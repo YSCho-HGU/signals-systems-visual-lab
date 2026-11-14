@@ -16,10 +16,14 @@ Interactive bilingual (English/Korean) Visual Labs for university Signals & Syst
 
 ## Versioning
 
-The current published revision is **Rev6**. Dark mode follows the OS by default, with optional System/Light/Dark selection. Previous Drive versions are retained in `Note/old/`; updating the homepage means replacing `index.html` with the latest verified revision. Existing URLs remain unchanged.
+The current published revision is **Rev7**. Dark mode follows the OS by default, with optional System/Light/Dark selection. Previous Drive versions are retained in `Note/old/`; updating the homepage means replacing `index.html` with the latest verified revision. Existing URLs remain unchanged.
 
 For teaching, students should verify any reported errors with the course instructor; Issues are public, so avoid sharing personal information.
 
-## Chapter 1 foundation labs (Rev6)
+## Chapter 1 foundation labs (Rev7)
 
 Nine experiments: CT/DT signals, elementary signals and impulses, time transformations, CT/DT sinusoid periodicity, energy/power, system properties, even/odd decomposition, signal operations, and synthetic engineering signals. Based on course note `101_Ch1_Signals_and_Systems_Rev2f`.
+
+## Rev7 graph and contrast audit
+
+All 62 experiments (132 graphs) now show axis names and visible plotted bounds. Dark-mode text contrast was checked in every experiment. Validation: 465/465 browser checks, 62/62 dark-mode sweeps, 186/186 Chapter 1 numerical checks and 67,249/67,249 Chapter 2–8 checks (233 independent analytic-value checks and 67,016 data/invariant checks). See the full-source ZIP and `QA_REPORT.md` for methodology and limits.
