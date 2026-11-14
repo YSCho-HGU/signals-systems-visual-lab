@@ -16,6 +16,6 @@ Interactive bilingual (English/Korean) Visual Labs for university Signals & Syst
 
 ## Versioning
 
-The current published revision is **Rev4**. Previous Drive versions are retained in `Note/old/`; updating the homepage means replacing `index.html` with the latest verified revision. Existing URLs remain unchanged.
+The current published revision is **Rev5**. Dark mode follows the OS by default, with optional System/Light/Dark selection. Previous Drive versions are retained in `Note/old/`; updating the homepage means replacing `index.html` with the latest verified revision. Existing URLs remain unchanged.
 
 For teaching, students should verify any reported errors with the course instructor; Issues are public, so avoid sharing personal information.
