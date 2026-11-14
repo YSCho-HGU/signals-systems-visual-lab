@@ -1,5 +1,12 @@
 # Changelog
 
+## Rev8 — 2026-11-14
+- Added mouse, touch, and keyboard graph probes to all 132 plots across eight chapters.
+- Show cursor coordinates and formula-evaluated function values when available; for precomputed numerical/discrete data show the nearest actual sample with its x coordinate.
+- Multi-curve signal comparison with matching colors and crosshair markers.
+- Complex-plane Re/Im, magnitude, phase, pole/zero proximity and ROC information.
+- 548/548 desktop checks, 12/12 interaction checks, 3/3 analytic tooltip checks and 67,435/67,435 mathematical/data checks passed.
+
 ## Rev7 — 2026-11-14
 - Added axis name and numerical range companions to all 132 plots across eight chapters.
 - Fixed dark-mode contrast in Graph Interpretation, animation controls, FFT presets, labels, and checkpoint text.
