@@ -1,5 +1,11 @@
 # Changelog
 
+## Rev7 — 2026-11-14
+- Added axis name and numerical range companions to all 132 plots across eight chapters.
+- Fixed dark-mode contrast in Graph Interpretation, animation controls, FFT presets, labels, and checkpoint text.
+- 62/62 dark-theme experiments passed DOM text contrast sweep; 465/465 browser checks passed.
+- 186 Ch1 + 67,249 Ch2–8 numerical and invariant checks passed. Numerical algorithms retained from Rev6.
+
 ## Rev6 — 2026-11-14
 - Added nine Chapter 1 foundation experiments based on `101_Ch1_Signals_and_Systems_Rev2f`.
 - Expanded integrated homepage to eight chapters and 62 interactive experiments.
