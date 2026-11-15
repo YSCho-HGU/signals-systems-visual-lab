@@ -163,3 +163,40 @@ html[data-theme="dark"] .theme-picker select{
 @media(max-width:880px){
  .ss-mobile-nav-note{display:block;order:4;width:100%;margin-top:-3px;font-size:11px}
 }
+
+/* Learning route: core and optional advanced, no barriers to access */
+.ss-study-guide{
+ background:var(--els-surface);color:var(--els-ink);
+ border:1px solid var(--els-border);border-radius:12px;
+ padding:14px 18px;margin:12px clamp(14px,2.5vw,34px);
+ max-height:46vh;overflow:auto;flex:0 0 auto
+}
+.ss-path-head{display:flex;align-items:start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.ss-path-heading strong{color:var(--els-ink);font-size:16px}
+.ss-path-heading p{color:var(--els-muted);font-size:13px;margin:4px 0}
+.ss-path-count{background:var(--els-info-bg);color:var(--els-info-ink);font-size:12px;font-weight:800;padding:6px 9px;border-radius:8px}
+.ss-path-help{font-size:12px;line-height:1.65;color:var(--els-muted);margin:6px 0 11px}
+.ss-study-guide details{border-top:1px solid var(--els-border);padding:7px 0 0}
+.ss-study-guide summary{font-weight:800;font-size:13px;color:var(--els-link);cursor:pointer;padding:7px 2px}
+.ss-path-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;list-style:none;padding:6px 0 9px;margin:0}
+.ss-path-item{min-width:0}
+.ss-path-link{
+ display:flex;gap:8px;align-items:center;text-align:left;width:100%;
+ border:1px solid var(--els-border);border-radius:9px;
+ padding:8px 10px;background:var(--els-surface-alt);
+ color:var(--els-ink);min-height:44px;
+}
+.ss-path-link:hover,.ss-path-link:focus-visible{border-color:var(--els-link)}
+.ss-path-link.selected{border:2px solid var(--els-link);background:var(--els-info-bg);color:var(--els-info-ink)}
+.ss-path-number{font:800 12px Consolas,monospace;flex-shrink:0;color:var(--els-link)}
+.ss-path-name{font-size:12px;line-height:1.5;min-width:0;overflow-wrap:anywhere}
+.ss-path-kind{font-size:10px;white-space:nowrap;color:var(--els-muted);margin-left:auto}
+.ss-path-live{font-size:12px;line-height:1.6;color:var(--els-muted);margin:8px 0 0}
+@media(max-width:850px){
+ .ss-study-guide{max-height:36vh;margin:8px 12px;padding:12px}
+ .ss-path-list{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+ .ss-study-guide{max-height:40vh}
+ .ss-path-head{gap:7px}
+}
