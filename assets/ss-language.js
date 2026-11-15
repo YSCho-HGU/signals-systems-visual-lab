@@ -7,6 +7,7 @@ const KEY="els-language", SELECT=document.getElementById("ss-language-select");
 if(!SELECT)return;
 const modes=["mixed","en","ko"];
 let mode="mixed";try{const saved=localStorage.getItem(KEY);if(modes.includes(saved))mode=saved}catch(e){}
+try{const requested=new URLSearchParams(location.search).get("lang");if(modes.includes(requested)){mode=requested;localStorage.setItem(KEY,mode)}}catch(e){}
 SELECT.value=mode;
 const T={
  "Display":["Display","화면","Display · 화면"],
