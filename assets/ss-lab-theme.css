@@ -262,3 +262,123 @@ html[data-els-theme] :is(.plot,.chart,.graph,.plot-area,.figure-plot) {
 html[data-els-theme] :is(.plot-card,.plotbox,.chart-card,.graph-card,.plot-panel,.plot-wrap,.graph-wrap,.canvas-wrap) :is(h2,h3,.plot-title){
  color:var(--els-ink)!important;
 }
+
+/* Rev 2.3: structural audit of all 8 embedded chapter implementations.
+   Important: legacy chapter dark-mode rules have specificity 0-2+ and use
+   !important. This integrated-only selector uses 3 root attributes so the
+   chosen Studio palette wins without changing graph SVG/canvas drawings. */
+html[data-els-theme][data-theme][data-ss-unified-nav]{
+ --ss-axis-bg:var(--els-surface-alt);
+ --ss-axis-text:var(--els-ink);
+ --ss-guide-bg:var(--els-info-bg);
+ --ss-guide-ink:var(--els-info-ink);
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(
+ body,.app,.shell,.main,.stage,.work,.workspace,.content,.experiment,.grid
+){
+ background:var(--els-page)!important;color:var(--els-ink)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(
+ .card,.panel,.controls,.control,.ctrl,.parameter,.field,.figure,.metric,
+ .learning,.question,.quiz,.derivation-panel,.reading-panel,.reading-note,
+ .reading,.readings,.deriv-step,.step,.stepbox,.guide-check,.check,
+ .compare-card,.compare-wrap,.detail-panel,.motion-panel,.fft-guide,
+ .detail-status,.motion-status,.motion-stage,.area-slider,.plot-instruction,
+ .axis-note,.axis-key,.guide-note,.interpretation,.insight,.notice,.intro,
+ .formula-panel,.math-panel,.progress-badge,.step-index,.hero-callout,
+ .plot-card,.plotbox,.chart-card,.graph-card,.plot-panel,.reading .note,
+ .motion-actions,.detail-actions,.guide-actions,.explain,.activity,
+ .fft-status,.detail-pill,.comparison,.help,.mathline,.deriv-math,
+ .guide-head,.lesson,.exercise,.experiment-card,.phase,.hint-box,
+ .theory,.tip,.callout,.note,.solution,.result,.answer,.model-card
+){
+ background:var(--els-surface)!important;
+ background-image:none!important;
+ color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(
+ .math,.mathbox,.equation,.deriv-math,.step .math,.stepbox .math,
+ .hero-callout .formula,.formula,.mathline,.motion-eq,.detail-status b,
+ .note,.tip,.callout,.guide-note,.reading-note,.reading .note,
+ .interpretation,.axis-note,.axis-key,.insight,.check,.step.active,
+ .deriv-step.active,.deriv-step.guide-enter,.fft-guide,.motion-panel,
+ .detail-panel,.motion-status,.detail-status,.motion-stage.current
+){
+ background:var(--els-info-bg)!important;
+ background-image:none!important;
+ color:var(--els-info-ink)!important;
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(
+ h1,h2,h3,h4,.guide-head h3,.deriv-top,.detail-head h4,.fft-guide h3,
+ .reading-note strong,.reading .note strong,.compare-title,.figure h3,
+ .plot-card .plot-title,.step strong,.check b,.insight strong,
+ .motion-status strong,.detail-status strong,.motion-panel h3
+){
+ color:var(--els-ink)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(
+ .intro,.desc,.smallnote,.rangeEnds,.range-ends,.metric .k,.metric .d,
+ .metric b,.legend,.bridge,.footer,.foot,.hint,.source,.crumb,.breadcrumb,
+ .plot-instruction,.axis-note,.motion-lead,.motion-speed,.motion-caution,
+ .motion-status small,.detail-sub,.detail-note,.area-slider label,
+ .area-slider .ends,.fft-guide p,.deriv-step p,.reading-note p,
+ .guide-head p,.learning p,.question p,.metric .detail,.ctrl .ends,
+ .plot-card .plot-title,.reading .note p,.motion-stage small
+){
+ color:var(--els-muted)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(
+ .overlabel,.over,.plot-number,.eyebrow,.heading .sup,.step-index,
+ .progress-badge,.metric .v,.metric strong,.ctrl output,.control output,
+ .mathline b,.detail-status b,.detail-pill,.area-slider output,
+ .detail-head .overlabel,.axis-key .ax-strong
+){
+ color:var(--els-link)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(
+ .plot-card .plot-title,.progress-badge,.step-index,.detail-pill,
+ .motion-stage b,.fft-status,.axis-key
+){
+ background:var(--els-surface-alt)!important;
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(
+ .btn,.btn:not(.primary),.guide-actions button,.step-buttons button,
+ .actions button,.quiz button,.motion-actions button,.detail-actions button,
+ .preset-row button,.preset,.check button,.tab,.tabs button,.nav button,
+ .motion-stage button,.motion-controls button,.control button,
+ .step button,.detail button,.guide button
+){
+ background:var(--els-surface-alt)!important;
+ background-image:none!important;
+ border-color:var(--els-border)!important;
+ color:var(--els-ink)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(
+ button.primary,.btn.primary,.guide-actions button.primary,
+ .step-buttons button.primary,.actions button.primary,.motion-primary,
+ .detail-primary,.preset-row button.selected,.preset.selected,
+ .motion-stage.current,.tab.active,.tabs button.active,.tabs button.on,
+ .step-buttons button.on,.check button.active
+){
+ background:var(--els-surface-alt)!important;
+ color:var(--els-ink)!important;
+ border-color:var(--els-link)!important;
+ box-shadow:inset 3px 0 var(--els-link)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(
+ select,textarea,input[type="number"],input[type="text"],input[type="search"]
+){
+ background:var(--els-surface-alt)!important;
+ color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+}
+/* Plot canvases retain their source-provided white coordinate surfaces.
+   Their SVG/Canvas strokes and fills are not recolored. */
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(
+ .plotbox canvas,.figure canvas,.plot-card canvas,.plot-card svg
+){
+ filter:none!important;
+}
