@@ -382,3 +382,84 @@ html[data-els-theme][data-theme][data-ss-unified-nav] :is(
 ){
  filter:none!important;
 }
+
+/* Guided Derivation + Read the Graphs: dedicated themed hierarchy, v2.4.
+   Applies to Ch2-6 full panels and Ch7-8 simplified step/reading panels.
+   Do not alter plots, SVGs, canvases or their coordinate annotations. */
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(.derivation-panel,.reading-panel,.reading,.stepbox){
+ background:var(--els-surface)!important;
+ color:var(--els-ink)!important;
+ border:1px solid var(--els-border)!important;
+ box-shadow:none!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(.derivation-panel,.reading-panel) :is(.guide-head,.reading-head,.guide-track,.guide-steps,.reading-grid){
+ background:transparent!important;
+ color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(.derivation-panel,.reading-panel) :is(h2,h3,h4,.guide-head h3,.deriv-top,.reading-note strong,.reading-note b){
+ color:var(--els-ink)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(.derivation-panel,.reading-panel) :is(.guide-head p,.reading-note p,.reading-note .ko-explain,.reading-note small,.guide-check,.plot-instruction,.plot-number){
+ color:var(--els-muted)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(.derivation-panel,.reading-panel) :is(.deriv-step,.reading-note,.guide-check,.reading .note,.step){
+ background:var(--els-surface-alt)!important;
+ color:var(--els-ink)!important;
+ border:1px solid var(--els-border)!important;
+ box-shadow:none!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(.derivation-panel,.reading-panel) :is(.deriv-step.guide-enter,.deriv-step.active,.step.active,.reading-note.active){
+ background:var(--els-info-bg)!important;
+ border-color:var(--els-link)!important;
+ box-shadow:inset 3px 0 var(--els-link)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(.derivation-panel,.reading-panel) :is(.deriv-math,.mathline,.step .math,.math,.formula){
+ background:var(--els-info-bg)!important;
+ color:var(--els-info-ink)!important;
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(.derivation-panel,.reading-panel) :is(.deriv-step p,.reading-note p,.guide-head p,.reading .note p){
+ color:var(--els-muted)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(.derivation-panel,.reading-panel) :is(.step-index,.progress-badge,.plot-number,.overlabel){
+ background:var(--els-surface-alt)!important;
+ color:var(--els-link)!important;
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(.derivation-panel,.reading-panel) :is(.guide-actions button,.step-buttons button,.check button){
+ background:var(--els-surface-alt)!important;
+ color:var(--els-ink)!important;
+ border:1px solid var(--els-border)!important;
+ box-shadow:none!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(.derivation-panel,.reading-panel) :is(.guide-actions button.primary,.step-buttons button.primary,.guide-actions button[aria-pressed="true"]){
+ background:var(--els-surface-alt)!important;
+ border-color:var(--els-link)!important;
+ color:var(--els-ink)!important;
+ box-shadow:inset 3px 0 var(--els-link)!important;
+}
+/* Read the Graphs tables and narrative headings remain dark-on-dark legible;
+   graphs retain their white coordinate plane and original trace palette. */
+html[data-els-theme][data-theme][data-ss-unified-nav] .reading-panel :is(.reading-grid,.reading-note,.interpretation,.axis-note,.axis-key){
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] .reading-panel :is(.axis-key,.axis-note,.interpretation){
+ background:var(--els-info-bg)!important;
+ color:var(--els-info-ink)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] .reading-panel :is(.axis-key .ax-strong,.plot-number,.reading-note strong){
+ color:var(--els-link)!important;
+}
+html[data-els-theme][data-theme][data-ss-unified-nav] :is(.derivation-panel,.reading-panel) :is(button,a):focus-visible{
+ outline:3px solid var(--els-focus)!important;
+ outline-offset:2px!important;
+}
+@media(max-width:700px){
+ html[data-els-theme][data-theme][data-ss-unified-nav] :is(.derivation-panel,.reading-panel){
+  padding:14px!important;min-width:0;
+ }
+ html[data-els-theme][data-theme][data-ss-unified-nav] :is(.reading-grid,.guide-steps,.deriv-math){
+  min-width:0;max-width:100%;
+ }
+}
