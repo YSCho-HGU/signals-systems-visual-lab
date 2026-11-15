@@ -1,0 +1,420 @@
+{
+  "version": "1.0.0",
+  "type": "recommended-two-tier-learning-path",
+  "audience": "2nd-year Signals and Systems",
+  "policy": "교수자에게 제안하는 권장 경로이며 공식 필수/평가 기준은 아닙니다. 장별 전체 실험은 기존대로 모두 이용할 수 있습니다.",
+  "chapters": {
+    "1": {
+      "goal": "신호의 표현과 기본 연산을 해석하고, 시스템 성질을 신호로 검증합니다.",
+      "experiments": [
+        {
+          "id": "1",
+          "name": "Continuous-Time vs Discrete-Time Signals",
+          "index": 1,
+          "level": "core"
+        },
+        {
+          "id": "2",
+          "name": "Elementary Signals · Step, Impulse, Ramp",
+          "index": 2,
+          "level": "core"
+        },
+        {
+          "id": "3",
+          "name": "Time Transformation Explorer",
+          "index": 3,
+          "level": "core"
+        },
+        {
+          "id": "4",
+          "name": "Sinusoids & DT Periodicity",
+          "index": 4,
+          "level": "core"
+        },
+        {
+          "id": "5",
+          "name": "Energy vs Average Power Analyzer",
+          "index": 5,
+          "level": "core"
+        },
+        {
+          "id": "6",
+          "name": "System Properties · Definition Tester",
+          "index": 6,
+          "level": "core"
+        },
+        {
+          "id": "7",
+          "name": "Even & Odd Decomposition",
+          "index": 7,
+          "level": "advanced"
+        },
+        {
+          "id": "8",
+          "name": "Signal Operations · Add, Multiply, Differentiate",
+          "index": 8,
+          "level": "advanced"
+        },
+        {
+          "id": "9",
+          "name": "Real-World Signal Explorer · Four Models",
+          "index": 9,
+          "level": "advanced"
+        }
+      ]
+    },
+    "2": {
+      "goal": "LTI 시스템의 임펄스 응답과 컨벌루션 계산을 시간축·범위와 연결합니다.",
+      "experiments": [
+        {
+          "id": "impulse",
+          "name": "Impulse Decomposition and LTI Response / 임펄스 분해와 LTI 응답",
+          "index": 1,
+          "level": "core"
+        },
+        {
+          "id": "dtflip",
+          "name": "Flip → Shift → Multiply → Sum / 이산 컨벌루션의 네 단계",
+          "index": 2,
+          "level": "core"
+        },
+        {
+          "id": "support",
+          "name": "Predict Convolution Support / 출력 범위 예측",
+          "index": 3,
+          "level": "core"
+        },
+        {
+          "id": "ctrect",
+          "name": "Rectangular-Pulse Convolution / 사각 펄스의 겹침 면적",
+          "index": 4,
+          "level": "core"
+        },
+        {
+          "id": "ctexp",
+          "name": "Convolution of Two Causal Exponentials / 인과 지수함수의 컨벌루션",
+          "index": 5,
+          "level": "advanced"
+        },
+        {
+          "id": "rc",
+          "name": "RC Low-Pass Pulse Response / RC 저역통과 응답",
+          "index": 6,
+          "level": "advanced"
+        },
+        {
+          "id": "average",
+          "name": "Moving-Average Sensor Filter / 센서 신호 평활화",
+          "index": 7,
+          "level": "advanced"
+        },
+        {
+          "id": "network",
+          "name": "LTI Interconnections / 직렬·병렬 시스템 연결",
+          "index": 8,
+          "level": "advanced"
+        },
+        {
+          "id": "stability",
+          "name": "Causality and BIBO Stability / 인과성과 BIBO 안정성",
+          "index": 9,
+          "level": "core"
+        }
+      ]
+    },
+    "3": {
+      "goal": "주기 신호를 Fourier 계수와 합성 파형으로 표현하고 CTFS/DTFS를 연결합니다.",
+      "experiments": [
+        {
+          "id": "harm",
+          "name": "Harmonically Related Sinusoids / 조화 정현파",
+          "index": 1,
+          "level": "core"
+        },
+        {
+          "id": "rectfs",
+          "name": "CTFS of a Periodic Pulse / 주기 펄스의 CTFS",
+          "index": 2,
+          "level": "core"
+        },
+        {
+          "id": "gibbs",
+          "name": "Fourier Partial Sums and Gibbs / 부분합과 깁스 현상",
+          "index": 3,
+          "level": "core"
+        },
+        {
+          "id": "shift",
+          "name": "Time Shift Changes Phase / 시간 이동과 위상",
+          "index": 4,
+          "level": "core"
+        },
+        {
+          "id": "dtfs",
+          "name": "Discrete-Time Fourier Series / 이산시간 푸리에 급수",
+          "index": 5,
+          "level": "core"
+        },
+        {
+          "id": "filter",
+          "name": "LTI Eigenfunctions and RC Filtering / 시스템 응답",
+          "index": 6,
+          "level": "advanced"
+        },
+        {
+          "id": "midpoint",
+          "name": "Value at a Jump / 불연속점의 수렴값",
+          "index": 7,
+          "level": "advanced"
+        }
+      ]
+    },
+    "4": {
+      "goal": "CTFT의 정의·기본 변환쌍·이동 및 시스템 응용을 시간·주파수 관점에서 비교합니다.",
+      "experiments": [
+        {
+          "id": "bridge",
+          "name": "From Fourier Series to CTFT / 선에서 연속 스펙트럼으로",
+          "index": 1,
+          "level": "core"
+        },
+        {
+          "id": "rect",
+          "name": "Rectangular Pulse and Signed Sinc / 펄스와 sinc",
+          "index": 2,
+          "level": "core"
+        },
+        {
+          "id": "exp",
+          "name": "Exponential Decay and Spectrum / 지수 감쇠",
+          "index": 3,
+          "level": "core"
+        },
+        {
+          "id": "shiftScale",
+          "name": "Shift, Width and Phase / 이동·폭·위상",
+          "index": 4,
+          "level": "core"
+        },
+        {
+          "id": "signed",
+          "name": "Signed X(jω) versus |X(jω)| / 스펙트럼 읽기",
+          "index": 5,
+          "level": "core"
+        },
+        {
+          "id": "rc",
+          "name": "Convolution and RC Lowpass / 필터의 시간·주파수",
+          "index": 6,
+          "level": "core"
+        },
+        {
+          "id": "mod",
+          "name": "Modulation and Spectral Copies / 변조와 이동",
+          "index": 7,
+          "level": "advanced"
+        },
+        {
+          "id": "numeric",
+          "name": "Numerical CTFT from Samples / 적분의 수치 근사",
+          "index": 8,
+          "level": "advanced"
+        }
+      ]
+    },
+    "5": {
+      "goal": "Laplace 변환의 ROC와 극점·안정성 및 역변환의 의미를 이해합니다.",
+      "experiments": [
+        {
+          "id": "weight",
+          "name": "Fourier → Laplace / 변환의 확장",
+          "index": 1,
+          "level": "core"
+        },
+        {
+          "id": "roc",
+          "name": "ROC & Signal Direction / 신호 방향",
+          "index": 2,
+          "level": "core"
+        },
+        {
+          "id": "pairs",
+          "name": "Laplace Transform Pairs / 변환쌍",
+          "index": 3,
+          "level": "advanced"
+        },
+        {
+          "id": "props",
+          "name": "Transform Properties / 변환 성질",
+          "index": 4,
+          "level": "core"
+        },
+        {
+          "id": "inverse",
+          "name": "Inverse Laplace & ROC / 역변환",
+          "index": 5,
+          "level": "core"
+        },
+        {
+          "id": "stability",
+          "name": "Pole · Zero · Stability / 안정성",
+          "index": 6,
+          "level": "core"
+        },
+        {
+          "id": "rc",
+          "name": "First-Order RC System / 1차 시스템",
+          "index": 7,
+          "level": "advanced"
+        },
+        {
+          "id": "second",
+          "name": "Second-Order Response / 2차 응답",
+          "index": 8,
+          "level": "advanced"
+        }
+      ]
+    },
+    "6": {
+      "goal": "DTFT의 주기성, 이동, 변환쌍과 필터의 주파수응답을 해석합니다.",
+      "experiments": [
+        {
+          "id": "periodic",
+          "name": "Digital Frequency / 디지털 주파수",
+          "index": 1,
+          "level": "core"
+        },
+        {
+          "id": "pairs",
+          "name": "DTFT Transform Pairs / 변환쌍",
+          "index": 2,
+          "level": "core"
+        },
+        {
+          "id": "phase",
+          "name": "Time Shift & Phase / 위상",
+          "index": 3,
+          "level": "core"
+        },
+        {
+          "id": "phasor",
+          "name": "Phasor Summation / 복소 벡터 합",
+          "index": 4,
+          "level": "advanced"
+        },
+        {
+          "id": "filter",
+          "name": "Digital Filtering / 디지털 필터링",
+          "index": 5,
+          "level": "core"
+        },
+        {
+          "id": "fft",
+          "name": "DFT · FFT · Leakage / 누설",
+          "index": 6,
+          "level": "advanced"
+        }
+      ]
+    },
+    "7": {
+      "goal": "샘플링 정리·스펙트럼 반복·앨리어싱·복원 원리를 설명합니다.",
+      "experiments": [
+        {
+          "id": "1",
+          "name": "7.1 · Sampling Theorem / 표본화 정리",
+          "index": 1,
+          "level": "core"
+        },
+        {
+          "id": "2",
+          "name": "7.2 · Spectral Replication / 스펙트럼 복제",
+          "index": 2,
+          "level": "core"
+        },
+        {
+          "id": "3",
+          "name": "7.3 · Aliasing / 서로 다른 주파수, 같은 표본",
+          "index": 3,
+          "level": "core"
+        },
+        {
+          "id": "4",
+          "name": "7.4 · Sinc Reconstruction / 이상적 복원",
+          "index": 4,
+          "level": "core"
+        },
+        {
+          "id": "5",
+          "name": "7.5 · Anti-Aliasing Filter / ADC 이전 필터",
+          "index": 5,
+          "level": "core"
+        },
+        {
+          "id": "6",
+          "name": "7.6 · Sampling vs Quantization / ADC 분해능",
+          "index": 6,
+          "level": "advanced"
+        },
+        {
+          "id": "7",
+          "name": "7.7 · Zero-Order Hold vs Ideal Reconstruction",
+          "index": 7,
+          "level": "advanced"
+        }
+      ]
+    },
+    "8": {
+      "goal": "Z변환의 ROC·역변환·극점/영점과 인과성·안정성의 관계를 판단합니다.",
+      "experiments": [
+        {
+          "id": "1",
+          "name": "8.1 · Why the Z-Transform? / 복소 z-평면",
+          "index": 1,
+          "level": "core"
+        },
+        {
+          "id": "2",
+          "name": "8.2 · Same X(z), Different ROC / 좌우 수열",
+          "index": 2,
+          "level": "core"
+        },
+        {
+          "id": "3",
+          "name": "8.3 · Two-Sided Signals / 고리형 ROC",
+          "index": 3,
+          "level": "core"
+        },
+        {
+          "id": "4",
+          "name": "8.4 · Inverse Z-Transform / 역변환",
+          "index": 4,
+          "level": "core"
+        },
+        {
+          "id": "5",
+          "name": "8.5 · Pole Location & Frequency Response",
+          "index": 5,
+          "level": "core"
+        },
+        {
+          "id": "6",
+          "name": "8.6 · FIR Moving Average / 영점과 노치",
+          "index": 6,
+          "level": "advanced"
+        },
+        {
+          "id": "7",
+          "name": "8.7 · Causality & BIBO Stability / 안정성",
+          "index": 7,
+          "level": "core"
+        },
+        {
+          "id": "8",
+          "name": "8.8 · Digital Sensor Smoother / 차분방정식",
+          "index": 8,
+          "level": "advanced"
+        }
+      ]
+    }
+  }
+}
