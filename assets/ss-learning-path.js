@@ -45,7 +45,7 @@ function showExperiment(ch,index){
  const target=items[index-1];
  if(!target)return false;
  target.click();
- for(const node of root.querySelectorAll(".ss-path-link")){
+ for(const node of document.querySelectorAll(".ss-path-link")){
    const chosen=Number(node.dataset.experiment)===index;
    node.classList.toggle("selected",chosen);
    if(chosen)node.setAttribute("aria-current","step");
@@ -95,5 +95,162 @@ root.addEventListener("click",event=>{
 });
 window.addEventListener("hashchange",()=>setTimeout(render,0));
 frame.addEventListener("load",()=>{const msg=document.getElementById("ss-path-live");if(msg)msg.textContent="실험이 준비되었습니다. 핵심 권장 목록에서 원하는 항목을 선택하세요.";});
+
+/* Unified chapter navigation v2: identical side navigation for Chapters 1-8.
+   The original experiment buttons remain in the iframe DOM and are clicked
+   through; this does not rewrite or reinitialize any simulation. */
+const frameWrap=document.querySelector("#lab-view .lab-frame-wrap");
+if(frameWrap){
+ const css=document.createElement("style");
+ css.id="ss-unified-chapter-nav-css";
+ css.textContent=String.raw`
+ #lab-view .lab-frame-wrap{display:flex;align-items:stretch;min-width:0;overflow:hidden}
+ #lab-view .lab-frame{flex:1 1 0;width:0;min-width:0}
+ #lab-view .ss-unified-nav{flex:0 0 260px;width:260px;min-width:0;display:flex;flex-direction:column;overflow:hidden;background:var(--els-surface);color:var(--els-ink);border-right:1px solid var(--els-border);transition:width .16s ease,flex-basis .16s ease}
+ #lab-view .ss-unified-nav.collapsed{flex-basis:44px;width:44px}
+ .ss-unified-head{display:flex;align-items:center;gap:8px;padding:10px 8px;border-bottom:1px solid var(--els-border);flex:0 0 auto}
+ .ss-unified-toggle{display:grid;place-items:center;flex:0 0 28px;width:28px;height:34px;min-height:34px;border:1px solid var(--els-border);border-radius:7px;background:var(--els-surface-alt);color:var(--els-ink);font-size:18px;line-height:1}
+ .ss-unified-label{font-size:12px;line-height:1.35;font-weight:800;white-space:nowrap}
+ .ss-unified-body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:8px;scrollbar-width:thin}
+ .ss-unified-nav.collapsed .ss-unified-body,.ss-unified-nav.collapsed .ss-unified-label{display:none}
+ .ss-unified-goal{font-size:12px;line-height:1.5;color:var(--els-muted);padding:5px 5px 12px;margin:0}
+ .ss-unified-list{display:flex;flex-direction:column;gap:4px;list-style:none;margin:0;padding:0}
+ .ss-unified-link{display:flex;align-items:flex-start;gap:9px;text-align:left;width:100%;min-height:42px;padding:9px 8px;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--els-ink);cursor:pointer}
+ .ss-unified-link:hover{background:var(--els-surface-alt)}
+ .ss-unified-link.selected{background:var(--els-surface-alt);border-color:var(--els-link);box-shadow:inset 3px 0 var(--els-link);font-weight:800}
+ .ss-unified-number{flex:0 0 22px;line-height:1.5;font-variant-numeric:tabular-nums;font-weight:800;color:var(--els-link)}
+ .ss-unified-name{flex:1;min-width:0;overflow-wrap:anywhere;font-size:12px;line-height:1.55}
+ .ss-unified-kind{font-size:10px;color:var(--els-muted);white-space:nowrap;align-self:flex-start;padding-top:2px}
+ #lab-view #ss-study-guide,#lab-view #guide-toggle{display:none!important}
+ #lab-view .ss-unified-link:focus-visible,.ss-unified-toggle:focus-visible{outline:3px solid var(--els-focus)!important;outline-offset:-2px}
+ @media(max-width:760px){
+  #lab-view .ss-unified-nav{flex-basis:220px;width:220px}
+  #lab-view .ss-unified-nav.collapsed{flex-basis:40px;width:40px}
+  .ss-unified-name{font-size:12px}
+ }
+ @media(prefers-reduced-motion:reduce){#lab-view .ss-unified-nav{transition:none}}
+`;
+ document.head.appendChild(css);
+ const sidebar=el("aside","ss-unified-nav",null);
+ sidebar.id="ss-unified-nav";
+ sidebar.setAttribute("aria-label","Chapter experiment navigation");
+ const bar=el("div","ss-unified-head",sidebar);
+ const toggle=el("button","ss-unified-toggle",bar,"☰");
+ toggle.type="button";
+ toggle.setAttribute("aria-controls","ss-unified-body");
+ const heading=el("span","ss-unified-label",bar,"Chapter experiments");
+ const body=el("div","ss-unified-body",sidebar);
+ body.id="ss-unified-body";
+ frameWrap.insertBefore(sidebar,frame);
+ let folded=false;
+ try{folded=localStorage.getItem("ss-unified-nav-collapsed")==="1"}catch(e){}
+ function applyFold(){
+  sidebar.classList.toggle("collapsed",folded);
+  body.hidden=folded;
+  toggle.textContent=folded?"☰":"‹";
+  toggle.setAttribute("aria-expanded",String(!folded));
+  toggle.setAttribute("aria-label",folded?"Expand chapter menu / 목차 펼치기":"Collapse chapter menu / 목차 접기");
+  toggle.title=folded?"목차 펼치기":"목차 접기";
+ }
+ toggle.addEventListener("click",()=>{
+  folded=!folded;applyFold();
+  try{localStorage.setItem("ss-unified-nav-collapsed",folded?"1":"0")}catch(e){}
+  try{frame.contentWindow.dispatchEvent(new Event("resize"))}catch(e){}
+ });
+ applyFold();
+ let renderedChapter=0;
+ function updateSelected(index){
+  for(const button of sidebar.querySelectorAll(".ss-unified-link")){
+   const chosen=Number(button.dataset.experiment)===index;
+   button.classList.toggle("selected",chosen);
+   if(chosen)button.setAttribute("aria-current","step");
+   else button.removeAttribute("aria-current");
+  }
+ }
+ function renderSidebar(){
+  const ch=currentChapter(),entry=CATALOG.chapters[String(ch)];
+  if(!entry){sidebar.hidden=true;renderedChapter=0;return}
+  sidebar.hidden=false;
+  if(ch===renderedChapter)return;
+  renderedChapter=ch;
+  heading.textContent="Chapter "+ch+" · Experiments";
+  body.replaceChildren();
+  el("p","ss-unified-goal",body,entry.goal);
+  const list=el("ol","ss-unified-list",body);
+  for(const exp of entry.experiments){
+   const item=el("li",null,list);
+   const button=el("button","ss-unified-link",item);
+   button.type="button";
+   button.dataset.experiment=String(exp.index);
+   button.dataset.chapter=String(ch);
+   el("span","ss-unified-number",button,String(exp.index).padStart(2,"0"));
+   el("span","ss-unified-name",button,exp.name);
+   el("span","ss-unified-kind",button,exp.level==="core"?"핵심":"심화");
+  }
+  updateSelected(1);
+ }
+ sidebar.addEventListener("click",e=>{
+  const button=e.target.closest(".ss-unified-link");
+  if(!button)return;
+  const ch=Number(button.dataset.chapter),index=Number(button.dataset.experiment);
+  if(ch!==currentChapter())return;
+  if(showExperiment(ch,index))updateSelected(index);
+ });
+ // Source chapter implementations differ: use their existing nav as an
+ // invisible control surface, and let the host offer one consistent menu.
+ const legacyNavCss=String.raw`
+ html[data-ss-unified-nav] body{margin:0!important}
+ html[data-ss-unified-nav] #studio-back{display:none!important}
+ html[data-ss-unified-nav] .sidebar,html[data-ss-unified-nav] .shell>aside.nav{
+  display:none!important
+ }
+ html[data-ss-unified-nav] .app,html[data-ss-unified-nav] .shell{
+  display:block!important;grid-template-columns:minmax(0,1fr)!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+ }
+ html[data-ss-unified-nav] main.main{
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  margin:0!important
+ }
+ html[data-ss-unified-nav] body>header{display:none!important}
+ html[data-ss-unified-nav] body>main>nav#nav,
+ html[data-ss-unified-nav] main nav#nav,
+ html[data-ss-unified-nav] nav#nav{
+  display:none!important
+ }
+ html[data-ss-unified-nav] body>main{
+  max-width:100%!important;width:100%!important;
+  margin:0!important;padding:12px!important
+ }
+ html[data-ss-unified-nav] :is(.grid,.experiment,.content,.workspace){
+  min-width:0
+ }
+ html[data-ss-unified-nav] .topline,html[data-ss-unified-nav] .top{
+  padding-top:8px!important
+ }
+`;
+ function applyIframeLayout(){
+  if(!currentChapter())return;
+  try{
+   const doc=frame.contentDocument;
+   if(!doc||!doc.documentElement)return;
+   doc.documentElement.dataset.ssUnifiedNav="true";
+   if(!doc.getElementById("ss-unified-frame-layout")){
+    const style=doc.createElement("style");
+    style.id="ss-unified-frame-layout";
+    style.textContent=legacyNavCss;
+    doc.head.appendChild(style);
+   }
+  }catch(e){}
+ }
+ window.addEventListener("hashchange",()=>{renderSidebar();});
+ frame.addEventListener("load",()=>{
+  renderSidebar();
+  applyIframeLayout();
+  updateSelected(1);
+ });
+ renderSidebar();
+}
+
 render();
 })();
