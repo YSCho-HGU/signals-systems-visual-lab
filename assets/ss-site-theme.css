@@ -157,3 +157,9 @@ html[data-theme="dark"] .theme-picker select{
  *,*::before,*::after{scroll-behavior:auto!important;
  transition-duration:0.01ms!important;animation-duration:0.01ms!important}
 }
+
+/* Orientation aid for horizontally scrollable chapter navigation */
+.ss-mobile-nav-note{display:none;color:#cce1f5;font-size:11px;line-height:1.5}
+@media(max-width:880px){
+ .ss-mobile-nav-note{display:block;order:4;width:100%;margin-top:-3px;font-size:11px}
+}
