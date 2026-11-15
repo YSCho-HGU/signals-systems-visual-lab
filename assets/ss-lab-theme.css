@@ -117,10 +117,10 @@ button:disabled{cursor:not-allowed;opacity:.55}
 :where(nav button,.nav button,.tabs button,.control label,.ctrl label,
  .legend,.caption,.source,.hint,.step p,.readings p,.breadcrumb,
  .side-foot,.plot-title,.control output,.ctrl output){
- font-size:max(12px,.8rem);
+ font-size:max(12px,.8rem)!important;
  line-height:1.6;
 }
-:where(button,select,input:not([type=range])){min-height:44px}
+:where(button,select,input:not([type=range])){min-height:44px!important}
 :where(.card,.control,.controls,.panel,.learning,.question,.figure){
  min-width:0;
 }
