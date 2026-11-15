@@ -172,3 +172,93 @@ html[data-els-theme] :is(.hero-callout,.insight,.note,.tip,.info-box,.callout){
  color:var(--els-info-ink)!important;
  border-color:var(--els-border)!important;
 }
+
+/* Unified exercise-surface palette v2.2 (2026-11-15).
+   Older chapter apps use distinct class names and hard-coded card/section
+   backgrounds. The shared theme now owns non-plot UI surfaces everywhere.
+   Graph canvas/SVG fills and their signal colors are intentionally untouched. */
+html[data-els-theme] body,
+html[data-els-theme] :is(main,.main,.app,.shell,.stage,.workspace,.work,.content,.experiment,.grid){
+ background-color:var(--els-page)!important;
+ color:var(--els-ink)!important;
+}
+html[data-els-theme] :is(
+ .card,.panel,.control,.controls,.ctrl,.parameter,.field,.learning,.question,
+ .metric,.readings,.reading,.derivation,.experiment-card,.case-card,
+ .step,.result,.answer,.quiz,.exercise,.activity,.unit,.box,.block,.section,
+ .figure,.plot-card,.plotbox,.chart-card,.graph-card,.plot-panel,
+ .lab-card,.output-card,.input-card,.formula-card,.summary-card,
+ .tabs,.tab-panel,.info-panel,.info-box,.insight-panel,.analysis,
+ .comparison,.table-wrap,.model-card,.parameter-card,.explain,.method,
+ .teach,.side-foot,.navlabel,.pill,.badge,.topline,.top,
+ .plot-wrap,.graph-wrap,.canvas-wrap
+){
+ background-color:var(--els-surface)!important;
+ background-image:none!important;
+ color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+ box-shadow:none;
+}
+html[data-els-theme] :is(
+ .card,.panel,.control,.controls,.ctrl,.parameter,.field,.learning,
+ .question,.metric,.readings,.derivation,.experiment-card,.case-card,
+ .step,.result,.answer,.quiz,.exercise,.activity,.unit,.box,.block,
+ .section,.figure,.lab-card,.output-card,.input-card,.summary-card,
+ .analysis,.comparison,.info-panel,.model-card,.parameter-card,.explain
+) :is(h1,h2,h3,h4,h5,strong,label){
+ color:var(--els-ink)!important;
+}
+html[data-els-theme] :is(
+ .card,.panel,.control,.controls,.ctrl,.parameter,.field,.learning,
+ .question,.metric,.readings,.derivation,.experiment-card,.case-card,
+ .step,.result,.answer,.quiz,.exercise,.activity,.unit,.box,.block,
+ .section,.figure,.lab-card,.output-card,.input-card,.summary-card,
+ .analysis,.comparison,.info-panel,.model-card,.parameter-card,.explain
+) :is(p,small,.hint,.muted,.desc,.caption,.helper,.source,.subtitle){
+ color:var(--els-muted)!important;
+}
+/* Secondary explanation blocks and math backgrounds are softly distinct. */
+html[data-els-theme] :is(
+ .formula,.mathbox,.equation,.math-panel,.formula-panel,.note,.tip,
+ .callout,.insight,.theory,.explanation,.step-detail,.guide,.definition,
+ .highlight,.key-point,.summary,.interpretation
+){
+ background-color:var(--els-info-bg)!important;
+ background-image:none!important;
+ color:var(--els-info-ink)!important;
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme] :is(.formula,.mathbox,.equation,.math-panel,.formula-panel,.note,.tip,.callout,.insight,.theory,.explanation,.definition,.interpretation)
+ :is(p,span,strong,b,em,small){
+ color:inherit!important;
+}
+html[data-els-theme] :is(
+ button:not(.active):not([aria-pressed="true"]),select,
+ input:not([type=range]):not([type=checkbox]):not([type=radio]),textarea
+){
+ background-color:var(--els-surface-alt)!important;
+ background-image:none!important;
+ color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme] :is(button.active,button[aria-pressed="true"],.tab.active,.choice.active){
+ background-color:var(--els-surface-alt)!important;
+ background-image:none!important;
+ color:var(--els-ink)!important;
+ border-color:var(--els-link)!important;
+ box-shadow:inset 3px 0 var(--els-link)!important;
+}
+/* Some chapter controls are colored via descendant spans instead of buttons. */
+html[data-els-theme] :is(.tab.active,.tabs .active,.nav .active,.selected) :is(span,small,b,strong){
+ color:var(--els-ink)!important;
+}
+html[data-els-theme] :is(.topline,.top,.breadcrumb,.crumb,.navlabel,.over,.eyebrow,.tag){
+ color:var(--els-muted)!important;
+}
+/* Neutral surfaces around charts; never recolor canvas pixels or SVG series. */
+html[data-els-theme] :is(.plot,.chart,.graph,.plot-area,.figure-plot) {
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme] :is(.plot-card,.plotbox,.chart-card,.graph-card,.plot-panel,.plot-wrap,.graph-wrap,.canvas-wrap) :is(h2,h3,.plot-title){
+ color:var(--els-ink)!important;
+}
