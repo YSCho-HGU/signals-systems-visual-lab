@@ -134,3 +134,41 @@ button:disabled{cursor:not-allowed;opacity:.55}
  :where(.controls,.control){max-width:100%}
  :where(.formula,.math,.mathbox,.equation,.step .math){font-size:clamp(16px,4vw,19px)}
 }
+
+/* Eye Comfort v2: the selected palette supersedes legacy blue lab chrome.
+   This deliberately excludes canvas/svg graph interiors and their series colors. */
+html[data-els-theme] header,
+html[data-els-theme] .sidebar{
+ background:var(--els-surface)!important;
+ color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme] header :is(h1,h2,p,.eyebrow),
+html[data-els-theme] .sidebar :is(h1,h2,p,.brand,.side-label,.nav-name){
+ color:var(--els-ink)!important;
+}
+html[data-els-theme] header .eyebrow,
+html[data-els-theme] :is(.side-label,.nav-name){
+ color:var(--els-muted)!important;
+}
+html[data-els-theme] nav#nav button.active,
+html[data-els-theme] nav.nav button.active,
+html[data-els-theme] .tabs button.active,
+html[data-els-theme] .sidebar .nav button.active{
+ background:var(--els-surface-alt)!important;
+ color:var(--els-ink)!important;
+ border:2px solid var(--els-link)!important;
+ box-shadow:inset 3px 0 var(--els-link)!important;
+}
+html[data-els-theme] .sidebar .nav button:not(.active){
+ background:transparent!important;
+ color:var(--els-ink)!important;
+}
+html[data-els-theme] .sidebar .nav button.active .num{
+ color:var(--els-link)!important;
+}
+html[data-els-theme] :is(.hero-callout,.insight,.note,.tip,.info-box,.callout){
+ background:var(--els-info-bg)!important;
+ color:var(--els-info-ink)!important;
+ border-color:var(--els-border)!important;
+}
