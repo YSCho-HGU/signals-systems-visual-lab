@@ -28,6 +28,9 @@ if(process.env.C_JOURNEY_BROWSER==='1'){
    const select=page.locator('[data-els-theme-picker]');
    check(await select.count()===1,'S&S theme selector visible at '+width);
    check(await page.evaluate(()=>document.documentElement.dataset.elsTheme)==='neutral-dark','S&S Neutral Dark default at '+width);
+   const appearance=await page.evaluate(()=>({bg:getComputedStyle(document.body).backgroundColor,ink:getComputedStyle(document.body).color}));
+   check(appearance.bg==='rgb(16, 16, 16)','S&S computed neutral background at '+width);
+   check(appearance.ink==='rgb(240, 240, 237)','S&S computed neutral text at '+width);
    await select.selectOption('warm-neutral');
    check(await page.evaluate(()=>document.documentElement.dataset.theme)==='light','S&S light theme applied at '+width);
    await select.selectOption('neutral-dark');
