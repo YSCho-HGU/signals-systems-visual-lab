@@ -112,3 +112,25 @@ button:disabled{cursor:not-allowed;opacity:.55}
  *,*::before,*::after{scroll-behavior:auto!important;
  transition-duration:0.01ms!important;animation-duration:0.01ms!important}
 }
+
+/* UI/UX audit v1.1: improve small non-graph labels across all 62 labs. */
+:where(nav button,.nav button,.tabs button,.control label,.ctrl label,
+ .legend,.caption,.source,.hint,.step p,.readings p,.breadcrumb,
+ .side-foot,.plot-title,.control output,.ctrl output){
+ font-size:max(12px,.8rem);
+ line-height:1.6;
+}
+:where(button,select,input:not([type=range])){min-height:44px}
+:where(.card,.control,.controls,.panel,.learning,.question,.figure){
+ min-width:0;
+}
+:where(.formula,.math,.mathbox,.equation,.step .math){
+ overflow-x:auto;overscroll-behavior-inline:contain;
+}
+:where(nav,.nav,.tabs){scrollbar-width:thin}
+@media(max-width:680px){
+ :where(nav,.nav,.tabs){max-width:100%;overflow-x:auto}
+ :where(.card,.figure,.panel){overflow-wrap:break-word}
+ :where(.controls,.control){max-width:100%}
+ :where(.formula,.math,.mathbox,.equation,.step .math){font-size:clamp(16px,4vw,19px)}
+}
