@@ -42,11 +42,25 @@ if(process.env.C_JOURNEY_BROWSER==='1'){
     const frame=page.locator('#lab-frame');
     await frame.waitFor({state:'visible'});
     await page.waitForFunction(()=>!!document.querySelector('#lab-frame')?.contentDocument?.body?.children.length);
+    check(await page.locator('#ss-chapter-select').count()===1,'Compact chapter dropdown is available');
+    check(await page.locator('#guide-toggle').getAttribute('aria-expanded')==='false','Study guide collapsed by default');
+    const topbarHeight=await page.locator('.topbar').evaluate(e=>e.getBoundingClientRect().height);
+    const labHeaderHeight=await page.locator('.lab-head').evaluate(e=>e.getBoundingClientRect().height);
+    check(topbarHeight<=56&&labHeaderHeight<=72,'Lab chrome height reduced: '+topbarHeight+'+'+labHeaderHeight);
+    const guide=page.locator('#guide-toggle');
+    await guide.click();
+    check(await guide.getAttribute('aria-expanded')==='true','Learning path can expand');
+    await guide.click();
+    check(await guide.getAttribute('aria-expanded')==='false','Learning path collapses again');
     const srcBefore=await frame.evaluate(e=>e.srcdoc.length);
     await select.selectOption('warm-dark');
     const srcAfter=await frame.evaluate(e=>e.srcdoc.length);
     check(srcBefore===srcAfter&&srcBefore>1000,'S&S theme switch does not reload chapter source');
     check(await frame.evaluate(e=>e.contentDocument?.documentElement?.dataset.elsTheme)==='warm-dark','S&S chapter iframe receives selected palette');
+    await page.locator('#ss-chapter-select').selectOption('2');
+    check(await page.evaluate(()=>location.hash)==='#chapter=2','Chapter dropdown navigates to Chapter 2');
+    check(await page.locator('#ss-chapter-select').inputValue()==='2','Chapter selector synchronizes with route');
+    check(await page.locator('#lab-frame').count()===1,'Chapter navigation preserves lab iframe element');
    }
    await page.close();
   }
