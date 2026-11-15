@@ -72,7 +72,7 @@ function render(){
  el("span","ss-path-count",head,"핵심 "+core.length+"개 · 심화 "+adv.length+"개");
  const lead=el("p","ss-path-help",root,"순서는 권장안입니다. 학생은 모든 실험에 자유롭게 접근할 수 있습니다. 핵심 실험을 먼저 수행하고, 선택 심화는 필요할 때 열어 보세요.");
  const first=el("details","ss-path-core",root);
- first.open=true;
+ // Closed by default: students open a short chapter pathway when needed.
  el("summary",null,first,"핵심 권장 "+core.length+"개 — 먼저 학습하기");
  lessonList(core,first,ch);
  const extra=el("details","ss-path-advanced",root);
