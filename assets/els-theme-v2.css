@@ -1,0 +1,31 @@
+/* Engineering Learning Studio - shared low-glare theme palette, v2. */
+:root[data-els-theme="neutral-dark"]{
+ color-scheme:dark;--els-page:#101010;--els-surface:#1c1c1c;--els-surface-alt:#292929;--els-ink:#f0f0ed;--els-muted:#c1c5c1;--els-border:#565b57;--els-primary:#aecfc0;--els-primary-text:#101712;--els-link:#b9d7c8;--els-focus:#ead18b;--els-success:#a2dec0;--els-info-bg:#293833;--els-info-ink:#e0f2e6;--els-code-bg:#171819;--els-code-ink:#f0f0ed;
+ --page:#101010;--bg:#101010;--surface:#1c1c1c;--paper:#1c1c1c;--panel:#1c1c1c;--ink:#f0f0ed;--text:#f0f0ed;--muted:#c1c5c1;--line:#565b57;--border:#565b57;--soft:#292929;--blue:#b9d7c8;--accent:#b9d7c8;--link:#b9d7c8;--code:#171819;--codeink:#f0f0ed;
+}
+:root[data-els-theme="warm-dark"]{
+ color-scheme:dark;--els-page:#1d2323;--els-surface:#293130;--els-surface-alt:#34413d;--els-ink:#e5e9e3;--els-muted:#bdc9c2;--els-border:#56665e;--els-primary:#9ebcad;--els-primary-text:#15201b;--els-link:#b0d2bf;--els-focus:#ead18b;--els-success:#a2ddbd;--els-info-bg:#34443d;--els-info-ink:#e2efe7;--els-code-bg:#171d1d;--els-code-ink:#e5e9e3;
+ --page:#1d2323;--bg:#1d2323;--surface:#293130;--paper:#293130;--panel:#293130;--ink:#e5e9e3;--text:#e5e9e3;--muted:#bdc9c2;--line:#56665e;--border:#56665e;--soft:#34413d;--blue:#b0d2bf;--accent:#b0d2bf;--link:#b0d2bf;--code:#171d1d;--codeink:#e5e9e3;
+}
+:root[data-els-theme="navy-dark"]{
+ color-scheme:dark;--els-page:#101827;--els-surface:#1c293a;--els-surface-alt:#27394e;--els-ink:#edf3fa;--els-muted:#c1cfdf;--els-border:#60768f;--els-primary:#90caff;--els-primary-text:#102338;--els-link:#a8d8ff;--els-focus:#ffe29c;--els-success:#a2dec0;--els-info-bg:#294760;--els-info-ink:#eaf5ff;--els-code-bg:#101b2b;--els-code-ink:#edf3fa;
+ --page:#101827;--bg:#101827;--surface:#1c293a;--paper:#1c293a;--panel:#1c293a;--ink:#edf3fa;--text:#edf3fa;--muted:#c1cfdf;--line:#60768f;--border:#60768f;--soft:#27394e;--blue:#a8d8ff;--accent:#a8d8ff;--link:#a8d8ff;--code:#101b2b;--codeink:#edf3fa;
+}
+:root[data-els-theme="warm-neutral"]{
+ color-scheme:light;--els-page:#f7f6f2;--els-surface:#fffefa;--els-surface-alt:#edf1eb;--els-ink:#28312f;--els-muted:#51665b;--els-border:#aab9ac;--els-primary:#355e4e;--els-primary-text:#ffffff;--els-link:#2c5c48;--els-focus:#28584a;--els-success:#246548;--els-info-bg:#e0eae1;--els-info-ink:#283f32;--els-code-bg:#232725;--els-code-ink:#f4f5ee;
+ --page:#f7f6f2;--bg:#f7f6f2;--surface:#fffefa;--paper:#fffefa;--panel:#fffefa;--ink:#28312f;--text:#28312f;--muted:#51665b;--line:#aab9ac;--border:#aab9ac;--soft:#edf1eb;--blue:#2c5c48;--accent:#2c5c48;--link:#2c5c48;--code:#232725;--codeink:#f4f5ee;
+}
+:root[data-els-theme] body{background:var(--els-page)!important;color:var(--els-ink)!important}
+:root[data-els-theme] :is(.stage,.side,.sidebar,.card,.panel,.phase,.route-card,.nav,.work,.cp-menu,.cp-content,.method,.unit,.chapter-card,.ss-home-section,.ss-method-strip,.ss-course-card){background-color:var(--els-surface);color:var(--els-ink);border-color:var(--els-border)}
+:root[data-els-theme] :is(.topbar,.top,.theme-picker){background:var(--els-surface);color:var(--els-ink);border-color:var(--els-border)}
+:root[data-els-theme] :is(.hero,.course-header,.ss-course-hero){background:linear-gradient(115deg,var(--els-surface-alt),var(--els-surface))!important;color:var(--els-ink)!important;border:1px solid var(--els-border)}
+:root[data-els-theme] :is(.hero,.course-header,.ss-course-hero) :is(h1,h2,h3,p,span,small,div){color:inherit}
+:root[data-els-theme] :is(.code,.trace-code,.code-live,.snippet,.mini-code,.cp-editor){background:var(--els-code-bg)!important;color:var(--els-code-ink)!important}
+:root[data-els-theme] :is(.cp-feedback,.cp-reference,.concept,.explain,.mem-diagram,.layout-cell,.activity,.quiz){border-color:var(--els-border);color:var(--els-ink)}
+:root[data-els-theme] :is(button,select,input,textarea){accent-color:var(--els-primary)}
+:root[data-els-theme] :is(a,button,input,textarea,select):focus-visible{outline:3px solid var(--els-focus)!important;outline-offset:3px!important}
+:root[data-els-theme] .els-theme-control{display:inline-flex;align-items:center;gap:6px;font:600 12px/1.3 system-ui,"Malgun Gothic",sans-serif;color:var(--els-ink);white-space:nowrap}
+:root[data-els-theme] .els-theme-control select{appearance:auto;min-height:36px;max-width:180px;padding:6px 10px;border:1px solid var(--els-border);border-radius:8px;background:var(--els-surface);color:var(--els-ink);font:inherit}
+:root[data-els-theme] .els-theme-control select:focus-visible{outline-color:var(--els-focus)}
+:root[data-els-theme] .els-primary, :root[data-els-theme] button.primary{background:var(--els-primary)!important;color:var(--els-primary-text)!important;border-color:var(--els-primary)!important}
+@media(max-width:600px){:root[data-els-theme] .els-theme-control span{display:none}:root[data-els-theme] .els-theme-control select{max-width:142px}}
