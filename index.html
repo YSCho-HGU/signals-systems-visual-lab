@@ -359,10 +359,30 @@ function changeRoute(route){location.hash=route;renderRoute();const target=route
 function escapeHtml(x){return String(x).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}
 function chapterCard(c){return `<button type="button" class="chapter-card" data-route="chapter=${c.id}" aria-label="Open Chapter ${c.id} ${escapeHtml(c.name)}"><span class="chapter-no">${String(c.id).padStart(2,'0')}</span><h3>${escapeHtml(c.name)}</h3><p><strong>${escapeHtml(c.sub)}</strong><br>${escapeHtml(c.description)}</p><div class="formula">${c.formula}</div><div class="foot"><span><b>${c.count} experiments</b><br>${escapeHtml(c.detail)}</span><span class="arrow" aria-hidden="true">→</span></div></button>`}
 function mapHtml(){return transformMapPreview()}
+window.__ssApplyCatalog=function(catalog){
+ if(!catalog||!Array.isArray(catalog.chapters))return;
+ const map=new Map(catalog.chapters.map(ch=>[Number(ch.id),ch]));
+ window.__ssPublishedChapters=new Set(catalog.chapters.filter(ch=>ch.published).map(ch=>Number(ch.id)));
+ for(const ch of CHAPTERS){
+  const meta=map.get(ch.id);if(!meta)continue;
+  if(typeof meta.title==="string"&&meta.title.trim())ch.name=meta.title.trim();
+  if(typeof meta.sub==="string")ch.sub=meta.sub;
+  if(typeof meta.description==="string")ch.description=meta.description;
+ }
+ const published=CHAPTERS.filter(ch=>window.__ssPublishedChapters.has(ch.id));
+ $('chapter-grid').innerHTML=published.map(chapterCard).join('');
+ document.querySelectorAll('.navbtn[data-route^="chapter="]').forEach(b=>{
+  const id=Number(b.dataset.route.split('=')[1]);b.hidden=!window.__ssPublishedChapters.has(id);
+ });
+ document.querySelectorAll('#ss-chapter-select option').forEach(o=>{if(/^\d+$/.test(o.value))o.hidden=!window.__ssPublishedChapters.has(Number(o.value))});
+ // Keep every embedded experiment intact; only visibility and catalog metadata change.
+ window.__ssCatalogLoaded=true;
+ renderRoute();
+};
 $('chapter-grid').innerHTML=CHAPTERS.map(chapterCard).join('');$('map-preview').innerHTML=mapHtml();$('map-full').innerHTML=addCasesToMap(transformMapFull());initTransformMap();initEngineeringCases();
 function decodeLab(ch){const b=atob(LABS[ch]);const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);const html=new TextDecoder('utf-8').decode(u);const sheets='<link rel="stylesheet" href="./assets/design-system.css?v=1"><link rel="stylesheet" href="./assets/ss-lab-theme.css?v=5"><link rel="stylesheet" href="./assets/els-theme-v2.css?v=3">';return html.replace('</head>',sheets+'</head>')}
 function showChapter(ch){if(!byId[ch])return;const c=byId[ch];$('lab-ch-icon').textContent=String(ch).padStart(2,'0');$('lab-title').textContent=`Chapter ${ch} · ${c.name}`;$('lab-subtitle').textContent=`${c.count} experiments · Guided Learning + Graph Interpretation`;$('prev-ch').disabled=ch===1;$('next-ch').disabled=ch===8;const loading=$('lab-loading');loading.hidden=false;const iframe=$('lab-frame');iframe.title=`Chapter ${ch} ${c.name} interactive experiments`;iframe.onload=()=>{loading.hidden=true;window.__ssApplyTheme?.();window.__ssApplyLanguage?.()};iframe.srcdoc=decodeLab(ch);currentChapter=ch}
-function renderRoute(){let route=decodeURIComponent(location.hash.replace(/^#/,''))||'overview';let ch=Number((/^chapter=(\d+)$/.exec(route)||[])[1]);if(!byId[ch])ch=null;let mode=ch?'lab':route==='map'?'map':'overview';$('overview').hidden=mode!=='overview';$('map-view').hidden=mode!=='map';$('lab-view').hidden=mode!=='lab';document.documentElement.dataset.ssView=mode;if(mode==='lab')document.getElementById('lab-area').dataset.guideOpen='false';const guideToggle=document.getElementById('guide-toggle');if(guideToggle){guideToggle.setAttribute('aria-expanded','false');guideToggle.textContent='☷ 학습 경로';}document.querySelectorAll('.navbtn').forEach(b=>{const active=b.dataset.route===(mode==='lab'?`chapter=${ch}`:mode);b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});if(mode==='lab'){const picker=$('ss-chapter-select');if(picker)picker.value=String(ch)}if(mode==='lab'&&ch!==currentChapter)showChapter(ch);if(mode!=='lab')exitFocus();window.scrollTo(0,0);document.title=mode==='lab'?`Chapter ${ch} · ${byId[ch].name} | S&S Visual Learning Studio`:'Signals & Systems — Integrated Visual Learning Studio'}
+function renderRoute(){let route=decodeURIComponent(location.hash.replace(/^#/,''))||'overview';if(/^chapter=\d+$/.test(route)&&window.__ssCatalogLoaded&&window.__ssPublishedChapters&&!window.__ssPublishedChapters.has(Number(route.split('=')[1]))){location.hash='overview';route='overview';}let ch=Number((/^chapter=(\d+)$/.exec(route)||[])[1]);if(!byId[ch])ch=null;let mode=ch?'lab':route==='map'?'map':'overview';$('overview').hidden=mode!=='overview';$('map-view').hidden=mode!=='map';$('lab-view').hidden=mode!=='lab';document.documentElement.dataset.ssView=mode;if(mode==='lab')document.getElementById('lab-area').dataset.guideOpen='false';const guideToggle=document.getElementById('guide-toggle');if(guideToggle){guideToggle.setAttribute('aria-expanded','false');guideToggle.textContent='☷ 학습 경로';}document.querySelectorAll('.navbtn').forEach(b=>{const active=b.dataset.route===(mode==='lab'?`chapter=${ch}`:mode);b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});if(mode==='lab'){const picker=$('ss-chapter-select');if(picker)picker.value=String(ch)}if(mode==='lab'&&ch!==currentChapter)showChapter(ch);if(mode!=='lab')exitFocus();window.scrollTo(0,0);document.title=mode==='lab'?`Chapter ${ch} · ${byId[ch].name} | S&S Visual Learning Studio`:'Signals & Systems — Integrated Visual Learning Studio'}
 function exitFocus(){const a=$('lab-area');a.classList.remove('focus');$('focus-btn').textContent='⛶ Focus';$('focus-btn').setAttribute('aria-pressed','false')}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-route]');if(b){e.preventDefault();changeRoute(b.dataset.route)}});
 $('ss-chapter-select').addEventListener('change',e=>{const selected=e.target.value;if(selected==='overview'||selected==='map'){changeRoute(selected);return}const ch=Number(selected);if(byId[ch])changeRoute(`chapter=${ch}`)});
@@ -484,4 +504,4 @@ byId('fb-github').addEventListener('click',()=>{
  applyTheme();
 })();
 
-</script><script src="./assets/ss-language.js?v=1" defer></script><script src="./assets/ss-learning-path.js?v=1" defer></script><script src="./assets/els-theme-v2.js?v=2" defer></script></body></html>
+</script><script src="./assets/ss-publication.js?v=1" defer></script><script src="./assets/ss-language.js?v=1" defer></script><script src="./assets/ss-learning-path.js?v=1" defer></script><script src="./assets/els-theme-v2.js?v=2" defer></script></body></html>
