@@ -48,3 +48,18 @@
 :root[data-els-theme] :is(.ss-course-hero,.ss-home-wrap,.intro,.hero,.course-header) .els-theme-control{color:var(--els-ink)!important}
 :root[data-els-theme] :is(.stage,.sidebar,.side,.card,.panel,.cp-content,.cp-menu,.nav,.work){background-color:var(--els-surface)!important;color:var(--els-ink)!important}
 :root[data-els-theme] .els-theme-control{position:relative;z-index:2}
+
+/* Desaturate course actions too, while preserving distinguishable status and graph series. */
+:root[data-els-theme] :is(.cp-primary,.journey-practice-link,.btn.primary,.go,.cta,.action.primary,.check-btn){
+ background:var(--els-primary)!important;color:var(--els-primary-text)!important;border-color:var(--els-primary)!important
+}
+:root[data-els-theme] :is(.btn.outline,.action:not(.primary),.cp-button:not(.cp-primary)){
+ background:var(--els-surface);color:var(--els-ink);border-color:var(--els-border)
+}
+:root[data-els-theme] .ss-course-hero .ss-primary-cta{background:var(--els-primary)!important;color:var(--els-primary-text)!important}
+:root[data-els-theme] :is(.section-head h2,.chapter-card h3,.stage h2,.card h3){color:var(--els-ink)!important}
+:root[data-els-theme] :is(.tag,.eyebrow,.over,.ss-overline,.num){color:var(--els-link)}
+:root[data-els-theme] .hero-aside{background:var(--els-surface-alt)!important;border-color:var(--els-border)!important;color:var(--els-ink)!important}
+:root[data-els-theme] .hero-aside :is(p,b,small,strong){color:var(--els-ink)!important}
+:root[data-els-theme] [data-els-theme-picker]{min-height:36px;background:var(--els-surface)!important;color:var(--els-ink)!important;border:1px solid var(--els-border)!important;border-radius:8px;padding:6px 9px}
+:root[data-els-theme] [data-els-theme-picker] option{background:var(--els-surface);color:var(--els-ink)}
