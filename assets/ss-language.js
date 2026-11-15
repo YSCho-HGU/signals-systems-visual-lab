@@ -39,6 +39,91 @@ const descriptions=[
  ["Explore sampling, spectral replicas, aliasing, sinc reconstruction, and ADC/DAC.","표본화 정리, 스펙트럼 복제, aliasing, sinc 복원, ADC/DAC를 실험합니다."],
  ["Analyze ROC, inverse transform, stability and FIR/IIR filtering in the z-plane.","ROC, 역변환, 인과성·안정성, FIR/IIR 필터를 복소 z-평면에서 이해합니다."]
 ];
+
+/* Mode-safe translation of existing bilingual text within experiments.
+   Never hide untranslated instructional text: language QA flags any remaining Hangul. */
+const TEXT_ORIGINAL=new WeakMap(),OBSERVERS=new WeakMap(),HANGUL=/[가-힣]/;
+const COMMON={
+ "✎ 오류 제보":["Report an issue","오류 제보"],
+ "GUIDED EXPLANATION · 단계별 이해":["GUIDED EXPLANATION","단계별 이해"],
+ "CHECK YOURSELF · 스스로 확인":["CHECK YOURSELF","스스로 확인"],
+ "Show answer / 해설 보기":["Show answer","해설 보기"],
+ "LEARNING EXPERIMENTS / 학습 주제":["LEARNING EXPERIMENTS","학습 주제"],
+ "Learning sequence / 학습 순서":["Learning sequence","학습 순서"],
+ "Graph probe / 그래프 값 읽기":["Graph probe","그래프 값 읽기"],
+ "Complex-plane probe / 복소평면 좌표":["Complex-plane probe","복소평면 좌표"],
+ "Sampled Signals / 샘플 신호":["Sampled Signals","샘플 신호"],
+ "DTFT Periodicity / 주기성":["DTFT Periodicity","주기성"],
+ "ROC 내부 (boundary excluded)":["Inside ROC (boundary excluded)","ROC 내부 (경계 제외)"],
+ "ROC 외부 또는 경계":["Outside ROC or on boundary","ROC 외부 또는 경계"],
+ "이산 표본":["Discrete sample","이산 표본"],
+ "계산 표본 (보간 없음)":["Computed sample (no interpolation)","계산 표본 (보간 없음)"],
+ "f(x) 직접 계산":["Direct evaluation of f(x)","f(x) 직접 계산"],
+ "표시 범위 밖":["Outside displayed range","표시 범위 밖"],
+ "먼저 학습하기":["Start here","먼저 학습하기"],
+ "선택 심화":["Optional advanced","선택 심화"],
+ "핵심 권장":["Core recommended","핵심 권장"]
+};
+const EXACT=new Map(Object.entries(COMMON));
+function translatedText(original){
+ const t=original.trim();
+ if(!HANGUL.test(t))return original;
+ const lead=original.match(/^\s*/)?.[0]||"",tail=original.match(/\s*$/)?.[0]||"";
+ if(EXACT.has(t)){
+  const [en,ko]=EXACT.get(t);
+  return lead+(mode==="en"?en:mode==="ko"?en+" ("+ko+")":en+" / "+ko)+tail;
+ }
+ // Only infer alignment when English and Korean are separated by an unambiguous slash.
+ const slash=t.match(/^(.+?)\s+\/\s+(.+)$/);
+ if(slash && !HANGUL.test(slash[1]) && HANGUL.test(slash[2])){
+  return lead+(mode==="en"?slash[1]:mode==="ko"?slash[1]+" ("+slash[2]+")":slash[1]+" / "+slash[2])+tail;
+ }
+ // Untranslated Korean stays visible for educational integrity, and is reported by QA.
+ return original;
+}
+function translateTextNode(node){
+ const host=node.parentElement;
+ if(!host||host.closest("script,style,textarea,code,pre,math,svg"))return;
+ let record=TEXT_ORIGINAL.get(node);
+ if(!record||record.last!==node.nodeValue){
+  record={original:node.nodeValue,last:node.nodeValue};
+  TEXT_ORIGINAL.set(node,record);
+ }
+ const next=translatedText(record.original);
+ if(node.nodeValue!==next)node.nodeValue=next;
+ record.last=next;
+}
+function translateTree(root){
+ if(!root||!root.createTreeWalker)return;
+ const view=root.defaultView;
+ const walker=root.createTreeWalker(root.body||root,view?.NodeFilter?.SHOW_TEXT||4);
+ let node;while((node=walker.nextNode()))translateTextNode(node);
+ // Never update value of any live input, selected item, plot, or simulator control.
+ const elements=(root.body||root).querySelectorAll?.("[title],[aria-label]")||[];
+ for(const el of elements){
+  for(const attr of ["title","aria-label"]){
+   if(!el.hasAttribute(attr))continue;
+   const key="data-ss-orig-"+attr;
+   if(!el.hasAttribute(key))el.setAttribute(key,el.getAttribute(attr));
+   const translated=translatedText(el.getAttribute(key));
+   if(el.getAttribute(attr)!==translated)el.setAttribute(attr,translated);
+  }
+ }
+}
+function watchFrame(doc){
+ if(!doc?.body)return;
+ if(OBSERVERS.has(doc))return;
+ let scheduled=false;
+ const observer=new MutationObserver(mutations=>{
+  if(scheduled)return;
+  if(!mutations.some(m=>m.type==="characterData"||m.type==="childList"))return;
+  scheduled=true;
+  queueMicrotask(()=>{scheduled=false;translateTree(doc)});
+ });
+ observer.observe(doc.body,{subtree:true,childList:true,characterData:true});
+ OBSERVERS.set(doc,observer);
+}
+
 const choice=([en,ko])=>mode==="en"?en:mode==="ko"?ko:en+" · "+ko;
 function setText(node,arr){if(node && node.textContent!==choice(arr))node.textContent=choice(arr)}
 const cleanTitle=s=>{
@@ -86,7 +171,10 @@ function updateFrame(){
  if(!doc||!doc.body)return;
  doc.documentElement.dataset.language=mode;
  doc.documentElement.lang=mode==="en"?"en":"ko";
- // Translate only verified paired headings, never erase arbitrary Korean-only instructional text.
+ // Translate verified bilingual instructional strings in place, including dynamic panels.
+ translateTree(doc);
+ watchFrame(doc);
+ // Preserve original interactive elements, plots, inputs and their state.
  doc.querySelectorAll("h1,h2,h3,nav button,.tabs button").forEach(node=>{
    if(node.children.length)return;
    if(!node.dataset.languageOriginal)node.dataset.languageOriginal=node.textContent;
