@@ -7,6 +7,8 @@ on:
       - 'index.html'
       - 'assets/els-theme-v2.css'
       - 'assets/els-theme-v2.js'
+      - 'assets/ss-compact-lab.css'
+      - 'tests/ss-theme-qa.mjs'
       - 'tests/ss-theme-qa.mjs'
       - '.github/workflows/ss-theme-qa.yml'
 jobs:
