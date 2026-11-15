@@ -154,7 +154,7 @@ function updateGuide(){
  guide.querySelectorAll(".ss-path-kind").forEach(node=>setText(node,node.parentElement?.dataset.level==="core"?["Core","핵심","Core / 핵심"]:["Advanced","심화","Advanced / 심화"]));
 }
 function updateShell(){
- document.documentElement.lang=mode==="en"?"en":"ko";
+ document.documentElement.lang=mode==="en"?"en":"ko";document.documentElement.dataset.language=mode;
  const langLabel=document.querySelector('label[for="ss-language-select"]');
  setText(langLabel,["Language","언어","Language · 언어"]);
  document.querySelectorAll(".chapter-card").forEach((card,index)=>{
