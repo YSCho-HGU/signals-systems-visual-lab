@@ -29,3 +29,22 @@
 :root[data-els-theme] .els-theme-control select:focus-visible{outline-color:var(--els-focus)}
 :root[data-els-theme] .els-primary, :root[data-els-theme] button.primary{background:var(--els-primary)!important;color:var(--els-primary-text)!important;border-color:var(--els-primary)!important}
 @media(max-width:600px){:root[data-els-theme] .els-theme-control span{display:none}:root[data-els-theme] .els-theme-control select{max-width:142px}}
+
+/* Unified course headers and experiment shells must not retain saturated blue fills. */
+:root[data-els-theme] :is(.topbar,.topnav,.theme-picker,.lab-head,.lab-foot){
+ background:var(--els-surface)!important;color:var(--els-ink)!important;border-color:var(--els-border)!important
+}
+:root[data-els-theme] .topnav :is(.navbtn,a){color:var(--els-muted)!important}
+:root[data-els-theme] .topnav .navbtn.active{background:var(--els-surface-alt)!important;color:var(--els-ink)!important;border-color:var(--els-link)!important}
+:root[data-els-theme] :is(.ss-studio-brand,.brand,.logo-copy,.logo-copy small,.topbar strong){color:var(--els-ink)!important}
+:root[data-els-theme] :is(.theme-picker select,.els-theme-control select){background:var(--els-surface)!important;color:var(--els-ink)!important;border-color:var(--els-border)!important}
+:root[data-els-theme] :is(.intro,.ss-course-hero,.course-header,.hero){background:linear-gradient(115deg,var(--els-surface-alt),var(--els-surface))!important;color:var(--els-ink)!important}
+:root[data-els-theme] :is(.intro,.ss-course-hero,.course-header,.hero) :is(h1,p,small,strong,span,.eyebrow,.ss-overline){color:var(--els-ink)!important}
+:root[data-els-theme] :is(.ss-course-hero,.hero,.intro) .cta.secondary{background:var(--els-surface-alt)!important;color:var(--els-ink)!important;border-color:var(--els-border)!important}
+:root[data-els-theme] :is(.ss-course-hero,.hero,.intro) .cta:not(.secondary){background:var(--els-primary)!important;color:var(--els-primary-text)!important;border-color:var(--els-primary)!important}
+:root[data-els-theme] :is(.chapter-card,.workflow-item,.map-wrap,.map-node,.tm-panel,.eng-card,.eng-detail,.feedback-modal,.compare-table){
+ background:var(--els-surface)!important;color:var(--els-ink)!important;border-color:var(--els-border)!important
+}
+:root[data-els-theme] :is(.ss-course-hero,.ss-home-wrap,.intro,.hero,.course-header) .els-theme-control{color:var(--els-ink)!important}
+:root[data-els-theme] :is(.stage,.sidebar,.side,.card,.panel,.cp-content,.cp-menu,.nav,.work){background-color:var(--els-surface)!important;color:var(--els-ink)!important}
+:root[data-els-theme] .els-theme-control{position:relative;z-index:2}
