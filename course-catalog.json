@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "course": "signals-systems",
+  "chapters": [
+    {
+      "id": "1",
+      "title": "Signals & Systems",
+      "sub": "CT/DT Signals · Time Operations · System Properties",
+      "description": "신호의 표현·시간 변환·주기성·에너지 및 시스템 성질",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "2",
+      "title": "LTI Systems",
+      "sub": "Convolution & Impulse Response",
+      "description": "임펄스 응답과 컨벌루션",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "3",
+      "title": "Fourier Series",
+      "sub": "Periodic Signals & Harmonics",
+      "description": "CTFS·DTFS와 조화 성분",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "4",
+      "title": "CTFT",
+      "sub": "Continuous-Time Fourier Transform",
+      "description": "연속시간 푸리에 변환",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "5",
+      "title": "Laplace Transform",
+      "sub": "Complex Frequency & ROC",
+      "description": "라플라스 변환과 ROC",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "6",
+      "title": "DTFT",
+      "sub": "Discrete-Time Fourier Transform",
+      "description": "이산시간 푸리에 변환과 필터",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "7",
+      "title": "Sampling",
+      "sub": "Sampling Theorem & Reconstruction",
+      "description": "샘플링, Aliasing, 복원",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "8",
+      "title": "Z-Transform",
+      "sub": "Pole-Zero & ROC for Digital Systems",
+      "description": "Z 변환과 극점·영점",
+      "published": true,
+      "book": ""
+    }
+  ]
+}
