@@ -1,0 +1,113 @@
+/* Compact learning canvas v1: maximize available chapter graph/experiment viewport.
+   Only active in chapter lab view. Do not resize numeric plot canvases or reload iframe. */
+html[data-ss-view="lab"] .topbar{
+ min-height:46px!important;height:46px!important;
+ padding:3px 14px!important;gap:8px!important;
+ display:flex!important;flex-wrap:nowrap!important;align-items:center!important;
+ position:sticky;top:0;z-index:30
+}
+html[data-ss-view="lab"] .topbar .ss-studio-brand{
+ display:flex;align-items:center;min-width:0;gap:7px;flex:0 1 auto;
+ font-size:13px;white-space:nowrap
+}
+html[data-ss-view="lab"] .topbar .ss-studio-mark{width:26px!important;height:26px!important;flex-shrink:0;font-size:14px}
+html[data-ss-view="lab"] .topbar .ss-course-slash{display:none!important}
+html[data-ss-view="lab"] .topbar .topnav,
+html[data-ss-view="lab"] .ss-mobile-nav-note{display:none!important}
+html[data-ss-view="lab"] .theme-picker{
+ margin:0!important;padding:0!important;
+ flex:0 0 auto;max-width:min(180px,27vw);border:0!important
+}
+html[data-ss-view="lab"] .theme-picker label{display:none!important}
+html[data-ss-view="lab"] .theme-picker select{
+ width:100%;min-width:70px;min-height:34px!important;height:34px!important;
+ padding:4px 6px!important;font-size:12px
+}
+html[data-ss-view="lab"] .lab-area{
+ height:calc(100dvh - 46px)!important;min-height:0!important;
+ display:flex;flex-direction:column;overflow:hidden
+}
+html[data-ss-view="lab"] .lab-area.focus{
+ position:fixed;inset:0;z-index:100;height:100dvh!important
+}
+html[data-ss-view="lab"] .lab-head{
+ flex:0 0 auto;min-height:52px!important;
+ padding:5px 14px!important;gap:9px!important;
+ flex-wrap:nowrap!important;overflow:visible
+}
+html[data-ss-view="lab"] .lab-head .where{gap:7px!important;min-width:0;flex:1 1 auto}
+html[data-ss-view="lab"] .lab-head .ch-icon{
+ width:29px!important;height:29px!important;font-size:13px!important;flex-shrink:0
+}
+html[data-ss-view="lab"] .lab-head .where strong{
+ display:block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;
+ font-size:13px!important
+}
+html[data-ss-view="lab"] .lab-head .where small{display:none!important}
+html[data-ss-view="lab"] .lab-tools{
+ display:flex!important;gap:5px!important;flex-wrap:nowrap!important;
+ align-items:center;min-width:0;max-width:75vw
+}
+html[data-ss-view="lab"] .lab-tools .toolbtn{
+ padding:5px 9px!important;min-width:34px;min-height:34px!important;
+ font-size:12px!important;white-space:nowrap
+}
+html[data-ss-view="lab"] .ss-compact-chapter-label{
+ position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+ clip:rect(0,0,0,0);white-space:nowrap;border:0
+}
+html[data-ss-view="lab"] #ss-chapter-select{
+ width:76px;min-width:76px;height:34px;min-height:34px!important;
+ padding:4px 5px!important;border-radius:8px;
+ background:var(--els-surface);color:var(--els-ink);
+ border:1px solid var(--els-border);font-size:12px
+}
+html[data-ss-view="lab"] .lab-foot{display:none!important}
+html[data-ss-view="lab"] #ss-study-guide{
+ display:none!important;flex:0 0 auto;
+ margin:5px 10px!important;padding:10px 14px!important;
+ max-height:min(34dvh,270px)!important;overflow:auto
+}
+html[data-ss-view="lab"] .lab-area[data-guide-open="true"] #ss-study-guide:not([hidden]){
+ display:block!important
+}
+html[data-ss-view="lab"] .lab-frame-wrap{
+ flex:1 1 auto!important;min-height:0!important;height:auto!important;
+ overflow:hidden;position:relative
+}
+html[data-ss-view="lab"] .lab-frame{
+ display:block;width:100%!important;height:100%!important;
+ min-height:0!important;border:0
+}
+html[data-ss-view="lab"] .lab-loading{z-index:3}
+html[data-ss-view="lab"] .lab-area.focus .lab-frame-wrap{flex:1 1 auto;height:auto!important}
+@media(max-width:1080px){
+ html[data-ss-view="lab"] .lab-tools .secondary-action{display:none!important}
+ html[data-ss-view="lab"] .lab-tools [data-feedback-open]{display:none!important}
+}
+@media(max-width:700px){
+ html[data-ss-view="lab"] .topbar{
+  padding:3px 9px!important;gap:6px!important;height:44px!important
+ }
+ html[data-ss-view="lab"] .topbar .ss-studio-brand strong{font-size:11px}
+ html[data-ss-view="lab"] .topbar .ss-studio-mark{display:none!important}
+ html[data-ss-view="lab"] .theme-picker{max-width:110px}
+ html[data-ss-view="lab"] .theme-picker select{font-size:10px;padding:2px 4px!important}
+ html[data-ss-view="lab"] .lab-area{height:calc(100dvh - 44px)!important}
+ html[data-ss-view="lab"] .lab-head{min-height:46px!important;padding:5px 8px!important;gap:5px!important}
+ html[data-ss-view="lab"] .lab-head .ch-icon{display:none!important}
+ html[data-ss-view="lab"] .lab-head .where strong{font-size:11px!important}
+ html[data-ss-view="lab"] .lab-tools{gap:4px!important;max-width:80vw}
+ html[data-ss-view="lab"] .lab-tools .toolbtn{padding:4px 6px!important;min-width:30px;min-height:34px!important;font-size:11px!important}
+ html[data-ss-view="lab"] .lab-tools [data-route="map"],
+ html[data-ss-view="lab"] .lab-tools #prev-ch,
+ html[data-ss-view="lab"] .lab-tools #next-ch{display:none!important}
+ html[data-ss-view="lab"] #ss-chapter-select{width:67px;min-width:67px;font-size:11px}
+}
+@media(max-width:425px){
+ html[data-ss-view="lab"] .topbar .ss-studio-brand strong{max-width:110px;overflow:hidden;text-overflow:ellipsis}
+ html[data-ss-view="lab"] .lab-head .where{flex:0 1 auto}
+ html[data-ss-view="lab"] .lab-tools{max-width:unset}
+ html[data-ss-view="lab"] #guide-toggle{font-size:0!important}
+ html[data-ss-view="lab"] #guide-toggle::first-letter{font-size:13px}
+}
