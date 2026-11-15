@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "course": "signals-systems",
+  "chapters": [
+    {
+      "id": "1",
+      "chapter": 1,
+      "title": "Signals & Systems",
+      "subtitle": "CT/DT Signals · Time Operations · System Properties",
+      "description": "신호의 domain, 기본 신호, 시간 변환, 주기성, 에너지·전력, 시스템 성질을 시각적으로 이해합니다.",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "2",
+      "chapter": 2,
+      "title": "LTI Systems",
+      "subtitle": "Convolution & Impulse Response",
+      "description": "시간영역에서 입력과 임펄스 응답이 출력으로 결합되는 과정을 이해합니다.",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "3",
+      "chapter": 3,
+      "title": "Fourier Series",
+      "subtitle": "Periodic Signals & Harmonics",
+      "description": "주기신호가 조화 성분의 합으로 표현되는 원리를 관찰합니다.",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "4",
+      "chapter": 4,
+      "title": "CTFT",
+      "subtitle": "Continuous-Time Fourier Transform",
+      "description": "비주기 연속신호의 연속 주파수 스펙트럼을 해석합니다.",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "5",
+      "chapter": 5,
+      "title": "Laplace Transform",
+      "subtitle": "Complex Frequency & ROC",
+      "description": "복소주파수, ROC, 극점으로 시스템의 인과성과 안정성을 분석합니다.",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "6",
+      "chapter": 6,
+      "title": "DTFT",
+      "subtitle": "Discrete-Time Fourier Transform",
+      "description": "이산시간 신호의 주기적인 주파수 응답과 디지털 필터를 탐구합니다.",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "7",
+      "chapter": 7,
+      "title": "Sampling",
+      "subtitle": "Sampling Theorem & Reconstruction",
+      "description": "표본화 정리, 스펙트럼 복제, aliasing, sinc 복원, ADC/DAC를 실험합니다.",
+      "published": true,
+      "book": ""
+    },
+    {
+      "id": "8",
+      "chapter": 8,
+      "title": "Z-Transform",
+      "subtitle": "Pole-Zero & ROC for Digital Systems",
+      "description": "ROC, 역변환, 인과성·안정성, FIR/IIR 필터를 복소 z-평면에서 이해합니다.",
+      "published": true,
+      "book": ""
+    }
+  ]
+}
