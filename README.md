@@ -33,3 +33,17 @@ All 62 experiments (132 graphs) now show axis names and visible plotted bounds. 
 Move your mouse over any graph, tap on mobile, or focus the graph and use the arrow keys to inspect cursor coordinates and signal values. Analytic functions are evaluated at the cursor x; precomputed and discrete traces show their nearest actual sample and its x coordinate, without claiming interpolation. Complex planes show Re/Im, magnitude, phase, pole/zero proximity and ROC. All 132 plots across 62 experiments support this feature in both Light and Dark modes.
 
 QA: 548/548 desktop checks, 12/12 additional interaction checks, 3/3 formula probe checks, 186/186 Ch1 and 67,249/67,249 Ch2–8 math/data checks passed.
+
+## Engineering Learning Studio shared theme — 2026-11-15
+
+The Visual Learning Studio now uses the same light/dark semantic palette as the C Programming site:
+
+- `assets/design-system.css`: shared Engineering Learning Studio tokens (source-equivalent copy).
+- `assets/ss-site-theme.css`: visual adapter for the home page, transform map, engineering cases, feedback dialog, and chapter navigation.
+- `assets/ss-lab-theme.css`: adapter inserted into **all eight embedded chapter lab frames** at runtime, leaving original lab programs and graph drawing code unchanged.
+
+The parent uses system/light/dark selection as before; the active chapter continues to follow parent messages without reloading its graphs. Numeric simulation and plotting palettes are intentionally not changed by the UI theme adapter.
+
+**Important for offline copies:** The original experiment payload remains embedded in `index.html`, so standalone fallback lab behavior is retained; however, the new common palette depends on these three CSS files being available in the relative `assets/` folder. Publish/copy the entire repository (not just `index.html`) to preserve the identical new look. Individual downloaded chapter HTML files retain their original self-contained appearance.
+
+**Accessibility:** WCAG 2.2 AA text contrast is a design target, not a certified status. Browser-based desktop/mobile/keyboard/200%-zoom checks across all 62 experiments and 132 graphs remain necessary after this theme-only change. Prior numerical QA results are historical, not a new complete automated browser acceptance.
