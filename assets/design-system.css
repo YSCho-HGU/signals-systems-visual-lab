@@ -1,0 +1,65 @@
+/* Engineering Learning Studio design tokens v1.0.
+   Explicit themes; target WCAG 2.2 AA: 4.5:1 normal text, 3:1 large text/UI.
+   Prefer semantic tokens over hardcoded per-page fixes. */
+:root{
+ color-scheme:light;
+ --els-page:#F5F8FC;--els-surface:#FFFFFF;--els-surface-alt:#EAF1F8;
+ --els-ink:#14263A;--els-muted:#455B70;--els-border:#98AEC2;
+ --els-primary:#075A93;--els-primary-text:#FFFFFF;--els-link:#075A93;
+ --els-focus:#085D95;--els-success:#0A704B;--els-warning:#87500A;
+ --els-info-bg:#E6F2FE;--els-info-ink:#113B5C;
+ --els-code-bg:#0F1B2D;--els-code-ink:#F1F6FD;--els-code-accent:#FFE28A;
+ --els-radius:12px;--els-space:8px;
+}
+@media(prefers-color-scheme:dark){
+ :root:not([data-theme=light]){
+  color-scheme:dark;--els-page:#0F1B2B;--els-surface:#1D2C40;
+  --els-surface-alt:#273B53;--els-ink:#F1F7FF;--els-muted:#C8D9EB;
+  --els-border:#8199B4;--els-primary:#A1D7FF;--els-primary-text:#102338;
+  --els-link:#A9DAFF;--els-focus:#FFDC79;--els-success:#9CE6BD;--els-warning:#FFD08A;
+  --els-info-bg:#203B55;--els-info-ink:#EAF5FF;
+  --els-code-bg:#0E192A;--els-code-ink:#F2F7FF;--els-code-accent:#FFE29C;
+ }
+}
+:root[data-theme=dark]{
+ color-scheme:dark;--els-page:#0F1B2B;--els-surface:#1D2C40;
+ --els-surface-alt:#273B53;--els-ink:#F1F7FF;--els-muted:#C8D9EB;
+ --els-border:#8199B4;--els-primary:#A1D7FF;--els-primary-text:#102338;
+ --els-link:#A9DAFF;--els-focus:#FFDC79;--els-success:#9CE6BD;--els-warning:#FFD08A;
+ --els-info-bg:#203B55;--els-info-ink:#EAF5FF;
+ --els-code-bg:#0E192A;--els-code-ink:#F2F7FF;--els-code-accent:#FFE29C;
+}
+:root[data-theme=light]{
+ color-scheme:light;--els-page:#F5F8FC;--els-surface:#FFFFFF;--els-surface-alt:#EAF1F8;
+ --els-ink:#14263A;--els-muted:#455B70;--els-border:#98AEC2;
+ --els-primary:#075A93;--els-primary-text:#FFFFFF;--els-link:#075A93;
+ --els-focus:#085D95;--els-success:#0A704B;--els-warning:#87500A;
+ --els-info-bg:#E6F2FE;--els-info-ink:#113B5C;
+ --els-code-bg:#0F1B2D;--els-code-ink:#F1F6FD;--els-code-accent:#FFE28A;
+}
+html{scroll-behavior:smooth}
+body.els-design{background:var(--els-page)!important;color:var(--els-ink)!important}
+.els-design :is(button,input,select,textarea,a):focus-visible{
+ outline:3px solid var(--els-focus)!important;outline-offset:3px!important;
+}
+.els-design button{min-height:44px;min-width:44px}
+.els-design a{color:var(--els-link)}
+.els-design :is(button,select,input,textarea){font:inherit}
+.els-design :is(select,textarea,input:not([type=radio]):not([type=checkbox])){
+ color:var(--els-ink);background:var(--els-surface);border:1px solid var(--els-border);border-radius:9px;padding:10px 12px
+}
+.els-design :is(button,select,input,textarea):disabled{cursor:not-allowed;opacity:.58}
+.els-design .els-card{border:1px solid var(--els-border);background:var(--els-surface);color:var(--els-ink);border-radius:var(--els-radius)}
+.els-design .els-meta{color:var(--els-muted)}
+.els-design .els-primary{background:var(--els-primary)!important;color:var(--els-primary-text)!important;border-color:var(--els-primary)!important;font-weight:750}
+.els-design :is(pre,code,.code-row,.live-row,.code-lines){font-family:Consolas,"Liberation Mono","DejaVu Sans Mono",monospace;font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
+.els-design :is(.code-live,.code-box,.snippet,.mini-code){background:var(--els-code-bg);color:var(--els-code-ink)}
+.els-design .els-sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.els-design .route-card,.els-design .sidebar,.els-design .stage,.els-design .panel{background:var(--els-surface);color:var(--els-ink);border-color:var(--els-border)}
+.els-design .route-card h2,.els-design .stage h2{color:var(--els-ink)}
+.els-design .route-card p,.els-design .route-card strong,.els-design .route-note,.els-design .caption{color:var(--els-muted)}
+.els-design .route-card .route-number{color:var(--els-link)}
+.els-design .topbar,.els-design .step{background:var(--els-surface);color:var(--els-ink)}
+.els-design button:disabled{opacity:1;color:var(--els-muted);background:var(--els-surface-alt);border-color:var(--els-border)}
+.els-design input[type=radio]{accent-color:var(--els-primary)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{transition:none!important;animation:none!important}}
