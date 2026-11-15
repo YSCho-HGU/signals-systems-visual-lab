@@ -1,0 +1,31 @@
+{
+  "name": "Engineering Learning Studio Design System",
+  "version": "1.0.0",
+  "released": "2026-11-15",
+  "canonical_repository": "YSCho-HGU/engineering-learning-studio",
+  "canonical_path": "assets/design-system.css",
+  "required_tokens": [
+    "--els-page",
+    "--els-surface",
+    "--els-surface-alt",
+    "--els-ink",
+    "--els-muted",
+    "--els-border",
+    "--els-primary",
+    "--els-primary-text",
+    "--els-link",
+    "--els-focus",
+    "--els-info-bg",
+    "--els-info-ink",
+    "--els-code-bg",
+    "--els-code-ink"
+  ],
+  "themes": [
+    "system",
+    "light",
+    "dark"
+  ],
+  "accessibility_target": "WCAG 2.2 AA",
+  "mirror_policy": "Copy exact canonical CSS on every release; adapters remain course-owned; verify both copies before deployment",
+  "compatibility": "1.x non-breaking semantic token contract"
+}
