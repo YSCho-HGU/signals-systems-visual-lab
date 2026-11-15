@@ -60,13 +60,19 @@ try{
        const root=document.documentElement;
        const input=[...document.querySelectorAll('input[type="range"],select')];
        const unlabeled=input.filter(x=>!(x.labels?.length||x.hasAttribute("aria-label")||x.hasAttribute("title")));
+       const rgb=s=>(s.match(/\\d+(?:\\.\\d+)?/g)||[]).slice(0,3).map(Number);
+       const light=x=>{x/=255;return x<=.04045?x/12.92:((x+.055)/1.055)**2.4};
+       const luminance=s=>{const [r,g,b]=rgb(s).map(light);return .2126*r+.7152*g+.0722*b};
+       const color=getComputedStyle(body),l1=luminance(color.color),l2=luminance(color.backgroundColor);
+       const contrast=(Math.max(l1,l2)+.05)/(Math.min(l1,l2)+.05);
        return {overflow:root.scrollWidth>innerWidth+6,overflowWidth:root.scrollWidth,
-         viewport:innerWidth,inputs:input.length,unlabeled:unlabeled.length,
+         viewport:innerWidth,inputs:input.length,unlabeled:unlabeled.length,bodyTextContrast:Number(contrast.toFixed(2)),
          active:document.querySelector("nav .active")?.textContent?.trim().slice(0,45)||"",
          theme:root.dataset.theme};
       });
       if(result.theme!==theme)errors.push({width,theme,chapter:ch,experiment:n,error:"iframe theme "+result.theme});
       if(result.overflow)errors.push({width,theme,chapter:ch,experiment:n,error:"iframe overflow "+result.overflowWidth+"/"+result.viewport});
+      if(result.bodyTextContrast<4.5)errors.push({width,theme,chapter:ch,experiment:n,error:"Body text contrast "+result.bodyTextContrast+" < 4.5"});
       record.push({width,theme,chapter:ch,experiment:n,...result});
       await page.locator("#lab-frame").screenshot({path:join(chDir,String(n).padStart(2,"0")+".png")});
     }
