@@ -47,3 +47,14 @@ The parent uses system/light/dark selection as before; the active chapter contin
 **Important for offline copies:** The original experiment payload remains embedded in `index.html`, so standalone fallback lab behavior is retained; however, the new common palette depends on these three CSS files being available in the relative `assets/` folder. Publish/copy the entire repository (not just `index.html`) to preserve the identical new look. Individual downloaded chapter HTML files retain their original self-contained appearance.
 
 **Accessibility:** WCAG 2.2 AA text contrast is a design target, not a certified status. Browser-based desktop/mobile/keyboard/200%-zoom checks across all 62 experiments and 132 graphs remain necessary after this theme-only change. Prior numerical QA results are historical, not a new complete automated browser acceptance.
+
+
+## Design System v1.0.0 + Recommended Learning Path (2026-11-15)
+
+- **Official shared style**: canonical [Engineering Learning Studio Design System v1.0.0](https://github.com/YSCho-HGU/engineering-learning-studio/blob/main/docs/Design_System_v1.0.0.md). Shared \`assets/design-system.css\` matches the canonical file; individual course adapters keep plots and equations functional.
+- **Student learning path**: each Chapter now contains a collapsible, directly navigable **Core recommended (42)** + **Optional advanced (20)** selection. Full [62-experiment catalog and learning objectives](docs/Signals_Systems_62_Learning_Path_v1.md) is sourced from the existing lab modules, and remains a recommendation rather than an official assessment policy.
+- **Accessibility/readability**: improved minimum label size, touch control height, formula overflow, dark/light semantic colors, and small-screen navigation.
+- **Browser QA pipeline**: [visual audit](tests/visual-audit.mjs) checks each experiment in light/dark × mobile/desktop (248 views); [GitHub Actions workflow](.github/workflows/visual-audit.yml) uploads screenshots and \`results.json\`. \`npm install && npx playwright install chromium && npm run qa:visual\`.
+- **QA status:** [Source-level UI/UX and acceptance report](docs/Signals_Systems_UIUX_62_Audit_2026-11-15.md). Real browser screenshot pass is not asserted until the workflow result and artifacts have been examined.
+
+**Offline:** new palette and pathway require the repository's \`assets/\` files. The original interactive lab payload remains embedded in \`index.html\`; opening a standalone HTML copy without assets falls back to the legacy interface.
