@@ -1,0 +1,36 @@
+name: Visual Lab Accessibility and Regression Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'assets/**'
+      - 'tests/**'
+      - 'package.json'
+      - '.github/workflows/visual-audit.yml'
+
+jobs:
+  visual-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser tooling
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Run all 62 experiments in Light and Dark at mobile/desktop widths
+        run: npm run qa:visual
+      - name: Upload screenshots and issue report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-qa-screenshots
+          path: qa-output/
+          if-no-files-found: warn
+          retention-days: 7
