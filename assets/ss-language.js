@@ -165,6 +165,70 @@ function updateShell(){
  const mapBtn=document.querySelector('#lab-view [data-route="map"]');if(mapBtn)setText(mapBtn,T["Learning Map"]);
  updateGuide();
 }
+
+const originalText=new WeakMap();
+const korean=/[가-힣]/;
+let frameObserver=null,observedDoc=null,translationBusy=false;
+const KO_ONLY={
+ "전체 초기화":"Reset all",
+ "초기화":"Reset",
+ "다음 실험 →":"Next experiment →",
+ "이전 실험":"Previous experiment",
+ "학습 주제":"Learning topics",
+ "학습 순서":"Learning sequence",
+ "스스로 확인":"Check yourself",
+ "해설 보기":"Reveal explanation",
+ "핵심 이해":"Key insight",
+ "실험 변수":"Experiment controls",
+ "결과 관찰":"Observe the result",
+ "정답 및 설명 보기":"Reveal answer and explanation",
+ "자동 재생":"Auto play",
+ "일시 정지":"Pause",
+ "설치 불필요":"No installation needed",
+ "오류 제보":"Report an issue"
+};
+function translateText(s){
+ if(!korean.test(s))return s;
+ const trim=s.trim();
+ if(KO_ONLY[trim])return mode==="en"?s.replace(trim,KO_ONLY[trim]):mode==="mixed"?s.replace(trim,KO_ONLY[trim]+" / "+trim):s;
+ const paired=/^([\s\S]*?[A-Za-z][\s\S]*?)\s+\/\s+([^\/]*[가-힣][\s\S]*)$/;
+ const m=trim.match(paired);
+ if(!m)return s; // Never silently hide unpaired instructional Korean.
+ const english=m[1].trim(),ko=m[2].trim(), leading=s.slice(0,s.indexOf(trim));
+ const rendered=mode==="en"?english:mode==="ko"?english+" ("+ko+")":english+" / "+ko;
+ return leading+rendered+s.slice(s.indexOf(trim)+trim.length);
+}
+function applyTextTree(doc){
+ const walker=doc.createTreeWalker(doc.body,NodeFilter.SHOW_TEXT);
+ const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+ for(const node of nodes){
+  const owner=node.parentElement;
+  if(!owner || owner.closest('script,style,svg,canvas,math,textarea,code,pre,[contenteditable],.katex'))continue;
+  const source=originalText.get(node)??node.nodeValue;
+  // An experiment redraw can reuse the same element with new content; capture it.
+  const previous=translateText(source);
+  if(originalText.has(node)&&node.nodeValue!==previous&&node.nodeValue!==source){
+   originalText.set(node,node.nodeValue);
+  }else if(!originalText.has(node))originalText.set(node,source);
+  const current=originalText.get(node);
+  const translated=translateText(current);
+  if(node.nodeValue!==translated)node.nodeValue=translated;
+ }
+}
+function installFrameTranslations(doc){
+ if(observedDoc!==doc){
+  if(frameObserver)frameObserver.disconnect();
+  observedDoc=doc;
+  frameObserver=new MutationObserver(()=>{
+   if(translationBusy)return;
+   translationBusy=true;
+   queueMicrotask(()=>{translationBusy=false;if(observedDoc===doc)applyTextTree(doc)});
+  });
+  frameObserver.observe(doc.body,{subtree:true,childList:true,characterData:true});
+ }
+ applyTextTree(doc);
+}
+
 function updateFrame(){
  const iframe=document.getElementById("lab-frame");
  let doc;try{doc=iframe?.contentDocument}catch(e){return}
@@ -175,12 +239,10 @@ function updateFrame(){
  translateTree(doc);
  watchFrame(doc);
  // Preserve original interactive elements, plots, inputs and their state.
- doc.querySelectorAll("h1,h2,h3,nav button,.tabs button").forEach(node=>{
-   if(node.children.length)return;
-   if(!node.dataset.languageOriginal)node.dataset.languageOriginal=node.textContent;
-   const s=node.dataset.languageOriginal;
-   if(s.includes(" / "))node.textContent=cleanTitle(s);
- });
+ // Dynamic lessons update labels after each control change. Keep their original
+ // bilingual text so toggling languages is reversible and never resets input state.
+ installFrameTranslations(doc);
+
 }
 function apply(){updateShell();updateFrame();document.dispatchEvent(new CustomEvent("ss-language-change",{detail:{mode}}))}
 SELECT.addEventListener("change",()=>{mode=SELECT.value;try{localStorage.setItem(KEY,mode)}catch(e){}apply()});
