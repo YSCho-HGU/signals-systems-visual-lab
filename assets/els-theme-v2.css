@@ -63,3 +63,70 @@
 :root[data-els-theme] .hero-aside :is(p,b,small,strong){color:var(--els-ink)!important}
 :root[data-els-theme] [data-els-theme-picker]{min-height:36px;background:var(--els-surface)!important;color:var(--els-ink)!important;border:1px solid var(--els-border)!important;border-radius:8px;padding:6px 9px}
 :root[data-els-theme] [data-els-theme-picker] option{background:var(--els-surface);color:var(--els-ink)}
+
+/* Eye Comfort v2.1: resolve remaining legacy navy-specific components.
+   Graph plots and signal-series palettes are intentionally excluded. */
+:root[data-els-theme] :is(.brand b,.ss-studio-mark){
+ background:var(--els-surface-alt)!important;
+ color:var(--els-link)!important;
+ border:1px solid var(--els-border)!important;
+}
+:root[data-els-theme] :is(.card.feature,.unit.feature,.integrated-journey){
+ background:var(--els-surface)!important;
+ border-color:var(--els-border)!important;
+ color:var(--els-ink)!important;
+}
+:root[data-els-theme] :is(.tag.now,.tag.featured,.tag.feature,.unit.live,.unit.feature){
+ color:var(--els-link)!important;
+ border-color:var(--els-border)!important;
+}
+:root[data-els-theme] :is(.card.feature,.unit.feature) :is(a,small,p){
+ color:var(--els-link)!important;
+}
+:root[data-els-theme] :is(.method div,.ss-method-strip div,.route-heading,.footnote,.hero-aside,.ss-hero-aside,.ss-aside-flow span){
+ background:var(--els-surface-alt)!important;
+ color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+}
+:root[data-els-theme] :is(.hero-aside,.ss-hero-aside) :is(a,p,small,strong,div,span){
+ color:var(--els-ink)!important;
+}
+:root[data-els-theme] :is(.hero-aside,.ss-hero-aside) a{
+ text-decoration:underline;
+ text-underline-offset:3px;
+}
+:root[data-els-theme] :is(.ss-home-primary,.btn.primary,.journey-practice-link,.cp-primary){
+ background:var(--els-primary)!important;
+ color:var(--els-primary-text)!important;
+ border-color:var(--els-primary)!important;
+}
+:root[data-els-theme] :is(.ss-home-outline,.btn.outline,.ss-roadmap-link){
+ background:var(--els-surface-alt)!important;
+ color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+}
+:root[data-els-theme] :is(.meter,.progress-track,.progress-bar){
+ background:var(--els-surface-alt)!important;
+}
+:root[data-els-theme] :is(.meter span,.progress-fill,.progress-bar>span){
+ background:var(--els-success)!important;
+}
+:root[data-els-theme] :is(.cp-reference,.cp-feedback,.cp-proof,.concept,.activity,.quiz,.transfer,.mem-diagram,.layout-cell){
+ background-color:var(--els-surface-alt)!important;
+ border-color:var(--els-border)!important;
+ color:var(--els-ink)!important;
+}
+:root[data-els-theme] .trace-line.active{
+ background:#474035!important;
+ border-left-color:var(--els-focus)!important;
+ color:#fff0c8!important;
+}
+:root[data-els-theme] .mem-cell.mem-pointer{
+ border-color:var(--els-link)!important;
+}
+:root[data-els-theme] .mem-cell.mem-target{
+ border-color:var(--els-success)!important;
+}
+:root[data-els-theme] :is(.theme-picker,.theme,.els-theme-control){
+ color:var(--els-ink)!important;
+}
