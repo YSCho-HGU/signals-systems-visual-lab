@@ -1,6 +1,8 @@
-/* Engineering Learning Studio design tokens v1.0.
-   Explicit themes; target WCAG 2.2 AA: 4.5:1 normal text, 3:1 large text/UI.
-   Prefer semantic tokens over hardcoded per-page fixes. */
+/* Engineering Learning Studio Design System v1.0.0 (2026-11-15)
+   Canonical: YSCho-HGU/engineering-learning-studio/assets/design-system.css
+   Contract: docs/Design_System_v1.0.0.md
+   Explicit themes; WCAG 2.2 AA target; not a sitewide conformance claim.
+   Semantic palette shared by all course websites. */
 :root{
  color-scheme:light;
  --els-page:#F5F8FC;--els-surface:#FFFFFF;--els-surface-alt:#EAF1F8;
