@@ -1,0 +1,114 @@
+/* Shared Signals & Systems lab theme adapter v1.0.
+   Loaded inside EACH of the 8 independent srcdoc lab frames, after the
+   experiment's original CSS. Reuses assets/design-system.css tokens.
+   Never change numerical models, canvas paints, SVG series, or trace colors. */
+:root,html[data-theme="light"]{
+ color-scheme:light;
+ --bg:var(--els-page);--card:var(--els-surface);--paper:var(--els-surface);
+ --ink:var(--els-ink);--sub:var(--els-muted);--muted:var(--els-muted);
+ --line:var(--els-border);--pale:var(--els-info-bg);
+ --teal:var(--els-link);--a:var(--els-link);--accent:var(--els-link);
+ --nav:#102338;--nav2:#1d3d5c;--navy:#102338;
+ --gold:var(--els-focus);--coral:#b24a35;--warm:#b24a35;
+}
+html[data-theme="dark"]{
+ color-scheme:dark;
+ --bg:var(--els-page);--card:var(--els-surface);--paper:var(--els-surface);
+ --ink:var(--els-ink);--sub:var(--els-muted);--muted:var(--els-muted);
+ --line:var(--els-border);--pale:var(--els-info-bg);
+ --teal:var(--els-link);--a:var(--els-link);--accent:var(--els-link);
+ --nav:#102338;--nav2:#24455f;--navy:#102338;
+ --gold:var(--els-focus);--coral:#ffad99;--warm:#ffad99;
+}
+html,body{background:var(--els-page)!important;color:var(--els-ink)!important}
+body{font-size:14px;line-height:1.7}
+:is(button,select,input,textarea,a,[tabindex]):focus-visible{
+ outline:3px solid var(--els-focus)!important;outline-offset:3px!important
+}
+button{min-height:40px}
+select{min-height:40px}
+input[type=range]{min-height:24px;accent-color:var(--els-link)}
+a{color:var(--els-link)}
+/* Form and control readability: overlays intentionally exclude graphs. */
+:is(.card,.figure,.learning,.question,.metric,.panel,.controls,.control,
+ .plot-card,.insight,.step,.formula,.answer,.result,.info,.quiz,.readings,
+ .derivation,.experiment-card,.case-card){
+ border-color:var(--els-border);color:var(--els-ink)
+}
+:is(.card,.figure,.learning,.question,.metric,.panel,
+ .controls,.control,.step,.answer,.result,.info,.quiz,.readings){
+ background:var(--els-surface);color:var(--els-ink);
+ border-color:var(--els-border)
+}
+:where(.control,.ctrl,.parameter,.field){min-width:0}
+:is(.control,.ctrl,.parameter,.field) label{color:var(--els-ink)}
+:is(.control,.ctrl,.parameter,.field) output{
+ color:var(--els-link);font-weight:800;font-variant-numeric:tabular-nums
+}
+:is(select,textarea,input:not([type=range]):not([type=checkbox]):not([type=radio])){
+ background:var(--els-surface);color:var(--els-ink);border:1px solid var(--els-border)
+}
+:is(.desc,.intro,.subtitle,.muted,.source,.hint,.caption,
+ .reading p,.learning p,.question p,.insight p){
+ color:var(--els-muted)
+}
+:is(.formula,.math,.mathbox,.equation,.step .math){
+ font-family:"Cambria Math",Cambria,"STIX Two Math",Georgia,serif;
+ overflow-x:auto;
+}
+:is(.formula,.mathbox,.equation,.step .math){
+ background:var(--els-info-bg);color:var(--els-info-ink);
+ border-color:var(--els-border)
+}
+/* Keep chapter gradients readable, especially when a dark theme is forced. */
+header{background:linear-gradient(110deg,#102338,#205173)!important;color:#fff!important}
+header :is(h1,p,.eyebrow){color:#eaf4ff!important}
+header .eyebrow{color:#bce7ff!important}
+/* Each chapter has its own nav implementation. Non-active buttons have
+   readable contrast; active buttons remain visibly selected. */
+nav#nav button,nav.nav button,.tabs button{
+ min-height:44px;
+}
+nav#nav button:not(.active),nav.nav button:not(.active),.tabs button:not(.active){
+ border-color:var(--els-border);background:var(--els-surface);color:var(--els-ink)
+}
+nav#nav button.active,nav.nav button.active,.tabs button.active{
+ background:#275a85;color:#fff;border-color:#a5d3f3
+}
+nav#nav button small,.tabs button small{color:inherit;opacity:.9}
+.sidebar{background:linear-gradient(155deg,#102338,#21475f)!important;color:#f2f8ff!important}
+.sidebar :is(h1,p,.brand,.side-label,.nav-name){color:#eaf4ff}
+.sidebar .nav button:not(.active){background:transparent;color:#e1effa}
+.sidebar .nav button.active{background:#285c83!important;color:#fff!important;box-shadow:inset 3px 0 #badfff}
+.sidebar .nav button.active .num{color:#e8f5ff}
+/* The following are reference panels, not plot backgrounds. */
+:is(.hero-callout,.insight,.note,.tip,.info-box,.callout){
+ border-color:var(--els-border)
+}
+:is(.hero-callout,.insight,.note,.tip,.info-box,.callout){
+ background:var(--els-info-bg);color:var(--els-info-ink)
+}
+:is(.hero-callout,.insight,.note,.tip,.info-box,.callout) :is(p,strong,span){
+ color:inherit
+}
+:where(.plot-card,.plotbox,.plot,.chart,.graph,.plot-area,.figure-plot){
+ border-color:var(--els-border)
+}
+/* Deliberately keep white graph backgrounds and the original SVG/canvas
+   colors: they were chosen together to preserve axis, marker and line contrast.
+   Overriding only graph backgrounds could make series invisible. */
+:where(canvas,svg){max-width:100%}
+/* Current dynamic buttons can be distinguishable without color alone. */
+button.active,button[aria-pressed="true"]{font-weight:800}
+button:disabled{cursor:not-allowed;opacity:.55}
+:where(.plot-title,.plotbox h3,.plot-card .plot-title){font-weight:800}
+@media(max-width:780px){
+ body{font-size:14px}
+ .controls{max-width:100%}
+ .card,.panel{min-width:0}
+ button{min-height:44px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;
+ transition-duration:0.01ms!important;animation-duration:0.01ms!important}
+}
