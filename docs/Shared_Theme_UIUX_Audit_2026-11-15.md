@@ -52,7 +52,7 @@ These are **token-level checks**, not sitewide WCAG 2.2 AA certification. SVG/ca
 
 - Main single-page app uses valid JavaScript; the embedded `application/json` payload is not JavaScript and must not be compiled as JS.
 - All **8 embedded lab payloads** decode into documents with exactly one `</head>` and each has working parent-theme message listener.
-- All **8 labs' inline JS blocks parse**, 33 blocks in total, with no syntax errors.
+- All **8 labs' inline JS blocks parse**, 35 blocks in total, with no syntax errors.
 - All lab payloads are unchanged (the new color adapter is inserted into the iframe's HTML string at load time), preserving original mathematical computations and 132 existing plot implementations.
 - Main document includes theme links; each iframe receives both global tokens and the lab adapter.
 - Mobile navigation hint and explicit graph interaction hint added.
