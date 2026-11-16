@@ -17,9 +17,9 @@ const hintByChapter={
 const style=document.createElement("style");style.textContent=`
 /* Supplemental panels should extend the document, not squeeze the legacy
    iframe inside the original fixed-height lab-area. Keep its usable height. */
-#lab-view .lab-area{height:auto;min-height:calc(100dvh - 78px)}
-#lab-view .lab-frame-wrap{flex:0 0 auto;height:min(72dvh,850px);min-height:460px}
-@media(max-width:760px){#lab-view .lab-frame-wrap{height:65dvh;min-height:420px}}
+#lab-view .lab-area:not(.focus){height:auto!important;min-height:calc(100dvh - 78px)!important}
+#lab-view .lab-area:not(.focus) .lab-frame-wrap{flex:0 0 auto!important;height:min(72dvh,850px)!important;min-height:460px!important}
+@media(max-width:760px){#lab-view .lab-area:not(.focus) .lab-frame-wrap{height:65dvh!important;min-height:420px!important}}
 
 #ss-hintbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:9px 13px;margin:8px 0 13px;border:1px solid var(--els-border,#555);border-radius:10px;background:var(--els-surface,#222);font-size:12px}
 #ss-hintbar button{min-height:39px;border:1px solid var(--els-border,#777);padding:7px 12px;border-radius:8px;background:var(--els-surface-alt,#333);color:var(--els-ink,#eee);cursor:pointer}
