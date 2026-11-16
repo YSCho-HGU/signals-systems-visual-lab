@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "recordType": "phase0-ss-compatibility-baseline",
+  "asOf": "2026-11-16",
+  "readOnly": true,
+  "course": "signals-systems",
+  "sharedOrigin": "https://yscho-hgu.github.io",
+  "chapters": [
+    {
+      "chapter": 1,
+      "labs": 9
+    },
+    {
+      "chapter": 2,
+      "labs": 9
+    },
+    {
+      "chapter": 3,
+      "labs": 7
+    },
+    {
+      "chapter": 4,
+      "labs": 8
+    },
+    {
+      "chapter": 5,
+      "labs": 8
+    },
+    {
+      "chapter": 6,
+      "labs": 6
+    },
+    {
+      "chapter": 7,
+      "labs": 7
+    },
+    {
+      "chapter": 8,
+      "labs": 8
+    }
+  ],
+  "catalogContracts": [
+    {
+      "file": "course-catalog.json",
+      "schemaVersion": 1,
+      "published": 8
+    },
+    {
+      "file": "chapter-catalog.json",
+      "schemaVersion": 1,
+      "published": 8
+    },
+    {
+      "file": "assets/ss-learning-path.v1.json",
+      "version": "1.0.0",
+      "labCount": 62
+    }
+  ],
+  "storageContracts": [
+    {
+      "key": "els-ss-lab-progress-v1",
+      "value": "JSON string[] chapter:index",
+      "meaning": "self-reported lab review; not verified completion"
+    },
+    {
+      "key": "ss-unified-nav-collapsed",
+      "value": "0 or 1",
+      "meaning": "chapter navigation collapse preference"
+    },
+    {
+      "key": "els-language",
+      "value": "mixed | en | ko",
+      "meaning": "shared course language"
+    },
+    {
+      "key": "els-theme-v2",
+      "value": "neutral-dark | warm-dark | navy-dark | warm-neutral",
+      "meaning": "shared theme"
+    },
+    {
+      "key": "ss-visual-lab-theme",
+      "value": "legacy light/dark",
+      "meaning": "legacy migration fallback; do not remove"
+    },
+    {
+      "key": "els-theme",
+      "value": "legacy light/dark",
+      "meaning": "legacy migration fallback; do not remove"
+    }
+  ],
+  "invariants": [
+    "Keep all 62 experiments available even if unreviewed",
+    "A marked lab is a self-reported activity, not a correctness certification",
+    "Preserve experiment inputs and derived plots on language changes",
+    "No student data uploaded; no cleanup of legacy localStorage",
+    "Never overwrite unknown unrelated localStorage keys",
+    "Chapter catalog publication is navigation-only; not authorization"
+  ],
+  "existingSuites": [
+    {
+      "file": "tests/visual-audit.mjs",
+      "scope": "62 experiments × 2 viewports × 2 themes = 248 screenshots"
+    },
+    {
+      "file": "tests/learning-aids-qa.mjs",
+      "scope": "progress, audio, ECG, hints, mobile controls"
+    },
+    {
+      "file": "tests/ss-theme-qa.mjs",
+      "scope": "shared theme and palette behavior"
+    }
+  ]
+}
