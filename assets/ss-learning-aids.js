@@ -5,13 +5,13 @@
 const frame=document.getElementById("lab-frame"),head=document.querySelector("#lab-view .lab-head");
 if(!frame||!head)return;
 const hintByChapter={
- 1:{en:"Check the signal domain, time scaling and whether the property must hold for every input.",ko:"신호의 정의역, 시간 변환, 그리고 시스템 성질이 모든 입력에 성립해야 하는지 확인하세요."},
- 2:{en:"Find overlap of nonzero supports before computing the convolution integral or sum.",ko:"컨벌루션 적분·합을 계산하기 전에 두 신호의 0이 아닌 구간이 겹치는 범위를 먼저 구하세요."},
- 3:{en:"Separate the fundamental frequency from harmonic indices, and check amplitude and phase.",ko:"기본 주파수와 고조파 차수를 구분하고 진폭·위상을 확인하세요."},
- 4:{en:"Recheck the CTFT sign convention and how time shifts change the complex phase.",ko:"CTFT 지수 부호 규약과 시간 이동이 복소 위상을 어떻게 바꾸는지 다시 확인하세요."},
- 5:{en:"For Laplace transforms, algebraic X(s) alone is insufficient: inspect the ROC and poles.",ko:"라플라스 변환은 X(s)만으로 부족합니다. ROC와 극점을 반드시 함께 확인하세요."},
- 6:{en:"DTFT is 2π-periodic. Compare magnitude/phase and the filter's gain at each frequency.",ko:"DTFT는 2π 주기입니다. 각 주파수에서 크기·위상과 필터 이득을 확인하세요."},
- 7:{en:"Check Nyquist frequency and the repeated spectrum before deciding whether aliasing occurs.",ko:"에일리어싱을 판단하기 전에 나이퀴스트 주파수와 반복 스펙트럼을 확인하세요."},
+ 1:{en:"Check the signal domain, time scaling and whether the property must hold for every input.",ko:"신호의 정의역, 시간 변환, 그리고 시스템 성질이 모든 입력에 성립해야 하는지 확인하세요.",k1:"사인파의 기본 주기는 주파수의 역수입니다.",k2:"주파수는 3 Hz입니다. T=1/f를 사용하세요."},
+ 2:{en:"Find overlap of nonzero supports before computing the convolution integral or sum.",ko:"컨벌루션 적분·합을 계산하기 전에 두 신호의 0이 아닌 구간이 겹치는 범위를 먼저 구하세요.",k1:"컨벌루션 합 y[n]=Σx[k]h[n−k]을 적어 보세요.",k2:"n=1에서 0이 아닌 항 두 개를 더해야 합니다."},
+ 3:{en:"Separate the fundamental frequency from harmonic indices, and check amplitude and phase.",ko:"기본 주파수와 고조파 차수를 구분하고 진폭·위상을 확인하세요.",k1:"고조파 주파수는 기본 주파수의 정수배입니다.",k2:"기본 주파수에 고조파 차수 k를 곱하세요."},
+ 4:{en:"Recheck the CTFT sign convention and how time shifts change the complex phase.",ko:"CTFT 지수 부호 규약과 시간 이동이 복소 위상을 어떻게 바꾸는지 다시 확인하세요.",k1:"시간 이동은 복소지수 위상에 영향을 줍니다.",k2:"e^(−jωt₀)의 크기는 1입니다."},
+ 5:{en:"For Laplace transforms, algebraic X(s) alone is insufficient: inspect the ROC and poles.",ko:"라플라스 변환은 X(s)만으로 부족합니다. ROC와 극점을 반드시 함께 확인하세요.",k1:"우측 지수 신호의 ROC는 극점 오른쪽입니다.",k2:"분모 s+2의 극점을 찾으세요."},
+ 6:{en:"DTFT is 2π-periodic. Compare magnitude/phase and the filter's gain at each frequency.",ko:"DTFT는 2π 주기입니다. 각 주파수에서 크기·위상과 필터 이득을 확인하세요.",k1:"이산시간 주파수 스펙트럼은 2π 주기입니다.",k2:"2π를 π로 나누어 보세요."},
+ 7:{en:"Check Nyquist frequency and the repeated spectrum before deciding whether aliasing occurs.",ko:"에일리어싱을 판단하기 전에 나이퀴스트 주파수와 반복 스펙트럼을 확인하세요.",k1:"샘플링 주파수는 최대 신호 주파수의 두 배 이상이어야 합니다.",k2:"2×400 Hz를 계산하세요. 실제 설계에서는 여유를 둡니다."},
  8:{en:"Check the ROC relative to poles. Causality and BIBO stability require different tests.",ko:"ROC가 극점의 어느 쪽인지 확인하고, 인과성과 BIBO 안정성 조건을 구분하세요."}
 };
 const style=document.createElement("style");style.textContent=`
@@ -28,7 +28,7 @@ function ch(){return Number((location.hash.match(/^#chapter=(\d+)/)||[])[1])||0}
 function lang(){return window.ELSLanguage?.get()||"mixed"}
 function text(pair){return lang()==="en"?pair.en:lang()==="ko"?pair.ko:pair.en+" · "+pair.ko}
 function render(){
- bar.hidden=!(ch()>=1&&ch()<=8);btn.textContent=lang()==="en"?"Need a hint?":lang()==="ko"?"개념 힌트 보기":"Need a hint? · 힌트 보기";
+ bar.style.display=(ch()>=1&&ch()<=8)?"flex":"none";btn.textContent=lang()==="en"?"Need a hint?":lang()==="ko"?"개념 힌트 보기":"Need a hint? · 힌트 보기";
  txt.hidden=!revealed;txt.textContent=revealed?text(hintByChapter[ch()]||hintByChapter[1]):"";
 }
 btn.addEventListener("click",()=>{revealed=!revealed;render()});
@@ -67,7 +67,7 @@ function instrument(doc){
    setTimeout(()=>{
      const incorrect=doc.querySelector('[data-result="incorrect"], [aria-invalid="true"], .quiz-feedback.incorrect, .answer.incorrect');
      if(incorrect){revealed=true;render()}
-   },30);
+   ,k1:"인과적인 유리 시스템의 ROC는 가장 바깥 극점 외부입니다.",k2:"1−0.5z⁻¹=0에서 극점을 구하세요."},30);
  });
 }
 // Optional chapter-level prediction check. Independent of existing lab grading.
@@ -88,7 +88,7 @@ predict.innerHTML='<strong id="ss-pc-label"></strong><label id="ss-pc-question" 
 bar.after(predict);
 let attempts=0;
 function pcRender(){
- const data=challenge[ch()];predict.hidden=!data;if(!data)return;
+ const data=challenge[ch()];predict.style.display=data?"flex":"none";if(!data)return;
  const lng=lang();document.getElementById("ss-pc-label").textContent=lng==="ko"?"예측하고 확인하기":lng==="en"?"Predict & Check":"Predict & Check · 예측 확인";
  document.getElementById("ss-pc-question").textContent=lng==="ko"?data.ko:lng==="en"?data.en:data.en+" · "+data.ko;
  document.getElementById("ss-pc-submit").textContent=lng==="ko"?"결과 확인":lng==="en"?"Check prediction":"Check · 확인";
@@ -102,7 +102,7 @@ document.getElementById("ss-pc-submit").addEventListener("click",()=>{
   return;
  }
  attempts++;
- const why=attempts===1?c.h1:c.h2;
+ const why=lang()==="ko"?(attempts===1?c.k1:c.k2):(attempts===1?c.h1:c.h2);
  feedback.textContent=(lang()==="ko"?"다시 확인: ":lang()==="en"?"Try again: ":"Hint · 힌트: ")+why;
 });
 function resetPredict(){
