@@ -60,6 +60,9 @@ try{
   const first=page.locator("#ss-unified-nav .ss-unified-link").first();
   await first.waitFor({state:"visible"});
   await first.click();
+  if(await page.locator("#ss-unified-nav").evaluate(e=>!e.classList.contains("collapsed")))
+   await page.locator("#ss-unified-nav .ss-unified-toggle").click();
+  await page.waitForTimeout(120);
   expect((await page.locator("#lab-frame").evaluate(e=>e.getBoundingClientRect().width))>=300,prefix+"-frame-width-after-nav");
   // Explicit review and undo must not damage existing progress fixture.
   const control=page.locator("#ss-progress-panel button");
