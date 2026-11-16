@@ -32,8 +32,14 @@ const panel=document.createElement("section");panel.id="ss-progress-panel";panel
 const label=document.createElement("strong"),bar=document.createElement("div"),fill=document.createElement("span"),pct=document.createElement("span"),btn=document.createElement("button"),note=document.createElement("span");
 bar.className="ss-progress-meter";bar.setAttribute("role","progressbar");bar.setAttribute("aria-valuemin","0");bar.setAttribute("aria-valuemax",String(total));bar.append(fill);note.className="ss-progress-note";btn.type="button";panel.append(label,bar,pct,btn,note);
 const top=document.querySelector("#lab-view .lab-head");if(top)top.after(panel);
+const homeActions=document.querySelector("#overview .ss-home-actions");
+const homeLink=document.createElement("a");
+homeLink.href="https://yscho-hgu.github.io/engineering-learning-studio/progress/";
+homeLink.style.cssText="display:inline-flex;align-items:center;gap:6px;margin:8px 0;padding:7px 10px;border:1px solid var(--els-border,#555);border-radius:9px;color:var(--els-link,#b9d7c8);font-size:12px";
+if(homeActions)homeActions.after(homeLink);
 function update(){
- const cur=current();label.textContent=t("label");const n=done.size;fill.style.width=100*n/total+"%";pct.textContent=n+"/"+total+" · "+Math.round(100*n/total)+"%";
+ const cur=current();label.textContent=t("label");const n=done.size;
+ homeLink.textContent=t("label")+" "+n+"/"+total+" · "+Math.round(100*n/total)+"% ↗";fill.style.width=100*n/total+"%";pct.textContent=n+"/"+total+" · "+Math.round(100*n/total)+"%";
  bar.setAttribute("aria-valuenow",String(n));bar.setAttribute("aria-label",t("progress"));
  btn.disabled=!cur;btn.textContent=cur&&done.has(cur)?t("unmark"):t("mark");
  note.textContent=t("notgraded");
