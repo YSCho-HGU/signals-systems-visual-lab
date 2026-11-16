@@ -60,6 +60,17 @@ try{
    console.log("NAV_GEOMETRY "+device+" "+JSON.stringify(geo));
    assert(await button.isVisible(),"Sidebar button hidden");
    await button.click({timeout:5000});
+   if(device==="mobile"){
+     const frameWidth=await page.locator("#lab-frame").evaluate(x=>x.getBoundingClientRect().width);
+     assert(frameWidth>=300,"Mobile iframe too narrow: "+frameWidth);
+     const toggle=page.locator("#ss-unified-nav .ss-unified-toggle");
+     const isCollapsed=await page.locator("#ss-unified-nav").evaluate(x=>x.classList.contains("collapsed"));
+     if(isCollapsed)await toggle.click();
+     const second=page.locator("#ss-unified-nav .ss-unified-link").nth(1);
+     await second.click({timeout:5000});
+     assert(await page.locator("#ss-unified-nav").evaluate(x=>x.classList.contains("collapsed")),"Mobile overlay did not auto-close after selection");
+     assert((await page.locator("#lab-frame").evaluate(x=>x.getBoundingClientRect().width))>=300,"Iframe shrank after overlay selection");
+   }
   },page);
   await testcase(device+"-chapter-3-harmonic-audio",async()=>{
    await go(page,3);
