@@ -58,3 +58,13 @@ The parent uses system/light/dark selection as before; the active chapter contin
 - **QA status:** [Source-level UI/UX and acceptance report](docs/Signals_Systems_UIUX_62_Audit_2026-11-15.md). Real browser screenshot pass is not asserted until the workflow result and artifacts have been examined.
 
 **Offline:** new palette and pathway require the repository's \`assets/\` files. The original interactive lab payload remains embedded in \`index.html\`; opening a standalone HTML copy without assets falls back to the legacy interface.
+
+## New interactive learning aids (2026-11-16)
+
+- **Self-reported progress:** 62 experiment review markers stored only in the current browser and shown on the Studio Progress Dashboard.
+- **Hear the signal:** original synthetic harmonic audio in Chapter 3 and low/high-pass filtered audio in Chapter 6; playback requires a user click.
+- **Engineering examples:** simulated ECG-like waveform (Ch1), additive harmonics (Ch3), and synthetic signal denoising/filtering (Ch6).
+- **Practice feedback:** chapter-level numeric Predict & Check with graduated hints; separate from existing embedded experimental quizzes.
+- **Mobile:** accessible range-slider increment/decrement buttons; device-level pinch zoom remains a separate testing requirement.
+
+[Details, limitations and acceptance checks](docs/SS_INTERACTIVE_LEARNING_ENHANCEMENT_2026-11-16.md).
