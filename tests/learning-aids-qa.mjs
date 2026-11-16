@@ -49,6 +49,8 @@ try{
   await testcase(device+"-chapter-sidebar-hit-testing",async()=>{
    await go(page,3);
    const button=page.locator("#ss-unified-nav .ss-unified-link").first();
+   if(device==="mobile"&&await page.locator("#ss-unified-nav").evaluate(x=>x.classList.contains("collapsed")))
+     await page.locator("#ss-unified-nav .ss-unified-toggle").click();
    await button.scrollIntoViewIfNeeded();
    const geo=await button.evaluate(node=>{
      const r=node.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
