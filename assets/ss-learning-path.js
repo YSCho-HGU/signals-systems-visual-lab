@@ -51,6 +51,12 @@ function showExperiment(ch,index){
    if(chosen)node.setAttribute("aria-current","step");
    else node.removeAttribute("aria-current");
  }
+ for(const button of document.querySelectorAll("#ss-unified-nav .ss-unified-link")){
+   const selected=Number(button.dataset.chapter)===ch&&Number(button.dataset.experiment)===index;
+   button.classList.toggle("selected",selected);
+   if(selected)button.setAttribute("aria-current","step");else button.removeAttribute("aria-current");
+ }
+ document.dispatchEvent(new CustomEvent("ss-experiment-change",{detail:{chapter:ch,index}}));
  const info=document.getElementById("ss-path-live");
  if(info)info.textContent="실험 "+index+"을(를) 열었습니다. 아래 실험 화면에서 파라미터를 바꾸고 그래프와 수식 유도를 확인하세요.";
  const interactive=doc.querySelector("main")||doc.querySelector("#content")||doc.body;
