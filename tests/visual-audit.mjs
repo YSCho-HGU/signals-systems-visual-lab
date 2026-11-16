@@ -74,7 +74,7 @@ try{
       if(result.theme!==(theme==="warm-neutral"?"light":"dark"))errors.push({width,theme,chapter:ch,experiment:n,error:"iframe theme "+result.theme});
       if(result.overflow)errors.push({width,theme,chapter:ch,experiment:n,error:"iframe overflow "+result.overflowWidth+"/"+result.viewport});
       if(result.bodyTextContrast<4.5)errors.push({width,theme,chapter:ch,experiment:n,error:"Body text contrast "+result.bodyTextContrast+" < 4.5"});
-      record.push({width,theme,chapter:ch,experiment:n,...result});
+      record.push({width,theme,chapter:ch,experiment:n,...result,theme,scheme:result.theme});
       await page.locator("#lab-frame").screenshot({path:join(chDir,String(n).padStart(2,"0")+".png")});
     }
    }
@@ -88,5 +88,5 @@ try{
 const summary={experimentScreens:record.length,expectedScreens:62*2*2,errors:errors.length,
  themes:MODES,widths:WATCH,records:record,failures:errors};
 writeFileSync(join(ROOT,"results.json"),JSON.stringify(summary,null,2));
-console.log(JSON.stringify({experimentScreens:record.length,expected:248,issues:errors.length,output:ROOT},null,2));
+console.log(JSON.stringify({experimentScreens:record.length,expected:248,issues:errors.length,issueExamples:errors.slice(0,15),output:ROOT},null,2));
 if(record.length!==248||errors.length>0)process.exitCode=1;
