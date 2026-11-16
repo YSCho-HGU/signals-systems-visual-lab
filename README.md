@@ -68,3 +68,7 @@ The parent uses system/light/dark selection as before; the active chapter contin
 - **Mobile:** accessible range-slider increment/decrement buttons; device-level pinch zoom remains a separate testing requirement.
 
 [Details, limitations and acceptance checks](docs/SS_INTERACTIVE_LEARNING_ENHANCEMENT_2026-11-16.md).
+
+## Phase 0 — Browser compatibility baseline
+
+The read-only [S&S storage contract](docs/phase0/ss-storage-baseline.json) pins 8 chapters, 62 lab IDs, and legacy preference/progress keys. The isolated Chromium [Phase 0 regression suite](tests/phase0-ss-baseline.mjs) and [source-only storage scanner](tests/phase0-storage-scan.mjs) run in [GitHub Actions](.github/workflows/phase0-ss-baseline.yml) on Ubuntu 24.04. Reference [successful run 43867654674](https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/43867654674): 53/53 checks passed. Tests use generated browser fixtures, not student data.
