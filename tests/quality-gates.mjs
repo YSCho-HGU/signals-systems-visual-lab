@@ -6,7 +6,7 @@ const root=process.env.SS_QA_DIR||'qa-output';
 const source=JSON.parse(readFileSync(join(root,'results.json'),'utf8'));
 const failures=[],cases=[];
 const expected=[9,9,7,8,8,6,7,8];
-const themes=['light','dark'],widths=[390,1280];
+const themes=['warm-neutral','neutral-dark'],widths=[390,1280];
 const map=new Map();
 for(const r of source.records||[]){
  const key=[r.width,r.theme,r.chapter,r.experiment].join(':');
@@ -26,7 +26,7 @@ for(const width of widths) for(const theme of themes){
   if(!existsSync(file)||statSync(file).size<1000) failures.push('Missing/empty screenshot: '+file);
   if(record && (!Number.isFinite(record.bodyTextContrast)||record.bodyTextContrast<4.5)) failures.push('Insufficient body contrast: '+key);
   if(record?.overflow) failures.push('Horizontal overflow: '+key);
-  if(record?.theme!==theme) failures.push('Theme mismatch: '+key);
+  if(record?.theme!==(theme==='warm-neutral'?'light':'dark')) failures.push('Theme mismatch: '+key);
   cases.push({width,theme,chapter,experiment,screenshot:file,
     visual_graph_review:'PENDING_HUMAN_REVIEW',
     math_reference_review:'PENDING_INDEPENDENT_ORACLE',
@@ -43,5 +43,5 @@ const result={
  manual_review_cases:cases
 };
 writeFileSync(join(root,'quality-gates.json'),JSON.stringify(result,null,2));
-console.log(JSON.stringify({gate:result.gate,status:result.status,screens:map.size,failures:failures.length,release_status:result.release_status},null,2));
+console.log(JSON.stringify({gate:result.gate,status:result.status,screens:map.size,failures:failures.length,release_status:result.release_status,examples:failures.slice(0,20)},null,2));
 if(failures.length) process.exitCode=1;
