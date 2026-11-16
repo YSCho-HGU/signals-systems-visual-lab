@@ -46,6 +46,21 @@ try{
    await page.locator("#ss-progress-panel button").click();
    assert((await page.evaluate(()=>JSON.parse(localStorage.getItem("els-ss-lab-progress-v1")||"[]"))).length===0,"unmark didn't persist");
   },page);
+  await testcase(device+"-chapter-sidebar-hit-testing",async()=>{
+   await go(page,3);
+   const button=page.locator("#ss-unified-nav .ss-unified-link").first();
+   await button.scrollIntoViewIfNeeded();
+   const geo=await button.evaluate(node=>{
+     const r=node.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
+     const hit=document.elementFromPoint(x,y);
+     const overlay=document.getElementById("ss-predict-check")?.getBoundingClientRect();
+     const wrapper=document.querySelector("#lab-view .lab-frame-wrap")?.getBoundingClientRect();
+     return {button:{x:r.x,y:r.y,width:r.width,height:r.height},point:{x,y},hit:hit?.tagName+"#"+(hit?.id||"")+"."+(hit?.className||""),predict:overlay?{x:overlay.x,y:overlay.y,width:overlay.width,height:overlay.height}:null,wrapper:wrapper?{x:wrapper.x,y:wrapper.y,width:wrapper.width,height:wrapper.height}:null};
+   });
+   console.log("NAV_GEOMETRY "+device+" "+JSON.stringify(geo));
+   assert(await button.isVisible(),"Sidebar button hidden");
+   await button.click({timeout:5000});
+  },page);
   await testcase(device+"-chapter-3-harmonic-audio",async()=>{
    await go(page,3);
    const panel=page.locator("#ss-applications");
