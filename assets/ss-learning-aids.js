@@ -40,7 +40,7 @@ function instrument(doc){
  function enhance(){
   const sliders=[...doc.querySelectorAll('input[type="range"]')];
   for(const input of sliders){
-    if(input.dataset.ssFineControls)return;
+    if(input.dataset.ssFineControls)continue;
     input.dataset.ssFineControls="true";
     const wrapper=doc.createElement("span");wrapper.className="ss-touch-stepper";
     for(const delta of [-1,1]){
