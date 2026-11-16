@@ -26,7 +26,7 @@ for(const width of widths) for(const theme of themes){
   if(!existsSync(file)||statSync(file).size<1000) failures.push('Missing/empty screenshot: '+file);
   if(record && (!Number.isFinite(record.bodyTextContrast)||record.bodyTextContrast<4.5)) failures.push('Insufficient body contrast: '+key);
   if(record?.overflow) failures.push('Horizontal overflow: '+key);
-  if(record?.theme!==(theme==='warm-neutral'?'light':'dark')) failures.push('Theme mismatch: '+key);
+  if(record?.scheme!==(theme==='warm-neutral'?'light':'dark')) failures.push('Theme mismatch: '+key);
   cases.push({width,theme,chapter,experiment,screenshot:file,
     visual_graph_review:'PENDING_HUMAN_REVIEW',
     math_reference_review:'PENDING_INDEPENDENT_ORACLE',
