@@ -35,14 +35,32 @@ function makeSamples(kind,N=720){
   else {const phase=(u*3)%1;const gaussian=(at,sigma,amp)=>amp*Math.exp(-.5*((phase-at)/sigma)**2);x[i]=gaussian(.15,.023,.09)-gaussian(.36,.012,.15)+gaussian(.4,.009,1)-gaussian(.435,.016,.24)+gaussian(.7,.06,.28)+.10*Math.sin(2*Math.PI*67*u)}
  }
  if(kind===6||kind===1){
-   const radius=kind===6?Math.max(1,Math.round(15*550/cutoff)):10;
-   for(let i=0;i<N;i++){let sum=0,n=0;for(let j=-radius;j<=radius;j++){const k=i+j;if(k>=0&&k<N){sum+=x[k];n++}}const smoothed=sum/n;y[i]=kind===6&&mode==="highpass"?x[i]-smoothed:smoothed}
+   // Audio and graph are independent *examples*. This graph applies a
+   // windowed-sinc discrete FIR LPF; the sound uses a BiquadFilter.
+   // For Chapter 6, 5 cycles correspond to a 220-Hz reference tone.
+   const fs=kind===6?N*220/5:N,fc=kind===6?cutoff:fs/18;
+   const radius=kind===6?96:12,kernel=[];
+   let gain=0;
+   for(let j=-radius;j<=radius;j++){
+     const ratio=fc/fs;
+     const sinc=j===0?2*ratio:Math.sin(2*Math.PI*ratio*j)/(Math.PI*j);
+     const window=.5+.5*Math.cos(Math.PI*j/radius);
+     kernel.push(sinc*window);gain+=sinc*window;
+   }
+   for(let i=0;i<N;i++){
+     let smoothed=0;for(let j=-radius;j<=radius;j++){
+       const index=i+j;
+       // Periodic boundary for the demonstration signal.
+       smoothed+=x[(index%N+N)%N]*kernel[j+radius]/gain;
+     }
+     y[i]=kind===6&&mode==="highpass"?x[i]-smoothed:smoothed;
+   }
  }
  return {x,y};
 }
 function plot(kind){
  const cv=$("ss-app-canvas"),d=makeSamples(kind),w=cv.width,H=cv.height;
- ctx.clearRect(0,0,w,H);
+ ctx.fillStyle="#11211f";ctx.fillRect(0,0,w,H);
  ctx.strokeStyle="rgba(160,170,170,.35)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,H/2);ctx.lineTo(w,H/2);ctx.stroke();
  for(const [values,color] of [[d.x,"#d3b77a"],[d.y,"#85ceb8"]]){
   ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=2;
