@@ -130,9 +130,17 @@ if(frameWrap){
  #lab-view #ss-study-guide,#lab-view #guide-toggle{display:none!important}
  #lab-view .ss-unified-link:focus-visible,.ss-unified-toggle:focus-visible{outline:3px solid var(--els-focus)!important;outline-offset:-2px}
  @media(max-width:760px){
-  #lab-view .ss-unified-nav{flex-basis:220px;width:220px}
-  #lab-view .ss-unified-nav.collapsed{flex-basis:40px;width:40px}
-  .ss-unified-name{font-size:12px}
+  /* Keep the experiment iframe at viewport width minus 40px. The open
+     navigation overlays the iframe instead of taking 220px from its width. */
+  #lab-view .lab-frame-wrap{position:relative}
+  #lab-view .ss-unified-nav{
+   flex:0 0 220px;width:220px;margin-right:-180px;
+   position:relative;z-index:6;box-shadow:8px 0 18px rgba(0,0,0,.20)
+  }
+  #lab-view .ss-unified-nav.collapsed{
+   flex:0 0 40px;width:40px;margin-right:0;box-shadow:none
+  }
+  #lab-view .ss-unified-name{font-size:12px}
  }
  @media(prefers-reduced-motion:reduce){#lab-view .ss-unified-nav{transition:none}}
 `;
@@ -148,8 +156,11 @@ if(frameWrap){
  const body=el("div","ss-unified-body",sidebar);
  body.id="ss-unified-body";
  frameWrap.insertBefore(sidebar,frame);
- let folded=false;
- try{folded=localStorage.getItem("ss-unified-nav-collapsed")==="1"}catch(e){}
+ let folded=window.matchMedia("(max-width:760px)").matches;
+ try{
+   const saved=localStorage.getItem("ss-unified-nav-collapsed");
+   if(saved==="1"||saved==="0")folded=saved==="1";
+ }catch(e){}
  function applyFold(){
   sidebar.classList.toggle("collapsed",folded);
   body.hidden=folded;
@@ -200,7 +211,14 @@ if(frameWrap){
   if(!button)return;
   const ch=Number(button.dataset.chapter),index=Number(button.dataset.experiment);
   if(ch!==currentChapter())return;
-  if(showExperiment(ch,index))updateSelected(index);
+  if(showExperiment(ch,index)){
+    updateSelected(index);
+    if(window.matchMedia("(max-width:760px)").matches && !folded){
+      folded=true;
+      applyFold();
+      try{localStorage.setItem("ss-unified-nav-collapsed","1")}catch(e){}
+    }
+  }
  });
  // Source chapter implementations differ: use their existing nav as an
  // invisible control surface, and let the host offer one consistent menu.
