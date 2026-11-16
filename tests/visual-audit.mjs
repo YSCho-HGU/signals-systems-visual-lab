@@ -39,8 +39,9 @@ try{
     await page.goto(BASE+"#chapter="+ch,{waitUntil:"domcontentloaded",timeout:45000});
     await page.locator("#lab-loading").waitFor({state:"hidden",timeout:45000});
     const iframe=page.frameLocator("#lab-frame");
-    const selector=ch===1?"#nav button":ch===5?"#tabs button":ch>=7?"#nav button":"nav.nav button[data-nav]";
-    const buttons=iframe.locator(selector);
+    // The legacy iframe nav is intentionally hidden by unified navigation.
+    // Use the same visible chapter sidebar students interact with.
+    const buttons=page.locator("#ss-unified-nav .ss-unified-link");
     await buttons.first().waitFor({state:"visible",timeout:20000});
     const found=await buttons.count(),expected=EXP_COUNTS[ch-1];
     if(found!==expected)errors.push({width,theme,chapter:ch,error:"Experiment nav count "+found+" vs "+expected});
@@ -54,7 +55,7 @@ try{
     if(!data.guide||!data.navCurrent)errors.push({width,theme,chapter:ch,error:"Missing learning route/current page"});
     const chDir=join(dir,"ch"+ch);mkdirSync(chDir,{recursive:true});
     for(let n=1;n<=Math.min(found,expected);n++){
-      await buttons.nth(n-1).click({force:true});
+      await buttons.nth(n-1).click();
       await page.waitForTimeout(110);
       const result=await iframe.locator("body").evaluate(body=>{
        const root=document.documentElement;
