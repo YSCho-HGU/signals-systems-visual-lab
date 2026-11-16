@@ -72,3 +72,14 @@ Incorrect inputs show a principle clue on first attempt and a more specific clue
 - `assets/ss-learning-path.js`: keep sidebar active experiment selection in sync
 - `index.html`: load the three new modules
 - Studio `progress/index.html` and `progress/dashboard.js`: read-only SS summary
+
+
+## Browser verification and fixes (2026-11-16)
+
+New automated E2E: `tests/learning-aids-qa.mjs` / `npm run qa:learning`, executed by `.github/workflows/learning-aids-qa.yml`.
+
+- GitHub Actions [run 43854943131](https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/43854943131): **12 passes, 0 failed checks, 0 reported JavaScript console/page errors**.
+- Chromium desktop 1280×800 and mobile-emulated 390×844 were exercised. Both cover progress save/unmark/reload, Ch3 harmonic changes and AudioContext startup, Ch6 filtering visualization, synthetic ECG display, the two-tier numeric hints, and iframe fine-step slider controls.
+- Fixed `ss-learning-aids.js` slider enhancement loop: `return` previously exited all enhancement when an already-instrumented slider was encountered. It now uses `continue`, allowing all eligible sliders to receive controls.
+- Updated the older 248-screenshot visual audit theme selectors to current `warm-neutral` / `neutral-dark` values. Previous legacy test failures arose from trying to select removed `light` and `dark` values.
+- **Verification limit:** Browser test confirms the Web Audio context starts after a click, not the perceptual quality of reproduced sound on speakers or headphones. Chromium touch emulation does not replace physical-device iOS/Android gesture checks. The complete 62-experiment visual audit is separately executed and must be judged by its workflow result, not assumed to pass based on these 12 checks.
