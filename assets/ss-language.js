@@ -3,27 +3,18 @@
    Text updates are performed in-place; never reload a lab on language change. */
 (()=>{
 "use strict";
-const KEY="els-language", SELECT=document.getElementById("ss-language-select");
+const language=window.ELSLanguage;
+if(!language)throw Error("Load assets/els-language.js before ss-language.js");
+const SELECT=document.getElementById("ss-language-select");
 if(!SELECT)return;
-const modes=["mixed","en","ko"];
-/* Shared language preference across Engineering Learning Studio and C Programming.
-   A query parameter only initializes the preference when none was saved:
-   old bookmarks must not overwrite a newer choice made in another course. */
-let mode="mixed",hasSaved=false;
-try{
- const saved=localStorage.getItem(KEY);
- if(modes.includes(saved)){mode=saved;hasSaved=true}
-}catch(e){}
-if(!hasSaved){
- try{
-  const requested=new URLSearchParams(location.search).get("lang");
-  if(modes.includes(requested)){
-   mode=requested;
-   try{localStorage.setItem(KEY,mode)}catch(e){}
-  }
- }catch(e){}
+const modes=language.modes;
+const stored=(()=>{try{return localStorage.getItem(language.key)}catch(e){return null}})();
+if(!modes.includes(stored)){
+ try{const requested=new URLSearchParams(location.search).get("lang");
+ if(modes.includes(requested))language.set(requested)}catch(e){}
 }
-SELECT.value=mode;
+let mode=language.get();
+language.bindSelect(SELECT);
 const T={
  "Display":["Display","화면","Display · 화면"],
  "Loading interactive experiments…":["Loading interactive experiments…","인터랙티브 실험 불러오는 중…","Loading interactive experiments… · 실험 불러오는 중"],
@@ -260,26 +251,10 @@ function updateFrame(){
 
 }
 function apply(){updateShell();updateFrame();document.dispatchEvent(new CustomEvent("ss-language-change",{detail:{mode}}))}
-SELECT.addEventListener("change",()=>{
- mode=SELECT.value;
- try{localStorage.setItem(KEY,mode)}catch(e){}
+language.subscribe(next=>{
+ if(next===mode)return;
+ mode=next;
  apply();
-});
-/* localStorage is shared by the two GitHub Pages projects under the same
-   origin. Receive changes from another open tab without reloading a lab. */
-window.addEventListener("storage",event=>{
- if(event.key!==KEY||!modes.includes(event.newValue)||event.newValue===mode)return;
- mode=event.newValue;
- SELECT.value=mode;
- apply();
-});
-window.addEventListener("pageshow",()=>{
- try{
-  const saved=localStorage.getItem(KEY);
-  if(modes.includes(saved)&&saved!==mode){
-   mode=saved;SELECT.value=mode;apply();
-  }
- }catch(e){}
 });
 const guide=document.getElementById("ss-study-guide");
 if(guide)new MutationObserver(()=>{if(!guide.hidden)updateGuide()}).observe(guide,{childList:true,subtree:false,attributes:true,attributeFilter:["hidden"]});
