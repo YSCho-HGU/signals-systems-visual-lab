@@ -83,3 +83,12 @@ New automated E2E: `tests/learning-aids-qa.mjs` / `npm run qa:learning`, execute
 - Fixed `ss-learning-aids.js` slider enhancement loop: `return` previously exited all enhancement when an already-instrumented slider was encountered. It now uses `continue`, allowing all eligible sliders to receive controls.
 - Updated the older 248-screenshot visual audit theme selectors to current `warm-neutral` / `neutral-dark` values. Previous legacy test failures arose from trying to select removed `light` and `dark` values.
 - **Verification limit:** Browser test confirms the Web Audio context starts after a click, not the perceptual quality of reproduced sound on speakers or headphones. Chromium touch emulation does not replace physical-device iOS/Android gesture checks. The complete 62-experiment visual audit is separately executed and must be judged by its workflow result, not assumed to pass based on these 12 checks.
+
+
+### Follow-up QA update — actual Chromium tests
+
+- Browser learning-aids E2E [run 43856283410](https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/43856283410): **14 pass, 0 fail, 0 JS page/console errors**, including a real pointer hit-test of Chapter 3's visible experiment navigation in desktop and mobile-emulated layouts.
+- Fixed a significant UI regression: the original `.lab-area` fixed-height flex container collapsed `.lab-frame-wrap` to 0px after the added progress/applications/prediction panels. A non-Focus layout now allows full document scrolling and preserves at least 420–460px for the iframe; Focus mode remains separate. Browser evidence confirms desktop 576px and mobile-emulated ~549px iframe height, with successful real pointer clicks.
+- The full 62×2×2 screenshot audit captured **248 screenshots** but its initial quality gate was not yet passing. Old theme names, hidden legacy iframe navigation, and a palette-vs-scheme overwrite in test records were corrected. These are test-automation changes, not mathematical transformations.
+- Before treating the full audit as green, examine the latest `Visual Lab Accessibility and Regression Audit` workflow result and its `qa-output/results.json` and `quality-gates.json` artifacts. Outstanding issues must not be represented as passed.
+- Physical Android/iOS pinch and headphone audio quality remain outside headless Chromium's validated scope.
