@@ -42,6 +42,11 @@ try{
     // The legacy iframe nav is intentionally hidden by unified navigation.
     // Use the same visible chapter sidebar students interact with.
     const buttons=page.locator("#ss-unified-nav .ss-unified-link");
+    const openSidebar=async()=>{
+      const collapsed=await page.locator("#ss-unified-nav").evaluate(node=>node.classList.contains("collapsed"));
+      if(collapsed)await page.locator("#ss-unified-nav .ss-unified-toggle").click();
+    };
+    await openSidebar();
     await buttons.first().waitFor({state:"visible",timeout:20000});
     const found=await buttons.count(),expected=EXP_COUNTS[ch-1];
     if(found!==expected)errors.push({width,theme,chapter:ch,error:"Experiment nav count "+found+" vs "+expected});
@@ -55,6 +60,7 @@ try{
     if(!data.guide||!data.navCurrent)errors.push({width,theme,chapter:ch,error:"Missing learning route/current page"});
     const chDir=join(dir,"ch"+ch);mkdirSync(chDir,{recursive:true});
     for(let n=1;n<=Math.min(found,expected);n++){
+      await openSidebar();
       await buttons.nth(n-1).click();
       await page.waitForTimeout(110);
       const result=await iframe.locator("body").evaluate(body=>{
