@@ -11,7 +11,7 @@ import {join} from "node:path";
 const BASE=process.env.SS_BASE_URL||"http://127.0.0.1:8765/";
 const ROOT=process.env.SS_QA_DIR||"qa-output";
 const WATCH=[390,1280];
-const MODES=["light","dark"];
+const MODES=["warm-neutral","neutral-dark"];
 const EXP_COUNTS=[9,9,7,8,8,6,7,8];
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 mkdirSync(ROOT,{recursive:true});
@@ -49,7 +49,7 @@ try{
       return {theme:e.dataset.theme,documentWidth:e.scrollWidth,windowWidth:innerWidth,
         guide:!!guide&&guide.hidden===false,navCurrent:!!document.querySelector('.navbtn[aria-current="page"]')};
     });
-    if(data.theme!==theme)errors.push({width,theme,chapter:ch,error:"Incorrect parent theme "+data.theme});
+    if(data.theme!==(theme==="warm-neutral"?"light":"dark"))errors.push({width,theme,chapter:ch,error:"Incorrect parent theme "+data.theme});
     if(data.documentWidth>data.windowWidth+5)errors.push({width,theme,chapter:ch,error:"Parent horizontal overflow "+JSON.stringify(data)});
     if(!data.guide||!data.navCurrent)errors.push({width,theme,chapter:ch,error:"Missing learning route/current page"});
     const chDir=join(dir,"ch"+ch);mkdirSync(chDir,{recursive:true});
@@ -70,7 +70,7 @@ try{
          active:document.querySelector("nav .active")?.textContent?.trim().slice(0,45)||"",
          theme:root.dataset.theme};
       });
-      if(result.theme!==theme)errors.push({width,theme,chapter:ch,experiment:n,error:"iframe theme "+result.theme});
+      if(result.theme!==(theme==="warm-neutral"?"light":"dark"))errors.push({width,theme,chapter:ch,experiment:n,error:"iframe theme "+result.theme});
       if(result.overflow)errors.push({width,theme,chapter:ch,experiment:n,error:"iframe overflow "+result.overflowWidth+"/"+result.viewport});
       if(result.bodyTextContrast<4.5)errors.push({width,theme,chapter:ch,experiment:n,error:"Body text contrast "+result.bodyTextContrast+" < 4.5"});
       record.push({width,theme,chapter:ch,experiment:n,...result});
