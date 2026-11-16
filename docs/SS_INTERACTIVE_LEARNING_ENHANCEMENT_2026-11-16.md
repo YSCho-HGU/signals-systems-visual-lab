@@ -92,3 +92,19 @@ New automated E2E: `tests/learning-aids-qa.mjs` / `npm run qa:learning`, execute
 - The full 62×2×2 screenshot audit captured **248 screenshots** but its initial quality gate was not yet passing. Old theme names, hidden legacy iframe navigation, and a palette-vs-scheme overwrite in test records were corrected. These are test-automation changes, not mathematical transformations.
 - Before treating the full audit as green, examine the latest `Visual Lab Accessibility and Regression Audit` workflow result and its `qa-output/results.json` and `quality-gates.json` artifacts. Outstanding issues must not be represented as passed.
 - Physical Android/iOS pinch and headphone audio quality remain outside headless Chromium's validated scope.
+
+
+## Full 248-screen regression resolution (2026-11-16, final)
+
+**Root-cause analysis:** In Chromium's mobile 390px viewport, the expanded 220px unified chapter sidebar reduced the iframe to approximately 170px. All 62 experiments therefore reported horizontal overflow in each of two themes (124 reports). These were repeated measurements of one mobile layout defect, not 124 independent mathematical errors.
+
+**UI fix:** `assets/ss-learning-path.js` now makes the sidebar an overlay on mobile, rather than subtracting 220px from the iframe. Mobile navigation is collapsed by default when no stored preference exists, can be expanded on demand, and auto-closes after an experiment is selected. LocalStorage retains the existing collapsed preference.
+
+**Regression-test fixes:** `tests/visual-audit.mjs` now uses the visible unified navigation, opens collapsed menus before navigation, and correctly distinguishes theme palette from iframe light/dark scheme. `tests/quality-gates.mjs` uses matching theme names. Additional `tests/learning-aids-qa.mjs` assertions check mobile iframe width ≥300px and selection/auto-close behavior.
+
+**Verified GitHub Actions (latest commit `cdf0a0a3`):**
+- [Full visual audit run 43858742127](https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/43858742127) — **success**, 248 desktop/mobile × light/dark-equivalent experiment screenshots, automated issues 0.
+- [Learning aids E2E run 43858742321](https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/43858742321) — **success**, including live browser mobile sidebar interaction.
+- GitHub Pages deployment for the same revision — **success**.
+
+**Scope of PASS:** Automated checks cover layout overflow, theme propagation, screenshot existence, navigation and the targeted interactive behavior. They do **not** establish proof of mathematical correctness for every graph, screen-reader usability for all elements, real-device iOS/Android pinch gestures, or actual acoustic fidelity. Those remain human/independent-review gates by design.
