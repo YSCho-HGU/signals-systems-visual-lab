@@ -27,7 +27,10 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Validate lab catalog and isolated progress fixtures
         run: node tests/phase0-ss-baseline.mjs
-      - name: Inventory storage access sites (source only)\n        if: always()\n        run: node tests/phase0-storage-scan.mjs\n      - name: Upload Phase 0 evidence
+      - name: Inventory storage access sites (source only)
+        if: always()
+        run: node tests/phase0-storage-scan.mjs
+      - name: Upload Phase 0 evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
