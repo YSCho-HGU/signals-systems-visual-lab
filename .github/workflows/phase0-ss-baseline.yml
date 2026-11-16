@@ -1,0 +1,36 @@
+name: Phase 0 Signals and Systems Baseline
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'assets/**'
+      - 'course-catalog.json'
+      - 'chapter-catalog.json'
+      - 'tests/phase0-ss-baseline.mjs'
+      - 'docs/phase0/ss-storage-baseline.json'
+      - '.github/workflows/phase0-ss-baseline.yml'
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Validate lab catalog and isolated progress fixtures
+        run: node tests/phase0-ss-baseline.mjs
+      - name: Upload Phase 0 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase0-ss-baseline-evidence
+          path: qa-phase0/
+          if-no-files-found: warn
+          retention-days: 14
