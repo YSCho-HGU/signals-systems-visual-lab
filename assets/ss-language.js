@@ -6,8 +6,23 @@
 const KEY="els-language", SELECT=document.getElementById("ss-language-select");
 if(!SELECT)return;
 const modes=["mixed","en","ko"];
-let mode="mixed";try{const saved=localStorage.getItem(KEY);if(modes.includes(saved))mode=saved}catch(e){}
-try{const requested=new URLSearchParams(location.search).get("lang");if(modes.includes(requested)){mode=requested;localStorage.setItem(KEY,mode)}}catch(e){}
+/* Shared language preference across Engineering Learning Studio and C Programming.
+   A query parameter only initializes the preference when none was saved:
+   old bookmarks must not overwrite a newer choice made in another course. */
+let mode="mixed",hasSaved=false;
+try{
+ const saved=localStorage.getItem(KEY);
+ if(modes.includes(saved)){mode=saved;hasSaved=true}
+}catch(e){}
+if(!hasSaved){
+ try{
+  const requested=new URLSearchParams(location.search).get("lang");
+  if(modes.includes(requested)){
+   mode=requested;
+   try{localStorage.setItem(KEY,mode)}catch(e){}
+  }
+ }catch(e){}
+}
 SELECT.value=mode;
 const T={
  "Display":["Display","화면","Display · 화면"],
@@ -245,7 +260,27 @@ function updateFrame(){
 
 }
 function apply(){updateShell();updateFrame();document.dispatchEvent(new CustomEvent("ss-language-change",{detail:{mode}}))}
-SELECT.addEventListener("change",()=>{mode=SELECT.value;try{localStorage.setItem(KEY,mode)}catch(e){}apply()});
+SELECT.addEventListener("change",()=>{
+ mode=SELECT.value;
+ try{localStorage.setItem(KEY,mode)}catch(e){}
+ apply();
+});
+/* localStorage is shared by the two GitHub Pages projects under the same
+   origin. Receive changes from another open tab without reloading a lab. */
+window.addEventListener("storage",event=>{
+ if(event.key!==KEY||!modes.includes(event.newValue)||event.newValue===mode)return;
+ mode=event.newValue;
+ SELECT.value=mode;
+ apply();
+});
+window.addEventListener("pageshow",()=>{
+ try{
+  const saved=localStorage.getItem(KEY);
+  if(modes.includes(saved)&&saved!==mode){
+   mode=saved;SELECT.value=mode;apply();
+  }
+ }catch(e){}
+});
 const guide=document.getElementById("ss-study-guide");
 if(guide)new MutationObserver(()=>{if(!guide.hidden)updateGuide()}).observe(guide,{childList:true,subtree:false,attributes:true,attributeFilter:["hidden"]});
 window.addEventListener("hashchange",()=>setTimeout(apply,0));
