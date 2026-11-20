@@ -96,16 +96,12 @@
     }
     originalRender();
     if(active==="periodic") {
-      var charts=document.querySelector(".charts");
-      if(charts&&!document.getElementById("frequency-learning-note")) {
-        var panel=document.createElement("section");
-        panel.id="frequency-learning-note";
-        panel.className="periodic-reading-note";
-        panel.setAttribute("aria-live","polite");
-        charts.parentNode.insertBefore(panel,charts);
+      var note=document.querySelector(".periodic-reading-note");
+      if(note){
+        note.id="frequency-learning-note";
+        note.setAttribute("aria-live","polite");
+        note.textContent=copyFor(state.periodic).note;
       }
-      var note=document.getElementById("frequency-learning-note");
-      if(note)note.textContent=copyFor(state.periodic).note;
     }
   };
 
