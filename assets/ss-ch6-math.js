@@ -40,6 +40,7 @@ const hero={
 function renderGuide(id,s,pane){
  if(!pane||id==="periodic")return;
  const eq=models(id,s);
+ renderHero(id,s);
  pane.querySelectorAll('.deriv-math').forEach(function(el,i){if(eq[i])w.ELSLabUI.renderMath(el,eq[i],{fallbackHTML:el.innerHTML})});
 }
 function renderHero(id,s){
