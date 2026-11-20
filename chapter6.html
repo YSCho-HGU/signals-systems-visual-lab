@@ -508,6 +508,7 @@ function revealGuide(moduleId,state,guideFactory){
  const displayStep=(v,i)=>`<article class="deriv-step ${animate&&i===n-1?'guide-enter':''}" aria-label="Step ${i+1} of ${total}"><div class="deriv-top"><span class="step-index">${i+1}</span><strong>${v.head}</strong></div><div class="deriv-math">${v.math}</div><p>${v.ko}</p></article>`;
  pane.innerHTML=`<div class="guide-head"><div><div class="overlabel">GUIDED DERIVATION / 단계별 수식 유도</div><h3>Equation → Derivation → Meaning / 수식 유도와 의미</h3><p>Adjust a variable to update the equations. / 변수를 변경하면 아래 수식도 갱신됩니다.</p></div><span class="progress-badge" role="status">Step ${n} / ${total}</span></div><div class="guide-track" role="progressbar" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${n}" aria-label="Derivation progress"><div style="width:${100*n/total}%"></div></div><div class="guide-steps">${d.steps.slice(0,n).map(displayStep).join('')}</div><div class="guide-actions"><button id="previousStep" type="button" ${n<=1?'disabled':''}>◀ Previous / 이전</button><button id="nextStep" type="button" ${n>=total?'disabled':''}>Next step / 다음 ▶</button><button id="guidePlay" type="button" class="primary" aria-pressed="${guideView.playing}">${guideView.playing?'Pause animation / 일시정지':'▶ Play animation / 자동 전개'}</button><button id="allSteps" type="button">${n===total?'Restart / 처음부터':'Show all / 전체 보기'}</button></div>`;
  if(moduleId==="periodic"&&typeof window.__ss6TypesetGuide==="function")window.__ss6TypesetGuide(pane,state);
+ if(moduleId!=="periodic"&&window.ELSChapterSixMath)window.ELSChapterSixMath.renderGuide(moduleId,state,pane);
  const change=next=>{guideView.count[moduleId]=Math.max(1,Math.min(total,next));revealGuide(moduleId,state,guideFactory)};
  pane.querySelector('#previousStep').onclick=()=>{stopGuidePlay();change(n-1)};
  pane.querySelector('#nextStep').onclick=()=>{stopGuidePlay();change(n+1)};
@@ -650,6 +651,8 @@ window.__dtftChecks={
 };
 
 </script>
+<script src="./assets/els-lab-components.js?v=1"></script>
+<script src="./assets/ss-ch6-math.js?v=1"></script>
 <script src="./assets/ss-ch6-frequency-foundations.js?v=7"></script>
 <script src="./assets/ss-ch6-learning-flow.js?v=8"></script>
 <script src="./assets/ss-applications.js?v=3"></script>
