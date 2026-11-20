@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="ko" class="ss5-native">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102d41">
+<title>Chapter 5 · Laplace Transform | Engineering Learning Studio</title>
+<meta name="description" content="Offline interactive Laplace Transform visual lab: ROC, transform pairs, inverse Laplace, pole-zero, RC and second-order systems.">
+<!-- Shared ELS theme replaces the legacy iframe/OS theme handshake. -->
+<style>
+:root{--nav:#112b41;--ink:#173046;--muted:#526a7c;--accent:#0e8491;--warm:#ef7055;--violet:#7356b8;--line:#dce6ec;--card:white;--bg:#f3f7f9;--pale:#ebf5f6}
+*{box-sizing:border-box}body{margin:0;font:15px/1.53 system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif;color:var(--ink);background:var(--bg)}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #f2bc64;outline-offset:2px}a{color:var(--accent)}.shell{display:grid;grid-template-columns:280px minmax(0,1fr);min-height:100vh}.nav{background:linear-gradient(155deg,#102c42,#0d2436);color:#ecf6fa;padding:26px 15px;position:sticky;top:0;height:100vh;overflow:auto}.brand{padding:4px 11px 21px;border-bottom:1px solid #38556a}.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:750;color:#a3c2d0}.brand h1{font-size:24px;line-height:1.1;margin:10px 0 7px;color:white}.brand p{margin:0;font-size:12px;color:#b5d0da}.navlabel{margin:22px 12px 11px;font-size:11px;letter-spacing:.1em;color:#9dbbc9}.tabs{display:grid;gap:5px}.tabs button{border:0;background:transparent;border-radius:11px;text-align:left;color:#d0dee5;display:flex;gap:10px;padding:11px 12px;align-items:center;line-height:1.25}.tabs button:hover{background:#26465c}.tabs button.on{background:#24576a;color:white;box-shadow:inset 3px 0 #7ce2cf}.num{display:inline-flex;border:1px solid #55798a;border-radius:6px;width:27px;height:23px;align-items:center;justify-content:center;font-size:11px;flex:0 0 27px}.tabs button.on .num{border-color:#95e6db;color:#d1fff1}.tabname{font-size:13px;font-weight:650}.teach{background:#1c4055;border:1px solid #48697c;margin-top:25px;border-radius:12px;padding:14px;font-size:12px;color:#d1e1e8}.teach strong{color:white}.teach p{margin:5px 0 0}.main{max-width:1470px;min-width:0;width:100%;padding:27px clamp(14px,3.7vw,54px) 45px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.crumb{font-size:11px;font-weight:750;letter-spacing:.1em;color:#5c778b}.pill{font-size:11px;color:#0e7078;background:#d9eeee;border-radius:30px;font-weight:700;padding:6px 10px}.heading{border-bottom:1px solid var(--line);padding-bottom:18px}.heading .sup{font-size:11px;color:var(--accent);letter-spacing:.11em;font-weight:800}.heading h2{font-size:clamp(26px,3vw,38px);letter-spacing:-.045em;line-height:1.2;margin:7px 0}.heading p{color:var(--muted);margin:0;max-width:950px}.formula{background:linear-gradient(100deg,#e2f3f4,#f7fafb);border:1px solid #c6e1e4;border-left:4px solid var(--accent);padding:15px 20px;border-radius:13px;display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin:18px 0}.math{font-family:Cambria,'Times New Roman',serif;font-size:20px;color:#164b5a;line-height:1.5;overflow-wrap:anywhere}.formhint{font-size:12px;color:#62808e}.lab{display:grid;grid-template-columns:minmax(228px,285px) minmax(0,1fr);gap:17px;align-items:start}.panel,.figure,.metric,.insight,.quiz{border:1px solid var(--line);background:var(--card);border-radius:17px;box-shadow:0 5px 20px #16364708}.panel{padding:19px;position:sticky;top:16px}.over{font-size:11px;font-weight:850;letter-spacing:.1em;color:var(--accent);text-transform:uppercase}.panel h3{font-size:20px;margin:5px 0 16px}.ctrl{margin:0 0 20px}.ctrl label{display:flex;justify-content:space-between;gap:10px;font-weight:700;font-size:13px;margin-bottom:7px;align-items:center}.ctrl output{color:var(--accent);font-variant-numeric:tabular-nums;font-size:12px}.ctrl select{width:100%;border-radius:9px;border:1px solid #ccdde5;background:#f8fcfd;padding:9px;min-height:40px}.ctrl input[type=range]{width:100%;accent-color:var(--accent)}.rangeEnds{display:flex;justify-content:space-between;color:#849aaa;font-size:10px}.presets{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 14px}.preset{border:1px solid #c6dfe2;background:#eef9f9;color:#186d74;font-size:11px;border-radius:9px;padding:7px 8px}.preset:hover{background:#d1eeee}.btnline{display:flex;gap:8px}.btn{border:1px solid #d2e2ea;border-radius:10px;background:white;color:#175267;padding:10px;font-size:12px;font-weight:750;flex:1}.btn.primary{background:#126f7e;border-color:#126f7e;color:white}.smallnote{border-top:1px solid #e2edf1;margin:15px 0 0;padding-top:13px;color:#6a8595;font-size:12px}.outputs{display:grid;gap:15px;min-width:0}.plots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.figure{min-width:0;padding:17px 16px 11px}.figure h3{font-size:15px;line-height:1.3;margin:0 0 3px}.figure .sub{font-size:11px;color:var(--muted);margin:0 0 9px;min-height:18px}.figure canvas{width:100%;height:270px;display:block}.interactive-plot{touch-action:none;cursor:crosshair}.compare-wrap{border:1px solid var(--line);border-radius:16px;padding:15px;background:white}.compare-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:10px}.compare-head h3{margin:0;font-size:16px}.compare-head span{font-size:11px;color:var(--muted)}.compare-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.compare-card{border:2px solid #d9e5ea;background:#fbfefe;border-radius:12px;padding:11px 8px;min-width:0;text-align:left}.compare-card.selected{border-color:#0e8797;background:#edf9fa;box-shadow:0 0 0 1px #0e879724}.compare-card:hover{border-color:#6dabb4}.compare-title{font-size:12px;font-weight:800;color:var(--ink);margin-bottom:2px}.compare-sub{font-size:10px;color:#577183;min-height:30px;line-height:1.35}.compare-card canvas{width:100%;height:200px;display:block}.compare-footer{margin-top:10px;color:#5f7a88;font-size:11px;line-height:1.5}.plot-instruction{font-size:12px;color:#1b6876;border-left:3px solid #0e8797;background:#edf8f8;padding:10px 12px;border-radius:7px;margin-top:7px}.legend{display:flex;flex-wrap:wrap;gap:11px;min-height:15px;margin:9px 0 0;font-size:11px;color:#556f80}.lgitem{display:inline-flex;align-items:center;gap:5px}.lgtick{display:inline-block;width:15px;border-top:3px solid var(--color)}.lgtick.dash{border-top-style:dashed}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.metric{padding:13px 15px;min-width:0}.metric .k{font-size:11px;color:var(--muted)}.metric .v{font-size:clamp(17px,2vw,24px);font-weight:750;margin:3px 0;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.metric .d{font-size:11px;color:var(--muted)}.insight{background:#fbfefe;border-left:4px solid var(--accent);padding:17px 19px}.insight h3,.quiz h3{font-size:15px;margin:0 0 6px}.insight p{margin:0;color:#466575}.quiz{padding:17px 19px}.quiz p{margin:8px 0;color:#445f70}.quiz details{border-top:1px solid var(--line);padding-top:10px}.quiz summary{font-weight:750;color:var(--accent);cursor:pointer}.quiz .answer{background:#eef8f7;padding:13px;border-radius:10px;margin-top:10px;color:#295a62}.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#728b9b;font-size:11px;margin-top:20px}.footer a{color:inherit}
+@media(max-width:1250px){.compare-grid{grid-template-columns:1fr 1fr}.compare-card:last-child{grid-column:span 2}}
+@media(max-width:1130px){.shell{grid-template-columns:210px minmax(0,1fr)}.lab{grid-template-columns:1fr}.panel{position:static}.main{padding:25px 22px}.controlgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px}.plots .figure canvas{height:255px}}
+@media(max-width:760px){.compare-grid{grid-template-columns:1fr}.compare-card:last-child{grid-column:span 1}.compare-card canvas{height:210px}}
+@media(max-width:760px){.shell{display:block}.nav{height:auto;position:relative;padding:12px 12px 5px}.brand{border:0;padding:4px 10px 11px}.brand h1{font-size:20px;margin:4px 0}.brand p,.navlabel,.teach{display:none}.tabs{display:flex;overflow-x:auto;gap:7px;padding-bottom:8px}.tabs button{white-space:nowrap;min-width:max-content;padding:9px}.tabname{font-size:12px}.main{padding:19px 13px 30px}.top{margin-bottom:13px}.plots{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.formula .math{font-size:17px}.figure canvas{height:255px}.controlgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+/* Guided Derivation: synchronized equation reveal and graph-reading panels */
+.derivation-panel,.reading-panel{background:#fff;border:1px solid #dce6ec;border-radius:16px;box-shadow:0 5px 19px #1e455407;padding:20px;min-width:0}
+.guide-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.guide-head h3,.reading-panel h3{font-size:18px;line-height:1.35;margin:5px 0 8px;color:#173046}
+.guide-head p{font-size:12px;color:#526a7c;margin:0 0 14px}
+.progress-badge{background:#e6f4f5;color:#086c76;font:700 12px system-ui,sans-serif;padding:6px 11px;border-radius:18px;white-space:nowrap}
+.guide-track{height:5px;background:#dcebee;border-radius:8px;margin:4px 0 14px;overflow:hidden}
+.guide-track>div{height:100%;background:#0e8491;border-radius:8px;transition:width .38s ease}
+.guide-steps{display:grid;gap:10px}
+.deriv-step{border:1px solid #dfe9ee;border-radius:12px;padding:12px 14px;background:#fcfdfd;min-width:0}
+.deriv-step.guide-enter{animation:guideReveal .58s cubic-bezier(.18,.65,.27,1) both;border-color:#75c5c7;background:#f2faf9}
+@keyframes guideReveal{from{opacity:0;transform:translateY(19px);filter:blur(2px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+.deriv-top{display:flex;align-items:center;gap:9px;font-size:13px;color:#173046;min-width:0}
+.step-index{display:inline-flex;align-items:center;justify-content:center;background:#e3f2f3;color:#087680;border-radius:50%;height:24px;width:24px;min-width:24px;font-size:12px;font-weight:800}
+.deriv-math{margin:9px 0;color:#174b5d;font-family:Cambria,'Cambria Math','Times New Roman',serif;font-size:17px;line-height:1.7;overflow-wrap:anywhere;white-space:normal;overflow-x:auto;padding:6px 10px;background:#eef7f8;border-left:3px solid #0e8491;border-radius:6px}
+.deriv-step p{font-size:13px;color:#486272;margin:8px 0 0;line-height:1.68}
+.guide-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.guide-actions button{background:#fff;color:#20546a;border:1px solid #c8dce5;border-radius:9px;padding:9px 12px;font:700 12px system-ui,'Malgun Gothic',sans-serif;cursor:pointer}
+.guide-actions button:hover{background:#edf8f8;border-color:#0e8491}
+.guide-actions button:disabled{opacity:.4;cursor:not-allowed}
+.guide-actions button.primary{color:#fff;background:#0e8491;border-color:#0e8491}
+.guide-actions button:focus-visible{outline:3px solid #e7ac3f;outline-offset:2px}
+.reading-panel{background:#fafdfd}
+.reading-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.reading-note{padding:11px 12px;border:1px solid #dce9eb;border-radius:12px;background:#fff}
+.plot-number{font-size:10px;letter-spacing:.09em;color:#0e8491;font-weight:800;display:block;margin-bottom:5px}
+.reading-note strong{display:block;color:#173046;font-size:13px}
+.reading-note p{font-size:12px;line-height:1.62;margin:6px 0 0;color:#344f60}
+.reading-note .ko-explain{color:#617b8a}
+.guide-check{font-size:13px;margin:12px 0 0;color:#395b68;border-top:1px solid #dce9eb;padding-top:11px}
+@media(max-width:750px){.derivation-panel,.reading-panel{padding:15px}.deriv-math{font-size:15px}.reading-grid{grid-template-columns:1fr}.guide-actions button{flex:1 1 auto}}
+@media(prefers-reduced-motion:reduce){.deriv-step.guide-enter{animation:none}.guide-track>div{transition:none}}
+
+.overlabel{font-size:10px;letter-spacing:.1em;font-weight:800;color:#0e8491;text-transform:uppercase}
+
+
+/* S&S Integrated Studio — common visual design tokens and learning components. */
+:root{--bg:#f3f7f9;--nav:#112b41;--ink:#173046;--sub:#526a7c;--a:#0e8491;--accent:#0e8491;--line:#dce6ec;--paper:#fff;--card:#fff;--r:16px}
+body{font-family:system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif;background:#f3f7f9;color:#173046}
+.figure,.metric,.controls,.panel,.derivation-panel,.reading-panel,.learning,.question,.insight,.quiz{border-radius:16px!important;box-shadow:0 5px 18px #15374a08!important;border-color:#dce6ec!important}
+.derivation-panel,.reading-panel{padding:20px!important}
+.guide-head h3,.reading-panel h3{color:#173046!important;font-size:18px!important;line-height:1.4!important}
+.deriv-math{font-family:Cambria,'Times New Roman',serif!important;line-height:1.55!important;overflow-wrap:anywhere}
+.deriv-step{border-radius:12px!important;overflow-wrap:anywhere}
+.guide-actions{gap:8px!important}
+.guide-actions button{font-family:system-ui,'Malgun Gothic',sans-serif!important;font-weight:700!important;font-size:12px!important;border-radius:10px!important;min-height:37px}
+.guide-actions button.primary{background:#0e8491!important;color:white!important;border-color:#0e8491!important}
+.guide-track{border-radius:100px!important;overflow:hidden}
+.guide-track>div{background:linear-gradient(90deg,#0e8491,#49bcb3)!important}
+.figure h3{color:#173046!important;font-weight:750!important}
+.figure canvas{display:block;max-width:100%}
+.figure p,.reading-panel p,.guide-head p{line-height:1.65}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #e2ae3e!important;outline-offset:2px!important}
+#studio-back{position:fixed;right:17px;top:14px;z-index:9999;display:flex;align-items:center;gap:8px;background:#112b41;color:#fff;text-decoration:none;border-radius:100px;padding:9px 15px;box-shadow:0 5px 20px #071c3066;font-size:12px;font-weight:750}
+#studio-back:hover{background:#0e8491}
+#studio-back[hidden]{display:none!important}
+@media(max-width:750px){.derivation-panel,.reading-panel{padding:15px!important}#studio-back{top:8px;right:9px;padding:7px 10px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.deriv-step{animation:none!important}}
+
+
+/* Rev5 integrated + standalone: dark mode; graph canvas stays light for legible axes/curves. */
+html[data-theme="dark"]{color-scheme:dark;--bg:#0c1827;--nav:#0c2234;--nav2:#193c51;--ink:#e5f1f8;--sub:#b0c7d3;--muted:#b0c7d3;--a:#75d9e3;--accent:#75d9e3;--teal:#75d9e3;--coral:#ff9a86;--warm:#ff9a86;--gold:#efc36e;--line:#355266;--paper:#192e42;--card:#192e42;--pale:#1f4050}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] .main,
+html[data-theme="dark"] main{color:var(--ink)}
+html[data-theme="dark"] .controls,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .figure,
+html[data-theme="dark"] .metric,
+html[data-theme="dark"] .learning,
+html[data-theme="dark"] .question,
+html[data-theme="dark"] .insight,
+html[data-theme="dark"] .quiz,
+html[data-theme="dark"] .derivation-panel,
+html[data-theme="dark"] .reading-panel,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .plot-card{background:#192e42!important;border-color:#365468!important;box-shadow:0 5px 22px #0002!important;color:#e7f3f9}
+html[data-theme="dark"] .deriv-step,
+html[data-theme="dark"] .step,
+html[data-theme="dark"] .reading .note,
+html[data-theme="dark"] .control,
+html[data-theme="dark"] .hero-callout,
+html[data-theme="dark"] .formula,
+html[data-theme="dark"] .axis-note,
+html[data-theme="dark"] .plot-instruction,
+html[data-theme="dark"] .reading-note,
+html[data-theme="dark"] .interpretation,
+html[data-theme="dark"] .guide-note{background:#203c4e!important;color:#e2f1f7!important;border-color:#426278!important}
+html[data-theme="dark"] .deriv-step.guide-enter,
+html[data-theme="dark"] .deriv-step.active,
+html[data-theme="dark"] .step.active{background:#20505a!important;border-color:#62bfc7!important}
+html[data-theme="dark"] .deriv-math,
+html[data-theme="dark"] .step .math,
+html[data-theme="dark"] .math,
+html[data-theme="dark"] .mathline,
+html[data-theme="dark"] .hero-callout .formula{color:#d9f4f4!important;background:#204557!important;border-color:#426a78!important}
+html[data-theme="dark"] .figure canvas,
+html[data-theme="dark"] .plot-card svg,
+html[data-theme="dark"] .plot-card canvas{background:#fbfdfe!important;border-radius:7px;color:#19394c;filter:none}
+html[data-theme="dark"] .plot-card .plot-title{background:#254759;color:#e5f3f8;border-color:#426477}
+html[data-theme="dark"] select,
+html[data-theme="dark"] input[type="number"],
+html[data-theme="dark"] input[type="text"]{background:#142d40;color:#e6f2f7;border:1px solid #507083}
+html[data-theme="dark"] button:not(.active):not(.on):not(.primary):not(.guide-primary){border-color:#45677b}
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .pill{background:#204957;color:#9be5e8}
+html[data-theme="dark"] .breadcrumb,
+html[data-theme="dark"] .crumb,
+html[data-theme="dark"] .intro,
+html[data-theme="dark"] .hint,
+html[data-theme="dark"] .reading .note p,
+html[data-theme="dark"] .axis-note{color:#b9d1dd!important}
+html[data-theme="dark"] .nav button:not(.active),
+html[data-theme="dark"] .tabs button:not(.on){color:#d3e6ee}
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .shell>.nav{background:linear-gradient(160deg,#0a2030,#102c40)}
+html[data-theme="dark"] nav:not(.sidebar):not(.nav) button:not(.active){background:#1e3b4e;color:#e5f3f8;border-color:#43677a}
+html[data-theme="dark"] nav:not(.sidebar):not(.nav) button.active{background:#136477;color:#fff}
+html[data-theme="dark"] .plot-card svg text{fill:#203b4e}
+
+
+/* Rev7 audited text contrast: no Light Mode ink inside dark surfaces. */
+:root{--ss-axis-text:#274f64;--ss-axis-bg:#f1f8fa}
+.axis-key{display:flex;flex-wrap:wrap;align-items:center;gap:5px 13px;margin:8px 0 4px;padding:8px 11px;border-radius:8px;border:1px solid #cfe1e9;background:var(--ss-axis-bg);color:var(--ss-axis-text);font:600 12px/1.55 system-ui,'Malgun Gothic',sans-serif;overflow-wrap:anywhere}
+.axis-key .ax-strong{font-weight:850;color:#086d79}
+html[data-theme="dark"]{--ss-axis-text:#d5edf5;--ss-axis-bg:#244457}
+html[data-theme="dark"] .axis-key{background:#244457!important;border-color:#54788b!important;color:#d5edf5!important}
+html[data-theme="dark"] .axis-key .ax-strong{color:#91e8eb!important}
+html[data-theme="dark"] :is(.reading-panel h3,.guide-head h3,.deriv-top,.reading-note strong,.reading .note strong,.compare-title,.figure h3,.plot-card .plot-title,.step strong,.check b,.insight strong){color:#eff9ff!important}
+html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain,.guide-check,.guide-head p,.deriv-step p,.reading-panel p,.reading .note p,.step p,.insight p,.quiz p,.check,.check .answer,.compare-sub,.compare-footer,.figure .sub,.figure p,.formhint,.heading p,.intro,.desc,.smallnote,.rangeEnds,.metric .k,.metric .d,.metric b,.legend,.bridge,.footer,.foot,.hint,.source,.crumb,.breadcrumb,.plot-instruction,.axis-note){color:#cce3ee!important}
+html[data-theme="dark"] :is(.reading-note,.reading .note,.step,.deriv-step,.compare-card,.compare-wrap,.check,.axis-note){background:#234254!important;border-color:#517185!important}
+html[data-theme="dark"] :is(.guide-check,.quiz details){border-color:#517185!important}
+html[data-theme="dark"] :is(.overlabel,.over,.plot-number,.eyebrow,.heading .sup,.step-index,.progress-badge,.metric .v,.metric strong,.ctrl output,.control output){color:#90e8ec!important}
+html[data-theme="dark"] :is(.guide-actions button:not(.primary),.step-buttons button:not(.primary),.btn:not(.primary),.preset,.check button,.quiz button,.actions button:not(.primary)){color:#e6f5fc!important;background:#234657!important;border-color:#54798d!important}
+html[data-theme="dark"] :is(.guide-actions button.primary,.step-buttons button.primary,.btn.primary,.actions button.primary){background:#0d697b!important;border-color:#67c6d1!important;color:#fff!important}
+html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain){opacity:1!important}
+html[data-theme="dark"] :is(.learning p,.question p,.learning .body,.question .body,.notice,.metric .detail,.ctrl .ends,.rangeEnds,.range-ends,.reading-panel .check,.reading-panel .question){color:#d1e7f0!important}
+html[data-theme="dark"] :is(.progress-badge,.step-index){background:#285666!important;color:#a6f2f0!important;border-color:#5b8593!important}
+/* Additional animated-convolution and FFT presets: previously retained light-only colors. */
+html[data-theme="dark"] :is(.motion-panel,.detail-panel,.fft-guide){background:#1c3548!important;border-color:#4c7385!important;color:#e8f5fb!important}
+html[data-theme="dark"] :is(.motion-panel h3,.detail-head h4,.fft-guide h3,.motion-status strong,.detail-status strong){color:#f0f9fd!important}
+html[data-theme="dark"] :is(.motion-lead,.motion-speed,.motion-caution,.motion-status small,.detail-sub,.detail-note,.area-slider label,.area-slider .ends,.fft-guide p){color:#cfe4ed!important}
+html[data-theme="dark"] :is(.motion-stage,.motion-stage.done,.motion-status,.detail-status,.detail-pill,.area-slider){background:#28495b!important;color:#e4f2f9!important;border-color:#567a8d!important}
+html[data-theme="dark"] .motion-stage.current{background:#255b63!important;color:#fff!important;border-color:#78d3d5!important}
+html[data-theme="dark"] :is(.motion-stage b,.motion-eq){background:#30566b!important;color:#a3edf0!important}
+html[data-theme="dark"] :is(.motion-actions button:not(.motion-primary),.detail-actions button:not(.detail-primary),.preset-row button:not(.selected)){background:#29495c!important;color:#eaf6fb!important;border-color:#5c8191!important}
+html[data-theme="dark"] :is(.motion-primary,.detail-primary,.preset-row button.selected){background:#086a79!important;color:#fff!important;border-color:#6ccbd0!important}
+html[data-theme="dark"] :is(.mathline,.mathline b,.detail-status b,.detail-pill,.area-slider output,.detail-head .overlabel){color:#9be7ec!important}
+html[data-theme="dark"] .fft-status{background:#284b5e!important;color:#e0f1f7!important;border-color:#5b8091!important}
+html[data-theme="dark"] .fft-status :is(b,span,strong){color:#e0f1f7!important}
+html[data-theme="dark"] .plot-card svg text{fill:#274b5e}
+@media(max-width:560px){.axis-key{font-size:11px;gap:4px 9px;padding:7px 8px}}
+
+
+/* Rev8: interactive graph probe, color-contrast safe in both themes. */
+.ss-hover-tip{position:absolute;z-index:35;pointer-events:none;display:none;min-width:190px;max-width:min(310px,calc(100% - 16px));padding:11px 12px;border-radius:11px;border:1px solid #4c8190;background:#102d41;color:#f1fbff;box-shadow:0 9px 26px rgba(5,22,36,.32);font:500 12px/1.55 system-ui,'Malgun Gothic',sans-serif;white-space:normal;overflow-wrap:anywhere}
+.ss-hover-tip .ss-hover-title{font-weight:800;color:#adf2f2;font-size:12px;margin-bottom:4px}
+.ss-hover-tip .ss-hover-coord{color:#e1f4fb;font-size:11px;margin-bottom:5px}
+.ss-hover-tip .ss-hover-line{display:flex;align-items:baseline;gap:7px;margin:3px 0;color:#f1fbff}
+.ss-hover-tip .ss-hover-swatch{display:inline-block;width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:var(--ss-line,#6ccbd0)}
+.ss-hover-tip .ss-hover-line b{font-weight:750;color:#fff}
+.ss-hover-tip .ss-hover-line.primary b{color:#a8f7df}
+.ss-hover-tip .ss-hover-note{color:#c0dbe7;font-size:10.5px;margin-top:5px;border-top:1px solid #486579;padding-top:4px}
+.ss-hover-v,.ss-hover-h{position:absolute;display:none;pointer-events:none;z-index:30;background:#e26b4f;opacity:.85}
+.ss-hover-v{width:1px;border-left:1px dashed #f18b63;background:transparent}
+.ss-hover-h{height:1px;border-top:1px dashed #f18b63;background:transparent}
+.ss-hover-dot{position:absolute;display:none;pointer-events:none;z-index:31;width:11px;height:11px;border-radius:50%;border:2px solid #fff;background:#ed7954;box-shadow:0 0 0 1px #123a4e;transform:translate(-50%,-50%)}
+.ss-hover-hint{font:600 11px/1.5 system-ui,'Malgun Gothic',sans-serif;color:#23576a;margin:5px 0 2px;letter-spacing:.01em}
+html[data-theme="dark"] .ss-hover-hint{color:#c6e9f2!important}
+html[data-theme="dark"] .ss-hover-tip{background:#0d2739;border-color:#6a98a9;color:#f4fbff}
+html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hover-note){color:#d6e9f3!important}
+.ss-hover-target:focus-visible{outline:3px solid #ee9868;outline-offset:3px}
+@media(max-width:560px){.ss-hover-tip{max-width:min(290px,calc(100% - 12px));padding:9px 10px;font-size:11px}.ss-hover-hint{font-size:10px}}
+
+</style>
+<script>
+/* Rev8 shared graph probe. Displays the cursor coordinate and an independently
+   evaluated analytic value when a function exists, otherwise an actual drawn
+   sample. No interpolation is presented as an exact analytic answer. */
+(function(){
+ 'use strict';
+ const states=new WeakMap();let queued=[];
+ const fmt=v=>{if(!Number.isFinite(v))return String(v);if(Math.abs(v)<1e-11)return '0';const a=Math.abs(v);if(a>=1e4||a<1e-4)return v.toExponential(3);return Number(v.toFixed(a>=100?2:a>=1?4:6)).toString()};
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ function el(tag,cls,parent){const x=document.createElement(tag);x.className=cls;parent.appendChild(x);return x}
+ function labels(host){return [...host.querySelectorAll('.legend > .lgitem,.legend > .legend-item,.legend > span')].map(e=>e.textContent.trim())}
+ function bind(target,d){
+  if(typeof target==='string')target=document.getElementById(target);
+  if(!target||!d)return;
+  let st=states.get(target);
+  if(!st){
+   const host=target.closest('.plotbox,.figure,.compare-card,.plot-card')||target.parentElement;
+   if(!host)return;
+   if(getComputedStyle(host).position==='static')host.style.position='relative';
+   const tip=el('div','ss-hover-tip',host),v=el('div','ss-hover-v',host),h=el('div','ss-hover-h',host),dot=el('div','ss-hover-dot',host);
+   tip.setAttribute('role','status');tip.setAttribute('aria-live','off');
+   let hint=host.querySelector('.ss-hover-hint');if(!hint){hint=el('div','ss-hover-hint',host);hint.textContent='ⓘ Hover / Tap / Focus: coordinates + signal values · 마우스·터치·키보드로 값 확인'}
+   target.classList.add('ss-hover-target');target.setAttribute('tabindex','0');
+   target.setAttribute('aria-description','Move pointer, tap, or use arrow keys to inspect signal values and coordinates.');
+   st={target,host,tip,v,h,dot,d:null,lastX:null,lastType:null};states.set(target,st);
+   target.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;move(st,e.clientX,e.clientY,e.pointerType)});
+   target.addEventListener('pointerdown',e=>{move(st,e.clientX,e.clientY,e.pointerType)});
+   target.addEventListener('pointerleave',e=>{if(e.pointerType!=='touch')hide(st)});
+   target.addEventListener('blur',()=>hide(st));
+   target.addEventListener('focus',()=>{const r=target.getBoundingClientRect();move(st,r.left+r.width*.55,r.top+r.height*.45,'keyboard')});
+   target.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End','Escape'].includes(e.key))return;
+    if(e.key==='Escape'){hide(st);return}e.preventDefault();const r=target.getBoundingClientRect();
+    const p=st.d.pad||{l:0,r:0,t:0,b:0},w=st.d.w,h=st.d.h;
+    const left=r.left+p.l/w*r.width,right=r.right-p.r/w*r.width;
+    let px=st.lastX===null?(left+right)/2:st.lastX;
+    if(e.key==='Home')px=left;else if(e.key==='End')px=right;else px+=((e.shiftKey?.05:.0125)*(right-left))*(e.key==='ArrowLeft'?-1:1);
+    move(st,clamp(px,left,right),r.top+r.height*.5,'keyboard',true)
+   });
+  }
+  st.d=d;
+  // A parameter change redraws the graph; hide stale numerical values.
+  hide(st);
+ }
+ function hide(st){st.tip.style.display='none';st.v.style.display='none';st.h.style.display='none';st.dot.style.display='none';st.lastX=null}
+ function pointToView(st,cx,cy){const r=st.target.getBoundingClientRect();const d=st.d;
+  return {x:r.left+cx/d.w*r.width,y:r.top+cy/d.h*r.height}
+ }
+ function nearest(data,x,xmin=-Infinity,xmax=Infinity){let best=null,bestDelta=Infinity;
+  for(const p of data||[]){if(!p||!Number.isFinite(p[0])||!Number.isFinite(p[1])||p[0]<xmin-1e-9||p[0]>xmax+1e-9)continue;const delta=Math.abs(p[0]-x);if(delta<bestDelta){bestDelta=delta;best=p}}
+  return best
+ }
+ function readSeries(st,x,y){const d=st.d;const values=[];
+  for(let i=0;i<(d.series||[]).length;i++){
+   const s=d.series[i];let v=null,sx=x,method='formula';
+   if(typeof s.fn==='function'){
+    try{v=s.fn(x)}catch(e){continue}
+   }else if(Array.isArray(s.points)){
+    const p=nearest(s.points,x,d.xmin,d.xmax);if(!p)continue;sx=p[0];v=p[1];method=s.discrete?'discrete':'sample';
+   }else continue;
+   if(!Number.isFinite(v))continue;
+   const ypixel=d.toPixel?d.toPixel(sx,v).y:d.pad.t+(d.ymax-v)/(d.ymax-d.ymin)*(d.h-d.pad.t-d.pad.b);
+   const py=d.pad.t+(d.ymax-y)/(d.ymax-d.ymin)*(d.h-d.pad.t-d.pad.b);
+   const off=Math.abs(ypixel-py);
+   values.push({i,label:s.label||'',color:s.color||'#42c9d2',x:sx,y:v,method,off,inRange:v>=d.ymin&&v<=d.ymax});
+  }
+  values.sort((a,b)=>a.off-b.off);
+  const lab=labels(st.host);for(const v of values){if(!v.label)v.label=lab[v.i]||d.ylabel||`Signal ${v.i+1}`}
+  return values
+ }
+ function rocInfo(d,x,y){const r=d.roc;if(!r)return null;
+  if(d.plane==='z'){const a=Math.hypot(x,y);return (a>r.inner+1e-8&&a<r.outer-1e-8)?'ROC 내부 (boundary excluded)':'ROC 외부 또는 경계'}
+  if(r.type==='all')return 'ROC: entire s-plane';
+  if(r.type==='none')return 'No ROC';
+  const inside=r.type==='right'?x>r.a:r.type==='left'?x<r.a:r.type==='strip'?x>r.a&&x<r.b:false;
+  return inside?'ROC 내부 (boundary excluded)':'ROC 외부 또는 경계'
+ }
+ function move(st,clientX,clientY,pointerType,fromKeyboard=false){
+  const d=st.d;if(!d)return;const rect=st.target.getBoundingClientRect();if(!rect.width||!rect.height)return;
+  let px=(clientX-rect.left)*d.w/rect.width,py=(clientY-rect.top)*d.h/rect.height;
+  const pad=d.pad||{l:0,r:0,t:0,b:0};
+  if(fromKeyboard)py=pad.t+(d.h-pad.t-pad.b)*.5;
+  if(px<pad.l||px>d.w-pad.r||py<pad.t||py>d.h-pad.b){hide(st);return}
+  let x,y;
+  if(d.plane&&d.center){x=(px-d.center.cx)/d.center.scale;y=(d.center.cy-py)/d.center.scale}
+  else{x=d.xmin+(px-pad.l)/(d.w-pad.l-pad.r)*(d.xmax-d.xmin);y=d.ymax-(py-pad.t)/(d.h-pad.t-pad.b)*(d.ymax-d.ymin)}
+  const items=[];let marker=null;
+  if(d.plane){
+   items.push({label:`${d.plane} = ${fmt(x)} ${y<0?'−':'+'} j${fmt(Math.abs(y))}`,value:`|${d.plane}|=${fmt(Math.hypot(x,y))}, ∠=${fmt(Math.atan2(y,x)*180/Math.PI)}°`,color:'#6dd7d9'});
+   const r=d.markers||[];let closest=null,dist=Infinity;
+   for(const m of r){const q=d.center?{x:d.center.cx+m.x*d.center.scale,y:d.center.cy-m.y*d.center.scale}:{x:pad.l+(m.x-d.xmin)/(d.xmax-d.xmin)*(d.w-pad.l-pad.r),y:pad.t+(d.ymax-m.y)/(d.ymax-d.ymin)*(d.h-pad.t-pad.b)};const delta=Math.hypot(px-q.x,py-q.y);if(delta<dist){closest=m;dist=delta}}
+   if(closest&&dist<17){items.push({label:`${closest.type} @ (${fmt(closest.x)}, ${fmt(closest.y)})`,value:closest.type==='Pole'?'× pole':closest.type==='Zero'?'○ zero':'vector endpoint',color:closest.type==='Pole'?'#ffa19a':'#93e8ed'})}
+   const region=rocInfo(d,x,y);if(region)items.push({label:'Region of convergence',value:region,color:'#b8e8c4'});
+  }else{
+   const values=readSeries(st,x,y);
+   if(values.length){
+    const ordered=values.slice(0,4);
+    for(const v of ordered){
+     const method=v.method==='formula'?'f(x) 직접 계산':v.method==='discrete'?'이산 표본':'계산 표본 (보간 없음)';
+     const extra=v.method==='formula'?'':` @ x=${fmt(v.x)}`;
+     items.push({label:v.label,value:`${fmt(v.y)}${extra}${v.inRange?'':' · 표시 범위 밖'}`,color:v.color,method,primary:v===values[0]});
+    }
+    const v=values.find(z=>z.inRange);if(v){const xplot=v.method==='formula'?x:v.x;marker={x:xplot,y:v.y}}
+    if(values.length>4)items.push({label:`+ ${values.length-4} additional series`,value:'',color:'#bedde5'});
+   }else items.push({label:'No finite signal value at this coordinate',value:'',color:'#f2c39c'});
+  }
+  const hostRect=st.host.getBoundingClientRect();const cx=rect.left+px/d.w*rect.width,cy=rect.top+py/d.h*rect.height;
+  const xlocal=cx-hostRect.left,ylocal=cy-hostRect.top;
+  const minX=rect.left+pad.l/d.w*rect.width-hostRect.left,maxX=rect.right-pad.r/d.w*rect.width-hostRect.left;
+  const minY=rect.top+pad.t/d.h*rect.height-hostRect.top,maxY=rect.bottom-pad.b/d.h*rect.height-hostRect.top;
+  st.v.style.cssText=`display:block;left:${xlocal}px;top:${minY}px;height:${maxY-minY}px`;
+  const showMarker=marker&&Number.isFinite(marker.y);
+  if(showMarker){const q=d.toPixel?d.toPixel(marker.x,marker.y):{x:pad.l+(marker.x-d.xmin)/(d.xmax-d.xmin)*(d.w-pad.l-pad.r),y:pad.t+(d.ymax-marker.y)/(d.ymax-d.ymin)*(d.h-pad.t-pad.b)};
+   const qx=rect.left+q.x/d.w*rect.width-hostRect.left,qy=rect.top+q.y/d.h*rect.height-hostRect.top;
+   st.h.style.cssText=`display:block;left:${minX}px;top:${qy}px;width:${maxX-minX}px`;
+   st.dot.style.cssText=`display:block;left:${qx}px;top:${qy}px`;
+  }else{st.h.style.display='none';st.dot.style.display='none'}
+  st.tip.replaceChildren();
+  const title=el('div','ss-hover-title',st.tip);title.textContent=d.plane?'Complex-plane probe / 복소평면 좌표':'Graph probe / 그래프 값 읽기';
+  const coord=el('div','ss-hover-coord',st.tip);coord.textContent=`${d.xlabel||'x'} = ${fmt(x)}   |   ${d.ylabel||'y'} (cursor) = ${fmt(y)}`;
+  for(const it of items){const line=el('div','ss-hover-line'+(it.primary?' primary':''),st.tip);const sw=el('i','ss-hover-swatch',line);sw.style.setProperty('--ss-line',it.color);const text=el('span','',line);const name=el('b','',text);name.textContent=it.label;const val=el('span','',text);val.textContent=(it.value?' = '+it.value:'')}
+  const note=el('div','ss-hover-note',st.tip);note.textContent=d.plane?'복소평면 좌표는 위치값이며, pole/zero는 가까운 경우에만 표시합니다.':items.some(x=>x.method&&x.method!=='f(x) 직접 계산')?'fn(x): 수식 직접 계산 · sample: 실제 계산 표본 (보간하지 않음)':'수식 함수가 제공된 경우 커서 x에서 직접 계산한 값입니다.';
+  st.tip.style.display='block';
+  // Measure after writing and keep the tooltip inside the card.
+  const tw=st.tip.offsetWidth||230,th=st.tip.offsetHeight||90;
+  const hostW=st.host.clientWidth||hostRect.width,hostH=st.host.clientHeight||hostRect.height;
+  const tx=clamp(xlocal+15,5,Math.max(5,hostW-tw-5));
+  const ty=clamp(ylocal+13,5,Math.max(5,hostH-th-5));
+  st.tip.style.left=tx+'px';st.tip.style.top=ty+'px';
+  st.lastX=cx;st.lastType=pointerType;
+ }
+ window.ssHoverBind=bind;
+ window.ssHoverQueue=d=>{queued.push(d)};
+ window.ssHoverResetQueue=()=>{queued=[]};
+ window.ssHoverAttachQueued=()=>{const cards=[...document.querySelectorAll('#plots .plot-card')];const all=queued.splice(0);for(let i=0;i<Math.min(cards.length,all.length);i++){const svg=cards[i].querySelector('svg');if(svg)bind(svg,all[i])}};
+ window.__ssHoverDebug=()=>({count:document.querySelectorAll('.ss-hover-target').length,visible:document.querySelectorAll('.ss-hover-tip').length});
+})();
+</script>
+<script>
+function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
+ const el=document.getElementById(id);if(!el)return;
+ const host=el.closest('.plotbox,.figure,.compare-card');if(!host)return;
+ let key=host.querySelector('.axis-key');if(!key){key=document.createElement('div');key.className='axis-key';key.setAttribute('aria-label','Graph axis information');const legend=host.querySelector('.legend');if(legend)host.insertBefore(key,legend);else host.appendChild(key)}
+ const fmtAxis=v=>{if(!Number.isFinite(v))return String(v);const a=Math.abs(v);return (a>=100?Number(v.toFixed(0)):a>=10?Number(v.toFixed(1)):Number(v.toFixed(2))).toString()};
+ key.textContent=`X-axis: ${xlabel} [${fmtAxis(x0)} … ${fmtAxis(x1)}]   |   Y-axis: ${ylabel} [${fmtAxis(y0)} … ${fmtAxis(y1)}]`;
+}
+</script>
+<meta name="ss-studio-version" content="Integrated Rev1">
+<meta name="ss-studio-version" content="Chapter 5 Native v1">
+<link rel="stylesheet" href="./assets/design-system.css?v=1">
+<link rel="stylesheet" href="./assets/ss-lab-theme.css?v=5">
+<link rel="stylesheet" href="./assets/els-theme-v2.css?v=4">
+<link rel="stylesheet" href="./assets/ss-ch5-standalone.css?v=1">
+<script src="./assets/els-language.js?v=1"></script>
+<script src="./assets/els-theme-v2.js?v=3"></script>
+</head>
+<body>
+<header class="ss5-site-header" aria-label="Engineering Learning Studio navigation">
+<a class="ss5-home" href="./index.html#overview">← Studio</a>
+<span class="ss5-site-title">Signals &amp; Systems · Chapter 5 · Laplace Transform</span>
+<div class="ss5-header-actions">
+<label for="ss5-chapter-picker">Chapter <select id="ss5-chapter-picker" aria-label="Change Chapter"><option value="1">Ch 1</option><option value="2">Ch 2</option><option value="3">Ch 3</option><option value="4">Ch 4</option><option value="5" selected>Ch 5</option><option value="6">Ch 6</option><option value="7">Ch 7</option><option value="8">Ch 8</option></select></label>
+<label for="ss5-language-picker">Language <select id="ss5-language-picker" aria-label="Language"><option value="mixed">Mixed</option><option value="en">English</option><option value="ko">한국어</option></select></label>
+<label for="ss5-theme-picker">Theme <select id="ss5-theme-picker" data-els-theme-picker aria-label="Theme"></select></label>
+</div></header><a id="studio-back" href="../index.html#chapter=5" aria-label="Return to integrated Visual Lab">← Learning Studio</a><script>try{if(window.self!==window.top){document.getElementById("studio-back").hidden=true;}}catch(e){}</script><div class="shell"><aside class="nav"><div class="brand"><div class="eyebrow">Signals and Systems / Chapter 05</div><h1>Laplace Visual Lab</h1><p>ROC · Poles · Time Response<br>인터랙티브 실습 · 설치 불필요</p></div><div class="navlabel">LEARNING EXPERIMENTS / 학습 주제</div><nav class="tabs" id="tabs"></nav><div class="teach"><strong>Learning sequence / 학습 순서</strong><p>1. Make a prediction · 결과 예측<br>2. Change one variable · 변수 변경<br>3. Observe and compare · 관찰·비교<br>4. Explain what you learned · 배운 내용 설명</p></div><section class="ss5-progress" id="ss5-progress" aria-label="Chapter 5 lab progress"><div class="ss5-progress-caption">My Lab Progress</div><button type="button">Mark this lab reviewed</button><small class="ss5-progress-note">Self-reported study</small></section></aside><main class="main"><div class="top"><span class="crumb">CHAPTER 05 / VISUAL LEARNING</span><span class="pill">Rev7 · Offline · No install</span></div><div id="page"></div><footer class="footer"><span>Chapter 5 · Laplace Transform · Interactive Visual Lab</span><span>All calculations run locally in this browser</span></footer></main></div>
+<script>
+'use strict';
+const PI=Math.PI,TAU=2*PI;
+const COLORS={teal:'#0e8491',orange:'#ef7055',purple:'#7358b8',gray:'#a4b5c2',navy:'#193e51',grid:'#e5edf1'};
+const DEF={weight:{sigma:0.6},roc:{a:1,side:'right'},pairs:{kind:'exp',a:0.9,T:2,omega:2.2},props:{a:1,mode:'delay',shift:1.1,b:.6},inverse:{roc:'right',sigma:-0.5},stability:{p:-1.1,z:-2.1},rc:{tau:1,input:'step'},second:{zeta:0.35,wn:3}};
+const state=JSON.parse(JSON.stringify(DEF));
+const LABS=[
+{id:'weight',num:'01',title:'Fourier → Laplace / 변환의 확장',en:'Exponential Weighting',subtitle:'가중 인자 e^(−σt)가 적분의 수렴 여부를 어떻게 바꾸는지 확인합니다. (교재 §5.1)',formula:'X(s) = ∫₋∞^∞ x(t)e<sup>−st</sup>dt &nbsp; | &nbsp; s = σ + jω',controls:[{key:'sigma',name:'Real part σ',type:'range',min:-.5,max:1.5,step:.05,unit:''}],presets:[{label:'σ > 0 (converges)',set:{sigma:.6}},{label:'σ = 0',set:{sigma:0}},{label:'σ < 0',set:{sigma:-.35}}],plots:[['Weighted Signal / 가중 신호','x(t)=u(t), weighted signal=e^(−σt)u(t)'],['Accumulated Integral / 누적 적분','F(T)=∫₀ᵀ e^(−σt)dt · T를 증가시켜 관찰']],metric:['Convergence','Integral as T→∞','ROC condition'],q:'x(t)=u(t)에 대해 σ=0이면 왜 일반적인 양방향 Laplace 적분이 수렴하지 않을까요?',a:'σ=0, ω=0에서 적분 ∫₀^∞1dt가 발산합니다. u(t)의 양방향 Laplace 변환 X(s)=1/s는 Re(s)>0에서만 수렴합니다. ROC에는 경계 σ=0이 포함되지 않습니다.'},
+{id:'roc',num:'02',title:'ROC & Signal Direction / 신호 방향',en:'ROC Determines the Signal',subtitle:'같은 유리함수라도 ROC가 달라지면 시간 신호의 방향과 모양이 달라집니다. (교재 §§5.2, 5.4)',formula:'X(s) = 1/(s+a) &nbsp; | &nbsp; pole: s = −a',controls:[{key:'a',name:'Pole distance a',type:'range',min:.5,max:2.5,step:.1,unit:''},{key:'side',name:'ROC selection',type:'select',options:[['right','Right-sided · Re(s)>−a'],['left','Left-sided · Re(s)<−a']]}],presets:[{label:'Right-sided / causal',set:{side:'right'}},{label:'Left-sided',set:{side:'left'}}],plots:[['Time-Domain Signal / 시간 신호','서로 다른 역변환 결과를 비교'],['s-Plane & ROC / 복소평면','청록색 영역이 수렴영역, ×가 pole']],metric:['ROC','Fourier axis','Time direction'],q:'X(s)=1/(s+1)만 주어졌을 때 x(t)를 하나로 결정할 수 있나요?',a:'결정할 수 없습니다. Re(s)>−1이면 e^(−t)u(t), Re(s)<−1이면 −e^(−t)u(−t)입니다. 두 경우의 대수식은 같지만 수렴영역과 시간 방향이 다릅니다.'},
+{id:'pairs',num:'03',title:'Laplace Transform Pairs / 변환쌍',en:'Essential Transform Pairs',subtitle:'정의·적분구간·극점·ROC를 함께 관찰합니다. (교재 §5.3)',formula:'Transform pair + ROC → complete description',controls:[{key:'kind',name:'Signal type',type:'select',options:[['impulse','Unit impulse δ(t)'],['step','Unit step u(t)'],['exp','Causal exponential e^(−at)u(t)'],['pulse','Finite rectangular pulse'],['damped','Damped cosine e^(−at)cos(ω₀t)u(t)']]},{key:'a',name:'Decay factor a',type:'range',min:.25,max:2,step:.05,unit:''},{key:'T',name:'Pulse width T',type:'range',min:.5,max:4,step:.1,unit:' s'},{key:'omega',name:'Oscillation ω₀',type:'range',min:.5,max:5,step:.1,unit:' rad/s'}],plots:[['Time-Domain Signal / 시간 신호','변환쌍의 원래 신호'],['s-Plane & ROC / 복소평면','선택한 신호의 극점, ROC 및 Fourier 축']],metric:['X(s)','ROC','At s=jω'],q:'유한 길이 직사각형 펄스의 X(s)=(1−e^(−sT))/s에서 s=0이 pole인가요?',a:'아닙니다. s=0에서 분자와 분모가 함께 0이 되고 극한값은 T입니다. 이는 제거 가능한 특이점이며 ROC는 전체 유한 s-평면입니다.'},
+{id:'props',num:'04',title:'Transform Properties / 변환 성질',en:'Laplace Transform Properties',subtitle:'시간 지연과 지수 가중치를 구별합니다. 하나는 ROC를 유지하고, 다른 하나는 pole과 ROC를 이동시킵니다. (교재 §5.5)',formula:'x(t−t₀) ↔ e<sup>−st₀</sup>X(s) &nbsp; | &nbsp; e<sup>bt</sup>x(t) ↔ X(s−b)',controls:[{key:'mode',name:'Operation',type:'select',options:[['delay','Delay: x(t−t₀)'],['weight','Multiply by e^(bt)']]},{key:'a',name:'Original decay rate a',type:'range',min:.4,max:2.5,step:.1,unit:''},{key:'shift',name:'Delay t₀',type:'range',min:0,max:2.8,step:.1,unit:' s'},{key:'b',name:'Exponential factor b',type:'range',min:-1,max:2,step:.1,unit:''}],presets:[{label:'Delay 1 s',set:{mode:'delay',shift:1}},{label:'Pole shift left',set:{mode:'weight',b:-.6}},{label:'Pole shift right',set:{mode:'weight',b:1.5}}],plots:[['Before & After / 변환 전후','원래 지수신호와 이동/가중 신호 비교'],['s-Plane & ROC / 복소평면','지연은 pole 위치·ROC 불변 / 가중은 이동']],metric:['Original pole','Resulting pole','Resulting ROC'],q:'시간 지연 x(t−t₀)과 e^(bt)x(t)가 ROC에 미치는 영향은 각각 무엇인가요?',a:'유한한 시간 이동은 e^(−st₀)만 곱하고 ROC를 그대로 유지합니다. 반면 e^(bt) 곱셈은 X(s−b)가 되어 모든 pole과 ROC가 실수축으로 b만큼 이동합니다.'},
+{id:'inverse',num:'05',title:'Inverse Laplace & ROC / 역변환',en:'Inverse Laplace & Partial Fractions',subtitle:'부분분수 결과를 ROC와 결합하면 한 대수식에서 세 가지 시간 신호가 나타납니다. (교재 §§5.4, 5.6)',formula:'X(s)=1/[(s+1)(s+4)] = (1/3)/(s+1) − (1/3)/(s+4)',controls:[{key:'roc',name:'Choose an ROC',type:'select',options:[['right','Right: Re(s)>−1'],['strip','Strip: −4<Re(s)<−1'],['left','Left: Re(s)<−4']]}],presets:[{label:'Right-sided',set:{roc:'right'}},{label:'Two-sided',set:{roc:'strip'}},{label:'Left-sided',set:{roc:'left'}}],plots:[['Inverse Transform x(t) / 역변환','강조된 0축, ROC별 시간 방향과 실제 x(0) 확인'],['Poles & ROC / 극점·수렴영역','경계: Re(s)=−4, −1']],metric:['ROC','Causal?','jω-axis inside ROC?'],q:'−4<Re(s)<−1의 ROC에서는 왜 양쪽 방향 신호가 생기나요?',a:'1/(s+1) 항은 ROC가 −1보다 왼쪽이므로 −e^(−t)u(−t)로, −1/(s+4) 항은 ROC가 −4보다 오른쪽이므로 −e^(−4t)u(t)로 해석됩니다. 각 항의 ROC의 교집합이 (−4,−1)입니다.'},
+{id:'stability',num:'06',title:'Pole · Zero · Stability / 안정성',en:'System Function and Causality',subtitle:'Pole과 zero를 움직여 인과 LTI 시스템의 임펄스 응답과 BIBO 안정성을 판단합니다. (교재 §5.7)',formula:'H(s) = (s−z) / [(s−p)(s+4)] &nbsp; | &nbsp; causal ROC: right of rightmost uncanceled pole',controls:[{key:'p',name:'Movable pole p',type:'range',min:-2.5,max:1.5,step:.1,unit:''},{key:'z',name:'Zero location z',type:'range',min:-4.5,max:1.5,step:.1,unit:''}],presets:[{label:'Stable',set:{p:-1.1,z:-2.1}},{label:'Unstable',set:{p:.8,z:-2.1}},{label:'Pole cancellation',set:{p:.8,z:.8}}],plots:[['Impulse Response h(t) / 임펄스 응답','Pole이 오른쪽으로 이동하면 감쇠가 느려지거나 증가'],['Pole-Zero Map & ROC / 극영점도','× movable pole, ○ draggable zero · ROC follows active poles']],metric:['Rightmost active pole','BIBO stability','FT H(jω) exists?'],q:'양의 실수부에 pole이 있어도 zero와 정확히 상쇄되면 안정성 판단은 어떻게 달라질까요?',a:'약분되지 않은 분모만 보고 안정성을 판단하면 안 됩니다. 정확히 상쇄된 pole은 전달함수의 진정한 pole이 아니므로 reduced H(s)의 활성 pole과 ROC를 사용합니다. 실제 내부 상태 안정성은 별도 문제일 수 있습니다.'},
+{id:'rc',num:'07',title:'First-Order RC System / 1차 시스템',en:'Time Constant and Bandwidth',subtitle:'한 개의 pole로 충전 속도, 63.2% 시간, 차단 주파수 및 위상을 예측합니다. (교재 §§5.8, 5.10, 5.11)',formula:'H(s) = 1/(τs+1) &nbsp; | &nbsp; pole = −1/τ &nbsp; | &nbsp; ω<sub>c</sub>=1/τ',controls:[{key:'tau',name:'Time constant τ',type:'range',min:.2,max:3,step:.1,unit:' s'},{key:'input',name:'Input',type:'select',options:[['step','Unit step (charging)'],['pulse','On-off pulse (0 to 2 s)']]}],presets:[{label:'Fast RC',set:{tau:.3}},{label:'Slow RC',set:{tau:2.4}},{label:'Pulse input',set:{input:'pulse'}}],plots:[['Time Response / 시간응답','1−e^(−t/τ), 초기조건 0'],['Frequency Response / 주파수응답','|H(jω)| vs ω, −3 dB cutoff에서 1/√2']],metric:['63.2% time','Cutoff ωc','Pole location'],q:'τ가 2배 커지면 충전 속도와 차단 주파수는 어떻게 되나요?',a:'충전 속도는 느려집니다. 63.2%에 도달하는 시간 τ는 2배가 되고, 차단 각주파수 ωc=1/τ는 절반이 됩니다. pole은 허수축에 더 가까워집니다.'},
+{id:'second',num:'08',title:'Second-Order Response / 2차 응답',en:'Second-Order Pole Motion',subtitle:'ζ와 ωₙ을 조절하여 under/critical/over damping을 비교합니다. (교재 §§5.9, 5.11)',formula:'H(s) = ωₙ² / (s²+2ζωₙs+ωₙ²)',controls:[{key:'zeta',name:'Damping ratio ζ',type:'range',min:.1,max:2,step:.05,unit:''},{key:'wn',name:'Natural frequency ωₙ',type:'range',min:1,max:5,step:.1,unit:' rad/s'}],presets:[{label:'Underdamped ζ=0.25',set:{zeta:.25}},{label:'Critical ζ=1',set:{zeta:1}},{label:'Overdamped ζ=1.5',set:{zeta:1.5}}],plots:[['Step Response y(t) / 계단응답','overshoot, ringing, settling을 관찰'],['Pole Motion / 극점 이동','허수부는 진동, 실수부는 감쇠를 결정']],metric:['Response regime','Peak overshoot','Pole real part'],q:'복소 켤레 pole의 실수부와 허수부는 각각 어떤 물리적인 의미를 갖나요?',a:'실수부(−ζωₙ)는 감쇠의 지수 속도이며, 허수부(±ωₙ√(1−ζ²))는 감쇠된 진동 각주파수입니다. ζ가 1 이상이면 pole들이 실수축에 놓이고 자유 진동이 사라집니다.'}
+];
+const $=id=>document.getElementById(id);
+let active=new URLSearchParams(location.search).get('lab')||'weight';if(!LABS.some(x=>x.id===active))active='weight';
+const fmt=(x,d=2)=>Number.isFinite(x)?(Math.abs(x)<1e-12?'0':x.toFixed(d)):'—';
+function esc(v){return String(v).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function nav(){const box=$('tabs');box.innerHTML=LABS.map(x=>`<button data-lab="${x.id}" class="${x.id===active?'on':''}" type="button"><span class="num">${x.num}</span><span class="tabname">${x.title}</span></button>`).join('');box.querySelectorAll('[data-lab]').forEach(b=>b.addEventListener('click',()=>switchLab(b.dataset.lab)))}
+function controlsHTML(c,s){if(c.type==='select')return `<div class="ctrl"><label for="c_${c.key}">${c.name}</label><select id="c_${c.key}" data-key="${c.key}">${c.options.map(([val,label])=>`<option value="${esc(val)}" ${String(val)===String(s[c.key])?'selected':''}>${esc(label)}</option>`).join('')}</select></div>`;return `<div class="ctrl"><label for="c_${c.key}"><span>${c.name}</span><output id="out_${c.key}">${fmt(s[c.key],2)}${c.unit||''}</output></label><input type="range" id="c_${c.key}" data-key="${c.key}" min="${c.min}" max="${c.max}" step="${c.step}" value="${s[c.key]}"><div class="rangeEnds"><span>${c.min}</span><span>${c.max}</span></div></div>`}
+function render(){stopGuidePlay();const L=LABS.find(x=>x.id===active),s=state[active];$('page').innerHTML=`<header class="heading"><div class="sup">EXPERIMENT ${L.num} / ${L.en}</div><h2>${L.title}</h2><p>${L.subtitle}</p></header><div class="formula"><div class="math" id="formula">${L.formula}</div><div class="formhint">Formula → Graph → Interpretation</div></div><div class="lab"><aside class="panel"><div class="over">EXPERIMENT CONTROLS</div><h3>Change one thing</h3><div class="controlgrid">${L.controls.map(c=>controlsHTML(c,s)).join('')}</div><div class="presets">${(L.presets||[]).map((p,i)=>`<button type="button" class="preset" data-preset="${i}">${p.label}</button>`).join('')}</div><div class="btnline"><button type="button" id="reset" class="btn">전체 초기화</button><button type="button" id="next" class="btn primary">다음 실험 →</button></div><p class="smallnote">먼저 결과를 예측한 다음 값을 조절하고, time-domain(시간영역)과 s-plane(복소평면)을 함께 읽어 보세요.</p></aside><div class="outputs"><div class="plots">${L.plots.map((p,i)=>`<section class="figure"><h3>${p[0]}</h3><p class="sub">${p[1]}</p><canvas id="plot${i}" width="650" height="320" role="img" aria-label="${esc(p[0])}"></canvas><div class="legend" id="legend${i}"></div></section>`).join('')}</div>${active==='inverse'?`<section class="compare-wrap"><div class="compare-head"><h3>RS · LS · Two-sided — 동시에 비교하기</h3><span>같은 X(s), 서로 다른 ROC · 공통 시간 범위, 독립적인 y축 눈금</span></div><div class="compare-grid">${[['right','RS · Right-sided','Re(s)>−1'],['strip','Two-sided','−4<Re(s)<−1'],['left','LS · Left-sided','Re(s)<−4']].map(([key,label,roc])=>`<button class="compare-card ${s.roc===key?'selected':''}" type="button" data-compare="${key}" aria-pressed="${s.roc===key}"><div class="compare-title">${label}</div><div class="compare-sub">${roc}</div><canvas id="cmp_${key}" width="430" height="230" role="img" aria-label="${label} signal"></canvas></button>`).join('')}</div><div class="compare-footer">세 그림은 x축 범위를 똑같이 t∈[−1.4, 2.6] s로 설정했습니다. RS는 작은 진폭, LS는 음의 시간에서 매우 큰 진폭이므로 각 y축의 단위 간격은 다릅니다. 각 그림을 클릭하면 메인 그래프의 ROC도 변경됩니다.</div></section>`:''}${active==='inverse'?`<div class="plot-instruction">s-plane의 보라색 <b>σ 탐침선</b>을 좌우로 드래그하거나 원하는 ROC 영역을 클릭해 보세요. Pole을 통과할 때마다 시간 신호가 바뀝니다.</div>`:active==='stability'?`<div class="plot-instruction">s-plane의 주황색 <b>× pole</b> 또는 보라색 <b>○ zero</b>를 마우스나 터치로 드래그하세요. 청록색 ROC 경계와 h(t)가 즉시 갱신됩니다. 겹친 위치는 Shift+드래그로 pole을 선택하거나 슬라이더를 이용할 수 있습니다.</div>`:active==='roc'?`<div class="plot-instruction">s-plane의 × pole을 좌우로 드래그하여 a 값과 시간 신호를 함께 관찰할 수 있습니다.</div>`:''}<div class="metrics">${L.metric.map((m,i)=>`<div class="metric"><div class="k">${m}</div><div class="v" id="met${i}">—</div><div class="d" id="md${i}"></div></div>`).join('')}</div><section class="derivation-panel" id="derivationPanel" aria-label="Guided derivation"></section><section class="reading-panel" id="readingPanel" aria-label="Graph interpretation"></section><section class="insight"><h3>Result interpretation / 결과 해석</h3><p id="insight"></p></section><section class="quiz"><div class="over">CHECK YOURSELF</div><h3>생각해 보기</h3><p>${esc(L.q)}</p><details><summary>정답 및 설명 보기</summary><div class="answer">${esc(L.a)}</div></details></section></div></div>`;
+ document.querySelectorAll('[data-key]').forEach(el=>el.addEventListener('input',()=>{const c=L.controls.find(x=>x.key===el.dataset.key);s[c.key]=c.type==='range'?Number(el.value):el.value;const out=$('out_'+c.key);if(out)out.textContent=fmt(s[c.key],2)+(c.unit||'');update()}));
+ document.querySelectorAll('[data-preset]').forEach(b=>b.addEventListener('click',()=>{Object.assign(s,L.presets[Number(b.dataset.preset)].set);render()}));
+ $('reset').addEventListener('click',()=>{state[active]=JSON.parse(JSON.stringify(DEF[active]));render()});$('next').addEventListener('click',()=>{const n=LABS.findIndex(x=>x.id===active);switchLab(LABS[(n+1)%LABS.length].id)});nav();update();installPlotInteractions();if(active==='inverse')document.querySelectorAll('[data-compare]').forEach(b=>b.addEventListener('click',()=>{state.inverse.roc=b.dataset.compare;state.inverse.sigma=rocProbeDefault(state.inverse.roc);syncInverseSelection();update()}))}
+function switchLab(id){if(!LABS.some(x=>x.id===id))return;active=id;try{history.replaceState({},'',location.pathname+'?lab='+id)}catch(e){}render();scrollTo({top:0,behavior:'smooth'})}
+function setMetric(items){items.forEach((m,i)=>{if(!$('met'+i))return;$('met'+i).textContent=m[0];$('md'+i).textContent=m[1]||''})}
+function setInsight(s){$('insight').textContent=s}
+function setLegend(i,items){$('legend'+i).innerHTML=(items||[]).map(a=>`<span class="lgitem"><span class="lgtick ${a.dash?'dash':''}" style="--color:${a.color}"></span>${a.label}</span>`).join('')}
+function setFormula(s){$('formula').innerHTML=s}
+function ctx(id){const el=$(id);const rect=el.getBoundingClientRect(),w=Math.max(220,rect.width),h=Math.max(230,rect.height),d=Math.min(devicePixelRatio||1,2);el.width=Math.round(w*d);el.height=Math.round(h*d);const g=el.getContext('2d');g.setTransform(d,0,0,d,0,0);return{g,w,h}}
+function bounds(points,lo=null,hi=null){let a=points.filter(p=>Number.isFinite(p[1])).map(p=>p[1]);if(!a.length)return[-1,1];let mn=lo??Math.min(...a),mx=hi??Math.max(...a);if(Math.abs(mx-mn)<1e-9){mn-=1;mx+=1}const p=(mx-mn)*.12;return[mn-(lo===null?p:0),mx+(hi===null?p:0)]}
+function niceStep(span,target=5){
+  const raw=Math.max(1e-12,Math.abs(span)/target),exp=Math.floor(Math.log10(raw)),unit=Math.pow(10,exp);
+  const candidates=[1,2,2.5,5,10];
+  let step=candidates.find(n=>n*unit>=raw-1e-12)*unit;
+  // When amplitude is several units wide, prefer clear integer spacing.
+  if(span>=3.5 && step<1)step=1;
+  return step;
+}
+function tickLabel(v,step){
+  if(Math.abs(v)<Math.max(step*1e-7,1e-10))return '0';
+  const isIntegerStep=Math.abs(step-Math.round(step))<1e-9;
+  const decimals=isIntegerStep?0:Math.min(5,Math.max(1,Math.ceil(-Math.log10(step))+1));
+  return Number(v.toFixed(decimals)).toString();
+}
+function chart(id,opt){
+ const {g,w,h}=ctx(id),mini=id.startsWith('cmp_');
+ const m=mini?{l:57,r:11,t:14,b:40}:{l:67,r:17,t:22,b:47};
+ const W=w-m.l-m.r,H=h-m.t-m.b,{xmin,xmax,ymin,ymax}=opt;
+ const X=x=>m.l+(x-xmin)*W/(xmax-xmin),Y=y=>m.t+(ymax-y)*H/(ymax-ymin);
+ g.fillStyle='white';g.fillRect(0,0,w,h);
+ g.save();g.beginPath();g.rect(m.l,m.t,W,H);g.clip();
+ if(opt.activeSide){
+   const fills=opt.activeSide==='right'?[[Math.max(0,xmin),xmax,'rgba(14,135,151,.065)']]:opt.activeSide==='left'?[[xmin,Math.min(0,xmax),'rgba(14,135,151,.065)']]:[[xmin,Math.min(0,xmax),'rgba(14,135,151,.055)'],[Math.max(0,xmin),xmax,'rgba(237,120,75,.055)']];
+   for(const [a,b,fill] of fills)if(b>a){g.fillStyle=fill;g.fillRect(X(a),m.t,X(b)-X(a),H)}
+ }
+ g.font=(mini?'10px':'11px')+' system-ui';g.textBaseline='middle';
+ const yStep=niceStep(ymax-ymin,mini?4:5),xStep=niceStep(xmax-xmin,mini?4:6);
+ // Every graph shares the same integer-friendly 'niceStep' rule; use decimals only for subunit amplitudes.
+ for(let k=Math.ceil(ymin/yStep-1e-8),count=0;k<=Math.floor(ymax/yStep+1e-8)&&count<28;k++,count++){
+   const v=k*yStep,py=Y(v);if(v<ymin-1e-8||v>ymax+1e-8)continue;
+   g.strokeStyle=COLORS.grid;g.lineWidth=1;g.beginPath();g.moveTo(m.l,py);g.lineTo(w-m.r,py);g.stroke();
+ }
+ for(let k=Math.ceil(xmin/xStep-1e-8),count=0;k<=Math.floor(xmax/xStep+1e-8)&&count<30;k++,count++){
+   const v=k*xStep,px=X(v);if(v<xmin-1e-8||v>xmax+1e-8)continue;
+   g.strokeStyle=COLORS.grid;g.lineWidth=1;g.beginPath();g.moveTo(px,m.t);g.lineTo(px,m.t+H);g.stroke();
+ }
+ if(ymin<=0&&ymax>=0){g.strokeStyle='#344f62';g.lineWidth=2.0;g.beginPath();g.moveTo(m.l,Y(0));g.lineTo(m.l+W,Y(0));g.stroke()}
+ if(xmin<=0&&xmax>=0){g.strokeStyle='#344f62';g.lineWidth=2.0;g.beginPath();g.moveTo(X(0),m.t);g.lineTo(X(0),m.t+H);g.stroke()}
+ for(const v of opt.vlines||[]){if(v.x<xmin||v.x>xmax)continue;g.strokeStyle=v.color||COLORS.orange;g.setLineDash([5,4]);g.lineWidth=1.5;g.beginPath();g.moveTo(X(v.x),m.t);g.lineTo(X(v.x),m.t+H);g.stroke();g.setLineDash([])}
+ for(const se of opt.series||[]){g.strokeStyle=se.color||COLORS.teal;g.fillStyle=se.color||COLORS.teal;g.lineWidth=se.width||2.3;g.setLineDash(se.dash?[5,4]:[]);g.beginPath();let connected=false;for(const p of se.xy){if(!Number.isFinite(p[1])||p[0]<xmin||p[0]>xmax){connected=false;continue}if(!connected){g.moveTo(X(p[0]),Y(p[1]));connected=true}else g.lineTo(X(p[0]),Y(p[1]))}g.stroke();g.setLineDash([])}
+ for(const p of opt.points||[]){if(!Number.isFinite(p.x)||!Number.isFinite(p.y)||p.x<xmin||p.x>xmax||p.y<ymin||p.y>ymax)continue;g.fillStyle=p.color||COLORS.orange;g.beginPath();g.arc(X(p.x),Y(p.y),p.r||4.5,0,TAU);g.fill()}
+ if(xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0){g.fillStyle='white';g.strokeStyle='#253f53';g.lineWidth=1.7;g.beginPath();g.arc(X(0),Y(0),4.8,0,TAU);g.fill();g.stroke()}
+ if(opt.activeSide&&xmin<0&&xmax>0&&!mini){g.textAlign='center';g.font='bold 10px system-ui';g.fillStyle='#0b7786';if(opt.activeSide==='right')g.fillText('t ≥ 0',X(Math.max(.45,xmax/2)),m.t+13);if(opt.activeSide==='left')g.fillText('t < 0',X(xmin/2),m.t+13);if(opt.activeSide==='both'){g.fillText('t < 0',X(xmin/2),m.t+13);g.fillStyle='#c87947';g.fillText('t ≥ 0',X(xmax/2),m.t+13)}}
+ g.restore();
+ // Tick labels are drawn outside clipping so all zeros are fully visible.
+ g.font=(mini?'10px':'11px')+' system-ui';g.textBaseline='middle';g.fillStyle='#556f82';
+ for(let k=Math.ceil(ymin/yStep-1e-8),count=0;k<=Math.floor(ymax/yStep+1e-8)&&count<28;k++,count++){
+   const v=k*yStep;g.textAlign='right';g.fillStyle=Math.abs(v)<1e-9?'#224559':'#647f90';g.font=(Math.abs(v)<1e-9?'bold ':'')+(mini?'10px':'11px')+' system-ui';g.fillText(tickLabel(v,yStep),m.l-9,Y(v));
+ }
+ for(let k=Math.ceil(xmin/xStep-1e-8),count=0;k<=Math.floor(xmax/xStep+1e-8)&&count<30;k++,count++){
+   const v=k*xStep;g.textAlign='center';g.fillStyle=Math.abs(v)<1e-9?'#224559':'#647f90';g.font=(Math.abs(v)<1e-9?'bold ':'')+(mini?'10px':'11px')+' system-ui';g.fillText(tickLabel(v,xStep),X(v),h-m.b+16);
+ }
+ g.font=(mini?'10px':'11px')+' system-ui';g.fillStyle='#516d7d';g.textAlign='center';g.fillText(opt.xlabel||'time t (s)',m.l+W/2,h-12);
+ g.save();g.translate(mini?15:16,m.t+H/2);g.rotate(-PI/2);g.fillText(opt.ylabel||'amplitude',0,0);g.restore();
+ if(opt.originLabel&&xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0&&!mini){g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle='#304a5d';g.fillText('(0, 0)',Math.min(w-62,X(0)+9),Math.max(m.t+23,Y(0)-14))}
+ if(opt.valueAtZeroLabel&&xmin<=0&&xmax>=0&&!mini){const yy=opt.valueAtZeroLabel.y;g.fillStyle=COLORS.orange;g.beginPath();g.arc(X(0),Y(yy),4.3,0,TAU);g.fill();g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle='#ba6036';g.fillText(opt.valueAtZeroLabel.text,Math.min(w-122,X(0)+10),Math.min(h-m.b-7,Y(yy)+17))}
+ if(opt.startLabel&&xmin<=0&&xmax>=0&&!mini){g.fillStyle=COLORS.orange;g.beginPath();g.arc(X(0),Y(0),4,0,TAU);g.fill();g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle='#ba6036';g.fillText('x(0) = 0',Math.min(w-92,X(0)+9),Math.max(m.t+35,Y(0)-18))}
+ ssAxisKey(id,opt.xlabel||'t (s)',opt.ylabel||'amplitude',xmin,xmax,ymin,ymax);
+ ssHoverBind(id,{kind:'cart',w,h,pad:m,xmin,xmax,ymin,ymax,xlabel:opt.xlabel||'time t (s)',ylabel:opt.ylabel||'amplitude',series:(opt.series||[]).map(s=>({label:s.label,color:s.color,points:s.xy||[],discrete:s.type==='stem'}))});
+ return{g,X,Y,w,h,m,xmin,xmax,ymin,ymax};
+}
+function sample(fn,t0,t1,N=400){let out=[];for(let i=0;i<=N;i++){let t=t0+(t1-t0)*i/N;out.push([t,fn(t)])}return out}
+let planeViewport=null;
+function plane(id,{poles=[],zeros=[],roc={type:'right',a:-1},xmin=-5.5,xmax=3,ymin=-4.7,ymax=4.7,probe=null,handles=null}){
+ const {g,w,h}=ctx(id),m={l:67,r:18,t:22,b:47},W=w-m.l-m.r,H=h-m.t-m.b;
+ const X=x=>m.l+(x-xmin)*W/(xmax-xmin),Y=y=>m.t+(ymax-y)*H/(ymax-ymin);
+ planeViewport={id,X,Y,xmin,xmax,ymin,ymax,m,w,h,toX:px=>xmin+(px-m.l)/W*(xmax-xmin)};
+ g.fillStyle='white';g.fillRect(0,0,w,h);
+ g.save();g.beginPath();g.rect(m.l,m.t,W,H);g.clip();
+ let left=xmin,right=xmax;
+ if(roc.type==='right')left=roc.a;
+ if(roc.type==='left')right=roc.a;
+ if(roc.type==='strip'){left=roc.a;right=roc.b}
+ if(roc.type==='all'){left=xmin;right=xmax}
+ if(roc.type!=='none'){g.fillStyle='#e1f3ef';const a=Math.max(left,xmin),b=Math.min(right,xmax);if(b>a)g.fillRect(X(a),m.t,X(b)-X(a),H)}
+ const xStep=niceStep(xmax-xmin,6),yStep=niceStep(ymax-ymin,6);
+ for(let k=Math.ceil(xmin/xStep-1e-8);k<=Math.floor(xmax/xStep+1e-8);k++){g.strokeStyle=COLORS.grid;g.lineWidth=1;g.beginPath();g.moveTo(X(k*xStep),m.t);g.lineTo(X(k*xStep),m.t+H);g.stroke()}
+ for(let k=Math.ceil(ymin/yStep-1e-8);k<=Math.floor(ymax/yStep+1e-8);k++){g.strokeStyle=COLORS.grid;g.lineWidth=1;g.beginPath();g.moveTo(m.l,Y(k*yStep));g.lineTo(m.l+W,Y(k*yStep));g.stroke()}
+ if(ymin<=0&&ymax>=0){g.strokeStyle='#344f62';g.lineWidth=2;g.beginPath();g.moveTo(m.l,Y(0));g.lineTo(m.l+W,Y(0));g.stroke()}
+ if(xmin<=0&&xmax>=0){g.strokeStyle='#344f62';g.lineWidth=2;g.beginPath();g.moveTo(X(0),m.t);g.lineTo(X(0),m.t+H);g.stroke()}
+ g.strokeStyle=COLORS.teal;g.setLineDash([5,4]);g.lineWidth=1.4;
+ const rocbounds=roc.type==='strip'?[roc.a,roc.b]:(roc.type==='all'||roc.type==='none')?[]:[roc.a];
+ for(const boundary of rocbounds){g.beginPath();g.moveTo(X(boundary),m.t);g.lineTo(X(boundary),m.t+H);g.stroke()}
+ g.setLineDash([]);
+ if(probe!==null){
+   g.strokeStyle=COLORS.purple;g.setLineDash([4,3]);g.lineWidth=2.2;g.beginPath();g.moveTo(X(probe),m.t+11);g.lineTo(X(probe),m.t+H);g.stroke();g.setLineDash([]);
+   g.fillStyle=COLORS.purple;g.beginPath();g.arc(X(probe),m.t+13,7,0,TAU);g.fill();
+   g.fillStyle='#47328a';g.font='bold 11px system-ui';g.textAlign='center';g.fillText('σ',X(probe),m.t+31);
+ }
+ for(const p of poles){let x=X(p.re),y=Y(p.im);g.strokeStyle=p.canceled?'#7f919c':COLORS.orange;g.lineWidth=3.1;g.beginPath();g.moveTo(x-7,y-7);g.lineTo(x+7,y+7);g.moveTo(x-7,y+7);g.lineTo(x+7,y-7);g.stroke();if(p.canceled){g.strokeStyle=COLORS.purple;g.beginPath();g.arc(x,y,10,0,TAU);g.stroke()}}
+ for(const z of zeros){g.strokeStyle=COLORS.purple;g.lineWidth=3;g.beginPath();g.arc(X(z.re),Y(z.im),7,0,TAU);g.stroke()}
+ if(xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0){g.fillStyle='white';g.strokeStyle='#253f53';g.lineWidth=1.7;g.beginPath();g.arc(X(0),Y(0),4.8,0,TAU);g.fill();g.stroke()}
+ if(handles){
+  g.font='bold 11px system-ui';g.textAlign='center';
+  if(handles.p!==undefined){const px=X(handles.p),py=Y(0);g.fillStyle=COLORS.orange;g.fillText('drag P',px,py-17)}
+  if(handles.z!==undefined){const zx=X(handles.z),zy=Y(0);g.fillStyle=COLORS.purple;g.fillText('drag Z',zx,zy+23)}
+ }
+ if(roc.type!=='none'){const a=Math.max(left,xmin),b=Math.min(right,xmax);if(b>a){g.fillStyle='#087d85';g.font='bold 11px system-ui';g.textAlign='center';g.fillText('ROC',Math.max(m.l+25,Math.min(m.l+W-25,(X(a)+X(b))/2)),m.t+17)}}
+ g.restore();
+ g.font='11px system-ui';g.textBaseline='middle';
+ for(let k=Math.ceil(xmin/xStep-1e-8);k<=Math.floor(xmax/xStep+1e-8);k++){const v=k*xStep;g.fillStyle=Math.abs(v)<1e-9?'#224559':'#647f90';g.font=(Math.abs(v)<1e-9?'bold ':'')+'11px system-ui';g.textAlign='center';g.fillText(tickLabel(v,xStep),X(v),h-m.b+16)}
+ for(let k=Math.ceil(ymin/yStep-1e-8);k<=Math.floor(ymax/yStep+1e-8);k++){const v=k*yStep;g.fillStyle=Math.abs(v)<1e-9?'#224559':'#647f90';g.font=(Math.abs(v)<1e-9?'bold ':'')+'11px system-ui';g.textAlign='right';g.fillText(tickLabel(v,yStep),m.l-9,Y(v))}
+ g.fillStyle='#516d7d';g.textAlign='center';g.font='11px system-ui';g.fillText('Re(s)  σ',m.l+W/2,h-12);
+ g.save();g.translate(16,m.t+H/2);g.rotate(-PI/2);g.fillText('Im(s)  ω',0,0);g.restore();
+ ssAxisKey(id,'Re(s) = σ','Im(s) = ω',xmin,xmax,ymin,ymax);
+ ssHoverBind(id,{kind:'complex',plane:'s',w,h,pad:m,xmin,xmax,ymin,ymax,xlabel:'Re(s) = σ',ylabel:'Im(s) = ω',markers:[...poles.map(p=>({x:p.re,y:p.im,type:'Pole'})),...zeros.map(z=>({x:z.re,y:z.im,type:'Zero'}))],roc});
+ return planeViewport;
+}
+function drawWeight(s){const sigma=s.sigma,t=sample(t=>Math.exp(-sigma*t),0,8),v=sample(t=>Math.abs(sigma)<1e-12?t:(1-Math.exp(-sigma*t))/sigma,0,8);let [lo,hi]=bounds(t,0,null);chart('plot0',{xmin:0,xmax:8,ymin:lo,ymax:hi,xlabel:'time t (s)',ylabel:'e^(−σt)',series:[{xy:t,color:COLORS.teal}]});let[lo2,hi2]=bounds(v,0,null);if(sigma>0&&1/sigma<hi2*1.5)hi2=Math.max(hi2,1.2/sigma);chart('plot1',{xmin:0,xmax:8,ymin:lo2,ymax:hi2,xlabel:'upper integration bound T',ylabel:'∫₀ᵀ e^(−σt)dt',series:[{xy:v,color:COLORS.orange},{xy:sigma>0?[[0,1/sigma],[8,1/sigma]]:[],color:COLORS.gray,dash:true}],points:[{x:8,y:v[v.length-1][1],color:COLORS.orange}]});setLegend(0,[{label:'weighted u(t)',color:COLORS.teal}]);setLegend(1,[{label:'finite T integral',color:COLORS.orange},{label:'limit 1/σ when σ>0',color:COLORS.gray,dash:true}]);setMetric([[sigma>0?'Convergent':'Divergent',sigma>0?'σ>0':'σ≤0'],[sigma>0?fmt(1/sigma,3):'∞','at ω=0'],['Re(s)>0','boundary not included']]);setInsight(sigma>0?`σ=${fmt(sigma)}이면 가중신호가 감쇠하고 적분은 1/σ=${fmt(1/sigma,3)}로 수렴합니다. 이 적분은 ω=0의 한 단면이며 ROC는 Re(s)>0입니다.`:`σ=${fmt(sigma)}인 경우 ω=0에서 적분이 수렴하지 않습니다. 유한 관측시간의 적분값이 계산된다는 사실은 T→∞의 수렴을 의미하지 않습니다.`)}
+function drawROC(s){const a=s.a,p=-a,right=s.side==='right',fn=t=>right?(t>=0?Math.exp(-a*t):0):(t<0?-Math.exp(-a*t):0),time=sample(fn,-2.5,5,600),[lo,hi]=bounds(time);chart('plot0',{xmin:-2.5,xmax:5,ymin:lo,ymax:hi,xlabel:'time t (s)',ylabel:'x(t)',series:[{xy:time,color:COLORS.teal}]});plane('plot1',{poles:[{re:p,im:0}],roc:{type:s.side,a:p},handles:{p}});setLegend(0,[{label:right?'e^(−at)u(t)':'−e^(−at)u(−t)',color:COLORS.teal}]);setLegend(1,[{label:'ROC',color:COLORS.teal},{label:'pole ×',color:COLORS.orange}]);setMetric([[`Re(s) ${right?'>':'<'} ${fmt(p,2)}`,'pole excluded'],[right?'Yes':'No','jω axis at Re(s)=0'],[right?'Right-sided':'Left-sided','same X(s) expression']]);setInsight(`주어진 식 X(s)=1/(s+${fmt(a,2)})의 pole은 s=${fmt(p,2)}입니다. ${right?'오른쪽 ROC이므로 t≥0의 인과적 감쇠 신호를 나타냅니다.':'왼쪽 ROC이므로 t<0의 신호이며, 음의 부호가 필요합니다.'} ROC는 time direction과 수렴을 함께 결정합니다.`)}
+const cadd=(a,b)=>[a[0]+b[0],a[1]+b[1]],csub=(a,b)=>[a[0]-b[0],a[1]-b[1]],cmul=(a,b)=>[a[0]*b[0]-a[1]*b[1],a[0]*b[1]+a[1]*b[0]],cdiv=(a,b)=>{let d=b[0]**2+b[1]**2;return[(a[0]*b[0]+a[1]*b[1])/d,(a[1]*b[0]-a[0]*b[1])/d]},cabs=a=>Math.hypot(...a),cexp=([re,im])=>[Math.exp(re)*Math.cos(im),Math.exp(re)*Math.sin(im)];
+function drawPairs(s){const kind=s.kind,a=s.a,T=s.T,om=s.omega,x=t=>{if(kind==='impulse')return 0;if(kind==='step')return t>=0?1:0;if(kind==='exp')return t>=0?Math.exp(-a*t):0;if(kind==='pulse')return t>=0&&t<=T?1:0;return t>=0?Math.exp(-a*t)*Math.cos(om*t):0};const t=sample(x,-1,6);const impChart=chart('plot0',{xmin:-1,xmax:6,ymin:-1.2,ymax:1.25,xlabel:'time t (s)',ylabel:'x(t)',series:[{xy:t,color:COLORS.teal}]});if(kind==='impulse'){const {g,X,Y}=impChart;let xx=X(0),y0=Y(0),y1=Y(1);g.strokeStyle=COLORS.orange;g.fillStyle=COLORS.orange;g.lineWidth=3;g.beginPath();g.moveTo(xx,y0);g.lineTo(xx,y1);g.stroke();g.beginPath();g.moveTo(xx-7,y1+11);g.lineTo(xx,y1-2);g.lineTo(xx+7,y1+11);g.closePath();g.fill();g.font='12px system-ui';g.fillText('area = 1',xx+42,y1+5)}let poles=[],roc={type:'all'},expr='',sigma0=0;if(kind==='impulse'){expr='1';}if(kind==='step'){expr='1/s';poles=[{re:0,im:0}];roc={type:'right',a:0};sigma0=1}if(kind==='exp'){expr=`1/(s+${fmt(a,2)})`;poles=[{re:-a,im:0}];roc={type:'right',a:-a}}if(kind==='pulse'){expr=`(1−e^(−${fmt(T,2)}s))/s`;roc={type:'all'}}if(kind==='damped'){expr=`(s+${fmt(a,2)})/[(s+${fmt(a,2)})²+${fmt(om,2)}²]`;poles=[{re:-a,im:om},{re:-a,im:-om}];roc={type:'right',a:-a}}plane('plot1',{poles,roc});setLegend(0,[{label:kind==='impulse'?'Impulse δ(t), arrow (area=1)':'Original signal x(t)',color:COLORS.teal}]);setLegend(1,[{label:'ROC',color:COLORS.teal},{label:'poles ×',color:COLORS.orange}]);setFormula(`X(s) = ${expr}`);setMetric([[expr,'Laplace expression'],[roc.type==='all'?'Entire s-plane':`Re(s)>${fmt(roc.a,2)}`,'ROC excludes its boundary'],[kind==='step'?'No':'Yes',kind==='step'?'ordinary CTFT fails':'jω axis inside ROC']]);setInsight(kind==='pulse'?`유한 펄스는 적분구간이 [0, ${fmt(T,2)}]로 유한하여 entire s-plane에서 수렴합니다. s=0은 pole이 아니라 제거 가능한 특이점이며 X(0)=T=${fmt(T,2)}입니다.`:kind==='impulse'?'Dirac delta는 높이가 유한한 신호가 아니므로 시간영역에 위치 표시만 사용합니다. 면적 1인 δ(t)의 Laplace 변환은 1입니다.':kind==='step'?'계단 신호는 t→∞에서 감쇠하지 않습니다. X(s)=1/s는 Re(s)>0에서 수렴하지만 일반적인 CTFT는 존재하지 않습니다.':kind==='damped'?`pole이 −${fmt(a,2)}±j${fmt(om,2)}에 있으므로 실수부는 감쇠, 허수부는 진동을 나타냅니다.`:`인과적 감쇠 신호의 pole은 s=−${fmt(a,2)}, ROC는 pole의 오른쪽입니다. a가 커지면 시간 응답은 빨리 감소합니다.`)}
+function drawProps(s){const original=sample(t=>t>=0?Math.exp(-s.a*t):0,-1,7,500),transformed=sample(t=>s.mode==='delay'?(t>=s.shift?Math.exp(-s.a*(t-s.shift)):0):(t>=0?Math.exp(-(s.a-s.b)*t):0),-1,7,500);let all=[...original,...transformed],range=bounds(all,-.12,null);chart('plot0',{xmin:-1,xmax:7,ymin:range[0],ymax:range[1],xlabel:'time t (s)',ylabel:'amplitude',series:[{xy:original,color:COLORS.gray,dash:true},{xy:transformed,color:COLORS.teal}]});const pole=-s.a,newpole=s.mode==='delay'?pole:pole+s.b;plane('plot1',{poles:[{re:pole,im:0},{re:newpole,im:0}],roc:{type:'right',a:newpole}});setLegend(0,[{label:'original x(t)',color:COLORS.gray,dash:true},{label:'transformed signal',color:COLORS.teal}]);setLegend(1,[{label:'resulting ROC',color:COLORS.teal},{label:'original/new pole ×',color:COLORS.orange}]);const eq=s.mode==='delay'?`Y(s)=e<sup>−${fmt(s.shift,1)}s</sup>/(s+${fmt(s.a,1)})`:`Y(s)=1/(s+${fmt(s.a-s.b,1)})`;setFormula(eq);setMetric([[fmt(pole,2),'original s=−a'],[fmt(newpole,2),s.mode==='delay'?'unchanged':'shifted by b'],[`Re(s)>${fmt(newpole,2)}`,s.mode==='delay'?'unchanged':'shifted ROC']]);setInsight(s.mode==='delay'?`t₀=${fmt(s.shift,1)} s의 순수 시간 지연은 시간축에서 파형만 이동하며 Y(s)=e^(−st₀)X(s)입니다. pole ${fmt(pole,2)}와 ROC는 변하지 않습니다.`:`e^(bt)에서 b=${fmt(s.b,1)}이므로 Y(s)=X(s−b)이고 pole이 ${fmt(pole,2)}에서 ${fmt(newpole,2)}로 이동합니다. ROC도 같은 방향으로 움직입니다. 가중치 때문에 신호의 감쇠/증가 속도가 달라집니다.`)}
+function invX(t,roc){const A=1/3,B=-1/3;if(roc==='right')return t>=0?A*Math.exp(-t)+B*Math.exp(-4*t):0;if(roc==='strip')return t<0?-A*Math.exp(-t):B*Math.exp(-4*t);return t<0?-A*Math.exp(-t)-B*Math.exp(-4*t):0}
+function drawInverse(s){
+  // The same rational transform has three distinct time-domain realizations.
+  // Deliberately choose different time/vertical ranges for each ROC so t<0 is legible.
+  const view=s.roc==='right'?{xmin:-1,xmax:6,ymin:-.012,ymax:.20,activeSide:'right'}:
+      s.roc==='left'?{xmin:-1.5,xmax:.75,ymin:-4,ymax:150,activeSide:'left'}:
+      {xmin:-1.8,xmax:3,ymin:-2.5,ymax:.25,activeSide:'both'};
+  const samples=sample(t=>invX(t,s.roc),view.xmin,view.xmax,720);
+  // Include t=0 exactly; otherwise sampling might visually miss the origin.
+  samples.push([0,invX(0,s.roc)]);samples.sort((a,b)=>a[0]-b[0]);
+  chart('plot0',{...view,xlabel:'time t (s)',ylabel:'x(t)',originLabel:true,startLabel:s.roc==='right',valueAtZeroLabel:s.roc==='strip'?{y:-1/3,text:'x(0) = -1/3'}:null,series:[{xy:samples,color:COLORS.teal,width:2.6}]});
+  const roc=s.roc==='right'?{type:'right',a:-1}:s.roc==='left'?{type:'left',a:-4}:{type:'strip',a:-4,b:-1};
+  if(s.sigma===undefined||rocForSigma(s.sigma)!==s.roc)s.sigma=rocProbeDefault(s.roc);
+  plane('plot1',{poles:[{re:-1,im:0},{re:-4,im:0}],roc,probe:s.sigma});
+  drawInverseComparison(s);
+  syncInverseSelection();
+  setLegend(0,[{label:`${s.roc==='right'?'Right-sided RS · t≥0':s.roc==='left'?'Left-sided LS · t<0':'Two-sided · t<0 and t≥0'}`,color:COLORS.teal}]);
+  setLegend(1,[{label:'ROC',color:COLORS.teal},{label:'poles ×',color:COLORS.orange}]);
+  const desc=s.roc==='right'?'Right-sided':s.roc==='left'?'Left-sided':'Two-sided',within=s.roc==='right';
+  setMetric([[s.roc==='right'?'Re(s)>−1':s.roc==='left'?'Re(s)<−4':'−4<Re(s)<−1','ROC'],[within?'Yes':'No','causal/right-sided'],[within?'Yes':'No','ordinary Fourier axis']]);
+  const modeNote=s.roc==='right'?'RS: x(t)=(e^(−t)−e^(−4t))/3 for t≥0. 두 항의 시작값이 상쇄되어 x(0)=0이며 t<0에서는 0입니다.':
+    s.roc==='left'?'LS: x(t)=(e^(−4t)−e^(−t))/3 for t<0, t≥0에서는 0입니다. 음의 시간 구간을 약 67%로 넓혔으며 t→−∞에서 지수적으로 커지므로 y축 눈금이 RS와 다릅니다.':
+    'Two-sided: t<0에서 −e^(−t)/3, t≥0에서 −e^(−4t)/3이며 x(0)=−1/3입니다.';
+  setInsight(`${desc} 역변환. ${modeNote} 두 pole은 동일하지만 ROC에 따라 시간 신호가 달라집니다. ${within?'허수축이 ROC에 포함되어 ordinary CTFT도 존재합니다.':'허수축이 ROC 밖에 있으므로 일반적인 CTFT는 존재하지 않습니다.'}`);
+}
+function rocProbeDefault(roc){return roc==='right'?-0.5:roc==='left'?-4.75:-2.5}
+function rocForSigma(sigma){return sigma> -1?'right':sigma< -4?'left':'strip'}
+function syncInverseSelection(){
+ if(active!=='inverse')return;
+ const control=$('c_roc');if(control)control.value=state.inverse.roc;
+ document.querySelectorAll('[data-compare]').forEach(el=>{const selected=el.dataset.compare===state.inverse.roc;el.classList.toggle('selected',selected);el.setAttribute('aria-pressed',selected?'true':'false')})
+}
+function drawInverseComparison(s){
+ const xmin=-1.4,xmax=2.6;
+ const configurations={right:{ymin:-.015,ymax:.2,activeSide:'right'},strip:{ymin:-1.5,ymax:.2,activeSide:'both'},left:{ymin:-3,ymax:90,activeSide:'left'}};
+ for(const key of ['right','strip','left']){
+  const view=configurations[key],series=sample(t=>invX(t,key),xmin,xmax,600);
+  series.push([0,invX(0,key)]);series.sort((a,b)=>a[0]-b[0]);
+  chart('cmp_'+key,{xmin,xmax,...view,xlabel:'t (s)',ylabel:'x(t)',series:[{xy:series,color:key==='right'?COLORS.teal:key==='strip'?COLORS.orange:COLORS.purple,width:2.4}],points:[{x:0,y:invX(0,key),color:key==='right'?COLORS.teal:key==='strip'?COLORS.orange:COLORS.purple,r:3.3}]});
+ }
+}
+function syncRange(key,val){const el=$('c_'+key),out=$('out_'+key),cfg=LABS.find(x=>x.id===active)?.controls.find(x=>x.key===key);if(el)el.value=val;if(out&&cfg)out.textContent=fmt(val,2)+(cfg.unit||'')}
+function installPlotInteractions(){
+ const cv=$('plot1');if(!cv||!['roc','inverse','stability'].includes(active))return;
+ cv.classList.add('interactive-plot');cv.setAttribute('aria-label',active==='inverse'?'Drag sigma probe across ROC regions':active==='roc'?'Drag pole on real axis':'Drag pole or zero on the real axis');
+ let drag=null;
+ const cursor=(e)=>{const v=planeViewport,rect=cv.getBoundingClientRect();return {x:e.clientX-rect.left,y:e.clientY-rect.top,px:v?.toX(e.clientX-rect.left)}};
+ const isPlot=(p)=>{const v=planeViewport;return v&&p.x>=v.m.l-5&&p.x<=v.w-v.m.r+5&&p.y>=v.m.t-7&&p.y<=v.h-v.m.b+8};
+ function apply(e){if(!drag||active!==drag.active)return;const pt=cursor(e),v=planeViewport;if(!v)return;
+  if(drag.mode==='probe'){
+    let sigma=Math.max(v.xmin+.06,Math.min(v.xmax-.06,pt.px));
+    if(Math.abs(sigma+1)<.055)sigma=-1.055;if(Math.abs(sigma+4)<.055)sigma=-4.055;
+    state.inverse.sigma=sigma;state.inverse.roc=rocForSigma(sigma);update();return;
+  }
+  if(drag.mode==='onepole'){
+    state.roc.a=Math.max(.5,Math.min(2.5,Math.round(-pt.px*10)/10));syncRange('a',state.roc.a);update();return;
+  }
+  if(drag.mode==='pole'||drag.mode==='zero'){
+    const key=drag.mode==='pole'?'p':'z',min=key==='p'?-2.5:-4.5,max=1.5;
+    let x=Math.max(min,Math.min(max,Math.round(pt.px*10)/10));
+    if(Math.abs(x-state.stability[key==='p'?'z':'p'])<.055)x=state.stability[key==='p'?'z':'p'];
+    if(Math.abs(x+4)<.055)x=-4;
+    state.stability[key]=x;syncRange(key,x);update();return;
+  }
+ }
+ cv.addEventListener('pointerdown',e=>{
+  if(!planeViewport||planeViewport.id!=='plot1')return;
+  const pt=cursor(e),v=planeViewport;if(!isPlot(pt))return;
+  const y0=v.Y(0),nearY=Math.abs(pt.y-y0)<25;
+  if(active==='inverse')drag={mode:'probe',active};
+  if(active==='roc'&&nearY&&Math.abs(pt.x-v.X(-state.roc.a))<28)drag={mode:'onepole',active};
+  if(active==='stability'&&nearY){
+   const distPole=Math.abs(pt.x-v.X(state.stability.p)),distZero=Math.abs(pt.x-v.X(state.stability.z));
+   if(Math.min(distPole,distZero)<=28){drag={mode:distZero<=distPole&&!e.shiftKey?'zero':'pole',active};}
+   else if(Math.abs(pt.x-v.X(Math.max(...reduced(state.stability).poles)))<14&&Math.max(...reduced(state.stability).poles)!==-4){drag={mode:'pole',active};}
+  }
+  if(!drag)return;
+  try{cv.setPointerCapture(e.pointerId)}catch(err){}
+  e.preventDefault();apply(e);
+ });
+ cv.addEventListener('pointermove',e=>{if(drag){e.preventDefault();apply(e)}});
+ function finish(){drag=null}
+ cv.addEventListener('pointerup',finish);cv.addEventListener('pointercancel',finish);cv.addEventListener('lostpointercapture',finish);
+}
+function reduced(s){let p=s.p,z=s.z;let ep=Math.abs(p-z)<1e-8,eq=Math.abs(z+4)<1e-8;if(ep)return{poles:[-4],canceled:p};if(eq)return{poles:[p],canceled:-4};return{poles:[p,-4],canceled:null}}
+function hResponse(t,s){if(t<0)return 0;const p=s.p,z=s.z;if(Math.abs(p-z)<1e-8)return Math.exp(-4*t);if(Math.abs(z+4)<1e-8)return Math.exp(p*t);if(Math.abs(p+4)<1e-8)return Math.exp(-4*t)*(1-(z+4)*t);const A=(p-z)/(p+4),B=(4+z)/(p+4);return A*Math.exp(p*t)+B*Math.exp(-4*t)}
+function drawStability(s){const r=reduced(s),right=Math.max(...r.poles),stable=right<0,seq=sample(t=>hResponse(t,s),0,6,650),[lo,hi]=bounds(seq);chart('plot0',{xmin:0,xmax:6,ymin:lo,ymax:hi,xlabel:'time t (s)',ylabel:'h(t)',series:[{xy:seq,color:stable?COLORS.teal:COLORS.orange}]});plane('plot1',{poles:[{re:s.p,im:0,canceled:Math.abs(s.p-s.z)<1e-8},{re:-4,im:0,canceled:Math.abs(s.z+4)<1e-8}],zeros:[{re:s.z,im:0}],roc:{type:'right',a:right},handles:{p:s.p,z:s.z}});setLegend(0,[{label:'Causal impulse response',color:stable?COLORS.teal:COLORS.orange}]);setLegend(1,[{label:'ROC',color:COLORS.teal},{label:'poles ×',color:COLORS.orange},{label:'zero ○',color:COLORS.purple}]);setMetric([[fmt(right,2),'reduced poles only'],[stable?'Stable':'Unstable',stable?'all active poles in LHP':'at least one pole on/right of jω'],[stable?'Yes':'No','imaginary axis inside ROC']]);const cancellation=Math.abs(s.p-s.z)<1e-8||Math.abs(s.z+4)<1e-8;setInsight(`${stable?'인과 시스템의 모든 활성 pole이 왼쪽 반평면에 있으므로 BIBO 안정입니다.':'오른쪽 또는 허수축 위에 활성 pole이 있으므로 이 인과 시스템은 BIBO 안정하지 않습니다.'} ${cancellation?'zero가 pole을 정확히 상쇄하므로 약분된 전달함수의 pole을 기준으로 판단합니다. 일반적인 근사 상쇄는 완전 상쇄와 다릅니다.':'pole의 실수부가 감쇠/증가를 결정하며 zero는 잔여계수와 주파수 응답의 모양에 영향을 줍니다.'}`)}
+function rcRise(t,tau){return t<0?0:1-Math.exp(-t/tau)}
+function drawRC(s){const tau=s.tau,input=t=>(s.input==='step'?t>=0?1:0:t>=0&&t<2?1:0),output=t=>s.input==='step'?rcRise(t,tau):rcRise(t,tau)-rcRise(t-2,tau),u=sample(input,0,8),y=sample(output,0,8);chart('plot0',{xmin:0,xmax:8,ymin:-.06,ymax:1.17,xlabel:'time t (s)',ylabel:'amplitude',series:[{xy:u,color:COLORS.gray,dash:true},{xy:y,color:COLORS.teal}],vlines:[{x:tau,color:COLORS.orange}],points:s.input==='step'?[{x:tau,y:1-Math.exp(-1),color:COLORS.orange}]:[]});const mag=sample(w=>1/Math.sqrt(1+(w*tau)**2),0,14,400);chart('plot1',{xmin:0,xmax:14,ymin:0,ymax:1.08,xlabel:'angular frequency ω (rad/s)',ylabel:'|H(jω)|',series:[{xy:mag,color:COLORS.purple}],vlines:[{x:1/tau,color:COLORS.orange}],points:[{x:1/tau,y:1/Math.sqrt(2),color:COLORS.orange}]});setLegend(0,[{label:'input',color:COLORS.gray,dash:true},{label:'output',color:COLORS.teal},{label:'t=τ',color:COLORS.orange,dash:true}]);setLegend(1,[{label:'magnitude',color:COLORS.purple},{label:'−3 dB cutoff',color:COLORS.orange,dash:true}]);setMetric([[`${fmt(tau,2)} s`,'time constant τ'],[`${fmt(1/tau,2)} rad/s`,'ωc=1/τ'],[`s=${fmt(-1/tau,2)}`,'system pole']]);setInsight(`τ=${fmt(tau,2)} s이면 63.2% 도달 시간은 τ입니다(단위계단 입력). 차단 각주파수 ωc=1/τ=${fmt(1/tau,2)} rad/s에서 |H|=1/√2이며 위상은 −45°입니다. τ가 크면 더 느리게 반응하고 bandwidth는 작아집니다.`)}
+function secondStep(t,z,w){if(t<0)return 0;if(Math.abs(z-1)<1e-8)return 1-Math.exp(-w*t)*(1+w*t);if(z<1){const d=Math.sqrt(1-z*z),wd=w*d;return 1-Math.exp(-z*w*t)*(Math.cos(wd*t)+z/d*Math.sin(wd*t))}const d=Math.sqrt(z*z-1),a=(1+z/d)/2,b=(1-z/d)/2;return 1-a*Math.exp(-w*(z-d)*t)-b*Math.exp(-w*(z+d)*t)}
+function secondPoles(z,w){if(z<1){let d=w*Math.sqrt(1-z*z);return[{re:-z*w,im:d},{re:-z*w,im:-d}]}if(Math.abs(z-1)<1e-8)return[{re:-w,im:0},{re:-w,im:0}];let d=w*Math.sqrt(z*z-1);return[{re:-w*z+d,im:0},{re:-w*z-d,im:0}]}
+function drawSecond(s){const z=s.zeta,w=s.wn,pol=secondPoles(z,w),tim=sample(t=>secondStep(t,z,w),0,12,700);chart('plot0',{xmin:0,xmax:12,ymin:-.08,ymax:1.9,xlabel:'time t (s)',ylabel:'step response',series:[{xy:tim,color:COLORS.teal},{xy:[[0,1],[12,1]],color:COLORS.gray,dash:true}]});plane('plot1',{poles:pol,roc:{type:'right',a:Math.max(...pol.map(p=>p.re))},xmin:Math.min(-8,Math.min(...pol.map(p=>p.re))-1.5),xmax:2,ymin:-8,ymax:8});setLegend(0,[{label:'output y(t)',color:COLORS.teal},{label:'final value 1',color:COLORS.gray,dash:true}]);setLegend(1,[{label:'causal ROC',color:COLORS.teal},{label:'pole ×',color:COLORS.orange}]);const under=z<1,reg=under?'Underdamped':z===1?'Critical':'Overdamped',ov=under?Math.exp(-PI*z/Math.sqrt(1-z*z))*100:0;setMetric([[reg,'determined by ζ'],[`${fmt(ov,1)}%`,'ideal second-order step peak'],[fmt(Math.max(...pol.map(p=>p.re)),2),'dominant pole real part']]);setInsight(under?`ζ=${fmt(z,2)}, ωₙ=${fmt(w,2)} rad/s → poles = ${fmt(-z*w,2)}±j${fmt(w*Math.sqrt(1-z*z),2)}. 실수부는 감쇠 속도, 허수부는 진동 속도를 나타내며 overshoot≈${fmt(ov,1)}%입니다.`:z===1?`ζ=1에서 두 pole이 −ωₙ에 중복됩니다. 출력은 진동 없이 빠르게 최종값으로 수렴하는 임계 감쇠 응답입니다.`:`ζ=${fmt(z,2)}로 두 pole이 실수축에 존재하며 진동/overshoot 없이 수렴합니다. 느린 pole이 장기 감쇠를 주도합니다.`)}
+
+// Shared bilingual learning UI, invoked from each lab's numeric update loop.
+const guideItem=(head,math,ko)=>({head,math,ko});
+const guidePlot=(title,en,ko)=>({title,en,ko});
+const guideView={count:{},previous:{},timer:null,playing:false,duration:2600,lastModule:null};
+function stopGuidePlay(){if(guideView.timer!==null){clearInterval(guideView.timer);guideView.timer=null}guideView.playing=false}
+function revealGuide(moduleId,state,guideFactory){
+ const pane=document.getElementById('derivationPanel'),rp=document.getElementById('readingPanel');if(!pane||!rp)return;
+ const d=guideFactory(state),total=d.steps.length;
+ const n=Math.max(1,Math.min(total,guideView.count[moduleId]||1));
+ const animate=guideView.previous[moduleId]!==undefined&&n>guideView.previous[moduleId]&&n===guideView.previous[moduleId]+1;
+ const displayStep=(v,i)=>`<article class="deriv-step ${animate&&i===n-1?'guide-enter':''}" aria-label="Step ${i+1} of ${total}"><div class="deriv-top"><span class="step-index">${i+1}</span><strong>${v.head}</strong></div><div class="deriv-math">${v.math}</div><p>${v.ko}</p></article>`;
+ pane.innerHTML=`<div class="guide-head"><div><div class="overlabel">GUIDED DERIVATION / 단계별 수식 유도</div><h3>Equation → Derivation → Meaning / 수식 유도와 의미</h3><p>Adjust a variable to update the equations. / 변수를 변경하면 아래 수식도 갱신됩니다.</p></div><span class="progress-badge" role="status">Step ${n} / ${total}</span></div><div class="guide-track" role="progressbar" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${n}" aria-label="Derivation progress"><div style="width:${100*n/total}%"></div></div><div class="guide-steps">${d.steps.slice(0,n).map(displayStep).join('')}</div><div class="guide-actions"><button id="previousStep" type="button" ${n<=1?'disabled':''}>◀ Previous / 이전</button><button id="nextStep" type="button" ${n>=total?'disabled':''}>Next step / 다음 ▶</button><button id="guidePlay" type="button" class="primary" aria-pressed="${guideView.playing}">${guideView.playing?'Pause animation / 일시정지':'▶ Play animation / 자동 전개'}</button><button id="allSteps" type="button">${n===total?'Restart / 처음부터':'Show all / 전체 보기'}</button></div>`;
+ const change=next=>{guideView.count[moduleId]=Math.max(1,Math.min(total,next));revealGuide(moduleId,state,guideFactory)};
+ pane.querySelector('#previousStep').onclick=()=>{stopGuidePlay();change(n-1)};
+ pane.querySelector('#nextStep').onclick=()=>{stopGuidePlay();change(n+1)};
+ pane.querySelector('#allSteps').onclick=()=>{stopGuidePlay();change(n===total?1:total)};
+ pane.querySelector('#guidePlay').onclick=()=>{
+  if(guideView.playing){stopGuidePlay();revealGuide(moduleId,state,guideFactory);return}
+  if(n===total)guideView.count[moduleId]=1;
+  guideView.playing=true;
+  revealGuide(moduleId,state,guideFactory);
+  guideView.timer=setInterval(()=>{
+   if(currentGuidedId()!==moduleId){stopGuidePlay();return}
+   const now=guideView.count[moduleId]||1;
+   if(now>=total){stopGuidePlay();revealGuide(moduleId,currentGuidedState(moduleId),guideFactory);return}
+   guideView.count[moduleId]=now+1;
+   revealGuide(moduleId,currentGuidedState(moduleId),guideFactory);
+   if(now+1>=total){stopGuidePlay();const b=pane.querySelector('#guidePlay');if(b){b.textContent='▶ Play animation / 자동 전개';b.setAttribute('aria-pressed','false')}}
+  },guideView.duration)
+ };
+ guideView.previous[moduleId]=n;
+ rp.innerHTML=`<div class="overlabel">READ THE GRAPHS / 그래프 해석</div><h3>What changed, and why? / 무엇이 왜 바뀌었을까요?</h3><div class="reading-grid">${d.graphs.map((v,i)=>`<div class="reading-note"><span class="plot-number">GRAPH ${String(i+1).padStart(2,'0')}</span><strong>${v.title}</strong><p>${v.en}</p><p class="ko-explain">${v.ko}</p></div>`).join('')}</div><p class="guide-check"><strong>Interpretation checkpoint / 해석 점검:</strong> ${d.check}</p>`;
+}
+
+// Chapter 5: Oppenheim-style bilateral Laplace derivations with ROC in every transform pair.
+const GUIDES5={
+ weight:s=>{const v=s.sigma,T=5,F=Math.abs(v)<1e-8?T:(1-Math.exp(-v*T))/v;
+ return {steps:[
+ guideItem('Begin with the bilateral transform / 정의식','X(s)=∫<sub>−∞</sub><sup>∞</sup>x(t)e<sup>−st</sup>dt; &nbsp; s=σ+jω','정의식에서 σ는 지수 감쇠·성장 가중을, ω는 진동을 정합니다.'),
+ guideItem('Restrict to the right-sided interval / 적분 구간','u(t)=1 (t≥0) ⇒ X(s)=∫<sub>0</sub><sup>∞</sup>e<sup>−st</sup>dt','u(t)는 음의 시간에서 0이므로 0에서 ∞까지만 적분합니다.'),
+ guideItem('Test the current exponential weight / 현재 σ 검토',`e<sup>−σt</sup>=e<sup>−(${v.toFixed(2)})t</sup>; &nbsp; F(5)=${F.toFixed(3)}; &nbsp; σ ${v>0?'&gt; 0':v<0?'&lt; 0':'= 0'}`,'현재 σ 값에 따른 가중 신호와 5초까지의 누적 적분을 함께 확인하세요. 유한 적분과 ∞에서의 수렴은 다릅니다.'),
+ guideItem('Evaluate and state ROC / 수렴영역',`X(s)=[−e<sup>−st</sup>/s]<sub>0</sub><sup>∞</sup>=1/s, &nbsp; ROC: Re(s)&gt;0`,'지수의 크기가 무한대에서 0으로 갈 때에만 적분값이 유한합니다. 경계 σ=0은 ROC에 포함되지 않습니다.')],
+ graphs:[guidePlot('Weighted signal / 가중 신호','A positive σ makes e^(−σt) decay; σ≤0 does not decay.',`현재 σ=${v.toFixed(2)}입니다. 감쇠 여부를 시간 그래프에서 확인하세요.`),guidePlot('Accumulated integral / 누적 적분','A convergent integral approaches a finite horizontal asymptote; at σ≤0 it grows without bound.','유한 구간 적분값이 끝없이 증가하는지, 일정한 값에 가까워지는지 구분하세요.')],check:'Why does observing a finite F(5) not prove convergence as T→∞? / 유한 시간 적분값만으로 수렴을 판단할 수 없는 이유는 무엇일까요?'}},
+ roc:s=>{const a=s.a,p=-a,right=s.side==='right';return {steps:[
+ guideItem('Locate the pole / 극점 찾기',`X(s)=1/(s+${a.toFixed(2)}) ; &nbsp; pole s=${p.toFixed(2)}`,'분모가 0인 위치가 pole입니다. 같은 유리식도 시간 방향이 한 가지로 정해지지 않습니다.'),
+ guideItem('Choose the time direction / 신호 방향',right?`x(t)=e<sup>−${a.toFixed(2)}t</sup>u(t)`:`x(t)=−e<sup>−${a.toFixed(2)}t</sup>u(−t)`,'RS는 t≥0, LS는 t<0에서 나타납니다. LS 역변환에는 마이너스 부호가 필요합니다.'),
+ guideItem('Read the convergence inequality / 수렴 부등식',right?`∫<sub>0</sub><sup>∞</sup>e<sup>−(s+${a.toFixed(2)})t</sup>dt converges if Re(s)&gt;${p.toFixed(2)}`:`−∫<sub>−∞</sub><sup>0</sup>e<sup>−(s+${a.toFixed(2)})t</sup>dt converges if Re(s)&lt;${p.toFixed(2)}`,'지수의 시간 방향에 맞추어 적분이 무한대에서 수렴하는 조건을 검사합니다.'),
+ guideItem('Finish with expression AND ROC / 최종 답',`X(s)=1/(s+${a.toFixed(2)}), &nbsp; ROC: Re(s)${right?'&gt;':'&lt;'}${p.toFixed(2)}`,'변환식과 ROC를 함께 적어야 시간 신호가 유일하게 결정됩니다.')],
+ graphs:[guidePlot('Signal versus time / 시간 신호',right?'The curve exists on t≥0 (right-sided).':'The curve exists on t<0 (left-sided) and grows toward negative infinity.','원점의 위치와 신호가 0이 아닌 시간 방향을 함께 확인하세요.'),guidePlot('s-plane / 복소평면',`The pole is fixed at σ=${p.toFixed(2)}. The shaded ROC lies ${right?'right':'left'} of it.`,'극점은 ROC에 포함되지 않으며 음영 영역은 선택한 시간 신호와 연결됩니다.')],check:'What changes if only the ROC is switched, without moving the pole? / pole을 그대로 두고 ROC만 바꾸면 무엇이 변하나요?'}},
+ pairs:s=>{let steps,condition,trans;
+ if(s.kind==='impulse'){trans='1';condition='entire finite s-plane';steps=[
+ guideItem('Choose the impulse / 임펄스','x(t)=δ(t)','임펄스는 t=0의 면적 1로 해석합니다.'),
+ guideItem('Apply the sampling property / 표본화 성질','∫<sub>−∞</sub><sup>∞</sup>δ(t)e<sup>−st</sup>dt=e<sup>0</sup>','δ(t)의 성질로 t=0에서 지수항을 평가합니다.'),
+ guideItem('Simplify / 정리','X(s)=1','주파수에 관계없이 상수인 변환 결과가 나옵니다.'),
+ guideItem('Verify ROC / 수렴영역','ROC: entire finite s-plane; no finite poles','유한 s에 대해 분모의 극점이나 무한 시간 적분이 없습니다.')];}
+ else if(s.kind==='step'){steps=[guideItem('Define the step / 단위계단','x(t)=u(t)','t≥0에서 1입니다.'),guideItem('Set integration limits / 적분 범위','X(s)=∫<sub>0</sub><sup>∞</sup>e<sup>−st</sup>dt','무한 길이 적분이므로 수렴 조건이 중요합니다.'),guideItem('Evaluate the integral / 적분 계산','X(s)=[−e<sup>−st</sup>/s]<sub>0</sub><sup>∞</sup>=1/s','경계항이 0일 때 계산이 성립합니다.'),guideItem('State ROC / 수렴영역','ROC: Re(s)&gt;0; pole s=0','단위계단의 일반적인 CTFT 적분은 수렴하지 않습니다.')];}
+ else if(s.kind==='exp'){const a=s.a.toFixed(2);steps=[guideItem('Specify the causal exponential / 인과 지수',`x(t)=e<sup>−${a}t</sup>u(t)`,'인과 신호이므로 t≥0입니다.'),guideItem('Combine exponents / 지수 결합',`X(s)=∫<sub>0</sub><sup>∞</sup>e<sup>−(s+${a})t</sup>dt`,'지수항을 합쳐 적분합니다.'),guideItem('Integrate / 적분',`X(s)=1/(s+${a})`,'분모에 s+a가 생깁니다.'),guideItem('Record pole and ROC / 극점·ROC',`pole=−${a}, &nbsp; ROC: Re(s)&gt;−${a}`,'극점의 오른쪽 반평면이 수렴영역입니다.')];}
+ else if(s.kind==='pulse'){const T=s.T.toFixed(2);steps=[guideItem('Define a finite pulse / 유한 펄스',`x(t)=u(t)−u(t−${T})`,'0≤t<T에서 높이 1입니다.'),guideItem('Integrate only the nonzero interval / 적분',`X(s)=∫<sub>0</sub><sup>${T}</sup>e<sup>−st</sup>dt`,'유한 구간에서 적분하므로 무한 시간 수렴 문제가 없습니다.'),guideItem('Evaluate / 계산',`X(s)=(1−e<sup>−${T}s</sup>)/s`,'s=0에서는 극한을 별도로 계산합니다.'),guideItem('Remove the apparent singularity / 제거 가능 특이점',`X(0)=lim<sub>s→0</sub>X(s)=${T}; &nbsp; ROC: entire finite s-plane`,'분모가 0이더라도 분자도 0으로 가면 진정한 pole이 아닐 수 있습니다.')];}
+ else {const a=s.a.toFixed(2),w=s.omega.toFixed(2);steps=[guideItem('Define damped cosine / 감쇠 정현파',`x(t)=e<sup>−${a}t</sup>cos(${w}t)u(t)`,'감쇠율 a와 진동 각주파수 ω₀를 분리해서 해석합니다.'),guideItem('Use Euler’s identity / 오일러 항등식',`cos(ω₀t)=(e<sup>jω₀t</sup>+e<sup>−jω₀t</sup>)/2`,'복소 켤레 지수 두 항으로 나눕니다.'),guideItem('Integrate the two modes / 두 모드 적분',`X(s)=½[1/(s+${a}−j${w})+1/(s+${a}+j${w})]`,'두 항이 동시에 수렴해야 합니다.'),guideItem('Combine and identify poles / 극점',`X(s)=(s+${a})/[(s+${a})²+${w}²]; &nbsp; poles=−${a}±j${w}`,'ROC는 Re(s)>−a이며, 극점의 실수부는 감쇠, 허수부는 진동을 나타냅니다.')];}
+ return {steps,graphs:[guidePlot('Original signal / 시간 신호','Watch whether the signal is finite-duration, decays, or oscillates.','슬라이더 값을 바꾸고 지속 시간·감쇠·진동을 관찰하세요.'),guidePlot('s-plane and ROC / 복소평면','Poles are excluded. Finite-duration pulses have an entire finite s-plane ROC.','적분구간이 유한한 경우와 무한한 경우의 ROC 차이를 비교하세요.')],check:'Can you reconstruct both X(s) and its ROC without memorizing the table? / 변환표 없이 X(s)와 ROC를 유도할 수 있나요?'}},
+ props:s=>{const a=s.a,t=s.shift,b=s.b,delay=s.mode==='delay',pole=delay?-a:b-a;return {steps:[
+ guideItem('Start from an elementary pair / 기본 변환쌍',`x(t)=e<sup>−${a.toFixed(2)}t</sup>u(t), &nbsp; X(s)=1/(s+${a.toFixed(2)})`,'기본 pole은 s=−a입니다.'),
+ guideItem('Apply the selected operation / 변환 성질',delay?`y(t)=x(t−${t.toFixed(2)})`:`y(t)=e<sup>${b.toFixed(2)}t</sup>x(t)`,'시간 지연과 지수 곱은 전혀 다른 연산입니다.'),
+ guideItem('Transform algebraically / 변환영역 계산',delay?`Y(s)=e<sup>−${t.toFixed(2)}s</sup>/(s+${a.toFixed(2)})`:`Y(s)=X(s−${b.toFixed(2)})=1/(s+${(a-b).toFixed(2)})`,'지연은 지수 인자를 곱하고, 지수 가중은 s의 위치를 이동시킵니다.'),
+ guideItem('Compare poles and ROC / 극점·ROC',`pole=${pole.toFixed(2)}, &nbsp; ROC: Re(s)&gt;${pole.toFixed(2)}`,'유한 시간 지연의 ROC는 불변입니다. 지수 가중은 pole과 ROC를 함께 이동시킵니다.')],
+ graphs:[guidePlot('Before and after / 시간영역',delay?'The onset moves right without changing its decay rate.':'The slope of the exponential envelope changes with b.','원래 신호와 변화된 신호의 시작 시점 또는 감쇠 속도를 비교하세요.'),guidePlot('s-plane / 복소평면',delay?'Pole and ROC stay fixed.':'Pole and ROC move horizontally by b.','극점과 ROC 경계가 함께 이동하는지 관찰하세요.')],check:'Which operation changes the ROC, and which preserves it? / ROC를 움직이는 연산은 어느 것인가요?'}},
+ inverse:s=>{const right=s.roc==='right',left=s.roc==='left';return {steps:[
+ guideItem('Factor and decompose / 인수분해·부분분수','X(s)=1/[(s+1)(s+4)]=⅓/(s+1)−⅓/(s+4)','부분분수의 계수 +1/3과 −1/3을 먼저 구합니다.'),
+ guideItem('Identify the ROC region / ROC 지정',right?'ROC: Re(s)&gt;−1':left?'ROC: Re(s)&lt;−4':'ROC: −4&lt;Re(s)&lt;−1','ROC를 먼저 결정해야 각 지수항의 시간 방향을 정할 수 있습니다.'),
+ guideItem('Choose each inverse pair / 항별 역변환',right?'x(t)=⅓e<sup>−t</sup>u(t)−⅓e<sup>−4t</sup>u(t)':left?'x(t)=−⅓e<sup>−t</sup>u(−t)+⅓e<sup>−4t</sup>u(−t)':'x(t)=−⅓e<sup>−t</sup>u(−t)−⅓e<sup>−4t</sup>u(t)','같은 1/(s+a)항도 ROC 좌우에 따라 부호와 시간 방향이 달라집니다.'),
+ guideItem('Verify the time-domain behavior / 검산',right?'x(0⁺)=⅓(1−1)=0, &nbsp; x(t)=0 (t&lt;0)':left?'x(0⁻)=⅓(1−1)=0, &nbsp; x(t)=0 (t&gt;0)':'x(0⁻)=−⅓, &nbsp; x(0⁺)=−⅓','좌측·우측 극한과 인과 여부를 확인합니다. 계단함수의 t=0 지정값은 관례에 따라 달라질 수 있습니다.')],
+ graphs:[guidePlot('Inverse response / 역변환',right?'Only t≥0 is nonzero.':left?'Only t<0 is nonzero.':'Both negative and positive times contain signal parts.','같은 시간축에서 양쪽 시간 방향을 비교하세요.'),guidePlot('Poles and ROC / 극점·수렴영역','Poles remain at −4 and −1 for all three choices; only the shaded ROC changes.','세 경우에 pole 위치가 동일하다는 사실을 확인하세요.')],check:'How can one rational expression represent three time-domain signals? / 하나의 X(s)에서 세 시간 신호가 가능한 이유는 무엇인가요?'}},
+ stability:s=>{const p=s.p,z=s.z,c1=Math.abs(p-z)<.051,c2=Math.abs(z+4)<.051,activePole=c1?-4:Math.max(p,-4);return {steps:[
+ guideItem('Write the transfer function / 전달함수',`H(s)=(s−(${z.toFixed(2)}))/[(s−(${p.toFixed(2)}))(s+4)]`,'움직일 수 있는 pole p와 zero z를 구분하세요.'),
+ guideItem('Inspect exact pole–zero cancellation / 극영점 상쇄',c1?`z=p=${p.toFixed(2)} ⇒ reduced H(s)=1/(s+4)`:c2?'z=−4 ⇒ reduced H(s)=1/(s−p)':'z≠p and z≠−4 ⇒ both denominator poles are active','수학적으로 정확히 일치하는 상쇄만 전달함수의 pole을 제거합니다. 근접만으로 안정해지지 않습니다.'),
+ guideItem('Determine the causal ROC / 인과 ROC',`ROC: Re(s)&gt;${activePole.toFixed(2)} (rightmost active pole)`,'인과 유리 전달함수의 ROC는 약분된 H(s)의 가장 오른쪽 pole의 오른쪽입니다.'),
+ guideItem('Decide BIBO stability / 안정성',`jω axis ${activePole<0?'inside':'outside'} ROC ⇒ ${activePole<0?'BIBO stable':'BIBO unstable'}`,'인과 유리 LTI의 BIBO 안정성은 실제 전달함수의 활성 pole 실수부가 모두 음수인지로 판단합니다.')],
+ graphs:[guidePlot('Impulse response / 임펄스 응답',`Rightmost active pole: ${activePole.toFixed(2)}. Negative gives decay; positive gives growth.`,'활성 pole이 허수축에 가까워질수록 감쇠가 느려집니다.'),guidePlot('Pole–zero plot / 극영점도','Drag × and ○; ROC boundary follows the rightmost uncanceled pole.','×는 pole, ○는 zero입니다. 서로 겹칠 때의 변화도 관찰하세요.')],check:'Why must we cancel exactly matching poles and zeros before checking stability? / 안정성을 판단하기 전에 정확한 상쇄를 확인해야 하는 이유는 무엇인가요?'}},
+ rc:s=>{const tau=s.tau,cut=1/tau;return {steps:[
+ guideItem('Model the RC system / RC 모델','τ dy(t)/dt+y(t)=x(t), &nbsp; τ=RC','RC lowpass의 시정수 τ가 응답 속도를 결정합니다.'),
+ guideItem('Derive the transfer function / 전달함수','H(s)=Y(s)/X(s)=1/(τs+1)','영 초기조건에서 Laplace Transform을 취해 정리합니다.'),
+ guideItem('Find pole and frequency response / pole·주파수응답',`pole=−1/τ=${(-cut).toFixed(3)}, &nbsp; |H(jω)|=1/√(1+(ωτ)²)`,'pole이 왼쪽으로 갈수록 더 빠르게 감쇠하고 cutoff frequency는 증가합니다.'),
+ guideItem('Interpret the step response / 계단응답',`y(t)=1−e<sup>−t/${tau.toFixed(2)}</sup>, &nbsp; y(τ)=1−e<sup>−1</sup>≈0.632, &nbsp; ω<sub>c</sub>=${cut.toFixed(3)} rad/s`,'입력이 pulse면 상승과 하강 두 step response의 차이로 해석합니다.')],
+ graphs:[guidePlot('Time response / 시간응답',s.input==='step'?'The response reaches 63.2% of the final value at t=τ.':'A pulse yields a charging edge and a discharging edge.','시정수가 커지면 응답이 느려지는지 비교하세요.'),guidePlot('Frequency response / 주파수응답',`Cutoff ωc=${cut.toFixed(2)} rad/s corresponds to magnitude 1/√2.`,'−3 dB에서의 주파수를 찾고 시간 영역의 τ와 연결하세요.')],check:'If τ doubles, what happens to the cutoff frequency and 63.2% time? / τ가 두 배이면 cutoff와 63.2% 시간은 어떻게 변하나요?'}},
+ second:s=>{const z=s.zeta,w=s.wn,r=-z*w,wd=z<1?w*Math.sqrt(1-z*z):0,over=z<1?Math.exp(-PI*z/Math.sqrt(1-z*z))*100:0;return {steps:[
+ guideItem('Write the standard model / 표준 2차 시스템',`H(s)=ω<sub>n</sub>²/(s²+2ζω<sub>n</sub>s+ω<sub>n</sub>²), &nbsp; ζ=${z.toFixed(2)}, ω<sub>n</sub>=${w.toFixed(2)}`,'감쇠비 ζ와 고유 각주파수 ωₙ은 서로 다른 역할을 합니다.'),
+ guideItem('Solve the characteristic equation / 특성방정식',`s²+2ζω<sub>n</sub>s+ω<sub>n</sub>²=0 ⇒ p<sub>1,2</sub>=−ζω<sub>n</sub>±ω<sub>n</sub>√(ζ²−1)`,'판별식의 부호에 따라 pole이 복소 켤레 또는 서로 다른 실수 pole이 됩니다.'),
+ guideItem('Interpret damping regime / 감쇠 유형',z<1?`0&lt;ζ&lt;1: poles=${r.toFixed(2)}±j${wd.toFixed(2)}; &nbsp; ω<sub>d</sub>=${wd.toFixed(2)}`:Math.abs(z-1)<1e-8?`ζ=1: repeated pole at s=${r.toFixed(2)}`:`ζ&gt;1: real poles ${(-z*w+w*Math.sqrt(z*z-1)).toFixed(2)}, ${(-z*w-w*Math.sqrt(z*z-1)).toFixed(2)}`,'복소 pole의 허수부는 진동, 실수부는 감쇠를 결정합니다.'),
+ guideItem('Predict overshoot and settling / 오버슈트',z<1?`Overshoot = 100e<sup>−πζ/√(1−ζ²)</sup> ≈ ${over.toFixed(2)}%`:'ζ≥1 ⇒ no oscillatory overshoot (ideal standard model)','진동을 줄이려면 ζ를 조절하지만 응답 속도 변화도 함께 고려해야 합니다.')],
+ graphs:[guidePlot('Step response / 계단응답',z<1?'Ringing and overshoot follow a decaying envelope.':'No ringing for ζ≥1 in this second-order model.','정착 시간과 최대 오버슈트의 변화를 따로 관찰하세요.'),guidePlot('Pole map / 극점도',`Real part = ${r.toFixed(2)}; damped angular frequency = ${wd.toFixed(2)} rad/s (if ζ<1).`,'pole의 실수부와 허수부가 파형의 어떤 특징을 결정하는지 연결하세요.')],check:'Which pole coordinate controls oscillation, and which controls decay? / pole의 어느 좌표가 진동과 감쇠를 결정하나요?'}}
+};
+
+function currentGuidedId(){return active}
+function currentGuidedState(id){return state[id]}
+function update(){const s=state[active];({weight:drawWeight,roc:drawROC,pairs:drawPairs,props:drawProps,inverse:drawInverse,stability:drawStability,rc:drawRC,second:drawSecond})[active](s);revealGuide(active,s,GUIDES5[active]);window.__laplaceVisualLab={active,healthy:true,state:JSON.parse(JSON.stringify(state)),planeDrag:active==='inverse'?'sigma ROC probe':active==='stability'?'pole/zero':'pole'}}
+render();window.addEventListener('resize',()=>update());
+window.__labNumerics={rc63:rcRise(1,1),secondStepInitial:secondStep(0,.4,3),inverseRightZero:invX(0,'right'),cancellation:reduced({p:.8,z:.8}).poles[0],rcCutoff:1/Math.sqrt(2),secondPeak:secondStep(PI/(3*Math.sqrt(1-.25**2)),.25,3)};
+</script><script src="./assets/ss-ch5-standalone.js?v=1"></script>
+</body></html>
