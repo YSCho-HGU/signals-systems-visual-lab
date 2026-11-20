@@ -79,19 +79,7 @@ try{
       assert(await page.locator(".ss6-top-question h3").count()===1,name+": predict step missing "+id);
       assert(await page.locator(".ss6-step-controls h3").count()===1,name+": adjust step missing "+id);
       assert(await page.locator(".ss6-observation-header h3").count()===1,name+": observe step missing "+id);
-      if(await page.locator(".ss6-interpretation h3").count()!==1){
-        const debug=await page.evaluate(()=>({
-          stepCards:[...document.querySelectorAll(".ss6-step-card")].map(e=>({cls:e.className,text:e.textContent.slice(0,65)})),
-          interpretHTML:document.querySelector(".ss6-interpretation")?.innerHTML.slice(0,420),
-          interpretHeaders:[...document.querySelectorAll(".ss6-interpretation *")].filter(e=>/^H[1-6]$/.test(e.tagName)).map(e=>e.outerHTML.slice(0,180)),
-          metrics:document.querySelectorAll(".metrics").length,
-          learning:document.querySelectorAll(".learning").length,
-          bodyChildClasses:[...document.querySelectorAll(".body-col > *")].map(e=>e.className),
-          experimentChildClasses:[...document.querySelectorAll(".experiment > *")].map(e=>e.className),
-          errors:window.__dtftApp,
-        }));
-        throw Error(name+": interpret step missing "+id+" DEBUG="+JSON.stringify(debug));
-      }
+      assert(await page.locator(".ss6-interpretation > h3").count()===1,name+": interpret primary heading missing "+id);
     }
     await page.locator('[data-nav="periodic"]').click();
     await page.waitForFunction(()=>window.__dtftApp?.active==="periodic");
