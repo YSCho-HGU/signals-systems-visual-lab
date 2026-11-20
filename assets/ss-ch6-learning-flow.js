@@ -197,6 +197,24 @@ function applyFlow(){
      if(learning)interpret.appendChild(learning);
    }
  }
+ // Chapter 6.1: place section 2 controls directly beside section 3 graphs.
+ // This workbench stops before section 4, so no floating control panel can
+ // cover interpretation or the guided derivation below the graphs.
+ if(active==="periodic"&&controls&&charts){
+   var graphHeading=experiment.querySelector(".ss6-observation-header");
+   var body=experiment.querySelector(".body-col");
+   if(graphHeading&&body){
+     var workbench=document.createElement("div");
+     workbench.className="ss6-control-plot-workspace";
+     var graphColumn=document.createElement("div");
+     graphColumn.className="ss6-workbench-graphs";
+     body.insertBefore(workbench,graphHeading);
+     workbench.appendChild(controls);
+     workbench.appendChild(graphColumn);
+     graphColumn.appendChild(graphHeading);
+     graphColumn.appendChild(charts);
+   }
+ }
  var guided=[["derivationPanel","Detailed derivation · 상세 수식 유도"],["readingPanel","Graph interpretation guide · 그래프 읽기 안내"]];
  guided.forEach(function(item){
    var panel=document.getElementById(item[0]);if(!panel)return;
