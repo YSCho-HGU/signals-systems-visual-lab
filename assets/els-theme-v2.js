@@ -1,6 +1,6 @@
 /* Shared theme: one localStorage key for Studio and both courses. */
 (()=>{"use strict";
-const KEY="els-theme-v2",VALID=["neutral-dark","warm-dark","navy-dark","warm-neutral"],DEFAULT="neutral-dark";
+const KEY="els-theme-v2",VALID=["neutral-dark","warm-dark","navy-dark","warm-neutral","white"],DEFAULT="neutral-dark";
 const root=document.documentElement;
 function safeGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function inferLegacy(){
@@ -19,14 +19,14 @@ function selected(){
 function apply(value,persist=true){
  const v=VALID.includes(value)?value:DEFAULT;
  root.dataset.elsTheme=v;
- root.dataset.theme=v==="warm-neutral"?"light":"dark";
- root.dataset.mode=v==="warm-neutral"?"light":"dark";
- root.style.colorScheme=v==="warm-neutral"?"light":"dark";
+ root.dataset.theme=["warm-neutral","white"].includes(v)?"light":"dark";
+ root.dataset.mode=["warm-neutral","white"].includes(v)?"light":"dark";
+ root.style.colorScheme=["warm-neutral","white"].includes(v)?"light":"dark";
  if(persist)try{localStorage.setItem(KEY,v)}catch(e){}
  document.querySelectorAll("[data-els-theme-picker]").forEach(s=>{if(s.value!==v)s.value=v});
  const meta=document.querySelector('meta[name="theme-color"]');
- if(meta)meta.content={"neutral-dark":"#101010","warm-dark":"#1d2323","navy-dark":"#101827","warm-neutral":"#f7f6f2"}[v];
- window.dispatchEvent(new CustomEvent("els:themechange",{detail:{theme:v,scheme:v==="warm-neutral"?"light":"dark"}}));
+ if(meta)meta.content={"neutral-dark":"#101010","warm-dark":"#1d2323","navy-dark":"#101827","warm-neutral":"#f7f6f2","white":"#ffffff"}[v];
+ window.dispatchEvent(new CustomEvent("els:themechange",{detail:{theme:v,scheme:["warm-neutral","white"].includes(v)?"light":"dark"}}));
  return v;
 }
 window.ELSTheme={get:()=>root.dataset.elsTheme||selected(),set:apply,options:VALID};
@@ -45,7 +45,7 @@ function setup(){
  }
  document.querySelectorAll("[data-els-theme-picker]").forEach(select=>{
   select.replaceChildren();
-  for(const [value,label] of [["neutral-dark","Neutral Dark (기본)"],["warm-dark","Warm Dark"],["navy-dark","Navy Dark"],["warm-neutral","Warm Neutral"]]){
+  for(const [value,label] of [["neutral-dark","Neutral Dark (기본)"],["warm-dark","Warm Dark"],["navy-dark","Navy Dark"],["warm-neutral","Warm Neutral"],["white","White · Clean"]]){
    const o=document.createElement("option");o.value=value;o.textContent=label;select.append(o);
   }
   select.value=selected();
