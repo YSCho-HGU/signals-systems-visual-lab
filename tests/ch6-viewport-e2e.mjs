@@ -38,6 +38,31 @@ try{
     assert(overview.title.y<overview.question.y&&overview.question.y<overview.controls.y&&overview.controls.y<overview.charts.y,name+": learning sequence order incorrect");
     assert(overview.plots===3,name+": 6.1 must include CT, DT, and reconstruction charts");
     assert(overview.buttons>=4,name+": inline +/- buttons missing");
+    // Prediction is optional; an unfilled note must never disable an experiment.
+    assert(await page.locator(".ss6-prediction-note").count()===1,name+": missing optional prediction field");
+    assert(await page.locator("#ctrl_f").isEnabled(),name+": 6.1 analog frequency slider locked");
+    assert(await page.locator("#ctrl_fs").isEnabled(),name+": 6.1 sampling frequency slider locked");
+    const typography=await page.evaluate(()=>{
+      const selectors=[".ss6-step-predict h3",".ss6-step-controls h3",".ss6-observation-header h3",".ss6-interpretation h3"];
+      return selectors.map(q=>{
+        const el=document.querySelector(q);
+        if(!el)return null;
+        const style=getComputedStyle(el);
+        return {size:style.fontSize,weight:style.fontWeight,margin:style.marginBottom};
+      });
+    });
+    assert(typography.every(v=>v!==null),name+": one of the four step headings is missing");
+    assert(typography.every(v=>v.size===typography[0].size&&v.weight===typography[0].weight),
+      name+": step headings have inconsistent typography: "+JSON.stringify(typography));
+    await page.locator("#ctrl_f").evaluate(e=>{e.value="10";e.dispatchEvent(new Event("input",{bubbles:true}))});
+    await page.locator(".ss6-adjust-button").first().click();
+    await page.waitForFunction(()=>window.__dtftApp?.state?.periodic?.fs===100);
+    assert(await page.locator("#ctrl_f").isEnabled(),name+": first step wrongly requires prediction before adjustment");
+    await page.locator("#ctrl_mode").selectOption("rate");
+    await page.waitForFunction(()=>window.__dtftApp?.state?.periodic?.mode==="rate");
+    assert(await page.locator("#ctrl_f").isEnabled()&&await page.locator("#ctrl_fs").isEnabled(),
+      name+": second step has unexpected locked slider");
+    await page.locator("#ctrl_mode").selectOption("frequency");
     const mode=await page.locator("#ctrl_mode").inputValue();
     assert(mode==="frequency",name+": initial frequency learning step incorrect");
     await page.locator("#ctrl_f").evaluate(e=>{e.value="20";e.dispatchEvent(new Event("input",{bubbles:true}))});
@@ -51,6 +76,10 @@ try{
       assert(await page.locator(".ss6-sequence-overview").count()===1,name+": overview not updated "+id);
       assert(await page.locator(".ss6-guide-details").count()===2,name+": guided content not collapsible "+id);
       assert(await page.locator(".charts canvas").count()>=2,name+": graph missing "+id);
+      assert(await page.locator(".ss6-top-question h3").count()===1,name+": predict step missing "+id);
+      assert(await page.locator(".ss6-step-controls h3").count()===1,name+": adjust step missing "+id);
+      assert(await page.locator(".ss6-observation-header h3").count()===1,name+": observe step missing "+id);
+      assert(await page.locator(".ss6-interpretation h3").count()===1,name+": interpret step missing "+id);
     }
     await page.locator('[data-nav="periodic"]').click();
     await page.waitForFunction(()=>window.__dtftApp?.active==="periodic");
