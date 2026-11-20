@@ -21,6 +21,38 @@ function periodicDo(){
  if(s.mode==="alias")return lang("f Hz와 (fs−f) Hz를 비교하고 동일한 샘플에서 복원되는 주파수를 찾으세요.","Compare f Hz and (fs−f) Hz and identify the reconstructed baseband frequency.");
  return lang("fs=100 Hz를 고정한 채 f만 10→20→40 Hz로 변경하세요.","Hold fs=100 Hz and change f: 10→20→40 Hz.");
 }
+function theoryBlock(){
+ var section=document.createElement("section");
+ section.className="ss6-core-theory";
+ section.id="ss6-core-theory";
+ section.setAttribute("aria-labelledby","ss6-theory-title");
+ function card(k,title,formula,description){
+  return '<article class="ss6-theory-item"><span class="ss6-theory-key">'+k+'</span><h4>'+title+'</h4><div class="ss6-theory-equation">'+formula+'</div><p>'+description+'</p></article>';
+ }
+ var header=lang("핵심 이론 · Normalized discrete-time frequency","Core theory · Normalized discrete-time frequency");
+ var lead=lang(
+  "연속시간 신호를 표본화하면 시간 간격은 T<sub>s</sub>가 되고, 이산시간 신호의 인덱스는 항상 n=0,1,2,…로 증가합니다. 주파수의 단위는 Hz에서 cycles/sample 또는 rad/sample로 바뀝니다.",
+  "Sampling converts physical time to integer sample index n. The sampling interval is T<sub>s</sub>, but sample-index spacing stays one. Frequency is then measured in cycles/sample or radians/sample."
+ );
+ var a=card("A",lang("연속시간 · Continuous-time","Continuous-time signal"),
+  'x(t) = cos(2&pi; f t) <span class="ss6-unit">[f: Hz]</span>',
+  lang("f는 1초 동안의 진동 횟수입니다. t는 초 단위의 연속시간입니다.",
+       "f is the number of cycles per second, and t is physical time in seconds."));
+ var b=card("B",lang("표본화 · Sampling","Sampling to a sequence"),
+  'T<sub>s</sub> = 1/f<sub>s</sub>, &nbsp; x[n] = x(nT<sub>s</sub>) = cos(2&pi;fn/f<sub>s</sub>)',
+  lang("f<sub>s</sub>는 초당 샘플 수입니다. n은 정수이며 샘플 간 인덱스 간격은 1입니다.",
+       "f<sub>s</sub> is samples per second; n is an integer, always advancing one sample at a time."));
+ var c=card("C",lang("정규화 이산시간 주파수","Normalized discrete-time frequency"),
+  'F = f/f<sub>s</sub> <span class="ss6-unit">[cycles/sample]</span><span class="ss6-eq-break"></span>&Omega; = 2&pi;F = 2&pi;f/f<sub>s</sub> <span class="ss6-unit">[rad/sample]</span>',
+  lang("정규화 주파수는 샘플 하나당 진동량입니다. f 또는 f<sub>s</sub>가 바뀌면 F와 Ω도 바뀝니다.",
+       "Normalized frequency measures oscillation per sample. Changing f or f<sub>s</sub> changes F and Ω."));
+ section.innerHTML='<div class="ss6-theory-heading"><span class="ss6-kicker">'+lang("개념 이해 · 먼저 읽기","CONCEPT FIRST")+'</span><h3 id="ss6-theory-title">'+header+'</h3><p>'+lead+'</p></div>'
+  +'<div class="ss6-theory-grid">'+a+b+c+'</div>'
+  +'<p class="ss6-theory-takeaway"><strong>'+lang("핵심","Key idea")+'</strong> · '
+  +lang("같은 f라도 f<sub>s</sub>를 바꾸면 x[n]이 달라집니다. 반대로 f/f<sub>s</sub>가 같으면 이산시간 각주파수 Ω는 같습니다. 이후에 aliasing을 다룹니다.",
+        "For the same f, changing f<sub>s</sub> changes x[n]. Conversely, the same f/f<sub>s</sub> gives the same digital angular frequency Ω. Aliasing follows after this relationship is understood.")+'</p>';
+ return section;
+}
 var predictions=Object.create(null);
 function applyFlow(){
  var root=document.getElementById("content"),experiment=root&&root.querySelector(".experiment");
@@ -29,8 +61,13 @@ function applyFlow(){
  var question=root.querySelector(".ss6-top-question");
  if(question){
    var qh=question.querySelector("h3");
-   if(qh)qh.textContent=lang("01 · 먼저 예측하세요","01 · Predict");
+   if(qh)qh.textContent=lang("예측하기","Predict");
    question.classList.add("ss6-step-card","ss6-step-predict");
+   question.dataset.ss6Step="1";
+   var oldLabel=question.querySelector(".overlabel");
+   if(oldLabel)oldLabel.remove();
+   var reveal=question.querySelector("details > summary");
+   if(reveal)reveal.textContent=lang("정답 및 설명 보기","Show answer and explanation");
    var note=document.createElement("p");
    note.className="ss6-no-gate-note";
    note.textContent=lang("정답을 입력하지 않아도 실습을 시작할 수 있습니다. 예상 결과를 기록하는 것은 선택 사항입니다.","You can start immediately. Writing a prediction is optional; no answer unlocks the sliders.");
@@ -50,11 +87,22 @@ function applyFlow(){
  overview.setAttribute("aria-label","Learning goal");
  overview.innerHTML='<div class="ss6-lesson-title"></div><p class="ss6-lesson-purpose"></p>';
  root.insertBefore(overview,question||experiment);
+ if(active==="periodic"){
+  var theory=theoryBlock();
+  overview.insertAdjacentElement("afterend",theory);
+ }
+ var flowLabel=document.createElement("div");
+ flowLabel.className="ss6-lab-intro";
+ flowLabel.innerHTML='<span class="ss6-kicker">'+lang("VISUAL LAB · 직접 확인","VISUAL LAB · TEST THE IDEA")+'</span>'
+  +'<h3>'+lang("이제 그래프로 확인해 보세요","Now explore the relationship")+'</h3>'
+  +'<p>'+lang("아래 네 단계는 실습의 순서입니다. 별도의 정답 입력 없이 슬라이더를 자유롭게 조절할 수 있습니다.","Follow the four steps. Sliders are available immediately; no answer is required to unlock them.")+'</p>';
+ (question||experiment).insertAdjacentElement("beforebegin",flowLabel);
  var controls=experiment.querySelector(".controls");
  if(controls){
    controls.classList.add("ss6-step-card","ss6-step-controls");
+   controls.dataset.ss6Step="2";
    var controlHeading=controls.querySelector("h3");
-   if(controlHeading)controlHeading.textContent=lang("02 · 값을 조절하세요","02 · Adjust parameters");
+   if(controlHeading)controlHeading.textContent=lang("변수 조절","Adjust parameters");
    var instruction=document.createElement("p");instruction.className="ss6-compact-instruction";
    instruction.id="ss6-compact-instruction";
    var h3=controls.querySelector("h3");
@@ -64,7 +112,8 @@ function applyFlow(){
  if(charts){
    var observation=document.createElement("section");
    observation.className="ss6-observation-header ss6-step-card";
-   observation.innerHTML='<h3>'+lang("03 · 그래프를 관찰하세요","03 · Observe the graphs")+'</h3><p class="ss6-reading-cue" id="ss6-reading-cue"></p>';
+   observation.innerHTML='<h3>'+lang("그래프 관찰","Observe the graphs")+'</h3><p class="ss6-reading-cue" id="ss6-reading-cue"></p>';
+   observation.dataset.ss6Step="3";
    charts.insertAdjacentElement("beforebegin",observation);
    charts.classList.add("ss6-step-graphs");
    var metrics=experiment.querySelector(".metrics");
@@ -72,8 +121,9 @@ function applyFlow(){
    if(metrics||learning){
      var interpret=document.createElement("section");
      interpret.className="ss6-interpretation ss6-step-card";
-     interpret.innerHTML='<h3>'+lang("04 · 결과를 해석하세요","04 · Interpret the result")+'</h3>'
+     interpret.innerHTML='<h3>'+lang("결과 해석","Interpret the result")+'</h3>'
          +'<p class="ss6-interpretation-hint">'+lang("표시된 수치와 그래프를 비교하여 예측이 맞았는지 설명해 보세요.","Compare the values with the plots, then explain whether your prediction matched.")+'</p>';
+     interpret.dataset.ss6Step="4";
      if(metrics)metrics.parentNode.insertBefore(interpret,metrics);
      else if(learning)learning.parentNode.insertBefore(interpret,learning);
      if(metrics)interpret.appendChild(metrics);
