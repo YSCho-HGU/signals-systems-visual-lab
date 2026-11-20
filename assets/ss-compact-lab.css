@@ -185,3 +185,21 @@ html.ss6-page-scroll[data-ss-view="lab"] .lab-area.focus{
   overflow-x:hidden!important;
   overscroll-behavior:contain;
 }
+
+/* Chapter 6: one continuous scrolling workspace, not two nested scroll areas. */
+html[data-ss-view="lab"]:has(#lab-frame[title^="Chapter 6 "]) .lab-area {
+  height:auto!important;min-height:calc(100dvh - 38px)!important;
+  overflow:visible!important;display:block!important
+}
+html[data-ss-view="lab"]:has(#lab-frame[title^="Chapter 6 "]) .lab-frame-wrap {
+  height:auto!important;min-height:0!important;
+  overflow:visible!important;display:block!important;flex:none!important
+}
+html[data-ss-view="lab"]:has(#lab-frame[title^="Chapter 6 "]) .lab-frame {
+  height:var(--ss6-content-height,1400px)!important;
+  min-height:0!important;overflow:hidden!important
+}
+html[data-ss-view="lab"]:has(#lab-frame[title^="Chapter 6 "]) .lab-area.focus {
+  position:static!important;inset:auto!important;
+  height:auto!important;min-height:100dvh!important
+}
