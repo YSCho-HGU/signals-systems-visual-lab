@@ -144,3 +144,44 @@ html.ss5-native :is(a,button,input,select):focus-visible{outline:3px solid var(-
  html.ss5-native .controlgrid,html.ss5-native .plots{grid-template-columns:1fr!important}
  html.ss5-native .heading h2{font-size:21px!important}
 }
+
+
+/* Chapter 5: compact control-and-graph workspace. Prediction is inside the
+   control column; plots remain visible while sliders are manipulated.
+   The control panel deliberately never becomes sticky. */
+html.ss5-native .lab{grid-template-columns:minmax(230px,278px) minmax(0,1fr)!important;gap:10px!important}
+html.ss5-native .panel{position:static!important;align-self:start!important;padding:11px 12px!important}
+html.ss5-native .panel .ss5-predict{padding:9px 10px!important;margin:0 0 10px!important}
+html.ss5-native .panel .ss5-predict p{font-size:12px!important;line-height:1.45!important;margin:3px 0 6px!important}
+html.ss5-native .panel .ss5-predict label{margin:4px 0!important}
+html.ss5-native .panel #ss5-prediction{min-height:48px!important;font-size:13px!important;padding:6px 8px!important}
+html.ss5-native .panel .ss5-predict small{font-size:11px!important}
+html.ss5-native .panel h3{margin:2px 0 7px!important;font-size:16px!important}
+html.ss5-native .panel .ctrl{margin:0 0 8px!important}
+html.ss5-native .panel .controlgrid{gap:7px!important}
+html.ss5-native .panel .presets{margin:6px 0!important}
+html.ss5-native .panel .btnline{margin-top:6px!important}
+html.ss5-native .panel .smallnote{margin:7px 0 0!important;font-size:12px!important;line-height:1.45!important}
+html.ss5-native .outputs .ss5-observe{padding:8px 11px!important;margin:0 0 7px!important}
+html.ss5-native .outputs .ss5-observe p{font-size:12px!important;margin:2px 0!important;line-height:1.4!important}
+html.ss5-native .figure{padding:9px 9px 7px!important}
+html.ss5-native .figure h3{font-size:15px!important;margin:0 0 4px!important}
+html.ss5-native .figure .sub{font-size:12px!important;margin:0 0 5px!important}
+html.ss5-native .figure canvas{height:clamp(220px,35dvh,330px)!important}
+@media(max-width:1150px) and (min-width:781px){
+ html.ss5-native .lab{grid-template-columns:minmax(205px,235px) minmax(0,1fr)!important}
+ html.ss5-native .plots{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ html.ss5-native .figure canvas{height:clamp(190px,30dvh,270px)!important}
+}
+@media(max-width:780px){
+ html.ss5-native .lab{grid-template-columns:1fr!important}
+ html.ss5-native .panel{padding:11px!important}
+ html.ss5-native .panel .ss5-predict{margin-bottom:9px!important}
+ html.ss5-native .controlgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ html.ss5-native .plots{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ html.ss5-native .figure canvas{height:230px!important}
+}
+@media(max-width:610px){
+ html.ss5-native .controlgrid,html.ss5-native .plots{grid-template-columns:1fr!important}
+ html.ss5-native .figure canvas{height:240px!important}
+}
