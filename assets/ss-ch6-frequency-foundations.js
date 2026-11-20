@@ -592,7 +592,7 @@
     +"html[data-theme='light'] body,html[data-theme='light'] .main{background:#fff!important}"
     +"html[data-els-theme='white']{--bg:#fff!important;--paper:#fff!important;--els-bg:#fff!important;--els-surface:#fff!important}"
     +"html[data-els-theme='white'] body,html[data-els-theme='white'] .main{background:#fff!important}"
-    +"@media(min-width:901px){html.ss6-compact-workspace .controls{position:sticky!important;top:54px!important;z-index:5!important;max-height:35dvh!important;overflow-y:auto!important}}"
+    +"html.ss6-compact-workspace .experiment .controls{position:static!important;top:auto!important;max-height:none!important;overflow:visible!important;z-index:auto!important}"
     +"@media(max-width:600px){html.ss6-compact-workspace .control-grid{grid-template-columns:1fr!important}html.ss6-compact-workspace .hero-callout .formula{font-size:17px!important}}";
   document.head.appendChild(css);
   renderModule();
