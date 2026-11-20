@@ -21,17 +21,40 @@ function periodicDo(){
  if(s.mode==="alias")return lang("f Hz와 (fs−f) Hz를 비교하고 동일한 샘플에서 복원되는 주파수를 찾으세요.","Compare f Hz and (fs−f) Hz and identify the reconstructed baseband frequency.");
  return lang("fs=100 Hz를 고정한 채 f만 10→20→40 Hz로 변경하세요.","Hold fs=100 Hz and change f: 10→20→40 Hz.");
 }
+var predictions=Object.create(null);
 function applyFlow(){
  var root=document.getElementById("content"),experiment=root&&root.querySelector(".experiment");
  if(!experiment)return;
  var data=lookup(active);
  var question=root.querySelector(".ss6-top-question");
- if(question){var qh=question.querySelector("h3");if(qh)qh.textContent=lang("1 · 먼저 예측하세요","1 · Predict before testing");}
+ if(question){
+   var qh=question.querySelector("h3");
+   if(qh)qh.textContent=lang("01 · 먼저 예측하세요","01 · Predict");
+   question.classList.add("ss6-step-card","ss6-step-predict");
+   var note=document.createElement("p");
+   note.className="ss6-no-gate-note";
+   note.textContent=lang("정답을 입력하지 않아도 실습을 시작할 수 있습니다. 예상 결과를 기록하는 것은 선택 사항입니다.","You can start immediately. Writing a prediction is optional; no answer unlocks the sliders.");
+   var details=question.querySelector("details");
+   if(details)question.insertBefore(note,details);
+   else question.appendChild(note);
+   var field=document.createElement("textarea");
+   field.className="ss6-prediction-note";
+   field.rows=2;
+   field.setAttribute("aria-label",lang("예측 메모 (선택)","Optional prediction note"));
+   field.placeholder=lang("어떤 변화가 예상되나요? (선택)","What do you predict? (Optional)");
+   field.value=predictions[active]||"";
+   field.addEventListener("input",function(){predictions[active]=field.value});
+   question.insertBefore(field,details||null);
+ }
  var overview=document.createElement("div");overview.className="ss6-sequence-overview";
+ overview.setAttribute("aria-label","Learning goal");
  overview.innerHTML='<div class="ss6-lesson-title"></div><p class="ss6-lesson-purpose"></p>';
  root.insertBefore(overview,question||experiment);
  var controls=experiment.querySelector(".controls");
  if(controls){
+   controls.classList.add("ss6-step-card","ss6-step-controls");
+   var controlHeading=controls.querySelector("h3");
+   if(controlHeading)controlHeading.textContent=lang("02 · 값을 조절하세요","02 · Adjust parameters");
    var instruction=document.createElement("p");instruction.className="ss6-compact-instruction";
    instruction.id="ss6-compact-instruction";
    var h3=controls.querySelector("h3");
@@ -39,10 +62,25 @@ function applyFlow(){
  }
  var charts=experiment.querySelector(".charts");
  if(charts){
-   var cue=document.createElement("p");cue.className="ss6-reading-cue";cue.id="ss6-reading-cue";
-   charts.insertAdjacentElement("beforebegin",cue);
+   var observation=document.createElement("section");
+   observation.className="ss6-observation-header ss6-step-card";
+   observation.innerHTML='<h3>'+lang("03 · 그래프를 관찰하세요","03 · Observe the graphs")+'</h3><p class="ss6-reading-cue" id="ss6-reading-cue"></p>';
+   charts.insertAdjacentElement("beforebegin",observation);
+   charts.classList.add("ss6-step-graphs");
+   var metrics=experiment.querySelector(".metrics");
+   var learning=experiment.querySelector(".learning");
+   if(metrics||learning){
+     var interpret=document.createElement("section");
+     interpret.className="ss6-interpretation ss6-step-card";
+     interpret.innerHTML='<h3>'+lang("04 · 결과를 해석하세요","04 · Interpret the result")+'</h3>'
+         +'<p class="ss6-interpretation-hint">'+lang("표시된 수치와 그래프를 비교하여 예측이 맞았는지 설명해 보세요.","Compare the values with the plots, then explain whether your prediction matched.")+'</p>';
+     if(metrics)metrics.parentNode.insertBefore(interpret,metrics);
+     else if(learning)learning.parentNode.insertBefore(interpret,learning);
+     if(metrics)interpret.appendChild(metrics);
+     if(learning)interpret.appendChild(learning);
+   }
  }
- var guided=[["derivationPanel","4 · Guided derivation / 단계별 수식 유도"],["readingPanel","5 · Read the graphs / 그래프 읽기"]];
+ var guided=[["derivationPanel","Detailed derivation · 상세 수식 유도"],["readingPanel","Graph interpretation guide · 그래프 읽기 안내"]];
  guided.forEach(function(item){
    var panel=document.getElementById(item[0]);if(!panel)return;
    var fold=document.createElement("details");fold.className="ss6-guide-details";
@@ -72,9 +110,9 @@ function refreshFlow(){
  var data=lookup(active),overview=document.querySelector(".ss6-sequence-overview");
  if(overview){overview.querySelector(".ss6-lesson-title").textContent=lang(data.title[0],data.title[1]);overview.querySelector(".ss6-lesson-purpose").textContent=lang(data.goal[0],data.goal[1]);}
  var instruct=document.getElementById("ss6-compact-instruction");
- if(instruct)instruct.textContent="2 · "+lang("한 가지 변수만 조절","Change one thing")+": "+(active==="periodic"?periodicDo():lang(data.do[0],data.do[1]));
+ if(instruct)instruct.textContent=(active==="periodic"?periodicDo():lang(data.do[0],data.do[1]));
  var cue=document.getElementById("ss6-reading-cue");
- if(cue)cue.textContent="3 · "+lang("그래프에서 관찰","Observe the graphs")+": "+lang(data.read[0],data.read[1]);
+ if(cue)cue.textContent=lang(data.read[0],data.read[1]);
 }
 var previousRender=renderModule;
 renderModule=function(){previousRender();applyFlow()};
