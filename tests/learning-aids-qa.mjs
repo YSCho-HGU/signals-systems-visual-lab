@@ -25,6 +25,10 @@ async function testcase(name,fn,page){
 function assert(ok,message){if(!ok)throw Error(message)}
 async function go(page,ch){
  await page.goto(BASE+"#chapter="+ch,{waitUntil:"domcontentloaded",timeout:45000});
+ if(ch===6){
+   await page.locator(".ss6-sequence-overview").waitFor({state:"visible",timeout:20000});
+   return;
+ }
  await page.locator("#lab-loading").waitFor({state:"hidden",timeout:45000});
  await page.locator("#ss-progress-panel").waitFor({state:"visible",timeout:20000});
 }
@@ -92,6 +96,8 @@ try{
   },page);
   await testcase(device+"-chapter-6-filter",async()=>{
    await go(page,6);
+   await page.locator('[data-nav="filter"]').click();
+   await page.locator("#ss-applications").waitFor({state:"visible",timeout:15000});
    const panel=page.locator("#ss-applications");
    assert(await panel.isVisible(),"filter panel not visible");
    const first=await panel.locator("canvas").evaluate(c=>c.toDataURL());
