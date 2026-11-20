@@ -80,6 +80,13 @@ try{
      return {count,reading:reading.slice(0,80),caption:caption.slice(0,80)};
    });
    check(inline.count>0,prefix+"-"+lab+"-inline-body-math",inline);
+   const quizMath=await page.evaluate(()=>({
+     count:document.querySelectorAll(".quiz .ss5-explicit-math .katex").length,
+     fallback:document.querySelectorAll(".quiz .ss5-explicit-math:not(:has(.katex))").length,
+     errors:document.querySelectorAll(".quiz .ss5-explicit-math[data-math-error]").length
+   }));
+   check(quizMath.count>0&&quizMath.fallback===0&&quizMath.errors===0,prefix+"-"+lab+"-explicit-quiz-math",quizMath);
+
 
    const notes=await page.locator(".reading-note p").allTextContents();
    check(notes.length>=2&&notes.some(x=>x.includes(" / ")||x.includes("ROC")||x.includes("pole")||x.includes("τ")),prefix+"-"+lab+"-reading-notes",notes.slice(0,2));
