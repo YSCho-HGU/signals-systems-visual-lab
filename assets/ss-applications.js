@@ -11,6 +11,7 @@ const tr={
  mixed:{title:"Hear Signals · 소리와 실생활 신호",harm:"Add harmonics to hear timbre changes · 고조파가 음색을 어떻게 바꾸는지 들어보세요.",filter:"Compare audio before/after low/high-pass filtering · 필터 전후 소리 비교",ecg:"Synthetic ECG-like waveform · 합성 심전도 유사 신호",synthetic:"Synthetic educational data · 실제 심전도 진단용이 아닙니다.",signal:"Input · 입력",output:"Output · 출력",mode:"Example · 예시",play:"Play 2 s · 재생",stop:"Stop · 중지",harmonic:"Odd harmonics · 홀수 고조파",cutoff:"Cutoff (Hz) · 차단주파수",low:"Low-pass · 저역",high:"High-pass · 고역",raw:"Unfiltered · 전",filtered:"Filtered · 후",noise:"Noise · 잡음",hint:"Change controls, compare and explain · 조절 후 결과를 설명하세요.",unavailable:"Audio unavailable · 오디오 미지원",audioNeed:"Play starts on click · 클릭해야 소리가 재생됩니다.",view:"Computed educational signals · 계산된 교육용 신호"}
 };
 let mode="lowpass",h=5,cutoff=550,audio=null,audioTimer=null;
+let nativeModule=window.__dtftApp?.active||"periodic";
 const $=id=>document.getElementById(id),language=()=>window.ELSLanguage?.get()||"mixed",t=k=>tr[language()][k];
 const style=document.createElement("style");style.textContent=`
 #ss-applications{margin:10px 0 15px;padding:13px;border:1px solid var(--els-border,#555);border-radius:12px;background:var(--els-surface,#202220);color:var(--els-ink,#eee);font-size:13px}
@@ -103,7 +104,7 @@ function control(kind,code){
  const b=document.createElement("button");b.type="button";b.textContent=t(kind);b.addEventListener("click",code);controls.append(b);return b;
 }
 function render(){
- const ch=parseChapter();stop();controls.replaceChildren();panel.hidden=nativeCh6?(window.__dtftApp?.active!=="filter"):![1,3,6].includes(ch);if(panel.hidden)return;
+ const ch=parseChapter();stop();controls.replaceChildren();panel.hidden=nativeCh6?(nativeModule!=="filter"):![1,3,6].includes(ch);if(panel.hidden)return;
  $("ss-app-title").textContent=t("title");
  $("ss-app-description").textContent=t(ch===3?"harm":ch===6?"filter":"ecg");
  $("ss-app-disclaimer").textContent=t("synthetic")+" "+t("view");
@@ -129,7 +130,8 @@ function render(){
 document.addEventListener("visibilitychange",()=>{if(document.hidden)stop()});
 window.addEventListener("hashchange",render);
 if(nativeCh6){
-  document.addEventListener("ss-ch6-module-changed",()=>{
+  document.addEventListener("ss-ch6-module-changed",event=>{
+    nativeModule=event.detail?.module||document.querySelector(".sidebar [data-nav].active")?.dataset.nav||"periodic";
     // This module is an optional real-world sound demonstration for the sensor
     // filter lesson. Move the real node so playback is stopped on lesson exit.
     const anchor=document.querySelector(".ss6-interpretation")||document.querySelector(".ss6-step-graphs");
