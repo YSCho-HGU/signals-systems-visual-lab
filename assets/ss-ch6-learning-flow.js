@@ -26,9 +26,10 @@ function applyFlow(){
  if(!experiment)return;
  var data=lookup(active);
  var question=root.querySelector(".ss6-top-question");
+ if(question){var qh=question.querySelector("h3");if(qh)qh.textContent=lang("1 · 먼저 예측하세요","1 · Predict before testing");}
  var overview=document.createElement("div");overview.className="ss6-sequence-overview";
  overview.innerHTML='<div class="ss6-lesson-title"></div><p class="ss6-lesson-purpose"></p>';
- if(question)question.insertAdjacentElement("afterend",overview);else root.insertBefore(overview,experiment);
+ root.insertBefore(overview,question||experiment);
  var controls=experiment.querySelector(".controls");
  if(controls){
    var instruction=document.createElement("p");instruction.className="ss6-compact-instruction";
