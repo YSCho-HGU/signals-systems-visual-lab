@@ -444,3 +444,91 @@ html.ss6-compact-workspace .ss6-control-plot-workspace .ss6-compact-instruction{
  html.ss6-compact-workspace .ss6-control-plot-workspace .charts{grid-template-columns:1fr!important}
  html.ss6-compact-workspace .ss6-control-plot-workspace .figure.wide{grid-column:auto!important}
 }
+
+/* Shared Chapter 6 laboratory workspace (6.1–6.6). All controls remain
+   in the same visual row as the charts, but never follow the reader into
+   Step 4 or the optional guided derivation. Preserve first-lab spacing. */
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module]{
+  display:grid!important;
+  grid-template-columns:minmax(235px,285px) minmax(0,1fr)!important;
+  gap:12px!important;
+  align-items:start!important;
+  min-width:0!important;
+  margin-bottom:14px!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ss6-step-controls{
+  position:relative!important;
+  top:auto!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  margin:0!important;
+  padding:16px 12px 14px 54px!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ss6-controls-number{
+  display:grid!important;
+  position:absolute!important;
+  left:12px!important;top:15px!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .control-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:6px!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ctrl{
+  min-width:0!important;
+  margin:0 0 6px!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ss6-workbench-graphs{
+  display:grid!important;
+  gap:9px!important;
+  min-width:0!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ss6-step-graphs{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:9px!important;
+  margin:0!important;
+  min-width:0!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ss6-step-graphs .figure{
+  min-width:0!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ss6-step-graphs .figure.wide{
+  grid-column:1/-1!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .figure canvas{
+  height:clamp(180px,26dvh,265px)!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ss6-workbench-presets{
+  margin:0!important;
+  min-width:0!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ss6-workbench-presets .preset-row{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:6px!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ss6-workbench-presets .preset-row button{
+  flex:1 1 135px!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ss6-step-controls::before{
+  content:none!important
+}
+@media(max-width:960px){
+ html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module]{
+  grid-template-columns:1fr!important
+ }
+ html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .control-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important
+ }
+}
+@media(max-width:620px){
+ html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .control-grid,
+ html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ss6-step-graphs{
+  grid-template-columns:1fr!important
+ }
+ html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ss6-step-graphs .figure.wide{
+  grid-column:auto!important
+ }
+}
