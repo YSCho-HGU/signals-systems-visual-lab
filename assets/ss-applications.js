@@ -1,8 +1,10 @@
 /* Engineering cases + sonification: original synthetic signals, no media uploads.
    Audio starts only from an explicit click and always has a stop control. */
 (()=>{"use strict";
-const frame=document.getElementById("lab-frame"),head=document.querySelector("#lab-view .lab-head");
-if(!frame||!head)return;
+const frame=document.getElementById("lab-frame");
+const nativeCh6=!!document.querySelector(".ss6-site-header");
+const head=document.querySelector("#lab-view .lab-head")||document.querySelector(".ss6-site-header");
+if(!head||(!frame&&!nativeCh6))return;
 const tr={
  en:{title:"Hear and explore real-world signals",harm:"Harmonic synthesis: hear how adding odd harmonics changes timbre.",filter:"Digital filtering: compare the same signal before and after low/high-pass filtering.",ecg:"Synthetic ECG-like waveform: inspect a simulated pulse pattern and smoothing.",synthetic:"Educational synthetic data, not a patient recording or diagnostic tool.",signal:"Input",output:"Output",mode:"Example",play:"Play 2 s",stop:"Stop",harmonic:"Odd harmonics",cutoff:"Cutoff (Hz)",low:"Low-pass",high:"High-pass",raw:"Unfiltered",filtered:"Filtered",noise:"Added noise",hint:"Try changing the controls, then compare the curves and the sound.",unavailable:"Audio unavailable in this browser.",audioNeed:"Audio plays only after clicking Play.",view:"Waveforms are computed illustrations, not a live microphone signal."},
  ko:{title:"소리와 실생활 신호로 이해하기",harm:"조화파 합성: 홀수 고조파를 추가하며 음색 변화를 들어보세요.",filter:"디지털 필터: 동일 신호를 저역통과/고역통과 전후로 비교하세요.",ecg:"합성 심전도 유사 파형: 모의 맥동 신호와 평활화 효과를 살펴보세요.",synthetic:"교육용 합성 데이터이며 실제 환자 기록이나 진단 도구가 아닙니다.",signal:"입력",output:"출력",mode:"예시",play:"2초 재생",stop:"중지",harmonic:"홀수 고조파 수",cutoff:"차단 주파수 (Hz)",low:"저역통과",high:"고역통과",raw:"필터 전",filtered:"필터 후",noise:"추가 잡음",hint:"조절값을 바꾼 뒤 파형과 소리를 비교하세요.",unavailable:"이 브라우저는 오디오 재생을 지원하지 않습니다.",audioNeed:"재생 버튼을 눌렀을 때만 소리가 납니다.",view:"파형은 계산한 교육용 예시이며 마이크 입력이 아닙니다."},
@@ -25,7 +27,7 @@ const panel=document.createElement("section");panel.id="ss-applications";panel.h
 panel.innerHTML='<strong id="ss-app-title"></strong><p id="ss-app-description"></p><div id="ss-app-controls" class="ss-app-controls"></div><canvas id="ss-app-canvas" width="720" height="200" role="img" aria-label="Synthetic signal input and output graph"></canvas><p id="ss-app-status" class="ss-app-note" aria-live="polite"></p><p id="ss-app-disclaimer" class="ss-app-note"></p>';
 const anchor=document.getElementById("ss-progress-panel");(anchor||head).after(panel);
 const controls=$("ss-app-controls"),ctx=$("ss-app-canvas").getContext("2d");
-function parseChapter(){return Number((location.hash.match(/^#chapter=(\d+)/)||[])[1])||0}
+function parseChapter(){return nativeCh6?6:Number((location.hash.match(/^#chapter=(\d+)/)||[])[1])||0}
 function makeSamples(kind,N=720){
  const x=new Float64Array(N),y=new Float64Array(N);
  for(let i=0;i<N;i++){
@@ -101,7 +103,7 @@ function control(kind,code){
  const b=document.createElement("button");b.type="button";b.textContent=t(kind);b.addEventListener("click",code);controls.append(b);return b;
 }
 function render(){
- const ch=parseChapter();stop();controls.replaceChildren();panel.hidden=![1,3,6].includes(ch);if(panel.hidden)return;
+ const ch=parseChapter();stop();controls.replaceChildren();panel.hidden=nativeCh6?(window.__dtftApp?.active!=="filter"):![1,3,6].includes(ch);if(panel.hidden)return;
  $("ss-app-title").textContent=t("title");
  $("ss-app-description").textContent=t(ch===3?"harm":ch===6?"filter":"ecg");
  $("ss-app-disclaimer").textContent=t("synthetic")+" "+t("view");
@@ -125,6 +127,16 @@ function render(){
  plot(ch);$("ss-app-status").textContent=t("audioNeed");
 }
 document.addEventListener("visibilitychange",()=>{if(document.hidden)stop()});
-window.addEventListener("hashchange",render);window.ELSLanguage?.subscribe(render);
+window.addEventListener("hashchange",render);
+if(nativeCh6){
+  document.addEventListener("ss-ch6-module-changed",()=>{
+    // This module is an optional real-world sound demonstration for the sensor
+    // filter lesson. Move the real node so playback is stopped on lesson exit.
+    const anchor=document.querySelector(".ss6-interpretation")||document.querySelector(".ss6-step-graphs");
+    if(anchor)anchor.insertAdjacentElement("afterend",panel);
+    render();
+  });
+}
+window.ELSLanguage?.subscribe(render);
 render();
 })();
