@@ -1,0 +1,15 @@
+/* Opt-in Engineering Learning Studio lab layout.
+ * Apply .els-lab-workbench only after mounting via ELSLabUI.mountWorkbench.
+ */
+.els-lab-workbench{display:grid;grid-template-columns:minmax(230px,290px) minmax(0,1fr);gap:12px;min-width:0;align-items:start}
+.els-lab-workbench>.controls{position:relative;top:auto;max-height:none;overflow:visible;min-width:0}
+.els-lab-graphs{display:grid;gap:10px;min-width:0}
+.els-lab-workbench .charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;min-width:0}
+.els-lab-workbench .figure{min-width:0}
+.els-lab-workbench .figure.wide{grid-column:1/-1}
+.els-lab-workbench .figure canvas{width:100%;height:clamp(190px,27dvh,290px)}
+.els-lab-workbench .els-lab-presets{min-width:0}
+.els-lab-workbench .els-step-number{display:grid;place-items:center;min-width:30px;min-height:30px;font-weight:800}
+.els-lab-workbench .katex-display{max-width:100%;overflow-x:auto;overflow-y:hidden}
+@media(max-width:960px){.els-lab-workbench{grid-template-columns:1fr}.els-lab-workbench .control-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.els-lab-workbench .control-grid,.els-lab-workbench .charts{grid-template-columns:1fr}.els-lab-workbench .figure.wide{grid-column:auto}}
