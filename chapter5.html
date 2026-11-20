@@ -737,7 +737,7 @@ const GUIDES5={
  guideItem('Choose each inverse pair / 항별 역변환',right?'x(t)=⅓e<sup>−t</sup>u(t)−⅓e<sup>−4t</sup>u(t)':left?'x(t)=−⅓e<sup>−t</sup>u(−t)+⅓e<sup>−4t</sup>u(−t)':'x(t)=−⅓e<sup>−t</sup>u(−t)−⅓e<sup>−4t</sup>u(t)','같은 1/(s+a)항도 ROC 좌우에 따라 부호와 시간 방향이 달라집니다.'),
  guideItem('Verify the time-domain behavior / 검산',right?'x(0⁺)=⅓(1−1)=0, &nbsp; x(t)=0 (t&lt;0)':left?'x(0⁻)=⅓(1−1)=0, &nbsp; x(t)=0 (t&gt;0)':'x(0⁻)=−⅓, &nbsp; x(0⁺)=−⅓','좌측·우측 극한과 인과 여부를 확인합니다. 계단함수의 t=0 지정값은 관례에 따라 달라질 수 있습니다.')],
  graphs:[guidePlot('Inverse response / 역변환',right?'Only t≥0 is nonzero.':left?'Only t<0 is nonzero.':'Both negative and positive times contain signal parts.','같은 시간축에서 양쪽 시간 방향을 비교하세요.'),guidePlot('Poles and ROC / 극점·수렴영역','Poles remain at −4 and −1 for all three choices; only the shaded ROC changes.','세 경우에 pole 위치가 동일하다는 사실을 확인하세요.')],check:'How can one rational expression represent three time-domain signals? / 하나의 X(s)에서 세 시간 신호가 가능한 이유는 무엇인가요?'}},
- stability:s=>{const p=s.p,z=s.z,c1=Math.abs(p-z)<.051,c2=Math.abs(z+4)<.051,activePole=c1?-4:Math.max(p,-4);return {steps:[
+ stability:s=>{const p=s.p,z=s.z,c1=Math.abs(p-z)<1e-8,c2=Math.abs(z+4)<1e-8,activePole=c1?-4:c2?p:Math.max(p,-4);return {steps:[
  guideItem('Write the transfer function / 전달함수',`H(s)=(s−(${z.toFixed(2)}))/[(s−(${p.toFixed(2)}))(s+4)]`,'움직일 수 있는 pole p와 zero z를 구분하세요.'),
  guideItem('Inspect exact pole–zero cancellation / 극영점 상쇄',c1?`z=p=${p.toFixed(2)} ⇒ reduced H(s)=1/(s+4)`:c2?'z=−4 ⇒ reduced H(s)=1/(s−p)':'z≠p and z≠−4 ⇒ both denominator poles are active','수학적으로 정확히 일치하는 상쇄만 전달함수의 pole을 제거합니다. 근접만으로 안정해지지 않습니다.'),
  guideItem('Determine the causal ROC / 인과 ROC',`ROC: Re(s)&gt;${activePole.toFixed(2)} (rightmost active pole)`,'인과 유리 전달함수의 ROC는 약분된 H(s)의 가장 오른쪽 pole의 오른쪽입니다.'),
