@@ -36,6 +36,43 @@ try{
    await page.locator('[data-route="map"]').first().click();
    await page.screenshot({path:join(dir,"map.png"),fullPage:true});
    for(let ch=1;ch<=8;ch++){
+    if(ch===6){
+      await page.goto(BASE+"chapter6.html",{waitUntil:"domcontentloaded",timeout:45000});
+      await page.locator(".ss6-sequence-overview").waitFor({state:"visible",timeout:30000});
+      await page.locator("#ss6-theme-picker").selectOption(theme);
+      const chDir=join(dir,"ch6");mkdirSync(chDir,{recursive:true});
+      const buttons=page.locator(".sidebar [data-nav]");
+      const found=await buttons.count(),expected=EXP_COUNTS[ch-1];
+      if(found!==expected)errors.push({width,theme,chapter:ch,error:"Native Chapter 6 nav count "+found+" vs "+expected});
+      for(let n=1;n<=Math.min(found,expected);n++){
+        await buttons.nth(n-1).click();
+        await page.waitForFunction(i=>window.__dtftApp?.active===["periodic","pairs","phase","phasor","filter","fft"][i],n-1,{timeout:10000});
+        await page.waitForTimeout(120);
+        const result=await page.evaluate(()=>{
+          const root=document.documentElement,body=document.body;
+          const input=[...document.querySelectorAll('input[type="range"],select')];
+          const unlabeled=input.filter(x=>!(x.labels?.length||x.hasAttribute("aria-label")||x.hasAttribute("title")));
+          const rgb=s=>(s.match(/[0-9]+(?:[.][0-9]+)?/g)||[]).slice(0,3).map(Number);
+          const light=x=>{x/=255;return x<=.04045?x/12.92:((x+.055)/1.055)**2.4};
+          const luminance=s=>{const [r,g,b]=rgb(s).map(light);return .2126*r+.7152*g+.0722*b};
+          const style=getComputedStyle(body);
+          const contrast=(Math.max(luminance(style.color),luminance(style.backgroundColor))+.05)/(Math.min(luminance(style.color),luminance(style.backgroundColor))+.05);
+          return {overflow:root.scrollWidth>innerWidth+6,overflowWidth:root.scrollWidth,viewport:innerWidth,
+            inputs:input.length,unlabeled:unlabeled.length,bodyTextContrast:Number(contrast.toFixed(2)),
+            active:window.__dtftApp?.active||"",theme:root.dataset.theme,
+            iframes:document.querySelectorAll("iframe").length,plots:document.querySelectorAll(".charts canvas").length};
+        });
+        if(result.iframes)errors.push({width,theme,chapter:ch,experiment:n,error:"Chapter 6 native page unexpectedly contains iframe"});
+        if(result.plots<2)errors.push({width,theme,chapter:ch,experiment:n,error:"Chapter 6 missing charts"});
+        if(result.unlabeled)errors.push({width,theme,chapter:ch,experiment:n,error:"Unlabeled Chapter 6 input "+result.unlabeled});
+        if(result.theme!==(theme==="warm-neutral"?"light":"dark"))errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 6 theme "+result.theme});
+        if(result.overflow)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 6 overflow "+result.overflowWidth+"/"+result.viewport});
+        if(result.bodyTextContrast<4.5)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 6 text contrast "+result.bodyTextContrast});
+        record.push({width,theme,chapter:ch,experiment:n,...result,scheme:result.theme});
+        await page.screenshot({path:join(chDir,String(n).padStart(2,"0")+".png"),fullPage:false});
+      }
+      continue;
+    }
     await page.goto(BASE+"#chapter="+ch,{waitUntil:"domcontentloaded",timeout:45000});
     await page.locator("#lab-loading").waitFor({state:"hidden",timeout:45000});
     const iframe=page.frameLocator("#lab-frame");
