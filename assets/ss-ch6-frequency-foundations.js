@@ -30,7 +30,7 @@
       ["rate","2 · Change f_s (fixed f)"],
       ["alias","3 · Aliasing (after fundamentals)"]
     ]});
-  m.controls.find(function(x){return x.key==="fs";}).min=80;
+  m.controls.find(function(x){return x.key==="fs";}).min=100;
 
   var originalControl = ctlHTML;
   ctlHTML = function(c,s) {
@@ -80,8 +80,8 @@
                   "The physical sampling instants t=n/f_s change. Index n still advances by 1, but T_s, F and Ω change."),
       note:isF?lang("관찰 1 · f_s=100 Hz 고정: f를 10→20→40 Hz로 올리세요. 검은 샘플 점의 실제 시간 간격과 n축 간격은 변하지 않습니다. 대신 x[n]이 더 빨리 진동합니다.",
                    "Experiment 1 · f_s fixed at 100 Hz: increase f from 10 to 20 to 40 Hz. The sample-time spacing and integer n spacing stay fixed, while x[n] oscillates faster.")
-              :lang("관찰 2 · f=10 Hz 고정: f_s를 80→100→200 Hz로 바꾸세요. 위쪽 CT 파형은 그대로이지만 검은 샘플 위치와 아래쪽 x[n]은 바뀝니다. n축 간격은 항상 1입니다.",
-                   "Experiment 2 · f fixed at 10 Hz: vary f_s from 80 to 100 to 200 Hz. The top CT waveform stays the same, but sample instants and x[n] change. Index spacing remains 1.")
+              :lang("관찰 2 · f=10 Hz 고정: f_s를 100→120→200 Hz로 바꾸세요. 위쪽 CT 파형은 그대로이지만 검은 샘플 위치와 아래쪽 첫 21개 x[n]은 바뀝니다. n축은 항상 0–20으로 고정됩니다.",
+                   "Experiment 2 · f fixed at 10 Hz: vary f_s from 100 to 120 to 200 Hz. The top CT waveform stays the same, but sample instants and the first 21 samples x[n] change. The lower n-axis stays fixed at 0–20.")
     };
   }
 
@@ -113,7 +113,7 @@
       for(var j=0;j<3;j++){var label=document.querySelectorAll(".metric .k")[j];if(label)label.textContent=oldLabels[j]}
       return;
     }
-    var fs=s.fs, f=s.f, Ts=1/fs, duration=0.2, N=Math.round(fs*duration)+1;
+    var fs=s.fs, f=s.f, Ts=1/fs, duration=0.2, N=21; // Fixed first 21 samples and a fixed index axis
     var ct=[], sampleByTime=[], samples=[];
     // A fixed physical 0–200 ms window makes the 'same x(t)' comparison meaningful.
     for(var i=0;i<=1200;i++){
@@ -191,7 +191,7 @@
         "The upper x-axis is physical milliseconds. Changing f_s moves the sample markers; changing f reshapes x(t).",
         "f 고정 시 위쪽 CT 곡선은 동일합니다. 샘플 시점만 달라지는지 확인하세요."),
       guidePlot("DT sequence and integer period",
-        "The lower x-axis uses integer n. Its spacing is always one, but digital oscillation and N₀ depend on f/f_s.",
+        "The lower x-axis always shows the first 21 samples on the same n=0–20 scale. Its index spacing is one while oscillation and N₀ depend on f/f_s.",
         "x[n]의 n 간격은 항상 1이며, 신호의 주기는 F=f/f_s에 따라 달라집니다.")
     ],check:"Is f_s/f necessarily an integer? How does that differ from the fundamental DT period N₀?"};
   };
@@ -204,7 +204,7 @@
     var button=$("play");if(button)button.textContent=KO.pause;
     playTimer=setInterval(function() {
       var next=state.periodic.fs+20;
-      if(next>200)next=80;
+      if(next>200)next=100;
       state.periodic.fs=next;
       var control=$("ctrl_fs");if(control)control.value=String(next);
       var output=$("val_fs");if(output)output.textContent=String(next)+" Hz";
