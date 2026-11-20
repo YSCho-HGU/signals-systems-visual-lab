@@ -26,6 +26,8 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Verify Chapter 6 digital-frequency foundations and sampling math
         run: node tests/ch6-sampling-foundations.mjs
+      - name: Test Chapter 6.1 viewport and three-stage interactions in Chromium
+        run: node tests/ch6-viewport-e2e.mjs
       - name: Run all 62 experiments in Light and Dark at mobile/desktop widths
         run: npm run qa:visual
       - name: Verify 248 screenshots and generate quality-gates report
