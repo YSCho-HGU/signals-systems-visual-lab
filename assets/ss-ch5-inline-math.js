@@ -3,6 +3,9 @@
 const pairs=[
  [/X\(s\)\s*=\s*1\/\(s\+a\)/g,"X(s)=\\frac{1}{s+a}"],
  [/X\(s\)\s*=\s*1\/s\b/g,"X(s)=\\frac1s"],
+ [/Y\(s\)\s*=\s*X\(s−b\)/g,"Y(s)=X(s-b)"],
+ [/Y\(s\)\s*=\s*e\^\(−st₀\)X\(s\)/g,"Y(s)=e^{-st_0}X(s)"],
+ [/∫₋∞\^∞/g,"\\int_{-\\infty}^{\\infty}"],
  [/Re\(s\)\s*[<>≥≤]\s*[−-]?(?:a|\d+(?:\.\d+)?)/g,null],
  [/e\^\(−σt\)/g,"e^{-\\sigma t}"],
  [/e\^\(−at\)/g,"e^{-at}"],
@@ -23,7 +26,7 @@ const pairs=[
 ];
 const matcher=new RegExp(pairs.map(p=>"(?: "+p[0].source+")".replace("(?: ","(?:")).join("|"),"g");
 function tex(x){
-for(const [re,v] of pairs){re.lastIndex=0;if(!re.test(x))continue;if(v!==null)return v;
+for(const [re,v] of pairs){re.lastIndex=0;if(!(new RegExp("^(?:"+re.source+")$")).test(x))continue;if(v!==null)return v;
 if(x.startsWith("Re("))return x.replace("Re(s)","\\operatorname{Re}(s)").replace("−","-");
 return ({"σ":"\\sigma","ζ":"\\zeta","τ":"\\tau","ω":"\\omega","∞":"\\infty"})[x]||x}
 return x;
