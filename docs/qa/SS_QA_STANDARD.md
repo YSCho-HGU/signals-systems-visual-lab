@@ -23,7 +23,7 @@ A green build means **automated regression checks passed**, not that every diagr
 ## 2. Stable baseline and boundaries
 
 - Chapter counts: **9, 9, 7, 8, 8, 6, 7, 8**.
-- Chapter 6 uses native `chapter6.html`; Chapters 1–5 and 7–8 currently use the established embedded-lab route.
+- Chapters 5 and 6 use native `chapter5.html` / `chapter6.html` without iframe; Chapters 1–4 and 7–8 retain the embedded-lab route.
 - Shared storage keys are `els-ss-lab-progress-v1`, `els-language`, `els-theme-v2`, `ss-unified-nav-collapsed`. Do not clear unknown localStorage keys.
 - Predicting before an experiment is instructional, **not a gate**: no answer submission is required to enable a slider.
 - English-only, Korean and Mixed modes preserve scientific units, mathematical expressions and current slider state.
@@ -41,6 +41,7 @@ A green build means **automated regression checks passed**, not that every diagr
 - `qa-standard/quality-summary.json` — machine-readable gate summary, with PASS/FAIL/NOT_RUN per gate.
 - `qa-output/results.json`, `qa-output/quality-gates.json`, `qa-output/{theme}/{width}/ch{n}/{index}.png` — 248 screenshot evidence.
 - `qa-ch6-viewport/` — three viewport Chapter 6 captures.
+- `qa-ch5/` — three-viewport Chapter 5 native rendering, ROC/pole slider and inverse-comparison reports.
 - `qa-phase0/ss-baseline.json`, `qa-learning-output/results.json`, `qa-output/ss-theme-qa.json` — focused reports.
 
 **Release notation:** `AUTOMATED_PASS / MANUAL_PENDING` means software checks passed but graph interpretation and student learning remain pending. `APPROVED` requires manual gate evidence as well. Never convert `NOT_RUN` into `PASS`.
@@ -57,6 +58,7 @@ npx playwright install chromium
 node tests/qa-contracts.mjs
 node tests/ch6-sampling-foundations.mjs
 node tests/ch6-viewport-e2e.mjs
+node tests/ch5-viewport-e2e.mjs
 node tests/phase0-ss-baseline.mjs
 C_JOURNEY_BROWSER=1 node tests/ss-theme-qa.mjs
 npm run qa:learning
