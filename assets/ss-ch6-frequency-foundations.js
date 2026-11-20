@@ -251,16 +251,18 @@
       +'<p>'+explanation+'</p>';
   }
   function drawReconstruction(s){
-    var fs=Number(s.fs), f=Number(s.f), rec=foldedFrequency(f,fs);
+    var fs=Number(s.fs), f=Number(s.f);
+    var sourceFrequency=s.mode==="alias"?fs-f:f;
+    var rec=foldedFrequency(sourceFrequency,fs);
     var source=[],reconstructed=[],sampled=[],duration=.2;
     for(var i=0;i<=1000;i++){
       var t=duration*i/1000;
-      source.push([t*1000,Math.cos(TAU*f*t)]);
+      source.push([t*1000,Math.cos(TAU*sourceFrequency*t)]);
       reconstructed.push([t*1000,Math.cos(TAU*rec*t)]);
     }
     for(var n=0;n<=Math.floor(duration*fs+1e-9);n++){
       var sampleTime=n/fs;
-      sampled.push([sampleTime*1000,Math.cos(TAU*f*sampleTime)]);
+      sampled.push([sampleTime*1000,Math.cos(TAU*sourceFrequency*sampleTime)]);
     }
     drawChart("plot2",{
       xmin:0,xmax:200,ymin:-1.15,ymax:1.15,
@@ -272,7 +274,7 @@
       ]
     });
     setLegend(2,[
-      {color:C.coral,kind:"dashed",label:"Original CT cosine "+clean(f,3)+" Hz"},
+      {color:C.coral,kind:"dashed",label:"CT source "+clean(sourceFrequency,3)+" Hz"},
       {color:C.teal,kind:"line",label:"Ideal reconstructed cosine "+clean(rec,3)+" Hz"},
       {color:C.ink,kind:"stem",label:"Samples at "+clean(fs,3)+" Hz"}
     ]);
