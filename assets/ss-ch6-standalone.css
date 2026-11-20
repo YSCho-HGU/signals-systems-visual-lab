@@ -363,3 +363,31 @@ html.ss6-compact-workspace .ss6-theory-item h4{font-size:17px!important}
  html.ss6-compact-workspace .ss6-theory-grid{grid-template-columns:1fr}
  html.ss6-compact-workspace .ss6-theory-item:last-child{grid-column:auto}
 }
+
+/* Chapter 6.1 equation audit: readable math in prose and guided derivations. */
+html.ss6-compact-workspace .ss6-inline-math{display:inline;white-space:nowrap;font-weight:500}
+html.ss6-compact-workspace .ss6-inline-math .katex{font-size:1.04em}
+html.ss6-compact-workspace .deriv-math{
+  font-family:KaTeX_Main,'Cambria Math',serif!important;
+  font-size:clamp(17px,1.35vw,22px)!important;
+  font-weight:400!important;
+  color:var(--els-ink,var(--ink))!important;
+  line-height:1.55!important;
+  overflow-x:auto!important;
+  overflow-wrap:normal!important;
+  padding:12px 14px!important;
+}
+html.ss6-compact-workspace .deriv-math .katex-display{margin:0!important;overflow-x:auto!important;overflow-y:hidden!important}
+html.ss6-compact-workspace .deriv-math .katex-display>.katex{text-align:left!important;white-space:nowrap!important}
+html.ss6-compact-workspace .deriv-math math{font-size:1em}
+html.ss6-compact-workspace .ss6-theory-takeaway,
+html.ss6-compact-workspace #insight,
+html.ss6-compact-workspace .ss6-top-question p,
+html.ss6-compact-workspace .ss6-compact-instruction,
+html.ss6-compact-workspace .periodic-reading-note{
+  line-height:1.8!important;overflow-wrap:break-word!important
+}
+html.ss6-compact-workspace .experiment .controls{
+  position:static!important;top:auto!important;max-height:none!important;
+  overflow:visible!important;z-index:auto!important
+}
