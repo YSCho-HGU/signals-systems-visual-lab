@@ -290,7 +290,7 @@ function setupToolbar(){
  }
  var chapter=document.getElementById("ss6-chapter-picker");
  if(chapter)chapter.addEventListener("change",function(){
-   if(chapter.value!=="6")location.href="./index.html#chapter="+chapter.value;
+   if(chapter.value!=="6")location.href=chapter.value==="5"?"./chapter5.html":"./index.html#chapter="+chapter.value;
  });
 }
 setupToolbar();
