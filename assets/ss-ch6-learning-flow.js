@@ -115,7 +115,7 @@ function refreshFlow(){
  if(cue)cue.textContent=lang(data.read[0],data.read[1]);
 }
 var previousRender=renderModule;
-renderModule=function(){previousRender();applyFlow()};
+renderModule=function(){previousRender();applyFlow();document.dispatchEvent(new CustomEvent("ss-ch6-module-changed",{detail:{module:active}}))};
 var previousUpdate=update;
 update=function(){previousUpdate();refreshFlow()};
 function setupToolbar(){
