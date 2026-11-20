@@ -46,8 +46,10 @@ for(const [label,width] of [["desktop",1280],["mobile",390]]){
  for(const i of [0,1,2]){
    await steps.nth(i).click();
    await iframe.locator(".ss6-step-button.is-current").waitFor({state:"visible"});
+   await page.waitForTimeout(140);
    const state=await iframe.locator("body").evaluate(()=>{
-     return {mode:state.periodic.mode,fs:state.periodic.fs,f:state.periodic.f,
+     const simulation=window.__dtftApp?.state?.periodic||{};
+     return {mode:simulation.mode,fs:simulation.fs,f:simulation.f,
        plot0:!!document.getElementById("plot0"),plot1:!!document.getElementById("plot1"),
        lockFs:document.getElementById("ctrl_fs")?.disabled,
        lockF:document.getElementById("ctrl_f")?.disabled};
@@ -59,12 +61,11 @@ for(const [label,width] of [["desktop",1280],["mobile",390]]){
  }
  await steps.nth(1).click();
  const slider=iframe.locator("#ctrl_fs");
- await slider.fill("200");
- await slider.dispatchEvent("input");
+ await slider.evaluate(el=>{el.value="200";el.dispatchEvent(new Event("input",{bubbles:true}))});
  await page.waitForTimeout(120);
  const rate=await iframe.locator("body").evaluate(()=>({
-   fs:state.periodic.fs,f:state.periodic.f,
-   samplesPhysical:Math.floor(.2*state.periodic.fs+1e-9)+1,
+   fs:window.__dtftApp?.state?.periodic.fs,f:window.__dtftApp?.state?.periodic.f,
+   samplesPhysical:Math.floor(.2*(window.__dtftApp?.state?.periodic.fs||0)+1e-9)+1,
    sampleCountN:21,wide:document.documentElement.classList.contains("ss6-wide-experiment")
  }));
  check(rate.fs===200&&rate.f===10,label+": sampling-rate experiment changed f or ignored fs");
