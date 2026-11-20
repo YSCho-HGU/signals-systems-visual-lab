@@ -44,6 +44,49 @@ function renderTheoryEquations(root){
  render();
  if(!window.katex&&document.readyState!=="complete")window.addEventListener("load",render,{once:true});
 }
+
+function typesetInlineMath(root){
+ if(!root||active!=="periodic")return;
+ var targets=root.querySelectorAll(
+  ".ss6-theory-heading p,.ss6-theory-takeaway,.ss6-theory-item p,"
+  +".ss6-top-question p,.ss6-compact-instruction,#ss6-reading-cue,"
+  +".periodic-reading-note,#insight,.ss6-live-explanation p,"
+  +".ss6-lesson-purpose,.deriv-step p,.reading-note p");
+ var rx=/x\[n\+N₀\]|x\[n\]|x\(t\)|f_s\/f|f\/f_s|T_s|f_s|fₛ|Tₛ|N₀|Ω|(?<![A-Za-z])(?:F|f|n)(?![A-Za-z])/g;
+ var mapping={"x[n+N₀]":String.raw\`x[n+N_0]\`,"x[n]":String.raw\`x[n]\`,
+  "x(t)":String.raw\`x(t)\`,"f_s/f":String.raw\`\frac{f_s}{f}\`,
+  "f/f_s":String.raw\`\frac{f}{f_s}\`,"T_s":String.raw\`T_s\`,
+  "f_s":String.raw\`f_s\`,"fₛ":String.raw\`f_s\`,"Tₛ":String.raw\`T_s\`,
+  "N₀":String.raw\`N_0\`,"Ω":String.raw\`\Omega\`,
+  "F":"F","f":"f","n":"n"};
+ function mathNode(token){
+  var el=document.createElement("span");
+  el.className="ss6-inline-math";
+  el.dataset.tex=mapping[token]||token;
+  var fallback={"f_s":"fₛ","fₛ":"fₛ","T_s":"Tₛ","Tₛ":"Tₛ","N₀":"N₀",
+    "f/f_s":"f⁄fₛ","f_s/f":"fₛ⁄f"};
+  el.textContent=fallback[token]||token;
+  if(window.katex){try{window.katex.render(el.dataset.tex,el,{throwOnError:false});el.dataset.mathRendered="katex";}catch(e){}}
+  return el;
+ }
+ targets.forEach(function(target){
+  var walker=document.createTreeWalker(target,NodeFilter.SHOW_TEXT);
+  var nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  nodes.forEach(function(node){
+   if(node.parentElement&&node.parentElement.closest(".katex,.ss6-inline-math,math,code,pre"))return;
+   var t=node.nodeValue,m,parts=[],last=0;rx.lastIndex=0;
+   while((m=rx.exec(t))!==null){
+    if(m.index>last)parts.push(document.createTextNode(t.slice(last,m.index)));
+    parts.push(mathNode(m[0]));last=m.index+m[0].length;
+   }
+   if(!parts.length)return;
+   if(last<t.length)parts.push(document.createTextNode(t.slice(last)));
+   node.replaceWith.apply(node,parts);
+  });
+ });
+}
+window.__ss6InlineTypeset=typesetInlineMath;
+
 function theoryBlock(){
  var section=document.createElement("section");
  section.className="ss6-core-theory";
@@ -179,6 +222,7 @@ function applyFlow(){
  progress.appendChild(value);progress.appendChild(mark);
  if(last>=0){experiment.appendChild(progress);paint()}
  refreshFlow();
+ typesetInlineMath(root);
 }
 function refreshFlow(){
  var data=lookup(active),overview=document.querySelector(".ss6-sequence-overview");
@@ -187,6 +231,7 @@ function refreshFlow(){
  if(instruct)instruct.textContent=(active==="periodic"?periodicDo():lang(data.do[0],data.do[1]));
  var cue=document.getElementById("ss6-reading-cue");
  if(cue)cue.textContent=lang(data.read[0],data.read[1]);
+ typesetInlineMath(document.getElementById("content"));
 }
 var previousRender=renderModule;
 renderModule=function(){previousRender();applyFlow();document.dispatchEvent(new CustomEvent("ss-ch6-module-changed",{detail:{module:active}}))};
