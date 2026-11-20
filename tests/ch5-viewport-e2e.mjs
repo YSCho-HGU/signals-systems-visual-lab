@@ -54,6 +54,16 @@ try{
    check(!snapshot.overflow,prefix+"-"+lab+"-no-horizontal-overflow");
    check(snapshot.sticky!=="sticky"&&snapshot.sticky!=="fixed",prefix+"-"+lab+"-controls-not-sticky",snapshot.sticky);
    check(snapshot.hasHeaders&&snapshot.progress,prefix+"-"+lab+"-native-layout");
+   const math=await page.evaluate(()=>{
+     const hero=document.querySelector("#formula");
+     const steps=[...document.querySelectorAll(".deriv-math")];
+     return {hero:hero?.dataset.mathRendered||"",steps:steps.map(x=>x.dataset.mathRendered||""),
+       expected:window.ELSChapterFiveMath?.guides(window.__laplaceVisualLab.active,window.__laplaceVisualLab.state[window.__laplaceVisualLab.active]).length,
+       engine:typeof window.ELSChapterFiveMath?.renderAll==="function"};
+   });
+   check(math.engine&&math.expected===4,prefix+"-"+lab+"-math-model",math);
+   check(math.hero==="katex"&&math.steps.every(x=>x==="katex"),prefix+"-"+lab+"-katex-rendered",math);
+
    const range=page.locator('.lab .panel input[type="range"]').first();
    if(await range.count()){
     const change=await range.evaluate(el=>{
