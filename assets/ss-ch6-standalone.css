@@ -1,0 +1,59 @@
+/* Chapter 6 native workspace: no iframe, one browser scroll, six experiments. */
+html.ss6-compact-workspace {scroll-behavior:smooth}
+html.ss6-compact-workspace body{min-height:100dvh;overflow-x:hidden}
+.ss6-site-header{height:46px;position:sticky;top:0;z-index:90;display:flex;align-items:center;gap:12px;padding:5px 15px;background:var(--els-surface,#202222);border-bottom:1px solid var(--els-border,#444);color:var(--els-ink,#eee)}
+.ss6-site-header .ss6-home{font-size:12px;font-weight:750;color:var(--els-link,#b4d7ca);text-decoration:none;white-space:nowrap}
+.ss6-site-header .ss6-site-title{font-size:13px;font-weight:700;flex:1 1 auto;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.ss6-site-header .ss6-header-actions{display:flex;align-items:center;gap:8px}
+.ss6-site-header label{display:flex;gap:5px;align-items:center;font-size:11px}
+.ss6-site-header select{width:auto;max-width:160px;min-height:30px;padding:3px 6px;border-radius:7px;border:1px solid var(--els-border,#444);background:var(--els-surface,#222);color:var(--els-ink,#eee);font-size:11px}
+html.ss6-compact-workspace .app{display:grid!important;grid-template-columns:230px minmax(0,1fr)!important;min-height:calc(100dvh - 46px)!important;align-items:start}
+html.ss6-compact-workspace .sidebar{display:block!important;position:sticky!important;top:46px!important;height:calc(100dvh - 46px)!important;overflow-y:auto!important;padding:18px 11px!important;z-index:25}
+html.ss6-compact-workspace .sidebar .brand{padding:3px 9px 14px!important}
+html.ss6-compact-workspace .sidebar .brand h1{font-size:18px!important}
+html.ss6-compact-workspace .sidebar .side-label{margin:15px 9px 8px!important}
+html.ss6-compact-workspace .sidebar .nav{display:grid!important;gap:4px!important}
+html.ss6-compact-workspace .sidebar .nav button{min-height:45px!important;padding:8px!important}
+html.ss6-compact-workspace .sidebar .nav-name{font-size:12px!important}
+html.ss6-compact-workspace .sidebar .side-foot{margin-top:14px!important;padding:11px!important;font-size:11px!important;line-height:1.55}
+html.ss6-compact-workspace .main{display:block!important;width:100%!important;max-width:none!important;min-width:0!important;margin:0!important;padding:12px clamp(12px,1.8vw,28px) 42px!important}
+html.ss6-compact-workspace .topline,
+html.ss6-compact-workspace .heading,
+html.ss6-compact-workspace .footer{display:none!important}
+html.ss6-compact-workspace .question.ss6-top-question{margin-top:0!important}
+html.ss6-compact-workspace .ss6-sequence-overview{padding:12px 14px;margin:0 0 10px;border:1px solid var(--els-border,#555);border-radius:12px;background:var(--els-surface,#252525)}
+html.ss6-compact-workspace .ss6-sequence-overview .ss6-lesson-title{font-size:15px;font-weight:750;line-height:1.4;margin:0 0 3px}
+html.ss6-compact-workspace .ss6-sequence-overview .ss6-lesson-purpose{font-size:12px;color:var(--els-muted,#b7b7b7);line-height:1.45;margin:0}
+html.ss6-compact-workspace .ss6-compact-instruction{font-size:12px!important;line-height:1.5!important;margin:0 0 6px!important;padding:6px 9px!important;background:var(--els-info-bg,#303b3d)!important;border-radius:7px}
+html.ss6-compact-workspace .ss6-reading-cue{font-size:12px;line-height:1.45;color:var(--els-muted,#bbb);padding:5px 2px;margin:0 0 5px}
+html.ss6-compact-workspace .ss6-guide-details{border:1px solid var(--els-border,#555);border-radius:10px;background:var(--els-surface,#222);padding:7px 10px;margin-top:8px}
+html.ss6-compact-workspace .ss6-guide-details>summary{font-weight:700;font-size:13px;cursor:pointer;line-height:1.6}
+html.ss6-compact-workspace .ss6-guide-details>.derivation-panel,
+html.ss6-compact-workspace .ss6-guide-details>.reading-panel{border:0!important;padding:12px 0 2px!important;margin:0!important;box-shadow:none!important}
+html.ss6-compact-workspace .ss6-next-lesson{margin:13px 0;display:flex;justify-content:flex-end}
+html.ss6-compact-workspace .ss6-next-lesson button{border:1px solid var(--els-border,#555);border-radius:9px;background:var(--els-surface,#252525);color:var(--els-ink,#fff);padding:9px 13px;font-size:12px;font-weight:700;cursor:pointer}
+html.ss6-compact-workspace .ss6-progress{display:flex;gap:8px;align-items:center;justify-content:flex-end;font-size:12px;margin:8px 0 0}
+html.ss6-compact-workspace .ss6-progress button{border:1px solid var(--els-border,#555);border-radius:8px;background:var(--els-surface,#252525);color:var(--els-ink,#fff);padding:7px 10px;cursor:pointer}
+html.ss6-compact-workspace .controls{border-radius:12px!important}
+html.ss6-compact-workspace .figure{border-radius:12px!important}
+html.ss6-compact-workspace .charts.three .figure.wide{grid-column:1/-1!important}
+html.ss6-compact-workspace .legend{display:flex!important;flex-wrap:wrap;gap:5px 12px}
+@media(max-width:960px){
+ html.ss6-compact-workspace .app{grid-template-columns:195px minmax(0,1fr)!important}
+ html.ss6-compact-workspace .main{padding:9px 10px 36px!important}
+ html.ss6-compact-workspace .control-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:700px){
+ .ss6-site-header{height:43px;padding:3px 8px;gap:7px}
+ .ss6-site-header .ss6-site-title{display:none}
+ .ss6-site-header .ss6-header-actions{margin-left:auto;gap:4px}
+ .ss6-site-header label{font-size:0}
+ .ss6-site-header select{max-width:100px;min-height:29px}
+ html.ss6-compact-workspace .app{display:block!important;min-height:0!important}
+ html.ss6-compact-workspace .sidebar{position:sticky!important;top:43px!important;height:auto!important;max-height:72px!important;overflow:visible!important;padding:5px 7px!important;z-index:30}
+ html.ss6-compact-workspace .sidebar .brand,html.ss6-compact-workspace .sidebar .side-label,html.ss6-compact-workspace .sidebar .side-foot,html.ss6-compact-workspace .sidebar .mobile-bar{display:none!important}
+ html.ss6-compact-workspace .sidebar .nav{display:flex!important;gap:5px!important;overflow-x:auto!important;scrollbar-width:thin!important;padding:0 0 3px!important}
+ html.ss6-compact-workspace .sidebar .nav button{flex:0 0 auto!important;min-width:155px!important;min-height:36px!important;padding:6px 8px!important}
+ html.ss6-compact-workspace .main{padding:8px 8px 34px!important}
+ html.ss6-compact-workspace .charts{grid-template-columns:1fr!important}
+}
