@@ -1,0 +1,146 @@
+/* Chapter 5 native Laplace Visual Lab — visually aligned with Chapter 6.
+ * Keep original numerical models, plot canvases and ROC/pole pointer events.
+ */
+html.ss5-native{scroll-behavior:smooth}
+html.ss5-native body{min-height:100dvh;overflow-x:hidden;margin:0;background:var(--els-page,#fff);color:var(--els-ink,#213240)}
+html.ss5-native .ss5-site-header{
+  box-sizing:border-box;height:46px;position:sticky;top:0;z-index:90;
+  display:flex;align-items:center;gap:12px;padding:5px 15px;
+  border-bottom:1px solid var(--els-border,#ccc);
+  background:var(--els-surface,#fff)!important;color:var(--els-ink,#222)!important;
+}
+html.ss5-native .ss5-home{font-size:12px;font-weight:750;text-decoration:none;white-space:nowrap;color:var(--els-link,#216178)}
+html.ss5-native .ss5-site-title{font-size:13px;font-weight:750;flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html.ss5-native .ss5-header-actions{display:flex;gap:8px;align-items:center;min-width:0}
+html.ss5-native .ss5-site-header label{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;white-space:nowrap}
+html.ss5-native .ss5-site-header select{
+ width:auto;max-width:158px;min-height:30px;padding:3px 6px;border-radius:7px;
+ background:var(--els-surface,#fff);color:var(--els-ink,#222);
+ border:1px solid var(--els-border,#bbb);font-size:11px;cursor:pointer;
+}
+html.ss5-native .shell{
+ display:grid!important;grid-template-columns:230px minmax(0,1fr)!important;
+ align-items:start;min-height:calc(100dvh - 46px)!important;
+}
+html.ss5-native .nav{
+ position:sticky!important;top:46px!important;height:calc(100dvh - 46px)!important;
+ overflow-y:auto!important;z-index:24!important;padding:16px 11px!important;
+ background:var(--els-surface,#fff)!important;color:var(--els-ink,#222)!important;
+ border-right:1px solid var(--els-border,#ccc)!important;
+}
+html.ss5-native .brand{padding:7px 9px 14px!important;border-bottom:1px solid var(--els-border,#ccc)!important}
+html.ss5-native .brand .eyebrow{color:var(--els-muted,#647683)!important;font-size:10px!important}
+html.ss5-native .brand h1{font-size:18px!important;line-height:1.28!important;margin:6px 0!important;color:var(--els-ink,#222)!important}
+html.ss5-native .brand p{font-size:12px!important;color:var(--els-muted,#667)!important}
+html.ss5-native .navlabel{margin:14px 9px 9px!important;font-size:11px!important;color:var(--els-muted,#667)!important}
+html.ss5-native .tabs{display:grid!important;gap:4px!important}
+html.ss5-native .tabs button{
+ min-height:47px!important;padding:8px 10px!important;background:transparent!important;
+ color:var(--els-ink,#222)!important;border:1px solid transparent!important;
+ border-radius:9px!important;font-size:12px!important;gap:7px!important;
+}
+html.ss5-native .tabs button:hover{background:var(--els-surface-alt,#eef4f6)!important}
+html.ss5-native .tabs button.on{
+ border-color:var(--els-border,#bcd0d9)!important;
+ background:var(--els-surface-alt,#edf5f6)!important;
+ box-shadow:inset 3px 0 var(--els-link,#137c91)!important;
+}
+html.ss5-native .tabs .num{color:var(--els-link,#226177)!important;border-color:var(--els-border,#aac)!important;font-weight:800}
+html.ss5-native .tabname{font-size:12px!important;line-height:1.3!important}
+html.ss5-native .teach{
+ margin-top:14px!important;padding:10px 11px!important;border:1px solid var(--els-border,#bbb)!important;
+ background:var(--els-surface-alt,#f2f4f5)!important;color:var(--els-muted,#667)!important;
+ font-size:12px!important;line-height:1.5!important
+}
+html.ss5-native .teach strong{color:var(--els-ink,#222)!important}
+html.ss5-native .ss5-progress{margin-top:12px;padding:11px;border:1px solid var(--els-border,#bbb);border-radius:9px;display:grid;gap:7px;font-size:12px;color:var(--els-muted,#667)}
+html.ss5-native .ss5-progress button{min-height:34px;padding:7px 8px;background:var(--els-surface-alt,#eef2f3);color:var(--els-ink,#222);border:1px solid var(--els-border,#bbb);border-radius:7px;font-size:12px;cursor:pointer}
+html.ss5-native .main{
+ display:block!important;width:100%!important;max-width:none!important;
+ min-width:0!important;margin:0!important;
+ padding:15px clamp(12px,1.8vw,27px) 42px!important;
+}
+html.ss5-native .top{display:none!important}
+html.ss5-native .heading{padding-bottom:10px!important}
+html.ss5-native .heading h2{font-size:clamp(21px,2.1vw,29px)!important;margin:5px 0 5px!important;line-height:1.3!important}
+html.ss5-native .heading p{font-size:16px!important;line-height:1.6!important;color:var(--els-muted,#667)!important}
+html.ss5-native .heading .sup{font-size:11px!important;color:var(--els-link,#216a80)!important}
+html.ss5-native .formula{
+ margin:10px 0 12px!important;padding:11px 14px!important;
+ background:var(--els-info-bg,#eef5f9)!important;
+ color:var(--els-info-ink,#245270)!important;
+ border:1px solid var(--els-border,#ccd6db)!important;
+ border-left:4px solid var(--els-link,#216a80)!important;
+ border-radius:11px!important;gap:6px!important
+}
+html.ss5-native .formula .math{font-size:clamp(18px,1.6vw,22px)!important;overflow-x:auto;line-height:1.55;color:var(--els-info-ink,#245270)!important}
+html.ss5-native .formula .formhint{font-size:12px!important;color:var(--els-muted,#667)!important}
+html.ss5-native .lab{
+ display:grid!important;grid-template-columns:minmax(220px,265px) minmax(0,1fr)!important;
+ gap:12px!important;align-items:start!important;min-width:0!important
+}
+html.ss5-native .panel{
+ position:relative!important;top:auto!important;max-height:none!important;overflow:visible!important;
+ padding:14px!important;margin:0!important;
+ border:1px solid var(--els-border,#bbb)!important;border-radius:12px!important;
+ background:var(--els-surface,#fff)!important;color:var(--els-ink,#222)!important;
+}
+html.ss5-native .panel h3{font-size:18px!important;margin:3px 0 12px!important;color:var(--els-ink,#222)!important}
+html.ss5-native .over{color:var(--els-link,#246a7a)!important;font-size:11px!important}
+html.ss5-native .ctrl{margin:0 0 13px!important}
+html.ss5-native .ctrl label{font-size:14px!important;color:var(--els-ink,#222)!important;line-height:1.45!important;gap:6px!important}
+html.ss5-native .ctrl output{font-size:13px!important;font-weight:700!important;color:var(--els-link,#226e8a)!important}
+html.ss5-native .rangeEnds{font-size:11px!important;color:var(--els-muted,#667)!important}
+html.ss5-native .ctrl select{background:var(--els-surface-alt,#f5f7f8)!important;color:var(--els-ink,#222)!important;border:1px solid var(--els-border,#ccd)!important}
+html.ss5-native .preset{background:var(--els-surface-alt,#f3f6f7)!important;color:var(--els-link,#216a80)!important;border-color:var(--els-border,#ccd)!important;font-size:12px!important}
+html.ss5-native .btn{background:var(--els-surface-alt,#f3f6f7)!important;color:var(--els-ink,#222)!important;border-color:var(--els-border,#ccd)!important}
+html.ss5-native .btn.primary{background:var(--els-link,#246a80)!important;color:var(--els-primary-text,#fff)!important}
+html.ss5-native .smallnote{font-size:14px!important;line-height:1.6!important;color:var(--els-muted,#667)!important}
+html.ss5-native .outputs{gap:10px!important;min-width:0!important}
+html.ss5-native .plots{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+html.ss5-native .figure{
+ min-width:0!important;padding:13px 12px 10px!important;
+ border:1px solid var(--els-border,#ccc)!important;border-radius:12px!important;
+ background:var(--els-surface,#fff)!important;color:var(--els-ink,#222)!important
+}
+html.ss5-native .figure h3{font-size:16px!important;color:var(--els-ink,#222)!important;line-height:1.4!important}
+html.ss5-native .figure .sub{font-size:13px!important;color:var(--els-muted,#667)!important;line-height:1.5!important}
+html.ss5-native .figure canvas{height:clamp(205px,29dvh,320px)!important;max-width:100%!important}
+html.ss5-native .metrics,.ss5-native .compare-grid{min-width:0}
+html.ss5-native .metric{background:var(--els-surface,#fff)!important;color:var(--els-ink,#222)!important;border:1px solid var(--els-border,#ccd)!important}
+html.ss5-native .insight,html.ss5-native .quiz,html.ss5-native .compare-wrap{
+ background:var(--els-surface,#fff)!important;color:var(--els-ink,#222)!important;border-color:var(--els-border,#ccd)!important
+}
+html.ss5-native .compare-head,html.ss5-native .compare-sub,html.ss5-native .compare-footer{color:var(--els-muted,#667)!important}
+html.ss5-native .compare-card{background:var(--els-surface,#fff)!important;color:var(--els-ink,#222)!important;border-color:var(--els-border,#ccd)!important;min-width:0}
+html.ss5-native .compare-card.selected{outline:2px solid var(--els-link,#216a80)!important;outline-offset:-2px}
+html.ss5-native .deriv-math{font-size:clamp(17px,1.45vw,21px)!important;overflow-x:auto!important}
+html.ss5-native .footer{font-size:11px!important;color:var(--els-muted,#667)!important;margin-top:22px!important;line-height:1.5!important}
+html.ss5-native #studio-back{display:none!important}
+html.ss5-native :is(a,button,input,select):focus-visible{outline:3px solid var(--els-focus,#b56b18)!important;outline-offset:2px!important}
+@media(max-width:1150px){
+ html.ss5-native .shell{grid-template-columns:205px minmax(0,1fr)!important}
+ html.ss5-native .lab{grid-template-columns:minmax(210px,230px) minmax(0,1fr)!important}
+ html.ss5-native .plots{grid-template-columns:1fr!important}
+}
+@media(max-width:780px){
+ html.ss5-native .shell{display:block!important;min-height:0!important}
+ html.ss5-native .nav{position:relative!important;top:auto!important;height:auto!important;max-height:none!important;overflow:visible!important;padding:7px!important}
+ html.ss5-native .nav .brand,html.ss5-native .nav .navlabel,html.ss5-native .nav .teach,html.ss5-native .nav .ss5-progress{display:none!important}
+ html.ss5-native .tabs{display:flex!important;gap:5px!important;overflow-x:auto!important;padding-bottom:4px!important}
+ html.ss5-native .tabs button{flex:0 0 auto!important;min-width:160px!important;min-height:39px!important}
+ html.ss5-native .main{padding:10px 11px 34px!important}
+ html.ss5-native .lab{grid-template-columns:1fr!important}
+ html.ss5-native .panel{padding:12px!important}
+ html.ss5-native .controlgrid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px 13px!important}
+ html.ss5-native .figure canvas{height:240px!important}
+}
+@media(max-width:610px){
+ html.ss5-native .ss5-site-header{height:auto;min-height:43px;flex-wrap:wrap;padding:7px 9px;gap:6px}
+ html.ss5-native .ss5-site-title{font-size:12px;flex:1 1 55%}
+ html.ss5-native .ss5-header-actions{width:100%;justify-content:flex-end;gap:5px}
+ html.ss5-native .ss5-site-header label{font-size:0}
+ html.ss5-native .ss5-site-header select{max-width:130px;font-size:11px}
+ html.ss5-native .controlgrid,html.ss5-native .plots{grid-template-columns:1fr!important}
+ html.ss5-native .heading h2{font-size:21px!important}
+}
