@@ -85,6 +85,79 @@
     };
   }
 
+
+  // Shared compact layout for every Chapter 6 experiment.
+  // Move real nodes so the original input listeners, graphs and guides remain intact.
+  function arrangeChapter6() {
+    var root=document.getElementById("content");
+    if(!root)return;
+    document.documentElement.classList.add("ss6-compact-workspace");
+    var experiment=root.querySelector(".experiment");
+    if(!experiment)return;
+    var controls=experiment.querySelector(".controls");
+    var body=experiment.querySelector(".body-col");
+    var charts=body&&body.querySelector(".charts");
+    var question=body&&body.querySelector(".question");
+    if(question) {
+      question.classList.add("ss6-top-question");
+      root.insertBefore(question,experiment);
+      var heading=question.querySelector("h3");
+      if(heading)heading.textContent=lang("먼저 예측한 후 실험으로 확인하세요","Predict, then test your answer");
+    }
+    if(!controls||!body||!charts)return;
+    var title=controls.querySelector("h3");
+    if(title)title.textContent=lang("실험 설정","Experiment settings");
+    var notice=controls.querySelector(".notice");
+    if(notice)notice.hidden=true;
+    // Place the learning goal immediately above settings, rather than in a banner.
+    var note=body.querySelector(".periodic-reading-note");
+    if(note)charts.insertAdjacentElement("afterend",note);
+    var hero=root.querySelector(".hero-callout");
+    if(hero)charts.insertAdjacentElement("afterend",hero);
+    var fftGuide=body.querySelector(".fft-guide");
+    if(fftGuide)charts.insertAdjacentElement("afterend",fftGuide);
+    var actions=controls.querySelector(".btnrow");
+    if(actions) {
+      actions.classList.add("ss6-short-actions");
+      var reset=actions.querySelector("#reset");
+      var play=actions.querySelector("#play");
+      if(reset)reset.textContent=lang("초기화","Reset");
+      if(play)play.textContent=lang("자동 재생","Auto play");
+    }
+    controls.querySelectorAll(".ctrl").forEach(function(ctrl) {
+      var slider=ctrl.querySelector('input[type="range"]');
+      if(!slider)return;
+      // Remove old +/- controls if a previous rendering hook has placed them.
+      Array.from(ctrl.querySelectorAll("button")).forEach(function(button){
+        var text=(button.textContent||"").trim();
+        if(text==="+"||text==="-"||text==="−")button.remove();
+      });
+      var row=document.createElement("div");
+      row.className="ss6-inline-slider";
+      slider.parentNode.insertBefore(row,slider);
+      var minus=document.createElement("button"),plus=document.createElement("button");
+      minus.type=plus.type="button";
+      minus.className=plus.className="ss6-adjust-button";
+      minus.textContent="−";plus.textContent="+";
+      var label=ctrl.querySelector("label");
+      var name=label?label.textContent.trim():"parameter";
+      minus.setAttribute("aria-label",lang(name+" 감소","Decrease "+name));
+      plus.setAttribute("aria-label",lang(name+" 증가","Increase "+name));
+      function adjust(direction){
+        if(slider.disabled)return;
+        var step=Number(slider.step)||1;
+        var min=Number(slider.min),max=Number(slider.max);
+        var next=Math.max(min,Math.min(max,Number(slider.value)+direction*step));
+        next=min+Math.round((next-min)/step)*step;
+        slider.value=String(Number(next.toFixed(8)));
+        slider.dispatchEvent(new Event("input",{bubbles:true}));
+      }
+      minus.addEventListener("click",function(){adjust(-1)});
+      plus.addEventListener("click",function(){adjust(1)});
+      minus.disabled=plus.disabled=slider.disabled;
+      row.appendChild(minus);row.appendChild(slider);row.appendChild(plus);
+    });
+  }
   var originalRender=renderModule;
   renderModule=function() {
     if(active==="periodic") {
@@ -95,6 +168,7 @@
       m.q=cfg.q; m.a=cfg.a;
     }
     originalRender();
+    arrangeChapter6();
     // Preserve the chapter's normal standalone layout; maximize the embedded
     // experiment canvas when the host already provides unified chapter navigation.
     document.documentElement.classList.toggle("ss6-wide-experiment",
@@ -333,6 +407,46 @@
     +"html.ss6-wide-experiment .charts{grid-template-columns:1fr!important}"
     +"html.ss6-wide-experiment .figure canvas{height:clamp(175px,27dvh,235px)!important}"
     +"}";
+
+  // Shared Chapter 6: left navigation owns the experiment title. No repeated header row.
+  css.textContent +=
+    "html.ss6-compact-workspace .sidebar,html.ss6-compact-workspace .topline,html.ss6-compact-workspace .heading{display:none!important}"
+    +"html.ss6-compact-workspace .app{display:block!important;min-height:0!important}"
+    +"html.ss6-compact-workspace .main{max-width:none!important;margin:0!important;padding:5px 11px 18px!important}"
+    +"html.ss6-compact-workspace .ss6-step-nav{display:none!important}"
+    +"html.ss6-compact-workspace .experiment{display:block!important;max-width:none!important}"
+    +"html.ss6-compact-workspace .controls{position:static!important;max-height:none!important;overflow:visible!important;margin:0 0 7px!important;padding:8px 10px!important}"
+    +"html.ss6-compact-workspace .controls>.overlabel{display:none!important}"
+    +"html.ss6-compact-workspace .controls h3{font-size:13px!important;line-height:1.3!important;margin:0 0 6px!important}"
+    +"html.ss6-compact-workspace .control-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px 12px!important}"
+    +"html.ss6-compact-workspace .ctrl{min-width:0!important;margin:0!important}"
+    +"html.ss6-compact-workspace .ctrl label{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:6px!important;margin:0 0 2px!important;font-size:12px!important}"
+    +"html.ss6-compact-workspace .ss6-inline-slider{display:flex!important;align-items:center!important;gap:5px!important;min-width:0!important}"
+    +"html.ss6-compact-workspace .ss6-inline-slider input[type=range]{flex:1 1 auto!important;min-width:25px!important;width:100%!important;margin:0!important}"
+    +"html.ss6-compact-workspace .ss6-adjust-button{display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 29px!important;width:29px!important;height:30px!important;min-height:30px!important;padding:0!important;border-radius:7px!important;border:1px solid var(--els-border,#777)!important;background:var(--els-surface,#222)!important;color:var(--els-ink,#fff)!important;font-size:18px!important;cursor:pointer!important}"
+    +"html.ss6-compact-workspace .ss6-adjust-button:disabled{opacity:.35!important;cursor:not-allowed!important}"
+    +"html.ss6-compact-workspace .ends{font-size:10px!important;margin:0!important;line-height:1.15!important}"
+    +"html.ss6-compact-workspace .ss6-short-actions{display:flex!important;justify-content:flex-end!important;gap:6px!important;margin:5px 0 0!important}"
+    +"html.ss6-compact-workspace .ss6-short-actions .btn{width:auto!important;flex:0 0 auto!important;min-height:30px!important;padding:3px 12px!important;font-size:12px!important}"
+    +"html.ss6-compact-workspace .controls .notice{display:none!important}"
+    +"html.ss6-compact-workspace .ss6-top-question{padding:8px 11px!important;margin:0 0 7px!important}"
+    +"html.ss6-compact-workspace .ss6-top-question .overlabel{display:none!important}"
+    +"html.ss6-compact-workspace .ss6-top-question h3{font-size:13px!important;margin:0 0 2px!important}"
+    +"html.ss6-compact-workspace .ss6-top-question p{margin:0!important;font-size:13px!important;line-height:1.45!important}"
+    +"html.ss6-compact-workspace .ss6-top-question details{margin:3px 0 0!important}"
+    +"html.ss6-compact-workspace .body-col{gap:8px!important}"
+    +"html.ss6-compact-workspace .charts{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}"
+    +"html.ss6-compact-workspace .figure{min-width:0!important;padding:8px!important}"
+    +"html.ss6-compact-workspace .figure h3{font-size:13px!important;line-height:1.3!important;margin:0 0 2px!important}"
+    +"html.ss6-compact-workspace .figure p{font-size:11px!important;line-height:1.3!important;margin:0 0 4px!important}"
+    +"html.ss6-compact-workspace .figure canvas{height:clamp(180px,28dvh,260px)!important;width:100%!important}"
+    +"html.ss6-compact-workspace .hero-callout{padding:7px!important;margin:4px 0!important}"
+    +"html.ss6-compact-workspace .periodic-reading-note{margin:4px 0!important;padding:6px 9px!important;font-size:12px!important}"
+    +"html.ss6-compact-workspace #wrap_mode{display:block!important}"
+    +"html.ss6-compact-workspace #wrap_mode select{width:100%!important;min-height:32px!important;font-size:12px!important}"
+    +"html.ss6-compact-workspace .figure.wide{grid-column:1/-1!important}"
+    +"@media(max-width:800px){html.ss6-compact-workspace .control-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}"
+    +"@media(max-width:620px){html.ss6-compact-workspace .control-grid{grid-template-columns:1fr!important}html.ss6-compact-workspace .charts{grid-template-columns:1fr!important}html.ss6-compact-workspace .main{padding:4px 7px 16px!important}}";
   document.head.appendChild(css);
   renderModule();
 })();
