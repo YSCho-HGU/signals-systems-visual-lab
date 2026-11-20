@@ -80,9 +80,18 @@ try{
   expect(after["els-theme-v2"]===before["els-theme-v2"],prefix+"-theme-unchanged");
   for(const ch of [1,3,6,8]){
    await page.goto(BASE+"#chapter="+ch,{waitUntil:"load"});
+   if(ch===6){
+     await page.locator(".ss6-sequence-overview").waitFor({state:"visible"});
+     expect(page.url().includes("/chapter6.html"),prefix+"-native-ch6-route");
+     expect(await page.locator("iframe").count()===0,prefix+"-native-ch6-no-iframe");
+     expect(await page.locator(".sidebar [data-nav]").count()===baseline.chapters[ch-1].labs,prefix+"-native-ch6-six-labs");
+     expect(await page.locator(".ss6-progress").count()===1,prefix+"-native-ch6-progress-control");
+     expect((await page.evaluate(()=>JSON.parse(localStorage.getItem("els-ss-lab-progress-v1")||"[]"))).length===2,prefix+"-native-ch6-storage-preserved");
+     continue;
+   }
    await page.locator("#ss-progress-panel").waitFor({state:"visible"});
    expect((await page.locator("#ss-unified-nav .ss-unified-link").count())===baseline.chapters[ch-1].labs,prefix+"-route-ch"+ch);
-   if(ch===3||ch===6)expect(await page.locator("#ss-applications").isVisible(),prefix+"-sonification-ch"+ch);
+   if(ch===3)expect(await page.locator("#ss-applications").isVisible(),prefix+"-sonification-ch"+ch);
    if(ch===1)expect(await page.locator("#ss-applications").isVisible(),prefix+"-synthetic-ecg-ch1");
   }
   await page.screenshot({path:reportDir+"/ss-"+viewport.width+".png",fullPage:true});
