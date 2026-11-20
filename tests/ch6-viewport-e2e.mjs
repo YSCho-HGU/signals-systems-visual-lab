@@ -37,6 +37,31 @@ try{
     assert(overview.title&&overview.question&&overview.controls&&overview.charts,name+": lesson sections missing");
     assert(overview.title.y<overview.question.y&&overview.question.y<overview.controls.y&&overview.controls.y<overview.charts.y,name+": learning sequence order incorrect");
     assert(overview.plots===3,name+": 6.1 must include CT, DT, and reconstruction charts");
+    const theory=page.locator("#ss6-core-theory");
+    assert(await theory.count()===1,name+": missing normalized digital frequency theory");
+    assert(await theory.locator(".ss6-theory-item").count()===3,name+": missing CT → sampling → normalized frequency concepts");
+    const ordered=await page.evaluate(()=>{
+      const targets=[".ss6-sequence-overview","#ss6-core-theory",".ss6-lab-intro",".ss6-top-question",".ss6-step-controls",".ss6-observation-header",".ss6-interpretation"];
+      return targets.map(x=>document.querySelector(x)?.getBoundingClientRect().top+scrollY);
+    });
+    assert(ordered.every((y,i)=>Number.isFinite(y)&&(i===0||y>ordered[i-1])),
+      name+": theory-to-visual-lab order broken: "+JSON.stringify(ordered));
+    const labels=await page.locator(".ss6-step-card[data-ss6-step]").evaluateAll(list=>list.map(x=>x.dataset.ss6Step));
+    assert(labels.join(",")==="1,2,3,4",name+": step marker hierarchy does not show 1–4");
+    await page.locator("#ss6-theme-picker").selectOption("white");
+    assert(await page.evaluate(()=>document.documentElement.dataset.elsTheme)==="white",name+": White theme not selectable");
+    const white=await page.locator("#ss6-core-theory").evaluate(el=>({body:getComputedStyle(document.body).backgroundColor,
+      theory:getComputedStyle(el).backgroundColor,fontSize:getComputedStyle(el.querySelector(".ss6-theory-heading p")).fontSize}));
+    assert(white.body==="rgb(255, 255, 255)"&&white.theory==="rgb(255, 255, 255)",name+": White theme not white: "+JSON.stringify(white));
+    assert(parseFloat(white.fontSize)>=15,name+": theory body font too small");
+    await page.locator("#ss6-language-picker").selectOption("en");
+    await page.waitForFunction(()=>document.querySelector(".ss6-top-question details summary")?.textContent==="Show answer and explanation");
+    const english=await page.locator(".ss6-top-question details summary").innerText();
+    assert(english==="Show answer and explanation",name+": English answer button still Korean");
+    assert((await page.locator("#ss6-theory-title").innerText()).includes("Normalized discrete-time frequency"),
+      name+": English concept heading absent");
+    await page.locator("#ss6-language-picker").selectOption("mixed");
+    await page.locator("#ss6-theme-picker").selectOption("neutral-dark");
     assert(overview.buttons>=4,name+": inline +/- buttons missing");
     // Prediction is optional; an unfilled note must never disable an experiment.
     assert(await page.locator(".ss6-prediction-note").count()===1,name+": missing optional prediction field");
