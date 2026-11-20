@@ -10,8 +10,16 @@ on:
       - 'assets/**'
       - 'tests/**'
       - 'docs/qa/**'
+      - 'tests/qa-dashboard-data.mjs'
       - 'package.json'
       - '.github/workflows/visual-audit.yml'
+
+concurrency:
+  group: ss-qa-main
+  cancel-in-progress: true
+
+permissions:
+  contents: write
 
 jobs:
   visual-qa:
@@ -66,6 +74,35 @@ jobs:
         if: always()
         run: node tests/qa-summary.mjs
 
+      - name: Export per-chapter status snapshot for the Studio administrator
+        if: always()
+        run: node tests/qa-dashboard-data.mjs
+
+      - name: Publish latest QA results to public repository data
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs');
+            const path='qa-dashboard/latest.json';
+            if(!fs.existsSync(path))throw Error('QA snapshot generation failed');
+            const {owner,repo}=context.repo;
+            const content=Buffer.from(fs.readFileSync(path,'utf8')).toString('base64');
+            let sha;
+            try{
+              const current=await github.rest.repos.getContent({owner,repo,path,ref:'main'});
+              if(Array.isArray(current.data))throw Error('QA snapshot is a directory');
+              sha=current.data.sha;
+            }catch(error){
+              if(error.status!==404)throw error;
+            }
+            // Snapshot commits use GITHUB_TOKEN, do not trigger another QA run.
+            const result=await github.rest.repos.createOrUpdateFileContents({
+              owner,repo,path,branch:'main',sha,content,
+              message:'chore(qa): publish chapter status from run '+context.runId+' [skip ci]'
+            });
+            core.info('Published snapshot for run '+context.runId+' at '+result.data.commit.sha);
+
       - name: Upload quality reports and screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -73,6 +110,7 @@ jobs:
           name: ss-qa-standard-62-labs
           path: |
             qa-standard/
+            qa-dashboard/
             qa-output/
             qa-ch6-viewport/
             qa-learning-output/
