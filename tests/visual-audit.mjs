@@ -68,7 +68,7 @@ try{
         if(result.theme!==(theme==="warm-neutral"?"light":"dark"))errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 6 theme "+result.theme});
         if(result.overflow)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 6 overflow "+result.overflowWidth+"/"+result.viewport});
         if(result.bodyTextContrast<4.5)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 6 text contrast "+result.bodyTextContrast});
-        record.push({width,theme,chapter:ch,experiment:n,...result,scheme:result.theme});
+        record.push({...result,width,theme,chapter:ch,experiment:n,scheme:result.theme});
         await page.screenshot({path:join(chDir,String(n).padStart(2,"0")+".png"),fullPage:false});
       }
       continue;
