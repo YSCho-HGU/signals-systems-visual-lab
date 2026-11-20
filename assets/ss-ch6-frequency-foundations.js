@@ -105,6 +105,14 @@
       if(heading)heading.textContent=lang("먼저 예측한 후 실험으로 확인하세요","Predict, then test your answer");
     }
     if(!controls||!body||!charts)return;
+    if(active==="periodic"){
+      var live=document.createElement("section");
+      live.className="ss6-live-explanation";
+      live.id="ss6-live-explanation";
+      live.setAttribute("role","status");
+      live.setAttribute("aria-live","polite");
+      charts.parentNode.insertBefore(live,charts);
+    }
     var title=controls.querySelector("h3");
     if(title)title.textContent=lang("실험 설정","Experiment settings");
     var notice=controls.querySelector(".notice");
@@ -162,7 +170,8 @@
   renderModule=function() {
     if(active==="periodic") {
       var cfg=copyFor(state.periodic);
-      m.plots=cfg.plots;
+      m.plots=cfg.plots.concat([[lang("이상적 복원 신호 · 주파수 비교","Ideal reconstruction · frequency comparison"),
+        lang("표본에서 이상적 저역통과 복원으로 얻는 CT 파형","Continuous-time result of ideal baseband reconstruction")]]);
       m.metric=cfg.labels;
       m.subtitle=cfg.subtitle;
       m.q=cfg.q; m.a=cfg.a;
@@ -217,10 +226,64 @@
     }
   };
 
+
+  function foldedFrequency(f,fs){
+    var r=((f%fs)+fs)%fs;
+    return Math.min(r,fs-r);
+  }
+  function explainLive(s){
+    var panel=document.getElementById("ss6-live-explanation");
+    if(!panel)return;
+    var f=Number(s.f),fs=Number(s.fs),F=f/fs,rec=foldedFrequency(f,fs);
+    var other=fs-f;
+    var explanation=s.mode==="alias"
+      ?lang("두 CT 코사인 "+f+" Hz와 "+other+" Hz는 동일한 이산 신호 x[n]을 만듭니다. 이상적 기저대역 복원 결과는 "+clean(rec,3)+" Hz입니다.",
+        "The "+f+" Hz and "+other+" Hz CT cosines create identical x[n]. Ideal baseband reconstruction yields "+clean(rec,3)+" Hz.")
+      :lang("현재 x(t)는 "+f+" Hz 코사인입니다. "+fs+" Hz로 표본화한 x[n]의 주파수는 "+clean(F,4)+" cycles/sample입니다. 이상적 저역통과 복원 결과는 "+clean(rec,3)+" Hz입니다.",
+        "The current x(t) is a "+f+" Hz cosine. At sampling rate "+fs+" Hz its digital frequency is "+clean(F,4)+" cycles/sample. Ideal low-pass reconstruction yields "+clean(rec,3)+" Hz.");
+    panel.innerHTML='<div class="ss6-live-values">'
+      +'<span>f = <b>'+clean(f,3)+' Hz</b></span>'
+      +'<span>f<sub>s</sub> = <b>'+clean(fs,3)+' Hz</b></span>'
+      +'<span>T<sub>s</sub> = <b>'+clean(1000/fs,3)+' ms</b></span>'
+      +'<span>F = f/f<sub>s</sub> = <b>'+clean(F,4)+' cycles/sample</b></span>'
+      +'<span>Ω = <b>'+clean(TAU*F,4)+' rad/sample</b></span>'
+      +'<span>f<sub>rec</sub> = <b>'+clean(rec,3)+' Hz</b></span></div>'
+      +'<p>'+explanation+'</p>';
+  }
+  function drawReconstruction(s){
+    var fs=Number(s.fs), f=Number(s.f), rec=foldedFrequency(f,fs);
+    var source=[],reconstructed=[],sampled=[],duration=.2;
+    for(var i=0;i<=1000;i++){
+      var t=duration*i/1000;
+      source.push([t*1000,Math.cos(TAU*f*t)]);
+      reconstructed.push([t*1000,Math.cos(TAU*rec*t)]);
+    }
+    for(var n=0;n<=Math.floor(duration*fs+1e-9);n++){
+      var sampleTime=n/fs;
+      sampled.push([sampleTime*1000,Math.cos(TAU*f*sampleTime)]);
+    }
+    drawChart("plot2",{
+      xmin:0,xmax:200,ymin:-1.15,ymax:1.15,
+      xlabel:"physical time t (ms)",ylabel:"amplitude",xticks:5,
+      series:[
+        {xy:source,color:C.coral,width:2,dash:true},
+        {xy:reconstructed,color:C.teal,width:2.2},
+        {xy:sampled,color:C.ink,type:"stem",radius:3.1}
+      ]
+    });
+    setLegend(2,[
+      {color:C.coral,kind:"dashed",label:"Original CT cosine "+clean(f,3)+" Hz"},
+      {color:C.teal,kind:"line",label:"Ideal reconstructed cosine "+clean(rec,3)+" Hz"},
+      {color:C.ink,kind:"stem",label:"Samples at "+clean(fs,3)+" Hz"}
+    ]);
+  }
+
   var oldDrawing=drawPeriodic;
   drawPeriodic=function(s) {
     if(s.mode==="alias") {
       oldDrawing(s);
+      drawReconstruction(s);
+      explainLive(s);
       var oldLabels=copyFor(s).labels;
       for(var j=0;j<3;j++){var label=document.querySelectorAll(".metric .k")[j];if(label)label.textContent=oldLabels[j]}
       return;
@@ -282,6 +345,8 @@
       +" f_s/f need not be an integer and should not be confused with N₀.");
     var note=document.getElementById("frequency-learning-note");
     if(note)note.textContent=copyFor(s).note;
+    drawReconstruction(s);
+    explainLive(s);
   };
 
   var oldGuide=GUIDES6.periodic;
@@ -447,6 +512,40 @@
     +"html.ss6-compact-workspace .figure.wide{grid-column:1/-1!important}"
     +"@media(max-width:800px){html.ss6-compact-workspace .control-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}"
     +"@media(max-width:620px){html.ss6-compact-workspace .control-grid{grid-template-columns:1fr!important}html.ss6-compact-workspace .charts{grid-template-columns:1fr!important}html.ss6-compact-workspace .main{padding:4px 7px 16px!important}}";
+
+  css.textContent +=
+    "html.ss6-compact-workspace .ss6-live-explanation{border:1px solid var(--els-border,#666);border-left:3px solid #41b8ba;border-radius:8px;padding:8px 12px;background:var(--els-surface,#222);margin:0 0 8px}"
+    +"html.ss6-compact-workspace .ss6-live-values{display:flex;flex-wrap:wrap;gap:5px 17px;font-size:12px;font-variant-numeric:tabular-nums}"
+    +"html.ss6-compact-workspace .ss6-live-values span{white-space:nowrap}"
+    +"html.ss6-compact-workspace .ss6-live-explanation p{margin:5px 0 0!important;font-size:12px;line-height:1.5}"
+    +"html.ss6-compact-workspace .charts.three .figure.wide{grid-column:1/-1!important}"
+    +"html.ss6-compact-workspace .charts.three .figure.wide canvas{height:clamp(190px,28dvh,290px)!important}";
+  function fitChapterSixFrame(){
+    if(window.self===window.parent||!window.frameElement)return;
+    var frame=window.frameElement;
+    var height=Math.ceil(Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)+12);
+    if(height>0&&height<50000){
+      var last=Number(frame.dataset.ss6FitHeight||0);
+      if(Math.abs(height-last)>3){
+        frame.dataset.ss6FitHeight=String(height);
+        frame.style.setProperty("--ss6-content-height",height+"px");
+      }
+    }
+  }
+  var fitQueued=false;
+  function queueFit(){
+    if(fitQueued)return;
+    fitQueued=true;
+    requestAnimationFrame(function(){fitQueued=false;fitChapterSixFrame()});
+  }
+  if(window.self!==window.parent&&typeof ResizeObserver!=="undefined"){
+    var fitObserver=new ResizeObserver(queueFit);
+    fitObserver.observe(document.body);
+    fitObserver.observe(document.getElementById("content"));
+    window.addEventListener("resize",queueFit);
+    document.addEventListener("toggle",queueFit,true);
+    requestAnimationFrame(queueFit);
+  }
   document.head.appendChild(css);
   renderModule();
 })();
