@@ -391,3 +391,56 @@ html.ss6-compact-workspace .experiment .controls{
   position:static!important;top:auto!important;max-height:none!important;
   overflow:visible!important;z-index:auto!important
 }
+
+/* Chapter 6.1 constrained workbench: step 2 controls and step 3 plots are neighbors.
+   The controls NEVER stick beyond this workbench; step 4 follows in normal flow. */
+html.ss6-compact-workspace .ss6-control-plot-workspace{
+ display:grid!important;grid-template-columns:minmax(250px,295px) minmax(0,1fr)!important;
+ align-items:start!important;gap:12px!important;min-width:0!important;margin:0 0 14px!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace .ss6-step-controls{
+ position:relative!important;top:auto!important;max-height:none!important;
+ overflow:visible!important;z-index:auto!important;align-self:start!important;
+ width:100%!important;min-width:0!important;margin:0!important;
+ padding:17px 13px 16px 55px!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace .ss6-step-controls::before{content:none!important;display:none!important}
+html.ss6-compact-workspace .ss6-control-plot-workspace .ss6-controls-number{
+ position:absolute!important;top:16px!important;left:13px!important;
+ width:31px!important;height:31px!important;display:grid!important;place-items:center!important;
+ border:1.5px solid var(--els-link,#4ba7bd)!important;border-radius:8px!important;
+ background:var(--els-surface-alt,#23343b)!important;color:var(--els-link,#8bd7e5)!important;
+ font-weight:800!important;font-size:16px!important;line-height:1!important
+}
+html.ss6-compact-workspace .ss6-workbench-graphs{min-width:0!important;display:grid!important;gap:8px!important}
+html.ss6-compact-workspace .ss6-control-plot-workspace .ss6-observation-header{margin:0!important}
+html.ss6-compact-workspace .ss6-control-plot-workspace .charts{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:9px!important;min-width:0!important;margin:0!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace .figure.wide{grid-column:1/-1!important}
+html.ss6-compact-workspace .ss6-control-plot-workspace .figure canvas{
+ height:clamp(185px,28dvh,285px)!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace .control-grid{
+ display:grid!important;grid-template-columns:1fr!important;gap:8px!important
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace .ctrl{margin:0 0 7px!important}
+html.ss6-compact-workspace .ss6-control-plot-workspace .ctrl label{font-size:14px!important}
+html.ss6-compact-workspace .ss6-control-plot-workspace .ss6-compact-instruction{font-size:15px!important}
+@media(max-width:1120px){
+ html.ss6-compact-workspace .ss6-control-plot-workspace{grid-template-columns:minmax(210px,245px) minmax(0,1fr)!important}
+ html.ss6-compact-workspace .ss6-control-plot-workspace .charts{grid-template-columns:1fr!important}
+ html.ss6-compact-workspace .ss6-control-plot-workspace .figure.wide{grid-column:auto!important}
+}
+@media(max-width:800px){
+ html.ss6-compact-workspace .ss6-control-plot-workspace{grid-template-columns:1fr!important}
+ html.ss6-compact-workspace .ss6-control-plot-workspace .control-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ html.ss6-compact-workspace .ss6-control-plot-workspace .charts{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ html.ss6-compact-workspace .ss6-control-plot-workspace .figure.wide{grid-column:1/-1!important}
+}
+@media(max-width:560px){
+ html.ss6-compact-workspace .ss6-control-plot-workspace .control-grid,
+ html.ss6-compact-workspace .ss6-control-plot-workspace .charts{grid-template-columns:1fr!important}
+ html.ss6-compact-workspace .ss6-control-plot-workspace .figure.wide{grid-column:auto!important}
+}
