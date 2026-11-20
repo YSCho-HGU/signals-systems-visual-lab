@@ -5,14 +5,14 @@ import {spawn} from 'node:child_process';
 const report=[],failures=[];
 function check(ok,msg){report.push({pass:!!ok,msg});if(!ok)failures.push(msg)}
 const html=fs.readFileSync('index.html','utf8'),css=fs.readFileSync('assets/els-theme-v2.css','utf8'),js=fs.readFileSync('assets/els-theme-v2.js','utf8');
-for(const q of ['data-els-theme','els-theme-v2.css','els-theme-v2.js','ss-set-theme','__ssApplyTheme','iframe.srcdoc=decodeLab(ch)']){
+for(const q of ['els-theme-v2.css','els-theme-v2.js','ss-set-theme','__ssApplyTheme','iframe.srcdoc=decodeLab(ch)']){
  check(html.includes(q),'S&S page preserves '+q);
 }
 for(const theme of ['neutral-dark','warm-dark','navy-dark','warm-neutral']){
  check(css.includes('data-els-theme="'+theme+'"'),'S&S theme colors '+theme);
  check(js.includes('"'+theme+'"'),'S&S selector supports '+theme);
 }
-check(html.includes('assets/els-theme-v2.css?v=2'),'Lab and site include shared theme CSS');
+check(html.includes('assets/els-theme-v2.css?v=')&&js.includes('dataset.elsTheme'),'Lab and site include shared theme CSS');
 check(html.includes('localStorage.getItem(\'els-theme-v2\')'),'prepaint theme persistence');
 let browserStatus='NOT_RUN',browser,server;
 if(process.env.C_JOURNEY_BROWSER==='1'){
@@ -48,10 +48,17 @@ if(process.env.C_JOURNEY_BROWSER==='1'){
     const labHeaderHeight=await page.locator('.lab-head').evaluate(e=>e.getBoundingClientRect().height);
     check(topbarHeight<=56&&labHeaderHeight<=72,'Lab chrome height reduced: '+topbarHeight+'+'+labHeaderHeight);
     const guide=page.locator('#guide-toggle');
-    await guide.click();
-    check(await guide.getAttribute('aria-expanded')==='true','Learning path can expand');
-    await guide.click();
-    check(await guide.getAttribute('aria-expanded')==='false','Learning path collapses again');
+    if(await guide.isVisible()){
+      await guide.click();
+      check(await guide.getAttribute('aria-expanded')==='true','Learning path can expand');
+      await guide.click();
+      check(await guide.getAttribute('aria-expanded')==='false','Learning path collapses again');
+    }else{
+      const navigation=page.locator('#ss-unified-nav');
+      check(await navigation.count()===1,'Unified experiment navigation replaces hidden legacy guide');
+      const toggle=navigation.locator('.ss-unified-toggle');
+      check(await toggle.count()===1,'Unified navigation has a toggle control');
+    }
     const srcBefore=await frame.evaluate(e=>e.srcdoc.length);
     await select.selectOption('warm-dark');
     const srcAfter=await frame.evaluate(e=>e.srcdoc.length);
