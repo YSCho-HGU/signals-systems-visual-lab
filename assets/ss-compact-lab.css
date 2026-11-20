@@ -111,3 +111,37 @@ html[data-ss-view="lab"] .lab-area.focus .lab-frame-wrap{flex:1 1 auto;height:au
  html[data-ss-view="lab"] #guide-toggle{font-size:0!important}
  html[data-ss-view="lab"] #guide-toggle::first-letter{font-size:13px}
 }
+
+/* Teaching-first layout refinement: keep only one compact chapter action row.
+   Larger iframe viewport; no additional sticky banners above the graphs. */
+@media(min-width:701px){
+ html[data-ss-view="lab"] .topbar{
+  height:38px!important;min-height:38px!important;padding:2px 11px!important;
+  box-shadow:none!important
+ }
+ html[data-ss-view="lab"] .topbar .ss-studio-mark{height:22px!important;width:22px!important}
+ html[data-ss-view="lab"] .lab-area{
+  height:calc(100dvh - 38px)!important
+ }
+ html[data-ss-view="lab"] .lab-head{
+  min-height:40px!important;padding:3px 11px!important;gap:5px!important
+ }
+ html[data-ss-view="lab"] .lab-head .ch-icon{
+  height:25px!important;width:25px!important;font-size:11px!important
+ }
+ html[data-ss-view="lab"] .lab-tools .toolbtn{
+  min-height:30px!important;padding:3px 7px!important
+ }
+ html[data-ss-view="lab"] #ss-chapter-select{height:30px!important;min-height:30px!important}
+}
+@media(max-width:700px){
+ html[data-ss-view="lab"] .topbar{
+  height:38px!important;min-height:38px!important;padding:2px 8px!important
+ }
+ html[data-ss-view="lab"] .lab-area{height:calc(100dvh - 38px)!important}
+ html[data-ss-view="lab"] .lab-head{
+  min-height:38px!important;padding:3px 7px!important
+ }
+ html[data-ss-view="lab"] .lab-tools .toolbtn{min-height:30px!important}
+ html[data-ss-view="lab"] #ss-chapter-select{height:30px!important;min-height:30px!important}
+}
