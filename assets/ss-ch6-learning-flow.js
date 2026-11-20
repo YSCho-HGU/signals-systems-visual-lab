@@ -53,11 +53,11 @@ function typesetInlineMath(root){
   +".periodic-reading-note,#insight,.ss6-live-explanation p,"
   +".ss6-lesson-purpose,.deriv-step p,.reading-note p");
  var rx=/x\[n\+N₀\]|x\[n\]|x\(t\)|f_s\/f|f\/f_s|T_s|f_s|fₛ|Tₛ|N₀|Ω|(?<![A-Za-z])(?:F|f|n)(?![A-Za-z])/g;
- var mapping={"x[n+N₀]":String.raw\`x[n+N_0]\`,"x[n]":String.raw\`x[n]\`,
-  "x(t)":String.raw\`x(t)\`,"f_s/f":String.raw\`\frac{f_s}{f}\`,
-  "f/f_s":String.raw\`\frac{f}{f_s}\`,"T_s":String.raw\`T_s\`,
-  "f_s":String.raw\`f_s\`,"fₛ":String.raw\`f_s\`,"Tₛ":String.raw\`T_s\`,
-  "N₀":String.raw\`N_0\`,"Ω":String.raw\`\Omega\`,
+ var mapping={"x[n+N₀]":String.raw`x[n+N_0]`,"x[n]":String.raw`x[n]`,
+  "x(t)":String.raw`x(t)`,"f_s/f":String.raw`\frac{f_s}{f}`,
+  "f/f_s":String.raw`\frac{f}{f_s}`,"T_s":String.raw`T_s`,
+  "f_s":String.raw`f_s`,"fₛ":String.raw`f_s`,"Tₛ":String.raw`T_s`,
+  "N₀":String.raw`N_0`,"Ω":String.raw`\Omega`,
   "F":"F","f":"f","n":"n"};
  function mathNode(token){
   var el=document.createElement("span");
