@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0e2940">
+<meta name="description" content="DTFT Visual Lab: interactive signals, spectra, digital filters, phasors, FFT leakage. No installations or external libraries.">
+<title>Chapter 6 · DTFT | Engineering Learning Studio</title>
+<script>
+/* Standalone labs follow OS appearance. Integrated parent may override without reloading graphs. */
+(function(){
+ const query=window.matchMedia('(prefers-color-scheme: dark)');
+ function systemTheme(){if(!window.__ssThemeFromParent)document.documentElement.dataset.theme=query.matches?'dark':'light';}
+ systemTheme();
+ if(query.addEventListener)query.addEventListener('change',systemTheme);
+ else if(query.addListener)query.addListener(systemTheme);
+ window.addEventListener('message',function(event){
+   if(event.source!==window.parent||!event.data||event.data.type!=='ss-set-theme')return;
+   if(event.data.theme!=='dark'&&event.data.theme!=='light')return;
+   window.__ssThemeFromParent=true;
+   document.documentElement.dataset.theme=event.data.theme;
+ });
+})();
+</script>
+<style>
+:root{--bg:#f3f7f9;--nav:#112b41;--nav2:#173c53;--ink:#173046;--sub:#526a7c;--a:#0e8491;--coral:#f06d55;--gold:#e2ae3e;--line:#dce6ec;--paper:#fff;--pale:#ebf5f6;--r:18px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.58 system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #f3aa69;outline-offset:2px}h1,h2,h3,p{margin-top:0}a{color:var(--a)}
+.app{display:grid;grid-template-columns:280px minmax(0,1fr);min-height:100vh}.sidebar{background:linear-gradient(160deg,var(--nav),#0b2235);color:#eaf3f7;padding:28px 18px 22px;position:sticky;top:0;height:100vh;overflow:auto}.brand{padding:5px 13px 25px;border-bottom:1px solid #3b5263}.brand .over{font-size:11px;letter-spacing:.15em;font-weight:700;color:#88abbc}.brand h1{margin:12px 0 3px;font-size:23px;letter-spacing:-.04em;color:white}.brand p{font-size:12px;color:#b2cad5;margin:0}.side-label{color:#a7becb;letter-spacing:.12em;font-size:11px;font-weight:700;margin:25px 15px 10px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;border-radius:12px;display:flex;align-items:center;gap:10px;padding:12px 13px;color:#c7d6dc;text-align:left;transition:.12s ease;min-width:0}.nav button:hover{background:#254258}.nav button.active{color:#fff;background:#235766;box-shadow:inset 3px 0 #5fd0cc}.nav .num{border:1px solid #4c6b7a;color:#bad1dc;border-radius:7px;padding:2px 5px;font-size:11px;min-width:30px;text-align:center;font-weight:700}.nav button.active .num{border-color:#8bd9d4;color:#aeebe6}.nav-name{font-size:13px;font-weight:600;overflow-wrap:anywhere}.side-foot{margin-top:30px;background:#1b3b4f;border:1px solid #3f5969;border-radius:13px;padding:14px;font-size:12px;color:#c3d3df}.side-foot strong{display:block;color:white;margin-bottom:5px}
+.main{min-width:0;padding:29px clamp(18px,4vw,54px) 50px;max-width:1520px;width:100%;margin:0 auto}.topline{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}.breadcrumb{color:var(--sub);font-size:12px;font-weight:700;letter-spacing:.08em}.tag{font-size:11px;border-radius:30px;background:#d9eef0;color:#126b73;font-weight:700;padding:6px 10px}.heading{padding:0 0 20px;border-bottom:1px solid var(--line)}.heading h2{font-size:clamp(26px,3vw,37px);line-height:1.18;letter-spacing:-.045em;margin:0 0 10px}.heading p{color:var(--sub);max-width:960px;margin:0;font-size:15px}.hero-callout{margin:18px 0 22px;background:linear-gradient(100deg,#e5f4f5,#f4f9fa);padding:15px 19px;border:1px solid #d1e6e9;border-left:4px solid var(--a);border-radius:13px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}.hero-callout .formula{font-size:18px;font-family:Cambria,'Times New Roman',serif;color:#13495c;letter-spacing:.015em}.hero-callout .hint{font-size:12px;color:#55717e}.experiment{display:grid;grid-template-columns:minmax(230px,300px) minmax(0,1fr);gap:19px;align-items:start}.controls,.figure,.metric,.learning,.question{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 5px 19px #1e455407}.controls{padding:20px;position:sticky;top:16px}.overlabel{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--a);text-transform:uppercase}.controls h3{margin:5px 0 17px;font-size:20px;letter-spacing:-.02em}.ctrl{margin:0 0 20px}.ctrl label{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;font-weight:700;margin-bottom:8px}.ctrl output{font-size:12px;color:var(--a);font-variant-numeric:tabular-nums;white-space:nowrap}.ctrl input[type=range]{width:100%;accent-color:var(--a);cursor:pointer}.ctrl select{width:100%;background:#f9fcfd;border:1px solid #cfdee5;border-radius:10px;padding:9px}.ctrl .ends{display:flex;justify-content:space-between;color:#82929c;font-size:10px}.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.btn{border:1px solid #cadde4;background:white;border-radius:10px;color:#22516b;padding:10px 12px;font-weight:700;font-size:12px;flex:1}.btn:hover{border-color:#76b6bb;background:#f4fbfb}.btn.primary{background:#126f7d;color:white;border-color:#126f7d}.body-col{min-width:0;display:grid;gap:15px}.charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.charts.three{grid-template-columns:repeat(2,minmax(0,1fr))}.figure{padding:17px 17px 10px;min-width:0}.figure h3{font-size:15px;margin:0 0 2px}.figure p{font-size:11px;color:var(--sub);margin:0 0 10px}.figure canvas{width:100%;height:270px;display:block}.legend{display:none;gap:14px;flex-wrap:wrap;margin:8px 0 2px;font-size:11px;color:var(--sub)}.legend-item{display:flex;align-items:center;gap:6px}.periodic-reading-note{padding:13px 15px;border:1px solid #b5d8dc;border-left:4px solid #16849c;border-radius:10px;background:#effafa;color:#294650;line-height:1.7;font-size:13px;margin-bottom:12px}.periodic-reading-note strong{font-weight:800}.legend{flex-wrap:wrap;gap:9px 16px;line-height:1.5}.legend-item{font-size:12px}.legend-chip{--lc:#000;display:inline-block;position:relative;flex:0 0 auto}.legend-chip.line{width:18px;height:0;border-top:3px solid var(--lc)}.legend-chip.dashed{width:18px;height:0;border-top:3px dashed var(--lc)}.legend-chip.stem{width:18px;height:14px}.legend-chip.stem::before{content:'';position:absolute;left:8px;top:2px;width:2px;height:11px;background:var(--lc)}.legend-chip.stem::after{content:'';position:absolute;left:5px;top:0;width:8px;height:8px;border-radius:50%;background:var(--lc)}.legend-chip.vline{width:3px;height:14px;background:var(--lc);border-radius:999px}.fft-guide{background:#f0f8f8;border:1px solid #c7e1e4;border-left:4px solid #0e8491;border-radius:15px;padding:15px 19px}.fft-guide h3{font-size:17px;margin:5px 0}.fft-guide p{font-size:12px;color:#405d69;margin:5px 0 12px}.preset-row{display:flex;flex-wrap:wrap;gap:8px}.preset-row button{background:white;border:1px solid #a6c9cb;color:#17616a;border-radius:9px;font-size:12px;padding:8px 10px;font-weight:700}.preset-row button.selected{background:#0e8491;color:white;border-color:#0e8491}.fft-status{background:#fff;padding:9px 11px;border:1px solid #d6e7e9;border-radius:9px;margin:11px 0 0!important;font-size:12px}.fft-status span{display:block;margin-top:4px}.figure.wide{grid-column:span 2}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.metric{padding:14px 15px;overflow:hidden}.metric .k{color:var(--sub);font-size:11px;margin-bottom:4px}.metric .v{font-size:23px;font-weight:750;line-height:1.25;color:var(--ink);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.metric .detail{font-size:11px;color:var(--sub);margin-top:3px}.learning{padding:18px 20px;background:#fbfefe;border-left:4px solid var(--a)}.learning h3{margin:0 0 5px;font-size:15px}.learning p{margin:0;color:#3d6172}.question{padding:19px 20px}.question h3{font-size:16px;margin:0 0 9px}.question p{color:#405b6a;margin:0 0 11px}.question details{border-top:1px solid var(--line);padding-top:11px}.question summary{color:var(--a);font-weight:700;cursor:pointer}.question .answer{background:#f2f8f7;border-radius:10px;padding:13px;margin-top:10px;color:#2a4b55}.footer{margin-top:25px;font-size:12px;color:#7b8f9b;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.notice{color:var(--sub);font-size:12px;line-height:1.6;border-top:1px solid #e6eef1;padding-top:14px}.mono{font-family:ui-monospace,Consolas,'Courier New',monospace}.muted{color:var(--sub)}.mobile-bar{display:none}
+@media(max-width:1050px){.app{grid-template-columns:225px minmax(0,1fr)}.sidebar{padding:24px 10px}.main{padding:24px 22px 40px}.experiment{grid-template-columns:1fr}.controls{position:static}.control-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 20px}.charts .figure canvas{height:245px}}
+@media(max-width:750px){.app{display:block}.sidebar{position:relative;height:auto;padding:12px 12px 5px}.brand{padding:5px 10px 11px;border:0}.brand h1{font-size:19px;margin:3px 0}.brand p,.side-label,.side-foot{display:none}.nav{display:flex;overflow-x:auto;gap:8px;padding:4px 3px 13px}.nav button{white-space:nowrap;padding:9px;flex:0 0 auto;min-width:max-content}.nav .nav-name{white-space:nowrap;overflow-wrap:normal}.nav-name{font-size:12px}.main{padding:18px 13px 35px}.topline{margin-bottom:12px}.heading h2{font-size:27px}.charts,.charts.three{grid-template-columns:1fr}.figure.wide{grid-column:span 1}.metrics{grid-template-columns:1fr 1fr}.metric .v{font-size:20px}.hero-callout .formula{font-size:15px}.figure canvas{height:245px}.mobile-bar{display:block;color:#a7ced3;font-size:11px;padding-left:10px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+/* Guided Derivation: synchronized equation reveal and graph-reading panels */
+.derivation-panel,.reading-panel{background:#fff;border:1px solid #dce6ec;border-radius:16px;box-shadow:0 5px 19px #1e455407;padding:20px;min-width:0}
+.guide-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.guide-head h3,.reading-panel h3{font-size:18px;line-height:1.35;margin:5px 0 8px;color:#173046}
+.guide-head p{font-size:12px;color:#526a7c;margin:0 0 14px}
+.progress-badge{background:#e6f4f5;color:#086c76;font:700 12px system-ui,sans-serif;padding:6px 11px;border-radius:18px;white-space:nowrap}
+.guide-track{height:5px;background:#dcebee;border-radius:8px;margin:4px 0 14px;overflow:hidden}
+.guide-track>div{height:100%;background:#0e8491;border-radius:8px;transition:width .38s ease}
+.guide-steps{display:grid;gap:10px}
+.deriv-step{border:1px solid #dfe9ee;border-radius:12px;padding:12px 14px;background:#fcfdfd;min-width:0}
+.deriv-step.guide-enter{animation:guideReveal .58s cubic-bezier(.18,.65,.27,1) both;border-color:#75c5c7;background:#f2faf9}
+@keyframes guideReveal{from{opacity:0;transform:translateY(19px);filter:blur(2px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+.deriv-top{display:flex;align-items:center;gap:9px;font-size:13px;color:#173046;min-width:0}
+.step-index{display:inline-flex;align-items:center;justify-content:center;background:#e3f2f3;color:#087680;border-radius:50%;height:24px;width:24px;min-width:24px;font-size:12px;font-weight:800}
+.deriv-math{margin:9px 0;color:#174b5d;font-family:Cambria,'Cambria Math','Times New Roman',serif;font-size:17px;line-height:1.7;overflow-wrap:anywhere;white-space:normal;overflow-x:auto;padding:6px 10px;background:#eef7f8;border-left:3px solid #0e8491;border-radius:6px}
+.deriv-step p{font-size:13px;color:#486272;margin:8px 0 0;line-height:1.68}
+.guide-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.guide-actions button{background:#fff;color:#20546a;border:1px solid #c8dce5;border-radius:9px;padding:9px 12px;font:700 12px system-ui,'Malgun Gothic',sans-serif;cursor:pointer}
+.guide-actions button:hover{background:#edf8f8;border-color:#0e8491}
+.guide-actions button:disabled{opacity:.4;cursor:not-allowed}
+.guide-actions button.primary{color:#fff;background:#0e8491;border-color:#0e8491}
+.guide-actions button:focus-visible{outline:3px solid #e7ac3f;outline-offset:2px}
+.reading-panel{background:#fafdfd}
+.reading-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.reading-note{padding:11px 12px;border:1px solid #dce9eb;border-radius:12px;background:#fff}
+.plot-number{font-size:10px;letter-spacing:.09em;color:#0e8491;font-weight:800;display:block;margin-bottom:5px}
+.reading-note strong{display:block;color:#173046;font-size:13px}
+.reading-note p{font-size:12px;line-height:1.62;margin:6px 0 0;color:#344f60}
+.reading-note .ko-explain{color:#617b8a}
+.guide-check{font-size:13px;margin:12px 0 0;color:#395b68;border-top:1px solid #dce9eb;padding-top:11px}
+@media(max-width:750px){.derivation-panel,.reading-panel{padding:15px}.deriv-math{font-size:15px}.reading-grid{grid-template-columns:1fr}.guide-actions button{flex:1 1 auto}}
+@media(prefers-reduced-motion:reduce){.deriv-step.guide-enter{animation:none}.guide-track>div{transition:none}}
+
+.overlabel{font-size:10px;letter-spacing:.1em;font-weight:800;color:#0e8491;text-transform:uppercase}
+
+
+/* S&S Integrated Studio — common visual design tokens and learning components. */
+:root{--bg:#f3f7f9;--nav:#112b41;--ink:#173046;--sub:#526a7c;--a:#0e8491;--accent:#0e8491;--line:#dce6ec;--paper:#fff;--card:#fff;--r:16px}
+body{font-family:system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif;background:#f3f7f9;color:#173046}
+.figure,.metric,.controls,.panel,.derivation-panel,.reading-panel,.learning,.question,.insight,.quiz{border-radius:16px!important;box-shadow:0 5px 18px #15374a08!important;border-color:#dce6ec!important}
+.derivation-panel,.reading-panel{padding:20px!important}
+.guide-head h3,.reading-panel h3{color:#173046!important;font-size:18px!important;line-height:1.4!important}
+.deriv-math{font-family:Cambria,'Times New Roman',serif!important;line-height:1.55!important;overflow-wrap:anywhere}
+.deriv-step{border-radius:12px!important;overflow-wrap:anywhere}
+.guide-actions{gap:8px!important}
+.guide-actions button{font-family:system-ui,'Malgun Gothic',sans-serif!important;font-weight:700!important;font-size:12px!important;border-radius:10px!important;min-height:37px}
+.guide-actions button.primary{background:#0e8491!important;color:white!important;border-color:#0e8491!important}
+.guide-track{border-radius:100px!important;overflow:hidden}
+.guide-track>div{background:linear-gradient(90deg,#0e8491,#49bcb3)!important}
+.figure h3{color:#173046!important;font-weight:750!important}
+.figure canvas{display:block;max-width:100%}
+.figure p,.reading-panel p,.guide-head p{line-height:1.65}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #e2ae3e!important;outline-offset:2px!important}
+#studio-back{position:fixed;right:17px;top:14px;z-index:9999;display:flex;align-items:center;gap:8px;background:#112b41;color:#fff;text-decoration:none;border-radius:100px;padding:9px 15px;box-shadow:0 5px 20px #071c3066;font-size:12px;font-weight:750}
+#studio-back:hover{background:#0e8491}
+#studio-back[hidden]{display:none!important}
+@media(max-width:750px){.derivation-panel,.reading-panel{padding:15px!important}#studio-back{top:8px;right:9px;padding:7px 10px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.deriv-step{animation:none!important}}
+
+
+/* Rev5 integrated + standalone: dark mode; graph canvas stays light for legible axes/curves. */
+html[data-theme="dark"]{color-scheme:dark;--bg:#0c1827;--nav:#0c2234;--nav2:#193c51;--ink:#e5f1f8;--sub:#b0c7d3;--muted:#b0c7d3;--a:#75d9e3;--accent:#75d9e3;--teal:#75d9e3;--coral:#ff9a86;--warm:#ff9a86;--gold:#efc36e;--line:#355266;--paper:#192e42;--card:#192e42;--pale:#1f4050}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] .main,
+html[data-theme="dark"] main{color:var(--ink)}
+html[data-theme="dark"] .controls,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .figure,
+html[data-theme="dark"] .metric,
+html[data-theme="dark"] .learning,
+html[data-theme="dark"] .question,
+html[data-theme="dark"] .insight,
+html[data-theme="dark"] .quiz,
+html[data-theme="dark"] .derivation-panel,
+html[data-theme="dark"] .reading-panel,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .plot-card{background:#192e42!important;border-color:#365468!important;box-shadow:0 5px 22px #0002!important;color:#e7f3f9}
+html[data-theme="dark"] .deriv-step,
+html[data-theme="dark"] .step,
+html[data-theme="dark"] .reading .note,
+html[data-theme="dark"] .control,
+html[data-theme="dark"] .hero-callout,
+html[data-theme="dark"] .formula,
+html[data-theme="dark"] .axis-note,
+html[data-theme="dark"] .plot-instruction,
+html[data-theme="dark"] .reading-note,
+html[data-theme="dark"] .interpretation,
+html[data-theme="dark"] .guide-note{background:#203c4e!important;color:#e2f1f7!important;border-color:#426278!important}
+html[data-theme="dark"] .deriv-step.guide-enter,
+html[data-theme="dark"] .deriv-step.active,
+html[data-theme="dark"] .step.active{background:#20505a!important;border-color:#62bfc7!important}
+html[data-theme="dark"] .deriv-math,
+html[data-theme="dark"] .step .math,
+html[data-theme="dark"] .math,
+html[data-theme="dark"] .mathline,
+html[data-theme="dark"] .hero-callout .formula{color:#d9f4f4!important;background:#204557!important;border-color:#426a78!important}
+html[data-theme="dark"] .figure canvas,
+html[data-theme="dark"] .plot-card svg,
+html[data-theme="dark"] .plot-card canvas{background:#fbfdfe!important;border-radius:7px;color:#19394c;filter:none}
+html[data-theme="dark"] .plot-card .plot-title{background:#254759;color:#e5f3f8;border-color:#426477}
+html[data-theme="dark"] select,
+html[data-theme="dark"] input[type="number"],
+html[data-theme="dark"] input[type="text"]{background:#142d40;color:#e6f2f7;border:1px solid #507083}
+html[data-theme="dark"] button:not(.active):not(.on):not(.primary):not(.guide-primary){border-color:#45677b}
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .pill{background:#204957;color:#9be5e8}
+html[data-theme="dark"] .breadcrumb,
+html[data-theme="dark"] .crumb,
+html[data-theme="dark"] .intro,
+html[data-theme="dark"] .hint,
+html[data-theme="dark"] .reading .note p,
+html[data-theme="dark"] .axis-note{color:#b9d1dd!important}
+html[data-theme="dark"] .nav button:not(.active),
+html[data-theme="dark"] .tabs button:not(.on){color:#d3e6ee}
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .shell>.nav{background:linear-gradient(160deg,#0a2030,#102c40)}
+html[data-theme="dark"] nav:not(.sidebar):not(.nav) button:not(.active){background:#1e3b4e;color:#e5f3f8;border-color:#43677a}
+html[data-theme="dark"] nav:not(.sidebar):not(.nav) button.active{background:#136477;color:#fff}
+html[data-theme="dark"] .plot-card svg text{fill:#203b4e}
+
+
+/* Rev7 audited text contrast: no Light Mode ink inside dark surfaces. */
+:root{--ss-axis-text:#274f64;--ss-axis-bg:#f1f8fa}
+.axis-key{display:flex;flex-wrap:wrap;align-items:center;gap:5px 13px;margin:8px 0 4px;padding:8px 11px;border-radius:8px;border:1px solid #cfe1e9;background:var(--ss-axis-bg);color:var(--ss-axis-text);font:600 12px/1.55 system-ui,'Malgun Gothic',sans-serif;overflow-wrap:anywhere}
+.axis-key .ax-strong{font-weight:850;color:#086d79}
+html[data-theme="dark"]{--ss-axis-text:#d5edf5;--ss-axis-bg:#244457}
+html[data-theme="dark"] .axis-key{background:#244457!important;border-color:#54788b!important;color:#d5edf5!important}
+html[data-theme="dark"] .axis-key .ax-strong{color:#91e8eb!important}
+html[data-theme="dark"] :is(.reading-panel h3,.guide-head h3,.deriv-top,.reading-note strong,.reading .note strong,.compare-title,.figure h3,.plot-card .plot-title,.step strong,.check b,.insight strong){color:#eff9ff!important}
+html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain,.guide-check,.guide-head p,.deriv-step p,.reading-panel p,.reading .note p,.step p,.insight p,.quiz p,.check,.check .answer,.compare-sub,.compare-footer,.figure .sub,.figure p,.formhint,.heading p,.intro,.desc,.smallnote,.rangeEnds,.metric .k,.metric .d,.metric b,.legend,.bridge,.footer,.foot,.hint,.source,.crumb,.breadcrumb,.plot-instruction,.axis-note){color:#cce3ee!important}
+html[data-theme="dark"] :is(.reading-note,.reading .note,.step,.deriv-step,.compare-card,.compare-wrap,.check,.axis-note){background:#234254!important;border-color:#517185!important}
+html[data-theme="dark"] :is(.guide-check,.quiz details){border-color:#517185!important}
+html[data-theme="dark"] :is(.overlabel,.over,.plot-number,.eyebrow,.heading .sup,.step-index,.progress-badge,.metric .v,.metric strong,.ctrl output,.control output){color:#90e8ec!important}
+html[data-theme="dark"] :is(.guide-actions button:not(.primary),.step-buttons button:not(.primary),.btn:not(.primary),.preset,.check button,.quiz button,.actions button:not(.primary)){color:#e6f5fc!important;background:#234657!important;border-color:#54798d!important}
+html[data-theme="dark"] :is(.guide-actions button.primary,.step-buttons button.primary,.btn.primary,.actions button.primary){background:#0d697b!important;border-color:#67c6d1!important;color:#fff!important}
+html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain){opacity:1!important}
+html[data-theme="dark"] :is(.learning p,.question p,.learning .body,.question .body,.notice,.metric .detail,.ctrl .ends,.rangeEnds,.range-ends,.reading-panel .check,.reading-panel .question){color:#d1e7f0!important}
+html[data-theme="dark"] :is(.progress-badge,.step-index){background:#285666!important;color:#a6f2f0!important;border-color:#5b8593!important}
+/* Additional animated-convolution and FFT presets: previously retained light-only colors. */
+html[data-theme="dark"] :is(.motion-panel,.detail-panel,.fft-guide){background:#1c3548!important;border-color:#4c7385!important;color:#e8f5fb!important}
+html[data-theme="dark"] :is(.motion-panel h3,.detail-head h4,.fft-guide h3,.motion-status strong,.detail-status strong){color:#f0f9fd!important}
+html[data-theme="dark"] :is(.motion-lead,.motion-speed,.motion-caution,.motion-status small,.detail-sub,.detail-note,.area-slider label,.area-slider .ends,.fft-guide p){color:#cfe4ed!important}
+html[data-theme="dark"] :is(.motion-stage,.motion-stage.done,.motion-status,.detail-status,.detail-pill,.area-slider){background:#28495b!important;color:#e4f2f9!important;border-color:#567a8d!important}
+html[data-theme="dark"] .motion-stage.current{background:#255b63!important;color:#fff!important;border-color:#78d3d5!important}
+html[data-theme="dark"] :is(.motion-stage b,.motion-eq){background:#30566b!important;color:#a3edf0!important}
+html[data-theme="dark"] :is(.motion-actions button:not(.motion-primary),.detail-actions button:not(.detail-primary),.preset-row button:not(.selected)){background:#29495c!important;color:#eaf6fb!important;border-color:#5c8191!important}
+html[data-theme="dark"] :is(.motion-primary,.detail-primary,.preset-row button.selected){background:#086a79!important;color:#fff!important;border-color:#6ccbd0!important}
+html[data-theme="dark"] :is(.mathline,.mathline b,.detail-status b,.detail-pill,.area-slider output,.detail-head .overlabel){color:#9be7ec!important}
+html[data-theme="dark"] .fft-status{background:#284b5e!important;color:#e0f1f7!important;border-color:#5b8091!important}
+html[data-theme="dark"] .fft-status :is(b,span,strong){color:#e0f1f7!important}
+html[data-theme="dark"] .plot-card svg text{fill:#274b5e}
+@media(max-width:560px){.axis-key{font-size:11px;gap:4px 9px;padding:7px 8px}}
+
+
+/* Rev8: interactive graph probe, color-contrast safe in both themes. */
+.ss-hover-tip{position:absolute;z-index:35;pointer-events:none;display:none;min-width:190px;max-width:min(310px,calc(100% - 16px));padding:11px 12px;border-radius:11px;border:1px solid #4c8190;background:#102d41;color:#f1fbff;box-shadow:0 9px 26px rgba(5,22,36,.32);font:500 12px/1.55 system-ui,'Malgun Gothic',sans-serif;white-space:normal;overflow-wrap:anywhere}
+.ss-hover-tip .ss-hover-title{font-weight:800;color:#adf2f2;font-size:12px;margin-bottom:4px}
+.ss-hover-tip .ss-hover-coord{color:#e1f4fb;font-size:11px;margin-bottom:5px}
+.ss-hover-tip .ss-hover-line{display:flex;align-items:baseline;gap:7px;margin:3px 0;color:#f1fbff}
+.ss-hover-tip .ss-hover-swatch{display:inline-block;width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:var(--ss-line,#6ccbd0)}
+.ss-hover-tip .ss-hover-line b{font-weight:750;color:#fff}
+.ss-hover-tip .ss-hover-line.primary b{color:#a8f7df}
+.ss-hover-tip .ss-hover-note{color:#c0dbe7;font-size:10.5px;margin-top:5px;border-top:1px solid #486579;padding-top:4px}
+.ss-hover-v,.ss-hover-h{position:absolute;display:none;pointer-events:none;z-index:30;background:#e26b4f;opacity:.85}
+.ss-hover-v{width:1px;border-left:1px dashed #f18b63;background:transparent}
+.ss-hover-h{height:1px;border-top:1px dashed #f18b63;background:transparent}
+.ss-hover-dot{position:absolute;display:none;pointer-events:none;z-index:31;width:11px;height:11px;border-radius:50%;border:2px solid #fff;background:#ed7954;box-shadow:0 0 0 1px #123a4e;transform:translate(-50%,-50%)}
+.ss-hover-hint{font:600 11px/1.5 system-ui,'Malgun Gothic',sans-serif;color:#23576a;margin:5px 0 2px;letter-spacing:.01em}
+html[data-theme="dark"] .ss-hover-hint{color:#c6e9f2!important}
+html[data-theme="dark"] .ss-hover-tip{background:#0d2739;border-color:#6a98a9;color:#f4fbff}
+html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hover-note){color:#d6e9f3!important}
+.ss-hover-target:focus-visible{outline:3px solid #ee9868;outline-offset:3px}
+@media(max-width:560px){.ss-hover-tip{max-width:min(290px,calc(100% - 12px));padding:9px 10px;font-size:11px}.ss-hover-hint{font-size:10px}}
+
+</style>
+<script>
+/* Rev8 shared graph probe. Displays the cursor coordinate and an independently
+   evaluated analytic value when a function exists, otherwise an actual drawn
+   sample. No interpolation is presented as an exact analytic answer. */
+(function(){
+ 'use strict';
+ const states=new WeakMap();let queued=[];
+ const fmt=v=>{if(!Number.isFinite(v))return String(v);if(Math.abs(v)<1e-11)return '0';const a=Math.abs(v);if(a>=1e4||a<1e-4)return v.toExponential(3);return Number(v.toFixed(a>=100?2:a>=1?4:6)).toString()};
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ function el(tag,cls,parent){const x=document.createElement(tag);x.className=cls;parent.appendChild(x);return x}
+ function labels(host){return [...host.querySelectorAll('.legend > .lgitem,.legend > .legend-item,.legend > span')].map(e=>e.textContent.trim())}
+ function bind(target,d){
+  if(typeof target==='string')target=document.getElementById(target);
+  if(!target||!d)return;
+  let st=states.get(target);
+  if(!st){
+   const host=target.closest('.plotbox,.figure,.compare-card,.plot-card')||target.parentElement;
+   if(!host)return;
+   if(getComputedStyle(host).position==='static')host.style.position='relative';
+   const tip=el('div','ss-hover-tip',host),v=el('div','ss-hover-v',host),h=el('div','ss-hover-h',host),dot=el('div','ss-hover-dot',host);
+   tip.setAttribute('role','status');tip.setAttribute('aria-live','off');
+   let hint=host.querySelector('.ss-hover-hint');if(!hint){hint=el('div','ss-hover-hint',host);hint.textContent='ⓘ Hover / Tap / Focus: coordinates + signal values · 마우스·터치·키보드로 값 확인'}
+   target.classList.add('ss-hover-target');target.setAttribute('tabindex','0');
+   target.setAttribute('aria-description','Move pointer, tap, or use arrow keys to inspect signal values and coordinates.');
+   st={target,host,tip,v,h,dot,d:null,lastX:null,lastType:null};states.set(target,st);
+   target.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;move(st,e.clientX,e.clientY,e.pointerType)});
+   target.addEventListener('pointerdown',e=>{move(st,e.clientX,e.clientY,e.pointerType)});
+   target.addEventListener('pointerleave',e=>{if(e.pointerType!=='touch')hide(st)});
+   target.addEventListener('blur',()=>hide(st));
+   target.addEventListener('focus',()=>{const r=target.getBoundingClientRect();move(st,r.left+r.width*.55,r.top+r.height*.45,'keyboard')});
+   target.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End','Escape'].includes(e.key))return;
+    if(e.key==='Escape'){hide(st);return}e.preventDefault();const r=target.getBoundingClientRect();
+    const p=st.d.pad||{l:0,r:0,t:0,b:0},w=st.d.w,h=st.d.h;
+    const left=r.left+p.l/w*r.width,right=r.right-p.r/w*r.width;
+    let px=st.lastX===null?(left+right)/2:st.lastX;
+    if(e.key==='Home')px=left;else if(e.key==='End')px=right;else px+=((e.shiftKey?.05:.0125)*(right-left))*(e.key==='ArrowLeft'?-1:1);
+    move(st,clamp(px,left,right),r.top+r.height*.5,'keyboard',true)
+   });
+  }
+  st.d=d;
+  // A parameter change redraws the graph; hide stale numerical values.
+  hide(st);
+ }
+ function hide(st){st.tip.style.display='none';st.v.style.display='none';st.h.style.display='none';st.dot.style.display='none';st.lastX=null}
+ function pointToView(st,cx,cy){const r=st.target.getBoundingClientRect();const d=st.d;
+  return {x:r.left+cx/d.w*r.width,y:r.top+cy/d.h*r.height}
+ }
+ function nearest(data,x,xmin=-Infinity,xmax=Infinity){let best=null,bestDelta=Infinity;
+  for(const p of data||[]){if(!p||!Number.isFinite(p[0])||!Number.isFinite(p[1])||p[0]<xmin-1e-9||p[0]>xmax+1e-9)continue;const delta=Math.abs(p[0]-x);if(delta<bestDelta){bestDelta=delta;best=p}}
+  return best
+ }
+ function readSeries(st,x,y){const d=st.d;const values=[];
+  for(let i=0;i<(d.series||[]).length;i++){
+   const s=d.series[i];let v=null,sx=x,method='formula';
+   if(typeof s.fn==='function'){
+    try{v=s.fn(x)}catch(e){continue}
+   }else if(Array.isArray(s.points)){
+    const p=nearest(s.points,x,d.xmin,d.xmax);if(!p)continue;sx=p[0];v=p[1];method=s.discrete?'discrete':'sample';
+   }else continue;
+   if(!Number.isFinite(v))continue;
+   const ypixel=d.toPixel?d.toPixel(sx,v).y:d.pad.t+(d.ymax-v)/(d.ymax-d.ymin)*(d.h-d.pad.t-d.pad.b);
+   const py=d.pad.t+(d.ymax-y)/(d.ymax-d.ymin)*(d.h-d.pad.t-d.pad.b);
+   const off=Math.abs(ypixel-py);
+   values.push({i,label:s.label||'',color:s.color||'#42c9d2',x:sx,y:v,method,off,inRange:v>=d.ymin&&v<=d.ymax});
+  }
+  values.sort((a,b)=>a.off-b.off);
+  const lab=labels(st.host);for(const v of values){if(!v.label)v.label=lab[v.i]||d.ylabel||`Signal ${v.i+1}`}
+  return values
+ }
+ function rocInfo(d,x,y){const r=d.roc;if(!r)return null;
+  if(d.plane==='z'){const a=Math.hypot(x,y);return (a>r.inner+1e-8&&a<r.outer-1e-8)?'ROC 내부 (boundary excluded)':'ROC 외부 또는 경계'}
+  if(r.type==='all')return 'ROC: entire s-plane';
+  if(r.type==='none')return 'No ROC';
+  const inside=r.type==='right'?x>r.a:r.type==='left'?x<r.a:r.type==='strip'?x>r.a&&x<r.b:false;
+  return inside?'ROC 내부 (boundary excluded)':'ROC 외부 또는 경계'
+ }
+ function move(st,clientX,clientY,pointerType,fromKeyboard=false){
+  const d=st.d;if(!d)return;const rect=st.target.getBoundingClientRect();if(!rect.width||!rect.height)return;
+  let px=(clientX-rect.left)*d.w/rect.width,py=(clientY-rect.top)*d.h/rect.height;
+  const pad=d.pad||{l:0,r:0,t:0,b:0};
+  if(fromKeyboard)py=pad.t+(d.h-pad.t-pad.b)*.5;
+  if(px<pad.l||px>d.w-pad.r||py<pad.t||py>d.h-pad.b){hide(st);return}
+  let x,y;
+  if(d.plane&&d.center){x=(px-d.center.cx)/d.center.scale;y=(d.center.cy-py)/d.center.scale}
+  else{x=d.xmin+(px-pad.l)/(d.w-pad.l-pad.r)*(d.xmax-d.xmin);y=d.ymax-(py-pad.t)/(d.h-pad.t-pad.b)*(d.ymax-d.ymin)}
+  const items=[];let marker=null;
+  if(d.plane){
+   items.push({label:`${d.plane} = ${fmt(x)} ${y<0?'−':'+'} j${fmt(Math.abs(y))}`,value:`|${d.plane}|=${fmt(Math.hypot(x,y))}, ∠=${fmt(Math.atan2(y,x)*180/Math.PI)}°`,color:'#6dd7d9'});
+   const r=d.markers||[];let closest=null,dist=Infinity;
+   for(const m of r){const q=d.center?{x:d.center.cx+m.x*d.center.scale,y:d.center.cy-m.y*d.center.scale}:{x:pad.l+(m.x-d.xmin)/(d.xmax-d.xmin)*(d.w-pad.l-pad.r),y:pad.t+(d.ymax-m.y)/(d.ymax-d.ymin)*(d.h-pad.t-pad.b)};const delta=Math.hypot(px-q.x,py-q.y);if(delta<dist){closest=m;dist=delta}}
+   if(closest&&dist<17){items.push({label:`${closest.type} @ (${fmt(closest.x)}, ${fmt(closest.y)})`,value:closest.type==='Pole'?'× pole':closest.type==='Zero'?'○ zero':'vector endpoint',color:closest.type==='Pole'?'#ffa19a':'#93e8ed'})}
+   const region=rocInfo(d,x,y);if(region)items.push({label:'Region of convergence',value:region,color:'#b8e8c4'});
+  }else{
+   const values=readSeries(st,x,y);
+   if(values.length){
+    const ordered=values.slice(0,4);
+    for(const v of ordered){
+     const method=v.method==='formula'?'f(x) 직접 계산':v.method==='discrete'?'이산 표본':'계산 표본 (보간 없음)';
+     const extra=v.method==='formula'?'':` @ x=${fmt(v.x)}`;
+     items.push({label:v.label,value:`${fmt(v.y)}${extra}${v.inRange?'':' · 표시 범위 밖'}`,color:v.color,method,primary:v===values[0]});
+    }
+    const v=values.find(z=>z.inRange);if(v){const xplot=v.method==='formula'?x:v.x;marker={x:xplot,y:v.y}}
+    if(values.length>4)items.push({label:`+ ${values.length-4} additional series`,value:'',color:'#bedde5'});
+   }else items.push({label:'No finite signal value at this coordinate',value:'',color:'#f2c39c'});
+  }
+  const hostRect=st.host.getBoundingClientRect();const cx=rect.left+px/d.w*rect.width,cy=rect.top+py/d.h*rect.height;
+  const xlocal=cx-hostRect.left,ylocal=cy-hostRect.top;
+  const minX=rect.left+pad.l/d.w*rect.width-hostRect.left,maxX=rect.right-pad.r/d.w*rect.width-hostRect.left;
+  const minY=rect.top+pad.t/d.h*rect.height-hostRect.top,maxY=rect.bottom-pad.b/d.h*rect.height-hostRect.top;
+  st.v.style.cssText=`display:block;left:${xlocal}px;top:${minY}px;height:${maxY-minY}px`;
+  const showMarker=marker&&Number.isFinite(marker.y);
+  if(showMarker){const q=d.toPixel?d.toPixel(marker.x,marker.y):{x:pad.l+(marker.x-d.xmin)/(d.xmax-d.xmin)*(d.w-pad.l-pad.r),y:pad.t+(d.ymax-marker.y)/(d.ymax-d.ymin)*(d.h-pad.t-pad.b)};
+   const qx=rect.left+q.x/d.w*rect.width-hostRect.left,qy=rect.top+q.y/d.h*rect.height-hostRect.top;
+   st.h.style.cssText=`display:block;left:${minX}px;top:${qy}px;width:${maxX-minX}px`;
+   st.dot.style.cssText=`display:block;left:${qx}px;top:${qy}px`;
+  }else{st.h.style.display='none';st.dot.style.display='none'}
+  st.tip.replaceChildren();
+  const title=el('div','ss-hover-title',st.tip);title.textContent=d.plane?'Complex-plane probe / 복소평면 좌표':'Graph probe / 그래프 값 읽기';
+  const coord=el('div','ss-hover-coord',st.tip);coord.textContent=`${d.xlabel||'x'} = ${fmt(x)}   |   ${d.ylabel||'y'} (cursor) = ${fmt(y)}`;
+  for(const it of items){const line=el('div','ss-hover-line'+(it.primary?' primary':''),st.tip);const sw=el('i','ss-hover-swatch',line);sw.style.setProperty('--ss-line',it.color);const text=el('span','',line);const name=el('b','',text);name.textContent=it.label;const val=el('span','',text);val.textContent=(it.value?' = '+it.value:'')}
+  const note=el('div','ss-hover-note',st.tip);note.textContent=d.plane?'복소평면 좌표는 위치값이며, pole/zero는 가까운 경우에만 표시합니다.':items.some(x=>x.method&&x.method!=='f(x) 직접 계산')?'fn(x): 수식 직접 계산 · sample: 실제 계산 표본 (보간하지 않음)':'수식 함수가 제공된 경우 커서 x에서 직접 계산한 값입니다.';
+  st.tip.style.display='block';
+  // Measure after writing and keep the tooltip inside the card.
+  const tw=st.tip.offsetWidth||230,th=st.tip.offsetHeight||90;
+  const hostW=st.host.clientWidth||hostRect.width,hostH=st.host.clientHeight||hostRect.height;
+  const tx=clamp(xlocal+15,5,Math.max(5,hostW-tw-5));
+  const ty=clamp(ylocal+13,5,Math.max(5,hostH-th-5));
+  st.tip.style.left=tx+'px';st.tip.style.top=ty+'px';
+  st.lastX=cx;st.lastType=pointerType;
+ }
+ window.ssHoverBind=bind;
+ window.ssHoverQueue=d=>{queued.push(d)};
+ window.ssHoverResetQueue=()=>{queued=[]};
+ window.ssHoverAttachQueued=()=>{const cards=[...document.querySelectorAll('#plots .plot-card')];const all=queued.splice(0);for(let i=0;i<Math.min(cards.length,all.length);i++){const svg=cards[i].querySelector('svg');if(svg)bind(svg,all[i])}};
+ window.__ssHoverDebug=()=>({count:document.querySelectorAll('.ss-hover-target').length,visible:document.querySelectorAll('.ss-hover-tip').length});
+})();
+</script>
+<script>
+function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
+ const el=document.getElementById(id);if(!el)return;
+ const host=el.closest('.plotbox,.figure,.compare-card');if(!host)return;
+ let key=host.querySelector('.axis-key');if(!key){key=document.createElement('div');key.className='axis-key';key.setAttribute('aria-label','Graph axis information');const legend=host.querySelector('.legend');if(legend)host.insertBefore(key,legend);else host.appendChild(key)}
+ const fmtAxis=v=>{if(!Number.isFinite(v))return String(v);const a=Math.abs(v);return (a>=100?Number(v.toFixed(0)):a>=10?Number(v.toFixed(1)):Number(v.toFixed(2))).toString()};
+ key.textContent=`X-axis: ${xlabel} [${fmtAxis(x0)} … ${fmtAxis(x1)}]   |   Y-axis: ${ylabel} [${fmtAxis(y0)} … ${fmtAxis(y1)}]`;
+}
+</script>
+<meta name="ss-studio-version" content="Integrated Rev1">
+<link rel="stylesheet" href="./assets/design-system.css?v=1">
+<link rel="stylesheet" href="./assets/ss-lab-theme.css?v=5">
+<link rel="stylesheet" href="./assets/els-theme-v2.css?v=3">
+<script src="./assets/els-language.js?v=1" defer></script>
+<script src="./assets/els-theme-v2.js?v=2" defer></script>
+</head>
+<body><header class="ss6-site-header" aria-label="Engineering Learning Studio navigation">
+<a class="ss6-home" href="./index.html#overview">← Studio</a>
+<span class="ss6-site-title">Signals &amp; Systems · Chapter 6 · DTFT</span>
+<div class="ss6-header-actions">
+<label for="ss6-chapter-picker">Chapter <select id="ss6-chapter-picker" aria-label="Change Chapter">
+<option value="1">Ch 1</option><option value="2">Ch 2</option><option value="3">Ch 3</option><option value="4">Ch 4</option><option value="5">Ch 5</option><option value="6" selected>Ch 6</option><option value="7">Ch 7</option><option value="8">Ch 8</option>
+</select></label>
+<label for="ss6-language-picker">Language <select id="ss6-language-picker" aria-label="Language">
+<option value="mixed">Mixed</option><option value="en">English</option><option value="ko">한국어</option>
+</select></label>
+<label for="ss6-theme-picker">Theme <select id="ss6-theme-picker" data-els-theme-picker aria-label="Theme"></select></label>
+</div></header><a id="studio-back" href="./index.html#overview" aria-label="Return to integrated Visual Lab">← Learning Studio</a><script>try{if(window.self!==window.top){document.getElementById("studio-back").hidden=true;}}catch(e){}</script>
+<div id="app" class="app"></div>
+<script>
+
+'use strict';
+// Self-contained educational application. No external data, fonts, scripts, libraries or network calls.
+const PI=Math.PI,TAU=2*PI;
+const C={teal:'#0e8491',coral:'#ef7055',ink:'#193e51',gold:'#d9a138',gray:'#a4b5c2',muted:'#70889a',grid:'#e5edf1',light:'#b0dfe0'};
+const KO={intro:'\uc774\uc0b0\uc2dc\uac04 \ud478\ub9ac\uc5d0 \ubcc0\ud658\uc744 \uadf8\ub9bc\uc73c\ub85c \uc774\ud574\ud558\uace0 \uc9c1\uc811 \uc2e4\ud5d8\ud569\ub2c8\ub2e4.',desc:'\ud559\uc0dd\uc6a9 \uc2e4\uc2b5 \u00b7 \uc124\uce58 \ubd88\ud544\uc694 \u00b7 \ubaa8\ub4e0 \uacc4\uc0b0\uc740 \ube0c\ub77c\uc6b0\uc800\uc5d0\uc11c \uc2e4\ud589\ub429\ub2c8\ub2e4.',guide:'LEARNING EXPERIMENTS / 학습 주제',predict:'\uba3c\uc800 \uc608\uce21\ud558\uace0, \uc2ac\ub77c\uc774\ub354\ub97c \uc6c0\uc9c1\uc778 \ub4a4, \uacb0\uacfc\ub97c \uc124\uba85\ud574 \ubcf4\uc138\uc694.',controls:'\uc2e4\ud5d8 \ubcc0\uc218',observe:'\uacb0\uacfc \uad00\ucc30',question:'\uc0dd\uac01\ud574 \ubcf4\uae30',reveal:'\uc815\ub2f5 \ubc0f \uc124\uba85 \ubcf4\uae30',reset:'\uc804\uccb4 \ucd08\uae30\ud654',play:'\uc790\ub3d9 \uc7ac\uc0dd',pause:'\uc77c\uc2dc \uc815\uc9c0',stamp:'\uc18c\ub9ac\uac00 \uc5c6\uc5b4\ub3c4 \uadf8\ub9bc\uacfc \uc218\uce58\ub9cc\uc73c\ub85c \uc124\uba85\ud560 \uc218 \uc788\ub3c4\ub85d \uc124\uacc4\ud588\uc2b5\ub2c8\ub2e4.'};
+const MODULES=[
+ {id:'periodic',short:'01',title:'Digital Frequency / 디지털 주파수',en:'Digital Frequency, Sampling & Periodicity',subtitle:'Set sampling rate f_s, compare two different analog cosines, and observe how their samples agree. The second graph shows the 2π-periodic DTFT of those N samples.',formula:'\u03a9 = 2\u03c0f / f<sub>s</sub> &nbsp; | &nbsp; X(e<sup>j(\u03a9+2\u03c0)</sup>) = X(e<sup>j\u03a9</sup>)',controls:[{key:'fs',name:'Sampling rate f_s',type:'range',min:100,max:200,step:20,unit:' Hz'},{key:'f',name:'Analog tone f',type:'range',min:5,max:45,step:1,unit:' Hz'},{key:'ns',name:'Visible sample count N',type:'range',min:12,max:32,step:2,unit:' samples'}],plots:[['Analog Waves and Their Samples','Two different analog frequencies; dots at integer n are identical'],['DTFT of N Samples · 2π-Periodic','Finite-record magnitude |X_N(e^{jΩ})|/N from exactly the N visible samples']],metric:['Digital frequency Ω/π','Other analog tone f₂','Max sample difference'],q:'Why do the two continuous-time cosines at f and (f_s − f) Hz have exactly the same discrete samples?',a:'At t=n/f_s, cos(2π(f_s−f)n/f_s) = cos(2πn−2πfn/f_s) = cos(2πfn/f_s), because n is an integer. Sampling alone cannot distinguish these two analog cosines.'},
+ {id:'pairs',short:'02',title:'DTFT Transform Pairs / 변환쌍',en:'Essential Transform Pairs',subtitle:'\uc815\uc758\uc5d0\uc11c \ucd9c\ubc1c\ud558\uc5ec \uae30\ubcf8 \uc2e0\ud638\uc758 \uc2dc\uac04 \ubaa8\uc591\uacfc \uc8fc\ud30c\uc218 \uc2a4\ud399\ud2b8\ub7fc \uc0ac\uc774\uc758 \uad00\uacc4\ub97c \ube44\uad50\ud569\ub2c8\ub2e4.',formula:'X(e<sup>j\u03a9</sup>) = \u03a3 x[n] e<sup>\u2212j\u03a9n</sup>',controls:[{key:'kind',name:'Signal',type:'select',values:[['impulse','Impulse \u03b4[n]'],['shift','Shifted impulse \u03b4[n-n0]'],['exp','Causal exponential a^n u[n]'],['rect','Rectangular M samples'],['sym','Two-sided exponential a^|n|']]},{key:'a',name:'Decay factor a',type:'range',min:.1,max:.95,step:.05,unit:''},{key:'m',name:'Rectangle length M',type:'range',min:2,max:20,step:1,unit:''},{key:'n0',name:'Shift n0',type:'range',min:0,max:10,step:1,unit:''},{key:'showphase',name:'Frequency view',type:'select',values:[['mag','Magnitude'],['phase','Phase']]}],plots:[['Time-Domain Sequence / 시간 수열','Integer-index sequence'],['Frequency Spectrum / 주파수 스펙트럼','Continuous and periodic frequency axis']],metric:['DC value X(0)','Nyquist X(\u03c0)','Important clue'],q:'Why is X(e^{j0}) the sum of all sequence samples, not automatically the average?',a:'At \u03a9=0 each complex exponential equals 1: X(0)=\u03a3_n x[n]. Only dividing by the number of samples produces a finite-record average.'},
+ {id:'phase',short:'03',title:'Time Shift & Phase / 위상',en:'Magnitude, Phase & Delay',subtitle:'\uc2dc\uac04 \uc9c0\uc5f0\uc774 \uc6d0\ub798 \uc2a4\ud399\ud2b8\ub7fc\uc758 \ud06c\uae30\ub294 \ubcf4\uc874\ud558\uba74\uc11c \uc704\uc0c1\uc5d0\ub294 \uc120\ud615\uc801 \ubcc0\ud654\ub97c \uc8fc\ub294 \uac83\uc744 \ud655\uc778\ud569\ub2c8\ub2e4.',formula:'x[n-n<sub>0</sub>] &nbsp; \u2194 &nbsp; e<sup>\u2212j\u03a9n<sub>0</sub></sup> X(e<sup>j\u03a9</sup>)',controls:[{key:'m',name:'Pulse length M',type:'range',min:3,max:11,step:2,unit:''},{key:'n0',name:'Delay n0',type:'range',min:0,max:10,step:1,unit:' samples'}],plots:[['Time Shift / 시간 이동','Original and delayed pulse'],['Magnitude / 크기 비교','Delay leaves magnitude unchanged'],['Phase Difference / 위상 차','Expected straight line -\u03a9 n0']],metric:['Delay','Magnitude difference','Phase slope'],q:'If two signals have identical magnitude spectra, must their sample values be identical?',a:'No. Time shifts preserve magnitude but change phase. Magnitude alone is not enough to reconstruct the original temporal alignment.'},
+ {id:'phasor',short:'04',title:'Phasor Summation / 복소 벡터 합',en:'Why a Moving Average Filters',subtitle:'\uc774\ub3d9\ud3c9\uade0\uc758 M\uac1c \ud0ed\uc774 \ubcf5\uc18c\ud3c9\uba74\uc5d0\uc11c \ud569\uc131\ub418\ub294 \ubc29\ubc95\uc744 \ubcf4\uba74, \uc5b4\ub5a4 \uc8fc\ud30c\uc218\uac00 \uc0c1\uc1c4\ub418\ub294\uc9c0 \uc9c1\uad00\uc801\uc73c\ub85c \uc54c \uc218 \uc788\uc2b5\ub2c8\ub2e4.',formula:'H(e<sup>j\u03a9</sup>) = (1/M) \u03a3<sub>k=0</sub><sup>M\u22121</sup> e<sup>\u2212j\u03a9k</sup>',controls:[{key:'m',name:'Moving average taps M',type:'range',min:2,max:12,step:1,unit:''},{key:'w',name:'Digital frequency \u03a9 / \u03c0',type:'range',min:0,max:1,step:.01,unit:' \u03c0'}],plots:[['Phasor Sum / 복소 벡터 합','Each tap contributes a rotating phasor'],['Frequency Response / 주파수 응답','Current frequency is marked']],metric:['Current |H|','DC gain','Passband delay'],q:'Why does a four-tap average cancel the alternating signal (-1)^n?',a:'At \u03a9=\u03c0 the four unit phasors are +1,-1,+1,-1. Their sum is zero. For a general M, zeros occur at \u03a9=2\u03c0k/M for nonzero k not divisible by M.'},
+ {id:'filter',short:'05',title:'Digital Filtering / 디지털 필터링',en:'A Real Sensor Filter',subtitle:'100 Hz\ub85c \uc0d8\ud50c\ub9c1\ud55c 2 Hz \uc720\ud6a8 \uc131\ubd84\uacfc 45 Hz \uac04\uc12d \uc131\ubd84\uc744 \uc774\ub3d9\ud3c9\uade0\uc73c\ub85c \ucc98\ub9ac\ud558\uace0, \uac10\uc1e0\ub7c9\uacfc \uc9c0\uc5f0\uc744 \uc608\uce21\ud569\ub2c8\ub2e4.',formula:'y[n] = (1/M) \u03a3<sub>k=0</sub><sup>M\u22121</sup> x[n-k] &nbsp; | &nbsp; f<sub>s</sub> = 100 Hz',controls:[{key:'m',name:'Filter length M',type:'range',min:2,max:20,step:1,unit:' taps'},{key:'fu',name:'Useful frequency',type:'range',min:1,max:15,step:1,unit:' Hz'},{key:'fn',name:'Noise frequency',type:'range',min:20,max:49,step:1,unit:' Hz'},{key:'an',name:'Noise amplitude',type:'range',min:0,max:1,step:.1,unit:''},{key:'startup',name:'Time interval',type:'select',values:[['steady','Steady state'],['startup','Startup transient']]}],plots:[['Input & Output / 입력·출력','Compare measured samples and filtering'],['Filter Response / 필터 응답','Theoretical gain at each frequency']],metric:['Useful gain','Noise gain','Group delay'],q:'If increasing M smooths the waveform more, does it always reduce every high-frequency component?',a:'No. Moving-average magnitude has frequency-dependent sidelobes and exact zeros. A larger M narrows the main lobe and increases delay, but attenuation is not monotone at every individual frequency.'},
+  {id:'fft',short:'06',title:'DFT · FFT · Leakage / 누설',en:'Finite Records and Spectral Leakage',subtitle:'정수 주기와 비정수 주기 관측을 비교하고, Hann window와 zero padding이 스펙트럼에 주는 영향을 확인합니다.',formula:'x<sub>w</sub>[n] = w[n] cos(2πfn/f<sub>s</sub>) | DFT bins: k f<sub>s</sub>/N',controls:[{key:'n',name:'Observed samples N',type:'select',values:[[128,'128'],[256,'256'],[512,'512'],[1024,'1024']]},{key:'f',name:'Tone frequency',type:'range',min:3.5,max:5.5,step:.05,unit:' Hz'},{key:'pad',name:'Zero padding factor',type:'select',values:[[1,'1x (none)'],[2,'2x'],[4,'4x'],[8,'8x']]},{key:'window',name:'Window',type:'select',values:[['rect','Rectangular'],['hann','Hann']]}],plots:[['Windowed Signal / 창 적용 신호','Full record: windowed real cosine'],['DFT Frequency Grid / 주파수 격자','Dense DTFT curve and discrete DFT bins'],['Rectangular vs Hann — Leakage (dB)','Same signal; see far sidelobes and main-lobe width']],metric:['Original DFT bin spacing','Displayed FFT bin spacing','Observation time'],q:'N=512, fs=128 Hz일 때 4.00 Hz와 4.15 Hz의 차이는 무엇인가요? Hann window와 zero padding은 leakage를 제거하나요?',a:'4.00 Hz는 16주기가 관측되어 DFT bin k=16과 일치합니다. 4.15 Hz는 16.6주기로 DFT 주파수 격자 사이에 놓여 여러 bin에 값이 나타납니다(leakage). Hann window는 먼 sidelobe를 줄이는 대신 중심 main lobe를 넓히며, zero padding은 동일한 유한 신호의 스펙트럼을 더 촘촘하게 표시할 뿐 측정 정보는 늘리지 않습니다.'}
+];
+const defaults={periodic:{fs:100,f:10,ns:24},pairs:{kind:'exp',a:.7,m:8,n0:3,showphase:'mag'},phase:{m:7,n0:3},phasor:{m:4,w:.5},filter:{m:4,fu:2,fn:45,an:.5,startup:'steady'},fft:{n:'512',f:4.15,pad:'1',window:'rect'}};
+const state=JSON.parse(JSON.stringify(defaults));
+let active='periodic',playTimer=null,resizeObserver=null,renderQueued=false;
+const $=id=>document.getElementById(id);
+function esc(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}
+function clean(x,n=3){return (Math.abs(x)<1e-10?0:x).toFixed(n)}
+function mod(x,m){return ((x%m)+m)%m}
+function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+function cis(t){return [Math.cos(t),Math.sin(t)]}
+function mag(z){return Math.hypot(z[0],z[1])}
+function maH(m,w){let re=0,im=0;for(let k=0;k<m;k++){re+=Math.cos(w*k)/m;im-=Math.sin(w*k)/m}return [re,im]}
+function spectrum(sig,w){let re=0,im=0;for(let i=0;i<sig.length;i++){const [n,x]=sig[i];re+=x*Math.cos(w*n);im-=x*Math.sin(w*n)}return [re,im]}
+function niceStep(span,target=5){
+  const raw=Math.max(1e-12,Math.abs(span)/target);
+  const exp=Math.floor(Math.log10(raw)),unit=Math.pow(10,exp);
+  const candidates=[1,2,2.5,5,10];
+  let step=(candidates.find(v=>v*unit>=raw-1e-12)||10)*unit;
+  // Chapter 5 Rev3 axis convention: favor integer-valued steps for wider ranges.
+  if(span>=3.5&&step<1)step=1;
+  return step;
+}
+function tickLabel(v,step){
+  if(Math.abs(v)<Math.max(step*1e-7,1e-10))return '0';
+  const isIntegerStep=Math.abs(step-Math.round(step))<1e-9;
+  const decimals=isIntegerStep?0:Math.min(5,Math.max(1,Math.ceil(-Math.log10(step))+1));
+  return Number(v.toFixed(decimals)).toString();
+}
+function niceTick(t){if(Math.abs(t)<1e-12)return '0';if(Math.abs(t)>=100)return t.toFixed(0);if(Math.abs(t)>=10)return t.toFixed(1).replace(/\.0$/,'');return t.toFixed(2).replace(/0+$/,'').replace(/\.$/,'')}
+function attr(s){return esc(String(s))}
+function shell(){const links=MODULES.map(m=>`<button data-nav="${m.id}" type="button" aria-current="${active===m.id?'page':'false'}" class="${active===m.id?'active':''}"><span class="num">${m.short}</span><span class="nav-name">${m.title}</span></button>`).join('');$('app').innerHTML=`<aside class="sidebar"><div class="brand"><div class="over">SIGNALS &amp; SYSTEMS / CHAPTER 06</div><h1>DTFT Visual Lab</h1><p>${KO.desc}</p></div><div class="mobile-bar">Tap a topic to start exploring</div><div class="side-label">${KO.guide}</div><nav class="nav" aria-label="Experiments">${links}</nav><div class="side-foot"><strong>Learning sequence / 학습 순서</strong>1. Make a prediction · 결과 예측<br>2. Change one variable · 변수 변경<br>3. Observe and compare · 관찰·비교<br>4. Explain what you learned · 배운 내용 설명</div></aside><main class="main"><div class="topline"><span class="breadcrumb">CHAPTER 06 / INTERACTIVE CONCEPTS</span><span class="tag">No install / Offline ready</span></div><div id="content"></div><footer class="footer"><span>Based on 601_Ch6_DTFT_Rev4 / Oppenheim, Willsky &amp; Nawab, 2nd ed.</span><span>Standalone HTML · all results computed locally in your browser</span></footer></main>`;document.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>switchModule(b.dataset.nav)))}
+function ctlHTML(c,s){const v=s[c.key];let inp='';if(c.type==='range'){inp=`<input id="ctrl_${c.key}" data-ctrl="${c.key}" aria-label="${attr(c.name)}" type="range" min="${c.min}" max="${c.max}" step="${c.step}" value="${v}"><div class="ends"><span>${c.min}${c.unit||''}</span><span>${c.max}${c.unit||''}</span></div>`}else{inp=`<select id="ctrl_${c.key}" data-ctrl="${c.key}" aria-label="${attr(c.name)}">${c.values.map(([a,b])=>`<option value="${a}" ${String(a)===String(v)?'selected':''}>${b}</option>`).join('')}</select>`}return `<div class="ctrl" id="wrap_${c.key}"><label for="ctrl_${c.key}">${c.name}<output id="val_${c.key}">${c.type==='range'?clean(Number(v),Number.isInteger(Number(c.step))?0:2)+(c.unit||''):''}</output></label>${inp}</div>`}
+function figHTML(name,sub,i,wide=false){return `<section class="figure ${wide?'wide':''}"><h3>${name}</h3><p>${sub}</p><canvas id="plot${i}" role="img" aria-label="${attr(name)}" width="600" height="270"></canvas><div class="legend" id="legend${i}"></div></section>`}
+function renderModule(){stopGuidePlay();stopPlay();const m=MODULES.find(o=>o.id===active),s=state[active];$('content').innerHTML=`<header class="heading"><div class="overlabel">EXPERIMENT ${m.short} / ${m.en}</div><h2>${m.title}</h2><p>${m.subtitle}</p></header><div class="hero-callout"><div class="formula" id="formula">${m.formula}</div><div class="hint">Formula \u2192 Graph \u2192 Interpretation</div></div><div class="experiment"><aside class="controls"><div class="overlabel">${KO.controls}</div><h3>Change one thing</h3><div class="control-grid">${m.controls.map(c=>ctlHTML(c,s)).join('')}</div><div class="btnrow"><button id="reset" type="button" class="btn">${KO.reset}</button><button id="play" type="button" class="btn primary">${KO.play}</button></div><p class="notice">${KO.predict}</p></aside><div class="body-col">${active==='fft'?`<section class="fft-guide"><div class="overlabel">LEAKAGE / Guided experiments</div><h3>한 개의 정현파가 왜 여러 FFT bin에 퍼져 보일까요?</h3><p>1 → 2 → 3 → 4 순서로 눌러 관측 주기 수, 양 끝단 모양, 스펙트럼을 비교하세요.</p><div class="preset-row"><button type="button" data-fft-preset="aligned">1. On-bin (4.00 Hz)</button><button type="button" data-fft-preset="offbin">2. Off-bin (4.15 Hz)</button><button type="button" data-fft-preset="hann">3. Hann (4.15 Hz)</button><button type="button" data-fft-preset="padding">4. Zero padding ×4</button></div><p class="fft-status" id="fftstatus" role="status"></p></section>`:''}${active==='periodic'?'<section class="periodic-reading-note"><strong>Read the top graph:</strong> Solid teal = original analog cosine f; red dashed = a different analog cosine (f_s − f); black stems and dots = the sampled sequence x[n] at t = nT_s. <strong>Visible sample count N</strong> changes only how many samples are shown. The lower graph uses those same N samples to calculate a finite-record DTFT.</section>':''}<div class="charts ${m.plots.length===3?'three':''}">${m.plots.map((p,i)=>figHTML(p[0],p[1],i,m.plots.length===3&&i===2)).join('')}</div><div class="metrics">${m.metric.map((name,i)=>`<div class="metric"><div class="k">${name}</div><div class="v" id="met${i}">-</div><div class="detail" id="metd${i}"></div></div>`).join('')}</div><section class="derivation-panel" id="derivationPanel" aria-label="Guided derivation"></section><section class="reading-panel" id="readingPanel" aria-label="Graph interpretation"></section><section class="learning"><h3>${KO.observe} / Key insight</h3><p id="insight"></p></section><section class="question"><div class="overlabel">CHECK YOURSELF</div><h3>${KO.question}</h3><p>${m.q}</p><details><summary>${KO.reveal}</summary><div class="answer">${m.a}</div></details></section></div></div>`;
+ $('reset').addEventListener('click',()=>{state[active]=JSON.parse(JSON.stringify(defaults[active]));renderModule()});$('play').addEventListener('click',togglePlay);document.querySelectorAll('[data-fft-preset]').forEach(b=>b.addEventListener('click',()=>{stopPlay();const presets={aligned:{n:'512',f:4,pad:'1',window:'rect'},offbin:{n:'512',f:4.15,pad:'1',window:'rect'},hann:{n:'512',f:4.15,pad:'1',window:'hann'},padding:{n:'512',f:4.15,pad:'4',window:'hann'}};Object.assign(state.fft,presets[b.dataset.fftPreset]);renderModule()}));document.querySelectorAll('[data-ctrl]').forEach(el=>{const handler=()=>{let val=el.value;const spec=m.controls.find(c=>c.key===el.dataset.ctrl);if(spec.type==='range')val=Number(val);s[spec.key]=val;const out=$('val_'+spec.key);if(out&&spec.type==='range')out.textContent=clean(val,Number.isInteger(Number(spec.step))?0:2)+(spec.unit||'');updateVisibility();requestUpdate()};el.addEventListener('input',handler);el.addEventListener('change',handler)});updateVisibility();requestUpdate();if(resizeObserver)resizeObserver.disconnect();resizeObserver=new ResizeObserver(()=>requestUpdate());document.querySelectorAll('canvas').forEach(cv=>resizeObserver.observe(cv));document.title=m.en+' | DTFT Visual Lab';}
+function switchModule(id){if(id===active)return;active=id;document.querySelectorAll('[data-nav]').forEach(b=>{const yes=b.dataset.nav===id;b.classList.toggle('active',yes);b.setAttribute('aria-current',yes?'page':'false')});renderModule();window.scrollTo({top:0,behavior:'smooth'})}
+function updateVisibility(){if(active!=='pairs')return;const s=state.pairs;for(const k of ['a','m','n0']){const x=$('wrap_'+k);if(x)x.style.display=(k==='a'?['exp','sym'].includes(s.kind):k==='m'?s.kind==='rect':s.kind==='shift')?'':'none'}}
+function stopPlay(){if(playTimer){clearInterval(playTimer);playTimer=null}const b=$('play');if(b)b.textContent=KO.play}
+function togglePlay(){if(playTimer){stopPlay();return}const conf={periodic:['f',5,45,1],pairs:['a',.1,.95,.05],phase:['n0',0,10,1],phasor:['w',0,1,.01],filter:['m',2,20,1],fft:['f',3.5,5.5,.05]};const [key,lo,hi,step]=conf[active];$('play').textContent=KO.pause;playTimer=setInterval(()=>{let val=Number(state[active][key])+step;if(val>hi+1e-8)val=lo;val=Math.round(val/step)*step;state[active][key]=val;const elem=$('ctrl_'+key);if(elem)elem.value=String(val);const out=$('val_'+key),spec=MODULES.find(x=>x.id===active).controls.find(x=>x.key===key);if(out&&spec)out.textContent=clean(val,Number.isInteger(Number(step))?0:2)+(spec.unit||'');requestUpdate()},95)}
+function requestUpdate(){if(renderQueued)return;renderQueued=true;requestAnimationFrame(()=>{renderQueued=false;update()})}
+function setMetrics(data){data.forEach((m,i)=>{if($('met'+i))$('met'+i).textContent=m[0];if($('metd'+i))$('metd'+i).textContent=m[1]||''})}
+function setInsight(str){if($('insight'))$('insight').textContent=str}
+function setLegend(i,items=[]){const el=$('legend'+i);if(!el)return;if(!items||!items.length){el.innerHTML='';el.style.display='none';return}el.innerHTML=items.map(it=>`<span class="legend-item"><span class="legend-chip ${it.kind||'line'}" style="--lc:${it.color}"></span>${it.label}</span>`).join('');el.style.display='flex'}
+function setFormula(s){if($('formula'))$('formula').innerHTML=s}
+function initCanvas(id){const cv=$(id);if(!cv)return null;const rect=cv.getBoundingClientRect();const w=Math.max(200,rect.width),h=Math.max(200,rect.height),d=Math.min(window.devicePixelRatio||1,2);cv.width=Math.round(w*d);cv.height=Math.round(h*d);const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);g.clearRect(0,0,w,h);return{g,w,h}}
+function drawChart(id,opt){
+ const z=initCanvas(id);if(!z)return;
+ const {g,w,h}=z,m={l:67,r:17,t:22,b:47};
+ const W=w-m.l-m.r,H=h-m.t-m.b;
+ const xmin=opt.xmin??0,xmax=opt.xmax??1,ymin=opt.ymin??0,ymax=opt.ymax??1;
+ const X=v=>m.l+(v-xmin)/(xmax-xmin)*W,Y=v=>m.t+(ymax-v)/(ymax-ymin)*H;
+ const xStep=niceStep(xmax-xmin,opt.xticks||6),yStep=niceStep(ymax-ymin,opt.yticks||5);
+ g.fillStyle='#fff';g.fillRect(0,0,w,h);
+ g.save();g.beginPath();g.rect(m.l,m.t,W,H);g.clip();
+ if(opt.band){const lo=clamp(Math.min(opt.band.from,opt.band.to),xmin,xmax),hi=clamp(Math.max(opt.band.from,opt.band.to),xmin,xmax);if(hi>lo){g.fillStyle=opt.band.color||'rgba(239,112,85,.09)';g.fillRect(X(lo),m.t,X(hi)-X(lo),H)}}
+ // Regular grid, with zero axes drawn distinctly afterward.
+ g.lineWidth=1;g.strokeStyle=C.grid;
+ for(let k=Math.ceil(ymin/yStep-1e-9),count=0;k<=Math.floor(ymax/yStep+1e-9)&&count<40;k++,count++){let v=k*yStep,py=Y(v);g.beginPath();g.moveTo(m.l,py);g.lineTo(m.l+W,py);g.stroke()}
+ for(let k=Math.ceil(xmin/xStep-1e-9),count=0;k<=Math.floor(xmax/xStep+1e-9)&&count<40;k++,count++){let v=k*xStep,px=X(v);g.beginPath();g.moveTo(px,m.t);g.lineTo(px,m.t+H);g.stroke()}
+ if(ymin<=0&&ymax>=0){g.strokeStyle='#344f62';g.lineWidth=2;g.beginPath();g.moveTo(m.l,Y(0));g.lineTo(m.l+W,Y(0));g.stroke()}
+ if(xmin<=0&&xmax>=0){g.strokeStyle='#344f62';g.lineWidth=2;g.beginPath();g.moveTo(X(0),m.t);g.lineTo(X(0),m.t+H);g.stroke()}
+ // Draw and clip every waveform, line, marker and stem to the plot rectangle.
+ for(const ss of opt.series||[]){
+  const col=ss.color||C.teal;g.strokeStyle=col;g.fillStyle=col;g.lineWidth=ss.width||2.2;g.setLineDash(ss.dash?[6,4]:[]);
+  if(ss.type==='stem'){
+   const baseline=Y(clamp(0,ymin,ymax));
+   for(const p of ss.xy){const vx=p[0],vy=p[1];if(!Number.isFinite(vy)||vx<xmin||vx>xmax)continue;g.beginPath();g.moveTo(X(vx),baseline);g.lineTo(X(vx),Y(vy));g.stroke();g.beginPath();g.arc(X(vx),Y(vy),ss.radius||2.9,0,TAU);g.fill()}
+  }else{
+   g.beginPath();let started=false;
+   for(const p of ss.xy){const vx=p[0],vy=p[1];if(!Number.isFinite(vy)||vx<xmin||vx>xmax){started=false;continue}if(!started){g.moveTo(X(vx),Y(vy));started=true}else g.lineTo(X(vx),Y(vy))}g.stroke();
+   if(ss.dots){for(const p of ss.xy){const vx=p[0],vy=p[1];if(!Number.isFinite(vy)||vx<xmin||vx>xmax)continue;g.beginPath();g.arc(X(vx),Y(vy),ss.radius||3,0,TAU);g.fill()}}
+  }
+  g.setLineDash([]);
+ }
+ for(const v of opt.vlines||[]){if(v.x<xmin||v.x>xmax)continue;g.strokeStyle=v.color||C.coral;g.lineWidth=1.5;g.setLineDash([5,4]);g.beginPath();g.moveTo(X(v.x),m.t);g.lineTo(X(v.x),m.t+H);g.stroke();g.setLineDash([])}
+ for(const p of opt.points||[]){if(!Number.isFinite(p.y)||p.x<xmin||p.x>xmax)continue;g.beginPath();g.fillStyle=p.color||C.coral;g.strokeStyle='#fff';g.lineWidth=1.5;g.arc(X(p.x),Y(p.y),p.radius||4.4,0,TAU);g.fill();g.stroke()}
+ // White center makes crossing at (0,0) recognizable, even when it is on the plot boundary.
+ if(xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0){g.fillStyle='#fff';g.strokeStyle='#253f53';g.lineWidth=1.7;g.beginPath();g.arc(X(0),Y(0),4.8,0,TAU);g.fill();g.stroke()}
+ g.restore();
+ // Draw tick labels outside clipping, using the same niceStep/tickLabel algorithm as Ch5 Rev3.
+ g.textBaseline='middle';
+ for(let k=Math.ceil(ymin/yStep-1e-9),count=0;k<=Math.floor(ymax/yStep+1e-9)&&count<40;k++,count++){const v=k*yStep;g.font=(Math.abs(v)<1e-9?'bold ':'')+'11px system-ui';g.textAlign='right';g.fillStyle=Math.abs(v)<1e-9?'#224559':'#647f90';g.fillText(tickLabel(v,yStep),m.l-9,Y(v))}
+ for(let k=Math.ceil(xmin/xStep-1e-9),count=0;k<=Math.floor(xmax/xStep+1e-9)&&count<40;k++,count++){const v=k*xStep;g.font=(Math.abs(v)<1e-9?'bold ':'')+'11px system-ui';g.textAlign='center';g.fillStyle=Math.abs(v)<1e-9?'#224559':'#647f90';g.fillText(tickLabel(v,xStep),X(v),h-m.b+16)}
+ g.fillStyle=C.ink;g.font='11px system-ui';
+ if(opt.xlabel){g.textAlign='center';g.fillText(opt.xlabel,m.l+W/2,h-12)}
+ if(opt.ylabel){g.save();g.translate(16,m.t+H/2);g.rotate(-PI/2);g.textAlign='center';g.fillText(opt.ylabel,0,0);g.restore()}
+ ssAxisKey(id,opt.xlabel||'sample index n',opt.ylabel||'amplitude',xmin,xmax,ymin,ymax);
+ ssHoverBind(id,{kind:'cart',w,h,pad:m,xmin,xmax,ymin,ymax,xlabel:opt.xlabel||'sample index n',ylabel:opt.ylabel||'amplitude',series:(opt.series||[]).map(s=>({label:s.label,color:s.color,points:s.xy||[],discrete:s.type==='stem'}))});
+}
+function drawPhasors(id,M,w){const z=initCanvas(id);if(!z)return;const{g,h,w:width}=z;const cx=width/2,cy=h/2,scale=Math.min((width-50)/2,(h-40)/2)*.85;g.fillStyle='#fff';g.fillRect(0,0,width,h);g.strokeStyle=C.grid;g.lineWidth=1;for(let j=-1;j<=1;j++){g.beginPath();g.moveTo(cx+j*scale,10);g.lineTo(cx+j*scale,h-10);g.stroke();g.beginPath();g.moveTo(10,cy+j*scale);g.lineTo(width-10,cy+j*scale);g.stroke()}g.strokeStyle='#afc4cf';g.beginPath();g.arc(cx,cy,scale,0,TAU);g.stroke();
+ g.strokeStyle='#344f62';g.lineWidth=2;g.beginPath();g.moveTo(10,cy);g.lineTo(width-10,cy);g.moveTo(cx,10);g.lineTo(cx,h-10);g.stroke();
+ g.font='11px system-ui';g.fillStyle=C.muted;g.textAlign='left';g.fillText('Re',width-29,cy-11);g.fillText('Im',cx+10,13);
+ g.font='10px system-ui';g.fillStyle='#647f90';g.textAlign='center';g.fillText('-1',cx-scale,cy+13);g.fillText('+1',cx+scale,cy+13);
+ g.textAlign='right';g.fillText('+1',cx-8,cy-scale);g.fillText('-1',cx-8,cy+scale);
+ g.fillStyle='#fff';g.strokeStyle='#253f53';g.lineWidth=1.7;g.beginPath();g.arc(cx,cy,4.5,0,TAU);g.fill();g.stroke();g.fillStyle='#253f53';g.textAlign='left';g.font='bold 11px system-ui';g.fillText('0',cx+7,cy-10);
+ let a=0,b=0;const arrow=(sx,sy,ex,ey,color,widthLine)=>{const xx=cx+sx*scale,yy=cy-sy*scale,XX=cx+ex*scale,YY=cy-ey*scale,ang=Math.atan2(YY-yy,XX-xx);g.strokeStyle=color;g.fillStyle=color;g.lineWidth=widthLine;g.beginPath();g.moveTo(xx,yy);g.lineTo(XX,YY);g.stroke();g.beginPath();g.moveTo(XX,YY);g.lineTo(XX-9*Math.cos(ang-.35),YY-9*Math.sin(ang-.35));g.lineTo(XX-9*Math.cos(ang+.35),YY-9*Math.sin(ang+.35));g.closePath();g.fill()};for(let k=0;k<M;k++){const re=Math.cos(-w*k)/M,im=Math.sin(-w*k)/M;arrow(a,b,a+re,b+im,C.teal,2);a+=re;b+=im}arrow(0,0,a,b,C.coral,3);g.fillStyle=C.coral;g.beginPath();g.arc(cx+a*scale,cy-b*scale,5,0,TAU);g.fill();g.fillStyle=C.ink;g.font='12px system-ui';g.fillText(`Sum = ${clean(Math.hypot(a,b),3)}`,15,h-13);ssAxisKey(id,'Re (complex plane)','Im (complex plane)',-1,1,-1,1);ssHoverBind(id,{kind:'complex',plane:'z',w:width,h,pad:{l:10,r:10,t:10,b:10},center:{cx,cy,scale},xmin:-1,xmax:1,ymin:-1,ymax:1,xlabel:'Re',ylabel:'Im',markers:[{x:a,y:b,type:'Sum vector'}]});}
+
+// Shared bilingual learning UI, invoked from each lab's numeric update loop.
+const guideItem=(head,math,ko)=>({head,math,ko});
+const guidePlot=(title,en,ko)=>({title,en,ko});
+const guideView={count:{},previous:{},timer:null,playing:false,duration:2600,lastModule:null};
+function stopGuidePlay(){if(guideView.timer!==null){clearInterval(guideView.timer);guideView.timer=null}guideView.playing=false}
+function revealGuide(moduleId,state,guideFactory){
+ const pane=document.getElementById('derivationPanel'),rp=document.getElementById('readingPanel');if(!pane||!rp)return;
+ const d=guideFactory(state),total=d.steps.length;
+ const n=Math.max(1,Math.min(total,guideView.count[moduleId]||1));
+ const animate=guideView.previous[moduleId]!==undefined&&n>guideView.previous[moduleId]&&n===guideView.previous[moduleId]+1;
+ const displayStep=(v,i)=>`<article class="deriv-step ${animate&&i===n-1?'guide-enter':''}" aria-label="Step ${i+1} of ${total}"><div class="deriv-top"><span class="step-index">${i+1}</span><strong>${v.head}</strong></div><div class="deriv-math">${v.math}</div><p>${v.ko}</p></article>`;
+ pane.innerHTML=`<div class="guide-head"><div><div class="overlabel">GUIDED DERIVATION / 단계별 수식 유도</div><h3>Equation → Derivation → Meaning / 수식 유도와 의미</h3><p>Adjust a variable to update the equations. / 변수를 변경하면 아래 수식도 갱신됩니다.</p></div><span class="progress-badge" role="status">Step ${n} / ${total}</span></div><div class="guide-track" role="progressbar" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${n}" aria-label="Derivation progress"><div style="width:${100*n/total}%"></div></div><div class="guide-steps">${d.steps.slice(0,n).map(displayStep).join('')}</div><div class="guide-actions"><button id="previousStep" type="button" ${n<=1?'disabled':''}>◀ Previous / 이전</button><button id="nextStep" type="button" ${n>=total?'disabled':''}>Next step / 다음 ▶</button><button id="guidePlay" type="button" class="primary" aria-pressed="${guideView.playing}">${guideView.playing?'Pause animation / 일시정지':'▶ Play animation / 자동 전개'}</button><button id="allSteps" type="button">${n===total?'Restart / 처음부터':'Show all / 전체 보기'}</button></div>`;
+ const change=next=>{guideView.count[moduleId]=Math.max(1,Math.min(total,next));revealGuide(moduleId,state,guideFactory)};
+ pane.querySelector('#previousStep').onclick=()=>{stopGuidePlay();change(n-1)};
+ pane.querySelector('#nextStep').onclick=()=>{stopGuidePlay();change(n+1)};
+ pane.querySelector('#allSteps').onclick=()=>{stopGuidePlay();change(n===total?1:total)};
+ pane.querySelector('#guidePlay').onclick=()=>{
+  if(guideView.playing){stopGuidePlay();revealGuide(moduleId,state,guideFactory);return}
+  if(n===total)guideView.count[moduleId]=1;
+  guideView.playing=true;
+  revealGuide(moduleId,state,guideFactory);
+  guideView.timer=setInterval(()=>{
+   if(currentGuidedId()!==moduleId){stopGuidePlay();return}
+   const now=guideView.count[moduleId]||1;
+   if(now>=total){stopGuidePlay();revealGuide(moduleId,currentGuidedState(moduleId),guideFactory);return}
+   guideView.count[moduleId]=now+1;
+   revealGuide(moduleId,currentGuidedState(moduleId),guideFactory);
+   if(now+1>=total){stopGuidePlay();const b=pane.querySelector('#guidePlay');if(b){b.textContent='▶ Play animation / 자동 전개';b.setAttribute('aria-pressed','false')}}
+  },guideView.duration)
+ };
+ guideView.previous[moduleId]=n;
+ rp.innerHTML=`<div class="overlabel">READ THE GRAPHS / 그래프 해석</div><h3>What changed, and why? / 무엇이 왜 바뀌었을까요?</h3><div class="reading-grid">${d.graphs.map((v,i)=>`<div class="reading-note"><span class="plot-number">GRAPH ${String(i+1).padStart(2,'0')}</span><strong>${v.title}</strong><p>${v.en}</p><p class="ko-explain">${v.ko}</p></div>`).join('')}</div><p class="guide-check"><strong>Interpretation checkpoint / 해석 점검:</strong> ${d.check}</p>`;
+}
+
+// Chapter 6: DTFT/DFT/FFT derivations and frequency-domain interpretation.
+const GUIDES6={
+ periodic:s=>{const fs=s.fs,f=s.f,om=2*PI*f/fs;return {steps:[
+ guideItem('Sample the analog cosine / 연속신호 표본화',`x[n]=cos(2πfn/f<sub>s</sub>), &nbsp; f=${f} Hz, f<sub>s</sub>=${fs} Hz, &nbsp; T<sub>s</sub>=${(1000/fs).toFixed(2)} ms`,'연속시간 주파수 f와 디지털 인덱스 n을 구별합니다.'),
+ guideItem('Convert to digital angular frequency / 디지털 각주파수',`Ω=2πf/f<sub>s</sub>=${(om/PI).toFixed(3)}π rad/sample`,'Ω는 rad/sample로 표시하며, physical frequency f와 단위가 다릅니다.'),
+ guideItem('Use the integer-index identity / 정수 인덱스',`e<sup>j(Ω+2π)n</sup>=e<sup>jΩn</sup>e<sup>j2πn</sup>=e<sup>jΩn</sup>`,'n은 정수이므로 e^(j2πn)=1입니다. 따라서 DTFT는 Ω에 대해 2π 주기입니다.'),
+ guideItem('Explain the frequency ambiguity / aliasing',`cos(2π${f}n/${fs})=cos(2π${fs-f}n/${fs})`,'두 아날로그 주파수가 동일한 이산 샘플을 만들 수 있으므로 샘플만으로 원래 주파수를 항상 복원할 수는 없습니다.')],
+ graphs:[guidePlot('Sampled signals / 샘플 신호',`The ${f} Hz solid curve and ${fs-f} Hz dashed curve differ between the dots, but coincide at all N=${s.ns} sampled positions.`,'서로 다른 연속시간 주파수의 샘플이 겹치는 지점을 확인하세요.'),guidePlot('DTFT periodicity / 주기성','Copies of the spectrum repeat every 2π along the digital frequency axis.','한 주기 밖에서도 같은 스펙트럼이 반복되는지 확인하세요.')],check:'Why must n be an integer in the proof of 2π periodicity? / n이 정수여야 하는 이유는 무엇인가요?'}},
+ pairs:s=>{let steps;
+ if(s.kind==='impulse'){steps=[guideItem('Start with a unit impulse / 단위 임펄스','x[n]=δ[n]','n=0에서만 1입니다.'),guideItem('Use the DTFT definition / 정의식','X(e<sup>jΩ</sup>)=Σ<sub>n=−∞</sub><sup>∞</sup>δ[n]e<sup>−jΩn</sup>','0이 아닌 한 항만 남습니다.'),guideItem('Evaluate at n=0 / 계산','X(e<sup>jΩ</sup>)=e<sup>0</sup>=1','모든 주파수에서 크기가 1인 일정한 스펙트럼입니다.'),guideItem('Interpret magnitude and phase / 크기·위상','|X|=1, &nbsp; ∠X=0','시간 임펄스는 균일한 주파수 성분을 포함합니다.')];}
+ else if(s.kind==='shift'){const n=s.n0;steps=[guideItem('Write the shifted impulse / 이동 임펄스',`x[n]=δ[n−${n}]`,'시간 이동량을 먼저 확인합니다.'),guideItem('Apply the defining sum / 정의식',`X(e<sup>jΩ</sup>)=Σ δ[n−${n}]e<sup>−jΩn</sup>`,'n=n₀에서의 항만 남습니다.'),guideItem('Evaluate the selected index / 계산',`X(e<sup>jΩ</sup>)=e<sup>−jΩ${n}</sup>`,'시간 지연은 주파수영역의 선형 위상으로 나타납니다.'),guideItem('Separate magnitude and phase / 크기와 위상',`|X|=1, &nbsp; ∠X=−${n}Ω (mod 2π)`,'크기는 변하지 않고 위상만 주파수에 비례하여 변화합니다.')];}
+ else if(s.kind==='exp'){const a=s.a.toFixed(2);steps=[guideItem('Define the right-sided exponential / 인과 지수',`x[n]=(${a})<sup>n</sup>u[n], &nbsp; |a|&lt;1`,'지수 수열은 n≥0에서만 존재합니다.'),guideItem('Collect into a geometric series / 등비급수',`X(e<sup>jΩ</sup>)=Σ<sub>n=0</sub><sup>∞</sup>(${a}e<sup>−jΩ</sup>)<sup>n</sup>`,'공비는 ae^(−jΩ)이며 절댓값이 |a|입니다.'),guideItem('Apply the sum formula / 등비급수 합',`Σ<sub>n=0</sub><sup>∞</sup>r<sup>n</sup>=1/(1−r), &nbsp; |r|&lt;1`,'수렴 조건이 충족될 때 공식을 적용합니다.'),guideItem('Obtain the DTFT / 최종 결과',`X(e<sup>jΩ</sup>)=1/(1−${a}e<sup>−jΩ</sup>)`,'a가 커질수록 긴 감쇠 꼬리와 강한 DC 부근 응답이 나타납니다.')];}
+ else if(s.kind==='rect'){const m=s.m;steps=[guideItem('Define the finite sequence / 유한 수열',`x[n]=1 (0≤n≤${m-1}); 0 otherwise`,'정수 인덱스 n의 유한 구간에만 값이 존재합니다.'),guideItem('Write the finite sum / 유한합',`X(e<sup>jΩ</sup>)=Σ<sub>n=0</sub><sup>${m-1}</sup>e<sup>−jΩn</sup>`,'지수합은 길이 M인 유한 등비급수입니다.'),guideItem('Sum and factor out the center phase / 정리',`X(e<sup>jΩ</sup>)=e<sup>−jΩ(${m-1})/2</sup>·sin(${m}Ω/2)/sin(Ω/2)`,'앞의 지수항은 시간 위치에 따른 위상, sine 비율은 signed amplitude를 결정합니다.'),guideItem('Check the DC limit and zeros / DC 검산',`X(e<sup>j0</sup>)=${m}, &nbsp; first zero Ω=2π/${m}`,'Ω=0에서의 0/0 형태는 원래 합으로 검산해야 합니다.')];}
+ else {const a=s.a.toFixed(2);steps=[guideItem('Define a symmetric exponential / 대칭 지수',`x[n]=(${a})<sup>|n|</sup>, &nbsp; |a|&lt;1`,'음과 양의 n에 대해 짝대칭인 실수 수열입니다.'),guideItem('Split the sum into two directions / 양방향 분리','X=1+Σ<sub>n=1</sub><sup>∞</sup>a<sup>n</sup>(e<sup>−jΩn</sup>+e<sup>jΩn</sup>)','대칭 성분을 켤레쌍으로 묶습니다.'),guideItem('Recognize cosine terms / 코사인','X=1+2Σ<sub>n=1</sub><sup>∞</sup>a<sup>n</sup>cos(Ωn)','짝대칭 실수 신호의 DTFT는 실수·짝대칭입니다.'),guideItem('Simplify the two geometric sums / 등비급수',`X(e<sup>jΩ</sup>)=(1−${a}²)/(1−2${a}cosΩ+${a}²)`,'분모는 항상 양수이고 주파수응답은 실수입니다.')];}
+ return {steps,graphs:[guidePlot('Time-domain sequence / 시간 수열','Observe whether the sequence is shifted, finite, one-sided, or symmetric.','수열의 인덱스 위치, 길이, 대칭성을 확인하세요.'),guidePlot('DTFT spectrum / 주파수영역',s.showphase==='phase'?'This panel shows phase; phase can be undefined where magnitude is zero.':'This panel shows the magnitude and its 2π periodicity.','선택한 Magnitude/Phase 보기를 확인하고 주파수영역의 특징을 설명하세요.')],check:'Which feature of the time sequence explains the observed magnitude or phase spectrum? / 시간 신호의 어떤 특징이 스펙트럼과 연결되나요?'}},
+ phase:s=>{const m=s.m,n=s.n0;return {steps:[
+ guideItem('Define the original finite pulse / 원래 신호',`x[n]=1 for 0≤n≤${m-1}`,'M개 샘플로 구성된 유한 펄스입니다.'),
+ guideItem('Shift in time / 시간 이동',`y[n]=x[n−${n}]`,'n₀>0이면 신호가 오른쪽으로 이동합니다.'),
+ guideItem('Apply the DTFT shift property / 이동 성질',`Y(e<sup>jΩ</sup>)=e<sup>−jΩ${n}</sup>X(e<sup>jΩ</sup>)`,'크기가 1인 지수 인자를 곱한 결과입니다.'),
+ guideItem('Interpret magnitude and phase / 크기와 위상',`|Y|=|X|, &nbsp; ∠Y−∠X=−${n}Ω (where X≠0)`,'크기는 그대로이고 위상의 기울기는 −n₀입니다. 스펙트럼 영점에서는 위상이 정의되지 않습니다.')],
+ graphs:[guidePlot('Time shift / 시간 이동',`The blue signal is delayed by ${n} sample(s).`,'원래 펄스와 이동한 펄스의 위치를 비교하세요.'),guidePlot('Magnitude / 크기','Both curves overlap if shifting is the only operation.','동일한 magnitude만으로 시간 지연을 찾을 수 있을까요?'),guidePlot('Phase difference / 위상 차',`Unwrapped difference is −${n}Ω except at undefined phases.`,'위상 기울기가 −n₀인지 확인하세요.')],check:'Can magnitude alone tell whether a signal has been delayed? / magnitude만으로 시간 이동을 알 수 있나요?'}},
+ phasor:s=>{const m=s.m,om=s.w*PI,g=maH(m,om),gain=Math.hypot(g[0],g[1]);return {steps:[
+ guideItem('Write the moving-average impulse response / 임펄스응답',`h[k]=1/${m} (k=0,…,${m-1}); 0 otherwise`,'모든 탭의 가중치가 동일하기 때문에 벡터 길이가 같습니다.'),
+ guideItem('Use the DTFT definition / 주파수응답',`H(e<sup>jΩ</sup>)=(1/${m})Σ<sub>k=0</sub><sup>${m-1}</sup>e<sup>−jΩk</sup>`,'각 항은 서로 다른 시간 지연을 나타내는 복소평면의 phasor입니다.'),
+ guideItem('Interpret each phasor / 각 벡터의 의미',`v<sub>k</sub>=(1/${m})e<sup>−jkΩ</sup>; &nbsp; |v<sub>k</sub>|=1/${m}, &nbsp; ∠v<sub>k</sub>=−kΩ`,'벡터는 힘이나 위치가 아니라 위상과 계수를 갖는 복소수입니다.'),
+ guideItem('Add them at the current frequency / 벡터 합',`Ω=${s.w.toFixed(2)}π, &nbsp; |H(e<sup>jΩ</sup>)|=${gain.toFixed(4)}`,'벡터의 합 크기는 입력 복소 정현파 성분이 출력에서 얼마나 남는지 나타냅니다.')],
+ graphs:[guidePlot('Phasor sum / 복소 벡터 합',`At Ω=${s.w.toFixed(2)}π, each vector has length 1/${m} and angles −kΩ.`,'벡터들이 같은 방향이면 강화되고 반대 방향이면 상쇄됩니다.'),guidePlot('Frequency response / 주파수 응답','The marker shows the current digital frequency and resulting magnitude.','현재 위치의 |H|가 벡터 합의 길이와 일치하는지 비교하세요.')],check:'Why is the phasor length 1/M in a moving-average filter? / 이동평균의 각 벡터 길이가 1/M인 이유는 무엇인가요?'}},
+ filter:s=>{const fs=100,m=s.m,wU=2*PI*s.fu/fs,wN=2*PI*s.fn/fs,u=maH(m,wU),n=maH(m,wN),gu=Math.hypot(...u),gn=Math.hypot(...n),delay=(m-1)/2/fs;return {steps:[
+ guideItem('Write the difference equation / 차분방정식',`y[n]=(1/${m})Σ<sub>k=0</sub><sup>${m-1}</sup>x[n−k]`,'시간영역에서는 M개 샘플을 평균합니다.'),
+ guideItem('Transform convolution to multiplication / 컨벌루션',`Y(e<sup>jΩ</sup>)=H(e<sup>jΩ</sup>)X(e<sup>jΩ</sup>)`,'각 주파수 성분은 독립적으로 H의 크기와 위상을 적용받습니다.'),
+ guideItem('Evaluate each sensor frequency / 주파수별 평가',`Ω<sub>useful</sub>=${(wU/PI).toFixed(3)}π, &nbsp; Ω<sub>noise</sub>=${(wN/PI).toFixed(3)}π`,'아날로그 주파수를 fs=100 Hz로 정규화합니다.'),
+ guideItem('Predict gain and linear-phase delay / 감쇠·지연',`|H(Ω<sub>u</sub>)|=${gu.toFixed(4)}, &nbsp; |H(Ω<sub>n</sub>)|=${gn.toFixed(4)}, &nbsp; delay=${(delay*1000).toFixed(1)} ms`,'출력에서 유효 성분과 잡음 성분이 각각 얼마나 남는지 예측하고 파형으로 확인하세요.')],
+ graphs:[guidePlot('Input and output / 입출력',`The useful ${s.fu} Hz tone and interference ${s.fn} Hz tone are filtered together.`,'입력과 출력의 감쇠·위상 지연을 함께 확인하세요.'),guidePlot('Filter response / 필터 응답',`Useful gain=${(gu*100).toFixed(1)}%, interference gain=${(gn*100).toFixed(1)}%.`,'두 주파수의 필터 이득을 비교하세요. M이 커져도 모든 고주파의 감쇠가 항상 단조 증가하지는 않습니다.')],check:'Why does the filter preserve some frequencies and cancel others? / 어떤 주파수는 통과하고 다른 주파수는 상쇄되는 이유는 무엇인가요?'}},
+ fft:s=>{const N=Number(s.n),pad=Number(s.pad),fs=128,L=N*pad,cycles=s.f*N/fs,onbin=Math.abs(cycles-Math.round(cycles))<1e-5,df=fs/N;return {steps:[
+ guideItem('Observe a finite record / 유한 관측',`x<sub>w</sub>[n]=w[n]cos(2πfn/${fs}), &nbsp; 0≤n&lt;${N}`,'Rectangular 또는 Hann window로 제한된 관측 신호를 비교합니다.'),
+ guideItem('Count the observed cycles / 관측 주기 수',`fN/f<sub>s</sub>=${s.f.toFixed(2)}·${N}/${fs}=${cycles.toFixed(3)} cycles (${onbin?'on-bin':'off-bin'})`,'정수 주기를 관측했는지 먼저 확인하세요. 빈번한 leakage 발생 원인을 파악하는 핵심입니다.'),
+ guideItem('Sample the DTFT on the FFT grid / 주파수 격자',`Δf<sub>DFT</sub>=f<sub>s</sub>/N=${df.toFixed(4)} Hz, &nbsp; L=N·${pad}=${L}`,'DFT는 유한 신호의 DTFT를 격자에서 샘플링합니다. FFT는 DFT를 빠르게 계산합니다.'),
+ guideItem('Interpret window and padding / Window·Zero padding',`Δf<sub>display</sub>=f<sub>s</sub>/L=${(fs/L).toFixed(5)} Hz; &nbsp; window=${s.window==='hann'?'Hann':'Rectangular'}`,'Hann은 distant sidelobe를 줄이는 대신 main lobe를 넓힙니다. Zero padding은 관측 길이를 늘리거나 새로운 측정 정보를 추가하지 않습니다.')],
+ graphs:[guidePlot('Windowed signal / 관측 신호',`Whole ${N}-sample record; ${s.window==='hann'?'Hann envelope tapers toward zero at the edges':'Rectangular keeps all observed samples at full weight'}.`,'왼쪽·오른쪽 경계의 파형 모양을 관찰하세요.'),guidePlot('DFT frequency grid / 주파수 격자',`The actual tone is at ${s.f.toFixed(2)} Hz; orange stems mark FFT bin samples.`,'실제 정현파 주파수와 FFT bin이 일치하는지 비교하세요.'),guidePlot('Rectangular vs Hann, dB / 창 비교','Compare far sidelobes, main-lobe width, and the effect of window selection.','먼 sidelobe와 중심 main lobe의 변화를 동시에 설명해 보세요.')],check:'Does zero padding remove leakage or increase true frequency resolution? / Zero padding이 leakage를 제거하거나 실제 분해능을 향상시키나요?'}}
+};
+
+function currentGuidedId(){return active}
+function currentGuidedState(id){return state[id]}
+function update(){const s=state[active];if(active==='periodic')drawPeriodic(s);if(active==='pairs')drawPairs(s);if(active==='phase')drawPhase(s);if(active==='phasor')drawAverage(s);if(active==='filter')drawFilter(s);if(active==='fft')drawFFT(s);revealGuide(active,s,GUIDES6[active]);document.documentElement.dataset.ready='true';window.__dtftApp={active,state:JSON.parse(JSON.stringify(state)),healthy:true}}
+function drawPeriodic(s){
+ const fs=s.fs,f=s.f,other=fs-f,w=TAU*f/fs,N=s.ns,nmax=N-1;
+ const samples=[],analog1=[],analog2=[];let maxDiff=0;
+ for(let n=0;n<N;n++){
+  const a=Math.cos(TAU*f*n/fs),b=Math.cos(TAU*other*n/fs);
+  samples.push([n,a]);maxDiff=Math.max(maxDiff,Math.abs(a-b));
+ }
+ // Horizontal coordinate t/T_s is continuous; black stems appear at integer sample indices.
+ const subdivisions=24;
+ for(let k=0;k<=nmax*subdivisions;k++){
+  const nt=k/subdivisions;
+  analog1.push([nt,Math.cos(TAU*f*nt/fs)]);
+  analog2.push([nt,Math.cos(TAU*other*nt/fs)]);
+ }
+ drawChart('plot0',{xmin:0,xmax:nmax,ymin:-1.15,ymax:1.15,
+  xlabel:'normalized time t/T_s',ylabel:'amplitude',xticks:6,
+  series:[{xy:analog1,color:C.teal,width:1.9},
+          {xy:analog2,color:C.coral,width:1.6,dash:true},
+          {xy:samples,color:C.ink,type:'stem',radius:3.8}]});
+ setLegend(0,[
+  {kind:'line',color:C.teal,label:`Solid: analog ${f} Hz`},
+  {kind:'dashed',color:C.coral,label:`Red dashed: analog ${other} Hz (= f_s − f)`},
+  {kind:'stem',color:C.ink,label:`Black stems/dots: N=${N} discrete samples x[n]`}]);
+ // Use the exact same visible N samples for the finite-record DTFT.
+ const freq=[];
+ for(let k=0;k<=720;k++){
+  const freqPi=-2+4*k/720,om=freqPi*PI;
+  freq.push([freqPi,mag(spectrum(samples,om))/N]);
+ }
+ drawChart('plot1',{xmin:-2,xmax:2,ymin:0,ymax:1.08,
+  xlabel:'digital frequency Ω/π',ylabel:'|X_N|/N',xticks:8,
+  series:[{xy:freq,color:C.teal,width:2.6}],
+  vlines:[{x:-1,color:C.gold},{x:1,color:C.gold}]});
+ setLegend(1,[
+  {kind:'line',color:C.teal,label:`DTFT magnitude of ${N} displayed samples`},
+  {kind:'vline',color:C.gold,label:'±π boundaries (spectrum repeats every 2π)'}]);
+ setFormula(`f<sub>s</sub> = ${fs} Hz &nbsp;·&nbsp; T<sub>s</sub> = ${clean(1000/fs,2)} ms &nbsp;·&nbsp; Ω = 2πf/f<sub>s</sub> = ${clean(2*f/fs,3)}π rad/sample`);
+ setMetrics([
+  [`${clean(2*f/fs,3)} π`,'rad/sample; Ω = 2πf/f_s'],
+  [`${other} Hz`,`f₂ = f_s − f = ${fs} − ${f} Hz`],
+  [`${clean(maxDiff,11)}`,'same value at each sampling instant']]);
+ setInsight(`Sampling at f_s=${fs} Hz means T_s=${clean(1000/fs,2)} ms. Solid teal is ${f} Hz; dashed red is a different analog waveform at ${other} Hz. Black stems are the actual samples x[n]. Both analog curves pass through every sample at t=nT_s. N=${N} changes only the number of displayed samples (and the DTFT observation length), not the sampling rate. The lower finite-record DTFT repeats every 2π in Ω.`);
+}
+function makePairSequence(s){const seq=[];for(let n=-14;n<=30;n++){let x=0;if(s.kind==='impulse')x=n===0?1:0;else if(s.kind==='shift')x=n===s.n0?1:0;else if(s.kind==='exp')x=n>=0?Math.pow(s.a,n):0;else if(s.kind==='rect')x=n>=0&&n<s.m?1:0;else if(s.kind==='sym')x=Math.pow(s.a,Math.abs(n));seq.push([n,x])}return seq}
+function pairTransform(s,w){if(s.kind==='impulse')return[1,0];if(s.kind==='shift')return cis(-w*s.n0);if(s.kind==='exp'){const ar=1-s.a*Math.cos(w),ai=s.a*Math.sin(w),den=ar*ar+ai*ai;return[ar/den,-ai/den]}if(s.kind==='sym'){const v=(1-s.a*s.a)/(1-2*s.a*Math.cos(w)+s.a*s.a);return[v,0]}const seq=[];for(let n=0;n<s.m;n++)seq.push([n,1]);return spectrum(seq,w)}
+function drawPairs(s){const seq=makePairSequence(s),xs=seq.filter(q=>q[0]>=-12&&q[0]<=28),ym=Math.max(1.15,...xs.map(p=>p[1]*1.13));drawChart('plot0',{xmin:-12,xmax:28,ymin:-.08,ymax:ym,xlabel:'sample index n',ylabel:'x[n]',xticks:8,series:[{xy:xs,color:C.teal,type:'stem',radius:2.6}]});const vals=[];for(let i=0;i<=600;i++){const w=-PI+2*PI*i/600,Z=pairTransform(s,w);const abs=mag(Z);vals.push([w/PI,s.showphase==='phase'?(abs<1e-7?NaN:Math.atan2(Z[1],Z[0])):abs])}let maxmag=Math.max(...vals.map(v=>Number.isFinite(v[1])?v[1]:0)),ph=s.showphase==='phase';drawChart('plot1',{xmin:-1,xmax:1,ymin:ph?-PI-0.2:0,ymax:ph?PI+0.2:Math.max(1.1,maxmag*1.08),xlabel:'\u03a9/\u03c0',ylabel:ph?'phase (rad)':'|X(e^{j\u03a9})|',xticks:4,series:[{xy:vals,color:C.coral,width:2.7}]});let dc=pairTransform(s,0),ny=pairTransform(s,PI),clue='';if(s.kind==='impulse'||s.kind==='shift')clue='Flat magnitude';if(s.kind==='exp')clue=`a=${clean(s.a,2)}, |a|<1`;if(s.kind==='rect')clue=`First zero = 2\u03c0/${s.m}`;if(s.kind==='sym')clue='Real, even spectrum';setMetrics([[clean(mag(dc),3),'Sum of all samples'],[clean(mag(ny),3),'|X(e^{j\u03c0})|'],[clue,'Interpret the structure']]);let eq={impulse:'X(e<sup>j\u03a9</sup>) = 1',shift:`X(e<sup>j\u03a9</sup>) = e<sup>\u2212j\u03a9${s.n0}</sup>`,exp:`X(e<sup>j\u03a9</sup>) = 1 / (1 \u2212 ${clean(s.a,2)} e<sup>\u2212j\u03a9</sup>)`,rect:`X(e<sup>j\u03a9</sup>) = e<sup>\u2212j\u03a9(${s.m}\u22121)/2</sup> \u00d7 sin(${s.m}\u03a9/2) / sin(\u03a9/2)`,sym:`X(e<sup>j\u03a9</sup>) = (1 \u2212 a<sup>2</sup>) / (1 \u2212 2a cos\u03a9 + a<sup>2</sup>)`}[s.kind];setFormula(eq);const tips={impulse:'One nonzero sample produces the same magnitude at all digital frequencies.',shift:'Shifting an impulse keeps |X|=1 and rotates its phase. Magnitude alone cannot reveal the time index.',exp:'This convergent geometric series has a strong DC value when a is close to 1. The infinite sum requires |a|<1.',rect:'Longer time rectangles have narrower central lobes and more closely spaced zeros. At \u03a9=0 use the original sum to avoid 0/0.',sym:'A real-even two-sided sequence has a real-even DTFT. Compare its magnitude with the causal exponential.'};setInsight(tips[s.kind])}
+function drawPhase(s){const base=[],shifted=[],N=28;for(let n=0;n<=N;n++){base.push([n,n<s.m?1:0]);shifted.push([n,n>=s.n0&&n<s.n0+s.m?1:0])}drawChart('plot0',{xmin:0,xmax:26,ymin:-.08,ymax:1.2,xlabel:'n (samples)',ylabel:'x[n]',series:[{xy:base,color:C.gray,type:'stem',radius:2.4},{xy:shifted,color:C.coral,type:'stem',radius:3}]});const orig=[],delayed=[],diff=[];for(let i=0;i<=300;i++){const w=PI*i/300,z=pairTransform({kind:'rect',m:s.m},w),v=mag(z);orig.push([w/PI,v]);delayed.push([w/PI,v]);diff.push([w/PI,-w*s.n0])}drawChart('plot1',{xmin:0,xmax:1,ymin:0,ymax:s.m*1.1,xlabel:'\u03a9/\u03c0',ylabel:'|X|',series:[{xy:orig,color:C.teal,width:3},{xy:delayed,color:C.coral,dash:true,width:1.8}]});drawChart('plot2',{xmin:0,xmax:1,ymin:Math.min(-PI*s.n0-1,-1),ymax:.5,xlabel:'\u03a9/\u03c0',ylabel:'phase difference (rad)',series:[{xy:diff,color:C.coral,width:3}]});setMetrics([[`${s.n0} samples`,'Time shift'],['0','Original vs shifted |X|'],[`${-s.n0} rad/(rad/sample)`,'-n0; phase slope']]);setInsight(`A ${s.n0}-sample delay contributes exp(-j\u03a9${s.n0}). The unwrapped phase difference is -${s.n0}\u03a9. At spectral zeros the individual phase is undefined; phase wrapping may create visual jumps.`)}
+function drawAverage(s){const w=s.w*PI,M=s.m,Z=maH(M,w);drawPhasors('plot0',M,w);const response=[];for(let i=0;i<=450;i++){const x=i/450,responseMag=mag(maH(M,x*PI));response.push([x,responseMag])}drawChart('plot1',{xmin:0,xmax:1,ymin:0,ymax:1.08,xlabel:'digital frequency \u03a9/\u03c0',ylabel:'|H|',series:[{xy:response,color:C.teal,width:2.8}],vlines:[{x:s.w,color:C.coral}],points:[{x:s.w,y:mag(Z),color:C.coral,radius:5}]});setMetrics([[clean(mag(Z),4),`\u03a9=${clean(s.w,2)}\u03c0`],['1.000','At DC, all M arrows align'],[`${clean((M-1)/2,1)} samples`,'Linear-phase slope near passband']]);setInsight(`Each tap contributes one phasor of length 1/${M}. At \u03a9=0, the M arrows align and |H|=1. At selected higher frequencies they may cancel. For this filter, zeros occur at 2\u03c0k/${M}, excluding multiples of 2\u03c0.`)}
+function drawFilter(s){const fs=100,N=220,M=s.m,signal=[],filtered=[];for(let n=0;n<N;n++)signal.push(20+Math.cos(TAU*s.fu*n/fs)+s.an*Math.cos(TAU*s.fn*n/fs));for(let n=0;n<N;n++){let sum=0;for(let k=0;k<M;k++)if(n>=k)sum+=signal[n-k];filtered.push(sum/M)}const from=s.startup==='startup'?0:Math.max(M+12,60),count=90;const inp=[],out=[];for(let n=from;n<from+count&&n<N;n++){inp.push([n/fs,signal[n]]);out.push([n/fs,filtered[n]])}let ymin=s.startup==='startup'?-1:18,ymax=22.5;drawChart('plot0',{xmin:from/fs,xmax:(from+count-1)/fs,ymin,ymax,xlabel:'time (seconds)',ylabel:'sensor units',series:[{xy:inp,color:C.gray,width:1.8},{xy:out,color:C.teal,width:2.5}],band:s.startup==='startup'?{from:0,to:(M-1)/fs,color:'rgba(239,112,85,.11)'}:null});const gains=[];for(let i=0;i<=440;i++){let xx=i/440;gains.push([xx,mag(maH(M,xx*PI))])}const gu=mag(maH(M,TAU*s.fu/fs)),gn=mag(maH(M,TAU*s.fn/fs)),delay=(M-1)/(2*fs)*1000;drawChart('plot1',{xmin:0,xmax:1,ymin:0,ymax:1.08,xlabel:'digital frequency \u03a9/\u03c0',ylabel:'|H|',series:[{xy:gains,color:C.teal,width:2.7}],points:[{x:2*s.fu/fs,y:gu,color:C.teal,radius:5.1},{x:2*s.fn/fs,y:gn,color:C.coral,radius:5.1}],vlines:[{x:2*s.fu/fs,color:C.teal},{x:2*s.fn/fs,color:C.coral}]});setMetrics([[`${clean(gu*100,2)}%`,`${s.fu} Hz output / input amplitude`],[`${clean(gn*100,2)}%`,`${s.fn} Hz interference; output amplitude ${clean(gn*s.an,3)}`],[`${clean(delay,1)} ms`,`${clean((M-1)/2,1)} samples at fs=100 Hz`]]);setInsight(`M=${M}: useful ${s.fu} Hz amplitude = ${clean(gu,4)} (input amplitude 1), noise ${s.fn} Hz amplitude = ${clean(s.an*gn,4)} (input amplitude ${s.an}), passband delay = ${clean(delay,1)} ms. ${s.startup==='startup'?'The shaded early interval contains startup behavior under a zero-prehistory assumption.':'This view excludes initial startup samples for a steadier comparison.'}`)}
+function fft(re,im){const n=re.length;let j=0;for(let i=1;i<n;i++){let bit=n>>1;while(j&bit){j^=bit;bit>>=1}j^=bit;if(i<j){let a=re[i];re[i]=re[j];re[j]=a;a=im[i];im[i]=im[j];im[j]=a}}for(let len=2;len<=n;len<<=1){const theta=-TAU/len;for(let start=0;start<n;start+=len){for(let k=0;k<(len>>1);k++){const ang=theta*k,c=Math.cos(ang),sn=Math.sin(ang),i=start+k,jj=i+len/2,tr=c*re[jj]-sn*im[jj],ti=sn*re[jj]+c*im[jj];re[jj]=re[i]-tr;im[jj]=im[i]-ti;re[i]+=tr;im[i]+=ti}}}return{re,im}}
+// Spectrum corresponds to the SAME real cosine displayed in the time plot.
+function fftSignal(N,L,f,win,fs){const re=new Float64Array(L),im=new Float64Array(L);let sum=0;for(let n=0;n<N;n++){const w=win==='hann'?.5-.5*Math.cos(TAU*n/(N-1)):1;re[n]=w*Math.cos(TAU*f*n/fs);sum+=w}fft(re,im);const out=new Float64Array(L/2+1);for(let k=0;k<out.length;k++)out[k]=2*Math.hypot(re[k],im[k])/sum;return out}
+function fftGuide(s,N,fs){const cycles=N*s.f/fs,nearest=Math.round(cycles),coherent=Math.abs(cycles-nearest)<1e-8,el=$('fftstatus');if(el){el.innerHTML=`<b>${clean(cycles,2)} cycles</b> during ${clean(N/fs,2)} seconds. Nearest bin k=${nearest}, f=${clean(nearest*fs/N,3)} Hz. ${coherent?'✅ 정수 주기, FFT bin 일치.':'⚠ 비정수 주기, FFT bin과 불일치 → leakage.'}<span>${s.window==='hann'?'Hann: 먼 sidelobe는 감소하지만 main lobe는 넓어집니다.':'Rectangular: main lobe는 좁지만 먼 sidelobe가 큽니다.'}</span>`}const presets={aligned:['rect',4,'1'],offbin:['rect',4.15,'1'],hann:['hann',4.15,'1'],padding:['hann',4.15,'4']};document.querySelectorAll('[data-fft-preset]').forEach(b=>{const [w,f,pad]=presets[b.dataset.fftPreset],yes=N===512&&s.window===w&&Math.abs(s.f-f)<1e-8&&String(s.pad)===pad;b.classList.toggle('selected',yes);b.setAttribute('aria-pressed',yes?'true':'false')})}
+function drawFFT(s){const N=Number(s.n),pad=Number(s.pad),fs=128,L=N*pad,time=[],up=[],down=[];for(let n=0;n<N;n++){const env=s.window==='hann'?.5-.5*Math.cos(TAU*n/(N-1)):1;time.push([n,Math.cos(TAU*s.f*n/fs)*env]);up.push([n,env]);down.push([n,-env])}
+ drawChart('plot0',{xmin:0,xmax:N-1,ymin:-1.14,ymax:1.14,xlabel:'sample index n (full record)',ylabel:'xw[n]',xticks:5,series:[{xy:up,color:C.gray,width:1.2,dash:true},{xy:down,color:C.gray,width:1.2,dash:true},{xy:time,color:C.teal,width:1.8}]});setLegend(0,[{label:'Observed real cosine × window',color:C.teal,kind:'line'},{label:`±${s.window==='hann'?'Hann':'Rectangular'} envelope`,color:C.gray,kind:'dashed'}]);
+ const dense=fftSignal(N,8192,s.f,s.window,fs),dft=fftSignal(N,L,s.f,s.window,fs),curve=[],dots=[];let peak=0,peakK=0;for(let k=0;k<dense.length;k+=3){const f=k*fs/8192;if(f>13)break;curve.push([f,dense[k]])}for(let k=0;k<dft.length;k++){const f=k*fs/L;if(f>13)break;dots.push([f,dft[k]]);if(dft[k]>peak){peak=dft[k];peakK=k}}
+ drawChart('plot1',{xmin:0,xmax:13,ymin:0,ymax:1.1,xlabel:'frequency (Hz)',ylabel:'2|X| / Σw',xticks:6,series:[{xy:curve,color:C.ink,width:2.2},{xy:dots,color:C.coral,type:'stem',radius:pad>2?1.7:2.9}],vlines:[{x:s.f,color:C.teal}],points:[{x:peakK*fs/L,y:peak,color:C.coral,radius:4.7}]});setLegend(1,[{label:'Finite-record DTFT (dense curve)',color:C.ink,kind:'line'},{label:`${L}-point FFT/DFT bins`,color:C.coral,kind:'stem'},{label:'Actual tone f',color:C.teal,kind:'vline'}]);
+ const rect=fftSignal(N,8192,s.f,'rect',fs),hann=fftSignal(N,8192,s.f,'hann',fs),ra=[],ha=[];for(let k=0;k<rect.length;k+=3){const hz=k*fs/8192;if(hz>13)break;ra.push([hz,Math.max(-85,20*Math.log10(Math.max(rect[k],1e-8)))]);ha.push([hz,Math.max(-85,20*Math.log10(Math.max(hann[k],1e-8)))])}
+ drawChart('plot2',{xmin:0,xmax:13,ymin:-85,ymax:5,xlabel:'frequency (Hz)',ylabel:'normalized amplitude (dB)',xticks:8,series:[{xy:ra,color:C.coral,width:s.window==='rect'?2.9:1.8,dash:s.window!=='rect'},{xy:ha,color:C.teal,width:s.window==='hann'?2.9:1.8,dash:s.window!=='hann'}],vlines:[{x:s.f,color:C.gray}]});setLegend(2,[{label:'Rectangular',color:C.coral,kind:'line'},{label:'Hann',color:C.teal,kind:'line'},{label:'Tone frequency',color:C.gray,kind:'vline'}]);
+ const df=fs/N,spacing=fs/L,cycles=N*s.f/fs,coherent=Math.abs(cycles-Math.round(cycles))<1e-8;setMetrics([[`${clean(df,3)} Hz`,'Δf = fs/N (N real measurements)'],[`${clean(spacing,4)} Hz`,'fs/(N × pad factor)'],[`${clean(N/fs,2)} s`,'unchanged by zero padding']]);
+ fftGuide(s,N,fs);setFormula('x<sub>w</sub>[n] = w[n] cos(2πfn/f<sub>s</sub>) &nbsp; | &nbsp; X[k] = Σ x<sub>w</sub>[n]e<sup>−j2πkn/L</sup>');
+ setInsight(`${clean(cycles,2)} cycles of a REAL cosine are observed. ${coherent?'With rectangular window and integer cycles the DFT has a single ideal positive-frequency bin.':'Fractional cycles place the tone between original DFT bins, producing spectral leakage over many bins.'} Hann tapers both ends, reducing distant sidelobes but broadening the central lobe. Even on-bin Hann data can occupy neighboring DFT bins. The navy curve is dense finite-record DTFT; orange stems sample it at FFT bins and the green line marks the actual tone f. Zero padding refines only the bin spacing to ${clean(spacing,4)} Hz, without extending the ${clean(N/fs,2)} s observation.`)}
+shell();renderModule();
+// Basic numerical checks run once. These are visible to automated inspection as a read-only diagnostic.
+window.__dtftChecks={
+ periodicity:Math.abs(Math.cos(.2*PI*7)-Math.cos((.2*PI+TAU)*7))<1e-10,
+ movingAverageDC:Math.abs(mag(maH(4,0))-1)<1e-10,
+ movingAverageNyquist:mag(maH(4,PI))<1e-10,
+ sensorUseful:Math.abs(mag(maH(4,.04*PI))-.99016)<.001,
+ sensorNoise:Math.abs(mag(maH(4,.9*PI))-.14878)<.001,
+ fftOnBin:(()=>{const a=fftSignal(128,128,4,'rect',128);let other=0;for(let k=0;k<a.length;k++)if(k!==4)other=Math.max(other,a[k]);return Math.abs(a[4]-1)<1e-10&&other<1e-10})()
+};
+
+</script>
+<script src="./assets/ss-ch6-frequency-foundations.js?v=4"></script>
+<script src="./assets/ss-ch6-learning-flow.js?v=1"></script>
+<link rel="stylesheet" href="./assets/ss-ch6-standalone.css?v=1">
+</body>
+</html>
