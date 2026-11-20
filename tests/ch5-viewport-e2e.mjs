@@ -63,6 +63,9 @@ try{
    });
    check(math.engine&&math.expected===4,prefix+"-"+lab+"-math-model",math);
    check(math.hero==="katex"&&math.steps.every(x=>x==="katex"),prefix+"-"+lab+"-katex-rendered",math);
+   const notes=await page.locator(".reading-note p").allTextContents();
+   check(notes.length>=2&&notes.some(x=>x.includes(" / ")||x.includes("ROC")||x.includes("pole")||x.includes("τ")),prefix+"-"+lab+"-reading-notes",notes.slice(0,2));
+
 
    const range=page.locator('.lab .panel input[type="range"]').first();
    if(await range.count()){
