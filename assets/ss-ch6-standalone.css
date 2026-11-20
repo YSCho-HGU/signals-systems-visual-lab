@@ -57,3 +57,6 @@ html.ss6-compact-workspace .legend{display:flex!important;flex-wrap:wrap;gap:5px
  html.ss6-compact-workspace .main{padding:8px 8px 34px!important}
  html.ss6-compact-workspace .charts{grid-template-columns:1fr!important}
 }
+
+/* One back link belongs in the shared top navigation. */
+#studio-back{display:none!important}
