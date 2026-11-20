@@ -26,6 +26,13 @@ for(const [ch,record] of Object.entries(learning.chapters)){
 check("G0-06-catalog-schema",course.schemaVersion===1&&chapters.schemaVersion===1,"Both schemaVersion=1");
 check("G0-07-published-8",course.chapters.filter(x=>x.published).length===8&&chapters.chapters.filter(x=>x.published).length===8);
 check("G0-08-native-ch6",!native.includes("<iframe")&&native.includes('id="ss6-chapter-picker"')&&native.includes('ss-ch6-learning-flow.js')&&page.includes('if(ch===6){location.replace(\'./chapter6.html\');return;}'));
+const laplaceNative=read("chapter5.html");
+check("G0-08a-native-ch5",policy.chapterRoutes["5"]==="native"&&policy.chapterRoutes["6"]==="native"&&
+ !/<iframe(?:\\s|>)/i.test(laplaceNative)&&laplaceNative.includes('id="ss5-chapter-picker"')&&
+ laplaceNative.includes("window.__labNumerics")&&laplaceNative.includes("function installPlotInteractions()")&&
+ page.includes("if(ch===5){location.replace('./chapter5.html');return;}"));
+try{new Script(read("assets/ss-ch5-standalone.js"),{filename:"assets/ss-ch5-standalone.js"});check("G0-js-ch5-native",true)}
+catch(e){check("G0-js-ch5-native",false,String(e).slice(0,200))}
 check("G0-09-six-modules",flow.includes('["periodic","pairs","phase","phasor","filter","fft"]'));
 check("G0-10-no-prediction-gate",flow.includes("Writing a prediction is optional")&&read("assets/ss-ch6-frequency-foundations.js").includes("return originalControl(c,s);"));
 check("G0-11-native-audio",native.includes('ss-applications.js')&&read("assets/ss-applications.js").includes("ss-ch6-module-changed"));
