@@ -168,6 +168,12 @@ function applyFlow(){
  if(controls){
    controls.classList.add("ss6-step-card","ss6-step-controls");
    controls.dataset.ss6Step="2";
+   // Explicit number: the CSS pseudo-badge could disappear when controls moved.
+   var stepBadge=document.createElement("span");
+   stepBadge.className="ss6-controls-number";
+   stepBadge.textContent="2";
+   stepBadge.setAttribute("aria-hidden","true");
+   controls.insertBefore(stepBadge,controls.firstChild);
    var controlHeading=controls.querySelector("h3");
    if(controlHeading)controlHeading.textContent=lang("변수 조절","Adjust parameters");
    var instruction=document.createElement("p");instruction.className="ss6-compact-instruction";
