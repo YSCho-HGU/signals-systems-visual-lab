@@ -523,7 +523,9 @@
   function fitChapterSixFrame(){
     if(window.self===window.parent||!window.frameElement)return;
     var frame=window.frameElement;
-    var height=Math.ceil(Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)+12);
+    var main=document.querySelector(".main")||document.getElementById("content");
+    var bottom=main?main.getBoundingClientRect().bottom+window.scrollY:document.body.scrollHeight;
+    var height=Math.ceil(bottom+14);
     if(height>0&&height<50000){
       var last=Number(frame.dataset.ss6FitHeight||0);
       if(Math.abs(height-last)>3){
