@@ -401,6 +401,35 @@
     ],check:"Is f_s/f necessarily an integer? How does that differ from the fundamental DT period N₀?"};
   };
 
+
+  // Typeset every visible Chapter 6.1 guided-derivation equation, including
+  // steps revealed later by the Previous/Next/Show all controls.
+  window.__ss6TypesetGuide=function(pane,s){
+    if(!pane||active!=="periodic")return;
+    var fs=Number(s.fs),f=Number(s.f),F=f/fs;
+    var n0=fs/gcd(fs,f),ts=1000/fs,t0=1000/f,om=2*Math.PI*F;
+    var values={f:clean(f,3),fs:clean(fs,3),F:clean(F,4),
+      ts:clean(ts,2),t0:clean(t0,2),om:clean(om,4),N0:String(n0)};
+    var tex=[
+      "x(t)=\\cos(2\\pi ft),\\quad f={f}\\,\\mathrm{Hz},\\quad T_0={t0}\\,\\mathrm{ms}",
+      "f_s={fs}\\,\\mathrm{Hz},\\quad T_s=\\frac1{f_s}={ts}\\,\\mathrm{ms},\\quad t=nT_s",
+      "x[n]=\\cos(2\\pi Fn),\\quad F=\\frac f{f_s}={F}\\,\\frac{\\mathrm{cycles}}{\\mathrm{sample}},\\quad \\Omega={om}\\,\\frac{\\mathrm{rad}}{\\mathrm{sample}}",
+      "x[n+N_0]=x[n],\\quad FN_0\\in\\mathbb{Z},\\quad N_0={N0}\\ \\mathrm{samples}"
+    ].map(function(t){return t.replace(/\{(f|fs|F|ts|t0|om|N0)\}/g,function(_,key){return values[key]})});
+    var nativeMath=[
+      '<mrow><mi>x</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mi>cos</mi><mo>(</mo><mn>2</mn><mi>π</mi><mi>f</mi><mi>t</mi><mo>)</mo><mspace width=".9em"/><mi>f</mi><mo>=</mo><mtext>'+values.f+' Hz</mtext><mspace width=".9em"/><msub><mi>T</mi><mn>0</mn></msub><mo>=</mo><mtext>'+values.t0+' ms</mtext></mrow>',
+      '<mrow><msub><mi>f</mi><mi>s</mi></msub><mo>=</mo><mtext>'+values.fs+' Hz</mtext><mspace width=".8em"/><msub><mi>T</mi><mi>s</mi></msub><mo>=</mo><mfrac><mn>1</mn><msub><mi>f</mi><mi>s</mi></msub></mfrac><mo>=</mo><mtext>'+values.ts+' ms</mtext><mspace width=".8em"/><mi>t</mi><mo>=</mo><mi>n</mi><msub><mi>T</mi><mi>s</mi></msub></mrow>',
+      '<mrow><mi>x</mi><mo>[</mo><mi>n</mi><mo>]</mo><mo>=</mo><mi>cos</mi><mo>(</mo><mn>2</mn><mi>π</mi><mi>F</mi><mi>n</mi><mo>)</mo><mspace width=".8em"/><mi>F</mi><mo>=</mo><mfrac><mi>f</mi><msub><mi>f</mi><mi>s</mi></msub></mfrac><mo>=</mo><mtext>'+values.F+' cycles/sample</mtext><mspace width=".8em"/><mi>Ω</mi><mo>=</mo><mtext>'+values.om+' rad/sample</mtext></mrow>',
+      '<mrow><mi>x</mi><mo>[</mo><mi>n</mi><mo>+</mo><msub><mi>N</mi><mn>0</mn></msub><mo>]</mo><mo>=</mo><mi>x</mi><mo>[</mo><mi>n</mi><mo>]</mo><mspace width=".9em"/><mi>F</mi><msub><mi>N</mi><mn>0</mn></msub><mo>∈</mo><mi>ℤ</mi><mspace width=".9em"/><msub><mi>N</mi><mn>0</mn></msub><mo>=</mo><mtext>'+values.N0+' samples</mtext></mrow>'
+    ];
+    pane.querySelectorAll(".deriv-math").forEach(function(el,i){
+      if(i>=tex.length)return;
+      if(window.katex){try{window.katex.render(tex[i],el,{displayMode:true,throwOnError:false});el.dataset.mathRendered="katex";return}catch(e){}}
+      el.innerHTML='<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">'+nativeMath[i]+'</math>';
+      el.dataset.mathRendered="mathml";
+    });
+  };
+
   // Existing automatic playback varies f. In step 2 the free control is f_s instead.
   var oldPlay=togglePlay;
   togglePlay=function() {
