@@ -82,6 +82,8 @@ try{
       if(await page.locator(".ss6-interpretation h3").count()!==1){
         const debug=await page.evaluate(()=>({
           stepCards:[...document.querySelectorAll(".ss6-step-card")].map(e=>({cls:e.className,text:e.textContent.slice(0,65)})),
+          interpretHTML:document.querySelector(".ss6-interpretation")?.innerHTML.slice(0,420),
+          interpretHeaders:[...document.querySelectorAll(".ss6-interpretation *")].filter(e=>/^H[1-6]$/.test(e.tagName)).map(e=>e.outerHTML.slice(0,180)),
           metrics:document.querySelectorAll(".metrics").length,
           learning:document.querySelectorAll(".learning").length,
           bodyChildClasses:[...document.querySelectorAll(".body-col > *")].map(e=>e.className),
