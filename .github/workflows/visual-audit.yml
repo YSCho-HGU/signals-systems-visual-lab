@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'index.html'
+      - 'chapter6.html'
       - 'assets/**'
       - 'tests/**'
       - 'package.json'
@@ -24,10 +25,10 @@ jobs:
         run: |
           npm install --no-audit --no-fund
           npx playwright install --with-deps chromium
+      - name: Test native Chapter 6 across laptop, desktop and mobile Chromium
+        run: node tests/ch6-viewport-e2e.mjs
       - name: Verify Chapter 6 digital-frequency foundations and sampling math
         run: node tests/ch6-sampling-foundations.mjs
-      - name: Test Chapter 6.1 viewport and three-stage interactions in Chromium
-        run: node tests/ch6-viewport-e2e.mjs
       - name: Run all 62 experiments in Light and Dark at mobile/desktop widths
         run: npm run qa:visual
       - name: Verify 248 screenshots and generate quality-gates report
@@ -38,6 +39,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: visual-qa-screenshots
-          path: qa-output/
+          path: |
+            qa-output/
+            qa-ch6-viewport/
           if-no-files-found: warn
           retention-days: 7
