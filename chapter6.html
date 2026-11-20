@@ -204,7 +204,20 @@ html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hov
 .ss-hover-target:focus-visible{outline:3px solid #ee9868;outline-offset:3px}
 @media(max-width:560px){.ss-hover-tip{max-width:min(290px,calc(100% - 12px));padding:9px 10px;font-size:11px}.ss-hover-hint{font-size:10px}}
 
+
+/* Chapter 6: larger teaching typography, compact control-to-graph distance, real white theme. */
+:root[data-theme='light']{--bg:#ffffff;--paper:#ffffff;--pale:#f7f9fa;--ink:#162b38;--sub:#475867;--line:#d9e0e5}
+body{font-size:17px;line-height:1.66}
+.heading p,.learning p,.question p,.notice,.insight{font-size:17px;line-height:1.68}
+.ctrl label{font-size:15px}.ctrl output{font-size:15px}.figure h3{font-size:17px}.figure p,.legend{font-size:14px}.hero-callout .hint{font-size:14px}
+.formula{font-size:21px;line-height:1.5;overflow-x:auto}.formula .katex{font-size:1.08em}.formula .katex-display{margin:0}
+.experiment{grid-template-columns:minmax(215px,255px) minmax(0,1fr);gap:10px}.controls{padding:14px;top:8px}.figure{padding:12px 12px 7px}.charts{gap:10px}.body-col{gap:10px}.figure canvas{height:260px}
+@media(max-width:1050px){.experiment{grid-template-columns:minmax(200px,240px) minmax(0,1fr)}.controls{position:sticky;top:8px}.control-grid{display:block}}
+@media(max-width:800px){.experiment{grid-template-columns:1fr}.controls{position:static}.control-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 14px}.figure canvas{height:245px}}
+@media(max-width:520px){.control-grid{grid-template-columns:1fr}.formula{font-size:18px}}
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.js"></script>
 <script>
 /* Rev8 shared graph probe. Displays the cursor coordinate and an independently
    evaluated analytic value when a function exists, otherwise an actual drawn
@@ -428,7 +441,7 @@ function requestUpdate(){if(renderQueued)return;renderQueued=true;requestAnimati
 function setMetrics(data){data.forEach((m,i)=>{if($('met'+i))$('met'+i).textContent=m[0];if($('metd'+i))$('metd'+i).textContent=m[1]||''})}
 function setInsight(str){if($('insight'))$('insight').textContent=str}
 function setLegend(i,items=[]){const el=$('legend'+i);if(!el)return;if(!items||!items.length){el.innerHTML='';el.style.display='none';return}el.innerHTML=items.map(it=>`<span class="legend-item"><span class="legend-chip ${it.kind||'line'}" style="--lc:${it.color}"></span>${it.label}</span>`).join('');el.style.display='flex'}
-function setFormula(s){if($('formula'))$('formula').innerHTML=s}
+function setFormula(s){const el=$('formula');if(!el)return;el.innerHTML=s; const tex=active==='periodic'?String.raw`\displaystyle \Omega=2\pi\frac{f}{f_s}\qquad X(e^{j(\Omega+2\pi)})=X(e^{j\Omega})`:null;if(!tex)return;const render=()=>{if(window.katex){try{window.katex.render(tex,el,{throwOnError:false,displayMode:true});el.dataset.mathRendered='true'}catch(e){el.innerHTML=s}}};render();if(!el.dataset.mathRendered){window.addEventListener('load',render,{once:true})}}
 function initCanvas(id){const cv=$(id);if(!cv)return null;const rect=cv.getBoundingClientRect();const w=Math.max(200,rect.width),h=Math.max(200,rect.height),d=Math.min(window.devicePixelRatio||1,2);cv.width=Math.round(w*d);cv.height=Math.round(h*d);const g=cv.getContext('2d');g.setTransform(d,0,0,d,0,0);g.clearRect(0,0,w,h);return{g,w,h}}
 function drawChart(id,opt){
  const z=initCanvas(id);if(!z)return;
@@ -623,6 +636,8 @@ function drawFFT(s){const N=Number(s.n),pad=Number(s.pad),fs=128,L=N*pad,time=[]
  fftGuide(s,N,fs);setFormula('x<sub>w</sub>[n] = w[n] cos(2πfn/f<sub>s</sub>) &nbsp; | &nbsp; X[k] = Σ x<sub>w</sub>[n]e<sup>−j2πkn/L</sup>');
  setInsight(`${clean(cycles,2)} cycles of a REAL cosine are observed. ${coherent?'With rectangular window and integer cycles the DFT has a single ideal positive-frequency bin.':'Fractional cycles place the tone between original DFT bins, producing spectral leakage over many bins.'} Hann tapers both ends, reducing distant sidelobes but broadening the central lobe. Even on-bin Hann data can occupy neighboring DFT bins. The navy curve is dense finite-record DTFT; orange stems sample it at FFT bins and the green line marks the actual tone f. Zero padding refines only the bin spacing to ${clean(spacing,4)} Hz, without extending the ${clean(N/fs,2)} s observation.`)}
 shell();renderModule();
+/* Re-render the initial Chapter 6 equation after KaTeX has loaded. */
+window.addEventListener('load',()=>{const el=document.getElementById('formula');if(el&&active==='periodic')setFormula(el.innerHTML)},{once:true});
 // Basic numerical checks run once. These are visible to automated inspection as a read-only diagnostic.
 window.__dtftChecks={
  periodicity:Math.abs(Math.cos(.2*PI*7)-Math.cos((.2*PI+TAU)*7))<1e-10,
