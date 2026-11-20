@@ -640,6 +640,63 @@ function revealGuide(moduleId,state,guideFactory){
  };
  guideView.previous[moduleId]=n;
  rp.innerHTML=`<div class="overlabel">READ THE GRAPHS / 그래프 해석</div><h3>What changed, and why? / 무엇이 왜 바뀌었을까요?</h3><div class="reading-grid">${d.graphs.map((v,i)=>`<div class="reading-note"><span class="plot-number">GRAPH ${String(i+1).padStart(2,'0')}</span><strong>${v.title}</strong><p>${v.en}</p><p class="ko-explain">${v.ko}</p></div>`).join('')}</div><p class="guide-check"><strong>Interpretation checkpoint / 해석 점검:</strong> ${d.check}</p>`;
+ chapter5ApplyReadingNotes(moduleId,state,rp);
+}
+
+/* Student graph-reading checkpoints: each claim corresponds to a plotted quantity.
+   Display-only; numerical and pointer handlers remain unchanged. */
+function chapter5ReadingNotes(id,s){
+ const f=x=>Number(x).toFixed(2);
+ switch(id){
+ case 'weight':return [
+  'The original u(t) is unchanged; only the exponential weighting e^(−σt) changes. / 원래 신호는 동일하고 가중치만 변합니다.',
+  s.sigma>0?'F(T) approaches 1/σ as T→∞. / 양의 σ에서 누적 적분은 유한한 값에 접근합니다.':'F(T) is finite for finite T, but diverges as T→∞. / 유한 구간의 적분값과 무한 구간의 수렴을 구분하세요.',
+  'ROC: Re(s)>0. A finite F(5) alone does not prove convergence. / 유한 시간의 값만으로 수렴을 판단할 수 없습니다.'];
+ case 'roc':return [
+  s.side==='right'?'The signal exists for t≥0 and decays rightward. / 원점 오른쪽의 감쇠 신호를 확인하세요.':'The signal exists for t<0 and has a negative sign. / 원점 왼쪽의 음수 신호를 확인하세요.',
+  'The pole remains at s='+f(-s.a)+' while the shaded ROC switches sides. / pole은 고정되고 ROC의 방향만 바뀝니다.',
+  'The same rational X(s) does not determine x(t) without its ROC. / 변환식과 ROC를 함께 지정해야 합니다.'];
+ case 'pairs':return [
+  s.kind==='pulse'?'The pulse lasts for a finite interval. / 유한 길이의 적분 구간에 주목하세요.':s.kind==='impulse'?'The impulse arrow represents area 1, not finite height. / 임펄스의 면적이 1임을 확인하세요.':'Check where the signal is nonzero and whether it decays. / 신호의 지지 구간과 감쇠를 구분하세요.',
+  s.kind==='pulse'?'At s=0 the singularity is removable: X(0)=T. / s=0은 실제 pole이 아닙니다.':'Poles are excluded from the ROC. / pole은 ROC에 포함되지 않습니다.',
+  'Derive the transform using support → integration → convergence, not memorization. / 구간, 적분, 수렴 조건 순으로 유도하세요.'];
+ case 'props':return [
+  s.mode==='delay'?'Time delay shifts the onset but preserves the envelope. / 시작 시점만 이동합니다.':'Exponential weighting changes the decay or growth rate. / 감쇠 또는 증가 속도가 달라집니다.',
+  s.mode==='delay'?'The pole and ROC stay fixed. / 순수 지연은 pole과 ROC를 이동시키지 않습니다.':'The pole and ROC shift together by b. / pole과 ROC가 함께 이동합니다.',
+  s.mode==='delay'?'Y(s)=e^(−st₀)X(s); compare onset times.':'Y(s)=X(s−b); compare pole positions.'];
+ case 'inverse':return [
+  s.roc==='right'?'Right-sided: x(t)=0 for t<0. / 인과 신호입니다.':s.roc==='left'?'Left-sided: x(t)=0 for t>0. / 음의 시간 신호입니다.':'Two-sided: both time directions contain signal components. / 양쪽 시간 신호를 비교하세요.',
+  'Both poles remain at −4 and −1; only ROC shading changes. / 세 경우의 pole은 동일합니다.',
+  'Use ROC to assign each partial-fraction term to its time direction. / 부분분수의 각 항에 시간 방향을 지정하세요.'];
+ case 'stability':{
+  const canceledP=Math.abs(s.p-s.z)<1e-8,canceled4=Math.abs(s.z+4)<1e-8;
+  const pole=canceledP?-4:canceled4?s.p:Math.max(s.p,-4);
+  return [
+   pole<0?'All active modes decay. / 모든 활성 pole의 실수부가 음수입니다.':'At least one active mode does not decay. / 활성 pole이 허수축 위 또는 오른쪽에 있습니다.',
+   canceledP||canceled4?'An exact pole-zero cancellation removes one pole. / 정확한 상쇄 후 남는 pole을 확인하세요.':'Nearby pole and zero locations do not imply cancellation. / 근접과 정확한 상쇄를 구분하세요.',
+   'Causal ROC: Re(s)>'+f(pole)+'. '+(pole<0?'The jω axis is inside the ROC.':'The jω axis is outside the ROC.')];
+ }
+ case 'rc':return [
+  s.input==='step'?'At t=τ the step response reaches about 63.2%. / 시정수에서 약 63.2%에 도달합니다.':'Pulse response combines charging and discharging. / 충전과 방전 구간을 구분하세요.',
+  'Cutoff ωc=1/τ='+f(1/s.tau)+' rad/s; magnitude is 1/√2 there. / 차단 주파수와 시정수를 연결하세요.',
+  'Doubling τ halves the cutoff frequency and slows the response. / τ를 두 배로 하면 차단 각주파수는 절반입니다.'];
+ case 'second':return [
+  s.zeta<1?'Underdamped: ringing and overshoot. / 진동과 오버슈트가 나타납니다.':'No oscillatory overshoot for ζ≥1. / 진동성 오버슈트가 없습니다.',
+  s.zeta<1?'The pole imaginary part gives damped oscillation frequency. / 허수부는 감쇠 진동 주파수입니다.':'Real poles give nonoscillatory modes. / 실수 pole의 감쇠 모드를 관찰하세요.',
+  'Pole real parts control decay; imaginary parts control oscillation. / 실수부는 감쇠, 허수부는 진동을 결정합니다.'];
+ default:return null;
+ }
+}
+function chapter5ApplyReadingNotes(id,s,root){
+ const notes=chapter5ReadingNotes(id,s);if(!root||!notes)return;
+ const items=root.querySelectorAll('.reading-note');
+ items.forEach((item,i)=>{
+  const p=item.querySelectorAll('p');
+  if(p[0])p[0].textContent=notes[i]||'';
+  if(p[1])p[1].textContent='';
+ });
+ const checkpoint=root.querySelector('.guide-check');
+ if(checkpoint)checkpoint.textContent='CHECK YOUR UNDERSTANDING / 개념 확인 — '+notes[2];
 }
 
 // Chapter 5: Oppenheim-style bilateral Laplace derivations with ROC in every transform pair.
