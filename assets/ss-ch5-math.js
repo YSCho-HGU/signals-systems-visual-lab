@@ -73,8 +73,8 @@
    ];
   }
   if(id==="stability"){
-   const p=Number(s.p),z=Number(s.z),cancelP=Math.abs(p-z)<0.051,cancel4=Math.abs(z+4)<0.051,
-    active=cancelP?-4:Math.max(p,-4);
+   const p=Number(s.p),z=Number(s.z),cancelP=Math.abs(p-z)<1e-8,cancel4=Math.abs(z+4)<1e-8,
+    active=cancelP?-4:cancel4?p:Math.max(p,-4);
    return [
     'H(s)=\\frac{s-('+f(z)+')}{[s-('+f(p)+')](s+4)}',
     cancelP?'z=p='+f(p)+'\\Longrightarrow H_{\\mathrm{red}}(s)=\\frac1{s+4}':cancel4?'z=-4\\Longrightarrow H_{\\mathrm{red}}(s)=\\frac1{s-p}':
