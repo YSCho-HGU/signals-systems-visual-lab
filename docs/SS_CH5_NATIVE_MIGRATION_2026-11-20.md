@@ -30,3 +30,12 @@ Make Chapter 5 a full-width, no-iframe standalone native page with the Chapter 6
 
 ## Further hardening
 Run `node tests/ch5-viewport-e2e.mjs` and `npm run qa:visual` in installed Playwright environment, examine screenshots at 390/1280/1366, confirm ROC pole/zero dragging in actual browser, and adjust horizontal overflow/layout after evidence review. Do not label manual mathematical/visual gates complete before seeing the results.
+
+## Q2: KaTeX mathematical typesetting
+- `assets/ss-ch5-math.js` supplies typed, dynamically parameterized LaTeX for all eight experiment formula headers and 32 guided derivation steps.
+- `chapter5.html` uses the same KaTeX 0.16.25 distribution as Chapter 6, and the existing shared `ELSLabUI.renderMath` renderer (accessible HTML + MathML output).
+- Rendering runs on lab selection, slider updates, preset changes and guided-step changes; the numerical computation and canvas/pointer handling functions are retained.
+- KaTeX availability requires the external CDN. If unavailable, the original HTML equations are retained as a fallback.
+- Source-level test: 21 model scenarios including RS/LS/strip ROC, all five transform pairs, exact pole-zero cancellation, overdamped/underdamped cases and RC changes; all 21 produced four valid LaTeX derivation expressions.
+- Browser E2E gate extended to require KaTeX rendering in each experiment.
+- **Verification limit:** Container networking cannot resolve GitHub Pages or jsDelivr, so live Chromium screenshots and drag actions have not been executed here. The automated Playwright workflow is committed, but its run result is not independently confirmed.
