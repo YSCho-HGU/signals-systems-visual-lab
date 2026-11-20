@@ -167,3 +167,164 @@ html.ss6-compact-workspace .ss6-step-controls .ss6-adjust-button:not(:disabled){
  html.ss6-compact-workspace .ss6-step-card h3{font-size:14px!important}
  html.ss6-compact-workspace .ss6-sequence-overview{padding:10px 11px!important}
 }
+
+
+/* Chapter 6.1 reading-first design, followed by four visually consistent lab steps.
+   Do not alter plots, sliders, event handlers or stored progress IDs. */
+html.ss6-compact-workspace .main{
+  font-size:16px!important;
+  line-height:1.65!important;
+  padding-top:20px!important;
+}
+html.ss6-compact-workspace .ss6-sequence-overview{
+  padding:20px 24px!important;
+  margin-bottom:16px!important;
+  border-radius:14px!important;
+  border-left:5px solid var(--els-link,#4c9486)!important;
+  background:var(--els-surface,#fff)!important
+}
+html.ss6-compact-workspace .ss6-sequence-overview .ss6-lesson-title{
+  font-size:clamp(20px,2vw,25px)!important;
+  line-height:1.35!important;
+  letter-spacing:-.025em!important;
+  margin-bottom:8px!important
+}
+html.ss6-compact-workspace .ss6-sequence-overview .ss6-lesson-purpose{
+  font-size:15px!important;line-height:1.7!important;color:var(--els-ink,#222)!important
+}
+html.ss6-compact-workspace .ss6-kicker{
+  display:block;font-size:12px;letter-spacing:.095em;font-weight:800;
+  color:var(--els-link,#175d77);text-transform:uppercase;margin:0 0 7px
+}
+html.ss6-compact-workspace .ss6-core-theory{
+  background:var(--els-surface,#fff)!important;
+  border:1px solid var(--els-border,#bbb)!important;border-radius:15px!important;
+  padding:22px 24px!important;margin:0 0 22px!important
+}
+html.ss6-compact-workspace .ss6-theory-heading h3{
+  margin:0 0 9px!important;font-size:clamp(19px,2vw,23px)!important;
+  line-height:1.35!important;color:var(--els-ink,#222)!important
+}
+html.ss6-compact-workspace .ss6-theory-heading p{
+  color:var(--els-muted,#495a63)!important;font-size:15px!important;
+  line-height:1.7!important;margin:0 0 19px!important;max-width:92ch
+}
+html.ss6-compact-workspace .ss6-theory-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px
+}
+html.ss6-compact-workspace .ss6-theory-item{
+  position:relative;background:var(--els-surface-alt,#f5f7f8)!important;
+  border:1px solid var(--els-border,#ccd3d9)!important;border-radius:11px;
+  padding:16px 17px!important;min-width:0
+}
+html.ss6-compact-workspace .ss6-theory-key{
+  width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid var(--els-link,#155d73);background:var(--els-surface,#fff);
+  color:var(--els-link,#155d73);font-size:13px;font-weight:800;border-radius:7px;margin-bottom:10px
+}
+html.ss6-compact-workspace .ss6-theory-item h4{
+  margin:0 0 11px;font-size:15px;line-height:1.4;font-weight:800;color:var(--els-ink,#222)
+}
+html.ss6-compact-workspace .ss6-theory-equation{
+  font-size:clamp(14px,1.35vw,17px);line-height:2;font-weight:700;
+  color:var(--els-ink,#222);overflow-wrap:anywhere;min-width:0;margin:0 0 12px;
+  font-family:Cambria Math,Georgia,serif
+}
+html.ss6-compact-workspace .ss6-eq-break{display:block}
+html.ss6-compact-workspace .ss6-unit{
+  font:500 12px/1.5 system-ui,'Malgun Gothic',sans-serif;
+  color:var(--els-muted,#4a5a63);white-space:normal
+}
+html.ss6-compact-workspace .ss6-theory-item p{
+  margin:0;color:var(--els-muted,#4a5a63)!important;
+  font-size:14px;line-height:1.7!important
+}
+html.ss6-compact-workspace .ss6-theory-takeaway{
+  margin:17px 0 0!important;padding:14px 17px;
+  border-left:4px solid var(--els-link,#175d77);border-radius:6px;
+  background:var(--els-info-bg,#edf4f8)!important;color:var(--els-info-ink,#214151)!important;
+  font-size:15px!important;line-height:1.7!important
+}
+html.ss6-compact-workspace .ss6-lab-intro{
+  padding:0 5px 9px;margin:0 0 7px;border-bottom:2px solid var(--els-border,#ccc)
+}
+html.ss6-compact-workspace .ss6-lab-intro h3{
+  font-size:21px!important;line-height:1.4!important;color:var(--els-ink,#222)!important;
+  font-weight:800;margin:0 0 5px
+}
+html.ss6-compact-workspace .ss6-lab-intro p{
+  font-size:14px!important;line-height:1.65!important;color:var(--els-muted,#455)!important;
+  margin:0 0 7px
+}
+html.ss6-compact-workspace .ss6-step-card{
+  position:relative;padding:18px 20px 18px 67px!important;margin-bottom:15px!important;
+  border-radius:13px!important;border:1px solid var(--els-border,#aaa)!important;
+  background:var(--els-surface,#fff)!important;
+  box-shadow:0 2px 9px rgb(0 0 0 / .035)!important
+}
+html.ss6-compact-workspace .ss6-step-card::before{
+  content:attr(data-ss6-step);
+  position:absolute;left:19px;top:18px;width:31px;height:31px;
+  display:grid;place-items:center;border-radius:8px;
+  border:1.5px solid var(--els-link,#185d76);
+  color:var(--els-link,#185d76);background:var(--els-surface-alt,#f1f6f8);
+  font-weight:850;font-size:16px;line-height:1
+}
+html.ss6-compact-workspace .ss6-step-card h3{
+  color:var(--els-ink,#222)!important;font-size:18px!important;
+  font-weight:800!important;line-height:1.45!important;margin:0 0 9px!important
+}
+html.ss6-compact-workspace .ss6-step-card :is(p,.ss6-compact-instruction,.ss6-reading-cue,.ss6-interpretation-hint){
+  color:var(--els-muted,#4a5a65)!important;
+  font-size:15px!important;line-height:1.7!important
+}
+html.ss6-compact-workspace .ss6-step-predict>p:not(.ss6-no-gate-note){
+  color:var(--els-ink,#253542)!important;font-weight:600
+}
+html.ss6-compact-workspace .ss6-no-gate-note{
+  font-size:14px!important;color:var(--els-muted,#4b5b65)!important
+}
+html.ss6-compact-workspace .ss6-prediction-note{
+  font-size:15px!important;line-height:1.6!important;min-height:67px!important;
+  padding:12px 14px!important;background:var(--els-surface-alt,#f7f8f9)!important
+}
+html.ss6-compact-workspace .ss6-step-predict summary{
+  color:var(--els-link,#145b78)!important;font-size:15px!important;
+  font-weight:750!important;cursor:pointer;padding:8px 0!important
+}
+html.ss6-compact-workspace .ss6-step-controls .ctrl label{
+  font-size:14px!important;line-height:1.5!important;font-weight:700!important
+}
+html.ss6-compact-workspace .ss6-step-controls .ss6-compact-instruction{
+  color:var(--els-muted,#4a5a65)!important;font-size:15px!important
+}
+html.ss6-compact-workspace .ss6-observation-header{padding-top:18px!important;padding-bottom:15px!important}
+html.ss6-compact-workspace .ss6-reading-cue{font-size:15px!important}
+html.ss6-compact-workspace .ss6-interpretation .learning h3{font-size:16px!important}
+html.ss6-compact-workspace .ss6-interpretation .metric .k{font-size:13px!important}
+html.ss6-compact-workspace .ss6-interpretation .metric .detail{font-size:13px!important}
+html.ss6-compact-workspace .figure h3{font-size:16px!important;line-height:1.4!important}
+html.ss6-compact-workspace .figure p{font-size:14px!important;line-height:1.65!important}
+html.ss6-compact-workspace .ss6-live-explanation{
+  border:1px solid var(--els-border,#c9d3db)!important;
+  border-left:4px solid var(--els-link,#145b78)!important;border-radius:10px!important;
+  background:var(--els-info-bg,#edf4f8)!important;padding:13px 16px!important
+}
+html.ss6-compact-workspace .ss6-live-explanation :is(p,span,div){
+  color:var(--els-info-ink,#23485b)!important;font-size:14px!important;line-height:1.65!important
+}
+html.ss6-compact-workspace .ss6-site-header{font-size:13px}
+@media(max-width:1120px){
+ html.ss6-compact-workspace .ss6-theory-grid{grid-template-columns:1fr}
+ html.ss6-compact-workspace .ss6-theory-item{padding:12px 15px!important}
+ html.ss6-compact-workspace .ss6-theory-item p{margin-top:3px}
+}
+@media(max-width:700px){
+ html.ss6-compact-workspace .main{padding:13px 11px 34px!important}
+ html.ss6-compact-workspace .ss6-core-theory{padding:15px!important}
+ html.ss6-compact-workspace .ss6-sequence-overview{padding:16px!important}
+ html.ss6-compact-workspace .ss6-step-card{padding:14px 14px 14px 53px!important}
+ html.ss6-compact-workspace .ss6-step-card::before{left:12px;top:13px;width:27px;height:27px;font-size:14px}
+ html.ss6-compact-workspace .ss6-step-card h3{font-size:17px!important}
+ html.ss6-compact-workspace .ss6-step-card :is(p,.ss6-compact-instruction,.ss6-reading-cue){font-size:14px!important}
+}
