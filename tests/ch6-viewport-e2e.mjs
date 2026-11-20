@@ -83,7 +83,7 @@ try{
     }
     await page.locator('[data-nav="periodic"]').click();
     await page.waitForFunction(()=>window.__dtftApp?.active==="periodic");
-    await page.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight));
+    await page.evaluate(()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:"instant"}));
     await page.waitForTimeout(200);
     const scroll=await page.evaluate(()=>({
       body:document.documentElement.scrollHeight,
