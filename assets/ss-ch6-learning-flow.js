@@ -203,20 +203,30 @@ function applyFlow(){
      if(learning)interpret.appendChild(learning);
    }
  }
- // Chapter 6.1: place section 2 controls directly beside section 3 graphs.
- // This workbench stops before section 4, so no floating control panel can
- // cover interpretation or the guided derivation below the graphs.
- if(active==="periodic"&&controls&&charts){
+ // Shared 6.1–6.6 interactive workbench: move original nodes to preserve
+ // slider listeners, graph canvases, data IDs and recorded completion state.
+ // The workbench ends before Step 4, so controls never overlay interpretation.
+ if(MODULE_ORDER.indexOf(active)>=0&&controls&&charts){
    var graphHeading=experiment.querySelector(".ss6-observation-header");
    var body=experiment.querySelector(".body-col");
    if(graphHeading&&body){
      var workbench=document.createElement("div");
      workbench.className="ss6-control-plot-workspace";
+     workbench.dataset.ss6Module=active;
      var graphColumn=document.createElement("div");
      graphColumn.className="ss6-workbench-graphs";
      body.insertBefore(workbench,graphHeading);
      workbench.appendChild(controls);
      workbench.appendChild(graphColumn);
+     // FFT's four presets must remain by the live graphs rather than under
+     // the interpretation block. No button handlers are detached.
+     if(active==="fft"){
+       var fftPresets=body.querySelector(".fft-guide");
+       if(fftPresets){
+         fftPresets.classList.add("ss6-workbench-presets");
+         graphColumn.appendChild(fftPresets);
+       }
+     }
      graphColumn.appendChild(graphHeading);
      graphColumn.appendChild(charts);
    }
