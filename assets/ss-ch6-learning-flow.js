@@ -21,6 +21,29 @@ function periodicDo(){
  if(s.mode==="alias")return lang("f Hz와 (fs−f) Hz를 비교하고 동일한 샘플에서 복원되는 주파수를 찾으세요.","Compare f Hz and (fs−f) Hz and identify the reconstructed baseband frequency.");
  return lang("fs=100 Hz를 고정한 채 f만 10→20→40 Hz로 변경하세요.","Hold fs=100 Hz and change f: 10→20→40 Hz.");
 }
+function renderTheoryEquations(root){
+ var eqs=root.querySelectorAll(".ss6-theory-equation");
+ var tex=[
+  String.raw`x(t)=\cos(2\pi ft)`,
+  String.raw`\begin{aligned}T_s&=\frac{1}{f_s}\\x[n]&=x(nT_s)=\cos\!\left(2\pi\frac{f}{f_s}n\right)\end{aligned}`,
+  String.raw`\begin{aligned}F&=\frac{f}{f_s}\quad\mathrm{cycles/sample}\\\Omega&=2\pi F=2\pi\frac{f}{f_s}\quad\mathrm{rad/sample}\end{aligned}`
+ ];
+ // Native MathML is used immediately when KaTeX is unavailable (e.g. offline).
+ var offline=[
+  '<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>x</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mi>cos</mi><mo>(</mo><mn>2</mn><mi>π</mi><mi>f</mi><mi>t</mi><mo>)</mo></mrow></math>',
+  '<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnalign="left"><mtr><mtd><mrow><msub><mi>T</mi><mi>s</mi></msub><mo>=</mo><mfrac><mn>1</mn><msub><mi>f</mi><mi>s</mi></msub></mfrac></mrow></mtd></mtr><mtr><mtd><mrow><mi>x</mi><mo>[</mo><mi>n</mi><mo>]</mo><mo>=</mo><mi>cos</mi><mo>(</mo><mn>2</mn><mi>π</mi><mfrac><mi>f</mi><msub><mi>f</mi><mi>s</mi></msub></mfrac><mi>n</mi><mo>)</mo></mrow></mtd></mtr></mtable></math>',
+  '<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnalign="left"><mtr><mtd><mrow><mi>F</mi><mo>=</mo><mfrac><mi>f</mi><msub><mi>f</mi><mi>s</mi></msub></mfrac><mtext> cycles/sample</mtext></mrow></mtd></mtr><mtr><mtd><mrow><mi>Ω</mi><mo>=</mo><mn>2</mn><mi>π</mi><mfrac><mi>f</mi><msub><mi>f</mi><mi>s</mi></msub></mfrac><mtext> rad/sample</mtext></mrow></mtd></mtr></mtable></math>'
+ ];
+ function render(){
+  eqs.forEach(function(el,i){
+   if(!el.isConnected||!tex[i])return;
+   if(window.katex){try{window.katex.render(tex[i],el,{throwOnError:false,displayMode:true});el.dataset.mathRendered="katex";return}catch(e){}}
+   el.innerHTML=offline[i];el.dataset.mathRendered="mathml";
+  });
+ }
+ render();
+ if(!window.katex&&document.readyState!=="complete")window.addEventListener("load",render,{once:true});
+}
 function theoryBlock(){
  var section=document.createElement("section");
  section.className="ss6-core-theory";
@@ -90,6 +113,7 @@ function applyFlow(){
  if(active==="periodic"){
   var theory=theoryBlock();
   overview.insertAdjacentElement("afterend",theory);
+  renderTheoryEquations(theory);
  }
  var flowLabel=document.createElement("div");
  flowLabel.className="ss6-lab-intro";
