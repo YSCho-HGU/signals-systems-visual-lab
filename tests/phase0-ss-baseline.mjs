@@ -78,8 +78,17 @@ try{
   expect(after["phase0-custom-key"]===before["phase0-custom-key"],prefix+"-unknown-storage-preserved");
   expect(after["els-ss-lab-progress-v1"]===before["els-ss-lab-progress-v1"],prefix+"-progress-bytes-restored");
   expect(after["els-theme-v2"]===before["els-theme-v2"],prefix+"-theme-unchanged");
-  for(const ch of [1,3,6,8]){
+  for(const ch of [1,3,5,6,8]){
    await page.goto(BASE+"#chapter="+ch,{waitUntil:"load"});
+   if(ch===5){
+     await page.locator("#ss5-progress").waitFor({state:"visible"});
+     expect(page.url().includes("/chapter5.html"),prefix+"-native-ch5-route");
+     expect(await page.locator("iframe").count()===0,prefix+"-native-ch5-no-iframe");
+     expect(await page.locator("#tabs [data-lab]").count()===baseline.chapters[ch-1].labs,prefix+"-native-ch5-eight-labs");
+     expect(await page.locator("#ss5-progress button").count()===1,prefix+"-native-ch5-progress-control");
+     expect((await page.evaluate(()=>JSON.parse(localStorage.getItem("els-ss-lab-progress-v1")||"[]"))).length===2,prefix+"-native-ch5-storage-preserved");
+     continue;
+   }
    if(ch===6){
      await page.locator(".ss6-sequence-overview").waitFor({state:"visible"});
      expect(page.url().includes("/chapter6.html"),prefix+"-native-ch6-route");
