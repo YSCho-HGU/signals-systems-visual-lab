@@ -73,6 +73,14 @@ try{
    });
    check(math.engine&&math.expected===4,prefix+"-"+lab+"-math-model",math);
    check(math.hero==="katex"&&math.steps.every(x=>x==="katex"),prefix+"-"+lab+"-katex-rendered",math);
+   const inline=await page.evaluate(()=>{
+     const count=document.querySelectorAll(".ss5-inline-equation .katex").length;
+     const reading=document.querySelector(".reading-panel")?.innerText||"";
+     const caption=document.querySelector(".figure .sub")?.innerText||"";
+     return {count,reading:reading.slice(0,80),caption:caption.slice(0,80)};
+   });
+   check(inline.count>0,prefix+"-"+lab+"-inline-body-math",inline);
+
    const notes=await page.locator(".reading-note p").allTextContents();
    check(notes.length>=2&&notes.some(x=>x.includes(" / ")||x.includes("ROC")||x.includes("pole")||x.includes("τ")),prefix+"-"+lab+"-reading-notes",notes.slice(0,2));
 
