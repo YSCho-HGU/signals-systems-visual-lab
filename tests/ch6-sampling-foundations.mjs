@@ -11,12 +11,15 @@ const chapter=Buffer.from(JSON.parse(match[1])["6"],"base64").toString("utf8");
 const errors=[];
 function check(ok,msg){if(!ok)errors.push(msg)}
 new Script(src,{filename:"ss-ch6-frequency-foundations.js"});
-check(chapter.includes('src="./assets/ss-ch6-frequency-foundations.js?v=1"'),"Chapter 6 does not load teaching extension");
+const standalone=readFileSync("chapter6.html","utf8");
+check(standalone.includes('ss-ch6-frequency-foundations.js?v=5'),"Native Chapter 6 does not load teaching extension");
+check(standalone.includes('ss-ch6-learning-flow.js?v=2'),"Native Chapter 6 learning sequence missing");
+check(!standalone.includes("<iframe"),"Native Chapter 6 must not use iframe");
 check(src.includes('["frequency"')&&src.includes('["rate"')&&src.includes('["alias"'),"Three ordered learning modes missing");
 check(src.includes("duration=0.2, N=21"),"Fixed first 21 displayed samples missing");
 check(src.includes("xmin:0,xmax:200"),"CT physical time axis not fixed");
 check(src.includes("xmin:0,xmax:N-1"),"DT sample-index axis not fixed");
-check(src.includes('disabled '),"Fixed-variable control is not disabled");
+check(!src.includes('markup.replace("<input ","<input disabled "'),"Step-controlled slider lock must not return");
 check(src.includes('setFormula(')&&src.includes('setMetrics('),"Digital F and Ω formulas or metrics missing");
 check(src.includes('oldDrawing(s)')&&src.includes('oldGuide(s)'),"Original aliasing comparison or derivation lost");
 check(src.includes("N0=fs/gcd(fs,f)"),"Discrete fundamental period calculation missing");
