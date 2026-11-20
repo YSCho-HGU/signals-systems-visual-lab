@@ -13,7 +13,7 @@ function check(ok,msg){if(!ok)errors.push(msg)}
 new Script(src,{filename:"ss-ch6-frequency-foundations.js"});
 const standalone=readFileSync("chapter6.html","utf8");
 check(standalone.includes('ss-ch6-frequency-foundations.js?v=5'),"Native Chapter 6 does not load teaching extension");
-check(standalone.includes('ss-ch6-learning-flow.js?v=2'),"Native Chapter 6 learning sequence missing");
+check(standalone.includes('ss-ch6-learning-flow.js?v=3'),"Native Chapter 6 learning sequence missing");
 check(!standalone.includes("<iframe"),"Native Chapter 6 must not use iframe");
 check(src.includes('["frequency"')&&src.includes('["rate"')&&src.includes('["alias"'),"Three ordered learning modes missing");
 check(src.includes("duration=0.2, N=21"),"Fixed first 21 displayed samples missing");
