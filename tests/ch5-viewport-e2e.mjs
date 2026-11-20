@@ -67,6 +67,10 @@ try{
    check(notes.length>=2&&notes.some(x=>x.includes(" / ")||x.includes("ROC")||x.includes("pole")||x.includes("τ")),prefix+"-"+lab+"-reading-notes",notes.slice(0,2));
 
 
+   const steps=await page.locator(".ss5-flow-label").allTextContents();
+   check(steps.some(x=>x.includes("Predict"))&&steps.some(x=>x.includes("Observe"))&&steps.some(x=>x.includes("Explain"))&&steps.some(x=>x.includes("Check")),prefix+"-"+lab+"-four-stage-flow",steps);
+   await page.locator("#ss5-prediction").fill("ROC/pole prediction: test");
+   await page.locator("#ss5-selfcheck").check();
    const range=page.locator('.lab .panel input[type="range"]').first();
    if(await range.count()){
     const change=await range.evaluate(el=>{
@@ -78,6 +82,8 @@ try{
     });
     check(Math.abs(Number(change.actual)-change.next)<1e-7,prefix+"-"+lab+"-slider-updates-model",change);
    }
+   check(await page.locator("#ss5-prediction").inputValue()==="ROC/pole prediction: test",prefix+"-"+lab+"-prediction-retained");
+   check(await page.locator("#ss5-selfcheck").isChecked(),prefix+"-"+lab+"-check-retained");
    if(lab==="inverse"){
     const choice=page.locator('[data-compare="strip"]');
     check(await choice.count()===1,prefix+"-inverse-compare-card-exists");
