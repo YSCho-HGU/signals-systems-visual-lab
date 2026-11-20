@@ -428,7 +428,7 @@ html.ss6-compact-workspace .ss6-control-plot-workspace .control-grid{
 html.ss6-compact-workspace .ss6-control-plot-workspace .ctrl{margin:0 0 7px!important}
 html.ss6-compact-workspace .ss6-control-plot-workspace .ctrl label{font-size:14px!important}
 html.ss6-compact-workspace .ss6-control-plot-workspace .ss6-compact-instruction{font-size:15px!important}
-@media(max-width:1120px){
+@media(max-width:960px){
  html.ss6-compact-workspace .ss6-control-plot-workspace{grid-template-columns:minmax(210px,245px) minmax(0,1fr)!important}
  html.ss6-compact-workspace .ss6-control-plot-workspace .charts{grid-template-columns:1fr!important}
  html.ss6-compact-workspace .ss6-control-plot-workspace .figure.wide{grid-column:auto!important}
