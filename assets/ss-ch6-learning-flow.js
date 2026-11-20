@@ -209,26 +209,23 @@ function applyFlow(){
  if(MODULE_ORDER.indexOf(active)>=0&&controls&&charts){
    var graphHeading=experiment.querySelector(".ss6-observation-header");
    var body=experiment.querySelector(".body-col");
-   if(graphHeading&&body){
-     var workbench=document.createElement("div");
-     workbench.className="ss6-control-plot-workspace";
-     workbench.dataset.ss6Module=active;
+   var fftPresets=active==="fft"&&body?body.querySelector(".fft-guide"):null;
+   if(window.ELSLabUI&&graphHeading&&body){
+     window.ELSLabUI.mountWorkbench({
+       module:active,experiment:experiment,body:body,controls:controls,
+       charts:charts,graphHeader:graphHeading,presets:fftPresets
+     });
+   }else if(graphHeading&&body){
+     // Preserve the local implementation if the shared script is unavailable.
+     var workspace=document.createElement("div");
+     workspace.className="ss6-control-plot-workspace";
+     workspace.dataset.ss6Module=active;
      var graphColumn=document.createElement("div");
      graphColumn.className="ss6-workbench-graphs";
-     body.insertBefore(workbench,graphHeading);
-     workbench.appendChild(controls);
-     workbench.appendChild(graphColumn);
-     // FFT's four presets must remain by the live graphs rather than under
-     // the interpretation block. No button handlers are detached.
-     if(active==="fft"){
-       var fftPresets=body.querySelector(".fft-guide");
-       if(fftPresets){
-         fftPresets.classList.add("ss6-workbench-presets");
-         graphColumn.appendChild(fftPresets);
-       }
-     }
-     graphColumn.appendChild(graphHeading);
-     graphColumn.appendChild(charts);
+     body.insertBefore(workspace,graphHeading);
+     workspace.appendChild(controls);workspace.appendChild(graphColumn);
+     if(fftPresets)graphColumn.appendChild(fftPresets);
+     graphColumn.appendChild(graphHeading);graphColumn.appendChild(charts);
    }
  }
  var guided=[["derivationPanel","Detailed derivation · 상세 수식 유도"],["readingPanel","Graph interpretation guide · 그래프 읽기 안내"]];
