@@ -46,19 +46,29 @@ function renderTheoryEquations(root){
 }
 
 function typesetInlineMath(root){
- if(!root||active!=="periodic")return;
+ if(!root)return;
  var targets=root.querySelectorAll(
-  ".ss6-theory-heading p,.ss6-theory-takeaway,.ss6-theory-item p,"
-  +".ss6-top-question p,.ss6-compact-instruction,#ss6-reading-cue,"
-  +".periodic-reading-note,#insight,.ss6-live-explanation p,"
-  +".ss6-lesson-purpose,.deriv-step p,.reading-note p");
- var rx=/x\[n\+N₀\]|x\[n\]|x\(t\)|f_s\/f|f\/f_s|T_s|f_s|fₛ|Tₛ|N₀|Ω|(?<![A-Za-z])(?:F|f|n)(?![A-Za-z])/g;
- var mapping={"x[n+N₀]":String.raw`x[n+N_0]`,"x[n]":String.raw`x[n]`,
-  "x(t)":String.raw`x(t)`,"f_s/f":String.raw`\frac{f_s}{f}`,
-  "f/f_s":String.raw`\frac{f}{f_s}`,"T_s":String.raw`T_s`,
-  "f_s":String.raw`f_s`,"fₛ":String.raw`f_s`,"Tₛ":String.raw`T_s`,
-  "N₀":String.raw`N_0`,"Ω":String.raw`\Omega`,
-  "F":"F","f":"f","n":"n"};
+   ".ss6-theory-heading p,.ss6-theory-takeaway,.ss6-theory-item p,"
+   +".ss6-top-question p,.ss6-top-question .answer,.ss6-compact-instruction,#ss6-reading-cue,"
+   +".periodic-reading-note,#insight,.ss6-live-explanation p,"
+   +".ss6-lesson-purpose,.deriv-step p,.reading-note p,.ss6-interpretation .metric .detail,"
+   +".ss6-interpretation .metric .k,.ss6-guide-details .guide-check");
+ var rx=/X\(e\^\{jΩ\}\)|Y\(e\^\{jΩ\}\)|H\(e\^\{jΩ\}\)|x\[n\+N₀\]|x_w\[n\]|x\[n\]|y\[n\]|x\(t\)|f_s\/f|f\/f_s|T_s|f_s|fₛ|Tₛ|N₀|n₀|Δf|Ω|π|(?<![A-Za-z])(?:F|M|N|L|f|n)(?![A-Za-z])/g;
+ var mapping={"X(e^{jΩ})":String.raw`X(e^{j\Omega})`,
+  "Y(e^{jΩ})":String.raw`Y(e^{j\Omega})`,
+  "H(e^{jΩ})":String.raw`H(e^{j\Omega})`,
+  "x[n+N₀]":String.raw`x[n+N_0]`,
+  "x_w[n]":String.raw`x_w[n]`,
+  "x[n]":String.raw`x[n]`,
+  "y[n]":String.raw`y[n]`,
+  "x(t)":String.raw`x(t)`,
+  "f_s/f":String.raw`\frac{f_s}{f}`,
+  "f/f_s":String.raw`\frac{f}{f_s}`,
+  "T_s":String.raw`T_s`,"f_s":String.raw`f_s`,
+  "fₛ":String.raw`f_s`,"Tₛ":String.raw`T_s`,
+  "N₀":String.raw`N_0`,"n₀":String.raw`n_0`,
+  "Δf":String.raw`\Delta f`,"Ω":String.raw`\Omega`,"π":String.raw`\pi`,
+  "F":"F","M":"M","N":"N","L":"L","f":"f","n":"n"};
  function mathNode(token){
   var el=document.createElement("span");
   el.className="ss6-inline-math";
@@ -66,7 +76,11 @@ function typesetInlineMath(root){
   var fallback={"f_s":"fₛ","fₛ":"fₛ","T_s":"Tₛ","Tₛ":"Tₛ","N₀":"N₀",
     "f/f_s":"f⁄fₛ","f_s/f":"fₛ⁄f"};
   el.textContent=fallback[token]||token;
-  if(window.katex){try{window.katex.render(el.dataset.tex,el,{throwOnError:false});el.dataset.mathRendered="katex";}catch(e){}}
+  if(window.ELSLabUI){
+    window.ELSLabUI.renderMath(el,el.dataset.tex,{display:false,fallbackHTML:el.innerHTML});
+  }else if(window.katex){
+    try{window.katex.render(el.dataset.tex,el,{throwOnError:false});el.dataset.mathRendered="katex"}catch(e){}
+  }
   return el;
  }
  targets.forEach(function(target){
