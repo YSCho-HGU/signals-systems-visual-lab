@@ -26,22 +26,18 @@
   defaults.periodic.f = 10;
   m.controls.unshift({key:"mode",name:"Learning sequence / 학습 순서",type:"select",
     values:[
-      ["frequency","1 · Change f (fixed f_s)"],
-      ["rate","2 · Change f_s (fixed f)"],
-      ["alias","3 · Aliasing (after fundamentals)"]
+      ["frequency","1 · Observe changing f / f 변화"],
+      ["rate","2 · Observe changing f_s / f_s 변화"],
+      ["alias","3 · Explore aliasing / 에일리어싱"]
     ]});
   m.controls.find(function(x){return x.key==="fs";}).min=100;
 
   var originalControl = ctlHTML;
   ctlHTML = function(c,s) {
+    // Step descriptions are instructional, never a prerequisite or an input lock.
+    // Students may explore either frequency slider without submitting an answer.
     if(active==="periodic" && c.key==="ns" && s.mode!=="alias")return "";
-    var markup=originalControl(c,s);
-    if(active==="periodic" &&
-        ((s.mode==="frequency"&&c.key==="fs")||(s.mode==="rate"&&c.key==="f"))) {
-      markup=markup.replace("<input ","<input disabled ");
-      markup=markup.replace("<label for=","<label data-fixed-control=\"true\" for=");
-    }
-    return markup;
+    return originalControl(c,s);
   };
 
   function copyFor(s) {
@@ -67,11 +63,11 @@
               lang("n=0,1,2,…의 간격은 언제나 1 sample입니다.","Integer sample indices always have spacing 1.")]],
       labels:["Digital F (cycles/sample)","Digital Ω (rad/sample)","DT fundamental period N₀"],
       subtitle:isF?lang("1단계: f_s를 고정하고 CT 주파수 f를 증가시키면서 x(t), x[n], F, Ω를 관찰합니다.",
-                        "Step 1: Hold f_s constant and increase analog f. Observe x(t), x[n], F and Ω.")
+                        "Step 1: Keep f_s near 100 Hz and vary f. Both sliders remain usable; no answer is required.")
                   :lang("2단계: 동일한 x(t)를 유지한 채 f_s를 바꾸세요. 실제 샘플 시간과 x[n]이 변합니다.",
-                        "Step 2: Keep exactly the same x(t) and vary f_s. Sample times and x[n] change."),
+                        "Step 2: Keep f near 10 Hz and vary f_s. Both sliders remain usable; no answer is required."),
       q:isF?lang("f_s를 고정하고 f만 높이면 x[n]의 인덱스 간격과 디지털 주파수는 각각 어떻게 되나요?",
-                 "At fixed f_s, what happens to the spacing of n and to digital frequency when f increases?")
+                 "When you increase f while keeping f_s at 100 Hz, what changes in x[n]?")
             :lang("아날로그 신호 x(t)가 동일한데도 f_s를 변경하면 x[n]이 왜 달라지나요?",
                   "Why does x[n] change when f_s changes even though x(t) stays the same?"),
       a:isF?lang("n의 간격은 1 sample로 그대로이며 T_s도 고정입니다. F=f/f_s와 Ω=2πF가 증가하여 x[n]이 더 빠르게 진동합니다.",
