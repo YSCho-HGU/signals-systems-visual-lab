@@ -1,0 +1,93 @@
+#!/usr/bin/env node
+/* Native Chapter 5 Playwright journey: original Laplace computation and controls
+ * must remain functional after removing the embedded iframe.
+ */
+import {chromium} from "playwright";
+import {spawn} from "node:child_process";
+import {mkdirSync,writeFileSync} from "node:fs";
+const BASE=process.env.SS_BASE_URL||"http://127.0.0.1:8765/";
+const output="qa-ch5";mkdirSync(output,{recursive:true});
+const failures=[],observations=[];
+const labs=["weight","roc","pairs","props","inverse","stability","rc","second"];
+const sizes=[{width:390,height:844},{width:1280,height:800},{width:1366,height:768}];
+let server=null,browser=null;
+const check=(ok,caseId,data)=>{observations.push({caseId,pass:!!ok,data});if(!ok)failures.push(caseId)};
+try{
+ if(!process.env.SS_BASE_URL){
+  server=spawn("python3",["-m","http.server","8765","--bind","127.0.0.1"],{stdio:"ignore"});
+  await new Promise(r=>setTimeout(r,1200));
+ }
+ browser=await chromium.launch({headless:true});
+ for(const viewport of sizes){
+  const page=await browser.newPage({viewport,deviceScaleFactor:1,reducedMotion:"reduce"});
+  const prefix=String(viewport.width);
+  const errors=[];
+  page.on("pageerror",err=>errors.push(err.message));
+  await page.goto(BASE+"chapter5.html",{waitUntil:"load"});
+  await page.waitForFunction(()=>Boolean(window.__laplaceVisualLab?.healthy));
+  check(await page.locator("iframe").count()===0,prefix+"-no-iframe");
+  check(await page.locator(".ss5-site-header").isVisible(),prefix+"-native-header");
+  check(await page.locator("#tabs [data-lab]").count()===8,prefix+"-eight-labs");
+  check((await page.evaluate(()=>window.__labNumerics?.rcCutoff))>0,prefix+"-numerical-diagnostics");
+  const theme=page.locator("#ss5-theme-picker");
+  await theme.selectOption("white");
+  check(await page.evaluate(()=>document.documentElement.dataset.elsTheme==="white"),prefix+"-white-theme");
+  await theme.selectOption("neutral-dark");
+  check(await page.evaluate(()=>document.documentElement.dataset.theme==="dark"),prefix+"-dark-theme");
+  const lang=page.locator("#ss5-language-picker");
+  await lang.selectOption("en");
+  check(await page.evaluate(()=>window.ELSLanguage.get()==="en"),prefix+"-language");
+  await lang.selectOption("mixed");
+  for(let index=0;index<labs.length;index++){
+   const lab=labs[index];
+   await page.locator('#tabs [data-lab="'+lab+'"]').click();
+   await page.waitForFunction(id=>window.__laplaceVisualLab?.active===id,lab);
+   const snapshot=await page.evaluate(()=>{
+    return {state:window.__laplaceVisualLab?.state,
+      canvases:document.querySelectorAll(".plots canvas").length,
+      overflow:document.documentElement.scrollWidth>innerWidth+6,
+      sticky:getComputedStyle(document.querySelector(".lab .panel")).position,
+      hasHeaders:!!document.querySelector(".ss5-site-header"),
+      progress:!!document.querySelector("#ss5-progress")};
+   });
+   check(snapshot.canvases>=2,prefix+"-"+lab+"-plots",snapshot.canvases);
+   check(!snapshot.overflow,prefix+"-"+lab+"-no-horizontal-overflow");
+   check(snapshot.sticky!=="sticky"&&snapshot.sticky!=="fixed",prefix+"-"+lab+"-controls-not-sticky",snapshot.sticky);
+   check(snapshot.hasHeaders&&snapshot.progress,prefix+"-"+lab+"-native-layout");
+   const range=page.locator('.lab .panel input[type="range"]').first();
+   if(await range.count()){
+    const change=await range.evaluate(el=>{
+     const key=el.dataset.key,old=Number(el.value),min=Number(el.min),max=Number(el.max),step=Number(el.step)||1;
+     const next=Math.abs(old-max)<step*.5?Math.max(min,old-step):Math.min(max,old+step);
+     el.value=String(next);el.dispatchEvent(new Event("input",{bubbles:true}));
+     const state=window.__laplaceVisualLab?.state?.[window.__laplaceVisualLab.active];
+     return {key,old,next,actual:state?.[key]};
+    });
+    check(Math.abs(Number(change.actual)-change.next)<1e-7,prefix+"-"+lab+"-slider-updates-model",change);
+   }
+   if(lab==="inverse"){
+    const choice=page.locator('[data-compare="strip"]');
+    check(await choice.count()===1,prefix+"-inverse-compare-card-exists");
+    if(await choice.count()){
+     await choice.click();
+     check(await page.evaluate(()=>window.__laplaceVisualLab?.state?.inverse?.roc==="strip"),prefix+"-inverse-select-strip-ROC");
+    }
+   }
+  }
+  const review=page.locator("#ss5-progress button");
+  await review.click();
+  check(await page.evaluate(()=>JSON.parse(localStorage.getItem("els-ss-lab-progress-v1")||"[]").includes("5:8")),prefix+"-progress-recorded");
+  await review.click();
+  check(!(await page.evaluate(()=>JSON.parse(localStorage.getItem("els-ss-lab-progress-v1")||"[]").includes("5:8"))),prefix+"-progress-undo");
+  await page.screenshot({path:output+"/ch5-"+prefix+".png",fullPage:false});
+  check(errors.length===0,prefix+"-no-page-errors",errors.slice(0,5));
+  await page.close();
+ }
+}finally{
+ if(browser)await browser.close();
+ if(server)server.kill();
+}
+const report={status:failures.length?"FAIL":"PASS",count:observations.length,failures,observations};
+writeFileSync(output+"/results.json",JSON.stringify(report,null,2)+"\n");
+console.log(JSON.stringify({status:report.status,total:report.count,failures:failures.slice(0,25)}));
+if(failures.length)process.exitCode=1;
