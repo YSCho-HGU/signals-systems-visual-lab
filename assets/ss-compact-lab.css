@@ -145,3 +145,43 @@ html[data-ss-view="lab"] .lab-area.focus .lab-frame-wrap{flex:1 1 auto;height:au
  html[data-ss-view="lab"] .lab-tools .toolbtn{min-height:30px!important}
  html[data-ss-view="lab"] #ss-chapter-select{height:30px!important;min-height:30px!important}
 }
+
+
+/* Chapter 6 full-document study workspace.
+   The iframe isolates chapter-specific JS, but it no longer clips its content
+   into an inner scrollport: its height follows the real chapter document. */
+html.ss6-page-scroll[data-ss-view="lab"] .lab-area:not(.focus){
+  display:block!important;
+  height:auto!important;
+  min-height:calc(100dvh - 38px)!important;
+  overflow:visible!important;
+  background:var(--els-page)!important;
+}
+html.ss6-page-scroll[data-ss-view="lab"] .lab-frame-wrap{
+  display:block!important;
+  flex:none!important;
+  height:auto!important;
+  min-height:0!important;
+  overflow:visible!important;
+  position:relative!important;
+  background:transparent!important;
+}
+html.ss6-page-scroll[data-ss-view="lab"] .lab-frame{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  min-height:0!important;
+  border:0!important;
+  overflow:hidden!important;
+  background:transparent!important;
+}
+html.ss6-page-scroll[data-ss-view="lab"] #lab-view{
+  overflow:visible!important;
+  min-height:0!important;
+}
+/* Full-screen focus mode remains scrollable instead of clipping the last panel. */
+html.ss6-page-scroll[data-ss-view="lab"] .lab-area.focus{
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain;
+}
