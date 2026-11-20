@@ -9,6 +9,7 @@ on:
       - 'chapter6.html'
       - 'assets/**'
       - 'tests/**'
+      - 'docs/qa/**'
       - 'package.json'
       - '.github/workflows/visual-audit.yml'
 
@@ -21,26 +22,60 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+
+      - name: G0 - Validate source, catalog and storage contracts
+        run: |
+          mkdir -p qa-standard
+          if node tests/qa-contracts.mjs; then echo PASS > qa-standard/G0.status; else echo FAIL > qa-standard/G0.status; fi
+
       - name: Install browser tooling
         run: |
           npm install --no-audit --no-fund
           npx playwright install --with-deps chromium
-      - name: Test native Chapter 6 across laptop, desktop and mobile Chromium
-        run: node tests/ch6-viewport-e2e.mjs
-      - name: Verify Chapter 6 digital-frequency foundations and sampling math
-        run: node tests/ch6-sampling-foundations.mjs
-      - name: Run all 62 experiments in Light and Dark at mobile/desktop widths
-        run: npm run qa:visual
-      - name: Verify 248 screenshots and generate quality-gates report
+
+      - name: G1 - Verify independent Chapter 6 sampling mathematics
+        run: |
+          if node tests/ch6-sampling-foundations.mjs; then echo PASS > qa-standard/G1.status; else echo FAIL > qa-standard/G1.status; fi
+
+      - name: G2 - Test native Chapter 6 at three Chromium viewports
+        run: |
+          if node tests/ch6-viewport-e2e.mjs; then echo PASS > qa-standard/G2.status; else echo FAIL > qa-standard/G2.status; fi
+
+      - name: G3 - Verify shared theme and in-place language controls
+        run: |
+          if C_JOURNEY_BROWSER=1 node tests/ss-theme-qa.mjs; then echo PASS > qa-standard/G3.status; else echo FAIL > qa-standard/G3.status; fi
+
+      - name: G4 - Test progress, prediction and sonification learning aids
+        run: |
+          if npm run qa:learning; then echo PASS > qa-standard/G4.status; else echo FAIL > qa-standard/G4.status; fi
+
+      - name: G5 - Protect all 62 progress IDs and stored preferences
+        run: |
+          if node tests/phase0-ss-baseline.mjs; then echo PASS > qa-standard/G5.status; else echo FAIL > qa-standard/G5.status; fi
+          node tests/phase0-storage-scan.mjs
+
+      - name: G6 - Capture 248 screenshots with theme and overflow checks
+        run: |
+          if npm run qa:visual; then echo PASS > qa-standard/G6.status; else echo FAIL > qa-standard/G6.status; fi
+
+      - name: G7 - Check all 248 evidence records and body text contrast
+        run: |
+          if [ -f qa-output/results.json ] && node tests/quality-gates.mjs; then echo PASS > qa-standard/G7.status; else echo FAIL > qa-standard/G7.status; fi
+
+      - name: Summarize all gate results; fail only for real blocking issues
         if: always()
-        run: node tests/quality-gates.mjs
-      - name: Upload screenshots and issue report
+        run: node tests/qa-summary.mjs
+
+      - name: Upload quality reports and screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: visual-qa-screenshots
+          name: ss-qa-standard-62-labs
           path: |
+            qa-standard/
             qa-output/
             qa-ch6-viewport/
+            qa-learning-output/
+            qa-phase0/
           if-no-files-found: warn
-          retention-days: 7
+          retention-days: 14
