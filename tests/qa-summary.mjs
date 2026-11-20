@@ -14,7 +14,7 @@ for(const [name,file] of [["contracts","qa-standard/contracts.json"],["visual","
  if(!existsSync(file)){evidence[name]={status:"NOT_RUN",path:file};continue;}
  try{
   const data=JSON.parse(readFileSync(file,"utf8"));
-  evidence[name]={status:name==="visual"?(data.errors===0?"PASS":"FAIL"):name==="learning"?(data.summary?.failed===0&&data.summary?.jsErrors===0?"PASS":"FAIL"):(data.status||data.browserStatus||"RECORDED"),
+  evidence[name]={status:name==="visual"?(data.errors===0?"PASS":"FAIL"):name==="learning"?(data.summary?.failed===0&&data.summary?.jsErrors===0?"PASS":"FAIL"):name==="theme"?(data.failures?.length?"FAIL":data.browserStatus==="RAN"?"PASS":"NOT_RUN"):(data.status||"RECORDED"),
     path:file,
     summary:name==="visual"?{screens:data.experimentScreens,issues:data.errors}:name==="learning"?data.summary:name==="visualQuality"?{screens:data.screens_recorded,failures:data.automated_failures?.length}:undefined};
  }catch(e){evidence[name]={status:"FAIL",path:file,error:String(e)}}
