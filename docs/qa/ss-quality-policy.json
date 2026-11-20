@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "title": "Signals & Systems Interactive Lab Quality Standard",
+  "audience": "2nd-year engineering",
+  "chapterCounts": [
+    9,
+    9,
+    7,
+    8,
+    8,
+    6,
+    7,
+    8
+  ],
+  "chapterRoutes": {
+    "1": "iframe",
+    "2": "iframe",
+    "3": "iframe",
+    "4": "iframe",
+    "5": "iframe",
+    "6": "native",
+    "7": "iframe",
+    "8": "iframe"
+  },
+  "labCount": 62,
+  "screenshotMatrix": {
+    "widths": [
+      390,
+      1280
+    ],
+    "themes": [
+      "warm-neutral",
+      "neutral-dark"
+    ],
+    "expected": 248
+  },
+  "supplementalViewport": {
+    "chapter": 6,
+    "widths": [
+      390,
+      1280,
+      1366
+    ]
+  },
+  "stableStorageKeys": [
+    "els-ss-lab-progress-v1",
+    "els-language",
+    "els-theme-v2",
+    "ss-unified-nav-collapsed"
+  ],
+  "automatedGates": [
+    {
+      "id": "G0",
+      "name": "Catalog and source integrity",
+      "required": true,
+      "script": "tests/qa-contracts.mjs"
+    },
+    {
+      "id": "G1",
+      "name": "Sampling and transform mathematics",
+      "required": true,
+      "script": "tests/ch6-sampling-foundations.mjs",
+      "scope": "Ch6.1 independent reference cases; other mathematical cases require explicit extensions"
+    },
+    {
+      "id": "G2",
+      "name": "Native Chapter 6 browser journey",
+      "required": true,
+      "script": "tests/ch6-viewport-e2e.mjs"
+    },
+    {
+      "id": "G3",
+      "name": "Theme and language persistence",
+      "required": true,
+      "script": "tests/ss-theme-qa.mjs"
+    },
+    {
+      "id": "G4",
+      "name": "Learning aids and sonification",
+      "required": true,
+      "script": "tests/learning-aids-qa.mjs"
+    },
+    {
+      "id": "G5",
+      "name": "Storage and 62-lab regression",
+      "required": true,
+      "script": "tests/phase0-ss-baseline.mjs"
+    },
+    {
+      "id": "G6",
+      "name": "248-screenshot visual and accessibility smoke audit",
+      "required": true,
+      "script": "tests/visual-audit.mjs"
+    },
+    {
+      "id": "G7",
+      "name": "Evidence postprocessing",
+      "required": true,
+      "script": "tests/quality-gates.mjs"
+    }
+  ],
+  "manualGates": [
+    {
+      "id": "M1",
+      "name": "Graph axes, scale, markers, phase and legend readability",
+      "status": "required before pedagogical approval"
+    },
+    {
+      "id": "M2",
+      "name": "Reference mathematics for changed concept modules",
+      "status": "required before pedagogical approval"
+    },
+    {
+      "id": "M3",
+      "name": "Second-year student clarity and concept sequencing",
+      "status": "required before pedagogical approval"
+    }
+  ],
+  "rules": {
+    "basicContrast": 4.5,
+    "horizontalOverflowTolerancePx": 6,
+    "automaticTestFailuresAllowed": 0,
+    "preserveProgressOnChange": true,
+    "doNotRequireCorrectPredictionToMoveSliders": true,
+    "existingFunctionsProtected": true
+  },
+  "statusVocabulary": [
+    "PASS",
+    "FAIL",
+    "NOT_RUN",
+    "NOT_VERIFIED"
+  ]
+}
