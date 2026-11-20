@@ -95,6 +95,10 @@
       m.q=cfg.q; m.a=cfg.a;
     }
     originalRender();
+    // Preserve the chapter's normal standalone layout; maximize the embedded
+    // experiment canvas when the host already provides unified chapter navigation.
+    document.documentElement.classList.toggle("ss6-wide-experiment",
+      active==="periodic" && window.self!==window.parent);
     if(active==="periodic") {
       var note=document.querySelector(".periodic-reading-note");
       if(note){
@@ -268,6 +272,39 @@
     +"html[data-theme='dark'] .ss6-step-button{background:#1b3344;color:#e7f0f3;border-color:#5d8594}"
     +"html[data-theme='dark'] .ss6-step-button.is-current{background:#245766;color:#fff;border-color:#8dd8dc}"
     +"@media(max-width:680px){.ss6-step-nav{grid-template-columns:1fr}.ss6-step-button{min-height:42px;text-align:left}}"
+    +"html.ss6-wide-experiment .app{display:block!important;min-height:0!important}"
+    +"html.ss6-wide-experiment .sidebar{display:none!important}"
+    +"html.ss6-wide-experiment .main{max-width:none!important;margin:0!important;padding:10px 14px 24px!important}"
+    +"html.ss6-wide-experiment .topline{display:none!important}"
+    +"html.ss6-wide-experiment .heading{padding:0 0 6px!important;border-bottom:0!important}"
+    +"html.ss6-wide-experiment .heading h2{font-size:clamp(19px,2vw,25px)!important;margin:0 0 5px!important;line-height:1.22!important}"
+    +"html.ss6-wide-experiment .heading p{font-size:12px!important;line-height:1.5!important;max-width:none!important}"
+    +"html.ss6-wide-experiment .hero-callout{margin:8px 0 10px!important;padding:8px 12px!important;min-height:0!important;gap:8px!important}"
+    +"html.ss6-wide-experiment .hero-callout .formula{font-size:16px!important;line-height:1.45!important}"
+    +"html.ss6-wide-experiment .hero-callout .hint{font-size:11px!important}"
+    +"html.ss6-wide-experiment .ss6-step-nav{gap:8px;margin-bottom:10px}"
+    +"html.ss6-wide-experiment .ss6-step-button{min-height:39px;padding:6px 10px;font-size:12px}"
+    +"html.ss6-wide-experiment .experiment{grid-template-columns:minmax(205px,245px) minmax(0,1fr)!important;gap:12px!important}"
+    +"html.ss6-wide-experiment .controls{padding:12px!important;top:0!important;position:static!important}"
+    +"html.ss6-wide-experiment .ctrl{margin-bottom:12px!important}"
+    +"html.ss6-wide-experiment .controls h3{font-size:16px!important;margin:3px 0 9px!important}"
+    +"html.ss6-wide-experiment .body-col{gap:10px!important}"
+    +"html.ss6-wide-experiment .charts{gap:10px!important}"
+    +"html.ss6-wide-experiment .figure{padding:10px 11px 8px!important}"
+    +"html.ss6-wide-experiment .figure canvas{height:clamp(245px,32dvh,365px)!important}"
+    +"html.ss6-wide-experiment .periodic-reading-note{padding:9px 12px!important;margin-bottom:8px!important;line-height:1.5!important}"
+    +"html.ss6-wide-experiment .footer{margin-top:10px!important}"
+    +"@media(max-width:960px){html.ss6-wide-experiment .experiment{grid-template-columns:1fr!important}"
+    +"html.ss6-wide-experiment .controls{padding:9px 12px!important}"
+    +"html.ss6-wide-experiment .control-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:5px 12px!important}"
+    +"html.ss6-wide-experiment .ctrl{margin:0 0 8px!important}"
+    +"html.ss6-wide-experiment .charts{grid-template-columns:repeat(2,minmax(0,1fr))!important}}"
+    +"@media(max-width:700px){html.ss6-wide-experiment .main{padding:7px 8px 18px!important}"
+    +"html.ss6-wide-experiment .heading p{font-size:11px!important}"
+    +"html.ss6-wide-experiment .ss6-step-nav{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:4px}"
+    +"html.ss6-wide-experiment .ss6-step-button{min-width:0;padding:6px 5px;font-size:11px;text-align:center}"
+    +"html.ss6-wide-experiment .charts{grid-template-columns:1fr!important}"
+    +"html.ss6-wide-experiment .figure canvas{height:245px!important}}"
     +".legend{flex-wrap:wrap;gap:9px 16px}";
   document.head.appendChild(css);
   renderModule();
