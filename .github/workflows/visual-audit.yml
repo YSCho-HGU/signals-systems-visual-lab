@@ -45,9 +45,12 @@ jobs:
         run: |
           if node tests/ch6-sampling-foundations.mjs; then echo PASS > qa-standard/G1.status; else echo FAIL > qa-standard/G1.status; fi
 
-      - name: G2 - Test native Chapter 6 at three Chromium viewports
+      - name: G2 - Test native Chapters 5 and 6 across three Chromium viewports
         run: |
-          if node tests/ch6-viewport-e2e.mjs; then echo PASS > qa-standard/G2.status; else echo FAIL > qa-standard/G2.status; fi
+          status=0
+          node tests/ch6-viewport-e2e.mjs || status=1
+          node tests/ch5-viewport-e2e.mjs || status=1
+          if [ "$status" -eq 0 ]; then echo PASS > qa-standard/G2.status; else echo FAIL > qa-standard/G2.status; fi
 
       - name: G3 - Verify shared theme and in-place language controls
         run: |
