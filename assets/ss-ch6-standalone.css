@@ -112,7 +112,7 @@ html.ss6-compact-workspace .ss6-step-predict details{
   margin:6px 0 0!important;padding:6px 0 0!important
 }
 html.ss6-compact-workspace .ss6-step-controls{max-height:none!important;overflow:visible!important}
-html.ss6-compact-workspace .ss6-step-controls h3{margin-bottom:5px!important}
+html.ss6-compact-workspace .ss6-step-controls h3{margin-bottom:6px!important}
 html.ss6-compact-workspace .ss6-compact-instruction{
   background:transparent!important;border:0!important;
   padding:0!important;margin:0 0 10px!important;font-size:13px!important
