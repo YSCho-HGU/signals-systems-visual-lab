@@ -57,7 +57,7 @@
     };
     var isF=mode==="frequency";
     return {
-      plots:[[lang("CT 신호 x(t) · 실제 시간 (ms)","Continuous-Time x(t) · Physical Time (ms)"),
+      plots:[[lang("CT 신호 x(t) · 실제 시간 (ms)","Continuous-Time x(t) · t (ms)"),
               lang("위 파형은 0–200 ms의 동일한 실제 시간 범위를 사용합니다.","The physical time range always stays 0–200 ms.")],
              [lang("DT 신호 x[n] · 샘플 인덱스","Discrete-Time Sequence x[n]"),
               lang("n=0,1,2,…의 간격은 언제나 1 sample입니다.","Integer sample indices always have spacing 1.")]],
@@ -246,6 +246,35 @@
       +'<span>f<sub>rec</sub> = <b>'+clean(rec,3)+' Hz</b></span></div>'
       +'<p>'+explanation+'</p>';
   }
+  // Typeset the frequency experiment as mathematics, with an offline MathML fallback.
+  function renderFrequencyMath(s){
+    var el=document.getElementById("formula"); if(!el)return;
+    var fs=Number(s.fs),f=Number(s.f),ts=1000/fs,F=f/fs,om=2*Math.PI*F;
+    var tex="\\begin{aligned}"+
+      "x(t)&=\\cos(2\\pi f t)\\\\[3pt]"+
+      "x[n]&=x(nT_s)=\\cos\\left(2\\pi\\frac{f}{f_s}n\\right)\\\\[5pt]"+
+      "T_s&=\\frac{1}{f_s}="+clean(ts,2)+"\\,\\mathrm{ms}\\\\[3pt]"+
+      "F&=\\frac{f}{f_s}="+clean(F,4)+"\\,\\mathrm{cycles/sample}\\\\[3pt]"+
+      "\\Omega&=2\\pi F="+clean(om,4)+"\\,\\mathrm{rad/sample}"+
+      "\\end{aligned}";
+    function show(){
+      if(!el.isConnected||active!=="periodic")return;
+      if(window.katex){
+        try{window.katex.render(tex,el,{displayMode:true,throwOnError:false,output:"htmlAndMathml"});el.dataset.mathRendered="katex";return;}catch(err){}
+      }
+      // Browser-native MathML uses structured fractions, not styled plain text.
+      el.innerHTML='<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable columnalign="left">'
+        +'<mtr><mtd><mrow><mi>x</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mi>cos</mi><mo>(</mo><mn>2</mn><mi>π</mi><mi>f</mi><mi>t</mi><mo>)</mo></mrow></mtd></mtr>'
+        +'<mtr><mtd><mrow><mi>x</mi><mo>[</mo><mi>n</mi><mo>]</mo><mo>=</mo><mi>x</mi><mo>(</mo><mi>n</mi><msub><mi>T</mi><mi>s</mi></msub><mo>)</mo><mo>=</mo><mi>cos</mi><mo>(</mo><mn>2</mn><mi>π</mi><mfrac><mi>f</mi><msub><mi>f</mi><mi>s</mi></msub></mfrac><mi>n</mi><mo>)</mo></mrow></mtd></mtr>'
+        +'<mtr><mtd><mrow><msub><mi>T</mi><mi>s</mi></msub><mo>=</mo><mfrac><mn>1</mn><msub><mi>f</mi><mi>s</mi></msub></mfrac><mo>=</mo><mtext>'+clean(ts,2)+' ms</mtext></mrow></mtd></mtr>'
+        +'<mtr><mtd><mrow><mi>F</mi><mo>=</mo><mfrac><mi>f</mi><msub><mi>f</mi><mi>s</mi></msub></mfrac><mo>=</mo><mtext>'+clean(F,4)+' cycles/sample</mtext></mrow></mtd></mtr>'
+        +'<mtr><mtd><mrow><mi>Ω</mi><mo>=</mo><mn>2</mn><mi>π</mi><mi>F</mi><mo>=</mo><mtext>'+clean(om,4)+' rad/sample</mtext></mrow></mtd></mtr>'
+        +'</mtable></math>';
+      el.dataset.mathRendered="mathml";
+    }
+    show();
+    if(!window.katex&&document.readyState!=="complete")window.addEventListener("load",show,{once:true});
+  }
   function drawReconstruction(s){
     var fs=Number(s.fs), f=Number(s.f);
     var sourceFrequency=s.mode==="alias"?fs-f:f;
@@ -262,15 +291,15 @@
     }
     drawChart("plot2",{
       xmin:0,xmax:200,ymin:-1.15,ymax:1.15,
-      xlabel:"physical time t (ms)",ylabel:"amplitude",xticks:5,
+      xlabel:"t (ms)",ylabel:"amplitude",xticks:5,
       series:[
-        {xy:source,color:C.coral,width:2,dash:true},
+        ...(Math.abs(sourceFrequency-rec)>1e-9?[{xy:source,color:C.coral,width:2.3,dash:true}]:[]),
         {xy:reconstructed,color:C.teal,width:2.2},
         {xy:sampled,color:C.ink,type:"stem",radius:3.1}
       ]
     });
     setLegend(2,[
-      {color:C.coral,kind:"dashed",label:"CT source "+clean(sourceFrequency,3)+" Hz"},
+      ...(Math.abs(sourceFrequency-rec)>1e-9?[{color:C.coral,kind:"dashed",label:"CT source "+clean(sourceFrequency,3)+" Hz"}]:[]),
       {color:C.teal,kind:"line",label:"Ideal reconstructed cosine "+clean(rec,3)+" Hz"},
       {color:C.ink,kind:"stem",label:"Samples at "+clean(fs,3)+" Hz"}
     ]);
@@ -304,7 +333,7 @@
     for(var n=0;n<N;n++)samples.push([n,Math.cos(TAU*f*n/fs)]);
     drawChart("plot0",{
       xmin:0,xmax:200,ymin:-1.15,ymax:1.15,
-      xlabel:"physical time t (ms)",ylabel:"x(t)",
+      xlabel:"t (ms)",ylabel:"x(t)",
       xticks:5,series:[
         {xy:ct,color:C.teal,width:2.2},
         {xy:sampleByTime,color:C.ink,type:"stem",radius:3.4}
@@ -315,16 +344,14 @@
     ]);
     drawChart("plot1",{
       xmin:0,xmax:N-1,ymin:-1.15,ymax:1.15,
-      xlabel:"integer sample index n",ylabel:"x[n]",
+      xlabel:"n",ylabel:"x[n]",
       xticks:6,series:[{xy:samples,color:C.ink,type:"stem",radius:4.0}]
     });
     setLegend(1,[
       {color:C.ink,kind:"stem",label:"First 21 samples x[n], n = 0…20 (fixed index axis)"}
     ]);
     var F=f/fs,Omega=TAU*F,N0=fs/gcd(fs,f);
-    setFormula("x(t)=cos(2πft) &nbsp;→&nbsp; x[n]=x(nT<sub>s</sub>)=cos(2π(f/f<sub>s</sub>)n)<br>"
-       +"T<sub>s</sub>="+clean(Ts*1000,2)+" ms &nbsp;·&nbsp; F=f/f<sub>s</sub>="+clean(F,4)+" cycles/sample"
-       +" &nbsp;·&nbsp; Ω=2πF="+clean(Omega,4)+" rad/sample");
+    renderFrequencyMath(s);
     setMetrics([
       [clean(F,4),"f / f_s = "+f+" / "+fs+" cycles/sample"],
       [clean(Omega,4),"Ω = 2πF rad/sample"],
@@ -546,6 +573,27 @@
     document.addEventListener("toggle",queueFit,true);
     requestAnimationFrame(queueFit);
   }
+  // Final responsive overrides for the actual compact Chapter 6.1 workspace.
+  css.textContent +=
+    "html.ss6-compact-workspace .ctrl label{font-size:15px!important}"
+    +"html.ss6-compact-workspace .ctrl output,html.ss6-compact-workspace .ends{font-size:13px!important}"
+    +"html.ss6-compact-workspace .ss6-live-explanation p,html.ss6-compact-workspace .periodic-reading-note{font-size:16px!important;line-height:1.6!important}"
+    +"html.ss6-compact-workspace .figure h3{font-size:17px!important}"
+    +"html.ss6-compact-workspace .figure p{font-size:14px!important;line-height:1.5!important}"
+    +"html.ss6-compact-workspace .legend{font-size:14px!important;line-height:1.5!important}"
+    +"html.ss6-compact-workspace .hero-callout .formula{font-size:clamp(17px,1.5vw,23px)!important;line-height:1.6!important;overflow-x:auto!important;color:var(--els-ink,var(--ink))!important}"
+    +"html.ss6-compact-workspace .hero-callout .katex-display{margin:0!important;overflow-x:auto!important}"
+    +"html.ss6-compact-workspace .hero-callout math{font-size:1em;max-width:100%}"
+    +"html.ss6-compact-workspace .hero-callout{padding:11px 13px!important;margin:5px 0 9px!important}"
+    +"html.ss6-compact-workspace .ss6-live-values{font-size:14px!important}"
+    +"html.ss6-compact-workspace .ss6-top-question p{font-size:16px!important}"
+    +"html.ss6-compact-workspace .figure canvas{height:clamp(210px,31dvh,310px)!important}"
+    +"html[data-theme='light']{--bg:#fff!important;--paper:#fff!important}"
+    +"html[data-theme='light'] body,html[data-theme='light'] .main{background:#fff!important}"
+    +"html[data-els-theme='white']{--bg:#fff!important;--paper:#fff!important;--els-bg:#fff!important;--els-surface:#fff!important}"
+    +"html[data-els-theme='white'] body,html[data-els-theme='white'] .main{background:#fff!important}"
+    +"@media(min-width:901px){html.ss6-compact-workspace .controls{position:sticky!important;top:54px!important;z-index:5!important;max-height:35dvh!important;overflow-y:auto!important}}"
+    +"@media(max-width:600px){html.ss6-compact-workspace .control-grid{grid-template-columns:1fr!important}html.ss6-compact-workspace .hero-callout .formula{font-size:17px!important}}";
   document.head.appendChild(css);
   renderModule();
 })();
