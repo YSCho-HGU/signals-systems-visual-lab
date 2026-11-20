@@ -306,6 +306,33 @@
     +"html.ss6-wide-experiment .charts{grid-template-columns:1fr!important}"
     +"html.ss6-wide-experiment .figure canvas{height:245px!important}}"
     +".legend{flex-wrap:wrap;gap:9px 16px}";
+  // Chapter 6 one-screen workspace: controls remain visible next to both plots.
+  // This overrides earlier wide-view breakpoint rules without changing math or state.
+  css.textContent +=
+    "html.ss6-wide-experiment .heading{padding-bottom:3px!important}"
+    +"html.ss6-wide-experiment .heading p{margin:2px 0!important}"
+    +"html.ss6-wide-experiment .hero-callout{margin:4px 0 7px!important;padding:5px 9px!important}"
+    +"html.ss6-wide-experiment .ss6-step-nav{margin-bottom:7px!important}"
+    +"html.ss6-wide-experiment .periodic-reading-note{margin-bottom:6px!important;padding:6px 10px!important;font-size:12px!important}"
+    +"html.ss6-wide-experiment .experiment{align-items:start!important}"
+    +"html.ss6-wide-experiment .charts{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;align-items:start!important}"
+    +"html.ss6-wide-experiment .figure{min-width:0!important;padding:8px!important}"
+    +"html.ss6-wide-experiment .figure canvas{height:clamp(185px,29dvh,270px)!important;width:100%!important}"
+    +"html.ss6-wide-experiment .legend{font-size:11px!important;line-height:1.35!important;gap:4px 8px!important}"
+    +"html.ss6-wide-experiment .controls{max-height:calc(100dvh - 125px)!important;overflow-y:auto!important;scrollbar-width:thin}"
+    +"@media(min-width:741px) and (max-width:1100px){"
+    +"html.ss6-wide-experiment .experiment{grid-template-columns:minmax(190px,23%) minmax(0,1fr)!important;gap:9px!important}"
+    +"html.ss6-wide-experiment .control-grid{display:block!important}"
+    +"html.ss6-wide-experiment .controls{padding:9px!important}"
+    +"html.ss6-wide-experiment .figure canvas{height:clamp(175px,27dvh,245px)!important}"
+    +"}"
+    +"@media(max-width:740px){"
+    +"html.ss6-wide-experiment .experiment{grid-template-columns:1fr!important}"
+    +"html.ss6-wide-experiment .controls{max-height:none!important;overflow:visible!important}"
+    +"html.ss6-wide-experiment .control-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}"
+    +"html.ss6-wide-experiment .charts{grid-template-columns:1fr!important}"
+    +"html.ss6-wide-experiment .figure canvas{height:clamp(175px,27dvh,235px)!important}"
+    +"}";
   document.head.appendChild(css);
   renderModule();
 })();
