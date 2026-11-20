@@ -328,3 +328,38 @@ html.ss6-compact-workspace .ss6-site-header{font-size:13px}
  html.ss6-compact-workspace .ss6-step-card h3{font-size:17px!important}
  html.ss6-compact-workspace .ss6-step-card :is(p,.ss6-compact-instruction,.ss6-reading-cue){font-size:14px!important}
 }
+
+/* Chapter 6.1: math typography, unit separation and responsive concept cards. */
+html.ss6-compact-workspace .ss6-theory-equation{
+  font-family:KaTeX_Main,'Cambria Math',Georgia,serif;
+  font-size:clamp(17px,1.35vw,22px)!important;
+  font-weight:400!important;
+  line-height:1.55!important;
+  overflow-x:auto!important;
+  overflow-wrap:normal!important;
+  padding:3px 1px 7px;
+}
+html.ss6-compact-workspace .ss6-theory-equation .katex-display{
+  margin:.35em 0!important;
+  text-align:left!important;
+  overflow-x:auto;
+  overflow-y:hidden;
+}
+html.ss6-compact-workspace .ss6-theory-equation .katex-display>.katex{
+  text-align:left;
+  white-space:nowrap;
+}
+html.ss6-compact-workspace .ss6-theory-equation math{
+  font-size:1em;
+  max-width:100%;
+}
+html.ss6-compact-workspace .ss6-theory-item p{font-size:16px!important;line-height:1.6!important}
+html.ss6-compact-workspace .ss6-theory-item h4{font-size:17px!important}
+@media(max-width:1100px){
+ html.ss6-compact-workspace .ss6-theory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ html.ss6-compact-workspace .ss6-theory-item:last-child{grid-column:1/-1}
+}
+@media(max-width:680px){
+ html.ss6-compact-workspace .ss6-theory-grid{grid-template-columns:1fr}
+ html.ss6-compact-workspace .ss6-theory-item:last-child{grid-column:auto}
+}
