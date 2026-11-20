@@ -80,8 +80,8 @@
                   "The physical sampling instants t=n/f_s change. Index n still advances by 1, but T_s, F and Ω change."),
       note:isF?lang("관찰 1 · f_s=100 Hz 고정: f를 10→20→40 Hz로 올리세요. 검은 샘플 점의 실제 시간 간격과 n축 간격은 변하지 않습니다. 대신 x[n]이 더 빨리 진동합니다.",
                    "Experiment 1 · f_s fixed at 100 Hz: increase f from 10 to 20 to 40 Hz. The sample-time spacing and integer n spacing stay fixed, while x[n] oscillates faster.")
-              :lang("관찰 2 · f=10 Hz 고정: f_s를 100→120→200 Hz로 바꾸세요. 위쪽 CT 파형은 그대로이지만 검은 샘플 위치와 아래쪽 첫 21개 x[n]은 바뀝니다. n축은 항상 0–20으로 고정됩니다.",
-                   "Experiment 2 · f fixed at 10 Hz: vary f_s from 100 to 120 to 200 Hz. The top CT waveform stays the same, but sample instants and the first 21 samples x[n] change. The lower n-axis stays fixed at 0–20.")
+              :lang("관찰 2 · f=10 Hz 고정: f_s를 100→120→200 Hz로 바꾸세요. 200 ms 동안의 CT 파형은 그대로지만 샘플 점 개수는 많아집니다. 아래 그래프는 처음 21개 x[n]을 n=0–20에 고정해서 비교합니다.",
+                   "Experiment 2 · f fixed at 10 Hz: vary f_s from 100 to 120 to 200 Hz. Over 0–200 ms the top CT waveform stays the same, and more sampling instants appear as f_s rises. The lower plot always shows the first 21 x[n] on n=0–20.")
     };
   }
 
@@ -102,6 +102,40 @@
         note.setAttribute("aria-live","polite");
         note.textContent=copyFor(state.periodic).note;
       }
+      var experiment=document.querySelector(".experiment");
+      if(experiment) {
+        var nav=document.createElement("nav");
+        nav.className="ss6-step-nav";
+        nav.setAttribute("aria-label",lang("6.1 학습 순서","Chapter 6.1 learning sequence"));
+        var items=[
+          ["frequency",lang("1 · CT 주파수 f 변화","1 · Change analog f")],
+          ["rate",lang("2 · 샘플링 주파수 fₛ 변화","2 · Change sampling fₛ")],
+          ["alias",lang("3 · Aliasing 확인","3 · Explore aliasing")]
+        ];
+        items.forEach(function(item){
+          var button=document.createElement("button");
+          button.type="button";
+          button.className="ss6-step-button";
+          button.dataset.frequencyMode=item[0];
+          button.textContent=item[1];
+          if(state.periodic.mode===item[0]){
+            button.classList.add("is-current");
+            button.setAttribute("aria-current","step");
+          }
+          button.addEventListener("click",function(){
+            if(state.periodic.mode===item[0])return;
+            stopPlay();
+            state.periodic.mode=item[0];
+            state.periodic.f=10;
+            state.periodic.fs=100;
+            renderModule();
+            var current=document.querySelector('[data-frequency-mode="'+item[0]+'"]');
+            if(current)current.focus({preventScroll:true});
+          });
+          nav.appendChild(button);
+        });
+        experiment.parentNode.insertBefore(nav,experiment);
+      }
     }
   };
 
@@ -120,12 +154,15 @@
       var t=duration*i/1200;
       ct.push([t*1000,Math.cos(TAU*f*t)]);
     }
-    for(var n=0;n<N;n++){
+    // Show EVERY physical sampling instant across the same 200 ms CT interval,
+    // so increasing f_s visibly increases the density of dots in the top chart.
+    var totalInWindow=Math.floor(duration*fs+1e-9)+1;
+    for(var n=0;n<totalInWindow;n++){
       var time=n/fs;
-      var amplitude=Math.cos(TAU*f*time);
-      sampleByTime.push([time*1000,amplitude]);
-      samples.push([n,amplitude]);
+      sampleByTime.push([time*1000,Math.cos(TAU*f*time)]);
     }
+    // Keep the first 21 samples and the n-axis fixed for a fair DT comparison.
+    for(var n=0;n<N;n++)samples.push([n,Math.cos(TAU*f*n/fs)]);
     drawChart("plot0",{
       xmin:0,xmax:200,ymin:-1.15,ymax:1.15,
       xlabel:"physical time t (ms)",ylabel:"x(t)",
@@ -135,7 +172,7 @@
       ]});
     setLegend(0,[
       {color:C.teal,kind:"line",label:"CT signal x(t) = cos(2πft), f = "+f+" Hz"},
-      {color:C.ink,kind:"stem",label:"Samples at t = nT_s, T_s = "+clean(Ts*1000,2)+" ms"}
+      {color:C.ink,kind:"stem",label:totalInWindow+" sampling instants over 200 ms; T_s = "+clean(Ts*1000,2)+" ms"}
     ]);
     drawChart("plot1",{
       xmin:0,xmax:N-1,ymin:-1.15,ymax:1.15,
@@ -143,7 +180,7 @@
       xticks:6,series:[{xy:samples,color:C.ink,type:"stem",radius:4.0}]
     });
     setLegend(1,[
-      {color:C.ink,kind:"stem",label:"x[n] = cos(2π(f/f_s)n), n = 0,1,2,…"}
+      {color:C.ink,kind:"stem",label:"First 21 samples x[n], n = 0…20 (fixed index axis)"}
     ]);
     var F=f/fs,Omega=TAU*F,N0=fs/gcd(fs,f);
     setFormula("x(t)=cos(2πft) &nbsp;→&nbsp; x[n]=x(nT<sub>s</sub>)=cos(2π(f/f<sub>s</sub>)n)<br>"
@@ -152,7 +189,7 @@
     setMetrics([
       [clean(F,4),"f / f_s = "+f+" / "+fs+" cycles/sample"],
       [clean(Omega,4),"Ω = 2πF rad/sample"],
-      [String(N0),"smallest integer N₀ with F N₀ ∈ ℤ"]
+      [String(N0),"smallest integer period; "+(N0>21?"longer than the 21 displayed samples":"visible within the 21-sample index range")]
     ]);
     var change=s.mode==="frequency"
      ?lang("f_s를 고정하고 f를 증가시키면 CT 진동이 빨라지고 DT의 F와 Ω도 증가합니다. n 간격은 1로 유지됩니다.",
@@ -221,7 +258,17 @@
   });
   var css=document.createElement("style");
   css.textContent=".periodic-reading-note{margin:0 0 13px;padding:12px 15px;border-left:4px solid #0e8491;background:#eaf6f7;border-radius:9px;line-height:1.7;font-size:13px}"
-    +"#wrap_fs [disabled],#wrap_f [disabled]{opacity:.50;cursor:not-allowed}label[data-fixed-control]{font-weight:750}.legend{flex-wrap:wrap;gap:9px 16px}";
+    +".ss6-step-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 16px}"
+    +".ss6-step-button{border:1px solid #a7c4ca;border-radius:10px;background:#f0f7f8;color:#244859;min-height:48px;font-weight:700;text-align:center;cursor:pointer;padding:9px 12px;line-height:1.35}"
+    +".ss6-step-button.is-current{border:2px solid #087f8c;background:#d4edee;color:#0b4852;box-shadow:inset 0 -3px #087f8c}"
+    +".ss6-step-button:focus-visible{outline:3px solid #e8a44f;outline-offset:2px}"
+    +"#wrap_mode{display:none!important}#wrap_fs [disabled],#wrap_f [disabled]{opacity:.56;cursor:not-allowed}"
+    +"label[data-fixed-control]::after{content:' (fixed)';font-size:11px;color:#527687}"
+    +"html[data-theme='dark'] .periodic-reading-note{background:#1a3443;color:#edf6f8;border-left-color:#6dcbd4}"
+    +"html[data-theme='dark'] .ss6-step-button{background:#1b3344;color:#e7f0f3;border-color:#5d8594}"
+    +"html[data-theme='dark'] .ss6-step-button.is-current{background:#245766;color:#fff;border-color:#8dd8dc}"
+    +"@media(max-width:680px){.ss6-step-nav{grid-template-columns:1fr}.ss6-step-button{min-height:42px;text-align:left}}"
+    +".legend{flex-wrap:wrap;gap:9px 16px}";
   document.head.appendChild(css);
   renderModule();
 })();
