@@ -4,8 +4,8 @@
  */
 (function () {
   "use strict";
-  if (!window.__dtftApp || typeof drawPeriodic !== "function" ||
-      typeof renderModule !== "function" || !MODULES || !state.periodic) return;
+  if (typeof drawPeriodic !== "function" || typeof renderModule !== "function" ||
+      typeof MODULES === "undefined" || typeof state === "undefined" || !state.periodic) return;
 
   function lang(ko, en) {
     try {
