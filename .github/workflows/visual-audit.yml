@@ -116,6 +116,7 @@ jobs:
             qa-dashboard/
             qa-output/
             qa-ch6-viewport/
+            qa-ch5/
             qa-learning-output/
             qa-phase0/
           if-no-files-found: warn
