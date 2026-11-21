@@ -488,9 +488,9 @@ function chart(id,opt){
  }
  if(ymin<=0&&ymax>=0){g.strokeStyle=plotTheme.axis;g.lineWidth=2.0;g.beginPath();g.moveTo(m.l,Y(0));g.lineTo(m.l+W,Y(0));g.stroke()}
  if(xmin<=0&&xmax>=0){g.strokeStyle=plotTheme.axis;g.lineWidth=2.0;g.beginPath();g.moveTo(X(0),m.t);g.lineTo(X(0),m.t+H);g.stroke()}
- for(const v of opt.vlines||[]){if(v.x<xmin||v.x>xmax)continue;g.strokeStyle=v.color||COLORS.orange;g.setLineDash([5,4]);g.lineWidth=1.5;g.beginPath();g.moveTo(X(v.x),m.t);g.lineTo(X(v.x),m.t+H);g.stroke();g.setLineDash([])}
- for(const se of opt.series||[]){g.strokeStyle=se.color||COLORS.teal;g.fillStyle=se.color||COLORS.teal;g.lineWidth=se.width||2.3;g.setLineDash(se.dash?[5,4]:[]);g.beginPath();let connected=false;for(const p of se.xy){if(!Number.isFinite(p[1])||p[0]<xmin||p[0]>xmax){connected=false;continue}if(!connected){g.moveTo(X(p[0]),Y(p[1]));connected=true}else g.lineTo(X(p[0]),Y(p[1]))}g.stroke();g.setLineDash([])}
- for(const p of opt.points||[]){if(!Number.isFinite(p.x)||!Number.isFinite(p.y)||p.x<xmin||p.x>xmax||p.y<ymin||p.y>ymax)continue;g.fillStyle=p.color||COLORS.orange;g.beginPath();g.arc(X(p.x),Y(p.y),p.r||4.5,0,TAU);g.fill()}
+ for(const v of opt.vlines||[]){if(v.x<xmin||v.x>xmax)continue;g.strokeStyle=ssTraceColor(v.color||COLORS.orange);g.setLineDash([5,4]);g.lineWidth=1.5;g.beginPath();g.moveTo(X(v.x),m.t);g.lineTo(X(v.x),m.t+H);g.stroke();g.setLineDash([])}
+ for(const se of opt.series||[]){g.strokeStyle=ssTraceColor(se.color||COLORS.teal);g.fillStyle=ssTraceColor(se.color||COLORS.teal);g.lineWidth=se.width||2.3;g.setLineDash(se.dash?[5,4]:[]);g.beginPath();let connected=false;for(const p of se.xy){if(!Number.isFinite(p[1])||p[0]<xmin||p[0]>xmax){connected=false;continue}if(!connected){g.moveTo(X(p[0]),Y(p[1]));connected=true}else g.lineTo(X(p[0]),Y(p[1]))}g.stroke();g.setLineDash([])}
+ for(const p of opt.points||[]){if(!Number.isFinite(p.x)||!Number.isFinite(p.y)||p.x<xmin||p.x>xmax||p.y<ymin||p.y>ymax)continue;g.fillStyle=ssTraceColor(p.color||COLORS.orange);g.beginPath();g.arc(X(p.x),Y(p.y),p.r||4.5,0,TAU);g.fill()}
  if(xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0){g.fillStyle=plotTheme.background;g.strokeStyle=plotTheme.axis;g.lineWidth=1.7;g.beginPath();g.arc(X(0),Y(0),4.8,0,TAU);g.fill();g.stroke()}
  if(opt.activeSide&&xmin<0&&xmax>0&&!mini){g.textAlign='center';g.font='bold 10px system-ui';g.fillStyle='#0b7786';if(opt.activeSide==='right')g.fillText('t ≥ 0',X(Math.max(.45,xmax/2)),m.t+13);if(opt.activeSide==='left')g.fillText('t < 0',X(xmin/2),m.t+13);if(opt.activeSide==='both'){g.fillText('t < 0',X(xmin/2),m.t+13);g.fillStyle='#c87947';g.fillText('t ≥ 0',X(xmax/2),m.t+13)}}
  g.restore();
@@ -508,7 +508,7 @@ function chart(id,opt){
  if(opt.valueAtZeroLabel&&xmin<=0&&xmax>=0&&!mini){const yy=opt.valueAtZeroLabel.y;g.fillStyle=COLORS.orange;g.beginPath();g.arc(X(0),Y(yy),4.3,0,TAU);g.fill();g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle='#ba6036';g.fillText(opt.valueAtZeroLabel.text,Math.min(w-122,X(0)+10),Math.min(h-m.b-7,Y(yy)+17))}
  if(opt.startLabel&&xmin<=0&&xmax>=0&&!mini){g.fillStyle=COLORS.orange;g.beginPath();g.arc(X(0),Y(0),4,0,TAU);g.fill();g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle='#ba6036';g.fillText('x(0) = 0',Math.min(w-92,X(0)+9),Math.max(m.t+35,Y(0)-18))}
  ssAxisKey(id,opt.xlabel||'t (s)',opt.ylabel||'amplitude',xmin,xmax,ymin,ymax);
- ssHoverBind(id,{kind:'cart',w,h,pad:m,xmin,xmax,ymin,ymax,xlabel:opt.xlabel||'time t (s)',ylabel:opt.ylabel||'amplitude',series:(opt.series||[]).map(s=>({label:s.label,color:s.color,points:s.xy||[],discrete:s.type==='stem'}))});
+ ssHoverBind(id,{kind:'cart',w,h,pad:m,xmin,xmax,ymin,ymax,xlabel:opt.xlabel||'time t (s)',ylabel:opt.ylabel||'amplitude',series:(opt.series||[]).map(s=>({label:s.label,color:ssTraceColor(s.color||COLORS.teal),points:s.xy||[],discrete:s.type==='stem'}))});
  return{g,X,Y,w,h,m,xmin,xmax,ymin,ymax};
 }
 function sample(fn,t0,t1,N=400){let out=[];for(let i=0;i<=N;i++){let t=t0+(t1-t0)*i/N;out.push([t,fn(t)])}return out}
