@@ -32,6 +32,40 @@ try{
    check('chapter'+ch+'-render-after-switch',layout.stage&&layout.predict&&layout.pair&&layout.explain&&layout.canvases>0&&layout.math,layout);
    const slider=page.locator(ch===1?'#controls input[type=range]':'#content input[type=range]').first();
    if(await slider.count()){await slider.evaluate(el=>{el.value=String((Number(el.min)+Number(el.max))/2);el.dispatchEvent(new Event('input',{bubbles:true}))});await page.waitForTimeout(230)}
+   // Full foundational chapter audit: every authored experiment must retain
+   // its controls, plots, core equation, prediction and guided explanation.
+   const lessonResults=[];
+   for(let lesson=0;lesson<count;lesson++){
+     await nav.nth(lesson).click();
+     await page.waitForTimeout(130);
+     const content=await page.evaluate(()=>({
+      title:(document.querySelector('#title')||document.querySelector('#content .heading h2'))?.textContent,
+      stage:!!document.querySelector('.ss-found-four-step'),
+      predict:!!document.querySelector('.ss-found-predict .ss-found-intro')?.textContent.trim(),
+      controls:document.querySelectorAll('#controls input,#controls select,#content .ss-found-controls input,#content .ss-found-controls select').length,
+      graphs:document.querySelectorAll('canvas').length,
+      keyFormula:!!document.querySelector('.ss-found-katex .katex'),
+      guided:!!document.querySelector(ch===1?'#step-text':'#derivationPanel .deriv-step'),
+      nextChapter:!!document.querySelector('.ss-found-explain a.ss-bridge-link'),
+      hasReferenceError:document.body.textContent.includes('ReferenceError:')
+     }));
+     lessonResults.push({lesson:lesson+1,...content});
+     const c=page.locator(ch===1?'#controls input[type=range]':'#content .ss-found-controls input[type=range]').first();
+     if(await c.count())await c.evaluate(el=>{el.value=el.max;el.dispatchEvent(new Event('input',{bubbles:true}))});
+     if(ch>1){
+      const all=page.locator('#allSteps');
+      if(await all.count()){await all.click();await page.waitForTimeout(45);
+       const steps=await page.locator('#derivationPanel .deriv-step').count();
+       if(steps!==4)lessonResults[lesson].guided=false;
+      }
+     }
+   }
+   const bad=lessonResults.filter(x=>!x.title||!x.stage||!x.predict||!x.controls||!x.graphs||!x.keyFormula||!x.guided||!x.nextChapter||x.hasReferenceError);
+   check('chapter'+ch+'-every-lab-functional',bad.length===0,{tested:lessonResults.length,failures:bad});
+   if(ch===1){
+    const toc=await page.locator('main > nav#nav').evaluate(el=>({display:getComputedStyle(el).display,position:getComputedStyle(el).position}));
+    check('chapter1-left-TOC',toc.display==='flex'&&toc.position==='sticky',toc);
+   }
    await page.locator('[data-els-theme-picker]').first().selectOption('warm-neutral');
    const theme=await page.evaluate(()=>document.documentElement.dataset.elsTheme);
    check('chapter'+ch+'-theme-switch',theme==='warm-neutral',{theme});
