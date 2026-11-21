@@ -27,7 +27,7 @@ function init(){
  var buttons=aside.querySelector('.step-buttons');if(buttons)deriv.appendChild(buttons);
  var reading=aside.querySelector('.reading'),check=document.getElementById('check');if(reading)interpret.appendChild(reading);if(check)interpret.appendChild(check);
  grid.appendChild(deriv);grid.appendChild(interpret);explain.appendChild(grid);
- layout.appendChild(lead);layout.appendChild(predict);layout.appendChild(pair);layout.appendChild(explain);
+ layout.appendChild(lead);layout.appendChild(predict);layout.appendChild(pair);layout.appendChild(periodic);layout.appendChild(explain);
  // Sampling 7.1: keep controls adjacent to both synchronized CT/DT plots.
  // No numerical simulation code is replaced; the existing draw() owns both graphs.
  var concept=node('div','ss7-sampling-concepts');
@@ -36,7 +36,8 @@ function init(){
  // Periodicity demonstration: identical DT samples for Ω and Ω+2πk.
  var periodic=node('section','ss7-periodicity');
  periodic.innerHTML='<div class="ss7-periodicity-title">Discrete-time frequency periodicity</div><label for="ss7-period-k">Integer frequency shift k</label><select id="ss7-period-k"><option value="-2">−2</option><option value="-1">−1</option><option value="0">0</option><option value="1" selected>+1</option><option value="2">+2</option></select><div class="ss7-period-equation" aria-live="polite"></div><div class="ss7-ct-compare"><div class="ss7-ct-title">Continuous-time signals: f, f + fₛ, f − fₛ</div><div class="ss7-ct-plot"></div><div class="ss7-ct-legend"><span>● f</span><span>● f + fₛ</span><span>● f − fₛ</span><span>◆ sampled values</span></div></div><div class="ss7-period-plot"></div><p class="ss7-period-note">The orange circles (Ω) and teal crosses (Ω + 2πk) coincide at every integer n. This is discrete-time frequency periodicity, not an assertion that the underlying continuous-time frequencies are identical.</p>';
- observe.appendChild(periodic);
+ // Supplementary alias-family analysis needs the full workspace width, not a third nested column in Observe.
+
  var animate=node('div','ss7-alias-animate');
  animate.innerHTML='<button type="button" class="ss7-alias-play">Play</button><button type="button" class="ss7-alias-reset">Reset</button><label>n <input type="range" class="ss7-alias-frame" min="0" max="8" value="0" step="1"></label><output class="ss7-alias-status">n = 0</output>';
  periodic.querySelector('.ss7-ct-compare').appendChild(animate);
@@ -126,5 +127,6 @@ function init(){
  document.addEventListener('ss-ch7-experiment-change',updatePrompt);
  window.__ss7Standard={ready:true,stages:4,chapter:7,experiments:window.SSChapter7?.experimentCount||0,sidebarColumns:1};
 }
-window.addEventListener('DOMContentLoaded',init);
+// The native core installs/render() in its own DOMContentLoaded handler. Initialize after it.
+window.addEventListener('DOMContentLoaded',function(){requestAnimationFrame(init)});
 })();
