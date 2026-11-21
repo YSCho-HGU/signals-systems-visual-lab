@@ -32,6 +32,8 @@ try{
   await page.waitForFunction(()=>window.__ss7Standard?.ready&&window.__ss7Native?.ready,{timeout:20000});
   const initial=await snapshot(page);
   check(width+' native shell',initial.ready&&initial.iframe===0&&initial.sidebar&&initial.navCount===7&&!initial.unsupportedTopBar,initial);
+  check(width+' initial graph visible without touching controls',initial.plots>0&&initial.content>10&&initial.series>0,initial);
+  check(width+' shared palette loaded before plot computation',await page.evaluate(()=>typeof window.ssTraceColor==='function'));
   check(width+' shared numbered stages',initial.panels.length===4&&initial.panels.every((v,i)=>v.startsWith(String(i+1))),initial.panels);
   check(width+' no horizontal overflow',initial.documentWidth<=width+6,initial.documentWidth);
   for(const theme of themes){
