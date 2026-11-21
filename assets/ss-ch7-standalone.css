@@ -1,7 +1,6 @@
 /* Chapter 7 native shell. Align with Chapters 5/6; simulation CSS stays intact. */
 html.ss7-native,html.ss7-native body{min-height:100%;background:var(--els-page,#f5f7f8);color:var(--els-ink,#202d30)}
 html.ss7-native body{margin:0;overflow-x:hidden}
-html.ss7-native .ss7-site-header{position:sticky!important;top:0;z-index:90;height:46px!important;min-height:46px!important;padding:5px 15px!important;background:var(--els-surface,#fff)!important;color:var(--els-ink,#222)!important;border-bottom:1px solid var(--els-border,#ccc)}
 html.ss7-native .ss7-site-header .ss-common-links{max-height:65vh}
 html.ss7-native .ss7-shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:calc(100dvh - 46px);align-items:start;max-width:none}
 html.ss7-native .ss7-sidebar{position:sticky;top:46px;height:calc(100dvh - 46px);overflow:auto;min-width:0;padding:16px 11px;background:var(--els-surface,#fff);color:var(--els-ink,#222);border-right:1px solid var(--els-border,#ccc)}
