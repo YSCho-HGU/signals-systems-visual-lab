@@ -124,6 +124,28 @@ try{
   record(values.legend.includes('FFT algorithm')&&values.application.includes('Problem'),
     'map-'+theme+'-full-curriculum-and-applications');
   record(values.scrollWidth<20,'map-'+theme+'-no-page-overflow',String(values.scrollWidth));
+  const visual=await overview.evaluate(()=>{
+   const svg=document.querySelector('#tm-demo-chart svg');
+   const rect=svg?.querySelector(':scope > rect:first-child');
+   const text=svg?.querySelector('text');
+   const root=getComputedStyle(document.documentElement);
+   const surface=root.getPropertyValue('--els-surface').trim();
+   const ink=root.getPropertyValue('--els-ink').trim();
+   const rgb=(value)=>{
+    const elem=document.createElement('span');elem.style.color=value;document.body.appendChild(elem);
+    const color=getComputedStyle(elem).color;elem.remove();return color;
+   };
+   return {chart:!!svg,labels:svg?.querySelectorAll('text').length||0,
+    fill:rect?getComputedStyle(rect).fill:null,desiredSurface:rgb(surface),
+    axisColor:text?getComputedStyle(text).fill:null,desiredInk:rgb(ink),
+    detailMath:!!document.querySelector('#tm-detail .tm-formula'),
+    labelCount:document.querySelectorAll('.tm-node').length};
+  });
+  record(visual.chart&&visual.labels>3&&visual.labelCount===8,
+    'map-'+theme+'-eight-nodes-and-labeled-graph',JSON.stringify(visual));
+  record(visual.fill===visual.desiredSurface&&visual.axisColor===visual.desiredInk,
+    'map-'+theme+'-chart-surface-and-axis-color',JSON.stringify(visual));
+  record(visual.detailMath,'map-'+theme+'-math-detail-present');
   await overview.screenshot({path:folder+'/learning-map-'+theme+'.png',fullPage:true});
  }
  await overview.screenshot({path:folder+'/learning-map-dark.png'});
