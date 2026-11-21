@@ -114,3 +114,12 @@ html.ss7-standard .ss7-period-legend span{display:inline-flex;align-items:center
 html.ss7-standard .ss7-period-dot{width:10px;height:10px;border-radius:50%;background:#cc8841}
 html.ss7-standard .ss7-period-cross{font-size:18px;font-weight:800;line-height:12px;color:#168c91}
 html.ss7-standard .ss7-periodicity .ss7-period-note{font-size:13px;line-height:1.6;margin:8px 0 0}
+
+/* Continuous-time alias families: curves remain distinguishable without color alone. */
+html.ss7-standard .ss7-ct-compare{margin:12px 0;padding:10px;border:1px solid var(--els-border);border-radius:8px;background:var(--els-surface)}
+html.ss7-standard .ss7-ct-title{font-size:13px;font-weight:700;line-height:1.5;margin-bottom:6px}
+html.ss7-standard .ss7-ct-plot svg{display:block;width:100%;height:auto;max-height:190px;color:var(--els-ink)}
+html.ss7-standard .ss7-ct-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px}
+html.ss7-standard .ss7-ct-legend span:nth-child(1){color:#168c91}
+html.ss7-standard .ss7-ct-legend span:nth-child(2){color:#cc8841}
+html.ss7-standard .ss7-ct-legend span:nth-child(3){color:#9864b3}
