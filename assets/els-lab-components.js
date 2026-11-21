@@ -42,6 +42,46 @@
       if(typeof item==="string")renderMath(node,item,{display:true,fallbackHTML:node.innerHTML});
     });
   }
+  // Author-controlled inline equations. Pass exact [sourceText, LaTeX] pairs.
+  // No regular-expression guessing, no rewriting user input or chart state.
+  function renderInlineMath(target,source,tokens){
+    if(!target||typeof source!=="string")return 0;
+    var entries=(tokens||[]).filter(function(pair){
+      return Array.isArray(pair)&&typeof pair[0]==="string"&&pair[0].length&&typeof pair[1]==="string";
+    }).sort(function(a,b){return b[0].length-a[0].length;});
+    var frag=document.createDocumentFragment(),cursor=0,count=0;
+    while(cursor<source.length){
+      var match=null;
+      for(var i=0;i<entries.length;i++){
+        if(source.startsWith(entries[i][0],cursor)){match=entries[i];break;}
+      }
+      if(match){
+        var span=document.createElement("span");
+        span.className="els-inline-math";
+        span.setAttribute("data-els-inline-source",match[0]);
+        renderMath(span,match[1],{display:false,fallbackText:match[0]});
+        frag.appendChild(span);count++;cursor+=match[0].length;
+      }else{
+        var next=cursor+1;
+        while(next<source.length&&!entries.some(function(pair){return source.startsWith(pair[0],next);}))next++;
+        frag.appendChild(document.createTextNode(source.slice(cursor,next)));cursor=next;
+      }
+    }
+    target.replaceChildren(frag);
+    return count;
+  }
+  // Explicit math inside authored HTML: <span data-els-math-inline="...">fallback</span>
+  // Author-supplied LaTeX is authoritative; content is never parsed heuristically.
+  function renderAuthoredMath(root){
+    if(!root)return 0;
+    var nodes=root.querySelectorAll("[data-els-math-inline], [data-els-math-display]");
+    nodes.forEach(function(node){
+      var display=node.hasAttribute("data-els-math-display");
+      var tex=node.getAttribute(display?"data-els-math-display":"data-els-math-inline");
+      if(tex)renderMath(node,tex,{display:display,fallbackText:node.textContent});
+    });
+    return nodes.length;
+  }
   function mountWorkbench(args){
     if(!args||!args.experiment||!args.controls||!args.charts)return null;
     var root=args.experiment,controls=args.controls,charts=args.charts;
@@ -75,7 +115,8 @@
     container.insertBefore(badge,container.firstChild);
   }
   global.ELSLabUI=Object.freeze({
-    version:"1.0.0",renderMath:renderMath,renderMany:renderMany,
+    version:"1.1.0",renderMath:renderMath,renderMany:renderMany,
+    renderInlineMath:renderInlineMath,renderAuthoredMath:renderAuthoredMath,
     mountWorkbench:mountWorkbench,addStepNumber:addStepNumber
   });
 })(window);
