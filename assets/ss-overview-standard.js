@@ -40,13 +40,22 @@ function math(){
   }catch(error){el.innerHTML=source}
  }
 }
+function typesetCurriculum(){
+ if(!window.katex?.render)return;
+ for(const el of document.querySelectorAll('#map-view .ss-inline-math[data-tex]')){
+  if(el.dataset.typeset==='1')continue;
+  const fallback=el.innerHTML;
+  try{window.katex.render(el.dataset.tex,el,{displayMode:false,throwOnError:true,strict:'ignore',trust:false,output:'htmlAndMathml'});el.dataset.typeset='1'}
+  catch(_){el.innerHTML=fallback}
+ }
+}
 function init(){
- math();typesetMapDetail();
+ math();typesetMapDetail();typesetCurriculum();
  const detail=document.getElementById('tm-detail');
  if(detail)new MutationObserver(typesetMapDetail).observe(detail,{childList:true});
  const grid=document.getElementById('chapter-grid');
  if(grid)new MutationObserver(math).observe(grid,{childList:true});
- window.addEventListener('load',()=>{math();typesetMapDetail()},{once:true});
+ window.addEventListener('load',()=>{math();typesetMapDetail();typesetCurriculum()},{once:true});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
