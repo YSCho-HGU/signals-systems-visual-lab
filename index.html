@@ -230,6 +230,20 @@ html body .topbar.els-ss-unified-header{box-sizing:border-box;height:46px;min-he
 .els-ss-unified-header .els-ss-settings select{width:auto;max-width:158px;min-height:30px;font-size:11px;padding:3px 6px;border:1px solid var(--els-border,#777);border-radius:7px;background:var(--els-surface,#222);color:var(--els-ink,#eee)}
 .els-ss-unified-header .els-ss-hidden-nav{display:none!important}
 @media(max-width:700px){html body .topbar.els-ss-unified-header{height:auto;flex-wrap:wrap;gap:6px;padding:7px 9px}.els-ss-unified-header .els-ss-chapter-menu{flex:1 1 calc(100% - 95px);max-width:calc(100% - 95px)}.els-ss-unified-header .els-ss-settings{margin-left:auto;width:100%;justify-content:flex-end}.els-ss-unified-header .els-ss-settings label{font-size:0}.els-ss-unified-header .els-ss-settings select{max-width:130px}}
+</style><style id="ss7-single-shell-fix">
+/* Chapter 7 uses the same single-header + single-TOC hierarchy as Ch5/6. */
+html[data-ss-chapter="7"] #lab-view .lab-head,
+html[data-ss-chapter="7"] #ss-hintbar,
+html[data-ss-chapter="7"] #ss-predict-check,
+html[data-ss-chapter="7"] #ss-study-guide,
+html[data-ss-chapter="7"] #lab-view .lab-foot{display:none!important}
+html[data-ss-chapter="7"] #lab-view .lab-area{height:calc(100dvh - 46px)!important;min-height:calc(100dvh - 46px)!important;display:flex;flex-direction:column}
+html[data-ss-chapter="7"] #lab-view .lab-frame-wrap{flex:1 1 auto!important;min-height:0!important;height:auto!important}
+html[data-ss-chapter="7"] #lab-view .lab-frame{height:100%!important}
+html[data-ss-chapter="7"] #lab-view .ss-unified-nav{flex-basis:230px;width:230px}
+html[data-ss-chapter="7"] #lab-view .ss-unified-nav.collapsed{flex-basis:44px;width:44px}
+html[data-ss-chapter="7"] #lab-view .ss-unified-body{min-height:0;overflow-y:auto}
+@media(max-width:760px){html[data-ss-chapter="7"] #lab-view .ss-unified-nav{flex-basis:205px;width:205px}html[data-ss-chapter="7"] #lab-view .ss-unified-nav.collapsed{flex-basis:40px;width:40px}html[data-ss-chapter="7"] #lab-view .lab-frame-wrap{height:auto!important;min-height:0!important}}
 </style></head>
 <body>
 <a class="ss-skip-link" href="#overview" id="ss-skip-link">본문으로 건너뛰기</a>
@@ -405,7 +419,7 @@ window.__ssApplyCatalog=function(catalog){
  renderRoute();
 };
 $('chapter-grid').innerHTML=CHAPTERS.map(chapterCard).join('');$('map-preview').innerHTML=mapHtml();$('map-full').innerHTML=addCasesToMap(transformMapFull());initTransformMap();initEngineeringCases();
-function decodeLab(ch){const b=atob(LABS[ch]);const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);const html=new TextDecoder('utf-8').decode(u);const sheets='<link rel="stylesheet" href="./assets/design-system.css?v=1"><link rel="stylesheet" href="./assets/ss-lab-theme.css?v=5"><link rel="stylesheet" href="./assets/els-theme-v2.css?v=6"><link rel="stylesheet" href="./assets/ss-trace-palette.css?v=1"><link rel="stylesheet" href="./assets/ss-vertical-nav.css?v=1"><script src="./assets/ss-trace-palette.js?v=1"><\/script><script src="./assets/ss-vertical-nav.js?v=1" defer><\/script><script src="./assets/ss-sidebar-toggle.js?v=2" defer><\/script><link rel="stylesheet" href="./assets/els-typography-standard.css?v=1">';const ch7=Number(ch)===7?'<link rel="stylesheet" href="./assets/ss-ch7-learning-standard.css?v=2"><script src="./assets/ss-ch7-learning-standard.js?v=3" defer><\/script>':'';return html.replace('</head>',sheets+ch7+'</head>')}
+function decodeLab(ch){const b=atob(LABS[ch]);const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);const html=new TextDecoder('utf-8').decode(u);const sheets='<link rel="stylesheet" href="./assets/design-system.css?v=1"><link rel="stylesheet" href="./assets/ss-lab-theme.css?v=5"><link rel="stylesheet" href="./assets/els-theme-v2.css?v=6"><link rel="stylesheet" href="./assets/ss-trace-palette.css?v=1"><link rel="stylesheet" href="./assets/ss-vertical-nav.css?v=1"><script src="./assets/ss-trace-palette.js?v=1"><\/script><script src="./assets/ss-vertical-nav.js?v=1" defer><\/script><script src="./assets/ss-sidebar-toggle.js?v=2" defer><\/script><link rel="stylesheet" href="./assets/els-typography-standard.css?v=1">';const ch7=Number(ch)===7?'<link rel="stylesheet" href="./assets/ss-ch7-learning-standard.css?v=3"><script src="./assets/ss-ch7-learning-standard.js?v=3" defer><\/script>':'';return html.replace('</head>',sheets+ch7+'</head>')}
 function adjacentChapter(ch,dir){
  const ids=CHAPTERS.filter(c=>!window.__ssCatalogLoaded||window.__ssPublishedChapters.has(c.id)).map(c=>c.id).sort((a,b)=>a-b);
  const pos=ids.indexOf(ch);
@@ -534,7 +548,7 @@ byId('fb-github').addEventListener('click',()=>{
  applyTheme();
 })();
 
-</script><script src="./assets/ss-publication.js?v=1" defer></script><script src="./assets/els-language.js?v=1" defer></script><script src="./assets/ss-language.js?v=2" defer></script><script src="./assets/ss-learning-path.js?v=1" defer></script><script src="./assets/ss-progress.js?v=2" defer></script><script src="./assets/ss-applications.js?v=1" defer></script><script src="./assets/ss-learning-aids.js?v=1" defer></script><script src="./assets/els-theme-v2.js?v=6" defer></script><script>
+</script><script src="./assets/ss-publication.js?v=1" defer></script><script src="./assets/els-language.js?v=1" defer></script><script src="./assets/ss-language.js?v=2" defer></script><script src="./assets/ss-learning-path.js?v=1" defer></script><script src="./assets/ss-progress.js?v=3" defer></script><script src="./assets/ss-applications.js?v=1" defer></script><script src="./assets/ss-learning-aids.js?v=1" defer></script><script src="./assets/els-theme-v2.js?v=6" defer></script><script>
 /* Pass the active Signals & Systems palette to the shared viewer without changing saved settings. */
 (function(){
  const a=document.getElementById("ss-textbook-viewer-link");
@@ -555,4 +569,4 @@ document.querySelectorAll('.els-ss-chapter-links a').forEach(function(a){if(Numb
 }
 window.addEventListener('hashchange',sync);sync();
 document.querySelectorAll('.els-ss-chapter-links a').forEach(function(a){a.addEventListener('click',function(){var d=document.querySelector('.els-ss-chapter-menu');if(d)d.open=false;setTimeout(sync,0)})});
-})();</script></body></html>
+})();</script><script id="ss7-shell-route-switch">(function(){function apply(){document.documentElement.dataset.ssChapter=(location.hash.match(/^#chapter=(\d+)$/)||[])[1]||''}window.addEventListener('hashchange',apply);apply()})();</script></body></html>
