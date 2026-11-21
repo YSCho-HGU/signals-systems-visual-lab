@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-21T07:45:39.302Z",
-  "sourceSha": "98f0b310f5d4135e6ff41aadbf026a793ed441f5",
-  "runId": "44881500794",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44881500794",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/98f0b310f5d4135e6ff41aadbf026a793ed441f5",
+  "generatedAt": "2026-11-21T07:50:23.323Z",
+  "sourceSha": "45069f2ff6647217ecd54c56ca3d259a70b1cc08",
+  "runId": "44881860858",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44881860858",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/45069f2ff6647217ecd54c56ca3d259a70b1cc08",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -63,13 +63,13 @@
     {
       "id": "G6",
       "label": "248-screenshot visual and accessibility smoke audit",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G7",
       "label": "Evidence postprocessing",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     }
   ],
