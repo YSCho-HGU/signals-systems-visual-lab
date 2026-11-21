@@ -1,0 +1,28 @@
+/* Chapter 6 final theme normalization. Explicit theme wins over legacy dark CSS. */
+html[data-els-theme="white"],html[data-els-theme="white-clean"]{
+ color-scheme:light!important;
+ --bg:var(--els-page)!important;--paper:var(--els-surface)!important;
+ --card:var(--els-surface)!important;--pale:var(--els-surface-alt)!important;
+ --ink:var(--els-ink)!important;--sub:var(--els-muted)!important;
+ --line:var(--els-border)!important;--a:var(--els-link)!important;
+ --nav:var(--els-surface)!important;--nav2:var(--els-surface-alt)!important;
+}
+html[data-els-theme="white"] body,html[data-els-theme="white-clean"] body{
+ background:var(--els-page)!important;color:var(--els-ink)!important;
+}
+html[data-els-theme="white"] :is(.app,.main,main,.workspace,.work,.content,.lab,.ss6-site-header,.sidebar,.controls,.panel,.figure,.metric,.learning,.question,.insight,.quiz,.derivation-panel,.reading-panel,.card,.plot-card,.step,.ss6-predict,.ss6-observe,.ss6-check),
+html[data-els-theme="white-clean"] :is(.app,.main,main,.workspace,.work,.content,.lab,.ss6-site-header,.sidebar,.controls,.panel,.figure,.metric,.learning,.question,.insight,.quiz,.derivation-panel,.reading-panel,.card,.plot-card,.step,.ss6-predict,.ss6-observe,.ss6-check){
+ background:var(--els-surface)!important;color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;box-shadow:none;
+}
+html[data-els-theme="white"] :is(.app,.main,main,.workspace,.work,.content,.lab){background:#fff!important}
+html[data-els-theme="white-clean"] :is(.app,.main,main,.workspace,.work,.content,.lab){background:var(--els-page)!important}
+html[data-els-theme="white"] :is(.ss6-site-header,.sidebar,.controls,.panel,.figure,.metric,.learning,.question,.insight,.quiz,.derivation-panel,.reading-panel,.card,.plot-card,.step,.ss6-predict,.ss6-observe,.ss6-check){background:#fff!important}
+html[data-els-theme="white"] :is(.ss6-site-header,.sidebar,.controls,.panel,.figure,.metric,.learning,.question,.insight,.quiz,.derivation-panel,.reading-panel,.card,.plot-card,.step,.ss6-predict,.ss6-observe,.ss6-check) :is(h1,h2,h3,p,small,label,span){color:inherit}
+html[data-els-theme="white"] :is(.ss6-site-header,.sidebar,.controls,.panel,.figure,.metric,.learning,.question,.insight,.quiz,.derivation-panel,.reading-panel,.card,.plot-card,.step,.ss6-predict,.ss6-observe,.ss6-check) :is(input,textarea,select),
+html[data-els-theme="white-clean"] :is(.ss6-site-header,.sidebar,.controls,.panel,.figure,.metric,.learning,.question,.insight,.quiz,.derivation-panel,.reading-panel,.card,.plot-card,.step,.ss6-predict,.ss6-observe,.ss6-check) :is(input,textarea,select){
+ background:var(--els-surface)!important;color:var(--els-ink)!important;border-color:var(--els-border)!important;
+}
+html[data-els-theme="white"] :is(.hero,.intro,.course-header,.ss-course-hero,.ss6-predict,.ss6-observe,.ss6-check){
+ background-image:none!important;background-color:#fff!important;
+}
