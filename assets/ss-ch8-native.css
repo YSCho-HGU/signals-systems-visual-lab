@@ -148,3 +148,26 @@ html.ss8-native [data-ss-math-error]{
 html.ss8-native .ss8-math-source,
 html.ss8-native .ss8-latex{font-size:var(--ss-math-step-size,19px)}
 html.ss8-native .ss8-key-equation{font-size:var(--ss-math-key-size,20px)}
+
+/* Inline mathematical expressions in prose, Reading and Check Yourself. */
+html.ss8-native .ss8-prose-math{
+ display:inline-block;
+ vertical-align:baseline;
+ max-width:100%;
+ margin:0 .045em;
+ line-height:1.45;
+ color:inherit;
+ white-space:nowrap;
+ font-weight:inherit;
+}
+html.ss8-native .ss8-prose-math .katex{
+ font-size:1.06em;
+ color:inherit;
+}
+html.ss8-native .ss8-prose-math[data-ss-math-state="waiting"]{
+ border-bottom:1px dotted var(--els-muted);
+}
+html.ss8-native .ss8-prose-math[data-ss-math-error]{
+ border-bottom:2px dotted var(--els-accent,#c55d54);
+ font-family:"Cambria Math",Georgia,serif;
+}
