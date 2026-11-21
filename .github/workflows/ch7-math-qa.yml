@@ -1,0 +1,41 @@
+name: Chapter 7 Math Browser Verification
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'chapter7.html'
+      - 'assets/ss-ch7-math.js'
+      - 'assets/ss-ch7-prose-math.js'
+      - 'assets/ss-ch7-prose-math.css'
+      - 'tests/ch7-viewport-e2e.mjs'
+      - '.github/workflows/ch7-math-qa.yml'
+
+concurrency:
+  group: ch7-math-qa
+  cancel-in-progress: true
+
+jobs:
+  math-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser
+        run: |
+          npm ci --no-audit --no-fund || npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Verify all seven labs, 28 guided equations, dynamic prose and themes
+        run: node tests/ch7-viewport-e2e.mjs
+      - name: Upload exact browser failure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chapter7-math-qa
+          path: qa-ch7/
+          retention-days: 14
+          if-no-files-found: warn
