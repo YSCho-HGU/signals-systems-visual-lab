@@ -82,7 +82,7 @@ try{
        };
        return {axis:pick(".figure .axis-key"),hint:pick(".ss-hover-hint"),
         predict:pick("#page>.ss5-predict"),panel:pick(".lab>.panel"),
-        plots:pick(".lab .plots"),follow:pick("#page>.ss5-followup"),
+        outputs:pick(".lab>.outputs"),plots:pick(".lab .plots"),follow:pick("#page>.ss5-followup"),
         steps:[...document.querySelectorAll(".ss5-flow-label")].map(el=>el.textContent.trim())};
       });
       check(id(lab+" axis-palette"),!!a.axis&&rgb(a.axis.background)===({"neutral-dark":"rgb(41, 41, 41)","warm-dark":"rgb(52, 65, 61)","navy-dark":"rgb(39, 57, 78)","warm-neutral":"rgb(237, 241, 235)","white-clean":"rgb(237, 242, 244)"}[theme]),a.axis);
@@ -91,7 +91,7 @@ try{
        a.predict.x<=a.panel.x+4&&a.predict.right>=a.plots.right-4&&
        a.predict.bottom<=a.panel.y+4&&a.predict.bottom<=a.plots.y+4,[a.predict,a.panel,a.plots]);
       check(id(lab+" controls-plots-parallel"),!!a.panel&&!!a.plots&&
-       a.panel.right<=a.plots.x+4&&Math.abs(a.panel.y-a.plots.y)<24,[a.panel,a.plots]);
+       a.panel.right<=a.outputs.x+4&&Math.abs(a.panel.y-a.outputs.y)<24,[a.panel,a.outputs]);
       check(id(lab+" derivation-full-left"),!!a.follow&&!!a.panel&&
        a.follow.x<=a.panel.x+4&&a.follow.width>=a.plots.right-a.panel.x-8,[a.follow,a.panel]);
       check(id(lab+" four-stages"),["Predict","Adjust","Observe","Explain"].every(z=>a.steps.some(t=>t.includes(z))),a.steps);
