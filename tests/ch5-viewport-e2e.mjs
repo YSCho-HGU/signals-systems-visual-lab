@@ -30,8 +30,8 @@ try{
   check(await page.locator("#tabs [data-lab]").count()===8,prefix+"-eight-labs");
   check((await page.evaluate(()=>window.__labNumerics?.rcCutoff))>0,prefix+"-numerical-diagnostics");
   const theme=page.locator("#ss5-theme-picker");
-  await theme.selectOption("white");
-  check(await page.evaluate(()=>document.documentElement.dataset.elsTheme==="white"),prefix+"-white-theme");
+  await theme.selectOption("white-clean");
+  check(await page.evaluate(()=>document.documentElement.dataset.elsTheme==="white-clean"),prefix+"-white-clean-theme");
   await theme.selectOption("neutral-dark");
   check(await page.evaluate(()=>document.documentElement.dataset.theme==="dark"),prefix+"-dark-theme");
   const lang=page.locator("#ss5-language-picker");
