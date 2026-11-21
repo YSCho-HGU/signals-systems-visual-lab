@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-21T01:19:33.957Z",
-  "sourceSha": "3d2117ae078dfd5eea3288e956b144bfbccf9f55",
-  "runId": "44849176308",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44849176308",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/3d2117ae078dfd5eea3288e956b144bfbccf9f55",
+  "generatedAt": "2026-11-21T01:23:47.256Z",
+  "sourceSha": "2b1a83acff6a7e33600a89c0f37e6764d1588849",
+  "runId": "44849580779",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44849580779",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/2b1a83acff6a7e33600a89c0f37e6764d1588849",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -15,7 +15,7 @@
     "expected": 248,
     "observed": 248,
     "issues": 2,
-    "qualityStatus": "NOT_RUN"
+    "qualityStatus": "FAIL"
   },
   "gates": [
     {
@@ -63,7 +63,7 @@
     {
       "id": "G7",
       "label": "Evidence postprocessing",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     }
   ],
