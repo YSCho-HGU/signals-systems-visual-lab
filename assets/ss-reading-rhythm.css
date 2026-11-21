@@ -1,0 +1,42 @@
+/* Chapter 5.1 / 6.1 readability and spacing reference, 2026-11-21.
+ * Load LAST after chapter-specific CSS and the canonical typography standard.
+ * Based on 16px / 1.7 File I/O prose; subordinate plot captions 13px / 1.55.
+ * Spatial rhythm preserves visibility of controls and dynamic plots.
+ */
+:root{--ss-reading-gap-xs:6px;--ss-reading-gap-sm:10px;--ss-reading-gap-md:14px;--ss-reading-gap-lg:20px;--ss-reading-gap-xl:24px}
+body:has(.ss5-site-header) :is(.heading,.formula,.lab,.plots,.figure,.reading-panel,.derivation-panel),
+body:has(.ss6-site-header) :is(.heading,.hero-callout,.experiment,.body-col,.figure,.reading-panel,.derivation-panel){min-width:0}
+/* Clear title / introduction / formula hierarchy, without an oversized fixed header. */
+body:has(.ss5-site-header) .heading,body:has(.ss6-site-header) .heading{padding-bottom:var(--ss-reading-gap-md)!important;margin-bottom:var(--ss-reading-gap-sm)!important}
+body:has(.ss5-site-header) .heading h2,body:has(.ss6-site-header) .heading h2{margin:6px 0 8px!important;line-height:1.3!important}
+body:has(.ss5-site-header) .heading>p,body:has(.ss6-site-header) .heading>p{margin:0!important;font-size:16px!important;line-height:1.7!important;max-width:84ch}
+body:has(.ss5-site-header) .formula,body:has(.ss6-site-header) .hero-callout{margin:10px 0 14px!important;padding:12px 16px!important}
+body:has(.ss5-site-header) .lab,body:has(.ss6-site-header) .experiment{gap:14px!important;align-items:start!important}
+/* The variable controls should visually connect to the graphs they modify. */
+body:has(.ss5-site-header) .panel,body:has(.ss6-site-header) .experiment>.controls{padding:14px!important;min-width:0}
+body:has(.ss5-site-header) .panel h3,body:has(.ss6-site-header) .experiment>.controls h3{margin:6px 0 10px!important}
+body:has(.ss5-site-header) .controlgrid,body:has(.ss6-site-header) .control-grid{gap:10px!important}
+body:has(.ss5-site-header) .panel :is(p,.notice,.ss5-predict p),body:has(.ss6-site-header) .experiment>.controls :is(p,.notice){font-size:16px!important;line-height:1.7!important}
+body:has(.ss5-site-header) .panel :is(.btnline,.presets),body:has(.ss6-site-header) .experiment>.controls .btnrow{margin-top:12px!important}
+/* Charts: choose readable width for short screens, consistent card padding. */
+body:has(.ss5-site-header) .plots{grid-template-columns:repeat(auto-fit,minmax(min(100%,385px),1fr))!important;gap:14px!important}
+body:has(.ss5-site-header) .figure,body:has(.ss6-site-header) .figure{padding:14px 14px 12px!important}
+body:has(.ss5-site-header) .figure h3,body:has(.ss6-site-header) .figure h3{font-size:16px!important;line-height:1.4!important;margin:0 0 6px!important}
+body:has(.ss5-site-header) .figure .sub,body:has(.ss6-site-header) .figure .sub{font-size:13px!important;line-height:1.55!important;margin:0 0 10px!important;min-height:0!important;color:var(--els-muted,#455663)!important}
+body:has(.ss5-site-header) .figure .legend,body:has(.ss6-site-header) .figure .legend{font-size:13px!important;line-height:1.55!important;gap:7px 14px!important;margin:9px 0 0!important;min-height:0!important;color:var(--els-muted,#455663)!important}
+body:has(.ss5-site-header) .figure .axis-key,body:has(.ss6-site-header) .figure .axis-key{font-size:13px!important;line-height:1.55!important;padding:8px 10px!important;margin:10px 0 4px!important;overflow-wrap:anywhere}
+/* Supporting text inside diagrams remains compact; explanations in derivation stay full size. */
+body:has(.ss5-site-header) :is(.reading-panel,.derivation-panel) p,
+body:has(.ss6-site-header) :is(.reading-panel,.derivation-panel) p{font-size:16px!important;line-height:1.7!important}
+body:has(.ss5-site-header) :is(.reading-panel,.derivation-panel),
+body:has(.ss6-site-header) :is(.reading-panel,.derivation-panel){margin-top:18px!important}
+body:has(.ss5-site-header) .reading-grid,body:has(.ss6-site-header) .reading-grid{gap:12px!important}
+@media(max-width:1050px){
+ body:has(.ss5-site-header) .lab,body:has(.ss6-site-header) .experiment{gap:11px!important}
+ body:has(.ss5-site-header) .figure,body:has(.ss6-site-header) .figure{padding:11px!important}
+}
+@media(max-width:760px){
+ body:has(.ss5-site-header) .lab,body:has(.ss6-site-header) .experiment{grid-template-columns:1fr!important}
+ body:has(.ss5-site-header) .plots{grid-template-columns:1fr!important}
+ body:has(.ss5-site-header) .panel,body:has(.ss6-site-header) .experiment>.controls{position:static!important;top:auto!important}
+}
