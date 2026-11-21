@@ -33,7 +33,7 @@ function init(){
  const path=location.pathname;
  function sync(){
   const ch=Number((path.match(/chapter([1-8])\.html$/)||[])[1])||Number((location.hash.match(/^#chapter=(\d+)/)||[])[1])||0;
-  const onOverview=/index\\.html$|\\/$/.test(path);
+  const onOverview=/index\.html$|\/$/.test(path);
   const view=onOverview?(location.hash==='#map'?'map':'overview'):null;
   for(const link of links.querySelectorAll('a')){
    const n=Number(link.dataset.ssChapter||0);
