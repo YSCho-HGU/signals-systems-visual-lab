@@ -1,0 +1,37 @@
+name: Chapter 5 KaTeX and Guided Derivation QA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'chapter5.html'
+      - 'assets/ss-ch5-*.js'
+      - 'assets/ss-ch5-*.css'
+      - 'tests/ch5-prose-math-qa.mjs'
+      - 'tests/ch5-viewport-e2e.mjs'
+      - '.github/workflows/ch5-math-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  ch5-math:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - name: Verify all eight experiments and full derivations
+        run: node tests/ch5-prose-math-qa.mjs
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ch5-math-report
+          path: qa-ch5-math/
+          retention-days: 14
