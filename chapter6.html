@@ -356,7 +356,7 @@ function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
 
 <script src="./assets/els-language.js?v=1"></script>
 <script src="./assets/els-theme-v2.js?v=6"></script>
-<link rel="stylesheet" href="./assets/ss-trace-palette.css?v=2"><script src="./assets/ss-trace-palette.js?v=2"></script><script src="./assets/ss-sidebar-toggle.js?v=1" defer></script><link rel="stylesheet" href="./assets/els-typography-standard.css?v=1"><link rel="stylesheet" href="./assets/ss-common-header.css?v=1"><link rel="stylesheet" href="./assets/ss-readable-themes.css?v=1"><script src="./assets/ss-common-header.js?v=3" defer></script></head>
+<link rel="stylesheet" href="./assets/ss-trace-palette.css?v=3"><script src="./assets/ss-trace-palette.js?v=2"></script><script src="./assets/ss-sidebar-toggle.js?v=1" defer></script><link rel="stylesheet" href="./assets/els-typography-standard.css?v=1"><link rel="stylesheet" href="./assets/ss-common-header.css?v=1"><link rel="stylesheet" href="./assets/ss-readable-themes.css?v=1"><script src="./assets/ss-common-header.js?v=3" defer></script></head>
 <body><header class="ss6-site-header ss-common-header" aria-label="Engineering Learning Studio navigation">
 <a class="ss6-home ss-common-home" href="./index.html#overview">← Studio</a>
 <details class="els-ss-chapter-menu ss-common-menu"><summary class="ss6-site-title ss-common-title">Signals &amp; Systems · Chapter 6 · DTFT <span aria-hidden="true">⌄</span></summary><nav class="els-ss-chapter-links ss-common-links" aria-label="Choose Chapter"></nav></details>
@@ -429,7 +429,7 @@ function initCanvas(id){const cv=$(id);if(!cv)return null;const rect=cv.getBound
 function elsPlotColors(){return window.ssPlotColors?window.ssPlotColors():{background:'#ffffff',ink:'#1b2730',muted:'#455663',axis:'#344f62',grid:'#c6d2da',rocFill:'rgba(19,133,120,0.13)',rocLabel:'#14736d'};}
 function drawChart(id,opt){
  const z=initCanvas(id);if(!z)return;
- const {g,w,h}=z,m={l:67,r:17,t:22,b:47},plotTheme=elsPlotColors();
+ const {g,w,h}=z,m={l:77,r:19,t:25,b:56},plotTheme=elsPlotColors();
  const W=w-m.l-m.r,H=h-m.t-m.b;
  const xmin=opt.xmin??0,xmax=opt.xmax??1,ymin=opt.ymin??0,ymax=opt.ymax??1;
  const X=v=>m.l+(v-xmin)/(xmax-xmin)*W,Y=v=>m.t+(ymax-v)/(ymax-ymin)*H;
@@ -457,24 +457,24 @@ function drawChart(id,opt){
   g.setLineDash([]);
  }
  for(const v of opt.vlines||[]){if(v.x<xmin||v.x>xmax)continue;g.strokeStyle=ssTraceColor(v.color||C.coral);g.lineWidth=1.5;g.setLineDash([5,4]);g.beginPath();g.moveTo(X(v.x),m.t);g.lineTo(X(v.x),m.t+H);g.stroke();g.setLineDash([])}
- for(const p of opt.points||[]){if(!Number.isFinite(p.y)||p.x<xmin||p.x>xmax)continue;g.beginPath();g.fillStyle=ssTraceColor(p.color||C.coral);g.strokeStyle='#fff';g.lineWidth=1.5;g.arc(X(p.x),Y(p.y),p.radius||4.4,0,TAU);g.fill();g.stroke()}
+ for(const p of opt.points||[]){if(!Number.isFinite(p.y)||p.x<xmin||p.x>xmax)continue;g.beginPath();g.fillStyle=ssTraceColor(p.color||C.coral);g.strokeStyle=plotTheme.background;g.lineWidth=1.5;g.arc(X(p.x),Y(p.y),p.radius||4.4,0,TAU);g.fill();g.stroke()}
  // White center makes crossing at (0,0) recognizable, even when it is on the plot boundary.
  if(xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0){g.fillStyle=plotTheme.background;g.strokeStyle=plotTheme.axis;g.lineWidth=1.7;g.beginPath();g.arc(X(0),Y(0),4.8,0,TAU);g.fill();g.stroke()}
  g.restore();
  // Draw tick labels outside clipping, using the same niceStep/tickLabel algorithm as Ch5 Rev3.
  g.textBaseline='middle';
- for(let k=Math.ceil(ymin/yStep-1e-9),count=0;k<=Math.floor(ymax/yStep+1e-9)&&count<40;k++,count++){const v=k*yStep;g.font=(Math.abs(v)<1e-9?'bold ':'')+'11px system-ui';g.textAlign='right';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.fillText(tickLabel(v,yStep),m.l-9,Y(v))}
- for(let k=Math.ceil(xmin/xStep-1e-9),count=0;k<=Math.floor(xmax/xStep+1e-9)&&count<40;k++,count++){const v=k*xStep;g.font=(Math.abs(v)<1e-9?'bold ':'')+'11px system-ui';g.textAlign='center';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.fillText(tickLabel(v,xStep),X(v),h-m.b+16)}
- g.fillStyle=plotTheme.ink;g.font='11px system-ui';
- if(opt.xlabel){g.textAlign='center';g.fillText(opt.xlabel,m.l+W/2,h-12)}
- if(opt.ylabel){g.save();g.translate(16,m.t+H/2);g.rotate(-PI/2);g.textAlign='center';g.fillText(opt.ylabel,0,0);g.restore()}
+ for(let k=Math.ceil(ymin/yStep-1e-9),count=0;k<=Math.floor(ymax/yStep+1e-9)&&count<40;k++,count++){const v=k*yStep;g.font=(Math.abs(v)<1e-9?'bold ':'')+'15px system-ui';g.textAlign='right';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.fillText(tickLabel(v,yStep),m.l-9,Y(v))}
+ for(let k=Math.ceil(xmin/xStep-1e-9),count=0;k<=Math.floor(xmax/xStep+1e-9)&&count<40;k++,count++){const v=k*xStep;g.font=(Math.abs(v)<1e-9?'bold ':'')+'15px system-ui';g.textAlign='center';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.fillText(tickLabel(v,xStep),X(v),h-m.b+16)}
+ g.fillStyle=plotTheme.ink;g.font='bold 17px system-ui';
+ if(opt.xlabel){g.textAlign='center';g.fillText(opt.xlabel,m.l+W/2,h-16)}
+ if(opt.ylabel){g.save();g.translate(19,m.t+H/2);g.rotate(-PI/2);g.textAlign='center';g.fillText(opt.ylabel,0,0);g.restore()}
  ssAxisKey(id,opt.xlabel||'sample index n',opt.ylabel||'amplitude',xmin,xmax,ymin,ymax);
  ssHoverBind(id,{kind:'cart',w,h,pad:m,xmin,xmax,ymin,ymax,xlabel:opt.xlabel||'sample index n',ylabel:opt.ylabel||'amplitude',series:(opt.series||[]).map(s=>({label:s.label,color:ssTraceColor(s.color||C.teal),points:s.xy||[],discrete:s.type==='stem'}))});
 }
-function drawPhasors(id,M,w){const z=initCanvas(id);if(!z)return;const plotTheme=elsPlotColors();const{g,h,w:width}=z;const cx=width/2,cy=h/2,scale=Math.min((width-50)/2,(h-40)/2)*.85;g.fillStyle=plotTheme.background;g.fillRect(0,0,width,h);g.strokeStyle=plotTheme.grid;g.lineWidth=1;for(let j=-1;j<=1;j++){g.beginPath();g.moveTo(cx+j*scale,10);g.lineTo(cx+j*scale,h-10);g.stroke();g.beginPath();g.moveTo(10,cy+j*scale);g.lineTo(width-10,cy+j*scale);g.stroke()}g.strokeStyle='#afc4cf';g.beginPath();g.arc(cx,cy,scale,0,TAU);g.stroke();
+function drawPhasors(id,M,w){const z=initCanvas(id);if(!z)return;const plotTheme=elsPlotColors();const{g,h,w:width}=z;const cx=width/2,cy=h/2,scale=Math.min((width-50)/2,(h-40)/2)*.85;g.fillStyle=plotTheme.background;g.fillRect(0,0,width,h);g.strokeStyle=plotTheme.grid;g.lineWidth=1;for(let j=-1;j<=1;j++){g.beginPath();g.moveTo(cx+j*scale,10);g.lineTo(cx+j*scale,h-10);g.stroke();g.beginPath();g.moveTo(10,cy+j*scale);g.lineTo(width-10,cy+j*scale);g.stroke()}g.strokeStyle=plotTheme.grid;g.beginPath();g.arc(cx,cy,scale,0,TAU);g.stroke();
  g.strokeStyle=plotTheme.axis;g.lineWidth=2;g.beginPath();g.moveTo(10,cy);g.lineTo(width-10,cy);g.moveTo(cx,10);g.lineTo(cx,h-10);g.stroke();
- g.font='11px system-ui';g.fillStyle=plotTheme.muted;g.textAlign='left';g.fillText('Re',width-29,cy-11);g.fillText('Im',cx+10,13);
- g.font='10px system-ui';g.fillStyle=plotTheme.muted;g.textAlign='center';g.fillText('-1',cx-scale,cy+13);g.fillText('+1',cx+scale,cy+13);
+ g.font='bold 17px system-ui';g.fillStyle=plotTheme.muted;g.textAlign='left';g.fillText('Re',width-29,cy-11);g.fillText('Im',cx+10,13);
+ g.font='14px system-ui';g.fillStyle=plotTheme.muted;g.textAlign='center';g.fillText('-1',cx-scale,cy+13);g.fillText('+1',cx+scale,cy+13);
  g.textAlign='right';g.fillText('+1',cx-8,cy-scale);g.fillText('-1',cx-8,cy+scale);
  g.fillStyle=plotTheme.background;g.strokeStyle=plotTheme.axis;g.lineWidth=1.7;g.beginPath();g.arc(cx,cy,4.5,0,TAU);g.fill();g.stroke();g.fillStyle=plotTheme.axis;g.textAlign='left';g.font='bold 11px system-ui';g.fillText('0',cx+7,cy-10);
  let a=0,b=0;const arrow=(sx,sy,ex,ey,color,widthLine)=>{const xx=cx+sx*scale,yy=cy-sy*scale,XX=cx+ex*scale,YY=cy-ey*scale,ang=Math.atan2(YY-yy,XX-xx);g.strokeStyle=color;g.fillStyle=color;g.lineWidth=widthLine;g.beginPath();g.moveTo(xx,yy);g.lineTo(XX,YY);g.stroke();g.beginPath();g.moveTo(XX,YY);g.lineTo(XX-9*Math.cos(ang-.35),YY-9*Math.sin(ang-.35));g.lineTo(XX-9*Math.cos(ang+.35),YY-9*Math.sin(ang+.35));g.closePath();g.fill()};for(let k=0;k<M;k++){const re=Math.cos(-w*k)/M,im=Math.sin(-w*k)/M;arrow(a,b,a+re,b+im,C.teal,2);a+=re;b+=im}arrow(0,0,a,b,C.coral,3);g.fillStyle=C.coral;g.beginPath();g.arc(cx+a*scale,cy-b*scale,5,0,TAU);g.fill();g.fillStyle=C.ink;g.font='12px system-ui';g.fillText(`Sum = ${clean(Math.hypot(a,b),3)}`,15,h-13);ssAxisKey(id,'Re (complex plane)','Im (complex plane)',-1,1,-1,1);ssHoverBind(id,{kind:'complex',plane:'z',w:width,h,pad:{l:10,r:10,t:10,b:10},center:{cx,cy,scale},xmin:-1,xmax:1,ymin:-1,ymax:1,xlabel:'Re',ylabel:'Im',markers:[{x:a,y:b,type:'Sum vector'}]});}
