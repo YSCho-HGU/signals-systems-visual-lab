@@ -67,3 +67,40 @@ html[data-ss-sidebar="collapsed"] #app{grid-template-columns:58px minmax(0,1fr)!
 :root[data-els-theme] .plot-card :is(.axis-key,.legend){color:var(--els-ink)!important;border-color:var(--els-border)!important}
 :root[data-els-theme] .plot-card .axis-key{background:var(--els-surface-alt)!important}
 :root[data-els-theme] .plot-card .legend i{border:1px solid var(--els-border)}
+
+/* Graph legibility v3: labels are essential text, grid is a supporting guide.
+   Tick labels 15px; axis names 17px; explanatory legends 14px minimum. */
+:root[data-els-theme] .plot-card svg text {
+ font-family:system-ui,-apple-system,"Malgun Gothic",Arial,sans-serif;
+ font-size:15px!important;
+ font-weight:550;
+ fill:var(--els-ink)!important;
+}
+:root[data-els-theme] .plot-card svg text.ss-plot-axis-title {
+ font-size:17px!important;
+ font-weight:750;
+ fill:var(--els-ink)!important;
+}
+:root[data-els-theme] .plot-card svg line[stroke*="els-border"] {
+ stroke:var(--ss-plot-grid)!important;
+}
+:root[data-els-theme] .plot-card svg line[stroke*="els-muted"] {
+ stroke:var(--ss-plot-axis)!important;
+}
+:root[data-els-theme] .plot-card .axis-key{
+ font-size:14px!important;
+ line-height:1.55;
+}
+:root[data-els-theme] .plot-card .legend{
+ font-size:14px!important;
+ line-height:1.55;
+}
+:root[data-els-theme] .plot-card .legend span{
+ display:inline-flex;
+ align-items:center;
+ gap:5px;
+}
+:root[data-els-theme] .plot-card .legend i{
+ flex-shrink:0;
+ min-width:18px;
+}
