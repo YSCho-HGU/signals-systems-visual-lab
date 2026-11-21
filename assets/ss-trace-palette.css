@@ -104,3 +104,21 @@ html[data-ss-sidebar="collapsed"] #app{grid-template-columns:58px minmax(0,1fr)!
  flex-shrink:0;
  min-width:18px;
 }
+
+/* Graph legibility v4: SVG viewBox text scales down together with the plot.
+   Container queries compensate the actual chart-card width, not viewport size. */
+:root[data-els-theme] .plot-card {container-type:inline-size}
+@container (max-width:449px){
+ :root[data-els-theme] .plot-card svg text{font-size:29px!important}
+ :root[data-els-theme] .plot-card svg text.ss-plot-axis-title{font-size:34px!important}
+}
+@container (min-width:450px) and (max-width:599px){
+ :root[data-els-theme] .plot-card svg text{font-size:23px!important}
+ :root[data-els-theme] .plot-card svg text.ss-plot-axis-title{font-size:27px!important}
+}
+@container (min-width:600px){
+ :root[data-els-theme] .plot-card svg text{font-size:17px!important}
+ :root[data-els-theme] .plot-card svg text.ss-plot-axis-title{font-size:19px!important}
+}
+/* Axis metadata and legends should never shrink with the SVG viewport. */
+:root[data-els-theme] .plot-card :is(.axis-key,.legend){font-size:14px!important;overflow-wrap:anywhere}
