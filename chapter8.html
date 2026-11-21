@@ -384,17 +384,22 @@ const EXPERIMENTS=[
  const ylo=right?-.15:-4.5,yhi=right?1.25:.3;
  const signal=chart({xmin:-6,xmax:8,ymin:ylo,ymax:yhi,xlab:'n (samples)',ylab:'h[n]',title:right?'A · Right-sided: h[n]=0.8ⁿu[n]':'B · Left-sided: h[n]=−0.8ⁿu[−n−1]',stems:[{xs:ns,ys:hs,color:right?'#0d8290':'#c55d54',label:right?'Right-sided impulse response':'Left-sided impulse response'}]});
  const roc=zplot({poles:[[a,0]],zeros:[[0,0]],inner:right?a:0,outer:right?Infinity:a,title:right?'A · Exterior ROC |z|>0.8':'B · Interior ROC |z|<0.8'});
- const derivation=right?[
- String.raw`H(z)=\sum_{n=0}^{\infty}(0.8z^{-1})^n`,
- String.raw`H(z)=\frac{1}{1-0.8z^{-1}}`,
- String.raw`|0.8z^{-1}|<1\ \Longrightarrow\ |z|>0.8`
+ const steps=right?[
+ String.raw`H_R(z)=\sum_{n=0}^{\infty}h_R[n]z^{-n}=\sum_{n=0}^{\infty}(0.8z^{-1})^n`,
+ String.raw`H_R(z)=\frac{1}{1-0.8z^{-1}},\quad |0.8z^{-1}|<1`
  ]:[
- String.raw`H(z)=-\sum_{n=-\infty}^{-1}(0.8z^{-1})^n`,
- String.raw`H(z)=-\sum_{k=1}^{\infty}(z/0.8)^k=\frac{1}{1-0.8z^{-1}}`,
- String.raw`|z/0.8|<1\ \Longrightarrow\ |z|<0.8`
+ String.raw`H_L(z)=-\sum_{n=-\infty}^{-1}(0.8z^{-1})^n`,
+ String.raw`H_L(z)=-\sum_{k=1}^{\infty}(z/0.8)^k=\frac{1}{1-0.8z^{-1}},\quad |z/0.8|<1`
  ];
- return {plots:`<div class="ss8-selected-inverse"><div class="ss8-selected-case"><strong>${right?'A · Right-sided / causal':'B · Left-sided / anti-causal'}</strong><span>Time signal → its Z-transform → corresponding ROC</span></div><div class="ss8-selected-pair">${signal}${roc}</div></div>`,
- insight:`<div class="ss8-derive-preview"><strong>${right?'A · Right-sided derivation':'B · Left-sided derivation'}</strong><div>${derivation.map((v,i)=>`<div class="ss8-derivation-line"><span class="ss8-derive-index">${i+1}</span><span class="ss8-latex" data-latex="${v.replaceAll('&','&amp;').replaceAll('"','&quot;')}"></span></div>`).join('')}</div><p class="ss8-compare-result"><strong>Same rational expression:</strong> H(z)=1/(1−0.8z⁻¹). <strong>Different ROC:</strong> ${right?'|z|>0.8':'|z|<0.8'}.</p></div>`};
+ const math=steps.map((tex,i)=>`<div class="ss8-equation-row"><span class="ss8-equation-label">\${i===0?'Substitute':'Simplify'}</span><div class="ss8-math-source" data-latex="\${tex.replaceAll('&','&amp;').replaceAll('"','&quot;')}">\${right?(i===0?'H(z) = sum for n >= 0':'H(z) = 1 / (1 - 0.8 z^-1)'):(i===0?'H(z) = -sum for n <= -1':'H(z) = 1 / (1 - 0.8 z^-1)')}</div></div>`).join('');
+ const expression='<div class="ss8-equation-summary"><strong>Same algebraic result</strong><div class="ss8-math-source" data-latex="H(z)=\\frac{1}{1-0.8z^{-1}}">H(z) = 1 / (1 - 0.8 z^-1)</div></div>';
+ return {plots:`<div class="ss8-82-sequence">
+ <section class="ss8-82-stage"><h3><span>1</span> Time-domain impulse response h[n]</h3>\${signal}</section>
+ <section class="ss8-82-stage"><h3><span>2</span> Derive the Z-transform H(z)</h3><div class="ss8-82-equations">\${math}\${expression}</div></section>
+ <section class="ss8-82-stage"><h3><span>3</span> Find the Region of Convergence (ROC)</h3><div class="ss8-82-roc-formula ss8-math-source" data-latex="\${right?'\\mathrm{ROC}:\\ |z|>0.8':'\\mathrm{ROC}:\\ |z|<0.8'}">ROC: \${right?'|z| > 0.8':'|z| < 0.8'}</div>\${roc}</section>
+ </div>`,
+ insight:`<strong>Compare both selections:</strong> Right-sided and left-sided impulse responses have the same rational expression H(z), but converge in different regions. Their corresponding ROCs are \${right?'exterior |z|>0.8 (unit circle included)':'interior |z|<0.8 (unit circle excluded)'}.`};
+
 },steps:[
  ['Begin with a discrete-time signal','h[n]=0.8^nu[n] \quad \mathrm{or}\quad h[n]=-0.8^nu[-n-1]','Change에서 수열을 선택합니다. 오른쪽은 n≥0, 왼쪽은 n≤−1에만 존재합니다.'],
  ['Determine the sum limits','Right: sum over n≥0; Left: sum over n≤−1','선택한 h[n]을 H(z)=Σh[n]z⁻ⁿ에 대입하고 구간을 결정합니다.'],
