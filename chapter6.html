@@ -10,7 +10,7 @@
 /* Standalone labs follow OS appearance. Integrated parent may override without reloading graphs. */
 (function(){
  const query=window.matchMedia('(prefers-color-scheme: dark)');
- function systemTheme(){if(!window.__ssThemeFromParent)document.documentElement.dataset.theme=query.matches?'dark':'light';}
+ function systemTheme(){if(!window.__ssThemeFromParent&&!document.documentElement.dataset.elsTheme)document.documentElement.dataset.theme=query.matches?'dark':'light';}
  systemTheme();
  if(query.addEventListener)query.addEventListener('change',systemTheme);
  else if(query.addListener)query.addListener(systemTheme);
@@ -18,7 +18,7 @@
    if(event.source!==window.parent||!event.data||event.data.type!=='ss-set-theme')return;
    if(event.data.theme!=='dark'&&event.data.theme!=='light')return;
    window.__ssThemeFromParent=true;
-   document.documentElement.dataset.theme=event.data.theme;
+   if(!document.documentElement.dataset.elsTheme)document.documentElement.dataset.theme=event.data.theme;
  });
 })();
 </script>
@@ -368,6 +368,7 @@ function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
 <link rel="stylesheet" href="./assets/design-system.css?v=1">
 <link rel="stylesheet" href="./assets/ss-lab-theme.css?v=5">
 <link rel="stylesheet" href="./assets/els-theme-v2.css?v=5">
+<link rel="stylesheet" href="./assets/ss6-white-theme-fix.css?v=1">
 <script src="./assets/els-language.js?v=1"></script>
 <script src="./assets/els-theme-v2.js?v=4"></script>
 </head>
