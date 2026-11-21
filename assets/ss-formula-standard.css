@@ -132,3 +132,46 @@ html.ss7-native .ss7-stage-observe .ss7-prose-math{
   html.ss7-native .ss7-key-equation,
   html.ss7-native .ss7-stage-explain .step .math{font-size:18px!important}
 }
+
+/* Shared prose-math baseline policy (Chapters 5–8).
+ * Inline math participates in the text line box, unlike display derivations.
+ * Do not apply overflow, fixed display sizes or scroll containers to it. */
+:is(
+ html.ss5-native .ss5-prose-math,
+ html.ss5-native .ss5-inline-equation,
+ html.ss6-compact-workspace .ss6-inline-math,
+ html.ss7-native .ss7-prose-math,
+ html.ss8-native .ss8-prose-math
+){
+ display:inline!important;
+ vertical-align:baseline!important;
+ position:static!important;
+ margin:0 .045em!important;
+ padding:0!important;
+ border-radius:0;
+ max-width:none!important;
+ overflow:visible!important;
+ line-height:inherit!important;
+ font-size:inherit!important;
+ font-weight:inherit!important;
+ white-space:normal;
+ color:inherit;
+}
+:is(
+ html.ss5-native .ss5-prose-math,
+ html.ss5-native .ss5-inline-equation,
+ html.ss6-compact-workspace .ss6-inline-math,
+ html.ss7-native .ss7-prose-math,
+ html.ss8-native .ss8-prose-math
+) > .katex{
+ display:inline-block;
+ vertical-align:baseline;
+ font-size:1em!important;
+ line-height:1!important;
+ font-weight:normal!important;
+ white-space:nowrap;
+ color:inherit;
+}
+html.ss8-native :is(#intro,#insight,#reading,#check-q,#check-a,#ss8-predict-question,.step p) .ss8-prose-math .katex{
+ font-size:1em!important;
+}
