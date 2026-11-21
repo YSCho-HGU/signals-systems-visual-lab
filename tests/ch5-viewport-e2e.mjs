@@ -80,6 +80,13 @@ try{
      return {count,reading:reading.slice(0,80),caption:caption.slice(0,80)};
    });
    check(inline.count>0,prefix+"-"+lab+"-inline-body-math",inline);
+   const readingMath=await page.evaluate(()=>({
+     authored:document.querySelectorAll(".reading-panel [data-els-math-inline]").length,
+     katex:document.querySelectorAll(".reading-panel [data-els-math-inline][data-math-rendered='katex']").length,
+     failed:document.querySelectorAll(".reading-panel [data-math-error]").length
+   }));
+   check(readingMath.authored>0&&readingMath.authored===readingMath.katex&&readingMath.failed===0,prefix+"-"+lab+"-explicit-reading-katex",readingMath);
+
    const quizMath=await page.evaluate(()=>({
      count:document.querySelectorAll(".quiz .ss5-explicit-math .katex").length,
      fallback:document.querySelectorAll(".quiz .ss5-explicit-math:not(:has(.katex))").length,
