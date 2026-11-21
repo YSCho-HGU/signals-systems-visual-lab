@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-21T06:43:03.338Z",
-  "sourceSha": "cd43fc78eea4ac5d0bf351a5f8c286ce6f2628ac",
-  "runId": "44876575966",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44876575966",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/cd43fc78eea4ac5d0bf351a5f8c286ce6f2628ac",
+  "generatedAt": "2026-11-21T06:47:54.152Z",
+  "sourceSha": "b48f53895da88596b738830882fb92330f8a5d42",
+  "runId": "44877185236",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44877185236",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/b48f53895da88596b738830882fb92330f8a5d42",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -39,37 +39,37 @@
     {
       "id": "G2b",
       "label": "Native Chapter 5 and 6 five-palette Chromium/Edge regression",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G3",
       "label": "Theme and language persistence",
-      "status": "PASS",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G4",
       "label": "Learning aids and sonification",
-      "status": "PASS",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G5",
       "label": "Storage and 62-lab regression",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G6",
       "label": "248-screenshot visual and accessibility smoke audit",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G7",
       "label": "Evidence postprocessing",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     }
   ],
