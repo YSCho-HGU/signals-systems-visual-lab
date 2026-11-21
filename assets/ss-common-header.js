@@ -14,7 +14,7 @@ function buildLinks(nav){
  CHAPTERS.forEach((name,i)=>{
   const number=i+1;
   const link=document.createElement('a');
-  link.href='./chapter'+number+'.html';
+  link.href='./chapter'+number+'.html?v=20261121e';
   link.dataset.ssChapter=String(number);
   link.textContent='Chapter '+number+' · '+name;
   fragment.appendChild(link);
