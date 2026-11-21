@@ -173,7 +173,7 @@ let busy=false;
 function schedule(){if(busy)return;busy=true;queueMicrotask(()=>{busy=false;try{chapter===1?content1():content234();refreshPredict(document.querySelector('.ss-found-four-step'));typeset();enhanceGuidedMath();setNewTitle()}catch(e){console.warn('Foundation standard enhancement',e)}})}
 function init(){
  // The native experiment scripts still own every simulation and state change.
- const root=document.querySelector(chapter===1?'main':'#content');if(!root)return;
+ const root=document.querySelector(chapter===1?'main':'#app');if(!root)return;
  new MutationObserver(mutations=>{if(mutations.some(m=>m.type==='childList'&&[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches?.('.experiment,.grid,.heading,.formula')||n.querySelector?.('.experiment,.grid')))))schedule()}).observe(root,{childList:true,subtree:true});
  const nav=document.querySelector(chapter===1?'#nav':'[data-nav]')?.closest('nav')||document.querySelector('nav');
  nav?.addEventListener('click',()=>setTimeout(schedule,60));
