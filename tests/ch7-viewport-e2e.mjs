@@ -64,6 +64,22 @@ try{
       await page.locator('#insight .ss7-prose-math .katex').count()>0);
     const equationCount=await page.locator('#step-content .step .math .katex').count();
     check(width+'/'+theme+'/lesson'+index+' guided derivation typeset',equationCount===1,equationCount);
+    // Exercise every derivation, not just the first one, in each of the 7 labs.
+    for(let step=2;step<=4;step++){
+      await page.locator('#next').click();
+      await page.waitForFunction(n=>document.querySelector('#step-num')?.textContent?.includes('Step '+n+' /')&&document.querySelectorAll('#step-content .step .math .katex').length===1,step,{timeout:9000});
+      const rendered=await page.locator('#step-content .step .math .katex').count();
+      check(width+'/'+theme+'/lesson'+index+' step'+step+' TeX output',rendered===1,rendered);
+    }
+    await page.locator('#all').click();
+    await page.waitForFunction(()=>document.querySelectorAll('#step-content .step .math .katex').length===4,{timeout:9000});
+    check(width+'/'+theme+'/lesson'+index+' all 4 derivations',
+      await page.locator('#step-content .step .math .katex').count()===4);
+    check(width+'/'+theme+'/lesson'+index+' complete prose math in live insight',
+      await page.locator('#insight .ss7-prose-math .katex').count()>0);
+    check(width+'/'+theme+'/lesson'+index+' KaTeX/inline parser no failures',
+      await page.evaluate(()=>window.__ss7ProseMath?.failed===0&&document.querySelectorAll('.katex-error,.ss7-prose-math-error').length===0));
+
     check(width+'/'+theme+'/lesson'+index+' no KaTeX parse errors',
       await page.evaluate(()=>!document.querySelector('.katex-error')&&window.__ss7ProseMath?.failed===0));
     const mathSize=await page.locator('#step-content .step .math').first().evaluate(el=>parseFloat(getComputedStyle(el).fontSize));
