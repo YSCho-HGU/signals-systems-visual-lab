@@ -36,13 +36,14 @@
   const dark=['neutral-dark','warm-dark','navy-dark'].includes(theme);
   const token=(name,fallback)=>style.getPropertyValue(name).trim()||fallback;
   return {
-   background:token('--els-surface',dark?'#1c1c1c':'#ffffff'),
+   background:token('--ss-plot-background',token('--els-surface',dark?'#1c1c1c':'#ffffff')),
    ink:token('--els-ink',dark?'#f0f0ed':'#1b2730'),
    muted:token('--els-muted',dark?'#c1c5c1':'#455663'),
    axis:token('--ss-plot-axis',dark?'#d0dbd7':'#344f62'),
    grid:token('--ss-plot-grid',dark?'#56615d':'#c6d2da'),
    rocFill:dark?'rgba(89,185,157,0.18)':'rgba(19,133,120,0.13)',
-   rocLabel:dark?'#a8e3d5':'#14736d'
+   rocLabel:dark?'#a8e3d5':'#14736d',
+   label:token('--ss-plot-label',token('--els-muted',dark?'#c1c5c1':'#455663'))
   };
  };
  window.ssTraceRole=role;
