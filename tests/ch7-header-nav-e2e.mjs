@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* Chapter 7 direct-navigation and Chapter 5 header parity regression. */
+/* Chapter 7 restored working-state regression: load and seven legacy lab controls. */
 import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -16,15 +16,15 @@ try{
   page.on('pageerror',e=>errors.push(String(e)));
   const size=String(viewport.width);
   await page.goto(base+'#chapter=7',{waitUntil:'commit',timeout:45000});
-  await page.waitForFunction(()=>document.querySelector('#lab-frame')?.contentWindow?.SSChapter7?.experimentCount===7,null,{timeout:30000});
+  await page.waitForFunction(()=>document.querySelector('#lab-frame')?.contentDocument?.querySelectorAll('#nav button').length===7,null,{timeout:30000});
   const f=page.frameLocator('#lab-frame');
   check(await page.locator('.els-ss-unified-header').count()===1,size+'-ch5-style-header');
   check(await page.locator('#els-ss-chapter-title').innerText().then(s=>s.includes('Chapter 7')&&s.includes('Sampling')),size+'-chapter-title');
   check(await page.locator('#ss-language-select').count()===1&&await page.locator('#theme-select').count()===1,size+'-single-language-theme');
   check(await page.locator('.els-ss-chapter-links a').count()===8,size+'-chapter-titles');
   check(await page.locator('#ss-unified-nav').count()===1,size+'-outer-toc');
-  check(await f.locator('#nav').count()===0,size+'-inner-toc-deleted');
-  check(await f.locator('.ss-vertical-sidebar').count()===0,size+'-no-duplicate-sidebar');
+  check(await f.locator('#nav button').count()===7,size+'-seven-internal-lab-buttons');
+  check(await f.locator('.ss-vertical-sidebar').count()===1,size+'-legacy-sidebar-present');
   check(await f.locator('.ss7-stage-predict').count()===1,size+'-four-step-layout');
   const lang=page.locator('#ss-language-select');
   await lang.selectOption('en');
@@ -40,7 +40,7 @@ try{
   for(let n=1;n<=7;n++){
    const button=page.locator('#ss-unified-nav .ss-unified-link').nth(n-1);
    await button.click();
-   await page.waitForFunction(v=>document.querySelector('#lab-frame')?.contentWindow?.SSChapter7?.currentExperiment===v,n);
+   await page.waitForFunction(v=>document.querySelector('#lab-frame')?.contentDocument?.querySelector('#title')?.textContent?.startsWith('7.'+v),n);
    const snapshot=await page.locator('#lab-frame').evaluate(iframe=>{
     const doc=iframe.contentDocument;
     return {plots:doc.querySelectorAll('#plots svg').length,title:doc.querySelector('#title')?.textContent||'',sliders:doc.querySelectorAll('#controls input[type=range]').length};
@@ -59,7 +59,7 @@ try{
    }
   }
   check(await page.locator('#ss-progress-panel').count()===1,size+'-single-progress');
-  check(await page.locator('#ss-unified-nav #ss-progress-panel').count()===1,size+'-progress-in-outer-toc');
+  check(await page.locator('#lab-frame').evaluate(f=>Boolean(f.contentDocument?.querySelector('#ss-progress-panel'))),size+'-progress-in-restored-sidebar');
   const toggled=await page.locator('#ss-progress-panel button').isEnabled();
   check(toggled,size+'-progress-enabled');
   const headerGeom=await page.locator('.els-ss-unified-header').evaluate(h=>({height:h.getBoundingClientRect().height,overflow:document.documentElement.scrollWidth-innerWidth}));
