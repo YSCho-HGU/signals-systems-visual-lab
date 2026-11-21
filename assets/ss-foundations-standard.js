@@ -148,6 +148,7 @@ function content234(){
  group.append(pred,pair,explain);experiment.replaceWith(group);
  refreshPredict(group);typeset();
  const note=document.createElement('p');note.className='ss-found-bridge';note.textContent=bridgeNotes[chapter];explain.append(note);
+ const link=document.createElement('a');link.className='ss-bridge-link';link.href='./chapter'+(chapter+1)+'.html';link.textContent='Continue to Chapter '+(chapter+1)+' · '+(['','LTI Systems','Fourier Series','CTFT','Laplace Transform'][chapter]);explain.append(link);
 }
 function content1(){
  const grid=document.querySelector('main .grid');if(!grid||grid.closest('.ss-found-four-step'))return;
@@ -163,6 +164,7 @@ function content1(){
  pair.append(change,observe);
  const explain=document.createElement('section');explain.className='ss-found-explain';explain.append(stageHeading(4,'Explain · Guided learning and check'),right);
  const note=document.createElement('p');note.className='ss-found-bridge';note.textContent=bridgeNotes[chapter];explain.append(note);
+ const link=document.createElement('a');link.className='ss-bridge-link';link.href='./chapter'+(chapter+1)+'.html';link.textContent='Continue to Chapter '+(chapter+1)+' · '+(['','LTI Systems','Fourier Series','CTFT','Laplace Transform'][chapter]);explain.append(link);
  block.append(pre,pair,explain);grid.replaceWith(block);refreshPredict(block);typeset();
 }
 let busy=false;
