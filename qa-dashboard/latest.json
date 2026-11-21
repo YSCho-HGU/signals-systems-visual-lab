@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-21T07:25:40.970Z",
-  "sourceSha": "c29acbbec9a1cf5b1c1b6bcc12940e3dd292f8f2",
-  "runId": "44880147648",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44880147648",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/c29acbbec9a1cf5b1c1b6bcc12940e3dd292f8f2",
+  "generatedAt": "2026-11-21T07:25:59.554Z",
+  "sourceSha": "2eb556207e030fd2ff8bc5b041b137de4eb5ee64",
+  "runId": "44880192480",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44880192480",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/2eb556207e030fd2ff8bc5b041b137de4eb5ee64",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -21,19 +21,19 @@
     {
       "id": "G0",
       "label": "Catalog and source integrity",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G1",
       "label": "Sampling and transform mathematics",
-      "status": "PASS",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G2",
       "label": "Native Chapter 6 browser journey",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
