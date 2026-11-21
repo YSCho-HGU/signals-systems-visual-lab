@@ -1,0 +1,49 @@
+/* Engineering Learning Studio typography standard, 2026-11.
+ * Reference: C Programming Chapter 17 File I/O Learning Journey.
+ * Load LAST, after chapter-specific and theme styles.
+ * Never scale code/graph coordinates, accessibility zoom or mathematics glyphs.
+ */
+:root {
+ --els-body-size:16px;
+ --els-body-leading:1.7;
+ --els-body-font:system-ui,-apple-system,"Segoe UI","Malgun Gothic",Arial,sans-serif;
+ --els-caption-size:13px;
+ --els-caption-leading:1.55;
+ --els-axis-size:12px;
+ --els-subheading-size:19px;
+}
+html{font-size:16px}
+body{font-family:var(--els-body-font);font-size:var(--els-body-size);line-height:var(--els-body-leading)}
+/* Narrative text: applicable across C course pages and all Signals & Systems labs.
+   Scope to semantic prose, preserving special-purpose widgets and controls. */
+:is(main,.main,.stage,.ss-vertical-main,.content,.cp-content,.lab-view,.ss-home-wrap)
+:is(p,.desc,.description,.intro,.subtitle,.explain,.explanation,.insight,.interpretation,.learning-note,.concept-text,.guide-intro,.reading-note p,.reading .note p,.step p,.steptext,.step-text,.guide-step p,.deriv-step p,.derivation-step p,.theory,.lesson-body,.concept-body,.question-context,.ss5-flow-intro):not(.plot-caption):not(.axis-key):not(.axis-note):not(.plot-instruction):not(.legend):not(.hint):not(.metric):not(.metadata):not(.small):not(.eyebrow) {
+ font-size:var(--els-body-size)!important;
+ line-height:var(--els-body-leading)!important;
+}
+:is(main,.main,.stage,.ss-vertical-main,.content,.cp-content)
+:is(ul,ol) {line-height:var(--els-body-leading)}
+:is(main,.main,.stage,.ss-vertical-main,.content,.cp-content)
+:is(li):not(.legend-item):not(.nav-item){font-size:var(--els-body-size);line-height:var(--els-body-leading)}
+/* Section headings follow the reference course hierarchy. */
+:is(main,.main,.stage,.ss-vertical-main,.content,.cp-content)
+:is(h3,.section-title,.guide-head h3,.reading-panel h3,.derivation-panel h3) {
+ font-size:var(--els-subheading-size);
+ line-height:1.4;
+}
+/* Compact labels located below or beside plots, never full learning explanations. */
+:is(.plotbox,.plot-card,.figure,.chart-card,.graph-card,.ss-graph,.tm-demo-chart,.reading-panel)
+:is(.plot-caption,.sub,.axis-key,.axis-note,.axis-label,.axis-description,.plot-instruction,.figure-caption,.graph-note,.legend,.legend-item,.axis-legend) {
+ font-size:var(--els-caption-size)!important;
+ line-height:var(--els-caption-leading)!important;
+}
+/* Graph annotation/key remains subordinate, but legible. */
+:is(.plotbox,.plot-card,.figure,.chart-card,.graph-card,.ss-graph)
+:is(.legend,.legend-item,.axis-key,.axis-note) {color:var(--els-muted,inherit)}
+/* Diagram and plot text: CSS can style SVG text; canvas tick labels need their own renderer. */
+svg[role="img"] text{font-family:var(--els-body-font)}
+/* Don't use 16px prose rule on keyboard controls, navigation, equations or code. */
+:is(pre,code,kbd,samp,.code,.code-lines,.code-row,.katex,.MathJax,.math){line-height:normal}
+@media(max-width:700px){
+ :root{--els-body-size:16px;--els-caption-size:13px}
+}
