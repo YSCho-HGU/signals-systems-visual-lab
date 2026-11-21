@@ -1,4 +1,4 @@
-/* Signals & Systems shared UI design tokens and components — Chapters 5, 6, 7.
+/* Signals & Systems shared UI design tokens and components — Chapters 5, 6, 7, 8.
  * Chapter 5 is the visual reference. Chapter-specific simulations, layout
  * exceptions, and graph palettes remain in their own modules.
  * Keep this stylesheet AFTER native chapter CSS on every standalone page.
@@ -12,10 +12,11 @@
   --ss-ui-content-pad-x:clamp(12px,1.8vw,27px);
   --ss-ui-focus:var(--els-focus,#a56a24);
 }
-/* One header surface, dimensions and text scale across all three chapters. */
+/* One header surface, dimensions and text scale across all four chapters. */
 :is(html.ss5-native .ss5-site-header,
     html.ss6-compact-workspace .ss6-site-header,
-    html.ss7-native .ss7-site-header){
+    html.ss7-native .ss7-site-header,
+    html.ss8-native .ss8-site-header){
   box-sizing:border-box!important;
   display:flex!important;
   align-items:center!important;
@@ -33,7 +34,8 @@
 /* Shared navigation tabs: do not alter chapter-specific click handlers. */
 :is(html.ss5-native .tabs button,
     html.ss6-compact-workspace .sidebar .nav button,
-    html.ss7-native #ss7-lesson-nav button){
+    html.ss7-native #ss7-lesson-nav button,
+    html.ss8-native #nav button){
   display:flex!important;
   align-items:center!important;
   gap:8px!important;
@@ -50,13 +52,15 @@
 }
 :is(html.ss5-native .tabs button,
     html.ss6-compact-workspace .sidebar .nav button,
-    html.ss7-native #ss7-lesson-nav button):hover{
+    html.ss7-native #ss7-lesson-nav button,
+    html.ss8-native #nav button):hover{
   background:var(--els-surface-alt,#ebf0f1)!important;
   border-color:var(--els-border,#adbcbc)!important;
 }
 :is(html.ss5-native .tabs button.on,
     html.ss6-compact-workspace .sidebar .nav button.active,
-    html.ss7-native #ss7-lesson-nav button[aria-current="true"]){
+    html.ss7-native #ss7-lesson-nav button[aria-current="true"],
+    html.ss8-native #nav button[aria-current="true"]){
   background:var(--els-surface-alt,#e8f0f0)!important;
   border-color:var(--els-link,var(--els-accent,#157487))!important;
   box-shadow:inset 3px 0 var(--els-link,var(--els-accent,#157487))!important;
@@ -65,7 +69,8 @@
 /* Navigation number badges, independent from learning step numbers. */
 :is(html.ss5-native .tabs .num,
     html.ss6-compact-workspace .sidebar .nav .num,
-    html.ss7-native .ss7-lab-number){
+    html.ss7-native .ss7-lab-number,
+    html.ss8-native .ss8-lab-number){
   display:inline-grid!important;
   place-items:center!important;
   flex:none;
@@ -80,7 +85,8 @@
 }
 :is(html.ss5-native .ss5-progress button,
     html.ss6-compact-workspace .ss6-progress button,
-    html.ss7-native .ss7-progress button){
+    html.ss7-native .ss7-progress button,
+    html.ss8-native .ss8-progress button){
   min-height:34px;
   border:1px solid var(--els-border,#aabcbc)!important;
   border-radius:8px!important;
@@ -91,13 +97,15 @@
 }
 :is(html.ss5-native .ss5-progress button,
     html.ss6-compact-workspace .ss6-progress button,
-    html.ss7-native .ss7-progress button):hover{
+    html.ss7-native .ss7-progress button,
+    html.ss8-native .ss8-progress button):hover{
   border-color:var(--els-link,var(--els-accent,#157487))!important;
 }
 /* Shared sidebar collapse control. Keep existing collapse state and storage key. */
 :is(html.ss5-native .nav .ss-side-toggle,
     html.ss6-compact-workspace .sidebar .ss-side-toggle,
-    html.ss7-native .ss7-sidebar .ss-side-toggle){
+    html.ss7-native .ss7-sidebar .ss-side-toggle,
+    html.ss8-native .ss8-sidebar .ss-side-toggle){
   display:flex;
   align-items:center;
   justify-content:flex-start;
@@ -117,14 +125,16 @@
 /* Unified card corners and elevation; existing panel fills remain untouched. */
 :is(html.ss5-native #page :is(.panel,.figure,.ss5-predict,.ss5-observe,.ss5-check,.deriv-step,.reading-note),
     html.ss6-compact-workspace :is(.ss6-step-card,.figure,.ss6-sequence-overview,.ss6-guide-details,.reading-note,.deriv-step),
-    html.ss7-native :is(.ss7-card,.plot-card,.step,.reading .note,.ss7-key-formula)){
+    html.ss7-native :is(.ss7-card,.plot-card,.step,.reading .note,.ss7-key-formula),
+    html.ss8-native :is(.ss8-card,.plot-card,.step,.reading .note,.ss8-key-formula)){
   border-radius:var(--ss-ui-card-radius)!important;
   box-shadow:none!important;
 }
 /* One legible teaching-step hierarchy; step labels still use local semantics. */
 :is(html.ss5-native .ss5-flow-label,
     html.ss6-compact-workspace .ss6-step-card h3,
-    html.ss7-native .ss7-stage-head){
+    html.ss7-native .ss7-stage-head,
+    html.ss8-native .ss8-stage-head){
   font-size:18px!important;
   line-height:1.45!important;
   font-weight:800!important;
@@ -132,13 +142,14 @@
 }
 /* Shared theme mapping for chapter-numbered steps.
  * These values match ss-four-step-standard.css without importing its unrelated layouts. */
-html.ss7-native[data-els-theme="neutral-dark"]{--ss-step-foreground:#d6f5e7;--ss-step-background:#315448;--ss-step-stroke:#a0d8c1}
-html.ss7-native[data-els-theme="warm-dark"]{--ss-step-foreground:#d7f5df;--ss-step-background:#385647;--ss-step-stroke:#a6d2b8}
-html.ss7-native[data-els-theme="navy-dark"]{--ss-step-foreground:#ddf2ff;--ss-step-background:#2d5270;--ss-step-stroke:#a9daff}
-html.ss7-native[data-els-theme="warm-neutral"]{--ss-step-foreground:#214c39;--ss-step-background:#e2ede4;--ss-step-stroke:#46765d}
-html.ss7-native[data-els-theme="white-clean"]{--ss-step-foreground:#194d65;--ss-step-background:#eaf4f9;--ss-step-stroke:#367793}
+html:is(.ss7-native,.ss8-native)[data-els-theme="neutral-dark"]{--ss-step-foreground:#d6f5e7;--ss-step-background:#315448;--ss-step-stroke:#a0d8c1}
+html:is(.ss7-native,.ss8-native)[data-els-theme="warm-dark"]{--ss-step-foreground:#d7f5df;--ss-step-background:#385647;--ss-step-stroke:#a6d2b8}
+html:is(.ss7-native,.ss8-native)[data-els-theme="navy-dark"]{--ss-step-foreground:#ddf2ff;--ss-step-background:#2d5270;--ss-step-stroke:#a9daff}
+html:is(.ss7-native,.ss8-native)[data-els-theme="warm-neutral"]{--ss-step-foreground:#214c39;--ss-step-background:#e2ede4;--ss-step-stroke:#46765d}
+html:is(.ss7-native,.ss8-native)[data-els-theme="white-clean"]{--ss-step-foreground:#194d65;--ss-step-background:#eaf4f9;--ss-step-stroke:#367793}
 /* Chapter 7 now inherits the same numbered-step palette used in Ch5/Ch6. */
-html.ss7-native .ss7-stage-index{
+html.ss7-native .ss7-stage-index,
+html.ss8-native .ss8-stage-index{
   display:inline-grid!important;
   place-items:center!important;
   flex:0 0 var(--ss-step-size,31px)!important;
@@ -153,7 +164,7 @@ html.ss7-native .ss7-stage-index{
   text-shadow:none!important;
   opacity:1!important;
 }
-:is(html.ss5-native,html.ss6-compact-workspace,html.ss7-native)
+:is(html.ss5-native,html.ss6-compact-workspace,html.ss7-native,html.ss8-native)
  :is(a,button,input,select,textarea,summary):focus-visible{
   outline:3px solid var(--ss-ui-focus)!important;
   outline-offset:2px!important;
