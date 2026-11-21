@@ -101,3 +101,24 @@ html.ss8-native #plots>.ss8-roc-pair{grid-column:1/-1;display:grid;grid-template
 html.ss8-native #plots>.ss8-roc-pair>.plot-card{min-width:0}
 html.ss8-native #plots:has(.ss8-roc-pair)>.plot-card{grid-column:1/-1}
 @media(max-width:780px){html.ss8-native #plots>.ss8-roc-pair{grid-template-columns:1fr}}
+
+/* Lesson 8.2: one vertically paired time/ROC study per case.
+   Fixed pole a=0.8; selection only highlights, never hides a comparison. */
+html.ss8-native #plots:has(.ss8-case-comparison){display:block!important}
+html.ss8-native .ss8-case-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start;min-width:0}
+html.ss8-native .ss8-case{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;min-width:0;border:2px solid var(--els-border);border-radius:12px;padding:10px;background:var(--els-surface);transition:border-color .15s ease}
+html.ss8-native .ss8-case-right{--ss8-case-accent:var(--ss-trace-teal)}
+html.ss8-native .ss8-case-left{--ss8-case-accent:var(--ss-trace-coral)}
+html.ss8-native .ss8-case-heading{display:grid;gap:3px;padding:7px 9px;border-left:4px solid var(--ss8-case-accent);background:var(--els-surface-alt);color:var(--els-ink);border-radius:6px}
+html.ss8-native .ss8-case-heading strong{font-size:16px;line-height:1.4}
+html.ss8-native .ss8-case-heading span{font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+html.ss8-native .ss8-case .plot-card{margin:0;min-width:0}
+html.ss8-native .ss8-case-focused{border-color:var(--ss8-case-accent)}
+html.ss8-native .ss8-case-focus-right .ss8-case-left,
+html.ss8-native .ss8-case-focus-left .ss8-case-right{opacity:.78}
+html.ss8-native .ss8-comparison-context{display:grid;gap:5px;padding:12px;border:1px solid var(--els-border);border-radius:10px;background:var(--els-surface-alt);color:var(--els-ink)}
+html.ss8-native .ss8-comparison-context strong{font-size:15px}
+html.ss8-native .ss8-comparison-context span{font-weight:700;font-size:15px}
+html.ss8-native .ss8-comparison-context small{font-size:13px;line-height:1.6}
+@media(max-width:1230px){html.ss8-native .ss8-case-comparison{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html.ss8-native .ss8-case{transition:none}}
