@@ -1,0 +1,59 @@
+/* SS Chapter 7 learning standard: follows Ch5/6. Existing simulation math unchanged. */
+html.ss7-standard{scroll-behavior:smooth}
+html.ss7-standard body{font-size:16px;line-height:1.75;background:var(--els-page,var(--bg));color:var(--els-ink,var(--ink))}
+html.ss7-standard header{padding:13px max(15px,calc((100% - 1420px)/2));background:var(--els-surface,#fff);color:var(--els-ink,#242424);border-bottom:1px solid var(--els-border,#ccc)}
+html.ss7-standard header .eyebrow{color:var(--els-muted,#526a7c)}
+html.ss7-standard header h1{font-size:clamp(21px,2.2vw,28px);margin:4px 0}
+html.ss7-standard header p{font-size:14px;color:var(--els-muted,#526a7c)}
+html.ss7-standard main{max-width:none;padding:14px clamp(12px,2vw,30px)}
+html.ss7-standard main>nav{padding:7px 0 13px;gap:7px}
+html.ss7-standard main>nav button{font-size:13px;max-width:none;flex:0 0 auto;padding:8px 12px}
+html.ss7-standard .experiment{display:block;min-width:0}
+html.ss7-standard .ss7-standard-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:13px}
+html.ss7-standard .ss7-card{background:var(--els-surface,#fff);color:var(--els-ink,#222);border:1px solid var(--els-border,#ccc);border-radius:12px;padding:17px;min-width:0}
+html.ss7-standard .ss7-chapter-lead{padding:14px 18px}
+html.ss7-standard #title{font-size:clamp(21px,2vw,27px);margin:1px 0 7px}
+html.ss7-standard .intro,html.ss7-standard .ss7-card p{font-size:16px;line-height:1.78;color:var(--els-ink,#222)}
+html.ss7-standard .ss7-stage-head{display:flex;align-items:center;gap:10px;margin-bottom:11px;font-size:16px;font-weight:750}
+html.ss7-standard .ss7-stage-index{display:inline-grid;place-items:center;flex:0 0 30px;height:30px;min-width:30px;border-radius:7px;background:var(--els-accent,#0d8290);color:#fff;font-size:15px;font-weight:800}
+html.ss7-standard .ss7-stage-head small{font-weight:550;color:var(--els-muted,#526a7c);font-size:13px}
+html.ss7-standard .ss7-predict-prompt{font-size:16px;line-height:1.7;margin:0;color:var(--els-ink,#222)}
+html.ss7-standard .ss7-stage-pair{display:grid;grid-template-columns:minmax(260px,.38fr) minmax(0,.62fr);gap:13px;align-items:start}
+html.ss7-standard .ss7-stage-change,html.ss7-standard .ss7-stage-observe{min-width:0}
+html.ss7-standard .controls{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin:0}
+html.ss7-standard .control{display:grid;grid-template-columns:1fr;gap:7px;min-width:0;flex:auto;padding:12px;background:var(--els-page,#f7f7f7);border-color:var(--els-border,#ccc)}
+html.ss7-standard .control label{font-size:14px;min-width:0;line-height:1.4}
+html.ss7-standard .control input[type=range]{width:100%;min-width:0}
+html.ss7-standard .control output{font-size:15px;color:var(--els-ink,#222)}
+html.ss7-standard .plot-grid{gap:12px}
+html.ss7-standard .plot-card{margin-top:0;background:var(--els-surface,#fff);border-color:var(--els-border,#ccc)}
+html.ss7-standard .plot-card .plot-title{font-size:14px;line-height:1.5;background:var(--els-page,#f5f5f5);color:var(--els-ink,#222);border-color:var(--els-border,#ccc)}
+html.ss7-standard .plot-card svg{background:#fff!important}
+html.ss7-standard .plot-card svg>rect:first-child{fill:#fff!important}
+html.ss7-standard .plot-card svg text{fill:#29465c!important}
+html.ss7-standard .legend,.ss7-standard .axis-key{font-size:13px;line-height:1.6}
+html.ss7-standard .legend{color:var(--els-ink,#222)}
+html.ss7-standard .axis-key{background:var(--els-page,#f5f5f5);color:var(--els-ink,#222);border-color:var(--els-border,#ccc)}
+html.ss7-standard .insight{font-size:15px;line-height:1.8;background:var(--els-page,#f5f5f5);color:var(--els-ink,#222);border:1px solid var(--els-border,#ccc);border-left:4px solid var(--els-accent,#0d8290)}
+html.ss7-standard .insight strong{color:var(--els-ink,#222)}
+html.ss7-standard .hint{font-size:13px;line-height:1.65;color:var(--els-muted,#526a7c)}
+html.ss7-standard .ss7-stage-explain{padding:18px}
+html.ss7-standard .ss7-explain-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,.42fr);gap:18px}
+html.ss7-standard .ss7-derivation{min-width:0}
+html.ss7-standard .ss7-interpret{min-width:0}
+html.ss7-standard .deriv-top h3,.ss7-standard .reading h3{font-size:18px}
+html.ss7-standard .step{background:var(--els-page,#f6f6f6);border-color:var(--els-border,#ccc)}
+html.ss7-standard .step strong{font-size:16px}
+html.ss7-standard .step p,.ss7-standard .reading .note p,.ss7-standard .check{font-size:15px;line-height:1.75;color:var(--els-ink,#222)}
+html.ss7-standard .step .math{font-size:20px;line-height:1.65;background:var(--els-page,#f5f5f5);color:var(--els-ink,#222);border:1px solid var(--els-border,#ccc)}
+html.ss7-standard .reading{margin-top:0}
+html.ss7-standard .reading .note{background:var(--els-page,#f7f7f7);border-color:var(--els-border,#ccc)}
+html.ss7-standard .reading .note strong{font-size:14px;color:var(--els-ink,#222)}
+html.ss7-standard .check{background:var(--els-page,#f7f7f7);border-color:var(--els-border,#ccc)}
+html.ss7-standard .check b{color:var(--els-ink,#222)}
+html.ss7-standard .check .answer{color:var(--els-ink,#222)}
+html.ss7-standard .step-buttons button{font-size:14px;min-height:36px}
+html.ss7-standard .foot{font-size:12px;color:var(--els-muted,#526a7c)}
+html.ss7-standard[data-els-theme] :is(.card,.ss7-card,.step,.control,.reading .note,.check,.insight){box-shadow:none!important}
+@media(max-width:1050px){html.ss7-standard .ss7-stage-pair{grid-template-columns:minmax(230px,.4fr) minmax(0,.6fr)}html.ss7-standard .ss7-explain-grid{grid-template-columns:1fr}}
+@media(max-width:730px){html.ss7-standard .ss7-stage-pair{grid-template-columns:1fr}html.ss7-standard main{padding:12px}html.ss7-standard .ss7-card{padding:12px}html.ss7-standard .control{grid-template-columns:1fr}}
