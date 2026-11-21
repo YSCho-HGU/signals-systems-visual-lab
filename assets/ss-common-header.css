@@ -1,0 +1,16 @@
+/* Single shared Signals & Systems chapter header: Chapters 5, 6 and integrated 7. */
+.ss-common-header{box-sizing:border-box;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:12px!important;min-height:46px!important;height:46px!important;padding:5px 15px!important;position:relative;z-index:90;overflow:visible!important;border-bottom:1px solid var(--els-border,var(--border,#555));background:var(--els-surface,var(--surface,#202222))!important;color:var(--els-ink,var(--ink,#eee))!important;box-shadow:none}
+.ss-common-header .ss-common-home{font-size:12px;font-weight:750;white-space:nowrap;color:var(--els-link,var(--accent,#6ebac6));text-decoration:none}
+.ss-common-header .ss-common-menu{position:relative;flex:0 1 auto;min-width:0;max-width:min(65vw,620px)}
+.ss-common-header .ss-common-title{display:flex;align-items:center;gap:6px;cursor:pointer;list-style:none;font-size:13px;font-weight:750;line-height:1.3;white-space:normal;color:inherit}
+.ss-common-header .ss-common-title::-webkit-details-marker{display:none}
+.ss-common-header .ss-common-title:focus-visible{outline:2px solid var(--els-accent,var(--accent,#0e8491));outline-offset:4px}
+.ss-common-header .ss-common-links{position:absolute;top:calc(100% + 12px);left:0;z-index:999;display:grid;gap:2px;width:max-content;min-width:min(350px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-height:min(65vh,500px);overflow-y:auto;padding:8px;border:1px solid var(--els-border,var(--border,#777));border-radius:8px;box-shadow:0 12px 32px #0005;background:var(--els-surface,var(--surface,#222));color:var(--els-ink,var(--ink,#eee))}
+.ss-common-header .ss-common-links a{display:block;padding:9px 12px;border-radius:5px;text-decoration:none;white-space:normal;line-height:1.4;color:inherit}
+.ss-common-header .ss-common-links a:hover,.ss-common-header .ss-common-links a:focus-visible{background:var(--els-accent,var(--accent,#0e8491));color:#fff}
+.ss-common-header .ss-common-links a[aria-current="page"]{font-weight:750;text-decoration:underline}
+.ss-common-header .ss-common-actions{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:10px;flex:0 0 auto}
+.ss-common-header .ss-common-actions label,.ss-common-header .ss-common-actions .theme-picker{display:flex;align-items:center;gap:5px;margin:0;padding:0;min-width:0;font-size:11px;font-weight:600;white-space:nowrap;color:inherit}
+.ss-common-header .ss-common-actions select{width:auto;max-width:158px;min-height:30px;font-size:11px;padding:3px 6px;border:1px solid var(--els-border,var(--border,#777));border-radius:7px;background:var(--els-surface,var(--surface,#222));color:var(--els-ink,var(--ink,#eee))}
+.ss-common-header .els-ss-hidden-nav{display:none!important}
+@media(max-width:700px){.ss-common-header{height:auto!important;min-height:46px!important;flex-wrap:wrap!important;gap:6px!important;padding:7px 9px!important}.ss-common-header .ss-common-menu{flex:1 1 calc(100% - 95px);max-width:calc(100% - 95px)}.ss-common-header .ss-common-actions{width:100%;margin-left:auto;justify-content:flex-end}.ss-common-header .ss-common-actions label{font-size:11px}}
