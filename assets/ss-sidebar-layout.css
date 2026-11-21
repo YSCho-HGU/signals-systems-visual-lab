@@ -178,3 +178,161 @@ html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .side-foot{
 html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .side-foot strong{
  color:var(--els-ink)!important
 }
+
+
+/* 2026-11 unified chapter-navigation standard
+ * Chapter 4's 01/02 numbering, Chapter 5's active-state and stage-number tokens.
+ * All chapters share one sidebar width and typography at each viewport size. */
+:root{
+ --ss-sidebar-open:250px;
+ --ss-sidebar-closed:52px;
+ --ss-nav-text-size:13px;
+ --ss-nav-number-size:30px;
+ --ss-nav-heading-size:11px;
+}
+:root[data-els-theme="neutral-dark"]{--ss-step-foreground:#d6f5e7;--ss-step-background:#315448;--ss-step-stroke:#a0d8c1}
+:root[data-els-theme="warm-dark"]{--ss-step-foreground:#d7f5df;--ss-step-background:#385647;--ss-step-stroke:#a6d2b8}
+:root[data-els-theme="navy-dark"]{--ss-step-foreground:#ddf2ff;--ss-step-background:#2d5270;--ss-step-stroke:#a9daff}
+:root[data-els-theme="warm-neutral"]{--ss-step-foreground:#214c39;--ss-step-background:#e2ede4;--ss-step-stroke:#46765d}
+:root[data-els-theme="white-clean"]{--ss-step-foreground:#194d65;--ss-step-background:#eaf4f9;--ss-step-stroke:#367793}
+html[data-els-theme] :is(.shell,.app,.ss7-shell,.ss8-shell){
+ grid-template-columns:var(--ss-sidebar-open) minmax(0,1fr)!important;
+ width:100%!important;max-width:none!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] main{
+ grid-template-columns:var(--ss-sidebar-open) minmax(0,1fr)!important;
+}
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar){
+ box-sizing:border-box!important;min-width:0!important;
+ background:var(--els-surface)!important;color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+ padding:14px 10px!important;
+ position:sticky!important;top:46px!important;
+ height:calc(100dvh - 46px)!important;
+ max-height:calc(100dvh - 46px)!important;overflow-y:auto!important;
+ border-right:1px solid var(--els-border)!important;
+}
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar) :is(.brand,.ss-ch1-brand){
+ background:transparent!important;border-color:var(--els-border)!important;
+ padding:7px 8px 14px!important;margin:0!important;
+}
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar) :is(.brand h1,.brand h2,.ss-ch1-brand h2){
+ font-size:18px!important;line-height:1.4!important;color:var(--els-ink)!important;
+ margin:4px 0 5px!important;letter-spacing:normal!important;
+}
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar) :is(.brand p,.ss-ch1-brand p){
+ font-size:12px!important;line-height:1.6!important;color:var(--els-muted)!important
+}
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+ :is(.navlabel,.side-label,.ss-ch1-sidebar-title,.ss7-sidebar-title,.ss8-sidebar-title){
+ font-size:var(--ss-nav-heading-size)!important;line-height:1.5!important;
+ font-weight:750!important;letter-spacing:.045em!important;
+ color:var(--els-muted)!important;margin:13px 7px 9px!important
+}
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+ :is(.tabs,.nav,#ss7-lesson-nav,#nav){
+ display:flex!important;flex-direction:column!important;gap:5px!important;
+ padding:0!important;margin:0!important;overflow:visible!important
+}
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+ :is(.tabs button,.nav button,#ss7-lesson-nav button,#nav button){
+ display:flex!important;align-items:center!important;justify-content:flex-start!important;
+ flex:0 0 auto!important;gap:10px!important;min-width:0!important;width:100%!important;
+ max-width:none!important;min-height:49px!important;
+ padding:9px 10px!important;border-radius:9px!important;
+ border:1px solid transparent!important;box-shadow:none!important;
+ background:transparent!important;color:var(--els-ink)!important;
+ text-align:left!important;font-size:var(--ss-nav-text-size)!important;
+ line-height:1.45!important;font-weight:650!important;
+ white-space:normal!important;overflow-wrap:anywhere!important;
+ text-shadow:none!important;opacity:1!important
+}
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+ :is(.tabs button,.nav button,#ss7-lesson-nav button,#nav button) :is(.tabname,.nav-name,.ss-ch1-nav-title){
+ font:inherit!important;color:var(--els-ink)!important;
+ white-space:normal!important;overflow-wrap:anywhere!important;min-width:0!important
+}
+html[data-els-theme] .ss-ch1-nav-title small{
+ display:block!important;font-size:11px!important;line-height:1.45!important;
+ color:var(--els-muted)!important;margin:3px 0 0!important;
+}
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+ :is(.tabs button,.nav button,#ss7-lesson-nav button,#nav button):hover{
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
+ border-color:var(--els-border)!important
+}
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+ :is(.tabs button.on,.nav button.active,#ss7-lesson-nav button[aria-current="true"],#nav button.active,#nav button[aria-current="true"],#nav button[aria-current="page"],.nav button[aria-current="page"]){
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
+ border-color:var(--els-link)!important;
+ box-shadow:inset 3px 0 var(--els-link)!important
+}
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+ :is(.tabs .num,.nav .num,#ss7-lesson-nav .ss7-lab-number,#nav .ss8-lab-number,#nav .ss-ch1-lab-number){
+ display:inline-grid!important;place-items:center!important;
+ box-sizing:border-box!important;flex:0 0 var(--ss-nav-number-size)!important;
+ width:var(--ss-nav-number-size)!important;height:var(--ss-nav-number-size)!important;
+ min-width:var(--ss-nav-number-size)!important;max-width:var(--ss-nav-number-size)!important;
+ border:1px solid var(--els-border)!important;border-radius:7px!important;
+ background:var(--els-surface-alt)!important;
+ color:var(--els-ink)!important;
+ font:800 12px/1 Arial,"Malgun Gothic",sans-serif!important;
+ opacity:1!important;box-shadow:none!important;text-shadow:none!important;
+}
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+ :is(.tabs button.on,.nav button.active,#ss7-lesson-nav button[aria-current="true"],#nav button.active,#nav button[aria-current="true"],#nav button[aria-current="page"],.nav button[aria-current="page"])
+ :is(.num,.ss7-lab-number,.ss8-lab-number,.ss-ch1-lab-number){
+ color:var(--els-ink)!important;background:var(--els-info-bg)!important;
+ border-color:var(--els-link)!important
+}
+/* Learning stages are distinct from chapter navigation numbers. */
+html[data-els-theme] :is(
+ .ss-found-stage span,.ss5-flow-label>span,.ss6-step-card::before,
+ .ss6-control-plot-workspace .ss6-controls-number,.ss7-stage-index,.ss8-stage-index){
+ display:inline-grid!important;place-items:center!important;
+ box-sizing:border-box!important;flex:0 0 31px!important;
+ width:31px!important;height:31px!important;min-width:31px!important;
+ border:1.5px solid var(--ss-step-stroke)!important;border-radius:8px!important;
+ background:var(--ss-step-background)!important;color:var(--ss-step-foreground)!important;
+ font:850 16px/1 Arial,"Malgun Gothic",sans-serif!important;
+ opacity:1!important;text-shadow:none!important
+}
+html.ss-foundations-standard .ss-found-stage{font-size:18px!important;line-height:1.45!important;gap:10px!important;color:var(--els-ink)!important}
+html[data-ss-sidebar="collapsed"] :is(.shell,.app,.ss7-shell,.ss8-shell){
+ grid-template-columns:var(--ss-sidebar-closed) minmax(0,1fr)!important
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"][data-ss-sidebar="collapsed"] main{
+ grid-template-columns:var(--ss-sidebar-closed) minmax(0,1fr)!important
+}
+html[data-els-theme][data-ss-sidebar="collapsed"] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar){
+ width:var(--ss-sidebar-closed)!important;min-width:0!important;max-width:var(--ss-sidebar-closed)!important;
+ padding:9px 5px!important;overflow-x:hidden!important;
+}
+html[data-els-theme][data-ss-sidebar="collapsed"] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)>:not(.ss-side-toggle){
+ display:none!important
+}
+@media(max-width:900px){
+ :root{--ss-sidebar-open:210px}
+}
+@media(max-width:780px){
+ :root{--ss-sidebar-open:190px}
+ html[data-els-theme] :is(.shell,.app,.ss7-shell,.ss8-shell){
+  display:grid!important;grid-template-columns:var(--ss-sidebar-open) minmax(0,1fr)!important
+ }
+ html.ss-foundations-standard[data-ss-foundation-chapter="1"] main{
+  display:grid!important;grid-template-columns:var(--ss-sidebar-open) minmax(0,1fr)!important
+ }
+ html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar){
+  position:sticky!important;top:46px!important;max-height:calc(100dvh - 46px)!important;height:calc(100dvh - 46px)!important
+ }
+ html[data-els-theme][data-ss-sidebar="collapsed"] :is(.shell,.app,.ss7-shell,.ss8-shell){
+  display:grid!important;grid-template-columns:var(--ss-sidebar-closed) minmax(0,1fr)!important
+ }
+}
+@media(max-width:560px){
+ :root{--ss-sidebar-open:170px}
+ html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+  :is(.tabs button,.nav button,#ss7-lesson-nav button,#nav button){
+  gap:6px!important;padding:8px 5px!important;font-size:12px!important
+ }
+}
