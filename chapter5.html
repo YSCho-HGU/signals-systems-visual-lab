@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#102d41">
-<meta name="els-chapter-build" content="ch5-white-clean-20261121b">
+<meta name="els-chapter-build" content="ch5-math-20261121c">
 <title>Chapter 5 · Laplace Transform | Engineering Learning Studio</title>
 <meta name="description" content="Offline interactive Laplace Transform visual lab: ROC, transform pairs, inverse Laplace, pole-zero, RC and second-order systems.">
 <!-- Shared ELS theme replaces the legacy iframe/OS theme handshake. -->
@@ -667,7 +667,7 @@ function revealGuide(moduleId,state,guideFactory){
  const d=guideFactory(state),total=d.steps.length;
  const n=Math.max(1,Math.min(total,guideView.count[moduleId]||1));
  const animate=guideView.previous[moduleId]!==undefined&&n>guideView.previous[moduleId]&&n===guideView.previous[moduleId]+1;
- const displayStep=(v,i)=>`<article class="deriv-step ${animate&&i===n-1?'guide-enter':''}" aria-label="Step ${i+1} of ${total}"><div class="deriv-top"><span class="step-index">${i+1}</span><strong>${esc(v.head)}</strong></div><div class="deriv-math">${v.math}</div><p>${esc(v.ko)}</p></article>`;
+ const displayStep=(v,i)=>`<article class="deriv-step ${animate&&i===n-1?'guide-enter':''}" aria-label="Step ${i+1} of ${total}"><div class="deriv-top"><span class="step-index">${i+1}</span><strong>${esc(v.head)}</strong></div><div class="deriv-math">${esc(v.math)}</div><p>${esc(v.ko)}</p></article>`;
  pane.innerHTML=`<div class="guide-head"><div><div class="overlabel">GUIDED DERIVATION / 단계별 수식 유도</div><h3>Equation → Derivation → Meaning / 수식 유도와 의미</h3><p>Adjust a variable to update the equations. / 변수를 변경하면 아래 수식도 갱신됩니다.</p></div><span class="progress-badge" role="status">Step ${n} / ${total}</span></div><div class="guide-track" role="progressbar" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${n}" aria-label="Derivation progress"><div style="width:${100*n/total}%"></div></div><div class="guide-steps">${d.steps.slice(0,n).map(displayStep).join('')}</div><div class="guide-actions"><button id="previousStep" type="button" ${n<=1?'disabled':''}>◀ Previous / 이전</button><button id="nextStep" type="button" ${n>=total?'disabled':''}>Next step / 다음 ▶</button><button id="guidePlay" type="button" class="primary" aria-pressed="${guideView.playing}">${guideView.playing?'Pause animation / 일시정지':'▶ Play animation / 자동 전개'}</button><button id="allSteps" type="button">${n===total?'Restart / 처음부터':'Show all / 전체 보기'}</button></div>`;
  const change=next=>{guideView.count[moduleId]=Math.max(1,Math.min(total,next));revealGuide(moduleId,state,guideFactory)};
  window.ELSChapterFiveMath?.renderGuide(moduleId,state,pane);
@@ -693,6 +693,7 @@ function revealGuide(moduleId,state,guideFactory){
  chapter5ApplyReadingNotes(moduleId,state,rp);
  window.ELSChapterFiveReadingMath?.apply(moduleId,state,rp);
  window.ELSChapterFiveInlineMath?.render(rp);
+ window.ELSChapterFiveProseMath?.render(rp);
  ss5RestoreCheck(moduleId);
 }
 
@@ -812,8 +813,8 @@ const GUIDES5={
 
 function currentGuidedId(){return active}
 function currentGuidedState(id){return state[id]}
-function update(){const s=state[active];({weight:drawWeight,roc:drawROC,pairs:drawPairs,props:drawProps,inverse:drawInverse,stability:drawStability,rc:drawRC,second:drawSecond})[active](s);revealGuide(active,s,GUIDES5[active]);window.ELSChapterFiveMath?.renderHero(active,s);window.ELSChapterFiveInlineMath?.render(document.getElementById("page"));window.__laplaceVisualLab={active,healthy:true,state:JSON.parse(JSON.stringify(state)),planeDrag:active==='inverse'?'sigma ROC probe':active==='stability'?'pole/zero':'pole'}}
-render();window.addEventListener("load",()=>{window.ELSChapterFiveMath?.renderHero(active,state[active]);window.ELSChapterFiveMath?.renderGuide(active,state[active],document.getElementById("derivationPanel"));window.ELSChapterFiveInlineMath?.render(document.getElementById("page"));window.ELSChapterFiveExplicitMath?.apply(active,LABS.find(x=>x.id===active))});window.addEventListener('resize',()=>update());
+function update(){const s=state[active];({weight:drawWeight,roc:drawROC,pairs:drawPairs,props:drawProps,inverse:drawInverse,stability:drawStability,rc:drawRC,second:drawSecond})[active](s);revealGuide(active,s,GUIDES5[active]);window.ELSChapterFiveMath?.renderHero(active,s);window.ELSChapterFiveInlineMath?.render(document.getElementById("page"));window.ELSChapterFiveProseMath?.render(document.getElementById("page"));window.__laplaceVisualLab={active,healthy:true,state:JSON.parse(JSON.stringify(state)),planeDrag:active==='inverse'?'sigma ROC probe':active==='stability'?'pole/zero':'pole'}}
+render();window.addEventListener("load",()=>{window.ELSChapterFiveMath?.renderHero(active,state[active]);window.ELSChapterFiveMath?.renderGuide(active,state[active],document.getElementById("derivationPanel"));window.ELSChapterFiveInlineMath?.render(document.getElementById("page"));window.ELSChapterFiveExplicitMath?.apply(active,LABS.find(x=>x.id===active));window.ELSLabUI?.renderAuthoredMath(document.getElementById("page"));window.ELSChapterFiveProseMath?.render(document.getElementById("page"))});window.addEventListener('resize',()=>update());
 window.addEventListener('els:themechange',()=>update());
 window.__labNumerics={rc63:rcRise(1,1),secondStepInitial:secondStep(0,.4,3),inverseRightZero:invX(0,'right'),cancellation:reduced({p:.8,z:.8}).poles[0],rcCutoff:1/Math.sqrt(2),secondPeak:secondStep(PI/(3*Math.sqrt(1-.25**2)),.25,3)};
 </script><script src="./assets/ss-ch5-standalone.js?v=1"></script>
