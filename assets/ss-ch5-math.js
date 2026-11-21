@@ -21,7 +21,7 @@
    return [
     'X(s)=\\frac{1}{s+'+a+'},\\quad \\mathrm{pole}:s='+pole,
     r?'x(t)=e^{-'+a+'t}u(t)':'x(t)=-e^{-'+a+'t}u(-t)',
-    (r?'\\int_0^\\infty':'-\\int_{-\\infty}^0')+'e^{-(s+'+a+')t}\\,dt\\text{ converges if }\\operatorname{Re}(s)'+(r?'>':'<')+pole,
+    (r?'\\int_0^\\infty':'-\\int_{-\\infty}^0')+'\\,e^{-(s+'+a+')t}\\,dt\\text{ converges if }\\operatorname{Re}(s)'+(r?'>':'<')+pole,
     'X(s)=\\frac{1}{s+'+a+'},\\quad\\mathrm{ROC}:\\operatorname{Re}(s)'+(r?'>':'<')+pole
    ];
   }
