@@ -169,7 +169,7 @@ html.ss7-native .ss7-stage-index{
   :is(html.ss5-native .ss5-flow-label,
       html.ss6-compact-workspace .ss6-step-card h3,
       html.ss7-native .ss7-stage-head){
-    font-size:17px!important;
+    font-size:18px!important;
   }
 }
 @media(max-width:700px){
