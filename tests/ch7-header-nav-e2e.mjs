@@ -38,6 +38,7 @@ try{
   if(size==='390'&&await page.locator('#ss-unified-nav').evaluate(x=>x.classList.contains('collapsed')))
    await page.locator('#ss-unified-nav .ss-unified-toggle').click();
   for(let n=1;n<=7;n++){
+   if(size==='390'&&await page.locator('#ss-unified-nav').evaluate(x=>x.classList.contains('collapsed'))) await page.locator('#ss-unified-nav .ss-unified-toggle').click();
    const button=page.locator('#ss-unified-nav .ss-unified-link').nth(n-1);
    await button.click();
    await page.waitForFunction(v=>document.querySelector('#lab-frame')?.contentDocument?.querySelector('#title')?.textContent?.startsWith('7.'+v),n);
