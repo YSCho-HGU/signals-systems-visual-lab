@@ -141,3 +141,55 @@ html #map-view .tm-demo-chart svg line[stroke="#edf2f5"]{
 }
 html #map-view .tm-formula .katex-display{margin:.15em 0}
 html #map-view .tm-formula .katex{font-size:1.02em}
+
+
+/* Map and overview: control, form, graph surfaces and captions follow theme. */
+html[data-els-theme] :is(#overview,#map-view) :is(.tm-demo-select,.tm-control,.tm-condition,.tm-demo-insight,
+ .tm-demo-head,.tm-demo-controls,.tm-legend,.tm-choice-group button,.tm-scenario-row button,
+ .eng-quiz,.eng-quiz-choices button,.eng-question,.eng-number,.eng-watch,.map-track,.map-column){
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme] :is(#overview,#map-view) :is(.tm-demo-select,.tm-control) :is(label,select,output,input){
+ color:var(--els-ink)!important;
+}
+html[data-els-theme] :is(#overview,#map-view) :is(.tm-demo-select,.tm-control select,.tm-choice-group select){
+ background:var(--els-surface)!important;color:var(--els-ink)!important;
+ border:1px solid var(--els-border)!important;
+}
+html[data-els-theme] :is(#overview,#map-view) :is(.tm-chip,.tm-note,.tm-control label,.tm-condition,
+ .tm-demo-insight p,.tm-detail p,.tm-panel p,.tm-legend){
+ color:var(--els-ink)!important;
+}
+html[data-els-theme] :is(#overview,#map-view) :is(.tm-panel h3,.eng-detail h4,.map-column h3){
+ color:var(--els-ink)!important;
+}
+html[data-els-theme] #map-view :is(.tm-demo-chart,.tm-demo-insight,.tm-panel,.map-wrap,.tm-detail-main,.tm-detail-side){
+ border-radius:12px!important;border:1px solid var(--els-border)!important;
+}
+html[data-els-theme] #map-view .tm-demo-chart{
+ overflow-x:auto!important;max-width:100%!important;
+}
+html[data-els-theme] #map-view .tm-demo-chart svg{
+ max-width:100%!important;height:auto!important;
+}
+html[data-els-theme] #map-view .tm-demo-chart svg > rect:first-child{
+ fill:var(--els-surface)!important;
+}
+html[data-els-theme] #map-view .tm-demo-chart svg text[fill="#647d8a"],
+html[data-els-theme] #map-view .tm-demo-chart svg text[fill="#345c6c"]{
+ fill:var(--els-muted)!important;
+}
+html[data-els-theme] #map-view .tm-formula{
+ max-width:100%!important;overflow-x:auto!important;
+ background:var(--els-surface-alt)!important;
+ color:var(--els-ink)!important;
+}
+html[data-els-theme] #map-view .tm-formula .katex-display{
+ max-width:100%;overflow-x:auto;
+}
+@media(max-width:700px){
+ html[data-els-theme] #map-view .tm-demo-chart svg{
+  min-width:650px!important;width:650px!important;
+ }
+}
