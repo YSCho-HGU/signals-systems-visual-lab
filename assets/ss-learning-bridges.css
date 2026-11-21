@@ -1,0 +1,18 @@
+
+/* Shared learning continuity bridge for Chapters 5-8. */
+.ss-learning-bridge{margin:22px 0 8px;padding:22px;border:1px solid var(--els-border,#53636a);border-radius:14px;background:var(--els-surface,#202726);color:var(--els-ink,#ebeee8);min-width:0;clear:both}
+.ss-learning-bridge .ss-bridge-tag{font-size:12px;letter-spacing:.09em;font-weight:800;text-transform:uppercase;color:var(--els-muted,#9fb8b0)}
+.ss-learning-bridge h3{font-size:20px;line-height:1.4;margin:6px 0 10px;color:inherit}
+.ss-learning-bridge p{font-size:16px;line-height:1.75;margin:0 0 13px;color:inherit}
+.ss-learning-bridge .ss-bridge-formula{background:var(--els-surface-alt,#293431);border:1px solid var(--els-border,#53636a);padding:14px;border-radius:10px;overflow-x:auto;font-size:18px;margin:12px 0;max-width:100%}
+.ss-learning-bridge .ss-bridge-link{display:inline-flex;align-items:center;font-size:15px;line-height:1.5;font-weight:700;color:var(--els-primary,#7acdc2);text-decoration:underline;text-underline-offset:3px;margin-top:8px}
+.ss-learning-bridge .ss-bridge-link:focus-visible{outline:3px solid var(--els-primary,#7acdc2);outline-offset:4px}
+.ss-learning-bridge .ss-bridge-rc{padding:14px;background:var(--els-surface-alt,#293431);border-radius:10px;margin:12px 0}
+.ss-learning-bridge .ss-bridge-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:13px}
+.ss-learning-bridge label{display:grid;gap:5px;font-size:15px;font-weight:650;color:inherit}
+.ss-learning-bridge input[type=range]{width:100%;accent-color:var(--els-primary,#299c90)}
+.ss-learning-bridge output{font-variant-numeric:tabular-nums}
+.ss-learning-bridge .ss-bridge-rc-readout{display:flex;flex-wrap:wrap;gap:8px 20px;margin:14px 0;font-size:14px}
+.ss-learning-bridge .ss-bridge-graph{width:100%;max-width:700px;display:block;height:auto}
+.ss-learning-bridge .ss-bridge-explain{font-size:14px!important;margin:10px 0!important}
+@media(max-width:650px){.ss-learning-bridge{padding:14px}.ss-learning-bridge h3{font-size:18px}.ss-learning-bridge .ss-bridge-formula{font-size:16px}}
