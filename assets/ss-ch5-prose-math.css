@@ -1,0 +1,17 @@
+/* Chapter 5: native-quality KaTeX expressions in ordinary teaching prose. */
+html.ss5-native .ss5-prose-math{
+ display:inline-block;vertical-align:baseline;white-space:nowrap;
+ max-width:100%;line-height:1.5;margin:0 .04em;
+ color:inherit;font-weight:inherit
+}
+html.ss5-native .ss5-prose-math .katex{
+ font-size:1.08em;line-height:1.4;color:inherit
+}
+html.ss5-native :is(.heading p,.reading-note p,.figure .sub,.quiz p,.deriv-step p,.guide-check){
+ font-size:16px;line-height:1.75;overflow-wrap:break-word
+}
+html.ss5-native .ss5-prose-math-error{
+ border-bottom:2px dotted #b24e43;
+ font-family:Cambria Math,Georgia,serif;
+}
+html.ss5-native .deriv-math .katex-display{overflow-x:auto;overflow-y:hidden}
