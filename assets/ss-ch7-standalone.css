@@ -11,7 +11,7 @@ html.ss7-native .ss7-sidebar .brand h2{font-size:18px;margin:5px 0 6px;color:var
 html.ss7-native .ss7-sidebar .brand p{font-size:12px;line-height:1.55;margin:0;color:var(--els-muted,#667)}
 html.ss7-native .ss7-sidebar-title{font-size:11px;letter-spacing:.06em;font-weight:750;color:var(--els-muted,#667);margin:17px 9px 9px}
 html.ss7-native #ss7-lesson-nav{display:grid!important;gap:4px;overflow:visible;padding:0!important}
-html.ss7-native #ss7-lesson-nav button{display:flex;align-items:center;gap:9px;width:100%;max-width:none;text-align:left;min-height:44px;padding:8px 9px;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--els-ink,#222);font-size:13px;line-height:1.35;font-weight:650}
+html.ss7-native #ss7-lesson-nav button{display:flex;align-items:center;gap:9px;width:100%;max-width:none;text-align:left;min-height:47px;padding:8px 10px;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--els-ink,#222);font-size:12px;line-height:1.35;font-weight:650}
 html.ss7-native #ss7-lesson-nav button:hover{background:var(--els-surface-alt,#eaf1f1);border-color:var(--els-border,#ccc)}
 html.ss7-native #ss7-lesson-nav button[aria-current="true"]{background:var(--els-surface-alt,#e6f4f3);border-color:var(--els-accent,#0d8290);font-weight:800}
 html.ss7-native .ss7-lab-number{display:inline-grid;place-items:center;min-width:29px;min-height:29px;border-radius:7px;background:var(--els-surface-alt,#eee);color:var(--els-ink,#222);font-weight:750}
@@ -22,9 +22,8 @@ html.ss7-native .ss7-progress{margin:17px 8px;padding:12px;border:1px solid var(
 html.ss7-native .ss7-progress strong{display:block;font-size:13px;margin-bottom:8px}
 html.ss7-native .ss7-progress button{display:block;width:100%;margin:8px 0}
 html.ss7-native .ss7-progress small{display:block;color:var(--els-muted,#667)}
-html.ss7-native main{max-width:none!important;width:100%;margin:0;padding:12px clamp(12px,1.8vw,25px)!important;background:transparent}
+html.ss7-native main{max-width:none!important;width:100%;margin:0;padding:15px clamp(12px,1.8vw,27px) 42px!important;background:transparent}
 html.ss7-native .ss7-standard-layout{max-width:none;width:100%;min-width:0}
-html.ss7-native .ss7-stage-pair{grid-template-columns:minmax(230px,0.32fr) minmax(0,0.68fr);gap:13px;align-items:start}
 html.ss7-native .ss7-stage-explain{grid-column:1/-1}
 html.ss7-native .ss7-card{box-shadow:none}
 html.ss7-native .ss7-stage-pair .ss7-stage-observe{min-width:0}
@@ -40,25 +39,20 @@ html.ss7-native .ss7-sidebar .ss-side-toggle:hover{border-color:var(--els-accent
 html.ss7-native .ss7-sidebar .ss-side-toggle:focus-visible{outline:2px solid var(--els-accent);outline-offset:2px}
 html.ss7-native[data-ss-sidebar="collapsed"] .ss7-sidebar .ss-side-toggle{width:34px;height:34px;justify-content:center;padding:4px}
 html.ss7-native[data-ss-sidebar="collapsed"] .ss7-sidebar .ss-side-toggle .ss-toggle-text{display:none}
-@media(max-width:1080px){html.ss7-native .ss7-shell{grid-template-columns:205px minmax(0,1fr)}html.ss7-native .ss7-stage-pair{grid-template-columns:minmax(195px,.34fr) minmax(0,.66fr)}}
-@media(max-width:760px){html.ss7-native .ss7-shell{display:block}html.ss7-native .ss7-sidebar{position:relative;top:0;height:auto;max-height:none;border-right:0;border-bottom:1px solid var(--els-border);padding:9px 12px}html.ss7-native .ss7-sidebar .brand{display:none}html.ss7-native .ss7-sidebar-title{margin:2px 6px 7px}html.ss7-native #ss7-lesson-nav{display:flex!important;overflow-x:auto;padding:0 0 5px!important}html.ss7-native #ss7-lesson-nav button{flex:0 0 auto;width:auto;min-width:128px;max-width:190px}html.ss7-native .ss7-progress{display:none}html.ss7-native .ss7-stage-pair,html.ss7-native .ss7-sampling-active .ss7-stage-pair{grid-template-columns:1fr}html.ss7-native[data-ss-sidebar="collapsed"] .ss7-shell{display:block}}
+@media(max-width:1150px){html.ss7-native .ss7-shell{grid-template-columns:205px minmax(0,1fr)}html.ss7-native .ss7-stage-pair{grid-template-columns:minmax(205px,230px) minmax(0,1fr)}}
+@media(max-width:780px){html.ss7-native .ss7-shell{display:block}html.ss7-native .ss7-sidebar{position:relative;top:0;height:auto;max-height:none;border-right:0;border-bottom:1px solid var(--els-border);padding:9px 12px}html.ss7-native .ss7-sidebar .brand{display:none}html.ss7-native .ss7-sidebar-title{margin:2px 6px 7px}html.ss7-native #ss7-lesson-nav{display:flex!important;overflow-x:auto;padding:0 0 5px!important}html.ss7-native #ss7-lesson-nav button{flex:0 0 auto;width:auto;min-width:128px;max-width:190px}html.ss7-native .ss7-progress{display:none}html.ss7-native .ss7-stage-pair,html.ss7-native .ss7-sampling-active .ss7-stage-pair{grid-template-columns:1fr}html.ss7-native[data-ss-sidebar="collapsed"] .ss7-shell{display:block}}
 
 /* Native structural correction: one clear control/observation row, full-width supplementary analysis. */
-html.ss7-native .ss7-stage-pair{display:grid;grid-template-columns:minmax(235px,.3fr) minmax(0,.7fr);gap:14px;align-items:start}
-html.ss7-native .ss7-sampling-active .ss7-stage-pair{grid-template-columns:minmax(235px,.3fr) minmax(0,.7fr)}
-html.ss7-native .ss7-stage-observe #plots{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,355px),1fr));gap:12px}
-html.ss7-native .ss7-sampling-active .ss7-stage-observe #plots{grid-template-columns:repeat(auto-fit,minmax(min(100%,355px),1fr));gap:12px}
+html.ss7-native .ss7-stage-pair{display:grid;grid-template-columns:minmax(220px,275px) minmax(0,1fr);gap:14px;align-items:start}
+html.ss7-native .ss7-stage-observe #plots{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,385px),1fr));gap:14px}
 html.ss7-native .ss7-periodicity{grid-column:1/-1;min-width:0;margin:0;padding:17px;background:var(--els-surface);border:1px solid var(--els-border);border-radius:12px}
 html.ss7-native .ss7-periodicity .ss7-ct-plot,
 html.ss7-native .ss7-periodicity .ss7-period-plot{width:100%;max-width:980px}
 html.ss7-native .ss7-periodicity :is(.ss7-ct-plot svg,.ss7-period-plot svg){height:auto;width:100%;max-height:260px}
 html.ss7-native .ss7-stage-explain{grid-column:1/-1;min-width:0}
 html.ss7-native .ss7-stage-observe{overflow:visible;min-width:0}
-@media(max-width:900px){
- html.ss7-native .ss7-stage-pair,html.ss7-native .ss7-sampling-active .ss7-stage-pair{grid-template-columns:minmax(195px,.34fr) minmax(0,.66fr)}
-}
-@media(max-width:760px){
- html.ss7-native .ss7-stage-pair,html.ss7-native .ss7-sampling-active .ss7-stage-pair{grid-template-columns:minmax(0,1fr)}
+@media(max-width:780px){
+ html.ss7-native .ss7-stage-pair{grid-template-columns:minmax(0,1fr)}
 }
 
 /* Shared chapter palette: legacy iframe styles must not override the selected site theme. */
