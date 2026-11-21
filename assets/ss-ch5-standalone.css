@@ -355,3 +355,37 @@ html.ss5-native[data-els-theme] :is(.reading-note p,.reading-note .ko-explain,.g
 @media(max-width:560px){
  html.ss5-native[data-els-theme] .axis-key{font-size:12px;gap:4px 9px;padding:7px 8px}
 }
+
+/* Chapter 5.1/6.1 reading scale and section rhythm — final native layer. */
+html.ss5-native #page :is(.heading p,.insight p,.quiz p,.quiz .answer,.reading-note p,.deriv-step p,.guide-check,.ss5-observe p){
+ font-size:16px!important;line-height:1.7!important;letter-spacing:normal
+}
+html.ss5-native #page>.ss5-predict>p{
+ font-size:16px!important;line-height:1.65!important
+}
+html.ss5-native #page :is(.figure h3,.panel h3,.reading-panel h3,.guide-head h3,.quiz h3){
+ font-size:17px!important;line-height:1.4!important;margin-bottom:7px!important
+}
+html.ss5-native #page :is(.figure .sub,.figure .legend,.axis-key,.metric .k,.metric .d,.formhint,.smallnote){
+ font-size:13px!important;line-height:1.55!important
+}
+html.ss5-native #page .ss5-flow-label{font-size:17px!important;line-height:1.45!important}
+html.ss5-native #page .ctrl label{font-size:14px!important;line-height:1.5!important}
+html.ss5-native #page :is(.guide-actions button,.preset,.btn,.ss5-check label){
+ font-size:14px!important;line-height:1.5!important;
+ min-height:36px
+}
+html.ss5-native #page :is(.derivation-panel,.reading-panel,.insight,.quiz){
+ padding:16px 18px!important;margin-top:18px!important
+}
+html.ss5-native #page .reading-grid{gap:12px!important}
+html.ss5-native #page .reading-note{padding:13px 15px!important}
+html.ss5-native #page .guide-steps{gap:12px!important}
+html.ss5-native #page .deriv-step{padding:14px 16px!important}
+html.ss5-native #page .deriv-math{font-size:clamp(18px,1.55vw,22px)!important;line-height:1.7!important}
+html.ss5-native #page .ss5-predict{gap:9px 16px!important}
+html.ss5-native #page>.lab{gap:14px!important}
+@media(max-width:780px){
+ html.ss5-native #page :is(.derivation-panel,.reading-panel,.insight,.quiz){padding:13px!important}
+ html.ss5-native #page>.lab{gap:12px!important}
+}
