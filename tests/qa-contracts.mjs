@@ -43,7 +43,7 @@ check("G0-shared-math-stylesheet-all-three",
  sharedFormula.includes(".ss7-prose-math"));
 const uiStandard=read("assets/ss-ui-standard.css");
 check("G0-ui-standard-ch5-6-7",
- [laplaceNative,native,ch7].every(x=>x.includes('ss-ui-standard.css?v=2')) &&
+ [laplaceNative,native,ch7].every(x=>x.includes('ss-ui-standard.css?v=3')) &&
  uiStandard.includes(".ss5-native .tabs button") &&
  uiStandard.includes(".ss6-compact-workspace .sidebar .nav button") &&
  uiStandard.includes(".ss7-native #ss7-lesson-nav button"));
