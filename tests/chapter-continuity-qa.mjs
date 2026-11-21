@@ -56,7 +56,7 @@ try{
   check('bridge-'+route+'-errors',errors.length===0,errors.slice(0,4));
   if(route.includes('lab=rc')){
    const input=page.locator('.ss-bridge-rc input[type=range]').first();check('rc-IIR-interactive',await input.count()===1);
-   if(await input.count()){await input.fill('2.0');const value=await page.locator('.ss-bridge-rc-readout').textContent();check('rc-IIR-coefficient-recomputed',value.includes('0.9048'),{value})}
+   if(await input.count()){await input.evaluate(el=>{el.value='2.0';el.dispatchEvent(new Event('input',{bubbles:true}))});const value=await page.locator('.ss-bridge-rc-readout').textContent();check('rc-IIR-coefficient-recomputed',value.includes('0.9048'),{value})}
   }
   await page.close();
  }
