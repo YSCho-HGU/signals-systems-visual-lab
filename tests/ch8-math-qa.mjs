@@ -118,6 +118,40 @@ try{
   await page.screenshot({path:join(OUT,'8-'+n+'.png'),fullPage:false});
   await page.locator('#all').click();
  }
+ // Full Chapter 8 inline-math readability matrix: all eight lessons,
+ // all five explicit palettes, desktop and narrow screens.
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:860});
+  for(const theme of ['neutral-dark','warm-dark','navy-dark','warm-neutral','white-clean']){
+   await page.locator('#ss8-theme-picker').selectOption(theme);
+   for(let n=1;n<=8;n++){
+    await page.evaluate(n=>window.SSChapter8.openExperiment(n),n);
+    await page.evaluate(()=>window.__ss8ProseMath.scan());
+    await page.evaluate(()=>window.SSMathCore.renderNow());
+    const geometry=await page.evaluate(()=>{
+     const nodes=[...document.querySelectorAll('.ss8-prose-math')];
+     const samples=nodes.map(el=>{
+      const parent=el.parentElement, k=el.querySelector('.katex');
+      const a=getComputedStyle(parent),b=getComputedStyle(k||el),c=getComputedStyle(el);
+      const line=parseFloat(a.lineHeight)||parseFloat(a.fontSize)*1.7;
+      const r=(k||el).getBoundingClientRect();
+      return {source:el.dataset.ssMath?.slice(0,72)||'',rendered:!!k,
+       fontDiff:Math.abs(parseFloat(a.fontSize)-parseFloat(b.fontSize)),
+       inline:c.display==='inline',overflow:c.overflowX,
+       lineRatio:r.height/line};
+     });
+     return {total:samples.length,failures:samples.filter(x=>!x.rendered||
+      x.fontDiff>1||!x.inline||x.overflow!=='visible'||x.lineRatio>1.5),
+      theme:document.documentElement.dataset.elsTheme};
+    });
+    check('8.'+n+'-'+theme+'-'+width+'px-inline-geometry',
+      geometry.theme===theme&&geometry.total>0&&geometry.failures.length===0,
+      {total:geometry.total,theme:geometry.theme,failures:geometry.failures.slice(0,5)});
+   }
+  }
+ }
+ await page.setViewportSize({width:1440,height:900});
+ await page.locator('#ss8-theme-picker').selectOption('neutral-dark');
  // Verify transitions do not leave blank or stale equations in the DOM.
  await page.evaluate(()=>window.SSChapter8.openExperiment(2));
  await page.locator('#ctl-direction').selectOption('left');
