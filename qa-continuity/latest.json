@@ -3,24 +3,6 @@
   "total": 59,
   "failures": [
     {
-      "id": "chapter2-no-js-errors",
-      "passed": false,
-      "detail": [
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined"
-      ]
-    },
-    {
-      "id": "chapter3-no-js-errors",
-      "passed": false,
-      "detail": [
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined"
-      ]
-    },
-    {
       "id": "chapter4-no-js-errors",
       "passed": false,
       "detail": [
@@ -220,12 +202,8 @@
     },
     {
       "id": "chapter2-no-js-errors",
-      "passed": false,
-      "detail": [
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined"
-      ]
+      "passed": true,
+      "detail": []
     },
     {
       "id": "chapter3-header-and-nav",
@@ -316,12 +294,8 @@
     },
     {
       "id": "chapter3-no-js-errors",
-      "passed": false,
-      "detail": [
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined"
-      ]
+      "passed": true,
+      "detail": []
     },
     {
       "id": "chapter4-header-and-nav",
@@ -595,7 +569,7 @@
       }
     }
   ],
-  "sourceSha": "7fb07ef0eaf56043b5daa0adfb2cafd57f2d0c91",
-  "runId": 44912791842,
-  "generatedAt": "2026-11-21T14:13:59.172Z"
+  "sourceSha": "faae3a32980ea27b9e6095621c39d92cd742c32c",
+  "runId": 44912802352,
+  "generatedAt": "2026-11-21T14:14:07.121Z"
 }
