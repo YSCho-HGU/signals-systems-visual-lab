@@ -1,0 +1,41 @@
+name: SS Navigation and Math UI Visual QA
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "assets/ss-common-header.css"
+      - "assets/ss-sidebar-layout.css"
+      - "assets/ss-overview-standard.css"
+      - "assets/ss-overview-standard.js"
+      - "assets/ss-ch7-standalone.js"
+      - "assets/ss-ch8-native.js"
+      - "chapter*.html"
+      - "index.html"
+      - "tests/ss-navigation*.mjs"
+      - "package.json"
+      - ".github/workflows/ss-navigation-visual.yml"
+permissions:
+  contents: read
+jobs:
+  navigation-visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - name: Shared header and sidebar contract
+        run: npm run qa:navigation
+      - name: 8 chapters, dark theme, responsive layout, overview and map
+        run: npm run qa:navigation:visual
+      - name: Upload visual audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ss-navigation-visual-evidence
+          path: qa-navigation/
+          if-no-files-found: ignore
