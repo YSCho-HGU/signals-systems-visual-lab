@@ -42,6 +42,7 @@ function showExperiment(ch,index){
  if(ch===7){
   const api=frame.contentWindow?.SSChapter7;
   if(!api||!api.openExperiment(index))return false;
+  doc.dispatchEvent(new Event("ss-ch7-experiment-change"));
  }else{
   const selectors=ch===1?"#nav button":ch===5?"#tabs button":
    ch===8?"#nav button":"nav.nav button[data-nav]";
