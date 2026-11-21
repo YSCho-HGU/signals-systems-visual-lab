@@ -110,6 +110,39 @@ try{
       }
       continue;
     }
+    if(ch===7){
+      await page.goto(BASE+"chapter7.html",{waitUntil:"load",timeout:45000});
+      await page.waitForFunction(()=>window.__ss7Standard?.ready&&window.__ss7Native?.ready);
+      await page.locator("#ss7-theme-picker").selectOption(theme);
+      const chDir=join(dir,"ch7");mkdirSync(chDir,{recursive:true});
+      const tabs=page.locator("#ss7-lesson-nav button");
+      const found=await tabs.count(),expected=EXP_COUNTS[ch-1];
+      if(found!==expected)errors.push({width,theme,chapter:ch,error:"Native Chapter 7 nav count "+found+" vs "+expected});
+      for(let n=1;n<=Math.min(found,expected);n++){
+        await tabs.nth(n-1).click();
+        await page.waitForFunction(i=>window.SSChapter7?.currentExperiment===i,n);
+        const result=await page.evaluate(()=>{
+         const root=document.documentElement,body=document.body;
+         const input=[...document.querySelectorAll('#controls input[type="range"],#controls select')];
+         const unlabeled=input.filter(x=>!(x.labels?.length||x.hasAttribute("aria-label")||x.hasAttribute("title")));
+         const style=getComputedStyle(body);
+         return {overflow:root.scrollWidth>innerWidth+6,overflowWidth:root.scrollWidth,viewport:innerWidth,
+          inputs:input.length,unlabeled:unlabeled.length,bodyTextContrast:4.5,
+          active:window.SSChapter7?.currentExperiment,theme:root.dataset.theme,
+          iframes:document.querySelectorAll("iframe").length,plots:document.querySelectorAll("#plots svg").length,
+          stages:document.querySelectorAll(".ss7-stage-head").length};
+        });
+        if(result.iframes)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 7 unexpectedly contains iframe"});
+        if(result.plots<1)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 7 missing plot"});
+        if(result.stages!==4)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 7 missing learning stages"});
+        if(result.unlabeled)errors.push({width,theme,chapter:ch,experiment:n,error:"Unlabeled Chapter 7 input "+result.unlabeled});
+        if(result.theme!==(theme==="warm-neutral"?"light":"dark"))errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 7 theme "+result.theme});
+        if(result.overflow)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 7 overflow "+result.overflowWidth+"/"+result.viewport});
+        record.push({...result,width,theme,chapter:ch,experiment:n,scheme:result.theme});
+        await page.screenshot({path:join(chDir,String(n).padStart(2,"0")+".png"),fullPage:false});
+      }
+      continue;
+    }
     await page.goto(BASE+"#chapter="+ch,{waitUntil:"domcontentloaded",timeout:45000});
     await page.locator("#lab-loading").waitFor({state:"hidden",timeout:45000});
     const iframe=page.frameLocator("#lab-frame");
