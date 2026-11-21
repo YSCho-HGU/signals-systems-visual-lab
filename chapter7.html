@@ -257,9 +257,9 @@ html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hov
 <link rel="stylesheet" href="./assets/ss-lab-theme.css?v=5">
 <link rel="stylesheet" href="./assets/els-theme-v2.css?v=20261121b">
 <link rel="stylesheet" href="./assets/els-typography-standard.css?v=1">
-<link rel="stylesheet" href="./assets/ss-ch7-learning-standard.css?v=11">
+<link rel="stylesheet" href="./assets/ss-ch7-learning-standard.css?v=12">
 <link rel="stylesheet" href="./assets/ss-common-header.css?v=2">
-<link rel="stylesheet" href="./assets/ss-ch7-standalone.css?v=2">
+<link rel="stylesheet" href="./assets/ss-ch7-standalone.css?v=3">
 <link rel="stylesheet" href="./assets/ss-trace-palette.css?v=1">
 <script src="./assets/ss-trace-palette.js?v=1"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css">
@@ -338,7 +338,7 @@ const fmt=(v,d=2)=>Number(v).toFixed(d).replace(/\.00$/,'');
 const sinc=x=>Math.abs(x)<1e-10?1:Math.sin(PI*x)/(PI*x);
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function chart({xmin,xmax,ymin,ymax,xlab='t (s)',ylab='Normalized amplitude',curves=[],stems=[],vlines=[],title=''}){
- const W=780,H=310,L=60,R=22,T=23,B=46,pw=W-L-R,ph=H-T-B;
+ const W=720,H=360,L=60,R=22,T=23,B=46,pw=W-L-R,ph=H-T-B;
  const xx=x=>L+(x-xmin)/(xmax-xmin)*pw,yy=y=>T+(ymax-y)/(ymax-ymin)*ph;
  let s=`<div class="plot-card"><div class="plot-title">${title}</div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}"><rect width="${W}" height="${H}" fill="var(--els-surface,white)"/>`;
  for(let i=0;i<=5;i++){let x=xmin+(xmax-xmin)*i/5,y=ymin+(ymax-ymin)*i/5;s+=`<line x1="${xx(x)}" y1="${T}" x2="${xx(x)}" y2="${H-B}" stroke="var(--els-border,#c9d3db)"/><text x="${xx(x)}" y="${H-B+20}" font-size="12" fill="var(--els-muted,#455663)" text-anchor="middle">${fmt(x,2)}</text><line x1="${L}" y1="${yy(y)}" x2="${W-R}" y2="${yy(y)}" stroke="var(--els-border,#c9d3db)"/><text x="${L-9}" y="${yy(y)+4}" text-anchor="end" font-size="12" fill="var(--els-muted,#455663)">${fmt(y,2)}</text>`}
