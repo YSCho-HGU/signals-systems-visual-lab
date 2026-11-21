@@ -149,6 +149,8 @@ html.ss7-native.ss7-standard .control output{font-size:13px;font-variant-numeric
 html.ss7-native.ss7-standard .plot-card{overflow:hidden;border-radius:12px}
 html.ss7-native.ss7-standard .plot-card .plot-title{padding:10px 12px;font-size:16px;line-height:1.4;font-weight:750;overflow-wrap:anywhere}
 html.ss7-native.ss7-standard .plot-card svg{display:block;width:100%;height:auto;min-width:0;max-width:100%;aspect-ratio:2/1}
+html.ss7-native.ss7-standard .plot-card svg text{font-size:15px!important}
+html.ss7-native.ss7-standard .plot-card svg text[transform]{font-size:16px!important}
 html.ss7-native.ss7-standard .plot-card .legend{padding:10px 12px;gap:8px 14px;font-size:13px;line-height:1.55}
 html.ss7-native.ss7-standard .plot-card .axis-key{font-size:13px;line-height:1.55;overflow-wrap:anywhere}
 html.ss7-native.ss7-standard .insight{font-size:16px;line-height:1.7;margin-top:14px;padding:12px 14px}
