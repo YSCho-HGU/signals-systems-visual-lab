@@ -103,22 +103,20 @@ html.ss8-native #plots:has(.ss8-roc-pair)>.plot-card{grid-column:1/-1}
 @media(max-width:780px){html.ss8-native #plots>.ss8-roc-pair{grid-template-columns:1fr}}
 
 
-/* Lesson 8.2: select a time-domain signal, inspect its H(z) derivation and ROC. */
+/* 8.2 unified stage order: h[n], transform, ROC. Observe keeps full graph width. */
+html.ss8-native #plots:has(.ss8-82-sequence){display:block!important}
+html.ss8-native .ss8-82-sequence{display:grid;gap:12px;min-width:0}
+html.ss8-native .ss8-82-stage{min-width:0;border:1px solid var(--els-border);background:var(--els-surface);border-radius:12px;padding:12px}
+html.ss8-native .ss8-82-stage h3{display:flex;align-items:center;gap:9px;font-size:16px;line-height:1.5;margin:0 0 11px;color:var(--els-ink)}
+html.ss8-native .ss8-82-stage h3>span{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:7px;background:var(--els-surface-alt);border:1px solid var(--els-border);font-size:14px}
+html.ss8-native .ss8-82-stage>.plot-card{margin:0;width:100%}
+html.ss8-native .ss8-82-equations{display:grid;gap:10px;min-width:0}
+html.ss8-native .ss8-equation-row{display:grid;grid-template-columns:76px minmax(0,1fr);align-items:center;gap:10px;min-width:0}
+html.ss8-native .ss8-equation-label{font-size:13px;font-weight:750;color:var(--els-muted)}
+html.ss8-native .ss8-math-source{font-size:16px;min-width:0;max-width:100%;overflow-x:auto;overflow-y:hidden;line-height:1.6;color:var(--els-ink)}
+html.ss8-native .ss8-math-source .katex-display{margin:.24em 0;text-align:left;overflow-x:auto;overflow-y:hidden}
+html.ss8-native .ss8-equation-summary{display:grid;gap:6px;border-top:1px solid var(--els-border);padding-top:10px;font-size:15px;color:var(--els-ink)}
+html.ss8-native .ss8-82-roc-formula{padding:8px 10px;background:var(--els-surface-alt);border-radius:8px;margin-bottom:9px;font-weight:700}
 html.ss8-native .ss8-comparison-context{display:grid;gap:5px;padding:12px;border:1px solid var(--els-border);border-radius:10px;background:var(--els-surface-alt);color:var(--els-ink)}
-html.ss8-native .ss8-comparison-context strong{font-size:15px}
 html.ss8-native .ss8-comparison-context small{font-size:13px;line-height:1.6}
-html.ss8-native #plots:has(.ss8-selected-inverse){display:block!important}
-html.ss8-native .ss8-selected-inverse{display:grid;gap:12px;min-width:0}
-html.ss8-native .ss8-selected-case{display:grid;gap:4px;padding:10px 13px;background:var(--els-surface-alt);border-left:4px solid var(--ss-trace-teal);border-radius:8px}
-html.ss8-native .ss8-selected-case strong{font-size:16px;color:var(--els-ink)}
-html.ss8-native .ss8-selected-case span{font-size:14px;color:var(--els-muted)}
-html.ss8-native .ss8-selected-pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,455px),1fr));gap:12px;min-width:0}
-html.ss8-native .ss8-selected-pair .plot-card{width:100%;min-width:0;margin:0}
-html.ss8-native .ss8-derive-preview{display:grid;gap:9px}
-html.ss8-native .ss8-derive-preview>strong{font-size:16px}
-html.ss8-native .ss8-derivation-line{display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--els-border)}
-html.ss8-native .ss8-derive-index{display:grid;place-items:center;font-size:13px;font-weight:800;background:var(--els-surface-alt);color:var(--els-ink);border-radius:7px;width:26px;height:26px}
-html.ss8-native .ss8-latex{min-width:0;max-width:100%;overflow-x:auto;color:var(--els-ink);font-size:16px}
-html.ss8-native .ss8-latex .katex-display{margin:.2em 0;text-align:left;overflow-x:auto}
-html.ss8-native .ss8-compare-result{font-size:15px;line-height:1.7}
-@media(max-width:840px){html.ss8-native .ss8-selected-pair{grid-template-columns:1fr}}
+@media(max-width:650px){html.ss8-native .ss8-equation-row{grid-template-columns:1fr}html.ss8-native .ss8-82-stage{padding:9px}}
