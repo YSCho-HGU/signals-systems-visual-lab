@@ -28,6 +28,26 @@ function init(){
  var reading=aside.querySelector('.reading'),check=document.getElementById('check');if(reading)interpret.appendChild(reading);if(check)interpret.appendChild(check);
  grid.appendChild(deriv);grid.appendChild(interpret);explain.appendChild(grid);
  layout.appendChild(lead);layout.appendChild(predict);layout.appendChild(pair);layout.appendChild(explain);
+ // Sampling 7.1: keep controls adjacent to both synchronized CT/DT plots.
+ // No numerical simulation code is replaced; the existing draw() owns both graphs.
+ var concept=node('div','ss7-sampling-concepts');
+ concept.innerHTML='<strong>From x(t) to x[n]</strong><p>Sample at t = nTₛ, where Tₛ = 1/fₛ. Then x[n] = cos(Ωn), Ω = 2πf/fₛ rad/sample.</p><div class="ss7-sampling-metrics" aria-live="polite"></div><p class="ss7-sampling-guidance">Change f with fₛ fixed: the discrete-time frequency changes although the index spacing stays at one sample. Change fₛ with f fixed: the sampling instants and x[n] change together. Compare frequencies that differ by an integer multiple of fₛ to investigate aliasing.</p>';
+ change.appendChild(concept);
+ function syncSampling(){
+  var isFirst=/^7\\.1(?:\\D|$)/.test((document.getElementById('title')||{}).textContent||'');
+  layout.classList.toggle('ss7-sampling-active',isFirst);
+  if(!isFirst)return;
+  var sliders=Array.from(controls.querySelectorAll('input[type="range"]'));
+  var f=Number(sliders[0]&&sliders[0].value),fs=Number(sliders[1]&&sliders[1].value);
+  var metrics=concept.querySelector('.ss7-sampling-metrics');
+  if(!Number.isFinite(f)||!Number.isFinite(fs)||fs<=0){metrics.textContent='Adjust the frequency and sampling-rate controls.';return}
+  var omega=2*Math.PI*f/fs,cycles=f/fs;
+  metrics.textContent='f = '+f+' Hz   ·   fₛ = '+fs+' Hz   ·   Tₛ = '+(1000/fs).toFixed(2)+' ms   ·   f/fₛ = '+cycles.toFixed(3)+' cycles/sample   ·   Ω = '+omega.toFixed(3)+' rad/sample';
+ }
+ controls.addEventListener('input',syncSampling);
+ document.addEventListener('ss-ch7-experiment-change',syncSampling);
+ syncSampling();
+
  root.replaceChildren(layout);
  // Keep the shared ss-vertical-layout sidebar. A second sidebar causes the toggle to occupy a separate column.
  var chapterHeader=document.querySelector('body > header > p');
