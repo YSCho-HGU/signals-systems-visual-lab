@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-21T11:30:33.480Z",
-  "sourceSha": "3dd06d71d8082f45c961deca9c45d2cf3caf27aa",
-  "runId": "44899354111",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44899354111",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/3dd06d71d8082f45c961deca9c45d2cf3caf27aa",
+  "generatedAt": "2026-11-21T11:31:37.970Z",
+  "sourceSha": "4705daf695172db4b65107f5ca54951f33ef576f",
+  "runId": "44899426578",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44899426578",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/4705daf695172db4b65107f5ca54951f33ef576f",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -33,7 +33,7 @@
     {
       "id": "G2",
       "label": "Native Chapter 6 browser journey",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
