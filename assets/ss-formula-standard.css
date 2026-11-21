@@ -1,8 +1,8 @@
-/* Shared Signals & Systems mathematical typography — Chapters 5, 6, 7.
+/* Shared Signals & Systems mathematical typography — Chapters 5, 6, 7, 8.
  * Rendering logic stays chapter-specific; only presentation is shared.
  * Loaded LAST in each chapter, after its native layout/theme styles.
  */
-:is(html.ss5-native,html.ss6-compact-workspace,html.ss7-native){
+:is(html.ss5-native,html.ss6-compact-workspace,html.ss7-native,html.ss8-native){
   --ss-math-inline-scale:1.08em;
   --ss-math-key-size:clamp(18px,1.6vw,22px);
   --ss-math-step-size:clamp(18px,1.55vw,22px);
@@ -40,7 +40,8 @@
 :is(
  html.ss5-native .formula .math,
  html.ss6-compact-workspace .ss6-theory-equation,
- html.ss7-native .ss7-key-equation
+ html.ss7-native .ss7-key-equation,
+ html.ss8-native .ss8-key-equation
 ){
   min-width:0;
   max-width:100%;
@@ -56,7 +57,8 @@
 :is(
  html.ss5-native .deriv-math,
  html.ss6-compact-workspace .deriv-math,
- html.ss7-native .ss7-stage-explain .step .math
+ html.ss7-native .ss7-stage-explain .step .math,
+ html.ss8-native .ss8-stage-explain .step .math
 ){
   min-width:0;
   max-width:100%;
@@ -75,7 +77,9 @@
  html.ss6-compact-workspace .ss6-theory-equation,
  html.ss6-compact-workspace .deriv-math,
  html.ss7-native .ss7-key-equation,
- html.ss7-native .ss7-stage-explain .step .math
+ html.ss7-native .ss7-stage-explain .step .math,
+ html.ss8-native .ss8-key-equation,
+ html.ss8-native .ss8-stage-explain .step .math
 ) .katex-display{
   margin:.25em 0!important;
   text-align:left!important;
@@ -88,7 +92,9 @@
  html.ss6-compact-workspace .ss6-theory-equation,
  html.ss6-compact-workspace .deriv-math,
  html.ss7-native .ss7-key-equation,
- html.ss7-native .ss7-stage-explain .step .math
+ html.ss7-native .ss7-stage-explain .step .math,
+ html.ss8-native .ss8-key-equation,
+ html.ss8-native .ss8-stage-explain .step .math
 ) .katex-display>.katex{
   text-align:left!important;
   white-space:nowrap;
@@ -99,13 +105,16 @@
  html.ss6-compact-workspace .ss6-theory-equation,
  html.ss6-compact-workspace .deriv-math,
  html.ss7-native .ss7-key-equation,
- html.ss7-native .ss7-stage-explain .step .math
+ html.ss7-native .ss7-stage-explain .step .math,
+ html.ss8-native .ss8-key-equation,
+ html.ss8-native .ss8-stage-explain .step .math
 ) .katex{
   font-size:1em!important;
   line-height:1.4;
   color:inherit;
 }
-:is(html.ss5-native .deriv-step,html.ss6-compact-workspace .deriv-step,html.ss7-native .ss7-stage-explain .step){
+:is(html.ss5-native .deriv-step,html.ss6-compact-workspace .deriv-step,html.ss7-native .ss7-stage-explain .step,
+ html.ss8-native .ss8-stage-explain .step){
   min-width:0;
 }
 html.ss5-native :is(.heading p,.reading-note p,.figure .sub,.quiz p,.deriv-step p,.guide-check),
