@@ -35,9 +35,40 @@ function init(){
  change.appendChild(concept);
  // Periodicity demonstration: identical DT samples for Ω and Ω+2πk.
  var periodic=node('section','ss7-periodicity');
- periodic.innerHTML='<div class="ss7-periodicity-title">Discrete-time frequency periodicity</div><label for="ss7-period-k">Integer frequency shift k</label><select id="ss7-period-k"><option value="-2">−2</option><option value="-1">−1</option><option value="0">0</option><option value="1" selected>+1</option><option value="2">+2</option></select><div class="ss7-period-equation" aria-live="polite"></div><div class="ss7-ct-compare"><div class="ss7-ct-title">Continuous-time signals: f, f + fₛ, f − fₛ</div><div class="ss7-ct-plot"></div><div class="ss7-ct-legend"><span>● f</span><span>● f + fₛ</span><span>● f − fₛ</span><span>◆ sampled values</span></div></div><div class="ss7-period-plot"></div><p class="ss7-period-note">The orange circles (Ω) and teal crosses (Ω + 2πk) coincide at every integer n. This is discrete-time frequency periodicity, not an assertion that the underlying continuous-time frequencies are identical.</p>';
+ periodic.innerHTML='<div class="ss7-periodicity-title">Discrete-time frequency periodicity</div><label for="ss7-period-k">Integer frequency shift k</label><select id="ss7-period-k"><option value="-2">−2</option><option value="-1">−1</option><option value="0">0</option><option value="1" selected>+1</option><option value="2">+2</option></select><div class="ss7-period-equation" aria-live="polite"></div><div class="ss7-ct-compare"><div class="ss7-ct-title">Continuous-time signals: f, f + fₛ, f − fₛ</div><div class="ss7-ct-plot"></div><div class="ss7-ct-animation"><button type="button" class="ss7-ct-play" aria-pressed="false">Play</button><button type="button" class="ss7-ct-reset">Reset</button><label>Speed <select class="ss7-ct-speed"><option value="1200">Slow</option><option value="650" selected>Normal</option><option value="300">Fast</option></select></label><output class="ss7-ct-step">n = 0</output></div><div class="ss7-ct-legend"><span>● f</span><span>● f + fₛ</span><span>● f − fₛ</span><span>◆ sampled values</span></div></div><div class="ss7-period-plot"></div><p class="ss7-period-note">The orange circles (Ω) and teal crosses (Ω + 2πk) coincide at every integer n. This is discrete-time frequency periodicity, not an assertion that the underlying continuous-time frequencies are identical.</p>';
  observe.appendChild(periodic);
  var shiftSelect=periodic.querySelector('#ss7-period-k');
+
+ var animation={running:false,frame:0,last:0,step:0};
+ var playButton=periodic.querySelector('.ss7-ct-play'),resetButton=periodic.querySelector('.ss7-ct-reset'),speedSelect=periodic.querySelector('.ss7-ct-speed'),stepOutput=periodic.querySelector('.ss7-ct-step');
+ function paintSamplingStep(){
+  var svg=periodic.querySelector('.ss7-ct-plot svg');if(!svg)return;
+  svg.querySelectorAll('[data-ss7-sample]').forEach(function(el){el.style.opacity=Number(el.dataset.ss7Sample)<=animation.step?'1':'0.12'});
+  var cursor=svg.querySelector('[data-ss7-cursor]'),x=38+(520-38-12)*animation.step/8;
+  if(cursor){cursor.setAttribute('x1',x);cursor.setAttribute('x2',x)}
+  stepOutput.textContent='n = '+animation.step+' · t = nTₛ';
+ }
+ function stopSampling(){
+  animation.running=false;playButton.textContent='Play';playButton.setAttribute('aria-pressed','false');
+  if(animation.frame)cancelAnimationFrame(animation.frame);animation.frame=0;animation.last=0;
+ }
+ function tickSampling(time){
+  if(!animation.running)return;
+  if(!animation.last)animation.last=time;
+  if(time-animation.last>=Number(speedSelect.value)){
+   animation.last=time;if(animation.step>=8){stopSampling();return}
+   animation.step++;paintSamplingStep();
+  }
+  animation.frame=requestAnimationFrame(tickSampling);
+ }
+ playButton.addEventListener('click',function(){
+  if(animation.running){stopSampling();return}
+  if(animation.step>=8)animation.step=0;
+  animation.running=true;animation.last=0;playButton.textContent='Pause';playButton.setAttribute('aria-pressed','true');
+  paintSamplingStep();animation.frame=requestAnimationFrame(tickSampling);
+ });
+ resetButton.addEventListener('click',function(){stopSampling();animation.step=0;paintSamplingStep()});
+ document.addEventListener('visibilitychange',function(){if(document.hidden)stopSampling()});
  function drawCTAliases(f,fs){
   var w=520,h=180,l=38,r=12,top=12,bottom=30,mid=(top+h-bottom)/2,amp=48;
   var duration=8/fs,colors=['#168c91','#cc8841','#9864b3'],freqs=[f,f+fs,f-fs];
@@ -55,7 +86,9 @@ function init(){
    graph+='<circle cx="'+x+'" cy="'+y+'" r="3.8" fill="#111" stroke="#fff" stroke-width="1.3"/>';
    if(n%2===0)graph+='<text x="'+x+'" y="'+(h-9)+'" font-size="10" text-anchor="middle" fill="currentColor">'+n+'</text>';
   }
+  graph+='<line data-ss7-cursor x1="38" x2="38" y1="12" y2="149" stroke="currentColor" stroke-dasharray="3 5" opacity=".65"/>';
   periodic.querySelector('.ss7-ct-plot').innerHTML='<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Three different continuous-time cosines with coincident samples at t equals n divided by sampling frequency">'+graph+'<text x="'+(w-r)+'" y="'+(h-9)+'" font-size="11" text-anchor="end" fill="currentColor">nTₛ</text></svg>';
+  paintSamplingStep();
   periodic.querySelector('.ss7-ct-title').textContent='Continuous time: '+f+' Hz, '+(f+fs)+' Hz, '+(f-fs)+' Hz (t = 0 … '+(1000*duration).toFixed(1)+' ms)';
  }
  function drawPeriodicity(omega){
@@ -84,6 +117,7 @@ function init(){
   if(!Number.isFinite(f)||!Number.isFinite(fs)||fs<=0){metrics.textContent='Adjust the frequency and sampling-rate controls.';return}
   var omega=2*Math.PI*f/fs,cycles=f/fs;
   drawPeriodicity(omega);
+  stopSampling();animation.step=0;
   drawCTAliases(f,fs);
   metrics.textContent='f = '+f+' Hz   ·   fₛ = '+fs+' Hz   ·   Tₛ = '+(1000/fs).toFixed(2)+' ms   ·   f/fₛ = '+cycles.toFixed(3)+' cycles/sample   ·   Ω = '+omega.toFixed(3)+' rad/sample';
  }
