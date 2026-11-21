@@ -260,7 +260,7 @@ if(frameWrap){
  }
 `;
  function applyIframeLayout(){
-  if(!currentChapter())return;
+  if(!currentChapter()||currentChapter()===7)return;
   try{
    const doc=frame.contentDocument;
    if(!doc||!doc.documentElement)return;
