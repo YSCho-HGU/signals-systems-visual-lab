@@ -350,6 +350,7 @@ function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
 <script src="./assets/ss-ch5-math.js?v=1"></script>
 <script src="./assets/ss-ch5-inline-math.js?v=1"></script>
 <script src="./assets/ss-ch5-explicit-math.js?v=1"></script>
+<script src="./assets/ss-ch5-reading-math.js?v=1"></script>
 
 <style id="ss5-katex-enhancements">
 .ss5-native .formula .katex-display{margin:.15em 0!important;overflow-x:auto;overflow-y:hidden;text-align:left}
@@ -677,6 +678,7 @@ function revealGuide(moduleId,state,guideFactory){
  guideView.previous[moduleId]=n;
  rp.innerHTML=`<div class="ss5-flow-label"><span>03</span><strong>Explain / 이유 설명</strong></div><h3>Why did the graphs change? / 그래프가 왜 변했을까요?</h3><p class="ss5-flow-intro">Use the transform, ROC and pole positions to explain the observation. / 변환식·ROC·pole 위치를 근거로 설명해 보세요.</p><div class="reading-grid">${d.graphs.map((v,i)=>`<div class="reading-note"><span class="plot-number">GRAPH ${String(i+1).padStart(2,'0')}</span><strong>${v.title}</strong><p>${v.en}</p><p class="ko-explain">${v.ko}</p></div>`).join('')}</div><section class="ss5-check"><div class="ss5-flow-label"><span>04</span><strong>Check / 개념 확인</strong></div><p class="guide-check"><strong>Interpretation checkpoint / 해석 점검:</strong> ${d.check}</p><label class="ss5-check-toggle"><input type="checkbox" id="ss5-selfcheck"> I can explain the result / 결과를 설명할 수 있습니다</label></section>`;
  chapter5ApplyReadingNotes(moduleId,state,rp);
+ window.ELSChapterFiveReadingMath?.apply(moduleId,state,rp);
  window.ELSChapterFiveInlineMath?.render(rp);
  ss5RestoreCheck(moduleId);
 }
