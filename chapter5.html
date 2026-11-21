@@ -20,26 +20,26 @@
 .guide-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
 .guide-head h3,.reading-panel h3{font-size:18px;line-height:1.35;margin:5px 0 8px;color:#173046}
 .guide-head p{font-size:12px;color:#526a7c;margin:0 0 14px}
-.progress-badge{background:#e6f4f5;color:#086c76;font:700 12px system-ui,sans-serif;padding:6px 11px;border-radius:18px;white-space:nowrap}
-.guide-track{height:5px;background:#dcebee;border-radius:8px;margin:4px 0 14px;overflow:hidden}
-.guide-track>div{height:100%;background:#0e8491;border-radius:8px;transition:width .38s ease}
+.progress-badge{background:var(--els-surface-alt);color:var(--els-ink);font:700 12px system-ui,sans-serif;padding:6px 11px;border-radius:18px;white-space:nowrap}
+.guide-track{height:5px;background:var(--els-surface-alt);border-radius:8px;margin:4px 0 14px;overflow:hidden}
+.guide-track>div{height:100%;background:var(--els-link);border-radius:8px;transition:width .38s ease}
 .guide-steps{display:grid;gap:10px}
-.deriv-step{border:1px solid #dfe9ee;border-radius:12px;padding:12px 14px;background:#fcfdfd;min-width:0}
-.deriv-step.guide-enter{animation:guideReveal .58s cubic-bezier(.18,.65,.27,1) both;border-color:#75c5c7;background:#f2faf9}
+.deriv-step{border:1px solid var(--els-border);border-radius:12px;padding:12px 14px;background:var(--els-surface);min-width:0}
+.deriv-step.guide-enter{animation:guideReveal .58s cubic-bezier(.18,.65,.27,1) both;border-color:var(--els-link);background:var(--els-surface-alt)}
 @keyframes guideReveal{from{opacity:0;transform:translateY(19px);filter:blur(2px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
 .deriv-top{display:flex;align-items:center;gap:9px;font-size:13px;color:#173046;min-width:0}
-.step-index{display:inline-flex;align-items:center;justify-content:center;background:#e3f2f3;color:#087680;border-radius:50%;height:24px;width:24px;min-width:24px;font-size:12px;font-weight:800}
-.deriv-math{margin:9px 0;color:#174b5d;font-family:Cambria,'Cambria Math','Times New Roman',serif;font-size:17px;line-height:1.7;overflow-wrap:anywhere;white-space:normal;overflow-x:auto;padding:6px 10px;background:#eef7f8;border-left:3px solid #0e8491;border-radius:6px}
+.step-index{display:inline-flex;align-items:center;justify-content:center;background:var(--els-surface-alt);color:var(--els-ink);border-radius:50%;height:24px;width:24px;min-width:24px;font-size:12px;font-weight:800}
+.deriv-math{margin:9px 0;color:var(--els-ink);font-family:Cambria,'Cambria Math','Times New Roman',serif;font-size:17px;line-height:1.7;overflow-wrap:anywhere;white-space:normal;overflow-x:auto;padding:6px 10px;background:var(--els-surface-alt);border-left:3px solid var(--els-link);border-radius:6px}
 .deriv-step p{font-size:13px;color:#486272;margin:8px 0 0;line-height:1.68}
 .guide-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
-.guide-actions button{background:#fff;color:#20546a;border:1px solid #c8dce5;border-radius:9px;padding:9px 12px;font:700 12px system-ui,'Malgun Gothic',sans-serif;cursor:pointer}
-.guide-actions button:hover{background:#edf8f8;border-color:#0e8491}
+.guide-actions button{background:var(--els-surface-alt);color:var(--els-ink);border:1px solid var(--els-border);border-radius:9px;padding:9px 12px;font:700 12px system-ui,'Malgun Gothic',sans-serif;cursor:pointer}
+.guide-actions button:hover{background:var(--els-info-bg);border-color:var(--els-link)}
 .guide-actions button:disabled{opacity:.4;cursor:not-allowed}
 .guide-actions button.primary{color:#fff;background:#0e8491;border-color:#0e8491}
 .guide-actions button:focus-visible{outline:3px solid #e7ac3f;outline-offset:2px}
-.reading-panel{background:#fafdfd}
+.reading-panel{background:var(--els-surface)}
 .reading-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-.reading-note{padding:11px 12px;border:1px solid #dce9eb;border-radius:12px;background:#fff}
+.reading-note{padding:11px 12px;border:1px solid var(--els-border);border-radius:12px;background:var(--els-surface)}
 .plot-number{font-size:10px;letter-spacing:.09em;color:#0e8491;font-weight:800;display:block;margin-bottom:5px}
 .reading-note strong{display:block;color:#173046;font-size:13px}
 .reading-note p{font-size:12px;line-height:1.62;margin:6px 0 0;color:#344f60}
@@ -75,13 +75,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 @media(prefers-reduced-motion:reduce){.deriv-step{animation:none!important}}
 
 
-/* Rev7 audited text contrast: no Light Mode ink inside dark surfaces. */
-:root{--ss-axis-text:#274f64;--ss-axis-bg:#f1f8fa}
-.axis-key{display:flex;flex-wrap:wrap;align-items:center;gap:5px 13px;margin:8px 0 4px;padding:8px 11px;border-radius:8px;border:1px solid #cfe1e9;background:var(--ss-axis-bg);color:var(--ss-axis-text);font:600 12px/1.55 system-ui,'Malgun Gothic',sans-serif;overflow-wrap:anywhere}
-.axis-key .ax-strong{font-weight:850;color:#086d79}
-@media(max-width:560px){.axis-key{font-size:11px;gap:4px 9px;padding:7px 8px}}
-
-
+/* Graph-axis guidance uses the canonical palette in ss-ch5-standalone.css. */
 /* Rev8: interactive graph probe, color-contrast safe in both themes. */
 .ss-hover-tip{position:absolute;z-index:35;pointer-events:none;display:none;min-width:190px;max-width:min(310px,calc(100% - 16px));padding:11px 12px;border-radius:11px;border:1px solid #4c8190;background:#102d41;color:#f1fbff;box-shadow:0 9px 26px rgba(5,22,36,.32);font:500 12px/1.55 system-ui,'Malgun Gothic',sans-serif;white-space:normal;overflow-wrap:anywhere}
 .ss-hover-tip .ss-hover-title{font-weight:800;color:#adf2f2;font-size:12px;margin-bottom:4px}
@@ -95,7 +89,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 .ss-hover-v{width:1px;border-left:1px dashed #f18b63;background:transparent}
 .ss-hover-h{height:1px;border-top:1px dashed #f18b63;background:transparent}
 .ss-hover-dot{position:absolute;display:none;pointer-events:none;z-index:31;width:11px;height:11px;border-radius:50%;border:2px solid #fff;background:#ed7954;box-shadow:0 0 0 1px #123a4e;transform:translate(-50%,-50%)}
-.ss-hover-hint{font:600 11px/1.5 system-ui,'Malgun Gothic',sans-serif;color:#23576a;margin:5px 0 2px;letter-spacing:.01em}
+.ss-hover-hint{font:600 11px/1.5 system-ui,'Malgun Gothic',sans-serif;color:var(--els-muted);margin:5px 0 2px;letter-spacing:.01em}
 .ss-hover-target:focus-visible{outline:3px solid #ee9868;outline-offset:3px}
 @media(max-width:560px){.ss-hover-tip{max-width:min(290px,calc(100% - 12px));padding:9px 10px;font-size:11px}.ss-hover-hint{font-size:10px}}
 
