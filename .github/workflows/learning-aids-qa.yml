@@ -10,6 +10,7 @@ on:
       - 'assets/ss-learning-path.js'
       - 'index.html'
       - 'tests/learning-aids-qa.mjs'
+      - 'tests/ch7-header-nav-e2e.mjs'
       - 'package.json'
       - '.github/workflows/learning-aids-qa.yml'
 jobs:
@@ -27,11 +28,15 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Run desktop and mobile Chromium E2E tests
         run: npm run qa:learning
+      - name: Verify Chapter 7 header and seven direct-navigation labs
+        run: node tests/ch7-header-nav-e2e.mjs
       - name: Upload test evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ss-learning-aids-e2e
-          path: qa-learning-output/
+          path: |
+            qa-learning-output/
+            qa-ch7/
           if-no-files-found: warn
           retention-days: 14
