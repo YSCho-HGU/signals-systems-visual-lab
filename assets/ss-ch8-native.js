@@ -4,7 +4,7 @@
 const KEY='els-ss-lab-progress-v1';
 const TOTAL=62;
 const $=id=>document.getElementById(id);
-const names=['Why Z?','Two ROC, two signals','Two-sided ROC','Partial fractions','Pole & frequency','FIR cancellation','BIBO convergence','Digital sensor smoother'];
+const names=['Z-Transform & ROC','Right- vs Left-Sided Signals','Two-Sided ROC','Inverse Z: Partial Fractions','Poles & Frequency Response','FIR Zero Cancellation','BIBO Stability & ROC','IIR Sensor Smoothing'];
 function active(){return window.SSChapter8?.currentExperiment||1}
 function stored(){try{const x=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(x)?x.filter(v=>typeof v==='string'):[]}catch{return[]}}
 function updateProgress(){
