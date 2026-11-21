@@ -5,6 +5,20 @@
 const EQ=[["X(z)=\\sum_{n=-\\infty}^{\\infty}x[n]z^{-n}","X(z)=\\sum_{n=0}^{\\infty}(az^{-1})^n","X(z)=\\frac{1}{1-az^{-1}},\\quad |z|>|a|","z=a,\\quad \\mathrm{ROC}:\\ |z|>|a|"],["H(z)=\\frac{1}{1-az^{-1}}\\quad(\\text{same algebraic expression})","h_R[n]=a^nu[n],\\qquad\\mathrm{ROC}:|z|>|a|","h_L[n]=-a^nu[-n-1],\\qquad\\mathrm{ROC}:|z|<|a|","(H(z),\\mathrm{ROC})\\longleftrightarrow h[n]"],["X_R(z)=\\frac{1}{1-az^{-1}},\\quad |z|>a","X_L(z)=\\frac{1}{1-bz^{-1}},\\quad |z|<b","X(z)=\\frac{z(2z-a-b)}{(z-a)(z-b)},\\quad a<|z|<b","0<a<1<b\\ \\Rightarrow\\ |z|=1\\text{ lies in ROC}"],["X(z)=\\frac1{(1-az^{-1})(1-bz^{-1})}","\\begin{aligned}1&=A(1-bz^{-1})+B(1-az^{-1})\\\\ A+B&=1,\\qquad bA+aB=0\\\\ A&=-\\frac{a}{b-a},\\quad B=\\frac{b}{b-a}\\end{aligned}","\\begin{cases}|z|>b:\\ RR\\\\a<|z|<b:\\ RL\\\\|z|<a:\\ LL\\end{cases}","x[n]=x_1[n]+x_2[n],\\quad\\mathcal Z\\{x[n]\\}=X(z)"],["y[n]=ay[n-1]+(1-a)x[n]","H(z)=\\frac{1-a}{1-az^{-1}}","z_p=a,\\quad\\mathrm{ROC}:\\ |z|>|a|","|H(e^{j\\Omega})|=\\frac{|1-a|}{\\sqrt{1+a^2-2a\\cos\\Omega}}"],["y[n]=\\frac1N\\sum_{k=0}^{N-1}x[n-k]","H(e^{j\\Omega})=\\frac1N\\sum_{k=0}^{N-1}e^{-j\\Omega k}","H(z)=\\frac1N\\sum_{k=0}^{N-1}z^{-k}","z_m=e^{j2\\pi m/N}\\ (m=1,\\ldots,N-1),\\quad\\mathrm{ROC}:|z|>0"],["h[n]=a^nu[n]\\quad\\mathrm{or}\\quad h[n]=-a^nu[-n-1]","S(M)=\\sum_{k=1}^{M}|h[n_k]|,\\quad n_k=\\begin{cases}k-1&\\text{causal}\\\\-k&\\text{anti-causal}\\end{cases}","\\text{Right-sided: }a<1,\\quad\\text{left-sided: }a>1","\\text{BIBO stable}\\iff\\sum_n|h[n]|<\\infty\\iff |z|=1\\text{ in ROC}"],["x[n]=s[n]+v[n],\\quad y[n]=ay[n-1]+(1-a)x[n]","y\\leftarrow a\\,y_{\\mathrm{prev}}+(1-a)x,\\quad y_{\\mathrm{prev}}\\leftarrow y","H(z)=\\frac{1-a}{1-az^{-1}},\\quad\\mathrm{ROC}:|z|>|a|","h[n]=(1-a)a^nu[n],\\quad H(e^{j\\Omega})=H(z)|_{z=e^{j\\Omega}}"]];
 const KEY=[0,0,2,1,1,2,3,2];
 const CH82=[String.raw`H(z)=\sum_{n=0}^{\infty}(0.8z^{-1})^n=\frac{1}{1-0.8z^{-1}},\quad|z|>0.8`,String.raw`H(z)=-\sum_{n=-\infty}^{-1}(0.8z^{-1})^n=\frac{1}{1-0.8z^{-1}},\quad|z|<0.8`];
+const CH82_STEPS={
+ right:[
+ String.raw`h_R[n]=(0.8)^n u[n]`,
+ String.raw`H_R(z)=\\sum_{n=0}^{\\infty}(0.8z^{-1})^n`,
+ String.raw`H_R(z)=\\frac1{1-0.8z^{-1}},\\quad |0.8z^{-1}|<1`,
+ String.raw`\\mathrm{ROC}_R:\\quad |z|>0.8`
+ ],
+ left:[
+ String.raw`h_L[n]=-(0.8)^n u[-n-1]`,
+ String.raw`H_L(z)=-\\sum_{n=-\\infty}^{-1}(0.8z^{-1})^n`,
+ String.raw`H_L(z)=-\\sum_{k=1}^{\\infty}(z/0.8)^k=\\frac1{1-0.8z^{-1}}`,
+ String.raw`\\mathrm{ROC}_L:\\quad |z|<0.8`
+ ]
+};
 let pending=false;
 function render(){
  pending=false;
@@ -33,10 +47,10 @@ function render(){
   catch(e){el.textContent=latex;console.warn('Ch8 plot derivation fallback',e)}
  });
  container.querySelectorAll('.step .math').forEach((element,i)=>{
-  const index=all?i:current,latex=row[index];
+  const index=all?i:current,latex=lesson===2?CH82_STEPS[direction==='left'?'left':'right'][index]:row[index];
   if(!latex)return;
-  if(element.dataset.ss8Math===lesson+':'+index)return;
-  try{window.katex.render(latex,element,{displayMode:true,throwOnError:true,strict:'ignore'});element.dataset.ss8Math=lesson+':'+index;element.setAttribute('aria-label',latex)}
+  if(element.dataset.ss8Math===lesson+':'+direction+':'+index)return;
+  try{window.katex.render(latex,element,{displayMode:true,throwOnError:true,strict:'ignore'});element.dataset.ss8Math=lesson+':'+direction+':'+index;element.setAttribute('aria-label',latex)}
   catch(e){console.warn('Chapter 8 derivation fallback',lesson,index,e)}
  });
 }
