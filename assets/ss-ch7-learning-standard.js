@@ -37,6 +37,23 @@ function init(){
  var periodic=node('section','ss7-periodicity');
  periodic.innerHTML='<div class="ss7-periodicity-title">Discrete-time frequency periodicity</div><label for="ss7-period-k">Integer frequency shift k</label><select id="ss7-period-k"><option value="-2">−2</option><option value="-1">−1</option><option value="0">0</option><option value="1" selected>+1</option><option value="2">+2</option></select><div class="ss7-period-equation" aria-live="polite"></div><div class="ss7-ct-compare"><div class="ss7-ct-title">Continuous-time signals: f, f + fₛ, f − fₛ</div><div class="ss7-ct-plot"></div><div class="ss7-ct-animation"><button type="button" class="ss7-ct-play" aria-pressed="false">Play</button><button type="button" class="ss7-ct-reset">Reset</button><label>Speed <select class="ss7-ct-speed"><option value="1200">Slow</option><option value="650" selected>Normal</option><option value="300">Fast</option></select></label><output class="ss7-ct-step">n = 0</output></div><div class="ss7-ct-legend"><span>● f</span><span>● f + fₛ</span><span>● f − fₛ</span><span>◆ sampled values</span></div></div><div class="ss7-period-plot"></div><p class="ss7-period-note">The orange circles (Ω) and teal crosses (Ω + 2πk) coincide at every integer n. This is discrete-time frequency periodicity, not an assertion that the underlying continuous-time frequencies are identical.</p>';
  observe.appendChild(periodic);
+ var animate=node('div','ss7-alias-animate');
+ animate.innerHTML='<button type="button" class="ss7-alias-play">Play</button><button type="button" class="ss7-alias-reset">Reset</button><label>n <input type="range" class="ss7-alias-frame" min="0" max="8" value="0" step="1"></label><output class="ss7-alias-status">n = 0</output>';
+ periodic.querySelector('.ss7-ct-compare').appendChild(animate);
+ var frame=0,running=false,raf=0,last=0,sampleF=0,sampleFs=1;
+ function paintFrame(){
+  var svg=periodic.querySelector('.ss7-ct-plot svg');if(!svg)return;
+  svg.querySelectorAll('.ss7-alias-dot').forEach(function(dot,i){dot.setAttribute('opacity',i<=frame?'1':'.12')});
+  animate.querySelector('.ss7-alias-frame').value=frame;
+  animate.querySelector('.ss7-alias-status').textContent='n = '+frame+' · t = '+(1000*frame/sampleFs).toFixed(2)+' ms · x[n] = '+Math.cos(2*Math.PI*sampleF*frame/sampleFs).toFixed(3);
+ }
+ function pauseFrame(){running=false;if(raf)cancelAnimationFrame(raf);raf=0;last=0;animate.querySelector('.ss7-alias-play').textContent='Play'}
+ function tickFrame(time){if(!running)return;if(!last)last=time;if(time-last>=600){frame=(frame+1)%9;last=time;paintFrame()}raf=requestAnimationFrame(tickFrame)}
+ animate.querySelector('.ss7-alias-play').addEventListener('click',function(){if(running){pauseFrame();return}running=true;this.textContent='Pause';raf=requestAnimationFrame(tickFrame)});
+ animate.querySelector('.ss7-alias-reset').addEventListener('click',function(){pauseFrame();frame=0;paintFrame()});
+ animate.querySelector('.ss7-alias-frame').addEventListener('input',function(){pauseFrame();frame=Number(this.value);paintFrame()});
+ document.addEventListener('visibilitychange',function(){if(document.hidden)pauseFrame()});
+
  var shiftSelect=periodic.querySelector('#ss7-period-k');
 
  var animation={running:false,frame:0,last:0,step:0};
@@ -83,12 +100,13 @@ function init(){
   }
   for(var n=0;n<=8;n++){
    var x=l+(w-l-r)*n/8,y=mid-amp*Math.cos(2*Math.PI*f*n/fs);
-   graph+='<circle cx="'+x+'" cy="'+y+'" r="3.8" fill="#111" stroke="#fff" stroke-width="1.3"/>';
+   graph+='<circle class="ss7-alias-dot" cx="'+x+'" cy="'+y+'" r="4" fill="var(--els-ink,#222)" stroke="var(--els-surface,#fff)" stroke-width="1.3"/>';
    if(n%2===0)graph+='<text x="'+x+'" y="'+(h-9)+'" font-size="10" text-anchor="middle" fill="currentColor">'+n+'</text>';
   }
   graph+='<line data-ss7-cursor x1="38" x2="38" y1="12" y2="149" stroke="currentColor" stroke-dasharray="3 5" opacity=".65"/>';
   periodic.querySelector('.ss7-ct-plot').innerHTML='<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Three different continuous-time cosines with coincident samples at t equals n divided by sampling frequency">'+graph+'<text x="'+(w-r)+'" y="'+(h-9)+'" font-size="11" text-anchor="end" fill="currentColor">nTₛ</text></svg>';
   paintSamplingStep();
+  sampleF=f;sampleFs=fs;paintFrame();
   periodic.querySelector('.ss7-ct-title').textContent='Continuous time: '+f+' Hz, '+(f+fs)+' Hz, '+(f-fs)+' Hz (t = 0 … '+(1000*duration).toFixed(1)+' ms)';
  }
  function drawPeriodicity(omega){
@@ -118,7 +136,7 @@ function init(){
   var omega=2*Math.PI*f/fs,cycles=f/fs;
   drawPeriodicity(omega);
   stopSampling();animation.step=0;
-  drawCTAliases(f,fs);
+  pauseFrame();frame=0;drawCTAliases(f,fs);
   metrics.textContent='f = '+f+' Hz   ·   fₛ = '+fs+' Hz   ·   Tₛ = '+(1000/fs).toFixed(2)+' ms   ·   f/fₛ = '+cycles.toFixed(3)+' cycles/sample   ·   Ω = '+omega.toFixed(3)+' rad/sample';
  }
  controls.addEventListener('input',syncSampling);
