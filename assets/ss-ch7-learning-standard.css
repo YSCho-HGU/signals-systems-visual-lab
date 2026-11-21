@@ -58,33 +58,8 @@ html.ss7-standard[data-els-theme] :is(.card,.ss7-card,.step,.control,.reading .n
 @media(max-width:1050px){html.ss7-standard .ss7-stage-pair{grid-template-columns:minmax(230px,.4fr) minmax(0,.6fr)}html.ss7-standard .ss7-explain-grid{grid-template-columns:1fr}}
 @media(max-width:730px){html.ss7-standard .ss7-stage-pair{grid-template-columns:1fr}html.ss7-standard main{padding:12px}html.ss7-standard .ss7-card{padding:12px}html.ss7-standard .control{grid-template-columns:1fr}}
 
-/* Left TOC, consistent with Chapter 5/6; keep wide graph region */
-html.ss7-standard .ss7-workspace{display:grid;grid-template-columns:210px minmax(0,1fr);gap:15px;align-items:start}
-html.ss7-standard .ss7-workspace>nav{display:flex;flex-direction:column;gap:7px;position:sticky;top:8px;max-height:calc(100dvh - 20px);overflow-y:auto;overflow-x:hidden;margin:0;padding:10px;background:var(--els-surface,#fff);border:1px solid var(--els-border,#ccc);border-radius:11px}
-html.ss7-standard .ss7-workspace>nav button{width:100%;max-width:none;text-align:left;font-size:13px;white-space:normal}
-html.ss7-standard .ss7-workspace>nav button small{font-size:12px;line-height:1.35;margin-top:3px}
-html.ss7-standard .ss7-workspace-content{min-width:0}
-html.ss7-standard .ss7-workspace-content .experiment{min-width:0}
-html.ss7-standard .ss7-workspace-content .ss7-stage-pair{grid-template-columns:minmax(240px,.38fr) minmax(0,.62fr)}
-html.ss7-standard .ss7-stage-observe .plot-grid{min-width:0}
-html.ss7-standard .ss7-stage-observe .plot-card{min-width:0}
-html.ss7-standard .ss7-stage-observe .plot-card svg{max-height:390px}
-html.ss7-standard .ss7-predict-prompt{padding:4px 0}
-@media(max-width:1100px){
- html.ss7-standard .ss7-workspace{grid-template-columns:175px minmax(0,1fr);gap:10px}
- html.ss7-standard .ss7-workspace-content .ss7-stage-pair{grid-template-columns:minmax(190px,.4fr) minmax(0,.6fr)}
-}
-@media(max-width:850px){
- html.ss7-standard .ss7-workspace{grid-template-columns:minmax(0,1fr)}
- html.ss7-standard .ss7-workspace>nav{position:static;flex-direction:row;overflow-x:auto;overflow-y:hidden;max-height:none;padding:8px}
- html.ss7-standard .ss7-workspace>nav button{width:auto;min-width:145px;max-width:200px;flex:0 0 auto}
- html.ss7-standard .ss7-workspace-content .ss7-stage-pair{grid-template-columns:1fr}
-}
-
-/* Chapter 7 single-TOC structural correction v4 */
-html.ss7-standard .ss-vertical-layout{display:block!important;grid-template-columns:minmax(0,1fr)!important;width:100%;min-width:0}
-html.ss7-standard .ss-vertical-layout>.ss-vertical-sidebar{display:none!important}
-html.ss7-standard .ss-vertical-layout>.ss-vertical-main{width:100%;min-width:0;padding:0!important}
+/* Chapter 7 now uses the host's single navigation. No inner sidebar is generated. */
 html.ss7-standard main{max-width:none!important;width:100%;padding:12px clamp(10px,1.6vw,24px)}
+html.ss7-standard .ss7-standard-layout{width:100%;max-width:none;min-width:0}
 html.ss7-standard body>header{display:none!important}
-html.ss7-standard .ss7-standard-layout{max-width:none;min-width:0}
+@media(max-width:850px){html.ss7-standard .ss7-stage-pair{grid-template-columns:1fr!important}}
