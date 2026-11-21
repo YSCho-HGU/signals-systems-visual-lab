@@ -220,7 +220,6 @@ html[data-theme="dark"] .chapter-card{border-color:#496e81!important}
 <a class="els-ss-studio-home ss5-home ss-common-home" href="./index.html#overview">← Studio</a>
 <details class="els-ss-chapter-menu ss5-chapter-menu ss-common-menu"><summary class="els-ss-chapter-title ss5-site-title ss-common-title" id="els-ss-chapter-title">Signals &amp; Systems · Choose Chapter <span aria-hidden="true">⌄</span></summary><nav class="els-ss-chapter-links ss5-chapter-links ss-common-links" aria-label="Choose Chapter"></nav></details>
 <div class="els-ss-settings ss5-header-actions ss-common-actions"><div class="theme-picker"><label for="ss-language-select">Language</label><select id="ss-language-select" aria-label="Language presentation mode"><option value="mixed">English + 한국어</option><option value="en">English</option><option value="ko">한국어</option></select></div><div class="theme-picker"><label for="theme-select">Theme</label><select id="theme-select" aria-label="Display theme / 화면 모드"><option value="system">◐ 시스템</option><option value="light">☀ 라이트</option><option value="dark">☾ 다크</option></select></div></div>
-<div class="els-ss-hidden-nav" hidden><nav class="topnav" aria-label="Main navigation"><button type="button" class="navbtn" data-route="overview">Overview</button><button type="button" class="navbtn" data-route="map">Learning Map</button><a class="navbtn" id="ss-textbook-viewer-link" href="https://yscho-hgu.github.io/engineering-learning-studio/textbook-viewer/?course=ss">Textbook Viewer</a><button type="button" class="navbtn" data-route="chapter=1">Ch 1</button><button type="button" class="navbtn" data-route="chapter=2">Ch 2</button><button type="button" class="navbtn" data-route="chapter=3">Ch 3</button><button type="button" class="navbtn" data-route="chapter=4">Ch 4</button><button type="button" class="navbtn" data-route="chapter=5">Ch 5</button><button type="button" class="navbtn" data-route="chapter=6">Ch 6</button><button type="button" class="navbtn" data-route="chapter=7">Ch 7</button><button type="button" class="navbtn" data-route="chapter=8">Ch 8</button></nav></div>
 </header>
 <main id="overview" tabindex="-1"><div class="ss-home-wrap">
 <div class="ss-breadcrumb"><a href="https://yscho-hgu.github.io/engineering-learning-studio/">Engineering Learning Studio</a> / Signals &amp; Systems</div>
@@ -517,19 +516,7 @@ byId('fb-github').addEventListener('click',()=>{
  applyTheme();
 })();
 
-</script><script src="./assets/ss-publication.js?v=1" defer></script><script src="./assets/els-language.js?v=1" defer></script><script src="./assets/ss-language.js?v=2" defer></script><script src="./assets/ss-learning-path.js?v=8" defer></script><script src="./assets/ss-progress.js?v=2" defer></script><script src="./assets/ss-applications.js?v=1" defer></script><script src="./assets/ss-learning-aids.js?v=1" defer></script><script src="./assets/els-theme-v2.js?v=6" defer></script><script>
-/* Pass the active Signals & Systems palette to the shared viewer without changing saved settings. */
-(function(){
- const a=document.getElementById("ss-textbook-viewer-link");
- if(!a)return;
- a.addEventListener("click",function(){
-   const theme=document.documentElement.dataset.elsTheme||"neutral-dark";
-   const u=new URL(a.href);
-   u.searchParams.set("theme",theme);
-   a.href=u.href;
- });
-})();
-</script><script id="els-ss-unified-header-router">(function(){
+</script><script src="./assets/ss-publication.js?v=1" defer></script><script src="./assets/els-language.js?v=1" defer></script><script src="./assets/ss-language.js?v=2" defer></script><script src="./assets/ss-learning-path.js?v=8" defer></script><script src="./assets/ss-progress.js?v=2" defer></script><script src="./assets/ss-applications.js?v=1" defer></script><script src="./assets/ss-learning-aids.js?v=1" defer></script><script src="./assets/els-theme-v2.js?v=6" defer></script><script id="els-ss-unified-header-router">(function(){
 var titles={"1":"Signals & Systems","2":"LTI Systems","3":"Fourier Series","4":"CTFT","5":"Laplace Transform","6":"DTFT","7":"Sampling","8":"Z-Transform"};
 function sync(){var match=location.hash.match(/chapter=(\d+)/),n=match?Number(match[1]):0;
 var title=document.getElementById('els-ss-chapter-title');
