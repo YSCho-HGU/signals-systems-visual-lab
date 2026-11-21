@@ -170,3 +170,17 @@ html.ss6-compact-workspace[data-els-theme] .ss6-control-plot-workspace + .ss6-in
 html.ss6-compact-workspace[data-els-theme] .ss6-control-plot-workspace :is(.ss6-step-controls,.ss6-observation-header){
  color:var(--ss-native-fg)!important
 }
+
+/* After moving the original Chapter 6 controls into the 2/3 workbench,
+   the outer experiment grid must become a single full-width column. */
+html.ss6-compact-workspace .experiment:has(.ss6-control-plot-workspace){
+ display:block!important;width:100%!important;min-width:0!important
+}
+html.ss6-compact-workspace .experiment:has(.ss6-control-plot-workspace)>.body-col{
+ display:block!important;width:100%!important;min-width:0!important;
+ grid-column:1/-1!important
+}
+html.ss6-compact-workspace .experiment:has(.ss6-control-plot-workspace) :is(.ss6-interpretation,.ss6-guide-details,.ss6-next-lesson,.ss6-progress){
+ width:100%!important;max-width:none!important;min-width:0!important;
+ box-sizing:border-box!important
+}
