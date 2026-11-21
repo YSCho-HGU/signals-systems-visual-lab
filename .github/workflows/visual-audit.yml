@@ -7,6 +7,7 @@ on:
     paths:
       - 'index.html'
       - 'chapter6.html'
+      - 'chapter7.html'
       - 'chapter5.html'
       - 'assets/**'
       - 'tests/**'
@@ -52,6 +53,10 @@ jobs:
           node tests/ch6-viewport-e2e.mjs || status=1
           node tests/ch5-viewport-e2e.mjs || status=1
           if [ "$status" -eq 0 ]; then echo PASS > qa-standard/G2.status; else echo FAIL > qa-standard/G2.status; fi
+
+      - name: G2c - Test native Chapter 7 layout, themes and seven lessons
+        run: |
+          if node tests/ch7-viewport-e2e.mjs; then echo PASS > qa-standard/G2c.status; else echo FAIL > qa-standard/G2c.status; fi
 
       - name: Chapter 5 - Verify inline equations and guided derivations across eight labs
         run: |
