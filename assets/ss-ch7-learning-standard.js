@@ -33,6 +33,27 @@ function init(){
  var concept=node('div','ss7-sampling-concepts');
  concept.innerHTML='<strong>From x(t) to x[n]</strong><p>Sample at t = nTₛ, where Tₛ = 1/fₛ. Then x[n] = cos(Ωn), Ω = 2πf/fₛ rad/sample.</p><div class="ss7-sampling-metrics" aria-live="polite"></div><p class="ss7-sampling-guidance">Change f with fₛ fixed: the discrete-time frequency changes although the index spacing stays at one sample. Change fₛ with f fixed: the sampling instants and x[n] change together. Compare frequencies that differ by an integer multiple of fₛ to investigate aliasing.</p>';
  change.appendChild(concept);
+ // Periodicity demonstration: identical DT samples for Ω and Ω+2πk.
+ var periodic=node('section','ss7-periodicity');
+ periodic.innerHTML='<div class="ss7-periodicity-title">Discrete-time frequency periodicity</div><label for="ss7-period-k">Integer frequency shift k</label><select id="ss7-period-k"><option value="-2">−2</option><option value="-1">−1</option><option value="0">0</option><option value="1" selected>+1</option><option value="2">+2</option></select><div class="ss7-period-equation" aria-live="polite"></div><div class="ss7-period-plot"></div><p class="ss7-period-note">The orange circles (Ω) and teal crosses (Ω + 2πk) coincide at every integer n. This is discrete-time frequency periodicity, not an assertion that the underlying continuous-time frequencies are identical.</p>';
+ observe.appendChild(periodic);
+ var shiftSelect=periodic.querySelector('#ss7-period-k');
+ function drawPeriodicity(omega){
+  var k=Number(shiftSelect.value),shifted=omega+2*Math.PI*k;
+  var eq=periodic.querySelector('.ss7-period-equation');
+  eq.textContent='Ω = '+omega.toFixed(3)+' rad/sample; Ω + 2π('+k+') = '+shifted.toFixed(3)+' rad/sample';
+  var w=520,h=180,l=35,r=15,top=15,bottom=31,mid=(top+h-bottom)/2,scale=(h-bottom-top)*0.38;
+  var lines='<line x1="'+l+'" y1="'+mid+'" x2="'+(w-r)+'" y2="'+mid+'" stroke="currentColor" opacity=".4"/>';
+  for(var n=0;n<=12;n++){
+   var x=l+(w-l-r)*n/12,y=mid-scale*Math.cos(omega*n),y2=mid-scale*Math.cos(shifted*n);
+   lines+='<line x1="'+x+'" y1="'+mid+'" x2="'+x+'" y2="'+y+'" stroke="#cc8841" stroke-width="1.4"/>';
+   lines+='<circle cx="'+x+'" cy="'+y+'" r="4.1" fill="#cc8841"/>';
+   lines+='<path d="M'+(x-3.5)+' '+(y2-3.5)+' l7 7 M'+(x+3.5)+' '+(y2-3.5)+' l-7 7" stroke="#168c91" stroke-width="1.8" fill="none"/>';
+   if(n%2===0)lines+='<text x="'+x+'" y="'+(h-9)+'" text-anchor="middle" font-size="11" fill="currentColor">'+n+'</text>';
+  }
+  periodic.querySelector('.ss7-period-plot').innerHTML='<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Coincident samples of cos(Ωn) and cos((Ω+2πk)n) for integer n">'+lines+'<text x="'+(w-r)+'" y="'+(h-9)+'" text-anchor="end" font-size="12" fill="currentColor">n</text></svg><div class="ss7-period-legend"><span><i class="ss7-period-dot"></i>cos(Ωn)</span><span><i class="ss7-period-cross">×</i>cos((Ω+2πk)n)</span></div>';
+ }
+ shiftSelect.addEventListener('change',syncSampling);
  function syncSampling(){
   var isFirst=/^7\.1(?:\D|$)/.test((document.getElementById('title')||{}).textContent||'');
   layout.classList.toggle('ss7-sampling-active',isFirst);
@@ -42,6 +63,7 @@ function init(){
   var metrics=concept.querySelector('.ss7-sampling-metrics');
   if(!Number.isFinite(f)||!Number.isFinite(fs)||fs<=0){metrics.textContent='Adjust the frequency and sampling-rate controls.';return}
   var omega=2*Math.PI*f/fs,cycles=f/fs;
+  drawPeriodicity(omega);
   metrics.textContent='f = '+f+' Hz   ·   fₛ = '+fs+' Hz   ·   Tₛ = '+(1000/fs).toFixed(2)+' ms   ·   f/fₛ = '+cycles.toFixed(3)+' cycles/sample   ·   Ω = '+omega.toFixed(3)+' rad/sample';
  }
  controls.addEventListener('input',syncSampling);
