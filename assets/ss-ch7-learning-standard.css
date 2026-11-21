@@ -144,7 +144,7 @@ html.ss7-native.ss7-standard .ss7-chapter-lead{padding:15px 18px}
 html.ss7-native.ss7-standard .ss7-chapter-lead .eyebrow{font-size:11px;line-height:1.5}
 html.ss7-native.ss7-standard .ss7-predict-prompt{font-size:16px;line-height:1.65}
 html.ss7-native.ss7-standard .control{padding:12px 13px;border-radius:10px;gap:8px}
-html.ss7-native.ss7-standard .control label{font-size:14px;line-height:1.45}
+html.ss7-native.ss7-standard .control label{font-size:14px!important;line-height:1.45!important}
 html.ss7-native.ss7-standard .control output{font-size:13px;font-variant-numeric:tabular-nums}
 html.ss7-native.ss7-standard .plot-card{overflow:hidden;border-radius:12px}
 html.ss7-native.ss7-standard .plot-card .plot-title{padding:10px 12px;font-size:16px;line-height:1.4;font-weight:750;overflow-wrap:anywhere}
