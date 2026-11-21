@@ -8,7 +8,7 @@ function buildLinks(nav){
  CHAPTERS.forEach((name,i)=>{
   const number=i+1;
   const link=document.createElement('a');
-  link.href=number===5?'./chapter5.html':number===6?'./chapter6.html':'./index.html#chapter='+number;
+  link.href=number===5?'./chapter5.html':number===6?'./chapter6.html':number===7?'./chapter7.html':'./index.html#chapter='+number;
   link.dataset.ssChapter=String(number);
   link.textContent='Chapter '+number+' · '+name;
   fragment.appendChild(link);
@@ -26,7 +26,7 @@ function init(){
  buildLinks(links);
  const path=location.pathname;
  function sync(){
-  const ch=path.endsWith('/chapter5.html')?5:path.endsWith('/chapter6.html')?6:Number((location.hash.match(/^#chapter=(\d+)/)||[])[1])||0;
+  const ch=path.endsWith('/chapter5.html')?5:path.endsWith('/chapter6.html')?6:path.endsWith('/chapter7.html')?7:Number((location.hash.match(/^#chapter=(\d+)/)||[])[1])||0;
   for(const link of links.querySelectorAll('a')){
    const n=Number(link.dataset.ssChapter||((link.textContent||'').match(/Chapter\s+(\d+)/)||[])[1]);
    if(n===ch)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
