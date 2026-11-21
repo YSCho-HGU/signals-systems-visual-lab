@@ -1,0 +1,352 @@
+<!doctype html><html lang="ko" class="ss8-native ss8-standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#112b41"><title>Chapter 8 · Z-Transform | Engineering Learning Studio</title>
+<style>
+:root{--navy:#112b41;--ink:#18394c;--muted:#597484;--teal:#0d8290;--line:#dce8ee;--bg:#f3f7f9;--gold:#d8a13d}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.7 system-ui,-apple-system,'Malgun Gothic',Arial,sans-serif}button,select,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #e8b349;outline-offset:2px}header{padding:28px max(20px,calc((100% - 1220px)/2));background:linear-gradient(110deg,#102d44,#165b6b);color:#fff}header .eyebrow{font-size:11px;font-weight:850;letter-spacing:.14em;color:#a7e6e2}header h1{font-size:clamp(24px,3.6vw,38px);margin:8px 0 5px;line-height:1.2}header p{margin:0;color:#d6e8ec;font-size:13px}main{max-width:1220px;margin:auto;padding:20px}nav{display:flex;gap:8px;overflow-x:auto;padding:12px 0 18px;scrollbar-width:thin}nav button{flex:0 0 auto;border:1px solid #cddfe6;border-radius:11px;background:#fff;color:#31576b;text-align:left;padding:10px 13px;font-size:12px;font-weight:750;max-width:210px}nav button.active{background:#115d70;border-color:#115d70;color:#fff}nav button small{display:block;font-weight:500;opacity:.78;font-size:10px}.experiment{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(270px,.85fr);gap:18px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:19px;box-shadow:0 4px 16px #1b4b5910;min-width:0}.card h2,.card h3{margin:0 0 8px;line-height:1.35}.card h2{font-size:23px}.card h3{font-size:17px}.intro{color:var(--muted);margin:0 0 13px}.eyebrow{font-size:10px;letter-spacing:.11em;font-weight:900;color:#0d8290}.controls{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}.control{display:flex;align-items:center;gap:10px;flex:1 1 220px;border:1px solid #e1ebef;border-radius:10px;padding:9px 12px;background:#f8fbfc}.control label{font-size:12px;font-weight:800;min-width:105px}.control input[type=range]{flex:1;min-width:75px;accent-color:#0d8290}.control select{border:1px solid #ccdde4;border-radius:7px;padding:6px;background:white;max-width:100%}.control output{min-width:49px;text-align:right;font-variant-numeric:tabular-nums;font-weight:850;color:#116b78}.plot-card{border:1px solid #e2ebef;border-radius:12px;overflow:hidden;margin-top:12px;background:#fff}.plot-card .plot-title{padding:10px 14px;font-size:12px;font-weight:800;background:#f3f9fa;border-bottom:1px solid #e2ebef}.plot-card svg{display:block;width:100%;height:auto}.legend{display:flex;gap:13px;flex-wrap:wrap;padding:8px 13px 10px;color:#496b7d;font-size:11px}.legend span i{display:inline-block;width:16px;height:3px;vertical-align:middle;margin-right:5px}.insight{background:#eaf7f6;border-left:4px solid #0d8290;border-radius:9px;padding:13px 15px;margin-top:14px;font-size:13px;line-height:1.7}.insight strong{color:#0b6f7d}.deriv-top{display:flex;justify-content:space-between;align-items:center;gap:12px}.progress{height:6px;border-radius:20px;background:#e5eef2;overflow:hidden;margin:13px 0 18px}.progress div{height:100%;background:linear-gradient(90deg,#0e8491,#48b7b0);transition:width .2s}.step{border:1px solid #d5e8eb;border-radius:12px;padding:14px;background:#f7fbfc;animation:rise .22s ease}.step strong{display:block;font-size:14px}.step .math{background:#eef7f7;color:#164b61;border-radius:8px;padding:11px 12px;margin:11px 0;font:18px/1.7 Cambria,'Times New Roman',serif;overflow-x:auto}.step p{margin:5px 0;color:#496a7b;font-size:13px}.step-buttons{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.step-buttons button{border:1px solid #c9dde5;background:white;border-radius:9px;padding:8px 10px;font-size:12px;font-weight:750}.step-buttons .primary{background:#0e8491;color:white;border-color:#0e8491}.step-buttons button:disabled{opacity:.35;cursor:not-allowed}.reading{margin-top:15px}.reading .note{border:1px solid #e0ebef;border-radius:10px;padding:11px 13px;margin-top:8px;background:#fbfdfd}.reading .note strong{display:block;font-size:12px;color:#24566b}.reading .note p{font-size:12px;color:#567282;margin:4px 0}.check{margin-top:16px;padding:13px 14px;border:1px dashed #aacdd2;background:#f2fafa;border-radius:10px;font-size:12px}.check b{color:#0a7684}.check button{border:0;background:transparent;color:#096c7a;text-decoration:underline;font-weight:850}.check .answer{display:none;margin-top:9px;color:#31596a}.check.open .answer{display:block}.foot{padding:18px 0 35px;color:#668293;font-size:11px}.foot a{color:#0c7684}.hint{font-size:11px;color:#667e8b;margin-top:8px}.plot-grid{display:grid;grid-template-columns:1fr;gap:12px}@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}@media(max-width:900px){.experiment{grid-template-columns:1fr}main{padding:13px}.card{padding:14px}header{padding:23px 18px}.control{flex:1 1 190px}}@media(max-width:520px){.control{flex:1 1 100%}.control label{min-width:90px}.card h2{font-size:20px}.step .math{font-size:16px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+
+/* Rev5 integrated + standalone: dark mode; graph canvas stays light for legible axes/curves. */
+html[data-theme="dark"]{color-scheme:dark;--bg:#0c1827;--nav:#0c2234;--nav2:#193c51;--ink:#e5f1f8;--sub:#b0c7d3;--muted:#b0c7d3;--a:#75d9e3;--accent:#75d9e3;--teal:#75d9e3;--coral:#ff9a86;--warm:#ff9a86;--gold:#efc36e;--line:#355266;--paper:#192e42;--card:#192e42;--pale:#1f4050}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] .main,
+html[data-theme="dark"] main{color:var(--ink)}
+html[data-theme="dark"] .controls,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .figure,
+html[data-theme="dark"] .metric,
+html[data-theme="dark"] .learning,
+html[data-theme="dark"] .question,
+html[data-theme="dark"] .insight,
+html[data-theme="dark"] .quiz,
+html[data-theme="dark"] .derivation-panel,
+html[data-theme="dark"] .reading-panel,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .plot-card{background:#192e42!important;border-color:#365468!important;box-shadow:0 5px 22px #0002!important;color:#e7f3f9}
+html[data-theme="dark"] .deriv-step,
+html[data-theme="dark"] .step,
+html[data-theme="dark"] .reading .note,
+html[data-theme="dark"] .control,
+html[data-theme="dark"] .hero-callout,
+html[data-theme="dark"] .formula,
+html[data-theme="dark"] .axis-note,
+html[data-theme="dark"] .plot-instruction,
+html[data-theme="dark"] .reading-note,
+html[data-theme="dark"] .interpretation,
+html[data-theme="dark"] .guide-note{background:#203c4e!important;color:#e2f1f7!important;border-color:#426278!important}
+html[data-theme="dark"] .deriv-step.guide-enter,
+html[data-theme="dark"] .deriv-step.active,
+html[data-theme="dark"] .step.active{background:#20505a!important;border-color:#62bfc7!important}
+html[data-theme="dark"] .deriv-math,
+html[data-theme="dark"] .step .math,
+html[data-theme="dark"] .math,
+html[data-theme="dark"] .mathline,
+html[data-theme="dark"] .hero-callout .formula{color:#d9f4f4!important;background:#204557!important;border-color:#426a78!important}
+html[data-theme="dark"] .figure canvas,
+html[data-theme="dark"] .plot-card svg,
+html[data-theme="dark"] .plot-card canvas{background:#fbfdfe!important;border-radius:7px;color:#19394c;filter:none}
+html[data-theme="dark"] .plot-card .plot-title{background:#254759;color:#e5f3f8;border-color:#426477}
+html[data-theme="dark"] select,
+html[data-theme="dark"] input[type="number"],
+html[data-theme="dark"] input[type="text"]{background:#142d40;color:#e6f2f7;border:1px solid #507083}
+html[data-theme="dark"] button:not(.active):not(.on):not(.primary):not(.guide-primary){border-color:#45677b}
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .pill{background:#204957;color:#9be5e8}
+html[data-theme="dark"] .breadcrumb,
+html[data-theme="dark"] .crumb,
+html[data-theme="dark"] .intro,
+html[data-theme="dark"] .hint,
+html[data-theme="dark"] .reading .note p,
+html[data-theme="dark"] .axis-note{color:#b9d1dd!important}
+html[data-theme="dark"] .nav button:not(.active),
+html[data-theme="dark"] .tabs button:not(.on){color:#d3e6ee}
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .shell>.nav{background:linear-gradient(160deg,#0a2030,#102c40)}
+html[data-theme="dark"] nav:not(.sidebar):not(.nav) button:not(.active){background:#1e3b4e;color:#e5f3f8;border-color:#43677a}
+html[data-theme="dark"] nav:not(.sidebar):not(.nav) button.active{background:#136477;color:#fff}
+html[data-theme="dark"] .plot-card svg text{fill:#203b4e}
+
+
+/* Rev7 audited text contrast: no Light Mode ink inside dark surfaces. */
+:root{--ss-axis-text:#274f64;--ss-axis-bg:#f1f8fa}
+.axis-key{display:flex;flex-wrap:wrap;align-items:center;gap:5px 13px;margin:8px 0 4px;padding:8px 11px;border-radius:8px;border:1px solid #cfe1e9;background:var(--ss-axis-bg);color:var(--ss-axis-text);font:600 12px/1.55 system-ui,'Malgun Gothic',sans-serif;overflow-wrap:anywhere}
+.axis-key .ax-strong{font-weight:850;color:#086d79}
+html[data-theme="dark"]{--ss-axis-text:#d5edf5;--ss-axis-bg:#244457}
+html[data-theme="dark"] .axis-key{background:#244457!important;border-color:#54788b!important;color:#d5edf5!important}
+html[data-theme="dark"] .axis-key .ax-strong{color:#91e8eb!important}
+html[data-theme="dark"] :is(.reading-panel h3,.guide-head h3,.deriv-top,.reading-note strong,.reading .note strong,.compare-title,.figure h3,.plot-card .plot-title,.step strong,.check b,.insight strong){color:#eff9ff!important}
+html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain,.guide-check,.guide-head p,.deriv-step p,.reading-panel p,.reading .note p,.step p,.insight p,.quiz p,.check,.check .answer,.compare-sub,.compare-footer,.figure .sub,.figure p,.formhint,.heading p,.intro,.desc,.smallnote,.rangeEnds,.metric .k,.metric .d,.metric b,.legend,.bridge,.footer,.foot,.hint,.source,.crumb,.breadcrumb,.plot-instruction,.axis-note){color:#cce3ee!important}
+html[data-theme="dark"] :is(.reading-note,.reading .note,.step,.deriv-step,.compare-card,.compare-wrap,.check,.axis-note){background:#234254!important;border-color:#517185!important}
+html[data-theme="dark"] :is(.guide-check,.quiz details){border-color:#517185!important}
+html[data-theme="dark"] :is(.overlabel,.over,.plot-number,.eyebrow,.heading .sup,.step-index,.progress-badge,.metric .v,.metric strong,.ctrl output,.control output){color:#90e8ec!important}
+html[data-theme="dark"] :is(.guide-actions button:not(.primary),.step-buttons button:not(.primary),.btn:not(.primary),.preset,.check button,.quiz button,.actions button:not(.primary)){color:#e6f5fc!important;background:#234657!important;border-color:#54798d!important}
+html[data-theme="dark"] :is(.guide-actions button.primary,.step-buttons button.primary,.btn.primary,.actions button.primary){background:#0d697b!important;border-color:#67c6d1!important;color:#fff!important}
+html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain){opacity:1!important}
+html[data-theme="dark"] :is(.learning p,.question p,.learning .body,.question .body,.notice,.metric .detail,.ctrl .ends,.rangeEnds,.range-ends,.reading-panel .check,.reading-panel .question){color:#d1e7f0!important}
+html[data-theme="dark"] :is(.progress-badge,.step-index){background:#285666!important;color:#a6f2f0!important;border-color:#5b8593!important}
+/* Additional animated-convolution and FFT presets: previously retained light-only colors. */
+html[data-theme="dark"] :is(.motion-panel,.detail-panel,.fft-guide){background:#1c3548!important;border-color:#4c7385!important;color:#e8f5fb!important}
+html[data-theme="dark"] :is(.motion-panel h3,.detail-head h4,.fft-guide h3,.motion-status strong,.detail-status strong){color:#f0f9fd!important}
+html[data-theme="dark"] :is(.motion-lead,.motion-speed,.motion-caution,.motion-status small,.detail-sub,.detail-note,.area-slider label,.area-slider .ends,.fft-guide p){color:#cfe4ed!important}
+html[data-theme="dark"] :is(.motion-stage,.motion-stage.done,.motion-status,.detail-status,.detail-pill,.area-slider){background:#28495b!important;color:#e4f2f9!important;border-color:#567a8d!important}
+html[data-theme="dark"] .motion-stage.current{background:#255b63!important;color:#fff!important;border-color:#78d3d5!important}
+html[data-theme="dark"] :is(.motion-stage b,.motion-eq){background:#30566b!important;color:#a3edf0!important}
+html[data-theme="dark"] :is(.motion-actions button:not(.motion-primary),.detail-actions button:not(.detail-primary),.preset-row button:not(.selected)){background:#29495c!important;color:#eaf6fb!important;border-color:#5c8191!important}
+html[data-theme="dark"] :is(.motion-primary,.detail-primary,.preset-row button.selected){background:#086a79!important;color:#fff!important;border-color:#6ccbd0!important}
+html[data-theme="dark"] :is(.mathline,.mathline b,.detail-status b,.detail-pill,.area-slider output,.detail-head .overlabel){color:#9be7ec!important}
+html[data-theme="dark"] .fft-status{background:#284b5e!important;color:#e0f1f7!important;border-color:#5b8091!important}
+html[data-theme="dark"] .fft-status :is(b,span,strong){color:#e0f1f7!important}
+html[data-theme="dark"] .plot-card svg text{fill:#274b5e}
+@media(max-width:560px){.axis-key{font-size:11px;gap:4px 9px;padding:7px 8px}}
+
+
+/* Rev8: interactive graph probe, color-contrast safe in both themes. */
+.ss-hover-tip{position:absolute;z-index:35;pointer-events:none;display:none;min-width:190px;max-width:min(310px,calc(100% - 16px));padding:11px 12px;border-radius:11px;border:1px solid #4c8190;background:#102d41;color:#f1fbff;box-shadow:0 9px 26px rgba(5,22,36,.32);font:500 12px/1.55 system-ui,'Malgun Gothic',sans-serif;white-space:normal;overflow-wrap:anywhere}
+.ss-hover-tip .ss-hover-title{font-weight:800;color:#adf2f2;font-size:12px;margin-bottom:4px}
+.ss-hover-tip .ss-hover-coord{color:#e1f4fb;font-size:11px;margin-bottom:5px}
+.ss-hover-tip .ss-hover-line{display:flex;align-items:baseline;gap:7px;margin:3px 0;color:#f1fbff}
+.ss-hover-tip .ss-hover-swatch{display:inline-block;width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:var(--ss-line,#6ccbd0)}
+.ss-hover-tip .ss-hover-line b{font-weight:750;color:#fff}
+.ss-hover-tip .ss-hover-line.primary b{color:#a8f7df}
+.ss-hover-tip .ss-hover-note{color:#c0dbe7;font-size:10.5px;margin-top:5px;border-top:1px solid #486579;padding-top:4px}
+.ss-hover-v,.ss-hover-h{position:absolute;display:none;pointer-events:none;z-index:30;background:#e26b4f;opacity:.85}
+.ss-hover-v{width:1px;border-left:1px dashed #f18b63;background:transparent}
+.ss-hover-h{height:1px;border-top:1px dashed #f18b63;background:transparent}
+.ss-hover-dot{position:absolute;display:none;pointer-events:none;z-index:31;width:11px;height:11px;border-radius:50%;border:2px solid #fff;background:#ed7954;box-shadow:0 0 0 1px #123a4e;transform:translate(-50%,-50%)}
+.ss-hover-hint{font:600 11px/1.5 system-ui,'Malgun Gothic',sans-serif;color:#23576a;margin:5px 0 2px;letter-spacing:.01em}
+html[data-theme="dark"] .ss-hover-hint{color:#c6e9f2!important}
+html[data-theme="dark"] .ss-hover-tip{background:#0d2739;border-color:#6a98a9;color:#f4fbff}
+html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hover-note){color:#d6e9f3!important}
+.ss-hover-target:focus-visible{outline:3px solid #ee9868;outline-offset:3px}
+@media(max-width:560px){.ss-hover-tip{max-width:min(290px,calc(100% - 12px));padding:9px 10px;font-size:11px}.ss-hover-hint{font-size:10px}}
+
+</style>
+<script>
+/* Rev8 shared graph probe. Displays the cursor coordinate and an independently
+   evaluated analytic value when a function exists, otherwise an actual drawn
+   sample. No interpolation is presented as an exact analytic answer. */
+(function(){
+ 'use strict';
+ const states=new WeakMap();let queued=[];
+ const fmt=v=>{if(!Number.isFinite(v))return String(v);if(Math.abs(v)<1e-11)return '0';const a=Math.abs(v);if(a>=1e4||a<1e-4)return v.toExponential(3);return Number(v.toFixed(a>=100?2:a>=1?4:6)).toString()};
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ function el(tag,cls,parent){const x=document.createElement(tag);x.className=cls;parent.appendChild(x);return x}
+ function labels(host){return [...host.querySelectorAll('.legend > .lgitem,.legend > .legend-item,.legend > span')].map(e=>e.textContent.trim())}
+ function bind(target,d){
+  if(typeof target==='string')target=document.getElementById(target);
+  if(!target||!d)return;
+  let st=states.get(target);
+  if(!st){
+   const host=target.closest('.plotbox,.figure,.compare-card,.plot-card')||target.parentElement;
+   if(!host)return;
+   if(getComputedStyle(host).position==='static')host.style.position='relative';
+   const tip=el('div','ss-hover-tip',host),v=el('div','ss-hover-v',host),h=el('div','ss-hover-h',host),dot=el('div','ss-hover-dot',host);
+   tip.setAttribute('role','status');tip.setAttribute('aria-live','off');
+   let hint=host.querySelector('.ss-hover-hint');if(!hint){hint=el('div','ss-hover-hint',host);hint.textContent='ⓘ Hover / Tap / Focus: coordinates + signal values · 마우스·터치·키보드로 값 확인'}
+   target.classList.add('ss-hover-target');target.setAttribute('tabindex','0');
+   target.setAttribute('aria-description','Move pointer, tap, or use arrow keys to inspect signal values and coordinates.');
+   st={target,host,tip,v,h,dot,d:null,lastX:null,lastType:null};states.set(target,st);
+   target.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;move(st,e.clientX,e.clientY,e.pointerType)});
+   target.addEventListener('pointerdown',e=>{move(st,e.clientX,e.clientY,e.pointerType)});
+   target.addEventListener('pointerleave',e=>{if(e.pointerType!=='touch')hide(st)});
+   target.addEventListener('blur',()=>hide(st));
+   target.addEventListener('focus',()=>{const r=target.getBoundingClientRect();move(st,r.left+r.width*.55,r.top+r.height*.45,'keyboard')});
+   target.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End','Escape'].includes(e.key))return;
+    if(e.key==='Escape'){hide(st);return}e.preventDefault();const r=target.getBoundingClientRect();
+    const p=st.d.pad||{l:0,r:0,t:0,b:0},w=st.d.w,h=st.d.h;
+    const left=r.left+p.l/w*r.width,right=r.right-p.r/w*r.width;
+    let px=st.lastX===null?(left+right)/2:st.lastX;
+    if(e.key==='Home')px=left;else if(e.key==='End')px=right;else px+=((e.shiftKey?.05:.0125)*(right-left))*(e.key==='ArrowLeft'?-1:1);
+    move(st,clamp(px,left,right),r.top+r.height*.5,'keyboard',true)
+   });
+  }
+  st.d=d;
+  // A parameter change redraws the graph; hide stale numerical values.
+  hide(st);
+ }
+ function hide(st){st.tip.style.display='none';st.v.style.display='none';st.h.style.display='none';st.dot.style.display='none';st.lastX=null}
+ function pointToView(st,cx,cy){const r=st.target.getBoundingClientRect();const d=st.d;
+  return {x:r.left+cx/d.w*r.width,y:r.top+cy/d.h*r.height}
+ }
+ function nearest(data,x,xmin=-Infinity,xmax=Infinity){let best=null,bestDelta=Infinity;
+  for(const p of data||[]){if(!p||!Number.isFinite(p[0])||!Number.isFinite(p[1])||p[0]<xmin-1e-9||p[0]>xmax+1e-9)continue;const delta=Math.abs(p[0]-x);if(delta<bestDelta){bestDelta=delta;best=p}}
+  return best
+ }
+ function readSeries(st,x,y){const d=st.d;const values=[];
+  for(let i=0;i<(d.series||[]).length;i++){
+   const s=d.series[i];let v=null,sx=x,method='formula';
+   if(typeof s.fn==='function'){
+    try{v=s.fn(x)}catch(e){continue}
+   }else if(Array.isArray(s.points)){
+    const p=nearest(s.points,x,d.xmin,d.xmax);if(!p)continue;sx=p[0];v=p[1];method=s.discrete?'discrete':'sample';
+   }else continue;
+   if(!Number.isFinite(v))continue;
+   const ypixel=d.toPixel?d.toPixel(sx,v).y:d.pad.t+(d.ymax-v)/(d.ymax-d.ymin)*(d.h-d.pad.t-d.pad.b);
+   const py=d.pad.t+(d.ymax-y)/(d.ymax-d.ymin)*(d.h-d.pad.t-d.pad.b);
+   const off=Math.abs(ypixel-py);
+   values.push({i,label:s.label||'',color:s.color||'#42c9d2',x:sx,y:v,method,off,inRange:v>=d.ymin&&v<=d.ymax});
+  }
+  values.sort((a,b)=>a.off-b.off);
+  const lab=labels(st.host);for(const v of values){if(!v.label)v.label=lab[v.i]||d.ylabel||`Signal ${v.i+1}`}
+  return values
+ }
+ function rocInfo(d,x,y){const r=d.roc;if(!r)return null;
+  if(d.plane==='z'){const a=Math.hypot(x,y);return (a>r.inner+1e-8&&a<r.outer-1e-8)?'ROC 내부 (boundary excluded)':'ROC 외부 또는 경계'}
+  if(r.type==='all')return 'ROC: entire s-plane';
+  if(r.type==='none')return 'No ROC';
+  const inside=r.type==='right'?x>r.a:r.type==='left'?x<r.a:r.type==='strip'?x>r.a&&x<r.b:false;
+  return inside?'ROC 내부 (boundary excluded)':'ROC 외부 또는 경계'
+ }
+ function move(st,clientX,clientY,pointerType,fromKeyboard=false){
+  const d=st.d;if(!d)return;const rect=st.target.getBoundingClientRect();if(!rect.width||!rect.height)return;
+  let px=(clientX-rect.left)*d.w/rect.width,py=(clientY-rect.top)*d.h/rect.height;
+  const pad=d.pad||{l:0,r:0,t:0,b:0};
+  if(fromKeyboard)py=pad.t+(d.h-pad.t-pad.b)*.5;
+  if(px<pad.l||px>d.w-pad.r||py<pad.t||py>d.h-pad.b){hide(st);return}
+  let x,y;
+  if(d.plane&&d.center){x=(px-d.center.cx)/d.center.scale;y=(d.center.cy-py)/d.center.scale}
+  else{x=d.xmin+(px-pad.l)/(d.w-pad.l-pad.r)*(d.xmax-d.xmin);y=d.ymax-(py-pad.t)/(d.h-pad.t-pad.b)*(d.ymax-d.ymin)}
+  const items=[];let marker=null;
+  if(d.plane){
+   items.push({label:`${d.plane} = ${fmt(x)} ${y<0?'−':'+'} j${fmt(Math.abs(y))}`,value:`|${d.plane}|=${fmt(Math.hypot(x,y))}, ∠=${fmt(Math.atan2(y,x)*180/Math.PI)}°`,color:'#6dd7d9'});
+   const r=d.markers||[];let closest=null,dist=Infinity;
+   for(const m of r){const q=d.center?{x:d.center.cx+m.x*d.center.scale,y:d.center.cy-m.y*d.center.scale}:{x:pad.l+(m.x-d.xmin)/(d.xmax-d.xmin)*(d.w-pad.l-pad.r),y:pad.t+(d.ymax-m.y)/(d.ymax-d.ymin)*(d.h-pad.t-pad.b)};const delta=Math.hypot(px-q.x,py-q.y);if(delta<dist){closest=m;dist=delta}}
+   if(closest&&dist<17){items.push({label:`${closest.type} @ (${fmt(closest.x)}, ${fmt(closest.y)})`,value:closest.type==='Pole'?'× pole':closest.type==='Zero'?'○ zero':'vector endpoint',color:closest.type==='Pole'?'#ffa19a':'#93e8ed'})}
+   const region=rocInfo(d,x,y);if(region)items.push({label:'Region of convergence',value:region,color:'#b8e8c4'});
+  }else{
+   const values=readSeries(st,x,y);
+   if(values.length){
+    const ordered=values.slice(0,4);
+    for(const v of ordered){
+     const method=v.method==='formula'?'f(x) 직접 계산':v.method==='discrete'?'이산 표본':'계산 표본 (보간 없음)';
+     const extra=v.method==='formula'?'':` @ x=${fmt(v.x)}`;
+     items.push({label:v.label,value:`${fmt(v.y)}${extra}${v.inRange?'':' · 표시 범위 밖'}`,color:v.color,method,primary:v===values[0]});
+    }
+    const v=values.find(z=>z.inRange);if(v){const xplot=v.method==='formula'?x:v.x;marker={x:xplot,y:v.y}}
+    if(values.length>4)items.push({label:`+ ${values.length-4} additional series`,value:'',color:'#bedde5'});
+   }else items.push({label:'No finite signal value at this coordinate',value:'',color:'#f2c39c'});
+  }
+  const hostRect=st.host.getBoundingClientRect();const cx=rect.left+px/d.w*rect.width,cy=rect.top+py/d.h*rect.height;
+  const xlocal=cx-hostRect.left,ylocal=cy-hostRect.top;
+  const minX=rect.left+pad.l/d.w*rect.width-hostRect.left,maxX=rect.right-pad.r/d.w*rect.width-hostRect.left;
+  const minY=rect.top+pad.t/d.h*rect.height-hostRect.top,maxY=rect.bottom-pad.b/d.h*rect.height-hostRect.top;
+  st.v.style.cssText=`display:block;left:${xlocal}px;top:${minY}px;height:${maxY-minY}px`;
+  const showMarker=marker&&Number.isFinite(marker.y);
+  if(showMarker){const q=d.toPixel?d.toPixel(marker.x,marker.y):{x:pad.l+(marker.x-d.xmin)/(d.xmax-d.xmin)*(d.w-pad.l-pad.r),y:pad.t+(d.ymax-marker.y)/(d.ymax-d.ymin)*(d.h-pad.t-pad.b)};
+   const qx=rect.left+q.x/d.w*rect.width-hostRect.left,qy=rect.top+q.y/d.h*rect.height-hostRect.top;
+   st.h.style.cssText=`display:block;left:${minX}px;top:${qy}px;width:${maxX-minX}px`;
+   st.dot.style.cssText=`display:block;left:${qx}px;top:${qy}px`;
+  }else{st.h.style.display='none';st.dot.style.display='none'}
+  st.tip.replaceChildren();
+  const title=el('div','ss-hover-title',st.tip);title.textContent=d.plane?'Complex-plane probe / 복소평면 좌표':'Graph probe / 그래프 값 읽기';
+  const coord=el('div','ss-hover-coord',st.tip);coord.textContent=`${d.xlabel||'x'} = ${fmt(x)}   |   ${d.ylabel||'y'} (cursor) = ${fmt(y)}`;
+  for(const it of items){const line=el('div','ss-hover-line'+(it.primary?' primary':''),st.tip);const sw=el('i','ss-hover-swatch',line);sw.style.setProperty('--ss-line',it.color);const text=el('span','',line);const name=el('b','',text);name.textContent=it.label;const val=el('span','',text);val.textContent=(it.value?' = '+it.value:'')}
+  const note=el('div','ss-hover-note',st.tip);note.textContent=d.plane?'복소평면 좌표는 위치값이며, pole/zero는 가까운 경우에만 표시합니다.':items.some(x=>x.method&&x.method!=='f(x) 직접 계산')?'fn(x): 수식 직접 계산 · sample: 실제 계산 표본 (보간하지 않음)':'수식 함수가 제공된 경우 커서 x에서 직접 계산한 값입니다.';
+  st.tip.style.display='block';
+  // Measure after writing and keep the tooltip inside the card.
+  const tw=st.tip.offsetWidth||230,th=st.tip.offsetHeight||90;
+  const hostW=st.host.clientWidth||hostRect.width,hostH=st.host.clientHeight||hostRect.height;
+  const tx=clamp(xlocal+15,5,Math.max(5,hostW-tw-5));
+  const ty=clamp(ylocal+13,5,Math.max(5,hostH-th-5));
+  st.tip.style.left=tx+'px';st.tip.style.top=ty+'px';
+  st.lastX=cx;st.lastType=pointerType;
+ }
+ window.ssHoverBind=bind;
+ window.ssHoverQueue=d=>{queued.push(d)};
+ window.ssHoverResetQueue=()=>{queued=[]};
+ window.ssHoverAttachQueued=()=>{const cards=[...document.querySelectorAll('#plots .plot-card')];const all=queued.splice(0);for(let i=0;i<Math.min(cards.length,all.length);i++){const svg=cards[i].querySelector('svg');if(svg)bind(svg,all[i])}};
+ window.__ssHoverDebug=()=>({count:document.querySelectorAll('.ss-hover-target').length,visible:document.querySelectorAll('.ss-hover-tip').length});
+})();
+</script>
+<link rel="stylesheet" href="./assets/design-system.css?v=1">
+<link rel="stylesheet" href="./assets/ss-lab-theme.css?v=5">
+<link rel="stylesheet" href="./assets/els-theme-v2.css?v=20261121b">
+<link rel="stylesheet" href="./assets/els-typography-standard.css?v=1">
+<link rel="stylesheet" href="./assets/ss-common-header.css?v=2">
+<link rel="stylesheet" href="./assets/ss-trace-palette.css?v=1">
+<link rel="stylesheet" href="./assets/ss-ch8-native.css?v=1">
+<link rel="stylesheet" href="./assets/ss-formula-standard.css?v=2">
+<link rel="stylesheet" href="./assets/ss-ui-standard.css?v=4">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css">
+<script src="./assets/ss-trace-palette.js?v=1"></script>
+<script src="./assets/els-language.js?v=1"></script>
+<script src="./assets/els-theme-v2.js?v=20261121b"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.js"></script>
+<script defer src="./assets/ss-common-header.js?v=3"></script>
+<script defer src="./assets/ss-sidebar-toggle.js?v=1"></script>
+<script defer src="./assets/ss-ch8-native.js?v=1"></script>
+<script defer src="./assets/ss-ch8-math.js?v=1"></script>
+</head><body>
+<header class="ss8-site-header ss-common-header" aria-label="Engineering Learning Studio navigation">
+<a class="ss-common-home" href="./index.html#overview">← Studio</a>
+<details class="ss-common-menu"><summary class="ss-common-title">Signals &amp; Systems · Chapter 8 · Z-Transform <span aria-hidden="true">⌄</span></summary><nav class="ss-common-links" aria-label="Choose Chapter"></nav></details>
+<div class="ss-common-actions"><label for="ss8-language-picker">Language <select id="ss8-language-picker" aria-label="Language"><option value="mixed">Mixed</option><option value="en">English</option><option value="ko">한국어</option></select></label><label for="ss8-theme-picker">Theme <select id="ss8-theme-picker" data-els-theme-picker aria-label="Theme"></select></label></div>
+</header>
+<div class="ss8-shell">
+<aside class="ss8-sidebar" aria-label="Chapter 8 learning navigation">
+<div class="brand"><div class="eyebrow">SIGNALS &amp; SYSTEMS / CHAPTER 08</div><h2>Z-Transform Visual Lab</h2><p>ROC · Pole-Zero · Inverse Z · Digital Filters</p></div>
+<div class="ss8-sidebar-title">LEARNING EXPERIMENTS / 학습 주제</div>
+<nav id="nav" class="ss8-lab-nav" aria-label="Chapter 8 experiments"></nav>
+<section class="ss8-progress" id="ss8-progress"><strong id="ss8-progress-count">My Lab Progress</strong><button type="button" id="ss8-mark-reviewed">Mark lab reviewed · 학습 확인</button><small>Self-reported study · 채점 결과 아님</small></section>
+</aside><div class="ss8-workspace"><main>
+<div class="ss8-standard-layout">
+<section class="ss8-card ss8-chapter-lead"><div class="eyebrow">INTERACTIVE EXPERIMENT</div><h2 id="title">8.1 · Z-Transform</h2><p id="intro" class="intro">Explore poles, zeros, convergence regions, and discrete-time systems.</p></section>
+<section class="ss8-key-formula" aria-label="Key mathematical relation"><div class="ss8-key-label">KEY RELATION / 핵심 관계식</div><div id="ss8-key-equation" class="ss8-key-equation">X(z)=\sum_{n=-\infty}^{\infty}x[n]z^{-n}</div></section>
+<section class="ss8-card ss8-stage-predict"><div class="ss8-stage-head"><span class="ss8-stage-index">1</span><span>Predict <small>Think before changing parameters</small></span></div><p id="ss8-predict-question">Predict the sequence, ROC, and system response before adjusting parameters.</p></section>
+<div class="ss8-stage-pair">
+<section class="ss8-card ss8-stage-change"><div class="ss8-stage-head"><span class="ss8-stage-index">2</span><span>Change <small>Adjust parameters</small></span></div><div id="controls" class="controls"></div></section>
+<section class="ss8-card ss8-stage-observe"><div class="ss8-stage-head"><span class="ss8-stage-index">3</span><span>Observe <small>Compare signals and the z-plane</small></span></div><div id="plots" class="plot-grid"></div><div id="insight" class="insight"></div><div class="hint">Axes and units remain explicitly labeled. ROC boundaries are excluded.</div></section>
+</div>
+<section class="ss8-card ss8-stage-explain"><div class="ss8-stage-head"><span class="ss8-stage-index">4</span><span>Explain <small>Guided derivation and graph interpretation</small></span></div>
+<div class="ss8-explain-grid">
+<div class="ss8-derivation"><div class="deriv-top"><div><div class="eyebrow">STEP-BY-STEP ANIMATED MATH</div><h3>Guided Derivation</h3></div><span id="step-num" class="eyebrow"></span></div><div class="progress"><div id="progress-bar"></div></div><div id="step-content"></div><div class="step-buttons"><button id="prev" type="button">← Previous step</button><button class="primary" id="next" type="button">Next step →</button><button id="all" type="button">Reveal all steps</button><button id="reset" type="button">Reset</button></div></div>
+<div class="ss8-interpret"><div class="reading"><div class="eyebrow">GRAPH INTERPRETATION</div><h3>What does this graph mean?</h3><div id="reading"></div></div><div class="check" id="check"><b>CHECK YOURSELF · </b><span id="check-q"></span> <button id="check-toggle" type="button">Show / Hide answer</button><div class="answer" id="check-a"></div></div></div>
+</div></section>
+</div>
+<div class="foot">Lecture support · Chapter 8 · Mathematical models for learning, not instrument calibration · All calculations run in your browser.</div>
+</main></div></div><script>
+'use strict';
+const $=id=>document.getElementById(id),PI=Math.PI;
+const fmt=(v,d=2)=>Number(v).toFixed(d).replace(/\.00$/,'');
+const sinc=x=>Math.abs(x)<1e-10?1:Math.sin(PI*x)/(PI*x);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function chart({xmin,xmax,ymin,ymax,xlab='t (s)',ylab='Amplitude',curves=[],stems=[],vlines=[],title=''}){
+ const W=780,H=310,L=60,R=22,T=23,B=46,pw=W-L-R,ph=H-T-B;
+ const xx=x=>L+(x-xmin)/(xmax-xmin)*pw,yy=y=>T+(ymax-y)/(ymax-ymin)*ph;
+ let s=`<div class="plot-card"><div class="plot-title">${title}</div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}"><rect width="${W}" height="${H}" fill="var(--els-surface,white)"/>`;
+ for(let i=0;i<=5;i++){let x=xmin+(xmax-xmin)*i/5,y=ymin+(ymax-ymin)*i/5;s+=`<line x1="${xx(x)}" y1="${T}" x2="${xx(x)}" y2="${H-B}" stroke="var(--els-border,#c9d3db)"/><text x="${xx(x)}" y="${H-B+20}" font-size="11" fill="var(--els-muted,#455663)" text-anchor="middle">${fmt(x,2)}</text><line x1="${L}" y1="${yy(y)}" x2="${W-R}" y2="${yy(y)}" stroke="var(--els-border,#c9d3db)"/><text x="${L-9}" y="${yy(y)+4}" text-anchor="end" font-size="11" fill="var(--els-muted,#455663)">${fmt(y,2)}</text>`}
+ if(ymin<=0&&ymax>=0)s+=`<line x1="${L}" y1="${yy(0)}" x2="${W-R}" y2="${yy(0)}" stroke="var(--els-muted,#455663)"/>`;
+ if(xmin<=0&&xmax>=0)s+=`<line x1="${xx(0)}" y1="${T}" x2="${xx(0)}" y2="${H-B}" stroke="var(--els-muted,#455663)"/>`;
+ for(const c of curves){const pts=c.pts||(Array.from({length:c.samples||500},(_,i)=>{const x=xmin+(xmax-xmin)*i/((c.samples||500)-1);return [x,c.fn(x)]}));let parts=[];for(const [x,y] of pts){if(Number.isFinite(y))parts.push(`${xx(x).toFixed(2)},${yy(clamp(y,ymin,ymax)).toFixed(2)}`)}s+=`<polyline fill="none" stroke="${ssTraceColor(c.color)}" stroke-width="${c.width||2.5}" ${c.dash?`stroke-dasharray="${c.dash}"`:''} stroke-linecap="round" stroke-linejoin="round" points="${parts.join(' ')}"/>`}
+ for(const c of stems){for(let i=0;i<c.xs.length;i++){let x=c.xs[i],y=c.ys[i];if(x<xmin-1e-8||x>xmax+1e-8)continue;const xp=xx(x),yp=yy(clamp(y,ymin,ymax));s+=`<line x1="${xp}" y1="${yy(clamp(0,ymin,ymax))}" x2="${xp}" y2="${yp}" stroke="${ssTraceColor(c.color)}" stroke-width="1.6"/><circle cx="${xp}" cy="${yp}" r="3.1" fill="${ssTraceColor(c.color)}"/>`}}
+ for(const v of vlines){if(v.x<xmin||v.x>xmax)continue;s+=`<line x1="${xx(v.x)}" y1="${T}" x2="${xx(v.x)}" y2="${H-B}" stroke="${ssTraceColor(v.color||'#bc704c')}" stroke-dasharray="5 5" stroke-width="1.7"/>`}
+ s+=`<text x="${(L+W-R)/2}" y="${H-6}" text-anchor="middle" font-size="12" fill="var(--els-ink,#1b2730)">${xlab}</text><text transform="translate(15 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="12" fill="var(--els-ink,#1b2730)">${ylab}</text></svg><div class="axis-key">X-axis: ${xlab} [${fmt(xmin,2)} … ${fmt(xmax,2)}] &nbsp; | &nbsp; Y-axis: ${ylab} [${fmt(ymin,2)} … ${fmt(ymax,2)}]</div><div class="legend">${[...curves,...stems].filter(x=>x.label).map(x=>`<span><i style="background:${ssTraceColor(x.color)}"></i>${x.label}</span>`).join('')}</div></div>`;ssHoverQueue({kind:'cart',w:W,h:H,pad:{l:L,r:R,t:T,b:B},xmin,xmax,ymin,ymax,xlabel:xlab,ylabel:ylab,series:[...curves.map(c=>({label:c.label,color:ssTraceColor(c.color),fn:c.fn,points:c.pts,discrete:false})),...stems.map(c=>({label:c.label,color:ssTraceColor(c.color),points:c.xs.map((x,i)=>[x,c.ys[i]]),discrete:true}))]});return s;
+}
+function zplot({title='z-plane · pole / zero / ROC',poles=[],zeros=[],inner=0,outer=Infinity,scale=95,unit=true}){
+ const W=780,H=310,cx=390,cy=154,r=v=>v*scale;let s=`<div class="plot-card"><div class="plot-title">${title}</div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}"><rect width="${W}" height="${H}" fill="var(--els-surface,#ffffff)"/>`;
+ if(outer===Infinity){s+=`<rect width="${W}" height="${H}" fill="var(--els-info-bg,#e6f5ee)"/>`;if(inner>0)s+=`<circle cx="${cx}" cy="${cy}" r="${r(inner)}" fill="var(--els-surface,#ffffff)"/>`}
+ else{s+=`<circle cx="${cx}" cy="${cy}" r="${r(outer)}" fill="var(--els-info-bg,#e6f5ee)"/>`;if(inner>0)s+=`<circle cx="${cx}" cy="${cy}" r="${r(inner)}" fill="var(--els-surface,#ffffff)"/>`}
+ for(let v=-3;v<=3;v++){const x=cx+r(v),y=cy-r(v);if(x>=20&&x<=760)s+=`<line x1="${x}" y1="15" x2="${x}" y2="${H-20}" stroke="var(--els-border,#c9d3db)" stroke-dasharray="3 6"/>`;if(y>=15&&y<=H-20)s+=`<line x1="20" y1="${y}" x2="760" y2="${y}" stroke="var(--els-border,#c9d3db)" stroke-dasharray="3 6"/>`}
+ s+=`<line x1="20" y1="${cy}" x2="760" y2="${cy}" stroke="var(--els-muted,#455663)" stroke-width="1.3"/><line x1="${cx}" y1="10" x2="${cx}" y2="${H-20}" stroke="var(--els-muted,#455663)" stroke-width="1.3"/>`;
+ if(unit)s+=`<circle cx="${cx}" cy="${cy}" r="${r(1)}" fill="none" stroke="#b98635" stroke-width="2.5" stroke-dasharray="7 5"/><text x="${cx+r(.7)}" y="${cy-r(.7)-8}" fill="var(--els-link,#145b78)" font-size="11">|z| = 1</text>`;
+ for(const [x,y] of poles){const xp=cx+r(x),yp=cy-r(y);s+=`<path d="M ${xp-7} ${yp-7} L ${xp+7} ${yp+7} M ${xp+7} ${yp-7} L ${xp-7} ${yp+7}" stroke="var(--ss-trace-coral,#b54e35)" stroke-width="3.5" stroke-linecap="round"/>`}
+ for(const [x,y] of zeros){const xp=cx+r(x),yp=cy-r(y);s+=`<circle cx="${xp}" cy="${yp}" r="7" fill="var(--els-surface,#ffffff)" stroke="var(--ss-trace-teal,#006b75)" stroke-width="3"/>`}
+ s+=`<text x="746" y="${cy-9}" text-anchor="end" fill="var(--els-ink,#1b2730)" font-size="12">Re(z)</text><text x="${cx+9}" y="17" fill="var(--els-ink,#1b2730)" font-size="12">Im(z)</text><text x="${cx+r(1)+4}" y="${cy+16}" fill="var(--els-link,#145b78)" font-size="11">1</text><text x="${cx-r(1)-4}" y="${cy+16}" text-anchor="end" fill="#274b5e" font-size="11">−1</text><text x="${cx+8}" y="${cy-r(1)-5}" fill="#274b5e" font-size="11">+j</text><text x="${cx+8}" y="${cy+r(1)+15}" fill="#274b5e" font-size="11">−j</text><text x="${cx+6}" y="${cy+15}" fill="#274b5e" font-size="11">0</text></svg><div class="axis-key">X-axis: Re(z) &nbsp; | &nbsp; Y-axis: Im(z) &nbsp; | &nbsp; grid spacing: 1 &nbsp; | &nbsp; dashed circle: |z|=1</div><div class="legend"><span><i style="background:#c55d54"></i>× Pole</span><span><i style="background:#277d9b"></i>○ Zero</span><span><i style="background:#9ad4b9"></i>Green: ROC (boundaries excluded)</span><span><i style="background:#b98635"></i>Unit circle</span></div></div>`;ssHoverQueue({kind:'complex',plane:'z',w:W,h:H,pad:{l:20,r:20,t:10,b:20},center:{cx,cy,scale},xmin:-3.8,xmax:3.8,ymin:-1.4,ymax:1.4,xlabel:'Re(z)',ylabel:'Im(z)',markers:[...poles.map(p=>({x:p[0],y:p[1],type:'Pole'})),...zeros.map(p=>({x:p[0],y:p[1],type:'Zero'}))],roc:{inner,outer}});return s;
+}
+const stepsState={};let current=0,step=0,all=false;
+function controlHTML(c,val){const id='ctl-'+c.key;if(c.type==='select')return `<div class="control"><label for="${id}">${c.label}</label><select id="${id}" data-param="${c.key}">${c.options.map(o=>`<option value="${o[0]}" ${String(val)===String(o[0])?'selected':''}>${o[1]}</option>`).join('')}</select></div>`;return `<div class="control"><label for="${id}">${c.label}</label><input id="${id}" data-param="${c.key}" type="range" min="${c.min}" max="${c.max}" step="${c.step||1}" value="${val}"><output id="out-${c.key}">${val}</output></div>`}
+function render(){const ex=EXPERIMENTS[current],state=stepsState[current]||(stepsState[current]={...ex.defaults});$('nav').innerHTML=EXPERIMENTS.map((x,i)=>`<button data-exp="${i}" class="${i===current?'active':''}" aria-current="${i===current?'true':'false'}">${String(i+1).padStart(2,'0')} · ${x.short}<small>${x.topic}</small></button>`).join('');$('title').textContent=ex.title;$('intro').textContent=ex.desc;$('controls').innerHTML=ex.controls.map(c=>controlHTML(c,state[c.key])).join('');draw();renderStep();$('reading').innerHTML=ex.readings.map((x,i)=>`<div class="note"><strong>${String(i+1).padStart(2,'0')} · ${x[0]}</strong><p>${x[1]}</p></div>`).join('');$('check').classList.remove('open');$('check-q').innerHTML=ex.check[0];$('check-a').innerHTML=ex.check[1];}
+function draw(){const ex=EXPERIMENTS[current],state=stepsState[current];ssHoverResetQueue();const out=ex.draw(state);$('plots').innerHTML=out.plots;ssHoverAttachQueued();$('insight').innerHTML=out.insight;for(const c of ex.controls){const o=$('out-'+c.key);if(o)o.textContent=String(state[c.key])}}
+function renderStep(){const ex=EXPERIMENTS[current],arr=ex.steps;$('step-num').textContent=all?`All ${arr.length} steps`:`Step ${step+1} / ${arr.length}`;$('progress-bar').style.width=`${all?100:(step+1)/arr.length*100}%`;$('step-content').innerHTML=(all?arr:[arr[step]]).map((s,i)=>`<div class="step" style="margin-bottom:${all?'10px':'0'}"><strong>${all?`Step ${i+1} · `:''}${s[0]}</strong><div class="math">${s[1]}</div><p>${s[2]}</p></div>`).join('');$('prev').disabled=step===0||all;$('next').disabled=step===arr.length-1||all;$('all').textContent=all?'Show one step':'Reveal all steps';}
+function init(){EXPERIMENTS.forEach((e,i)=>stepsState[i]={...e.defaults});$('nav').addEventListener('click',e=>{const b=e.target.closest('[data-exp]');if(!b)return;current=Number(b.dataset.exp);step=0;all=false;render()});$('controls').addEventListener('input',e=>{const el=e.target.closest('[data-param]');if(!el)return;const k=el.dataset.param;stepsState[current][k]=el.type==='range'?Number(el.value):el.value;draw()});$('controls').addEventListener('change',e=>{const el=e.target.closest('[data-param]');if(!el)return;const k=el.dataset.param;stepsState[current][k]=el.type==='range'?Number(el.value):el.value;draw()});$('prev').onclick=()=>{step=Math.max(0,step-1);renderStep()};$('next').onclick=()=>{step=Math.min(EXPERIMENTS[current].steps.length-1,step+1);renderStep()};$('all').onclick=()=>{all=!all;renderStep()};$('reset').onclick=()=>{step=0;all=false;renderStep()};$('check-toggle').onclick=()=>$('check').classList.toggle('open');render()}
+window.addEventListener('DOMContentLoaded',init);
+
+const EXPERIMENTS=[
+{short:'Why Z?',topic:'Exponential & ROC',title:'8.1 · Why the Z-Transform? / 복소 z-평면',desc:'감쇠·증가하는 이산 지수수열의 pole과 ROC를 연결합니다. 시간축 n=0…15를 고정합니다.',defaults:{a:.8},controls:[{key:'a',label:'Pole a',min:.3,max:1.1,step:.05}],draw:p=>{const n=Array.from({length:16},(_,i)=>i),ys=n.map(k=>p.a**k),stable=p.a<1;return {plots:chart({xmin:0,xmax:15,ymin:0,ymax:4.3,xlab:'n (samples)',title:'Causal exponential x[n] = aⁿu[n] · fixed n-axis',stems:[{xs:n,ys,color:'#0d8290',label:'Sequence aⁿ'}]})+zplot({poles:[[p.a,0]],zeros:[[0,0]],inner:p.a,outer:Infinity,title:'Pole z=a · exterior ROC |z|>|a|'}),insight:`<strong>a=${fmt(p.a,2)}, pole z=${fmt(p.a,2)}.</strong> ROC: |z|>${fmt(p.a,2)}. ${stable?'<strong>Unit circle lies in ROC</strong>; the causal sequence is absolutely summable.':'<strong>Unit circle is not inside ROC</strong>; this causal sequence is not absolutely summable.'} 같은 대수식이라도 ROC가 필요합니다.`}},steps:[['Start with the bilateral Z-transform','X(z)=Σ<sub>n=−∞</sub><sup>∞</sup> x[n]z<sup>−n</sup>','복소 z의 반지름과 위상이 수열을 가중합니다.'],['Insert a right-sided exponential','X(z)=Σ<sub>n=0</sub><sup>∞</sup>(az<sup>−1</sup>)<sup>n</sup>','u[n] 때문에 합은 n=0에서 시작합니다.'],['Apply the geometric series','X(z)=1/(1−az<sup>−1</sup>)','무한 기하급수는 |az⁻¹|<1에서만 수렴합니다.'],['Read pole and ROC','Pole: z=a; &nbsp; ROC: |z|>|a|','단위원이 ROC 안에 있을 때에만 통상적인 DTFT를 얻습니다.']],readings:[['Pole radius','a가 1에 가까울수록 시간응답이 천천히 감소합니다.'],['Causality','우측수열은 극점의 바깥쪽 ROC를 가집니다.'],['Stability','인과적 rational LTI 시스템에서는 모든 실제 pole이 단위원 안에 있어야 안정합니다.']],check:['a=1.05인 인과적 x[n]=aⁿu[n]의 DTFT가 일반적인 합으로 존재하나요?','아닙니다. ROC |z|>1.05에 단위원이 포함되지 않습니다.']},
+{short:'ROC direction',topic:'Right vs left sided',title:'8.2 · Same X(z), Different ROC / 좌우 수열',desc:'동일한 대수식 X(z)=1/(1−az⁻¹)이라도 ROC 선택에 따라 시간수열이 완전히 달라집니다.',defaults:{a:.8,side:'right'},controls:[{key:'a',label:'Pole a',min:.75,max:1.25,step:.05},{key:'side',label:'Sequence direction',type:'select',options:[['right','Right-sided / causal'],['left','Left-sided / anti-causal']]}],draw:p=>{const right=p.side==='right',xs=Array.from({length:13},(_,i)=>i-5),ys=xs.map(n=>right?(n>=0?p.a**n:0):(n<=-1?-(p.a**n):0));const roc=right?{inner:p.a,outer:Infinity}:{inner:0,outer:p.a};const stable=right?p.a<1:p.a>1;return {plots:chart({xmin:-5,xmax:7,ymin:-5.5,ymax:5.5,xlab:'n (samples)',title:'Fixed sample axis · right-sided vs left-sided inverse',stems:[{xs,ys,color:'#0d8290',label:right?'aⁿu[n]':'−aⁿu[−n−1]'}]})+zplot({poles:[[p.a,0]],zeros:[[0,0]],...roc,title:right?'Exterior ROC · |z|>|a|':'Interior ROC · |z|<|a|'}),insight:`<strong>X(z)=1/(1−${fmt(p.a,2)}z⁻¹).</strong> ${right?'Right-sided: x[n]=aⁿu[n], ROC |z|>|a|.':'Left-sided: x[n]=−aⁿu[−n−1], ROC |z|<|a|.'} ${stable?'Unit circle is in the ROC; absolutely summable.':'Unit circle is outside the ROC; not absolutely summable.'} 두 수열은 같은 rational expression을 가집니다.`}},steps:[['Fix the algebraic expression','X(z)=1/(1−az<sup>−1</sup>)','대수식과 pole 위치만으로 역변환이 결정되지 않습니다.'],['Exterior ROC: descending powers','|z|>|a| ⇒ Σ<sub>n=0</sub><sup>∞</sup>aⁿz<sup>−n</sup>','우측수열 aⁿu[n]이 됩니다.'],['Interior ROC: ascending powers','|z|<|a| ⇒ −Σ<sub>k=1</sub><sup>∞</sup>a<sup>−k</sup>z<sup>k</sup>','n=−k로 치환하면 좌측수열 −aⁿu[−n−1]입니다.'],['Choose the sequence with ROC','X(z) + ROC ⇒ unique x[n]','인과성·안정성 판단에는 pole 위치와 ROC가 모두 필요합니다.']],readings:[['Same poles, different signals','ROC를 바꾸면 시간축에서 수열이 존재하는 방향이 달라집니다.'],['Interior ROC','좌측수열은 pole보다 안쪽 영역에서 수렴합니다.'],['Noncausal stability','pole이 단위원 밖에 있어도 적절한 내부 ROC를 가지는 비인과 시스템은 안정할 수 있습니다.']],check:['a=1.2일 때 안정한 것은 우측수열인가요, 좌측수열인가요?','좌측수열입니다. |z|<1.2에 단위원이 포함됩니다.']},
+{short:'Annular ROC',topic:'Two-sided sequence',title:'8.3 · Two-Sided Signals / 고리형 ROC',desc:'우측수열과 좌측수열을 합하면 두 수렴영역의 교집합인 annular ROC가 만들어집니다.',defaults:{a:.4,b:1.8},controls:[{key:'a',label:'Inner pole a',min:.2,max:.8,step:.1},{key:'b',label:'Outer pole b',min:1.3,max:2.3,step:.1}],draw:p=>{const xs=Array.from({length:17},(_,i)=>i-6),ys=xs.map(n=>n>=0?p.a**n:-(p.b**n));return {plots:chart({xmin:-6,xmax:10,ymin:-1.2,ymax:1.2,xlab:'n (samples)',title:'x[n]=aⁿu[n] − bⁿu[−n−1]',stems:[{xs,ys,color:'#0d8290',label:'Two-sided sequence'}]})+zplot({poles:[[p.a,0],[p.b,0]],zeros:[],inner:p.a,outer:p.b,title:'Annular ROC · a < |z| < b'}),insight:`<strong>Poles at a=${fmt(p.a,2)}, b=${fmt(p.b,2)}.</strong> ROC: ${fmt(p.a,2)}<|z|<${fmt(p.b,2)}. <strong>Unit circle lies inside the annulus</strong>, so the sequence is absolutely summable. Two-sided ≠ necessarily unstable.`}},steps:[['Right-sided part','aⁿu[n] ↔ 1/(1−az<sup>−1</sup>), &nbsp; |z|>a','첫 번째 성분은 바깥쪽 ROC입니다.'],['Left-sided part','−bⁿu[−n−1] ↔ 1/(1−bz<sup>−1</sup>), &nbsp; |z|<b','두 번째 성분은 안쪽 ROC입니다.'],['Intersect convergence regions','ROC: a<|z|<b','합의 ROC는 각 성분의 공통 수렴영역입니다.'],['Test the unit circle','a<1<b ⇒ |z|=1 inside ROC','양측수열도 절대합이 유한하여 안정적인 LTI impulse response가 될 수 있습니다.']],readings:[['Green annulus','두 경계 원은 ROC에 포함되지 않습니다.'],['Two-sided time support','n≥0과 n≤−1 양쪽에 성분이 있습니다.'],['Important distinction','인과성은 우측 지지, 안정성은 절대합/단위원 ROC와 관련됩니다.']],check:['a=0.4, b=1.8이면 ROC가 단위원을 포함하나요?','네. 0.4<1<1.8이므로 포함합니다.']},
+{short:'Inverse Z',topic:'ROC selects inverse',title:'8.4 · Inverse Z-Transform / 역변환',desc:'하나의 rational expression에 대해 ROC를 선택하고 시간영역의 계수를 복원합니다.',defaults:{a:.6,roc:'outer'},controls:[{key:'a',label:'Pole a',min:.5,max:1.2,step:.1},{key:'roc',label:'Choose ROC',type:'select',options:[['outer','|z| > |a|'],['inner','|z| < |a|']]}],draw:p=>{const right=p.roc==='outer',xs=Array.from({length:13},(_,i)=>i-5),ys=xs.map(n=>right?(n>=0?p.a**n:0):(n<0?-(p.a**n):0));return {plots:chart({xmin:-5,xmax:7,ymin:-5.5,ymax:5.5,xlab:'n (samples)',title:'Inverse sequence from geometric-series expansion',stems:[{xs,ys,color:'#0d8290',label:right?'Right-sided inverse':'Left-sided inverse'}]})+zplot({poles:[[p.a,0]],zeros:[[0,0]],inner:right?p.a:0,outer:right?Infinity:p.a,title:'Choose ROC before inverse expansion'}),insight:`<strong>X(z)=1/(1−${fmt(p.a,2)}z⁻¹).</strong> ${right?'Expansion in z⁻¹: x[n]=aⁿu[n].':'Expansion in z: x[n]=−aⁿu[−n−1].'} 역변환은 partial fractions만으로 끝나지 않고 각 항에 ROC를 적용해야 합니다.`}},steps:[['Factor the rational expression','X(z)=1/(1−az<sup>−1</sup>)','우선 pole z=a를 확인합니다.'],['Decide ROC','Outside or inside the pole circle?','인과성 조건이 주어지면 바깥쪽 ROC를 선택합니다.'],['Expand the correct geometric series','Outer: Σₙ₌₀∞aⁿz⁻ⁿ; &nbsp; Inner: −Σₖ₌₁∞a⁻ᵏzᵏ','같은 식이라도 서로 다른 전개가 가능합니다.'],['Read the time indices','Outer → aⁿu[n]; &nbsp; Inner → −aⁿu[−n−1]','각 z⁻ⁿ 항의 계수가 시간수열 x[n]입니다.']],readings:[['Expansion direction','z⁻¹의 거듭제곱은 n≥0, z의 거듭제곱은 n<0에 대응합니다.'],['Partial fractions','다중 pole에서도 각 항의 ROC와 시간 방향을 선택합니다.'],['Numerical check','선택된 수열의 Z-transform을 다시 합해 검증합니다.']],check:['왜 같은 분모의 두 역변환이 모두 가능한가요?','기하급수 전개의 수렴영역이 서로 다르기 때문입니다. ROC를 지정해야 유일해집니다.']},
+{short:'Pole–zero filter',topic:'Time–frequency tradeoff',title:'8.5 · Pole Location & Frequency Response',desc:'인과적 1-pole 저역통과 필터에서 pole을 단위원에 가깝게 이동하며 impulse response와 frequency response를 함께 관찰합니다.',defaults:{a:.7},controls:[{key:'a',label:'Pole a',min:.1,max:.95,step:.05}],draw:p=>{const ns=Array.from({length:21},(_,i)=>i),hs=ns.map(n=>(1-p.a)*p.a**n),mag=w=>(1-p.a)/Math.hypot(1-p.a*Math.cos(w),p.a*Math.sin(w));return {plots:zplot({poles:[[p.a,0]],zeros:[[0,0]],inner:p.a,outer:Infinity,title:'H(z)=(1−a)/(1−az⁻¹) · pole and zero'})+chart({xmin:0,xmax:20,ymin:0,ymax:1,xlab:'n (samples)',title:'Impulse response h[n] = (1−a)aⁿu[n]',stems:[{xs:ns,ys:hs,color:'#0d8290',label:'Impulse response'}]})+chart({xmin:0,xmax:PI,ymin:0,ymax:1.1,xlab:'Ω (rad/sample)',title:'|H(eʲΩ)| · DC normalized to 1',curves:[{fn:mag,color:'#c88939',label:'Frequency response magnitude'}]}),insight:`<strong>a=${fmt(p.a,2)}.</strong> Pole radius ${fmt(p.a,2)}<1 ⇒ causal stable. DC gain H(eʲ⁰)=1. ${p.a>.8?'Pole near +1: narrow lowpass response but longer time memory.':'Pole farther from +1: faster time decay but weaker frequency selectivity.'}`}},steps:[['Write the difference equation','y[n]=ay[n−1]+(1−a)x[n]','피드백 항은 이전 출력을 저장하는 delay입니다.'],['Apply Z-transform','H(z)=(1−a)/(1−az<sup>−1</sup>)','초기조건 0에서 전달함수를 구합니다.'],['Identify pole and ROC','Pole z=a; causal ROC |z|>|a|','a<1이면 단위원이 ROC에 포함됩니다.'],['Evaluate on unit circle','|H(e<sup>jΩ</sup>)|=(1−a)/√(1+a²−2a cosΩ)','pole이 +1에 가까워지면 저주파 응답은 상대적으로 뚜렷해집니다.']],readings:[['Impulse response tail','a가 커지면 impulse response가 천천히 감소합니다.'],['Frequency selectivity','동시에 높은 주파수의 억제 정도가 달라집니다.'],['Real application','IoT 센서의 온도·습도 smoothing과 노이즈 저감에 사용됩니다.']],check:['a=0.95와 a=0.2 중 어떤 필터가 더 긴 기억을 갖나요?','a=0.95입니다. impulse response aⁿ이 더 천천히 감소합니다.']},
+{short:'FIR zeros',topic:'Moving-average notches',title:'8.6 · FIR Moving Average / 영점과 노치',desc:'N-point moving average의 Z-transform 영점이 특정 주파수를 제거하는 과정을 관찰합니다.',defaults:{N:5},controls:[{key:'N',label:'FIR length N',min:3,max:10,step:1}],draw:p=>{const zeros=Array.from({length:p.N-1},(_,i)=>{const th=2*PI*(i+1)/p.N;return [Math.cos(th),Math.sin(th)]}),mag=w=>Math.abs(Math.sin(w/2))<1e-9?1:Math.abs(Math.sin(p.N*w/2)/(p.N*Math.sin(w/2)));return {plots:zplot({poles:[[0,0]],zeros,inner:.03,outer:Infinity,title:'N−1 unit-circle zeros · pole at origin (order N−1)'})+chart({xmin:0,xmax:PI,ymin:0,ymax:1.05,xlab:'Ω (rad/sample)',title:'Moving-average frequency response magnitude',curves:[{fn:mag,color:'#0d8290',label:'|H(eʲΩ)|'}]}),insight:`<strong>N=${p.N}.</strong> H(z)=(1/N)Σₖ₌₀ᴺ⁻¹ z⁻ᵏ. Unit-circle zeros at Ω=2πm/N, m=1,…,N−1. z=1은 <strong>removable cancellation</strong>이며 H(1)=1입니다. z=0에는 N−1차 pole이 있으며, z=1은 <strong>removable cancellation</strong>입니다. ROC는 |z|>0입니다.`}},steps:[['Form the FIR sum','H(z)=(1/N)Σ<sub>k=0</sub><sup>N−1</sup>z<sup>−k</sup>','N개 현재·과거 표본을 동일 가중치로 평균합니다.'],['Use finite geometric series','H(z)=(1/N)(1−z<sup>−N</sup>)/(1−z<sup>−1</sup>)','z≠1에서 성립하며 z=1은 원래 유한합으로 평가합니다.'],['Find nontrivial zeros','z<sup>N</sup>=1, &nbsp; z≠1','단위원 위의 N-th roots 중 z=1을 제외한 N−1개가 영점입니다.'],['Interpret the notches','Ω<sub>m</sub>=2πm/N','해당 주파수의 정현파 성분은 완전히 제거됩니다.']],readings:[['Unit circle','영점이 단위원 위에 놓이면 해당 디지털 주파수에서 magnitude가 0이 됩니다.'],['Not a pole at z=1','유한합 H(1)=1이며 분수의 0/0은 제거 가능한 형태입니다.'],['Causal FIR','유한 길이 impulse response이므로 BIBO stable입니다.']],check:['N=4 moving average가 Ω=π/2 성분을 제거하나요?','네. 2π/4=π/2는 영점 주파수입니다.']},
+{short:'Stability checker',topic:'Causal vs anti-causal',title:'8.7 · Causality & BIBO Stability / 안정성',desc:'인과/비인과 방향과 pole 반지름을 각각 선택합니다. 단위원이 ROC 안에 있는지가 핵심입니다.',defaults:{a:.8,side:'causal'},controls:[{key:'a',label:'Pole a',min:.5,max:1.5,step:.1},{key:'side',label:'ROC direction',type:'select',options:[['causal','Causal · outside'],['anti','Anti-causal · inside']]}],draw:p=>{const right=p.side==='causal',stable=right?p.a<1:p.a>1,xs=Array.from({length:16},(_,i)=>i-5),ys=xs.map(n=>right?(n>=0?p.a**n:0):(n<0?-(p.a**n):0));return {plots:zplot({poles:[[p.a,0]],zeros:[[0,0]],inner:right?p.a:0,outer:right?Infinity:p.a,title:'ROC vs unit circle · stable iff |z|=1 is inside'})+chart({xmin:-5,xmax:10,ymin:-4.5,ymax:4.5,xlab:'n (samples)',title:'Impulse response · fixed n-axis (large values clipped)',stems:[{xs,ys,color:'#0d8290',label:right?'Right-sided':'Left-sided'}]}),insight:`<strong>Pole a=${fmt(p.a,2)}; ${right?'causal ROC |z|>a':'anti-causal ROC |z|<a'}.</strong> ${stable?'<strong>BIBO stable:</strong> the unit circle is contained in the ROC.':'<strong>Not BIBO stable:</strong> the unit circle is not in the ROC.'} ${right?'Causal right-sided impulse response.':'Anti-causal left-sided impulse response.'} 큰 값은 그래프 범위 밖에서 잘릴 수 있습니다.`}},steps:[['Identify causality','Causal ⇔ h[n]=0 for n<0','인과 시스템은 미래 입력을 사용하지 않습니다.'],['Read the ROC direction','Right-sided → exterior; left-sided → interior','ROC는 pole 위치만으로 정해지지 않습니다.'],['Use the BIBO criterion','Σₙ |h[n]| < ∞','이산시간 LTI 시스템의 BIBO 안정성 조건입니다.'],['Translate to z-plane','Stable ⇔ unit circle lies in ROC','인과적 유리형에서는 모든 실제 pole이 단위원 내부여야 합니다. 비인과 경우는 다를 수 있습니다.']],readings:[['Causal is not stable','인과성과 안정성은 서로 다른 성질입니다.'],['Anti-causal stable example','a=1.3, |z|<1.3은 단위원을 포함하므로 안정할 수 있습니다.'],['Boundary','a=1이면 ROC 경계에 단위원이 놓이므로 일반적인 BIBO 안정성이 없습니다.']],check:['pole이 1.3에 있는 비인과 시스템도 안정할 수 있나요?','네. 좌측수열의 ROC |z|<1.3에 단위원이 포함되면 안정합니다.']},
+{short:'Sensor IIR',topic:'Real digital filter',title:'8.8 · Digital Sensor Smoother / 차분방정식',desc:'차분방정식의 z⁻¹ 지연, pole, step response와 저역통과 주파수 응답을 연결합니다.',defaults:{a:.8},controls:[{key:'a',label:'Smoothing pole a',min:.1,max:.95,step:.05}],draw:p=>{const xs=Array.from({length:21},(_,i)=>i),step=xs.map(n=>1-p.a**(n+1)),mag=w=>(1-p.a)/Math.hypot(1-p.a*Math.cos(w),p.a*Math.sin(w));return {plots:chart({xmin:0,xmax:20,ymin:0,ymax:1.1,xlab:'n (samples)',title:'Unit-step response y[n]=1−aⁿ⁺¹',stems:[{xs,ys:step,color:'#0d8290',label:'Filter output'}]})+chart({xmin:0,xmax:PI,ymin:0,ymax:1.05,xlab:'Ω (rad/sample)',title:'Sensor smoother frequency response',curves:[{fn:mag,color:'#c88939',label:'|H(eʲΩ)|'}]})+zplot({poles:[[p.a,0]],zeros:[[0,0]],inner:p.a,outer:Infinity,title:'Causal ROC and pole · z⁻¹ means one-sample delay'}),insight:`<strong>y[n]=${fmt(p.a,2)}y[n−1]+${fmt(1-p.a,2)}x[n].</strong> Pole a=${fmt(p.a,2)}<1 ⇒ causal stable. Step response at n=5: ${fmt(1-p.a**6,3)}. ${p.a>.8?'Stronger smoothing, slower step response.':'Faster response, weaker smoothing.'}`}},steps:[['Start from a real-time difference equation','y[n]=ay[n−1]+(1−a)x[n]','이전 출력 y[n−1]은 메모리에 저장된 값입니다.'],['Transform the delay','Z{y[n−1]}=z<sup>−1</sup>Y(z)','초기조건 0인 시스템 전달함수 해석입니다.'],['Solve for H(z)','H(z)=Y(z)/X(z)=(1−a)/(1−az<sup>−1</sup>)','pole z=a와 causal ROC |z|>|a|를 얻습니다.'],['Compute time and frequency behavior','h[n]=(1−a)aⁿu[n], &nbsp; H(e<sup>jΩ</sup>)','실제 C 코드의 한 줄 업데이트와 pole/ROC/주파수 응답이 연결됩니다.']],readings:[['Implementation','C 코드: y = a*y_prev + (1-a)*x; y_prev = y;'],['Time-frequency tradeoff','a가 커지면 노이즈는 더 부드러워지지만 급격한 변화에 늦게 반응합니다.'],['Physical units','실제 cutoff Hz는 sampling rate와 함께 해석해야 합니다.']],check:['a=0.9를 a=0.3으로 줄이면 계단 입력에 대한 응답 속도는?','더 빨라집니다. 대신 고주파 노이즈 억제 정도는 약해집니다.']}
+];
+
+</script></body></html>
