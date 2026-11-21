@@ -9,11 +9,10 @@ function init(){
  const links=header.querySelector('.ss-common-links');
  if(!menu||!title||!links)return;
  const path=location.pathname;
- const chapter=path.endsWith('/chapter5.html')?5:path.endsWith('/chapter6.html')?6:Number((location.hash.match(/^#chapter=(\d+)/)||[])[1])||0;
  function sync(){
   const ch=path.endsWith('/chapter5.html')?5:path.endsWith('/chapter6.html')?6:Number((location.hash.match(/^#chapter=(\d+)/)||[])[1])||0;
   for(const link of links.querySelectorAll('a')){
-   const n=Number(link.dataset.ssChapter||((link.textContent||'').match(/Chapter\\s+(\d+)/)||[])[1]);
+   const n=Number(link.dataset.ssChapter||((link.textContent||'').match(/Chapter\s+(\d+)/)||[])[1]);
    if(n===ch)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
   }
  }
