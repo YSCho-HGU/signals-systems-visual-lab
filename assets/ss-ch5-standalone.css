@@ -309,3 +309,49 @@ html.ss5-native #page>.ss5-followup{
   grid-column:1!important
  }
 }
+
+/* Axis ranges and teaching annotations must honor every selected theme.
+ * Legacy :root light-only --ss-axis-* rules were removed from Chapter 5 HTML.
+ * Chart canvas drawing colors remain managed independently by elsPlotColors().
+ */
+html.ss5-native[data-els-theme]{
+ --ss-axis-bg:var(--els-surface-alt);
+ --ss-axis-text:var(--els-ink);
+ --ss-axis-border:var(--els-border);
+}
+html.ss5-native[data-els-theme] :is(.axis-key,.plot-instruction,.ss-hover-hint){
+ background:var(--els-surface-alt)!important;
+ color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+}
+html.ss5-native[data-els-theme] .axis-key{
+ display:flex;flex-wrap:wrap;align-items:center;gap:5px 13px;
+ margin:8px 0 4px;padding:8px 11px;border:1px solid var(--els-border)!important;
+ border-radius:8px;font:650 13px/1.65 system-ui,'Malgun Gothic',sans-serif;
+ overflow-wrap:anywhere
+}
+html.ss5-native[data-els-theme] .axis-key .ax-strong{
+ color:var(--els-link)!important;font-weight:850
+}
+html.ss5-native[data-els-theme] :is(.progress-badge,.guide-track,.deriv-math,.reading-note,.guide-actions button){
+ border-color:var(--els-border)!important
+}
+html.ss5-native[data-els-theme] .progress-badge,
+html.ss5-native[data-els-theme] .deriv-math,
+html.ss5-native[data-els-theme] .guide-actions button{
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important
+}
+html.ss5-native[data-els-theme] .guide-actions button.primary{
+ background:var(--els-primary)!important;
+ border-color:var(--els-primary)!important;
+ color:var(--els-primary-text)!important
+}
+html.ss5-native[data-els-theme] :is(.reading-note strong,.deriv-top,.deriv-step p,.guide-head h3,.reading-panel h3,.guide-check){
+ color:var(--els-ink)!important
+}
+html.ss5-native[data-els-theme] :is(.reading-note p,.reading-note .ko-explain,.guide-head p){
+ color:var(--els-muted)!important
+}
+@media(max-width:560px){
+ html.ss5-native[data-els-theme] .axis-key{font-size:12px;gap:4px 9px;padding:7px 8px}
+}
