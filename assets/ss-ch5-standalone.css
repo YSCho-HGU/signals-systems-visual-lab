@@ -389,3 +389,16 @@ html.ss5-native #page>.lab{gap:14px!important}
  html.ss5-native #page :is(.derivation-panel,.reading-panel,.insight,.quiz){padding:13px!important}
  html.ss5-native #page>.lab{gap:12px!important}
 }
+
+/* Primary actions retain readable contrast in all five palettes. */
+html.ss5-native[data-els-theme] #page :is(.btn.primary,.guide-actions button.primary){
+ background:var(--els-primary)!important;color:var(--els-primary-text)!important;
+ border-color:var(--els-primary)!important
+}
+html.ss5-native[data-els-theme] #page :is(.guide-actions button:not(.primary),.preset,.btn:not(.primary)){
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
+ border-color:var(--els-border)!important
+}
+html.ss5-native[data-els-theme] #page :is(.guide-actions button,.preset,.btn):focus-visible{
+ outline:3px solid var(--els-focus)!important;outline-offset:2px
+}
