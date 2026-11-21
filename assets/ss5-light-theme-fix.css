@@ -1,0 +1,26 @@
+/* Chapter 5: definitive light-theme override of legacy dark rules. */
+html.ss5-native[data-els-theme="white"],html.ss5-native[data-els-theme="white-clean"]{
+ color-scheme:light!important;--bg:var(--els-page)!important;--card:var(--els-surface)!important;
+ --paper:var(--els-surface)!important;--pale:var(--els-surface-alt)!important;
+ --ink:var(--els-ink)!important;--muted:var(--els-muted)!important;
+ --line:var(--els-border)!important;--accent:var(--els-link)!important;
+ --nav:var(--els-surface)!important;
+}
+html.ss5-native[data-els-theme="white"] :is(body,.shell,.main,.lab,.outputs,.plots),
+html.ss5-native[data-els-theme="white-clean"] :is(body,.shell,.main,.lab,.outputs,.plots){
+ background:var(--els-page)!important;color:var(--els-ink)!important;
+}
+html.ss5-native[data-els-theme="white"] :is(.ss5-site-header,.nav,.panel,.figure,.formula,.reading-panel,.reading-note,.derivation-panel,.deriv-step,.quiz,.insight,.metric,.card,.ss5-predict,.ss5-observe,.ss5-check,.teach,.ss5-progress,.heading),
+html.ss5-native[data-els-theme="white-clean"] :is(.ss5-site-header,.nav,.panel,.figure,.formula,.reading-panel,.reading-note,.derivation-panel,.deriv-step,.quiz,.insight,.metric,.card,.ss5-predict,.ss5-observe,.ss5-check,.teach,.ss5-progress,.heading){
+ background:var(--els-surface)!important;background-image:none!important;color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;box-shadow:none!important;
+}
+html.ss5-native[data-els-theme="white"] :is(.ss5-site-header,.nav,.panel,.figure,.formula,.reading-panel,.reading-note,.derivation-panel,.deriv-step,.quiz,.insight,.metric,.card,.ss5-predict,.ss5-observe,.ss5-check,.teach,.ss5-progress,.heading){background:#fff!important}
+html.ss5-native[data-els-theme="white"] :is(.heading h2,.heading p,.heading .sup,.panel h3,.figure h3,.reading-panel h3,.reading-note p,.ss5-flow-label,.ss5-predict p,.ss5-observe p,.ss5-check p,.quiz p,.deriv-step p,.formula,.formula .math,.mathline,.deriv-math,.nav .brand h1,.nav .brand p,.navlabel,.tabname,.ss5-site-title),
+html.ss5-native[data-els-theme="white-clean"] :is(.heading h2,.heading p,.heading .sup,.panel h3,.figure h3,.reading-panel h3,.reading-note p,.ss5-flow-label,.ss5-predict p,.ss5-observe p,.ss5-check p,.quiz p,.deriv-step p,.formula,.formula .math,.mathline,.deriv-math,.nav .brand h1,.nav .brand p,.navlabel,.tabname,.ss5-site-title){color:var(--els-ink)!important}
+html.ss5-native[data-els-theme="white"] :is(input,textarea,select,.ss5-site-header select),
+html.ss5-native[data-els-theme="white-clean"] :is(input,textarea,select,.ss5-site-header select){
+ background:var(--els-surface)!important;color:var(--els-ink)!important;border-color:var(--els-border)!important;
+}
+html.ss5-native[data-els-theme="white"] .figure canvas,
+html.ss5-native[data-els-theme="white-clean"] .figure canvas{background:#fff!important;filter:none!important}
