@@ -5,6 +5,12 @@ const CHAPTERS=["Signals & Systems","LTI Systems","Fourier Series","CTFT","Lapla
 function buildLinks(nav){
  if(nav.dataset.ssLinksBuilt)return;
  const fragment=document.createDocumentFragment();
+ const overview=document.createElement('a');
+ overview.href='./index.html#overview';overview.dataset.ssView='overview';
+ overview.textContent='Overview · Course Home';fragment.appendChild(overview);
+ const map=document.createElement('a');
+ map.href='./index.html#map';map.dataset.ssView='map';
+ map.textContent='Learning Map · Transform Connections';fragment.appendChild(map);
  CHAPTERS.forEach((name,i)=>{
   const number=i+1;
   const link=document.createElement('a');
@@ -27,9 +33,12 @@ function init(){
  const path=location.pathname;
  function sync(){
   const ch=Number((path.match(/chapter([1-8])\.html$/)||[])[1])||Number((location.hash.match(/^#chapter=(\d+)/)||[])[1])||0;
+  const onOverview=/index\\.html$|\\/$/.test(path);
+  const view=onOverview?(location.hash==='#map'?'map':'overview'):null;
   for(const link of links.querySelectorAll('a')){
-   const n=Number(link.dataset.ssChapter||((link.textContent||'').match(/Chapter\s+(\d+)/)||[])[1]);
-   if(n===ch)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
+   const n=Number(link.dataset.ssChapter||0);
+   const active=link.dataset.ssView?link.dataset.ssView===view:!!ch&&n===ch;
+   if(active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
   }
  }
  sync();
