@@ -124,3 +124,20 @@ html[data-ss-view="map"] #map-view{padding-top:18px!important}
  html #overview .ss-method-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important}
  html #overview .ss-aside-flow{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
+
+/* Learning Map graphs: axes, canvas and labels honor the selected palette.
+ * Retain semantic ROC fills and data-series hues. */
+html #map-view .tm-demo-chart svg{
+ background:var(--els-surface)!important;color:var(--els-ink)!important
+}
+html #map-view .tm-demo-chart > svg > rect:first-child{
+ fill:var(--els-surface)!important
+}
+html #map-view .tm-demo-chart svg text{
+ fill:var(--els-ink)!important
+}
+html #map-view .tm-demo-chart svg line[stroke="#edf2f5"]{
+ stroke:var(--els-border)!important
+}
+html #map-view .tm-formula .katex-display{margin:.15em 0}
+html #map-view .tm-formula .katex{font-size:1.02em}
