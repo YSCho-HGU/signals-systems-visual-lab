@@ -372,7 +372,9 @@ function elsPlotColors(){
  ink:token('--els-ink',dark?'#f0f0ed':'#1b2730'),
  muted:token('--els-muted',dark?'#c1c5c1':'#455663'),
  axis:dark?'#d0dbd7':'#344f62',
- grid:dark?'#46514d':'#dfe7ec'};
+ grid:dark?'#46514d':'#dfe7ec',
+ rocFill:dark?'rgba(89,185,157,0.18)':'rgba(19,133,120,0.13)',
+ rocLabel:dark?'#a8e3d5':'#14736d'};
 }
 function chart(id,opt){
  const {g,w,h}=ctx(id),mini=id.startsWith('cmp_'),plotTheme=elsPlotColors();
@@ -434,7 +436,7 @@ function plane(id,{poles=[],zeros=[],roc={type:'right',a:-1},xmin=-5.5,xmax=3,ym
  if(roc.type==='left')right=roc.a;
  if(roc.type==='strip'){left=roc.a;right=roc.b}
  if(roc.type==='all'){left=xmin;right=xmax}
- if(roc.type!=='none'){g.fillStyle='#e1f3ef';const a=Math.max(left,xmin),b=Math.min(right,xmax);if(b>a)g.fillRect(X(a),m.t,X(b)-X(a),H)}
+ if(roc.type!=='none'){g.fillStyle=plotTheme.rocFill;const a=Math.max(left,xmin),b=Math.min(right,xmax);if(b>a)g.fillRect(X(a),m.t,X(b)-X(a),H)}
  const xStep=niceStep(xmax-xmin,6),yStep=niceStep(ymax-ymin,6);
  for(let k=Math.ceil(xmin/xStep-1e-8);k<=Math.floor(xmax/xStep+1e-8);k++){g.strokeStyle=plotTheme.grid;g.lineWidth=1;g.beginPath();g.moveTo(X(k*xStep),m.t);g.lineTo(X(k*xStep),m.t+H);g.stroke()}
  for(let k=Math.ceil(ymin/yStep-1e-8);k<=Math.floor(ymax/yStep+1e-8);k++){g.strokeStyle=plotTheme.grid;g.lineWidth=1;g.beginPath();g.moveTo(m.l,Y(k*yStep));g.lineTo(m.l+W,Y(k*yStep));g.stroke()}
@@ -457,7 +459,7 @@ function plane(id,{poles=[],zeros=[],roc={type:'right',a:-1},xmin=-5.5,xmax=3,ym
   if(handles.p!==undefined){const px=X(handles.p),py=Y(0);g.fillStyle=COLORS.orange;g.fillText('drag P',px,py-17)}
   if(handles.z!==undefined){const zx=X(handles.z),zy=Y(0);g.fillStyle=COLORS.purple;g.fillText('drag Z',zx,zy+23)}
  }
- if(roc.type!=='none'){const a=Math.max(left,xmin),b=Math.min(right,xmax);if(b>a){g.fillStyle='#087d85';g.font='bold 11px system-ui';g.textAlign='center';g.fillText('ROC',Math.max(m.l+25,Math.min(m.l+W-25,(X(a)+X(b))/2)),m.t+17)}}
+ if(roc.type!=='none'){const a=Math.max(left,xmin),b=Math.min(right,xmax);if(b>a){g.fillStyle=plotTheme.rocLabel;g.font='bold 11px system-ui';g.textAlign='center';g.fillText('ROC',Math.max(m.l+25,Math.min(m.l+W-25,(X(a)+X(b))/2)),m.t+17)}}
  g.restore();
  g.font='11px system-ui';g.textBaseline='middle';
  for(let k=Math.ceil(xmin/xStep-1e-8);k<=Math.floor(xmax/xStep+1e-8);k++){const v=k*xStep;g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.font=(Math.abs(v)<1e-9?'bold ':'')+'11px system-ui';g.textAlign='center';g.fillText(tickLabel(v,xStep),X(v),h-m.b+16)}
