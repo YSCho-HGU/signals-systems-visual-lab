@@ -120,3 +120,31 @@ html.ss8-native .ss8-82-roc-formula{padding:8px 10px;background:var(--els-surfac
 html.ss8-native .ss8-comparison-context{display:grid;gap:5px;padding:12px;border:1px solid var(--els-border);border-radius:10px;background:var(--els-surface-alt);color:var(--els-ink)}
 html.ss8-native .ss8-comparison-context small{font-size:13px;line-height:1.6}
 @media(max-width:650px){html.ss8-native .ss8-equation-row{grid-template-columns:1fr}html.ss8-native .ss8-82-stage{padding:9px}}
+
+/* Shared mathematical rendering: consistent layout and explicit failure states. */
+html.ss8-native [data-ss-math],
+html.ss8-native [data-latex]{
+ color:var(--els-ink);
+ min-width:0;
+ max-width:100%;
+ overflow-x:auto;
+ overflow-y:hidden;
+ scrollbar-width:thin;
+}
+html.ss8-native [data-ss-math] .katex-display,
+html.ss8-native [data-latex] .katex-display{
+ margin:.3em 0!important;
+ text-align:left!important;
+ overflow-x:auto;
+ overflow-y:hidden;
+}
+html.ss8-native [data-ss-math-state="error"],
+html.ss8-native [data-ss-math-state="missing"],
+html.ss8-native [data-ss-math-error]{
+ border-left:3px solid var(--els-accent,#c75b4e);
+ padding-left:9px;
+ font-family:"Cambria Math",serif;
+}
+html.ss8-native .ss8-math-source,
+html.ss8-native .ss8-latex{font-size:var(--ss-math-step-size,19px)}
+html.ss8-native .ss8-key-equation{font-size:var(--ss-math-key-size,20px)}
