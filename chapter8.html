@@ -391,14 +391,14 @@ const EXPERIMENTS=[
  String.raw`H_L(z)=-\sum_{n=-\infty}^{-1}(0.8z^{-1})^n`,
  String.raw`H_L(z)=-\sum_{k=1}^{\infty}(z/0.8)^k=\frac{1}{1-0.8z^{-1}},\quad |z/0.8|<1`
  ];
- const math=steps.map((tex,i)=>`<div class="ss8-equation-row"><span class="ss8-equation-label">\${i===0?'Substitute':'Simplify'}</span><div class="ss8-math-source" data-latex="\${tex.replaceAll('&','&amp;').replaceAll('"','&quot;')}">\${right?(i===0?'H(z) = sum for n >= 0':'H(z) = 1 / (1 - 0.8 z^-1)'):(i===0?'H(z) = -sum for n <= -1':'H(z) = 1 / (1 - 0.8 z^-1)')}</div></div>`).join('');
+ const math=steps.map((tex,i)=>`<div class="ss8-equation-row"><span class="ss8-equation-label">${i===0?'Substitute':'Simplify'}</span><div class="ss8-math-source" data-latex="${tex.replaceAll('&','&amp;').replaceAll('"','&quot;')}">${right?(i===0?'H(z) = sum for n >= 0':'H(z) = 1 / (1 - 0.8 z^-1)'):(i===0?'H(z) = -sum for n <= -1':'H(z) = 1 / (1 - 0.8 z^-1)')}</div></div>`).join('');
  const expression='<div class="ss8-equation-summary"><strong>Same algebraic result</strong><div class="ss8-math-source" data-latex="H(z)=\\frac{1}{1-0.8z^{-1}}">H(z) = 1 / (1 - 0.8 z^-1)</div></div>';
  return {plots:`<div class="ss8-82-sequence">
- <section class="ss8-82-stage"><h3><span>1</span> Time-domain impulse response h[n]</h3>\${signal}</section>
- <section class="ss8-82-stage"><h3><span>2</span> Derive the Z-transform H(z)</h3><div class="ss8-82-equations">\${math}\${expression}</div></section>
- <section class="ss8-82-stage"><h3><span>3</span> Find the Region of Convergence (ROC)</h3><div class="ss8-82-roc-formula ss8-math-source" data-latex="\${right?'\\mathrm{ROC}:\\ |z|>0.8':'\\mathrm{ROC}:\\ |z|<0.8'}">ROC: \${right?'|z| > 0.8':'|z| < 0.8'}</div>\${roc}</section>
+ <section class="ss8-82-stage"><h3><span>1</span> Time-domain impulse response h[n]</h3>${signal}</section>
+ <section class="ss8-82-stage"><h3><span>2</span> Derive the Z-transform H(z)</h3><div class="ss8-82-equations">${math}${expression}</div></section>
+ <section class="ss8-82-stage"><h3><span>3</span> Find the Region of Convergence (ROC)</h3><div class="ss8-82-roc-formula ss8-math-source" data-latex="${right?'\\mathrm{ROC}:\\ |z|>0.8':'\\mathrm{ROC}:\\ |z|<0.8'}">ROC: ${right?'|z| > 0.8':'|z| < 0.8'}</div>${roc}</section>
  </div>`,
- insight:`<strong>Compare both selections:</strong> Right-sided and left-sided impulse responses have the same rational expression H(z), but converge in different regions. Their corresponding ROCs are \${right?'exterior |z|>0.8 (unit circle included)':'interior |z|<0.8 (unit circle excluded)'}.`};
+ insight:`<strong>Compare both selections:</strong> Right-sided and left-sided impulse responses have the same rational expression H(z), but converge in different regions. Their corresponding ROCs are ${right?'exterior |z|>0.8 (unit circle included)':'interior |z|<0.8 (unit circle excluded)'}.`};
 
 },steps:[
  ['Begin with a discrete-time signal','h[n]=0.8^nu[n] \quad \mathrm{or}\quad h[n]=-0.8^nu[-n-1]','Change에서 수열을 선택합니다. 오른쪽은 n≥0, 왼쪽은 n≤−1에만 존재합니다.'],
