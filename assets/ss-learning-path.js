@@ -39,12 +39,16 @@ function lessonList(items,host,ch){
 function showExperiment(ch,index){
  const doc=frame.contentDocument;
  if(!doc)return false;
- const selectors=ch===1?"#nav button":ch===5?"#tabs button":
- (ch===7||ch===8)?"#nav button":"nav.nav button[data-nav]";
- const items=[...doc.querySelectorAll(selectors)];
- const target=items[index-1];
- if(!target)return false;
- target.click();
+ if(ch===7){
+  if(!frame.contentWindow?.SSChapter7?.openExperiment(index))return false;
+ }else{
+  const selectors=ch===1?"#nav button":ch===5?"#tabs button":
+   ch===8?"#nav button":"nav.nav button[data-nav]";
+  const items=[...doc.querySelectorAll(selectors)];
+  const target=items[index-1];
+  if(!target)return false;
+  target.click();
+ }
  for(const node of document.querySelectorAll(".ss-path-link")){
    const chosen=Number(node.dataset.experiment)===index;
    node.classList.toggle("selected",chosen);
@@ -254,7 +258,7 @@ if(frameWrap){
  }
 `;
  function applyIframeLayout(){
-  if(!currentChapter())return;
+  if(!currentChapter()||currentChapter()===7)return;
   try{
    const doc=frame.contentDocument;
    if(!doc||!doc.documentElement)return;
