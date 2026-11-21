@@ -362,19 +362,7 @@ function tickLabel(v,step){
   const decimals=isIntegerStep?0:Math.min(5,Math.max(1,Math.ceil(-Math.log10(step))+1));
   return Number(v.toFixed(decimals)).toString();
 }
-function elsPlotColors(){
- const style=getComputedStyle(document.documentElement);
- const theme=document.documentElement.dataset.elsTheme||'neutral-dark';
- const dark=['neutral-dark','warm-dark','navy-dark'].includes(theme);
- const token=(name,fallback)=>style.getPropertyValue(name).trim()||fallback;
- return {background:token('--els-surface',dark?'#1c1c1c':'#ffffff'),
- ink:token('--els-ink',dark?'#f0f0ed':'#1b2730'),
- muted:token('--els-muted',dark?'#c1c5c1':'#455663'),
- axis:dark?'#d0dbd7':'#344f62',
- grid:dark?'#46514d':'#dfe7ec',
- rocFill:dark?'rgba(89,185,157,0.18)':'rgba(19,133,120,0.13)',
- rocLabel:dark?'#a8e3d5':'#14736d'};
-}
+function elsPlotColors(){return window.ssPlotColors?window.ssPlotColors():{background:'#ffffff',ink:'#1b2730',muted:'#455663',axis:'#344f62',grid:'#c6d2da',rocFill:'rgba(19,133,120,0.13)',rocLabel:'#14736d'};}
 function chart(id,opt){
  const {g,w,h}=ctx(id),mini=id.startsWith('cmp_'),plotTheme=elsPlotColors();
  const m=mini?{l:57,r:11,t:14,b:40}:{l:67,r:17,t:22,b:47};
