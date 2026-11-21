@@ -40,3 +40,58 @@ body:has(.ss5-site-header) .reading-grid,body:has(.ss6-site-header) .reading-gri
  body:has(.ss5-site-header) .plots{grid-template-columns:1fr!important}
  body:has(.ss5-site-header) .panel,body:has(.ss6-site-header) .experiment>.controls{position:static!important;top:auto!important}
 }
+
+
+/* Shared four-step standard: Chapter 6.1 is the visual reference. */
+body:has(.ss5-site-header) .ss5-followup{display:block;width:100%;min-width:0;margin-top:18px;clear:both}
+body:has(.ss5-site-header) .ss5-followup>section{width:100%;max-width:none;min-width:0}
+html.ss5-native .ss5-flow-label span{
+ display:grid!important;place-items:center!important;
+ width:31px!important;height:31px!important;min-width:31px!important;
+ border:1.5px solid var(--els-link,#185d76)!important;border-radius:8px!important;
+ background:var(--els-surface-alt,#23343b)!important;
+ color:var(--els-link,#8bd7e5)!important;
+ font-size:16px!important;font-weight:850!important;line-height:1!important;
+ opacity:1!important;text-shadow:none!important
+}
+/* Preserve strong number/background separation even in neutral and navy dark. */
+html.ss5-native[data-theme="dark"] .ss5-flow-label span{
+ background:#294b58!important;color:#b5f6f2!important;border-color:#80cfca!important
+}
+/* 5.1 light themes: avoid legacy hard-coded backgrounds and inherited dark overrides.
+ * Explicit data-els-theme wins over browser/system appearance. */
+html.ss5-native[data-els-theme="white-clean"],
+html.ss5-native[data-els-theme="warm-neutral"]{
+ color-scheme:light!important;
+ --bg:var(--els-page)!important;--card:var(--els-surface)!important;
+ --paper:var(--els-surface)!important;--pale:var(--els-surface-alt)!important;
+ --ink:var(--els-ink)!important;--muted:var(--els-muted)!important;
+ --line:var(--els-border)!important;--accent:var(--els-link)!important;
+}
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"]) body,
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"]) .main{
+ background:var(--els-page)!important;color:var(--els-ink)!important
+}
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"])
+ :is(.panel,.figure,.formula,.metric,.learning,.question,.insight,.quiz,.derivation-panel,.reading-panel,.ss5-predict,.ss5-observe,.ss5-check,.reading-note,.deriv-step){
+ background:var(--els-surface)!important;color:var(--els-ink)!important;
+ border-color:var(--els-border)!important
+}
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"])
+ :is(.ss5-flow-label,.guide-head h3,.deriv-top,.reading-panel h3,.figure h3,.reading-note strong){
+ color:var(--els-ink)!important
+}
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"])
+ :is(.ss5-predict p,.ss5-observe p,.ss5-flow-intro,.deriv-step p,.reading-note p,.reading-note .ko-explain,.figure .sub,.figure .legend){
+ color:var(--els-muted)!important;opacity:1!important
+}
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"])
+ :is(textarea,input,select){
+ color-scheme:light;background:var(--els-surface)!important;color:var(--els-ink)!important;
+ border-color:var(--els-border)!important
+}
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"])
+ .ss5-flow-label span{
+ background:var(--els-surface-alt)!important;color:var(--els-link)!important;
+ border-color:var(--els-link)!important
+}
