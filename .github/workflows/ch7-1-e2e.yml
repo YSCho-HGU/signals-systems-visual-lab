@@ -1,0 +1,36 @@
+name: Chapter 7.1 Browser Regression
+
+on:
+  push:
+    paths:
+      - 'index.html'
+      - 'assets/ss-ch7-learning-standard.js'
+      - 'assets/ss-ch7-learning-standard.css'
+      - 'assets/ss-common-header.js'
+      - 'tests/ch7-1-e2e.mjs'
+      - '.github/workflows/ch7-1-e2e.yml'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  chapter-7-1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run Chapter 7.1 browser regression
+        run: node tests/ch7-1-e2e.mjs
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chapter-7-1-screenshots
+          path: qa-ch7/
+          if-no-files-found: ignore
