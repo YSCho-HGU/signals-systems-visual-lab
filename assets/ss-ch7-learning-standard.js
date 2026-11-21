@@ -47,7 +47,8 @@ function init(){
  var frame=0,running=false,raf=0,last=0,sampleF=0,sampleFs=1;
  function paintFrame(){
   var svg=periodic.querySelector('.ss7-ct-plot svg');if(!svg)return;
-  svg.querySelectorAll('.ss7-alias-dot').forEach(function(dot,i){dot.setAttribute('opacity',i<=frame?'1':'.12')});
+  svg.querySelectorAll('.ss7-alias-dot').forEach(function(dot,i){dot.setAttribute('opacity',i<=frame?'1':'.12');dot.setAttribute('r',i===frame?'5.5':'4')});
+  var cursor=svg.querySelector('.ss7-alias-cursor');if(cursor){var x=38+(520-38-12)*frame/8;cursor.setAttribute('x1',x);cursor.setAttribute('x2',x)}
   animate.querySelector('.ss7-alias-frame').value=frame;
   animate.querySelector('.ss7-alias-status').textContent='n = '+frame+' · t = '+(1000*frame/sampleFs).toFixed(2)+' ms · x[n] = '+Math.cos(2*Math.PI*sampleF*frame/sampleFs).toFixed(3);
  }
@@ -100,6 +101,7 @@ function init(){
  shiftSelect.addEventListener('change',syncSampling);
  function syncSampling(){
   var isFirst=/^7\.1(?:\D|$)/.test((document.getElementById('title')||{}).textContent||'');
+  if(!isFirst)pauseFrame();
   layout.classList.toggle('ss7-sampling-active',isFirst);
   if(!isFirst)return;
   var sliders=Array.from(controls.querySelectorAll('input[type="range"]'));
