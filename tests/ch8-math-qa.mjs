@@ -56,6 +56,10 @@ try{
   await page.evaluate(n=>window.SSChapter8.openExperiment(n),n);
   await page.waitForFunction(n=>window.__ss8MathAudit?.status?.lesson===n,n);
   await page.evaluate(()=>window.SSMathCore.renderNow());
+  await page.evaluate(()=>window.__ss8ProseMath?.scan?.());
+  await page.evaluate(()=>window.SSMathCore.renderNow());
+  const prose=await page.evaluate(()=>window.__ss8ProseMath?.audit?.()||null);
+  check('8.'+n+'-prose-inline-math',!!prose&&prose.visible>0&&prose.failures.length===0&&prose.conversionErrors.length===0,prose);
   const one=await snapshot(page);
   check('8.'+n+'-default',one.report?.passed&&one.key.rendered&&
     one.steps.length===1&&one.steps[0].rendered&&one.blanks===0&&one.errors===0,one);
@@ -65,6 +69,10 @@ try{
   check('8.'+n+'-four-guided-equations',all.report?.passed&&all.steps.length===4&&
    all.steps.every(st=>st.rendered)&&all.blanks===0&&all.errors===0,all);
   if(n===4){
+   const background=await page.evaluate(()=>({math:document.querySelectorAll('#ss8-predict-question .katex').length,
+    factor:document.getElementById('ss8-predict-question')?.textContent.includes('A')||false}));
+   check('8.4-background-typeset',background.math>0,background);
+
    check('8.4-input-factored-equation',all.key.source.includes('(1-az^{-1})(1-bz^{-1})')&&
     all.key.source.includes('\\frac{A}{1-az^{-1}}')&&all.katexCount>=6,all);
   }
