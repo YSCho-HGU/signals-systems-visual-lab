@@ -13,7 +13,6 @@ html.ss6-compact-workspace .sidebar .brand{padding:3px 9px 14px!important}
 html.ss6-compact-workspace .sidebar .brand h1{font-size:18px!important}
 html.ss6-compact-workspace .sidebar .side-label{margin:15px 9px 8px!important}
 html.ss6-compact-workspace .sidebar .nav{display:grid!important;gap:4px!important}
-html.ss6-compact-workspace .sidebar .nav button{min-height:45px!important;padding:8px!important}
 html.ss6-compact-workspace .sidebar .nav-name{font-size:12px!important}
 html.ss6-compact-workspace .sidebar .side-foot{margin-top:14px!important;padding:11px!important;font-size:11px!important;line-height:1.55}
 html.ss6-compact-workspace .main{display:block!important;width:100%!important;max-width:none!important;min-width:0!important;margin:0!important;padding:12px clamp(12px,1.8vw,28px) 42px!important}
@@ -33,7 +32,6 @@ html.ss6-compact-workspace .ss6-guide-details>.reading-panel{border:0!important;
 html.ss6-compact-workspace .ss6-next-lesson{margin:13px 0;display:flex;justify-content:flex-end}
 html.ss6-compact-workspace .ss6-next-lesson button{border:1px solid var(--els-border,#555);border-radius:9px;background:var(--els-surface,#252525);color:var(--els-ink,#fff);padding:9px 13px;font-size:12px;font-weight:700;cursor:pointer}
 html.ss6-compact-workspace .ss6-progress{display:flex;gap:8px;align-items:center;justify-content:flex-end;font-size:12px;margin:8px 0 0}
-html.ss6-compact-workspace .ss6-progress button{border:1px solid var(--els-border,#555);border-radius:8px;background:var(--els-surface,#252525);color:var(--els-ink,#fff);padding:7px 10px;cursor:pointer}
 html.ss6-compact-workspace .controls{border-radius:12px!important}
 html.ss6-compact-workspace .figure{border-radius:12px!important}
 html.ss6-compact-workspace .charts.three .figure.wide{grid-column:1/-1!important}
