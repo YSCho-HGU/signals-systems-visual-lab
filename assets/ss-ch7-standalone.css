@@ -1,0 +1,45 @@
+/* Chapter 7 native shell. Align with Chapters 5/6; simulation CSS stays intact. */
+html.ss7-native,html.ss7-native body{min-height:100%;background:var(--els-page,#f5f7f8);color:var(--els-ink,#202d30)}
+html.ss7-native body{margin:0;overflow-x:hidden}
+html.ss7-native .ss7-site-header{position:sticky!important;top:0;z-index:90;height:46px!important;min-height:46px!important;padding:5px 15px!important;background:var(--els-surface,#fff)!important;color:var(--els-ink,#222)!important;border-bottom:1px solid var(--els-border,#ccc)}
+html.ss7-native .ss7-site-header .ss-common-links{max-height:65vh}
+html.ss7-native .ss7-shell{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:calc(100dvh - 46px);align-items:start;max-width:none}
+html.ss7-native .ss7-sidebar{position:sticky;top:46px;height:calc(100dvh - 46px);overflow:auto;min-width:0;padding:19px 11px;background:var(--els-surface,#fff);color:var(--els-ink,#222);border-right:1px solid var(--els-border,#ccc)}
+html.ss7-native .ss7-sidebar .brand{margin:0;padding:3px 10px 18px;border-bottom:1px solid var(--els-border,#ccc);background:transparent}
+html.ss7-native .ss7-sidebar .brand .eyebrow{font-size:11px;color:var(--els-muted,#667);letter-spacing:.07em;font-weight:750}
+html.ss7-native .ss7-sidebar .brand h2{font-size:18px;margin:5px 0 6px;color:var(--els-ink,#222);line-height:1.3}
+html.ss7-native .ss7-sidebar .brand p{font-size:12px;line-height:1.55;margin:0;color:var(--els-muted,#667)}
+html.ss7-native .ss7-sidebar-title{font-size:11px;letter-spacing:.06em;font-weight:750;color:var(--els-muted,#667);margin:17px 9px 9px}
+html.ss7-native #ss7-lesson-nav{display:grid!important;gap:4px;overflow:visible;padding:0!important}
+html.ss7-native #ss7-lesson-nav button{display:flex;align-items:center;gap:9px;width:100%;max-width:none;text-align:left;min-height:44px;padding:8px 9px;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--els-ink,#222);font-size:13px;line-height:1.35;font-weight:650}
+html.ss7-native #ss7-lesson-nav button:hover{background:var(--els-surface-alt,#eaf1f1);border-color:var(--els-border,#ccc)}
+html.ss7-native #ss7-lesson-nav button[aria-current="true"]{background:var(--els-surface-alt,#e6f4f3);border-color:var(--els-accent,#0d8290);font-weight:800}
+html.ss7-native .ss7-lab-number{display:inline-grid;place-items:center;min-width:29px;min-height:29px;border-radius:7px;background:var(--els-surface-alt,#eee);color:var(--els-ink,#222);font-weight:750}
+html.ss7-native .ss7-workspace{min-width:0;max-width:none;padding:0}
+html.ss7-native .ss7-topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px clamp(12px,2vw,27px);border-bottom:1px solid var(--els-border,#ccc);background:var(--els-page,#f7f7f7)}
+html.ss7-native .ss7-topbar-title{font-size:13px;font-weight:750;color:var(--els-ink,#222)}
+html.ss7-native .ss7-topbar-actions{display:flex;gap:7px;align-items:center}
+html.ss7-native .ss7-topbar button,html.ss7-native .ss7-progress button{background:var(--els-surface,#fff);color:var(--els-ink,#222);border:1px solid var(--els-border,#ccc);border-radius:8px;padding:7px 12px;font-size:13px;min-height:34px;cursor:pointer}
+html.ss7-native .ss7-topbar button:disabled{opacity:.42;cursor:not-allowed}
+html.ss7-native .ss7-topbar button:not(:disabled):hover,html.ss7-native .ss7-progress button:hover{border-color:var(--els-accent,#0d8290)}
+html.ss7-native .ss7-progress{margin:17px 8px;padding:12px;border:1px solid var(--els-border,#ccc);border-radius:10px;background:var(--els-page,#f7f7f7);font-size:12px;line-height:1.6}
+html.ss7-native .ss7-progress strong{display:block;font-size:13px;margin-bottom:8px}
+html.ss7-native .ss7-progress button{display:block;width:100%;margin:8px 0}
+html.ss7-native .ss7-progress small{display:block;color:var(--els-muted,#667)}
+html.ss7-native main{max-width:none!important;width:100%;margin:0;padding:12px clamp(12px,1.8vw,25px)!important;background:transparent}
+html.ss7-native .ss7-standard-layout{max-width:none;width:100%;min-width:0}
+html.ss7-native .ss7-stage-pair{grid-template-columns:minmax(230px,0.32fr) minmax(0,0.68fr);gap:13px;align-items:start}
+html.ss7-native .ss7-stage-explain{grid-column:1/-1}
+html.ss7-native .ss7-card{box-shadow:none}
+html.ss7-native .ss7-stage-pair .ss7-stage-observe{min-width:0}
+html.ss7-native .ss7-stage-pair .plot-card{min-width:0}
+html.ss7-native .ss7-stage-pair svg{max-width:100%}
+html.ss7-native .foot{color:var(--els-muted,#667)}
+html.ss7-native[data-els-theme] .ss7-sidebar,html.ss7-native[data-els-theme] .ss7-topbar{color:var(--els-ink);background:var(--els-surface)}
+html.ss7-native[data-els-theme] .ss7-topbar{background:var(--els-page)}
+html.ss7-native[data-ss-sidebar="collapsed"] .ss7-shell{grid-template-columns:52px minmax(0,1fr)}
+html.ss7-native[data-ss-sidebar="collapsed"] .ss7-sidebar{overflow:hidden}
+html.ss7-native[data-ss-sidebar="collapsed"] .ss7-sidebar>*:not(.ss-side-toggle){display:none!important}
+html.ss7-native .ss7-sidebar .ss-side-toggle{position:relative;display:block;margin-left:auto;margin-bottom:9px}
+@media(max-width:1080px){html.ss7-native .ss7-shell{grid-template-columns:205px minmax(0,1fr)}html.ss7-native .ss7-stage-pair{grid-template-columns:minmax(195px,.34fr) minmax(0,.66fr)}}
+@media(max-width:760px){html.ss7-native .ss7-shell{display:block}html.ss7-native .ss7-sidebar{position:relative;top:0;height:auto;max-height:none;border-right:0;border-bottom:1px solid var(--els-border);padding:9px 12px}html.ss7-native .ss7-sidebar .brand{display:none}html.ss7-native .ss7-sidebar-title{margin:2px 6px 7px}html.ss7-native #ss7-lesson-nav{display:flex!important;overflow-x:auto;padding:0 0 5px!important}html.ss7-native #ss7-lesson-nav button{flex:0 0 auto;width:auto;min-width:128px;max-width:190px}html.ss7-native .ss7-progress{display:none}html.ss7-native .ss7-stage-pair,html.ss7-native .ss7-sampling-active .ss7-stage-pair{grid-template-columns:1fr}html.ss7-native[data-ss-sidebar="collapsed"] .ss7-shell{display:block}}
