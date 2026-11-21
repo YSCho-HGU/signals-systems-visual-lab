@@ -85,6 +85,16 @@ try{
   const all=await snapshot(page);
   check('8.'+n+'-four-guided-equations',all.report?.passed&&all.steps.length===4&&
    all.steps.every(st=>st.rendered)&&all.blanks===0&&all.errors===0,all);
+  if(n===2){
+   const graphic=await page.evaluate(()=>{
+    const plotTitle=document.querySelector('#plots .plot-title');
+    const stage=document.querySelector('#plots .ss8-82-stage h3');
+    return {plot:plotTitle?.textContent||'',plotMath:plotTitle?.querySelector('.katex')?.textContent||'',
+       stage:stage?.textContent||'',stageMath:stage?.querySelector('.katex')?.textContent||''};
+   });
+   check('8.2-graph-title-and-stage-inline-typesetting',
+       !!graphic.plotMath?.includes('h[n]')&&graphic.stageMath==='h[n]',graphic);
+  }
   if(n===4){
    const background=await page.evaluate(()=>({math:document.querySelectorAll('#ss8-predict-question .katex').length,
     factor:document.getElementById('ss8-predict-question')?.textContent.includes('A')||false}));
