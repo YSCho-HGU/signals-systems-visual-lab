@@ -128,7 +128,10 @@ function convertText(node){
   const original=raw.slice(item.start,item.end);
   const span=document.createElement('span');
   span.className='ss8-prose-math';
-  span.setAttribute('data-ss-math',item.latex);
+  // Use text-style fractions inside sentences; display-style fractions belong to
+  // separate key and derivation blocks, where height is not constrained.
+  const inlineLatex=item.latex.replace(/\\frac\b/g,'\\tfrac');
+  span.setAttribute('data-ss-math',inlineLatex);
   span.setAttribute('data-ss-math-display','inline');
   span.setAttribute('data-ss-math-fallback',original);
   span.textContent=original;
