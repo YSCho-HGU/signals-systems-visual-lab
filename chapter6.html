@@ -91,96 +91,96 @@ button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{ou
 
 
 /* Rev5 integrated + standalone: dark mode; graph canvas stays light for legible axes/curves. */
-html[data-theme="dark"]{color-scheme:dark;--bg:#0c1827;--nav:#0c2234;--nav2:#193c51;--ink:#e5f1f8;--sub:#b0c7d3;--muted:#b0c7d3;--a:#75d9e3;--accent:#75d9e3;--teal:#75d9e3;--coral:#ff9a86;--warm:#ff9a86;--gold:#efc36e;--line:#355266;--paper:#192e42;--card:#192e42;--pale:#1f4050}
-html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
-html[data-theme="dark"] .main,
-html[data-theme="dark"] main{color:var(--ink)}
-html[data-theme="dark"] .controls,
-html[data-theme="dark"] .panel,
-html[data-theme="dark"] .figure,
-html[data-theme="dark"] .metric,
-html[data-theme="dark"] .learning,
-html[data-theme="dark"] .question,
-html[data-theme="dark"] .insight,
-html[data-theme="dark"] .quiz,
-html[data-theme="dark"] .derivation-panel,
-html[data-theme="dark"] .reading-panel,
-html[data-theme="dark"] .card,
-html[data-theme="dark"] .plot-card{background:#192e42!important;border-color:#365468!important;box-shadow:0 5px 22px #0002!important;color:#e7f3f9}
-html[data-theme="dark"] .deriv-step,
-html[data-theme="dark"] .step,
-html[data-theme="dark"] .reading .note,
-html[data-theme="dark"] .control,
-html[data-theme="dark"] .hero-callout,
-html[data-theme="dark"] .formula,
-html[data-theme="dark"] .axis-note,
-html[data-theme="dark"] .plot-instruction,
-html[data-theme="dark"] .reading-note,
-html[data-theme="dark"] .interpretation,
-html[data-theme="dark"] .guide-note{background:#203c4e!important;color:#e2f1f7!important;border-color:#426278!important}
-html[data-theme="dark"] .deriv-step.guide-enter,
-html[data-theme="dark"] .deriv-step.active,
-html[data-theme="dark"] .step.active{background:#20505a!important;border-color:#62bfc7!important}
-html[data-theme="dark"] .deriv-math,
-html[data-theme="dark"] .step .math,
-html[data-theme="dark"] .math,
-html[data-theme="dark"] .mathline,
-html[data-theme="dark"] .hero-callout .formula{color:#d9f4f4!important;background:#204557!important;border-color:#426a78!important}
-html[data-theme="dark"] .figure canvas,
-html[data-theme="dark"] .plot-card svg,
-html[data-theme="dark"] .plot-card canvas{background:#fbfdfe!important;border-radius:7px;color:#19394c;filter:none}
-html[data-theme="dark"] .plot-card .plot-title{background:#254759;color:#e5f3f8;border-color:#426477}
-html[data-theme="dark"] select,
-html[data-theme="dark"] input[type="number"],
-html[data-theme="dark"] input[type="text"]{background:#142d40;color:#e6f2f7;border:1px solid #507083}
-html[data-theme="dark"] button:not(.active):not(.on):not(.primary):not(.guide-primary){border-color:#45677b}
-html[data-theme="dark"] .tag,
-html[data-theme="dark"] .pill{background:#204957;color:#9be5e8}
-html[data-theme="dark"] .breadcrumb,
-html[data-theme="dark"] .crumb,
-html[data-theme="dark"] .intro,
-html[data-theme="dark"] .hint,
-html[data-theme="dark"] .reading .note p,
-html[data-theme="dark"] .axis-note{color:#b9d1dd!important}
-html[data-theme="dark"] .nav button:not(.active),
-html[data-theme="dark"] .tabs button:not(.on){color:#d3e6ee}
-html[data-theme="dark"] .sidebar,
-html[data-theme="dark"] .shell>.nav{background:linear-gradient(160deg,#0a2030,#102c40)}
-html[data-theme="dark"] nav:not(.sidebar):not(.nav) button:not(.active){background:#1e3b4e;color:#e5f3f8;border-color:#43677a}
-html[data-theme="dark"] nav:not(.sidebar):not(.nav) button.active{background:#136477;color:#fff}
-html[data-theme="dark"] .plot-card svg text{fill:#203b4e}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]){color-scheme:dark;--bg:#0c1827;--nav:#0c2234;--nav2:#193c51;--ink:#e5f1f8;--sub:#b0c7d3;--muted:#b0c7d3;--a:#75d9e3;--accent:#75d9e3;--teal:#75d9e3;--coral:#ff9a86;--warm:#ff9a86;--gold:#efc36e;--line:#355266;--paper:#192e42;--card:#192e42;--pale:#1f4050}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) body{background:var(--bg);color:var(--ink)}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .main,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) main{color:var(--ink)}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .controls,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .panel,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .figure,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .metric,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .learning,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .question,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .insight,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .quiz,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .derivation-panel,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .reading-panel,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .card,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .plot-card{background:#192e42!important;border-color:#365468!important;box-shadow:0 5px 22px #0002!important;color:#e7f3f9}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .deriv-step,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .step,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .reading .note,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .control,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .hero-callout,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .formula,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .axis-note,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .plot-instruction,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .reading-note,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .interpretation,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .guide-note{background:#203c4e!important;color:#e2f1f7!important;border-color:#426278!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .deriv-step.guide-enter,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .deriv-step.active,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .step.active{background:#20505a!important;border-color:#62bfc7!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .deriv-math,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .step .math,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .math,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .mathline,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .hero-callout .formula{color:#d9f4f4!important;background:#204557!important;border-color:#426a78!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .figure canvas,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .plot-card svg,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .plot-card canvas{background:#fbfdfe!important;border-radius:7px;color:#19394c;filter:none}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .plot-card .plot-title{background:#254759;color:#e5f3f8;border-color:#426477}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) select,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) input[type="number"],
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) input[type="text"]{background:#142d40;color:#e6f2f7;border:1px solid #507083}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) button:not(.active):not(.on):not(.primary):not(.guide-primary){border-color:#45677b}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .tag,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .pill{background:#204957;color:#9be5e8}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .breadcrumb,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .crumb,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .intro,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .hint,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .reading .note p,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .axis-note{color:#b9d1dd!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .nav button:not(.active),
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .tabs button:not(.on){color:#d3e6ee}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .sidebar,
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .shell>.nav{background:linear-gradient(160deg,#0a2030,#102c40)}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) nav:not(.sidebar):not(.nav) button:not(.active){background:#1e3b4e;color:#e5f3f8;border-color:#43677a}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) nav:not(.sidebar):not(.nav) button.active{background:#136477;color:#fff}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .plot-card svg text{fill:#203b4e}
 
 
 /* Rev7 audited text contrast: no Light Mode ink inside dark surfaces. */
 :root{--ss-axis-text:#274f64;--ss-axis-bg:#f1f8fa}
 .axis-key{display:flex;flex-wrap:wrap;align-items:center;gap:5px 13px;margin:8px 0 4px;padding:8px 11px;border-radius:8px;border:1px solid #cfe1e9;background:var(--ss-axis-bg);color:var(--ss-axis-text);font:600 12px/1.55 system-ui,'Malgun Gothic',sans-serif;overflow-wrap:anywhere}
 .axis-key .ax-strong{font-weight:850;color:#086d79}
-html[data-theme="dark"]{--ss-axis-text:#d5edf5;--ss-axis-bg:#244457}
-html[data-theme="dark"] .axis-key{background:#244457!important;border-color:#54788b!important;color:#d5edf5!important}
-html[data-theme="dark"] .axis-key .ax-strong{color:#91e8eb!important}
-html[data-theme="dark"] :is(.reading-panel h3,.guide-head h3,.deriv-top,.reading-note strong,.reading .note strong,.compare-title,.figure h3,.plot-card .plot-title,.step strong,.check b,.insight strong){color:#eff9ff!important}
-html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain,.guide-check,.guide-head p,.deriv-step p,.reading-panel p,.reading .note p,.step p,.insight p,.quiz p,.check,.check .answer,.compare-sub,.compare-footer,.figure .sub,.figure p,.formhint,.heading p,.intro,.desc,.smallnote,.rangeEnds,.metric .k,.metric .d,.metric b,.legend,.bridge,.footer,.foot,.hint,.source,.crumb,.breadcrumb,.plot-instruction,.axis-note){color:#cce3ee!important}
-html[data-theme="dark"] :is(.reading-note,.reading .note,.step,.deriv-step,.compare-card,.compare-wrap,.check,.axis-note){background:#234254!important;border-color:#517185!important}
-html[data-theme="dark"] :is(.guide-check,.quiz details){border-color:#517185!important}
-html[data-theme="dark"] :is(.overlabel,.over,.plot-number,.eyebrow,.heading .sup,.step-index,.progress-badge,.metric .v,.metric strong,.ctrl output,.control output){color:#90e8ec!important}
-html[data-theme="dark"] :is(.guide-actions button:not(.primary),.step-buttons button:not(.primary),.btn:not(.primary),.preset,.check button,.quiz button,.actions button:not(.primary)){color:#e6f5fc!important;background:#234657!important;border-color:#54798d!important}
-html[data-theme="dark"] :is(.guide-actions button.primary,.step-buttons button.primary,.btn.primary,.actions button.primary){background:#0d697b!important;border-color:#67c6d1!important;color:#fff!important}
-html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain){opacity:1!important}
-html[data-theme="dark"] :is(.learning p,.question p,.learning .body,.question .body,.notice,.metric .detail,.ctrl .ends,.rangeEnds,.range-ends,.reading-panel .check,.reading-panel .question){color:#d1e7f0!important}
-html[data-theme="dark"] :is(.progress-badge,.step-index){background:#285666!important;color:#a6f2f0!important;border-color:#5b8593!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]){--ss-axis-text:#d5edf5;--ss-axis-bg:#244457}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .axis-key{background:#244457!important;border-color:#54788b!important;color:#d5edf5!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .axis-key .ax-strong{color:#91e8eb!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.reading-panel h3,.guide-head h3,.deriv-top,.reading-note strong,.reading .note strong,.compare-title,.figure h3,.plot-card .plot-title,.step strong,.check b,.insight strong){color:#eff9ff!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.reading-note p,.reading-note .ko-explain,.guide-check,.guide-head p,.deriv-step p,.reading-panel p,.reading .note p,.step p,.insight p,.quiz p,.check,.check .answer,.compare-sub,.compare-footer,.figure .sub,.figure p,.formhint,.heading p,.intro,.desc,.smallnote,.rangeEnds,.metric .k,.metric .d,.metric b,.legend,.bridge,.footer,.foot,.hint,.source,.crumb,.breadcrumb,.plot-instruction,.axis-note){color:#cce3ee!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.reading-note,.reading .note,.step,.deriv-step,.compare-card,.compare-wrap,.check,.axis-note){background:#234254!important;border-color:#517185!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.guide-check,.quiz details){border-color:#517185!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.overlabel,.over,.plot-number,.eyebrow,.heading .sup,.step-index,.progress-badge,.metric .v,.metric strong,.ctrl output,.control output){color:#90e8ec!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.guide-actions button:not(.primary),.step-buttons button:not(.primary),.btn:not(.primary),.preset,.check button,.quiz button,.actions button:not(.primary)){color:#e6f5fc!important;background:#234657!important;border-color:#54798d!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.guide-actions button.primary,.step-buttons button.primary,.btn.primary,.actions button.primary){background:#0d697b!important;border-color:#67c6d1!important;color:#fff!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.reading-note p,.reading-note .ko-explain){opacity:1!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.learning p,.question p,.learning .body,.question .body,.notice,.metric .detail,.ctrl .ends,.rangeEnds,.range-ends,.reading-panel .check,.reading-panel .question){color:#d1e7f0!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.progress-badge,.step-index){background:#285666!important;color:#a6f2f0!important;border-color:#5b8593!important}
 /* Additional animated-convolution and FFT presets: previously retained light-only colors. */
-html[data-theme="dark"] :is(.motion-panel,.detail-panel,.fft-guide){background:#1c3548!important;border-color:#4c7385!important;color:#e8f5fb!important}
-html[data-theme="dark"] :is(.motion-panel h3,.detail-head h4,.fft-guide h3,.motion-status strong,.detail-status strong){color:#f0f9fd!important}
-html[data-theme="dark"] :is(.motion-lead,.motion-speed,.motion-caution,.motion-status small,.detail-sub,.detail-note,.area-slider label,.area-slider .ends,.fft-guide p){color:#cfe4ed!important}
-html[data-theme="dark"] :is(.motion-stage,.motion-stage.done,.motion-status,.detail-status,.detail-pill,.area-slider){background:#28495b!important;color:#e4f2f9!important;border-color:#567a8d!important}
-html[data-theme="dark"] .motion-stage.current{background:#255b63!important;color:#fff!important;border-color:#78d3d5!important}
-html[data-theme="dark"] :is(.motion-stage b,.motion-eq){background:#30566b!important;color:#a3edf0!important}
-html[data-theme="dark"] :is(.motion-actions button:not(.motion-primary),.detail-actions button:not(.detail-primary),.preset-row button:not(.selected)){background:#29495c!important;color:#eaf6fb!important;border-color:#5c8191!important}
-html[data-theme="dark"] :is(.motion-primary,.detail-primary,.preset-row button.selected){background:#086a79!important;color:#fff!important;border-color:#6ccbd0!important}
-html[data-theme="dark"] :is(.mathline,.mathline b,.detail-status b,.detail-pill,.area-slider output,.detail-head .overlabel){color:#9be7ec!important}
-html[data-theme="dark"] .fft-status{background:#284b5e!important;color:#e0f1f7!important;border-color:#5b8091!important}
-html[data-theme="dark"] .fft-status :is(b,span,strong){color:#e0f1f7!important}
-html[data-theme="dark"] .plot-card svg text{fill:#274b5e}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.motion-panel,.detail-panel,.fft-guide){background:#1c3548!important;border-color:#4c7385!important;color:#e8f5fb!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.motion-panel h3,.detail-head h4,.fft-guide h3,.motion-status strong,.detail-status strong){color:#f0f9fd!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.motion-lead,.motion-speed,.motion-caution,.motion-status small,.detail-sub,.detail-note,.area-slider label,.area-slider .ends,.fft-guide p){color:#cfe4ed!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.motion-stage,.motion-stage.done,.motion-status,.detail-status,.detail-pill,.area-slider){background:#28495b!important;color:#e4f2f9!important;border-color:#567a8d!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .motion-stage.current{background:#255b63!important;color:#fff!important;border-color:#78d3d5!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.motion-stage b,.motion-eq){background:#30566b!important;color:#a3edf0!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.motion-actions button:not(.motion-primary),.detail-actions button:not(.detail-primary),.preset-row button:not(.selected)){background:#29495c!important;color:#eaf6fb!important;border-color:#5c8191!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.motion-primary,.detail-primary,.preset-row button.selected){background:#086a79!important;color:#fff!important;border-color:#6ccbd0!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.mathline,.mathline b,.detail-status b,.detail-pill,.area-slider output,.detail-head .overlabel){color:#9be7ec!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .fft-status{background:#284b5e!important;color:#e0f1f7!important;border-color:#5b8091!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .fft-status :is(b,span,strong){color:#e0f1f7!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .plot-card svg text{fill:#274b5e}
 @media(max-width:560px){.axis-key{font-size:11px;gap:4px 9px;padding:7px 8px}}
 
 
@@ -198,9 +198,9 @@ html[data-theme="dark"] .plot-card svg text{fill:#274b5e}
 .ss-hover-h{height:1px;border-top:1px dashed #f18b63;background:transparent}
 .ss-hover-dot{position:absolute;display:none;pointer-events:none;z-index:31;width:11px;height:11px;border-radius:50%;border:2px solid #fff;background:#ed7954;box-shadow:0 0 0 1px #123a4e;transform:translate(-50%,-50%)}
 .ss-hover-hint{font:600 11px/1.5 system-ui,'Malgun Gothic',sans-serif;color:#23576a;margin:5px 0 2px;letter-spacing:.01em}
-html[data-theme="dark"] .ss-hover-hint{color:#c6e9f2!important}
-html[data-theme="dark"] .ss-hover-tip{background:#0d2739;border-color:#6a98a9;color:#f4fbff}
-html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hover-note){color:#d6e9f3!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .ss-hover-hint{color:#c6e9f2!important}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .ss-hover-tip{background:#0d2739;border-color:#6a98a9;color:#f4fbff}
+html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hover-note){color:#d6e9f3!important}
 .ss-hover-target:focus-visible{outline:3px solid #ee9868;outline-offset:3px}
 @media(max-width:560px){.ss-hover-tip{max-width:min(290px,calc(100% - 12px));padding:9px 10px;font-size:11px}.ss-hover-hint{font-size:10px}}
 
