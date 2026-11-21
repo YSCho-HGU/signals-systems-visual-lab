@@ -29,19 +29,13 @@ function init(){
  grid.appendChild(deriv);grid.appendChild(interpret);explain.appendChild(grid);
  layout.appendChild(lead);layout.appendChild(predict);layout.appendChild(pair);layout.appendChild(explain);
  root.replaceChildren(layout);
- var main=root.closest('main'),navPanel=document.getElementById('nav');
- if(main&&navPanel){
-  var work=node('div','ss7-workspace'),workspaceMain=node('div','ss7-workspace-content');
-  var foot=main.querySelector(':scope > .foot');
-  main.insertBefore(work,navPanel);work.appendChild(navPanel);work.appendChild(workspaceMain);
-  workspaceMain.appendChild(root);if(foot)workspaceMain.appendChild(foot);
- }
+ // Keep the shared ss-vertical-layout sidebar. A second sidebar causes the toggle to occupy a separate column.
  var chapterHeader=document.querySelector('body > header > p');
  if(chapterHeader)chapterHeader.textContent='Predict → Change → Observe → Explain · Interactive Sampling Lab';
  function updatePrompt(){var q=document.getElementById('check-q');prompt.textContent=q?q.textContent.trim():'Predict how the output changes when a parameter moves.'}
  updatePrompt();
  var nav=document.getElementById('nav');if(nav)nav.addEventListener('click',function(){queueMicrotask(updatePrompt)});
- window.__ss7Standard={ready:true,stages:4,chapter:7,experiments:document.querySelectorAll('#nav button').length};
+ window.__ss7Standard={ready:true,stages:4,chapter:7,experiments:document.querySelectorAll('#nav button').length,sidebarColumns:1};
 }
 window.addEventListener('DOMContentLoaded',init);
 })();
