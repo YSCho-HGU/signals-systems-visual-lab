@@ -146,6 +146,7 @@ function content234(){
   const node=body.querySelector(selector);if(node)explain.append(node);
  }
  group.append(pred,pair,explain);experiment.replaceWith(group);
+ requestAnimationFrame(()=>{try{if(typeof updateModule==='function')updateModule()}catch(e){console.warn('Foundations reflow update',e)}});
  refreshPredict(group);typeset();
  const note=document.createElement('p');note.className='ss-found-bridge';note.textContent=bridgeNotes[chapter];explain.append(note);
  const link=document.createElement('a');link.className='ss-bridge-link';link.href='./chapter'+(chapter+1)+'.html';link.textContent='Continue to Chapter '+(chapter+1)+' · '+(['','LTI Systems','Fourier Series','CTFT','Laplace Transform'][chapter]);explain.append(link);
@@ -166,6 +167,7 @@ function content1(){
  const note=document.createElement('p');note.className='ss-found-bridge';note.textContent=bridgeNotes[chapter];explain.append(note);
  const link=document.createElement('a');link.className='ss-bridge-link';link.href='./chapter'+(chapter+1)+'.html';link.textContent='Continue to Chapter '+(chapter+1)+' · '+(['','LTI Systems','Fourier Series','CTFT','Laplace Transform'][chapter]);explain.append(link);
  block.append(pre,pair,explain);grid.replaceWith(block);refreshPredict(block);typeset();
+ requestAnimationFrame(()=>{try{if(typeof draw==='function')draw()}catch(e){console.warn('Ch1 reflow graph update',e)}});
 }
 let busy=false;
 function schedule(){if(busy)return;busy=true;queueMicrotask(()=>{busy=false;try{chapter===1?content1():content234();refreshPredict(document.querySelector('.ss-found-four-step'));typeset();enhanceGuidedMath();setNewTitle()}catch(e){console.warn('Foundation standard enhancement',e)}})}
