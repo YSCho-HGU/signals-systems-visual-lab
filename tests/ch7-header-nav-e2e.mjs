@@ -3,9 +3,9 @@
 import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
-const base=process.env.SS_BASE_URL||'http://127.0.0.1:8777/';
+const base=process.env.SS_BASE_URL||'http://127.0.0.1:8766/';
 const out='qa-ch7';mkdirSync(out,{recursive:true});
-const server=process.env.SS_BASE_URL?null:spawn('python3',['-m','http.server','8777','--bind','127.0.0.1'],{stdio:'ignore'});
+const server=process.env.SS_BASE_URL?null:spawn('python3',['-m','http.server','8766','--bind','127.0.0.1'],{stdio:'ignore'});
 if(server)await new Promise(r=>setTimeout(r,1200));
 const browser=await chromium.launch({headless:true});
 const tests=[],errors=[];
@@ -15,10 +15,10 @@ try{
   const page=await browser.newPage({viewport,reducedMotion:'reduce'});
   page.on('pageerror',e=>errors.push(String(e)));
   const size=String(viewport.width);
-  await page.goto(base+'#chapter=7',{waitUntil:'domcontentloaded',timeout:45000});
+  await page.goto(base+'#chapter=7',{waitUntil:'commit',timeout:45000});
   await page.waitForFunction(()=>document.querySelector('#lab-frame')?.contentWindow?.SSChapter7?.experimentCount===7,null,{timeout:30000});
   const f=page.frameLocator('#lab-frame');
-  check(await page.locator('.ss5-site-header').count()===1,size+'-ch5-style-header');
+  check(await page.locator('.els-ss-unified-header').count()===1,size+'-ch5-style-header');
   check(await page.locator('#els-ss-chapter-title').innerText().then(s=>s.includes('Chapter 7')&&s.includes('Sampling')),size+'-chapter-title');
   check(await page.locator('#ss-language-select').count()===1&&await page.locator('#theme-select').count()===1,size+'-single-language-theme');
   check(await page.locator('.els-ss-chapter-links a').count()===8,size+'-chapter-titles');
@@ -62,7 +62,7 @@ try{
   check(await page.locator('#ss-unified-nav #ss-progress-panel').count()===1,size+'-progress-in-outer-toc');
   const toggled=await page.locator('#ss-progress-panel button').isEnabled();
   check(toggled,size+'-progress-enabled');
-  const headerGeom=await page.locator('.ss5-site-header').evaluate(h=>({height:h.getBoundingClientRect().height,overflow:document.documentElement.scrollWidth-innerWidth}));
+  const headerGeom=await page.locator('.els-ss-unified-header').evaluate(h=>({height:h.getBoundingClientRect().height,overflow:document.documentElement.scrollWidth-innerWidth}));
   check(headerGeom.height<=90,size+'-compact-header',headerGeom);
   await page.screenshot({path:out+'/chapter7-'+size+'.png'});
   await page.close();
