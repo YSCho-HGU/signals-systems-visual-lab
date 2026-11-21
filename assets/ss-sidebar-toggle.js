@@ -14,7 +14,7 @@ function update(){
  });
 }
 function setup(){
- const side=document.querySelector('.shell>aside.nav,.shell>aside.sidebar,#app>aside.sidebar');
+ const side=document.querySelector('.ss-vertical-layout>.ss-vertical-sidebar,.shell>aside.nav,.shell>aside.sidebar,#app>aside.sidebar');
  if(!side)return;
  if(!side.querySelector('.ss-side-toggle')){
   const b=document.createElement('button');
