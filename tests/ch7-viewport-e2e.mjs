@@ -36,6 +36,17 @@ try{
   check(width+' shared palette loaded before plot computation',await page.evaluate(()=>typeof window.ssTraceColor==='function'));
   check(width+' shared numbered stages',initial.panels.length===4&&initial.panels.every((v,i)=>v.startsWith(String(i+1))),initial.panels);
   check(width+' audited equation dataset',await page.evaluate(()=>window.__ss7EquationAudit?.formulas===28));
+  const initialKey=await page.evaluate(()=>{
+   const host=document.getElementById('ss7-key-equation');
+   const card=document.querySelector('.ss7-key-formula');
+   const style=host&&getComputedStyle(host);
+   return {count:document.querySelectorAll('#ss7-key-equation .katex').length,
+    font:style?parseFloat(style.fontSize):0,scroll:style?.overflowX,
+    between:!!(card&&card.previousElementSibling?.classList.contains('ss7-chapter-lead')
+      &&card.nextElementSibling?.classList.contains('ss7-stage-predict'))};
+  });
+  check(width+' Chapter 5-style key relation under the lesson introduction',
+    initialKey.between&&initialKey.count===1&&initialKey.font>=18&&initialKey.scroll==='auto',initialKey);
   await page.waitForFunction(()=>window.__ss7ProseMath&&document.querySelectorAll('#insight .ss7-prose-math .katex').length>0,{timeout:15000});
   check(width+' prose math renderer loaded',await page.evaluate(()=>window.__ss7ProseMath?.rendered>0));
   check(width+' math renderer has no failed expressions',await page.evaluate(()=>window.__ss7ProseMath?.failed===0));
@@ -64,6 +75,36 @@ try{
       await page.locator('#insight .ss7-prose-math .katex').count()>0);
     const equationCount=await page.locator('#step-content .step .math .katex').count();
     check(width+'/'+theme+'/lesson'+index+' guided derivation typeset',equationCount===1,equationCount);
+    const mathVisual=await page.evaluate(()=>{
+     const key=document.getElementById('ss7-key-equation');
+     const step=document.querySelector('#step-content .step .math');
+     const keyStyle=key?getComputedStyle(key):null;
+     const mathStyle=step?getComputedStyle(step):null;
+     const card=document.querySelector('.ss7-key-formula');
+     const rect=x=>x?.getBoundingClientRect();
+     const kr=rect(key),sr=rect(step),cr=rect(card);
+     return {
+      rendered:key?.querySelectorAll('.katex').length||0,
+      chapter:key?.dataset.ss7Key,
+      aria:key?.getAttribute('aria-label')||'',
+      keyFont:keyStyle?parseFloat(keyStyle.fontSize):0,
+      stepFont:mathStyle?parseFloat(mathStyle.fontSize):0,
+      keyScroll:keyStyle?.overflowX,
+      stepScroll:mathStyle?.overflowX,
+      withinCard:!!(kr&&cr&&kr.left>=cr.left&&kr.right<=cr.right+2),
+      keyBeforeDerivation:!!(kr&&sr&&kr.bottom<sr.top)
+     };
+    });
+    check(width+'/'+theme+'/lesson'+index+' lesson-specific key equation and alignment',
+      mathVisual.rendered===1&&mathVisual.chapter===String(index)&&mathVisual.aria.length>8
+      &&mathVisual.withinCard&&mathVisual.keyBeforeDerivation,mathVisual);
+    check(width+'/'+theme+'/lesson'+index+' Chapter 5-equivalent math sizes',
+      mathVisual.keyFont>=18&&mathVisual.keyFont<=22.5&&mathVisual.stepFont>=18&&mathVisual.stepFont<=22.5
+      &&mathVisual.keyScroll==='auto'&&mathVisual.stepScroll==='auto',mathVisual);
+    if(width===1280&&theme==='neutral-dark'){
+      mkdirSync('qa-ch7/screens',{recursive:true});
+      await page.screenshot({path:'qa-ch7/screens/ch7-'+index+'-native-math.png',fullPage:false});
+    }
     // Exercise every derivation, not just the first one, in each of the 7 labs.
     for(let step=2;step<=4;step++){
       await page.locator('#next').click();
