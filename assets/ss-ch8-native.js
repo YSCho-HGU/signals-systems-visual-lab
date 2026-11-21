@@ -35,7 +35,7 @@ function refresh(){
   const text=button.firstChild;
   if(text&&text.nodeType===Node.TEXT_NODE)text.textContent='';
   if(!button.querySelector('.ss8-lab-number')){
-   const span=document.createElement('span');span.className='ss8-lab-number';span.textContent=String(i+1);
+   const span=document.createElement('span');span.className='ss8-lab-number';span.textContent=String(i+1).padStart(2,'0');
    button.prepend(span);
    const title=document.createElement('span');title.className='ss8-lab-label';
    const heading=document.createElement('strong');heading.textContent=names[i];
