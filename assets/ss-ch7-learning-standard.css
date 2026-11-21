@@ -130,3 +130,8 @@ html.ss7-standard .ss7-alias-animate label{display:flex;align-items:center;gap:6
 html.ss7-standard .ss7-alias-animate input{width:115px;accent-color:var(--els-accent)}
 html.ss7-standard .ss7-alias-status{font-size:12px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 @media(prefers-reduced-motion:reduce){html.ss7-standard .ss7-alias-animate{scroll-behavior:auto}}
+
+html.ss7-standard .ss7-learning-flow{padding:11px 13px;margin:10px 0;border:1px solid var(--els-border);border-radius:8px;background:var(--els-surface);font-size:13px;line-height:1.55}
+html.ss7-standard .ss7-learning-flow strong{display:block;margin-bottom:5px}
+html.ss7-standard .ss7-learning-flow ol{margin:0;padding-left:21px}
+html.ss7-standard .ss7-learning-flow li{margin:3px 0}
