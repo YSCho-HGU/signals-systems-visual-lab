@@ -89,11 +89,13 @@ try{
    const graphic=await page.evaluate(()=>{
     const plotTitle=document.querySelector('#plots .plot-title');
     const stage=document.querySelector('#plots .ss8-82-stage h3');
-    return {plot:plotTitle?.textContent||'',plotMath:plotTitle?.querySelector('.katex')?.textContent||'',
-       stage:stage?.textContent||'',stageMath:stage?.querySelector('.katex')?.textContent||''};
+    return {plotSource:plotTitle?.querySelector('.ss8-prose-math')?.getAttribute('data-ss-math')||'',
+       plotRendered:!!plotTitle?.querySelector('.katex-html'),
+       stageSource:stage?.querySelector('.ss8-prose-math')?.getAttribute('data-ss-math')||'',
+       stageRendered:!!stage?.querySelector('.katex-html')};
    });
    check('8.2-graph-title-and-stage-inline-typesetting',
-       !!graphic.plotMath?.includes('h[n]')&&graphic.stageMath==='h[n]',graphic);
+       graphic.plotRendered&&graphic.stageRendered&&graphic.plotSource.includes('h[n]=')&&graphic.stageSource==='h[n]',graphic);
   }
   if(n===4){
    const background=await page.evaluate(()=>({math:document.querySelectorAll('#ss8-predict-question .katex').length,
@@ -135,13 +137,17 @@ try{
       const a=getComputedStyle(parent),b=getComputedStyle(k||el),c=getComputedStyle(el);
       const line=parseFloat(a.lineHeight)||parseFloat(a.fontSize)*1.7;
       const r=(k||el).getBoundingClientRect();
+      // Inline elements become blockified by the browser when they are
+      // direct flex/grid items. This is normal and not a layout defect.
+      const flexItem=/^(flex|inline-flex|grid|inline-grid)$/.test(a.display);
+      const inFlow=c.display==='inline'||(flexItem&&c.display==='block');
       return {source:el.dataset.ssMath?.slice(0,72)||'',rendered:!!k,
        fontDiff:Math.abs(parseFloat(a.fontSize)-parseFloat(b.fontSize)),
-       inline:c.display==='inline',overflow:c.overflowX,
+       inFlow,computedDisplay:c.display,parentDisplay:a.display,overflow:c.overflowX,
        lineRatio:r.height/line};
      });
      return {total:samples.length,failures:samples.filter(x=>!x.rendered||
-      x.fontDiff>1||!x.inline||x.overflow!=='visible'||x.lineRatio>1.5),
+      x.fontDiff>1||!x.inFlow||x.overflow!=='visible'||x.lineRatio>1.5),
       theme:document.documentElement.dataset.elsTheme};
     });
     check('8.'+n+'-'+theme+'-'+width+'px-inline-geometry',
