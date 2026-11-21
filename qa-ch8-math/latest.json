@@ -1,2738 +1,7 @@
 {
-  "status": "FAIL",
+  "status": "PASS",
   "total": 118,
-  "failures": [
-    {
-      "id": "8.2-graph-title-and-stage-inline-typesetting",
-      "passed": false,
-      "detail": {
-        "plot": "A · Right-sided: h[n]=(0.8)nu[n]h[n]=(0.8)^nu[n]h[n]=(0.8)nu[n]",
-        "plotMath": "h[n]=(0.8)nu[n]h[n]=(0.8)^nu[n]h[n]=(0.8)nu[n]",
-        "stage": "1 Time-domain impulse response h[n]h[n]h[n]",
-        "stageMath": "h[n]h[n]h[n]"
-      }
-    },
-    {
-      "id": "8.1-neutral-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 17,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.2-neutral-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 29,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.3-neutral-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 16,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.4-neutral-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 19,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.5-neutral-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 13,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.6-neutral-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 32,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.7-neutral-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 24,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.8-neutral-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 15,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.1-warm-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 17,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.2-warm-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 29,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.3-warm-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 16,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.4-warm-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 19,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.5-warm-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 13,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.6-warm-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 32,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.7-warm-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 24,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.8-warm-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 15,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.1-navy-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 17,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.2-navy-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 29,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.3-navy-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 16,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.4-navy-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 19,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.5-navy-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 13,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.6-navy-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 32,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.7-navy-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 24,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.8-navy-dark-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 15,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.1-warm-neutral-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 17,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.2-warm-neutral-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 29,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.3-warm-neutral-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 16,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.4-warm-neutral-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 19,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.5-warm-neutral-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 13,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.6-warm-neutral-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 32,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.7-warm-neutral-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 24,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.8-warm-neutral-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 15,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.1-white-clean-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 17,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.2-white-clean-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 29,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.3-white-clean-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 16,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.4-white-clean-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 19,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.5-white-clean-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 13,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.6-white-clean-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 32,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.7-white-clean-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 24,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.8-white-clean-390px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 15,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.1-neutral-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 17,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.2-neutral-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 29,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.3-neutral-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 16,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.4-neutral-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 19,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.5-neutral-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 13,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.6-neutral-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 32,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.7-neutral-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 24,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.8-neutral-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 15,
-        "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.1-warm-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 17,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.2-warm-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 29,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.3-warm-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 16,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.4-warm-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 19,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.5-warm-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 13,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.6-warm-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 32,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.7-warm-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 24,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.8-warm-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 15,
-        "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.1-navy-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 17,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.2-navy-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 29,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.3-navy-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 16,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.4-navy-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 19,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.5-navy-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 13,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.6-navy-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 32,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.7-navy-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 24,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.8-navy-dark-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 15,
-        "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.1-warm-neutral-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 17,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.2-warm-neutral-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 29,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.3-warm-neutral-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 16,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.4-warm-neutral-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 19,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.5-warm-neutral-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 13,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.6-warm-neutral-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 32,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.7-warm-neutral-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 24,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.8-warm-neutral-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 15,
-        "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.1-white-clean-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 17,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.2-white-clean-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 29,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.3-white-clean-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 16,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.4-white-clean-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 19,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.5-white-clean-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 13,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.6-white-clean-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 32,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.7-white-clean-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 24,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
-      }
-    },
-    {
-      "id": "8.8-white-clean-1280px-inline-geometry",
-      "passed": false,
-      "detail": {
-        "total": 15,
-        "theme": "white-clean",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
-      }
-    }
-  ],
+  "failures": [],
   "findings": [
     {
       "id": "formula-catalogue",
@@ -2987,12 +256,12 @@
     },
     {
       "id": "8.2-graph-title-and-stage-inline-typesetting",
-      "passed": false,
+      "passed": true,
       "detail": {
-        "plot": "A · Right-sided: h[n]=(0.8)nu[n]h[n]=(0.8)^nu[n]h[n]=(0.8)nu[n]",
-        "plotMath": "h[n]=(0.8)nu[n]h[n]=(0.8)^nu[n]h[n]=(0.8)nu[n]",
-        "stage": "1 Time-domain impulse response h[n]h[n]h[n]",
-        "stageMath": "h[n]h[n]h[n]"
+        "plotSource": "h[n]=(0.8)^nu[n]",
+        "plotRendered": true,
+        "stageSource": "h[n]",
+        "stageRendered": true
       }
     },
     {
@@ -3873,2722 +1142,722 @@
     },
     {
       "id": "8.1-neutral-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 17,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.2-neutral-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 29,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.3-neutral-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 16,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.4-neutral-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 19,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.5-neutral-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 13,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.6-neutral-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 32,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.7-neutral-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 24,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.8-neutral-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 15,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.1-warm-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 17,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.2-warm-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 29,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.3-warm-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 16,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.4-warm-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 19,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.5-warm-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 13,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.6-warm-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 32,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.7-warm-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 24,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.8-warm-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 15,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.1-navy-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 17,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.2-navy-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 29,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.3-navy-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 16,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.4-navy-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 19,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.5-navy-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 13,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.6-navy-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 32,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.7-navy-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 24,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.8-navy-dark-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 15,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.1-warm-neutral-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 17,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.2-warm-neutral-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 29,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.3-warm-neutral-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 16,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.4-warm-neutral-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 19,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.5-warm-neutral-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 13,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.6-warm-neutral-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 32,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.7-warm-neutral-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 24,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.8-warm-neutral-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 15,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.1-white-clean-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 17,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.2-white-clean-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 29,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.3-white-clean-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 16,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.4-white-clean-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 19,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.5-white-clean-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 13,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.6-white-clean-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 32,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.7-white-clean-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 24,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.8-white-clean-390px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 15,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.1-neutral-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 17,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.2-neutral-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 29,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.3-neutral-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 16,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.4-neutral-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 19,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.5-neutral-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 13,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.6-neutral-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 32,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.7-neutral-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 24,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.8-neutral-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 15,
         "theme": "neutral-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.1-warm-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 17,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.2-warm-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 29,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.3-warm-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 16,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.4-warm-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 19,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.5-warm-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 13,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.6-warm-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 32,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.7-warm-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 24,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.8-warm-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 15,
         "theme": "warm-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.1-navy-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 17,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.2-navy-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 29,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.3-navy-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 16,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.4-navy-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 19,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.5-navy-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 13,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.6-navy-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 32,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.7-navy-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 24,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.8-navy-dark-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 15,
         "theme": "navy-dark",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.1-warm-neutral-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 17,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.2-warm-neutral-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 29,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.3-warm-neutral-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 16,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.4-warm-neutral-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 19,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.5-warm-neutral-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 13,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.6-warm-neutral-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 32,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.7-warm-neutral-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 24,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.8-warm-neutral-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 15,
         "theme": "warm-neutral",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.1-white-clean-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 17,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "a^n",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.2-white-clean-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 29,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "h[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "H(z)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7083333333333334
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.3-white-clean-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 16,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.4-white-clean-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 19,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "az^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "bz^{-1}",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.5-white-clean-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 13,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.6-white-clean-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 32,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\pi",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.7-white-clean-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 24,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "S(M)",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|z|=1",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6912442396313364
-          }
-        ]
+        "failures": []
       }
     },
     {
       "id": "8.8-white-clean-1280px-inline-geometry",
-      "passed": false,
+      "passed": true,
       "detail": {
         "total": 15,
         "theme": "white-clean",
-        "failures": [
-          {
-            "source": "x[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "y[n]",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "\\Omega",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.6451612903225806
-          },
-          {
-            "source": "|H(e^{j\\Omega})|",
-            "rendered": true,
-            "fontDiff": 0,
-            "inline": false,
-            "overflow": "visible",
-            "lineRatio": 0.7034850230414746
-          }
-        ]
+        "failures": []
       }
     },
     {
@@ -6639,7 +1908,7 @@
     }
   ],
   "pageErrors": [],
-  "sourceSha": "d520f6387a8e850f78493185c499637219944e88",
-  "runId": 44910394758,
-  "generatedAt": "2026-11-21T13:45:47.132Z"
+  "sourceSha": "d829e02a90613676b8aff2ce73d76a7faf6078da",
+  "runId": 44910534034,
+  "generatedAt": "2026-11-21T13:47:02.965Z"
 }
