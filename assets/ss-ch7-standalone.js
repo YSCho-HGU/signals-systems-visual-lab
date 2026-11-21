@@ -1,7 +1,7 @@
 /* Chapter 7 native lab navigation; no iframe dependency. */
 (function(){
 "use strict";
-const NAMES=['Sampling theorem','Spectral replicas','Aliasing','Sinc reconstruction','Anti-alias filter','Quantization','DAC / ZOH'];
+const NAMES=['Sampling Theorem','Spectral Replicas','Frequency Aliasing','Sinc Reconstruction','Anti-Aliasing Filter','Quantization Noise','DAC & Zero-Order Hold'];
 const PROGRESS_KEY='els-ss-lab-progress-v1';
 const TOTAL=62;
 const $=id=>document.getElementById(id);
