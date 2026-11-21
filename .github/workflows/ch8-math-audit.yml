@@ -1,0 +1,76 @@
+name: Chapter 8 Math Layout Audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'chapter8.html'
+      - 'assets/ss-math-core.js'
+      - 'assets/ss-ch8-math.js'
+      - 'assets/ss-ch8-prose-math.js'
+      - 'assets/ss-ch8-native.css'
+      - 'assets/ss-formula-standard.css'
+      - 'tests/ch8-math-qa.mjs'
+      - '.github/workflows/ch8-math-audit.yml'
+
+concurrency:
+  group: ch8-math-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  render-math:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Run Chapter 8 equation and layout browser audit
+        continue-on-error: true
+        run: node tests/ch8-math-qa.mjs
+
+      - name: Publish versioned Chapter 8 QA result
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs=require('fs');
+            const path='qa-ch8-math/latest.json';
+            const data=fs.existsSync('qa-ch8-math/results.json')
+              ?JSON.parse(fs.readFileSync('qa-ch8-math/results.json','utf8'))
+              :{status:'NOT_RUN',total:0,failures:[{id:'runner',detail:'No QA result file generated'}]};
+            data.sourceSha=context.sha;
+            data.runId=context.runId;
+            data.generatedAt=new Date().toISOString();
+            const {owner,repo}=context.repo;
+            let sha;
+            try{
+              const old=await github.rest.repos.getContent({owner,repo,path,ref:'main'});
+              if(Array.isArray(old.data))throw new Error('QA status path is a directory');
+              sha=old.data.sha;
+            }catch(e){if(e.status!==404)throw e}
+            await github.rest.repos.createOrUpdateFileContents({
+              owner,repo,path,sha,branch:'main',
+              content:Buffer.from(JSON.stringify(data,null,2)+'\n').toString('base64'),
+              message:'chore(qa): Chapter 8 math audit '+context.runId+' [skip ci]'
+            });
+      - name: Upload layout evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chapter8-math-audit
+          path: qa-ch8-math/
+          if-no-files-found: warn
+      - name: Enforce Chapter 8 math quality gate
+        if: always()
+        run: |
+          node -e "const fs=require('fs');const p='qa-ch8-math/results.json';if(!fs.existsSync(p))process.exit(1);const r=JSON.parse(fs.readFileSync(p));if(r.status!=='PASS')process.exit(1)"
