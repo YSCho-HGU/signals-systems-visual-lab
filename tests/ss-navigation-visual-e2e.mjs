@@ -56,6 +56,11 @@ try{
     },{side,buttons,badge});
     record(before.width>=160&&before.width<=270,'ch'+ch+'-'+width+'-expanded-width',JSON.stringify(before.width));
     record(before.number==='01','ch'+ch+'-'+width+'-two-digit-first-number',before.number);
+    if(ch===1){
+     const names=await page.locator('.ss-ch1-nav-title').allTextContents();
+     record(names.length===9&&names[1]==='Step, Impulse & Ramp Signals'&&names[8]==='Sensor-to-Digital Signal Chain','ch1-'+width+'-revised-lesson-titles',JSON.stringify(names));
+     record(!names.some(name=>/^Elementary$/.test(name)),'ch1-'+width+'-no-ambiguous-elementary');
+    }
     record(before.font>=12&&before.font<=14,'ch'+ch+'-'+width+'-nav-font',String(before.font));
     record(before.overflow<15,'ch'+ch+'-'+width+'-no-horizontal-overflow',String(before.overflow));
     record(contrast(before.foreground,before.background)>=4.5,'ch'+ch+'-'+width+'-selected-contrast',String(contrast(before.foreground,before.background).toFixed(2)));
@@ -89,6 +94,38 @@ try{
  await overview.screenshot({path:folder+'/overview-dark.png'});
  await overview.goto(base+'index.html#map',{waitUntil:'domcontentloaded'});
  record(await overview.locator('#tm-detail .tm-formula').count()===1,'learning-map-math-panel');
+ record(await overview.locator('.ss-curriculum-steps > div').count()===4,'learning-map-four-curriculum-phases');
+ record(await overview.locator('.ss-application-preview').count()===1,'learning-map-future-applications');
+ const themes=['neutral-dark','warm-dark','navy-dark','warm-neutral','white-clean'];
+ for(const theme of themes){
+  await overview.locator('[data-els-theme-picker]').selectOption(theme);
+  const values=await overview.evaluate(()=>{
+   const sample=(selector)=>{
+    const el=document.querySelector(selector);
+    if(!el)return null;
+    const own=getComputedStyle(el);
+    const parent=getComputedStyle(el.parentElement);
+    return {size:parseFloat(own.fontSize),fg:own.color,bg:own.backgroundColor,containerBg:parent.backgroundColor}
+   };
+   return {
+    theme:document.documentElement.dataset.elsTheme,
+    node:sample('#map-view .tm-node small'),
+    edge:sample('#map-view .tm-edge-btn'),
+    description:sample('#map-view .tm-sub'),
+    control:sample('#map-view .tm-control label'),
+    application:document.querySelector('.ss-application-preview')?.textContent||'',
+    legend:document.querySelector('#tm-root .tm-badges')?.textContent||'',
+    scrollWidth:document.documentElement.scrollWidth-innerWidth
+   };
+  });
+  record(values.theme===theme,'map-'+theme+'-theme-selected',values.theme);
+  record(values.node?.size>=12&&values.edge?.size>=12&&values.description?.size>=14&&values.control?.size>=13,
+    'map-'+theme+'-readable-typography',JSON.stringify([values.node?.size,values.edge?.size,values.description?.size,values.control?.size]));
+  record(values.legend.includes('FFT algorithm')&&values.application.includes('Problem'),
+    'map-'+theme+'-full-curriculum-and-applications');
+  record(values.scrollWidth<20,'map-'+theme+'-no-page-overflow',String(values.scrollWidth));
+  await overview.screenshot({path:folder+'/learning-map-'+theme+'.png',fullPage:true});
+ }
  await overview.screenshot({path:folder+'/learning-map-dark.png'});
  await overview.close();
 }finally{
