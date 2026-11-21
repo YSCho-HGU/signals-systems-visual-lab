@@ -339,7 +339,15 @@ function chart({xmin,xmax,ymin,ymax,xlab='t (s)',ylab='Amplitude',curves=[],stem
  const W=780,H=310,L=90,R=26,T=29,B=62,pw=W-L-R,ph=H-T-B;
  const xx=x=>L+(x-xmin)/(xmax-xmin)*pw,yy=y=>T+(ymax-y)/(ymax-ymin)*ph;
  let s=`<div class="plot-card"><div class="plot-title">${title}</div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}"><rect width="${W}" height="${H}" fill="var(--els-surface,white)"/>`;
- for(let i=0;i<=4;i++){let x=xmin+(xmax-xmin)*i/4,y=ymin+(ymax-ymin)*i/4;s+=`<line x1="${xx(x)}" y1="${T}" x2="${xx(x)}" y2="${H-B}" stroke="var(--ss-plot-grid,#c9d3db)"/><text x="${xx(x)}" y="${H-B+20}" font-size="15" fill="var(--els-muted,#455663)" text-anchor="middle">${fmt(x,2)}</text><line x1="${L}" y1="${yy(y)}" x2="${W-R}" y2="${yy(y)}" stroke="var(--ss-plot-grid,#c9d3db)"/><text x="${L-9}" y="${yy(y)+4}" text-anchor="end" font-size="15" fill="var(--els-muted,#455663)">${fmt(y,2)}</text>`}
+ const niceStep=(range,desired=5)=>{const raw=Math.abs(range)/desired,base=10**Math.floor(Math.log10(raw));return ([1,2,2.5,5,10].find(v=>v*base>=raw)||10)*base};
+ const xStep=niceStep(xmax-xmin,5),yStep=niceStep(ymax-ymin,4);
+ // Nice, round tick positions align with samples; do not label fractional sample indices.
+ for(let k=Math.ceil(xmin/xStep-1e-9),count=0;k<=Math.floor(xmax/xStep+1e-9)&&count<20;k++,count++){
+  const x=k*xStep; s+=`<line x1="${xx(x)}" y1="${T}" x2="${xx(x)}" y2="${H-B}" stroke="var(--ss-plot-grid,#c9d3db)"/><text x="${xx(x)}" y="${H-B+20}" font-size="15" fill="var(--els-muted,#455663)" text-anchor="middle">${fmt(x,Math.abs(xStep)<1?3:2)}</text>`;
+ }
+ for(let k=Math.ceil(ymin/yStep-1e-9),count=0;k<=Math.floor(ymax/yStep+1e-9)&&count<16;k++,count++){
+  const y=k*yStep; s+=`<line x1="${L}" y1="${yy(y)}" x2="${W-R}" y2="${yy(y)}" stroke="var(--ss-plot-grid,#c9d3db)"/><text x="${L-9}" y="${yy(y)+4}" text-anchor="end" font-size="15" fill="var(--els-muted,#455663)">${fmt(y,Math.abs(yStep)<1?3:2)}</text>`;
+ }
  if(ymin<=0&&ymax>=0)s+=`<line x1="${L}" y1="${yy(0)}" x2="${W-R}" y2="${yy(0)}" stroke="var(--ss-plot-axis,#455663)"/>`;
  if(xmin<=0&&xmax>=0)s+=`<line x1="${xx(0)}" y1="${T}" x2="${xx(0)}" y2="${H-B}" stroke="var(--ss-plot-axis,#455663)"/>`;
  for(const c of curves){const pts=c.pts||(Array.from({length:c.samples||500},(_,i)=>{const x=xmin+(xmax-xmin)*i/((c.samples||500)-1);return [x,c.fn(x)]}));let parts=[];for(const [x,y] of pts){if(Number.isFinite(y))parts.push(`${xx(x).toFixed(2)},${yy(clamp(y,ymin,ymax)).toFixed(2)}`)}s+=`<polyline fill="none" stroke="${ssTraceColor(c.color)}" stroke-width="${c.width||2.5}" ${c.dash?`stroke-dasharray="${c.dash}"`:''} stroke-linecap="round" stroke-linejoin="round" points="${parts.join(' ')}"/>`}
