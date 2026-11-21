@@ -2,17 +2,17 @@
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#112b41"><meta name="feedback-repository" content="YSCho-HGU/signals-systems-visual-lab"><meta name="description" content="Signals & Systems Chapter 1–8: 62 interactive experiments, 18 engineering cases, a transform relationship explorer, and student error reporting. Offline single-file learning studio."><script>
 /* Shared low-glare palette: apply before first paint, without reloading a lab. */
 (function(){
- const valid=['neutral-dark','warm-dark','navy-dark','warm-neutral'];
+ const valid=['neutral-dark','warm-dark','navy-dark','warm-neutral','white-clean'];
  let palette='neutral-dark';
  try{
   const saved=localStorage.getItem('els-theme-v2');
   const legacy=localStorage.getItem('ss-visual-lab-theme');
-  palette=valid.includes(saved)?saved:legacy==='light'?'warm-neutral':legacy==='dark'?'navy-dark':'neutral-dark';
+  palette=valid.includes(saved)?saved:saved==='white'?'white-clean':legacy==='light'?'warm-neutral':legacy==='dark'?'navy-dark':'neutral-dark';
  }catch(e){}
  document.documentElement.dataset.elsTheme=palette;
- document.documentElement.dataset.theme=palette==='warm-neutral'?'light':'dark';
+ document.documentElement.dataset.theme=['warm-neutral','white-clean'].includes(palette)?'light':'dark';
  document.documentElement.dataset.themePreference=palette;
- document.documentElement.style.colorScheme=palette==='warm-neutral'?'light':'dark';
+ document.documentElement.style.colorScheme=['warm-neutral','white-clean'].includes(palette)?'only light':'dark';
 })();
 </script>
 <title>Signals & Systems — Integrated Visual Learning Studio Rev8 (Ch2–8)</title><style>
@@ -496,13 +496,13 @@ byId('fb-github').addEventListener('click',()=>{
 (function(){
  function applyTheme(){
   const palette=document.documentElement.dataset.elsTheme||'neutral-dark';
-  const scheme=palette==='warm-neutral'?'light':'dark';
+  const scheme=['warm-neutral','white-clean'].includes(palette)?'light':'dark';
   const frame=document.getElementById('lab-frame');
   if(frame&&frame.contentWindow){
    try{
     frame.contentDocument.documentElement.dataset.elsTheme=palette;
     frame.contentDocument.documentElement.dataset.theme=scheme;
-    frame.contentDocument.documentElement.style.colorScheme=scheme;
+    frame.contentDocument.documentElement.style.colorScheme=scheme==='light'?'only light':'dark';
    }catch(e){}
    frame.contentWindow.postMessage({type:'ss-set-theme',theme:scheme},'*');
   }
