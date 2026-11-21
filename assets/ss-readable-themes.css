@@ -1,0 +1,31 @@
+/* Shared readability layer for Signals & Systems visual labs.
+   Explicit user-selected palettes only; no OS/theme inference. */
+:root[data-els-theme="white-clean"],
+:root[data-els-theme="neutral-dark"]{
+ --ss-readable-text:var(--els-ink);
+ --ss-readable-muted:var(--els-muted);
+ --ss-readable-panel:var(--els-surface);
+ --ss-readable-inset:var(--els-surface-alt);
+ --ss-readable-border:var(--els-border);
+ --ss-readable-focus:var(--els-focus);
+}
+:root[data-els-theme="white-clean"]{--ss-plot-grid:#c6d2da;--ss-plot-label:#334b5a}
+:root[data-els-theme="neutral-dark"]{--ss-plot-grid:#56615d;--ss-plot-label:#e0e8e2}
+:root:is([data-els-theme="white-clean"],[data-els-theme="neutral-dark"]) :is(.derivation-panel,.reading-panel,.figure,.plot-card,.ss7-card,.ss6-step-graphs .figure){
+ color:var(--ss-readable-text)!important;
+ background-color:var(--ss-readable-panel)!important;
+ border-color:var(--ss-readable-border)!important;
+}
+:root:is([data-els-theme="white-clean"],[data-els-theme="neutral-dark"]) :is(.derivation-panel,.reading-panel,.figure,.plot-card,.ss7-card) :is(p,li,label,small){
+ color:var(--ss-readable-text);
+}
+:root:is([data-els-theme="white-clean"],[data-els-theme="neutral-dark"]) :is(.derivation-panel,.reading-panel,.figure,.plot-card,.ss7-card) :is(.muted,.hint,.caption,.axis-note){
+ color:var(--ss-readable-muted)!important;
+}
+:root:is([data-els-theme="white-clean"],[data-els-theme="neutral-dark"]) :is(.math,.formula,.katex,.katex-display,.deriv-math){
+ color:var(--ss-readable-text);
+}
+:root:is([data-els-theme="white-clean"],[data-els-theme="neutral-dark"]) :is(.reading-panel,.derivation-panel,.ss7-card) :is(button,input,select):focus-visible{
+ outline:3px solid var(--ss-readable-focus)!important;
+ outline-offset:2px;
+}
