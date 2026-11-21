@@ -38,7 +38,7 @@ homeLink.href="https://yscho-hgu.github.io/engineering-learning-studio/progress/
 homeLink.style.cssText="display:inline-flex;align-items:center;gap:6px;margin:8px 0;padding:7px 10px;border:1px solid var(--els-border,#555);border-radius:9px;color:var(--els-link,#b9d7c8);font-size:12px";
 if(homeActions)homeActions.after(homeLink);
 function placeProgress(){
- const ch=Number((location.hash.match(/^#chapter=(\\d+)/)||[])[1]);
+ const ch=Number((location.hash.match(/^#chapter=(\d+)/)||[])[1]);
  if(ch===7){
   let doc;try{doc=frame.contentDocument}catch(e){}
   const sidebar=doc?.querySelector('.ss-vertical-layout>.ss-vertical-sidebar');
