@@ -6,7 +6,7 @@
 function normalize(s){
  return s.replace(/<=/g,"\\le ").replace(/>=/g,"\\ge ")
  .replace(/≤/g,"\\le ").replace(/≥/g,"\\ge ").replace(/−/g,"-")
- .replace(/σ/g,"\\sigma ").replace(/ζ/g,"\\zeta ").replace(/τ/g,"\\tau ")
+ .replace(/ωc/g,"\\omega_c ").replace(/σ/g,"\\sigma ").replace(/ζ/g,"\\zeta ").replace(/τ/g,"\\tau ")
  .replace(/ω/g,"\\omega ").replace(/∞/g,"\\infty ")
  .replace(/₀/g,"_0").replace(/ₙ/g,"_n").replace(/²/g,"^2")
  .replace(/e\^\(([^)]+)\)/g,"e^{$1}").trim();
@@ -23,6 +23,8 @@ const specs=[
  [/\|H\(jω\)\|\s*=\s*1\/√2/gu,()=>"\\lvert H(j\\omega)\\rvert=\\frac1{\\sqrt2}"],
  [/\|H\(jω\)\|/gu,()=>"\\lvert H(j\\omega)\\rvert"],
  [/1\/√2/gu,()=>"\\frac1{\\sqrt2}"],
+ [/1\/σ/gu,()=>"\\frac1{\\sigma}"],
+ [/1\/τ/gu,()=>"\\frac1{\\tau}"],
  [/X\(s\)\s*=\s*1\/\(s\+a\)/gu,()=>"X(s)=\\frac1{s+a}"],
  [/X\(s\)\s*=\s*1\/\(s\+1\)/gu,()=>"X(s)=\\frac1{s+1}"],
  [/X\(s\)\s*=\s*1\/s\b/gu,()=>"X(s)=\\frac1s"],
