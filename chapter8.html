@@ -258,7 +258,7 @@ html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hov
 <link rel="stylesheet" href="./assets/els-typography-standard.css?v=1">
 <link rel="stylesheet" href="./assets/ss-common-header.css?v=2">
 <link rel="stylesheet" href="./assets/ss-trace-palette.css?v=4">
-<link rel="stylesheet" href="./assets/ss-ch8-native.css?v=1">
+<link rel="stylesheet" href="./assets/ss-ch8-native.css?v=3">
 <link rel="stylesheet" href="./assets/ss-formula-standard.css?v=2">
 <link rel="stylesheet" href="./assets/ss-ui-standard.css?v=4">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css">
@@ -298,8 +298,8 @@ html.ss8-native .plot-card .legend i {border:1px solid var(--els-border)}
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.js"></script>
 <script defer src="./assets/ss-common-header.js?v=3"></script>
 <script defer src="./assets/ss-sidebar-toggle.js?v=2"></script>
-<script defer src="./assets/ss-ch8-native.js?v=1"></script>
-<script defer src="./assets/ss-ch8-math.js?v=1"></script>
+<script defer src="./assets/ss-ch8-native.js?v=3"></script>
+<script defer src="./assets/ss-ch8-math.js?v=3"></script>
 <link rel="stylesheet" href="./assets/ss-graph-workspace-layout.css?v=1">
 </head><body>
 <header class="ss8-site-header ss-common-header" aria-label="Engineering Learning Studio navigation">
@@ -371,7 +371,7 @@ function controlHTML(c,val){const id='ctl-'+c.key;if(c.type==='select')return `<
 function render(){const ex=EXPERIMENTS[current],state=stepsState[current]||(stepsState[current]={...ex.defaults});$('nav').innerHTML=EXPERIMENTS.map((x,i)=>`<button data-exp="${i}" class="${i===current?'active':''}" aria-current="${i===current?'true':'false'}">${String(i+1).padStart(2,'0')} · ${x.short}<small>${x.topic}</small></button>`).join('');$('title').textContent=ex.title;$('intro').textContent=ex.desc;$('controls').innerHTML=ex.controls.map(c=>controlHTML(c,state[c.key])).join('');if(current===1)$('controls').insertAdjacentHTML('afterbegin','<div class="ss8-comparison-context"><strong>Starting in the time domain</strong><small>Pole a=0.8 is fixed. Select one h[n]; observe its transform derivation and ROC on the right.</small></div>');draw();renderStep();$('reading').innerHTML=ex.readings.map((x,i)=>`<div class="note"><strong>${String(i+1).padStart(2,'0')} · ${x[0]}</strong><p>${x[1]}</p></div>`).join('');$('check').classList.remove('open');$('check-q').innerHTML=ex.check[0];$('check-a').innerHTML=ex.check[1];}
 function draw(){const ex=EXPERIMENTS[current],state=stepsState[current];ssHoverResetQueue();const out=ex.draw(state);$('plots').innerHTML=out.plots;ssHoverAttachQueued();$('insight').innerHTML=out.insight;for(const c of ex.controls){const o=$('out-'+c.key);if(o)o.textContent=String(state[c.key])}}
 function renderStep(){const ex=EXPERIMENTS[current],arr=ex.steps;$('step-num').textContent=all?`All ${arr.length} steps`:`Step ${step+1} / ${arr.length}`;$('progress-bar').style.width=`${all?100:(step+1)/arr.length*100}%`;$('step-content').innerHTML=(all?arr:[arr[step]]).map((s,i)=>`<div class="step" style="margin-bottom:${all?'10px':'0'}"><strong>${all?`Step ${i+1} · `:''}${s[0]}</strong><div class="math">${s[1]}</div><p>${s[2]}</p></div>`).join('');$('prev').disabled=step===0||all;$('next').disabled=step===arr.length-1||all;$('all').textContent=all?'Show one step':'Reveal all steps';}
-function init(){EXPERIMENTS.forEach((e,i)=>stepsState[i]={...e.defaults});$('nav').addEventListener('click',e=>{const b=e.target.closest('[data-exp]');if(!b)return;current=Number(b.dataset.exp);step=0;all=false;render()});$('controls').addEventListener('input',e=>{const el=e.target.closest('[data-param]');if(!el)return;const k=el.dataset.param;stepsState[current][k]=el.type==='range'?Number(el.value):el.value;draw()});$('controls').addEventListener('change',e=>{const el=e.target.closest('[data-param]');if(!el)return;const k=el.dataset.param;stepsState[current][k]=el.type==='range'?Number(el.value):el.value;draw()});$('prev').onclick=()=>{step=Math.max(0,step-1);renderStep()};$('next').onclick=()=>{step=Math.min(EXPERIMENTS[current].steps.length-1,step+1);renderStep()};$('all').onclick=()=>{all=!all;renderStep()};$('reset').onclick=()=>{step=0;all=false;renderStep()};$('check-toggle').onclick=()=>$('check').classList.toggle('open');render()}
+function init(){EXPERIMENTS.forEach((e,i)=>stepsState[i]={...e.defaults});$('nav').addEventListener('click',e=>{const b=e.target.closest('[data-exp]');if(!b)return;current=Number(b.dataset.exp);step=0;all=false;render()});$('controls').addEventListener('input',e=>{const el=e.target.closest('[data-param]');if(!el)return;const k=el.dataset.param;stepsState[current][k]=el.type==='range'?Number(el.value):el.value;draw();document.dispatchEvent(new CustomEvent('ss-ch8-state-change',{detail:{lesson:current+1,key:k}}))});$('controls').addEventListener('change',e=>{const el=e.target.closest('[data-param]');if(!el)return;const k=el.dataset.param;stepsState[current][k]=el.type==='range'?Number(el.value):el.value;draw();document.dispatchEvent(new CustomEvent('ss-ch8-state-change',{detail:{lesson:current+1,key:k}}))});$('prev').onclick=()=>{step=Math.max(0,step-1);renderStep()};$('next').onclick=()=>{step=Math.min(EXPERIMENTS[current].steps.length-1,step+1);renderStep()};$('all').onclick=()=>{all=!all;renderStep()};$('reset').onclick=()=>{step=0;all=false;renderStep()};$('check-toggle').onclick=()=>$('check').classList.toggle('open');render()}
 window.addEventListener('DOMContentLoaded',init);
 /* Repaint computed graph trace colors whenever the explicit ELS theme changes. */
 window.addEventListener('els:themechange',()=>{if(stepsState[current])draw()});
@@ -415,7 +415,7 @@ const EXPERIMENTS=[
  insight:`<strong>Partial fractions:</strong> A=${fmt(A,3)}, B=${fmt(B,3)}, so X(z)=A/(1−${fmt(p.a,2)}z⁻¹)+B/(1−${fmt(p.b,2)}z⁻¹). <strong>Selected ROC:</strong> ${p.roc==='outer'?'|z|>b; both terms right-sided':p.roc==='annulus'?'a<|z|<b; first right-sided and second left-sided':'|z|<a; both terms left-sided'}. 계수와 신호의 부호를 두 그래프에서 확인하세요. 원점 영점은 2중입니다.`};
 },steps:[
  ['Factor and identify the poles','X(z)=1/[(1−az<sup>−1</sup>)(1−bz<sup>−1</sup>)]','서로 다른 두 pole z=a, z=b를 확인합니다. a<b입니다.'],
- ['Calculate the partial-fraction coefficients','X(z)=A/(1−az<sup>−1</sup>)+B/(1−bz<sup>−1</sup>); A=−a/(b−a), B=b/(b−a)','분자를 통분해 A+B=1, Ab+Ba=0을 풀어 계수를 결정합니다.'],
+ ['Calculate the partial-fraction coefficients','1=A(1−bz⁻¹)+B(1−az⁻¹); A+B=1, bA+aB=0','상수항과 z⁻¹항을 비교합니다. B=1−A를 대입하면 (b−a)A=−a, 따라서 A=−a/(b−a), B=b/(b−a)입니다. 예: a=0.5, b=2이면 A=−1/3, B=4/3.'],
  ['Apply the selected ROC to each term','|z|>b: RR; a<|z|<b: RL; |z|<a: LL','같은 대수식도 ROC에 따라 두 항의 시간 방향이 달라집니다.'],
  ['Reconstruct and verify x[n]','x[n]=x₁[n]+x₂[n], &nbsp; Z{x[n]}=X(z)','항별 계수를 합하고, 각 항의 변환쌍과 ROC 교집합을 다시 검사합니다.']
 ],readings:[['Coefficients first','A=−a/(b−a), B=b/(b−a): Pole만 선택하는 것이 아니라 부분분수의 계수도 계산합니다.'],['Three possible inverse signals','외부 ROC는 두 우측수열, 고리형 ROC는 양측수열, 내부 ROC는 두 좌측수열입니다.'],['Why two time plots?','각 항의 수열이 어떻게 합쳐져 최종 x[n]이 되는지 같은 y축으로 비교합니다.']],check:['a=0.5, b=2일 때 a<|z|<b에서 x[n]은?','A=−1/3, B=4/3이므로 x[n]=−(1/3)(0.5)ⁿu[n]−(4/3)(2)ⁿu[−n−1]입니다.']},
