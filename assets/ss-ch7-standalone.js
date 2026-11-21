@@ -20,7 +20,7 @@ function open(n){if(!window.SSChapter7?.openExperiment(n))return;refresh();windo
 function setup(){
  const nav=$('ss7-lesson-nav');
  if(!nav||!window.SSChapter7)return;
- NAMES.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.innerHTML='<span class="ss7-lab-number">'+(i+1)+'</span><span>'+name+'</span>';b.addEventListener('click',()=>open(i+1));nav.appendChild(b)});
+ NAMES.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.innerHTML='<span class="ss7-lab-number">'+String(i+1).padStart(2,'0')+'</span><span>'+name+'</span>';b.addEventListener('click',()=>open(i+1));nav.appendChild(b)});
  $('ss7-mark-reviewed').addEventListener('click',()=>{
   const id='7:'+current(),saved=readProgress(),next=saved.includes(id)?saved.filter(x=>x!==id):saved.concat(id);
   try{localStorage.setItem(PROGRESS_KEY,JSON.stringify(next))}catch(_){}
