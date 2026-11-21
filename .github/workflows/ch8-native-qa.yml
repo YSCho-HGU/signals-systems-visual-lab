@@ -1,0 +1,40 @@
+name: Chapter 8 Native UI and Math Verification
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'chapter8.html'
+      - 'assets/ss-ch8-*'
+      - 'assets/ss-ui-standard.css'
+      - 'assets/ss-formula-standard.css'
+      - 'assets/ss-common-header.js'
+      - 'assets/ss-sidebar-toggle.js'
+      - 'tests/ch8-viewport-e2e.mjs'
+      - '.github/workflows/ch8-native-qa.yml'
+concurrency:
+  group: ch8-native-qa
+  cancel-in-progress: true
+jobs:
+  ch8-chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install and configure Chromium
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Validate eight labs and 32 Z-transform derivations
+        run: node tests/ch8-viewport-e2e.mjs
+      - name: Upload real-browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chapter8-native-regression
+          path: qa-ch8/
+          if-no-files-found: warn
+          retention-days: 14
