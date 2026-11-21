@@ -576,6 +576,10 @@ function stopGuidePlay(){if(guideView.timer!==null){clearInterval(guideView.time
 function revealGuide(moduleId,state,guideFactory){
  const pane=document.getElementById('derivationPanel'),rp=document.getElementById('readingPanel');if(!pane||!rp)return;
  const d=guideFactory(state),total=d.steps.length;
+ // One source of truth: the four KaTeX-ready equations are owned by ss-ch5-math.js.
+ // The narrative factory supplies titles and explanations, not a competing formula.
+ const canonical=window.ELSChapterFiveMath?.guides(moduleId,state);
+ if(canonical?.length===total)d.steps.forEach((step,i)=>{step.math=canonical[i]});
  const n=Math.max(1,Math.min(total,guideView.count[moduleId]||1));
  const animate=guideView.previous[moduleId]!==undefined&&n>guideView.previous[moduleId]&&n===guideView.previous[moduleId]+1;
  const displayStep=(v,i)=>`<article class="deriv-step ${animate&&i===n-1?'guide-enter':''}" aria-label="Step ${i+1} of ${total}"><div class="deriv-top"><span class="step-index">${i+1}</span><strong>${esc(v.head)}</strong></div><div class="deriv-math">${esc(v.math)}</div><p>${esc(v.ko)}</p></article>`;
