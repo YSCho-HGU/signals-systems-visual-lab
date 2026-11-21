@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-21T14:44:37.875Z",
-  "sourceSha": "a8db90950def972f6b09b4b5963cac7231c587d7",
-  "runId": "44914747141",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44914747141",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/a8db90950def972f6b09b4b5963cac7231c587d7",
+  "generatedAt": "2026-11-21T14:48:03.384Z",
+  "sourceSha": "d8083ab9ec9786f44dbe889edad408f5e207ad9b",
+  "runId": "44915738162",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44915738162",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/d8083ab9ec9786f44dbe889edad408f5e207ad9b",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -33,49 +33,49 @@
     {
       "id": "G2",
       "label": "Native Chapter 6 browser journey",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G2b",
       "label": "Native Chapter 5 and 6 five-palette Chromium/Edge regression",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G3",
       "label": "Theme and language persistence",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G4",
       "label": "Learning aids and sonification",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G5",
       "label": "Storage and 62-lab regression",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G6",
       "label": "248-screenshot visual and accessibility smoke audit",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G7",
       "label": "Evidence postprocessing",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "CH8_MATH",
       "label": "Chapter 8 key, guided, Predict and Observe math typesetting",
-      "status": "PASS",
+      "status": "NOT_RUN",
       "required": true
     }
   ],
