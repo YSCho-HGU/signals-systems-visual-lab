@@ -1,0 +1,123 @@
+/* Shared Signals & Systems learning flow — Chapter 6.1 reference.
+ * The 2/3 parallel experiment stays side-by-side on wide screens; derivation
+ * and step 4 start at the LEFT edge after both columns. No plot repaint rules.
+ */
+:root{
+ --ss-step-size:31px;--ss-step-radius:8px;--ss-step-gap:12px;
+ --ss-step-foreground:var(--els-link,#a7d8d2);
+ --ss-step-background:var(--els-surface-alt,#293a3c);
+ --ss-step-stroke:var(--els-link,#86c9c0)
+}
+.ss-standard-stage-head{display:flex;align-items:center;gap:12px;margin:0 0 12px;min-height:32px;
+ font-size:18px;line-height:1.45;font-weight:800;color:var(--els-ink,#eee)}
+.ss-standard-stage-head strong{font-size:inherit;color:inherit}
+.ss-standard-number,
+html.ss5-native .ss5-flow-label span,
+html.ss6-compact-workspace .ss6-step-card::before,
+html.ss6-compact-workspace .ss6-control-plot-workspace .ss6-controls-number{
+ display:inline-grid!important;place-items:center!important;flex:none!important;
+ width:var(--ss-step-size)!important;height:var(--ss-step-size)!important;
+ min-width:var(--ss-step-size)!important;
+ border:1.5px solid var(--ss-step-stroke)!important;
+ border-radius:var(--ss-step-radius)!important;
+ background:var(--ss-step-background)!important;
+ color:var(--ss-step-foreground)!important;
+ font:850 16px/1 system-ui,'Malgun Gothic',sans-serif!important;
+ text-shadow:none!important;opacity:1!important
+}
+:root[data-els-theme="neutral-dark"]{
+ --ss-step-foreground:#d6f5e7;--ss-step-background:#315448;--ss-step-stroke:#a0d8c1
+}
+:root[data-els-theme="warm-dark"]{
+ --ss-step-foreground:#d7f5df;--ss-step-background:#385647;--ss-step-stroke:#a6d2b8
+}
+:root[data-els-theme="navy-dark"]{
+ --ss-step-foreground:#ddf2ff;--ss-step-background:#2d5270;--ss-step-stroke:#a9daff
+}
+:root[data-els-theme="warm-neutral"]{
+ --ss-step-foreground:#214c39;--ss-step-background:#e2ede4;--ss-step-stroke:#46765d
+}
+:root[data-els-theme="white-clean"]{
+ --ss-step-foreground:#194d65;--ss-step-background:#eaf4f9;--ss-step-stroke:#367793
+}
+.ss-standard-stage{min-width:0;box-sizing:border-box}
+.ss-standard-predict,.ss-standard-followup{width:100%;margin:0 0 16px}
+.ss-standard-predict,.ss-standard-workspace>.ss-standard-stage,.ss-standard-followup{
+ border:1px solid var(--els-border,#666)!important;border-radius:13px!important;
+ background:var(--els-surface,#242a29)!important;color:var(--els-ink,#eee)!important;
+ padding:16px 18px!important;box-shadow:none!important
+}
+.ss-standard-instruction{margin:0 0 8px;font-size:16px;line-height:1.7;color:var(--els-muted,#c7c7c7)}
+.ss-standard-prediction-note{width:100%;min-height:52px;padding:10px 12px;box-sizing:border-box;
+ border:1px solid var(--els-border,#666);border-radius:8px;resize:vertical;
+ background:var(--els-surface-alt,#343434);color:var(--els-ink,#eee);
+ font:inherit;font-size:15px;line-height:1.65}
+.ss-standard-workspace{display:grid;grid-template-columns:minmax(260px,0.36fr) minmax(0,0.64fr);
+ gap:14px;align-items:start;margin:0 0 16px}
+.ss-standard-followup{display:block!important;clear:both;width:100%;min-width:0}
+.ss-standard-followup>section,.ss-standard-followup>aside{margin:12px 0!important;max-width:none!important}
+.ss-standard-followup :is(.derivation-panel,.reading-panel){width:100%;max-width:none;min-width:0}
+.ss-standard-intro-only{display:block!important;grid-template-columns:1fr!important;margin-bottom:12px!important}
+.ss-standard-intro-only>.card{width:100%;max-width:none!important;min-width:0}
+.ss-standard-intro-only>.card:not(:first-child){display:none}
+.ss-standard-controls :is(input,select,textarea){max-width:100%}
+.ss-standard-observe :is(canvas,svg){max-width:100%}
+.ss-standard-observe .plot-grid{min-width:0}
+.ss-standard-observe .figure{min-width:0}
+.ss-standard-followup .card{width:100%;max-width:none}
+#content>.experiment[data-ss-standard-applied="true"]{align-items:start}
+#content>.experiment[data-ss-standard-applied="true"]>.controls.ss-standard-controls{
+ border:1px solid var(--els-border,#666)!important
+}
+#content>.experiment[data-ss-standard-applied="true"]>.body-col.ss-standard-observe{min-width:0}
+#content>.experiment+.ss-standard-followup{margin-top:16px}
+html.ss5-native .ss5-flow-label{font-size:18px!important;line-height:1.45!important;font-weight:800!important;
+ color:var(--els-ink,#eee)!important;gap:12px!important;margin:0 0 10px!important}
+html.ss5-native .ss5-predict{margin:0 0 14px!important}
+html.ss5-native .ss5-followup{display:block!important;width:100%;clear:both;min-width:0;margin-top:16px}
+html.ss5-native .ss5-followup>.ss5-flow-label{padding:6px 0 10px}
+html.ss5-native .ss5-followup>section{width:100%;max-width:none}
+html.ss5-native .ss5-predict,.ss5-native .ss5-observe,.ss5-native .ss5-check{
+ border-color:var(--els-border,#666)!important;background:var(--els-surface,#222)!important;
+ color:var(--els-ink,#eee)!important
+}
+html.ss6-compact-workspace .ss6-step-card::before{display:grid!important}
+@media(max-width:1100px){.ss-standard-workspace{grid-template-columns:minmax(210px,.4fr) minmax(0,.6fr)}}
+@media(max-width:760px){
+ .ss-standard-workspace{grid-template-columns:minmax(0,1fr)!important}
+ #content>.experiment[data-ss-standard-applied="true"]{grid-template-columns:minmax(0,1fr)!important}
+ .ss-standard-predict,.ss-standard-workspace>.ss-standard-stage,.ss-standard-followup{padding:13px!important}
+}
+/* Edge/Chromium: explicit palette MUST win over OS dark preference. */
+:root[data-els-theme="white-clean"],:root[data-els-theme="warm-neutral"]{color-scheme:only light!important}
+:root[data-els-theme="neutral-dark"],:root[data-els-theme="warm-dark"],
+:root[data-els-theme="navy-dark"]{color-scheme:dark!important}
+/* Protect native Chapter 5 from inline dark/stale backgrounds. */
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"]){
+ --bg:var(--els-page)!important;--card:var(--els-surface)!important;--ink:var(--els-ink)!important;
+ --muted:var(--els-muted)!important;--line:var(--els-border)!important;--nav:var(--els-surface)!important
+}
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"])
+ :is(body,.shell,.main,.lab,.outputs,.plots){background:var(--els-page)!important;
+ background-image:none!important;color:var(--els-ink)!important}
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"])
+ :is(.ss5-site-header,.nav,.nav>.brand,.panel,.figure,.formula,.reading-panel,.reading-note,.derivation-panel,
+ .deriv-step,.quiz,.insight,.metric,.ss5-predict,.ss5-observe,.ss5-check,.ss5-progress,.heading,
+ .ss5-followup,.control,.ss5-header-actions){
+ background:var(--els-surface)!important;background-image:none!important;
+ color:var(--els-ink)!important;border-color:var(--els-border)!important}
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"])
+ :is(.heading h2,.heading p,.panel h3,.figure h3,.reading-panel h3,.reading-note strong,
+ .guide-head h3,.nav .brand h1,.nav .brand p,.ss5-site-title,.ss5-flow-label,
+ .ss5-flow-label strong,.formula .math,.deriv-math,.metric .v){
+ color:var(--els-ink)!important;text-shadow:none!important}
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"])
+ :is(.reading-note p,.deriv-step p,.ss5-predict p,.ss5-observe p,.ss5-check p,.figure .sub,
+ .figure .legend,.smallnote,.navlabel,.heading .sup){
+ color:var(--els-muted)!important;opacity:1!important}
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"])
+ :is(input,textarea,select){
+ color-scheme:only light!important;background:var(--els-surface)!important;
+ color:var(--els-ink)!important;border-color:var(--els-border)!important}
+html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"])
+ .figure canvas{background:#fff!important;filter:none!important}
