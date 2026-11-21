@@ -65,7 +65,7 @@ jobs:
 
       - name: Chapter 8 - Audit all key equations and guided mathematics
         run: |
-          if node tests/ch8-math-qa.mjs; then echo PASS > qa-standard/ch8-math.status; else echo FAIL > qa-standard/ch8-math.status; fi
+          if node tests/ch8-math-qa.mjs; then echo PASS > qa-standard/CH8_MATH.status; else echo FAIL > qa-standard/CH8_MATH.status; fi
 
       - name: G3 - Verify shared theme and in-place language controls
         run: |
