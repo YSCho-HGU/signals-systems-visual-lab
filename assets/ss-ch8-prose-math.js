@@ -6,6 +6,11 @@
 'use strict';
 const RULES=[
  // Full equations first: preserve their mathematical relation as a single unit.
+ // Chart titles and the lesson heading show the entire selected h[n] formula.
+ [/h\[n\]\s*=\s*[−-]?0\.8ⁿu\[(?:n|[−-]n[−-]1)\]/gu,
+  x=>x.includes('−')||x.includes('-')?String.raw`h[n]=-(0.8)^nu[-n-1]`:String.raw`h[n]=(0.8)^nu[n]`],
+ [/h\[n\]\s*=\s*[−-]aⁿu\[(?:n|[−-]n[−-]1)\]/gu,
+  x=>x.includes('−')||x.includes('-')?String.raw`h[n]=-a^nu[-n-1]`:String.raw`h[n]=a^nu[n]`],
  [/y\[n\]\s*=\s*ay\[n−1\]\s*\+\s*\(1−a\)x\[n\]/gu,
   ()=>String.raw`y[n]=ay[n-1]+(1-a)x[n]`],
  [/h_R\[n\]\s*=\s*0\.8ⁿu\[n\]/gu,
@@ -95,7 +100,7 @@ const CONTAINERS=[
  '#intro','#insight','#reading','#check-q','#check-a',
  '#ss8-predict-question','#step-content .step p','#plots .plot-title',
  '#plots .legend','#plots .axis-key','#plots .ss8-compare-result',
- '#controls .control label'
+ '#controls .control label','#plots .ss8-82-stage h3'
 ].join(',');
 const EXCLUDE='script,style,textarea,select,option,input,svg,canvas,code,pre,.katex,[data-ss-math],[data-latex],[contenteditable],.ss8-prose-math,.ss8-math-source';
 let scheduled=false,converted=0,failures=[];
