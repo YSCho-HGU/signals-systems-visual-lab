@@ -385,12 +385,16 @@ const EXPERIMENTS=[
  const signal=chart({xmin:-6,xmax:8,ymin:ylo,ymax:yhi,xlab:'n (samples)',ylab:'h[n]',title:right?'A · Right-sided: h[n]=0.8ⁿu[n]':'B · Left-sided: h[n]=−0.8ⁿu[−n−1]',stems:[{xs:ns,ys:hs,color:right?'#0d8290':'#c55d54',label:right?'Right-sided impulse response':'Left-sided impulse response'}]});
  const roc=zplot({poles:[[a,0]],zeros:[[0,0]],inner:right?a:0,outer:right?Infinity:a,title:right?'A · Exterior ROC |z|>0.8':'B · Interior ROC |z|<0.8'});
  const derivation=right?[
- 'H(z)=Σₙ₌₀∞(0.8z⁻¹)ⁿ','H(z)=1/(1−0.8z⁻¹)','Convergence requires |0.8z⁻¹|<1, hence |z|>0.8'
+ String.raw`H(z)=\sum_{n=0}^{\infty}(0.8z^{-1})^n`,
+ String.raw`H(z)=\frac{1}{1-0.8z^{-1}}`,
+ String.raw`|0.8z^{-1}|<1\ \Longrightarrow\ |z|>0.8`
  ]:[
- 'H(z)=−Σₙ₌₋∞⁻¹(0.8z⁻¹)ⁿ','H(z)=−Σₖ₌₁∞(z/0.8)ᵏ=1/(1−0.8z⁻¹)','Convergence requires |z/0.8|<1, hence |z|<0.8'
+ String.raw`H(z)=-\sum_{n=-\infty}^{-1}(0.8z^{-1})^n`,
+ String.raw`H(z)=-\sum_{k=1}^{\infty}(z/0.8)^k=\frac{1}{1-0.8z^{-1}}`,
+ String.raw`|z/0.8|<1\ \Longrightarrow\ |z|<0.8`
  ];
  return {plots:`<div class="ss8-selected-inverse"><div class="ss8-selected-case"><strong>${right?'A · Right-sided / causal':'B · Left-sided / anti-causal'}</strong><span>Time signal → its Z-transform → corresponding ROC</span></div><div class="ss8-selected-pair">${signal}${roc}</div></div>`,
- insight:`<div class="ss8-derive-preview"><strong>${right?'A · Right-sided derivation':'B · Left-sided derivation'}</strong><div>${derivation.map((v,i)=>`<p><span class="ss8-derive-index">${i+1}</span>${v}</p>`).join('')}</div><p class="ss8-compare-result"><strong>Same rational expression:</strong> H(z)=1/(1−0.8z⁻¹). <strong>Different ROC:</strong> ${right?'|z|>0.8':'|z|<0.8'}.</p></div>`};
+ insight:`<div class="ss8-derive-preview"><strong>${right?'A · Right-sided derivation':'B · Left-sided derivation'}</strong><div>${derivation.map((v,i)=>`<div class="ss8-derivation-line"><span class="ss8-derive-index">${i+1}</span><span class="ss8-latex" data-latex="${v.replaceAll('&','&amp;').replaceAll('"','&quot;')}"></span></div>`).join('')}</div><p class="ss8-compare-result"><strong>Same rational expression:</strong> H(z)=1/(1−0.8z⁻¹). <strong>Different ROC:</strong> ${right?'|z|>0.8':'|z|<0.8'}.</p></div>`};
 },steps:[
  ['Begin with a discrete-time signal','h[n]=0.8^nu[n] \quad \mathrm{or}\quad h[n]=-0.8^nu[-n-1]','Change에서 수열을 선택합니다. 오른쪽은 n≥0, 왼쪽은 n≤−1에만 존재합니다.'],
  ['Determine the sum limits','Right: sum over n≥0; Left: sum over n≤−1','선택한 h[n]을 H(z)=Σh[n]z⁻ⁿ에 대입하고 구간을 결정합니다.'],
