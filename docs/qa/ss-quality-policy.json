@@ -104,6 +104,13 @@
       "name": "Evidence postprocessing",
       "required": true,
       "script": "tests/quality-gates.mjs"
+    },
+    {
+      "id": "CH8_MATH",
+      "name": "Chapter 8 key, guided, Predict and Observe math typesetting",
+      "required": true,
+      "script": "tests/ch8-math-qa.mjs",
+      "scope": "All eight native Chapter 8 lessons, all four steps, both 8.2 directions, 8.4 partial fractions"
     }
   ],
   "manualGates": [
