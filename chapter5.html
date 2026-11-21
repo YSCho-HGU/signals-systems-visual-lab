@@ -341,6 +341,7 @@ function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
 <link rel="stylesheet" href="./assets/ss-lab-theme.css?v=5">
 <link rel="stylesheet" href="./assets/els-theme-v2.css?v=5">
 <link rel="stylesheet" href="./assets/ss-ch5-standalone.css?v=1">
+<link rel="stylesheet" href="./assets/ss5-light-theme-fix.css?v=1">
 <script src="./assets/els-language.js?v=1"></script>
 <script src="./assets/els-theme-v2.js?v=4"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css">
@@ -803,4 +804,5 @@ function update(){const s=state[active];({weight:drawWeight,roc:drawROC,pairs:dr
 render();window.addEventListener("load",()=>{window.ELSChapterFiveMath?.renderHero(active,state[active]);window.ELSChapterFiveMath?.renderGuide(active,state[active],document.getElementById("derivationPanel"));window.ELSChapterFiveInlineMath?.render(document.getElementById("page"));window.ELSChapterFiveExplicitMath?.apply(active,LABS.find(x=>x.id===active))});window.addEventListener('resize',()=>update());
 window.__labNumerics={rc63:rcRise(1,1),secondStepInitial:secondStep(0,.4,3),inverseRightZero:invX(0,'right'),cancellation:reduced({p:.8,z:.8}).poles[0],rcCutoff:1/Math.sqrt(2),secondPeak:secondStep(PI/(3*Math.sqrt(1-.25**2)),.25,3)};
 </script><script src="./assets/ss-ch5-standalone.js?v=1"></script>
+<script src="./assets/ss5-language-content.js?v=1"></script>
 </body></html>
