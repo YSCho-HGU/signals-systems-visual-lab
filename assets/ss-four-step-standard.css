@@ -121,3 +121,52 @@ html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"
  color:var(--els-ink)!important;border-color:var(--els-border)!important}
 html.ss5-native:is([data-els-theme="white-clean"],[data-els-theme="warm-neutral"])
  .figure canvas{background:#fff!important;filter:none!important}
+
+/* Chapter 5/6 final theme layer: selected palette, never OS color preference.
+ * All five palettes use the identical semantic tokens and stable selectors.
+ * Keep below both standalone styles and Chapter 6 reading rhythm.
+ */
+html.ss5-native[data-els-theme],
+html.ss6-compact-workspace[data-els-theme]{
+ --ss-native-page:var(--els-page);
+ --ss-native-card:var(--els-surface);
+ --ss-native-card-alt:var(--els-surface-alt);
+ --ss-native-fg:var(--els-ink);
+ --ss-native-muted:var(--els-muted);
+ --ss-native-stroke:var(--els-border);
+}
+html.ss5-native[data-els-theme] :is(body,.shell,.main,.outputs,.plots),
+html.ss6-compact-workspace[data-els-theme] :is(body,.app,.main){
+ background-color:var(--ss-native-page)!important;color:var(--ss-native-fg)!important
+}
+html.ss5-native[data-els-theme] :is(.ss5-site-header,.nav,.panel,.figure,.formula,.metric,.derivation-panel,.reading-panel,.reading-note,.deriv-step,.quiz,.insight,.ss5-predict,.ss5-observe,.ss5-check,.guide-check,.ss5-progress,.heading,.ss5-followup),
+html.ss6-compact-workspace[data-els-theme] :is(.ss6-site-header,.sidebar,.controls,.panel,.figure,.metric,.derivation-panel,.reading-panel,.reading-note,.deriv-step,.quiz,.insight,.ss6-step-card,.ss6-observation-header,.ss6-sequence-overview,.ss6-guide-details){
+ background-color:var(--ss-native-card)!important;background-image:none!important;
+ border-color:var(--ss-native-stroke)!important;color:var(--ss-native-fg)!important
+}
+html.ss5-native[data-els-theme] :is(.nav .brand,.ss5-flow-label,.ss5-flow-label strong,.heading h2,.heading p,.guide-head h3,.deriv-top,.deriv-math,.reading-panel h3,.reading-note strong,.figure h3,.metric .v,.formula .math),
+html.ss6-compact-workspace[data-els-theme] :is(.heading h2,.heading p,.ss6-step-card h3,.ss6-sequence-overview .ss6-lesson-title,.guide-head h3,.deriv-top,.deriv-math,.reading-panel h3,.reading-note strong,.figure h3,.metric .v){
+ color:var(--ss-native-fg)!important
+}
+html.ss5-native[data-els-theme] :is(.ss5-predict p,.ss5-observe p,.ss5-check p,.reading-note p,.reading-note .ko-explain,.deriv-step p,.figure .sub,.figure .legend,.smallnote,.heading .sup),
+html.ss6-compact-workspace[data-els-theme] :is(.ss6-step-card p,.ss6-lesson-purpose,.ss6-reading-cue,.ss6-compact-instruction,.reading-note p,.deriv-step p,.figure .sub,.figure .legend){
+ color:var(--ss-native-muted)!important;opacity:1!important
+}
+html.ss5-native[data-els-theme] :is(input:not([type="range"]),textarea,select),
+html.ss6-compact-workspace[data-els-theme] :is(input:not([type="range"]),textarea,select){
+ background:var(--ss-native-card-alt)!important;color:var(--ss-native-fg)!important;
+ border-color:var(--ss-native-stroke)!important
+}
+html.ss5-native[data-els-theme] .ss5-flow-label span{
+ background:var(--ss-step-background)!important;color:var(--ss-step-foreground)!important;
+ border-color:var(--ss-step-stroke)!important
+}
+html.ss5-native[data-els-theme] .ss5-followup{grid-column:1/-1!important}
+html.ss5-native[data-els-theme] .ss5-followup > .reading-panel{margin-top:18px!important}
+html.ss5-native[data-els-theme] .ss5-check{margin-top:18px!important}
+html.ss6-compact-workspace[data-els-theme] .ss6-control-plot-workspace + .ss6-interpretation{
+ clear:both!important
+}
+html.ss6-compact-workspace[data-els-theme] .ss6-control-plot-workspace :is(.ss6-step-controls,.ss6-observation-header){
+ color:var(--ss-native-fg)!important
+}
