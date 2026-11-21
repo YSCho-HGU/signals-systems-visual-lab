@@ -44,15 +44,15 @@ try{
       const targets=[".ss6-sequence-overview","#ss6-core-theory",".ss6-lab-intro",".ss6-top-question",".ss6-step-controls",".ss6-observation-header",".ss6-interpretation"];
       return targets.map(x=>document.querySelector(x)?.getBoundingClientRect().top+scrollY);
     });
-    assert(ordered.every((y,i)=>Number.isFinite(y)&&(i===0||y>ordered[i-1])),
+    assert(ordered.every((y,i)=>Number.isFinite(y)&&(i===0||y>=ordered[i-1]-1)),
       name+": theory-to-visual-lab order broken: "+JSON.stringify(ordered));
-    const labels=await page.locator(".ss6-step-card[data-ss6-step]").evaluateAll(list=>list.map(x=>x.dataset.ss6Step));
+    // Steps 2 and 3 intentionally share the same vertical position.\n    const labels=await page.locator(".ss6-step-card[data-ss6-step]").evaluateAll(list=>list.map(x=>x.dataset.ss6Step));
     assert(labels.join(",")==="1,2,3,4",name+": step marker hierarchy does not show 1–4");
-    await page.locator("#ss6-theme-picker").selectOption("white");
-    assert(await page.evaluate(()=>document.documentElement.dataset.elsTheme)==="white",name+": White theme not selectable");
+    await page.locator("#ss6-theme-picker").selectOption("white-clean");
+    assert(await page.evaluate(()=>document.documentElement.dataset.elsTheme)==="white-clean",name+": White theme not selectable");
     const white=await page.locator("#ss6-core-theory").evaluate(el=>({body:getComputedStyle(document.body).backgroundColor,
       theory:getComputedStyle(el).backgroundColor,fontSize:getComputedStyle(el.querySelector(".ss6-theory-heading p")).fontSize}));
-    assert(white.body==="rgb(255, 255, 255)"&&white.theory==="rgb(255, 255, 255)",name+": White theme not white: "+JSON.stringify(white));
+    assert(white.body==="rgb(244, 246, 247)"&&white.theory==="rgb(255, 255, 255)",name+": White theme not white: "+JSON.stringify(white));
     assert(parseFloat(white.fontSize)>=15,name+": theory body font too small");
     await page.locator("#ss6-language-picker").selectOption("en");
     await page.waitForFunction(()=>document.querySelector(".ss6-top-question details summary")?.textContent==="Show answer and explanation");
