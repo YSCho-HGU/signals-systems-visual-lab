@@ -33,6 +33,13 @@ check("G0-08a-native-ch5",policy.chapterRoutes["5"]==="native"&&policy.chapterRo
  page.includes("if(ch===5){location.replace('./chapter5.html?build=20261121-ch5-formula10');return;}"));
 try{new Script(read("assets/ss-ch5-standalone.js"),{filename:"assets/ss-ch5-standalone.js"});check("G0-js-ch5-native",true)}
 catch(e){check("G0-js-ch5-native",false,String(e).slice(0,200))}
+const ch7=read("chapter7.html");
+check("G0-08b-ch7-initial-observe-dependencies",ch7.includes('./assets/ss-trace-palette.js?v=1')&&ch7.includes('id="plots"')&&!ch7.includes("<iframe")&&ch7.includes('ss-ch7-math.js?v=1'));
+check("G0-08c-ch7-7-lessons",(ch7.match(/\\{short:'/g)||[]).length===7);
+for(const path of ["assets/ss-ch7-math.js","assets/ss-ch7-learning-standard.js","assets/ss-ch7-standalone.js"]){
+ try{new Script(read(path),{filename:path});check("G0-js-"+path,true)}
+ catch(e){check("G0-js-"+path,false,String(e).slice(0,200))}
+}
 check("G0-09-six-modules",flow.includes('["periodic","pairs","phase","phasor","filter","fft"]'));
 check("G0-10-no-prediction-gate",flow.includes("Writing a prediction is optional")&&read("assets/ss-ch6-frequency-foundations.js").includes("return originalControl(c,s);"));
 check("G0-11-native-audio",native.includes('ss-applications.js')&&read("assets/ss-applications.js").includes("ss-ch6-module-changed"));
