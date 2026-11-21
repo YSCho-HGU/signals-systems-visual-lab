@@ -67,6 +67,36 @@ try{
     }
     check(id("controls-and-plots"),!!snapshot.controls?.width&&!!snapshot.plots?.width,snapshot.controls);
     check(id("followup-extends-to-left"),!snapshot.follow||snapshot.follow.left<=snapshot.controls?.left+20,[snapshot.follow?.left,snapshot.controls?.left]);
+
+    if(chapter===5){
+     // Inspect every Chapter 5 experiment: the axis guidance was previously
+     // hardcoded to a light background, even in Neutral/Warm/Navy Dark.
+     for(const lab of ["weight","roc","pairs","props","inverse","stability","rc","second"]){
+      await page.locator('#tabs [data-lab="'+lab+'"]').click();
+      await page.waitForFunction(x=>window.__laplaceVisualLab?.active===x,lab);
+      const a=await page.evaluate(()=>{
+       const pick=sel=>{const el=document.querySelector(sel);if(!el)return null;
+        const st=getComputedStyle(el),r=el.getBoundingClientRect();
+        return {background:st.backgroundColor,color:st.color,border:st.borderTopColor,
+         x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height};
+       };
+       return {axis:pick(".figure .axis-key"),hint:pick(".ss-hover-hint"),
+        predict:pick("#page>.ss5-predict"),panel:pick(".lab>.panel"),
+        plots:pick(".lab .plots"),follow:pick("#page>.ss5-followup"),
+        steps:[...document.querySelectorAll(".ss5-flow-label")].map(el=>el.textContent.trim())};
+      });
+      check(id(lab+" axis-palette"),!!a.axis&&rgb(a.axis.background)===({"neutral-dark":"rgb(41, 41, 41)","warm-dark":"rgb(52, 65, 61)","navy-dark":"rgb(39, 57, 78)","warm-neutral":"rgb(237, 241, 235)","white-clean":"rgb(237, 242, 244)"}[theme]),a.axis);
+      check(id(lab+" axis-legible"),!!a.axis&&rgb(a.axis.color)===({"neutral-dark":"rgb(240, 240, 237)","warm-dark":"rgb(229, 233, 227)","navy-dark":"rgb(237, 243, 250)","warm-neutral":"rgb(40, 49, 47)","white-clean":"rgb(27, 39, 48)"}[theme]),a.axis);
+      check(id(lab+" predict-full-width-above"),!!a.predict&&!!a.panel&&!!a.plots&&
+       a.predict.x<=a.panel.x+4&&a.predict.right>=a.plots.right-4&&
+       a.predict.bottom<=a.panel.y+4&&a.predict.bottom<=a.plots.y+4,[a.predict,a.panel,a.plots]);
+      check(id(lab+" controls-plots-parallel"),!!a.panel&&!!a.plots&&
+       a.panel.right<=a.plots.x+4&&Math.abs(a.panel.y-a.plots.y)<24,[a.panel,a.plots]);
+      check(id(lab+" derivation-full-left"),!!a.follow&&!!a.panel&&
+       a.follow.x<=a.panel.x+4&&a.follow.width>=a.plots.right-a.panel.x-8,[a.follow,a.panel]);
+      check(id(lab+" four-stages"),["Predict","Adjust","Observe","Explain"].every(z=>a.steps.some(t=>t.includes(z))),a.steps);
+     }
+    }
     const oldTheme=await page.evaluate(()=>localStorage.getItem("els-theme-v2"));
     check(id("stored-theme"),oldTheme===theme,oldTheme);
     await page.reload({waitUntil:"load"});
