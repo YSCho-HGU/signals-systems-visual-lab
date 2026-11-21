@@ -440,7 +440,27 @@ const EXPERIMENTS=[
  ['Find the convergence condition','Right-sided: a<1; left-sided: a>1','단위원과 pole 위치만 외우지 말고 기하급수의 공비가 1보다 작은지 확인합니다.'],
  ['Connect BIBO stability to ROC','Σ|h[n]|<∞ ⇔ unit circle ⊂ ROC','ROC가 단위원 전체를 포함할 때 안정합니다. pole이 단위원 밖에 있어도 좌측수열은 안정할 수 있습니다.']
 ],readings:[['A · Time support','causal은 n≥0, anti-causal은 n≤−1 표본만 존재합니다.'],['B · A necessary convergence test','M을 증가시켜 S(M)이 유한값으로 수렴하는지 봅니다. 최종 판정은 기하급수의 정확한 수렴 조건으로 합니다.'],['C · Confirm with ROC','인과/비인과 방향에 따라 ROC가 달라지고 안정 여부가 달라집니다.']],check:['a=1.2인 anti-causal h[n]의 절대합은 수렴하나요?','네. Σₖ₌₁∞1.2⁻ᵏ=1/(1.2−1)=5입니다. ROC |z|<1.2는 단위원을 포함합니다.']},
-{short:'Sensor IIR',topic:'Real digital filter',title:'8.8 · Digital Sensor Smoother / 차분방정식',desc:'차분방정식의 z⁻¹ 지연, pole, step response와 저역통과 주파수 응답을 연결합니다.',defaults:{a:.8},controls:[{key:'a',label:'Smoothing pole a',min:.1,max:.95,step:.05}],draw:p=>{const xs=Array.from({length:21},(_,i)=>i),step=xs.map(n=>1-p.a**(n+1)),mag=w=>(1-p.a)/Math.hypot(1-p.a*Math.cos(w),p.a*Math.sin(w));return {plots:chart({xmin:0,xmax:20,ymin:0,ymax:1.1,xlab:'n (samples)',title:'Unit-step response y[n]=1−aⁿ⁺¹',stems:[{xs,ys:step,color:'#0d8290',label:'Filter output'}]})+chart({xmin:0,xmax:PI,ymin:0,ymax:1.05,xlab:'Ω (rad/sample)',title:'Sensor smoother frequency response',curves:[{fn:mag,color:'#c88939',label:'|H(eʲΩ)|'}]})+zplot({poles:[[p.a,0]],zeros:[[0,0]],inner:p.a,outer:Infinity,title:'Causal ROC and pole · z⁻¹ means one-sample delay'}),insight:`<strong>y[n]=${fmt(p.a,2)}y[n−1]+${fmt(1-p.a,2)}x[n].</strong> Pole a=${fmt(p.a,2)}<1 ⇒ causal stable. Step response at n=5: ${fmt(1-p.a**6,3)}. ${p.a>.8?'Stronger smoothing, slower step response.':'Faster response, weaker smoothing.'}`}},steps:[['Start from a real-time difference equation','y[n]=ay[n−1]+(1−a)x[n]','이전 출력 y[n−1]은 메모리에 저장된 값입니다.'],['Transform the delay','Z{y[n−1]}=z<sup>−1</sup>Y(z)','초기조건 0인 시스템 전달함수 해석입니다.'],['Solve for H(z)','H(z)=Y(z)/X(z)=(1−a)/(1−az<sup>−1</sup>)','pole z=a와 causal ROC |z|>|a|를 얻습니다.'],['Compute time and frequency behavior','h[n]=(1−a)aⁿu[n], &nbsp; H(e<sup>jΩ</sup>)','실제 C 코드의 한 줄 업데이트와 pole/ROC/주파수 응답이 연결됩니다.']],readings:[['Implementation','C 코드: y = a*y_prev + (1-a)*x; y_prev = y;'],['Time-frequency tradeoff','a가 커지면 노이즈는 더 부드러워지지만 급격한 변화에 늦게 반응합니다.'],['Physical units','실제 cutoff Hz는 sampling rate와 함께 해석해야 합니다.']],check:['a=0.9를 a=0.3으로 줄이면 계단 입력에 대한 응답 속도는?','더 빨라집니다. 대신 고주파 노이즈 억제 정도는 약해집니다.']}
+{short:'Sensor IIR',topic:'Implement & evaluate smoothing',title:'8.8 · Digital Sensor Smoother / Real Data Model',desc:'차분방정식을 실제 센서 표본 처리에 적용합니다. 측정 잡음과 입력 변화에 대한 평활화·지연의 절충을 관찰합니다.',defaults:{a:.8,noise:1},controls:[{key:'a',label:'Smoothing pole a',min:.1,max:.95,step:.05},{key:'noise',label:'Sensor noise level',min:0,max:2,step:.1}],draw:p=>{
+ const xs=Array.from({length:41},(_,i)=>i);
+ const ideal=xs.map(n=>20+(n>=12?5:0));
+ const measurement=xs.map((n,i)=>ideal[i]+p.noise*(.9*Math.sin(1.8*n)+.45*Math.cos(2.6*n)));
+ const y=[];let previous=20;
+ for(const x of measurement){previous=p.a*previous+(1-p.a)*x;y.push(previous)}
+ const smoothStep=xs.map(n=>n<12?20:25-5*p.a**(n-11));
+ const lastErr=Math.abs(y[40]-25);
+ const mag=w=>(1-p.a)/Math.hypot(1-p.a*Math.cos(w),p.a*Math.sin(w));
+ return {plots:
+ chart({xmin:0,xmax:40,ymin:16,ymax:29,xlab:'n (samples)',ylab:'Sensor reading',title:'A · Raw noisy sensor samples and filtered output',curves:[{pts:xs.map((n,i)=>[n,measurement[i]]),color:'#0d8290',label:'Noisy measurement x[n]'},{pts:xs.map((n,i)=>[n,y[i]]),color:'#c88939',label:'Filtered y[n]'},{pts:xs.map((n,i)=>[n,ideal[i]]),color:'#6b4aaa',dash:'5 5',label:'Underlying signal'}]})+
+ chart({xmin:0,xmax:40,ymin:19,ymax:26,xlab:'n (samples)',ylab:'Sensor reading',title:'B · Step response without noise · latency tradeoff',curves:[{pts:xs.map((n,i)=>[n,smoothStep[i]]),color:'#c88939',label:'Noise-free filtered step'},{pts:xs.map((n,i)=>[n,ideal[i]]),color:'#0d8290',dash:'5 5',label:'Ideal step'}]})+
+ chart({xmin:0,xmax:PI,ymin:0,ymax:1.05,xlab:'Ω (rad/sample)',title:'C · Noise-rejection frequency response',curves:[{fn:mag,color:'#c88939',label:'|H(eʲΩ)|'}]}),
+ insight:`<strong>In each sampling cycle:</strong> y = ${fmt(p.a,2)}·y_prev + ${fmt(1-p.a,2)}·x; then y_prev = y. <strong>After sample 40:</strong> |y−25|=${fmt(lastErr,3)}. ${p.a>.75?'Higher a provides stronger smoothing but slower response to the step.':'Lower a follows the step faster but passes more noise.'} 초기 필터 상태 y[−1]=20으로 설정하며, 입력은 12번째 샘플부터 증가합니다.`};
+},steps:[
+ ['Model a noisy real-world sensor','x[n]=s[n]+v[n],  y[n]=ay[n−1]+(1−a)x[n]','측정 잡음 v[n]과 실제 환경 신호 s[n]이 섞인 입력을 처리합니다. 초기 출력은 y[−1]=20입니다.'],
+ ['Implement the filter state update','y = a*y_prev + (1−a)*x;  y_prev = y','매 샘플마다 이전 출력을 기억하는 코드 한 줄이 z⁻¹ 지연을 구현합니다.'],
+ ['Connect the code to the system function','H(z)=(1−a)/(1−az<sup>−1</sup>)','초기 휴지 상태의 Z-transform으로 전달함수를 계산합니다. pole z=a가 안정성과 기억 길이를 결정합니다.'],
+ ['Evaluate the engineering tradeoff','Step delay versus high-frequency noise attenuation','a를 변화시켜 출력의 평활화와 계단 입력 추종 속도 사이의 절충을 평가합니다.']
+],readings:[['Observe measured data','파란 입력에 결정적인 모의 잡음을 추가했습니다. 실시간 센서 데이터가 아닌 재현 가능한 실습용 모델입니다.'],['Watch the step transition','n=12에서 원래 신호가 20→25로 바뀌지만 필터 출력은 지연되어 접근합니다.'],['Implement on MCU','C 코드에서는 y_prev를 연속 샘플 사이에 보존해야 합니다. 샘플링 주파수에 따라 같은 a의 실제 시간 응답도 달라집니다.']],check:['측정 잡음이 많은 센서에서 a를 0.3에서 0.9로 올리면 무엇이 좋아지고 나빠지나요?','고주파 잡음 억제는 커지지만 신호가 실제로 변할 때 출력의 추종 속도가 느려집니다.']
+}
 ];
 /* Native Chapter 8 controller: do not modify simulation functions. */
 window.SSChapter8=Object.freeze({
