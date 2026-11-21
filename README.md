@@ -4,7 +4,16 @@ Interactive bilingual (English/Korean) Visual Labs for university Signals & Syst
 
 - 62 interactive experiments, 18 engineering cases, transform relationship explorer
 - Feedback: use the **오류 제보 / Feedback** form on the site to open a prefilled GitHub Issue (GitHub sign-in required), copy a report, or save it as TXT.
-- All lab functionality is bundled in [index.html](./index.html) and runs without external dependencies.
+- All chapters are now independent pages: chapter1.html through chapter8.html. The homepage is a course overview and no longer embeds lab payloads or iframes.
+- Shared theme, header, formula and learning bridge assets are in assets/. Publish the full repository, rather than just index.html.
+
+## Current architecture and teaching continuity — 2026-11-21
+
+- **Standalone Chapters:** chapter1.html through chapter8.html. No chapter iframe or embedded encoded lab payload in index.html.
+- **UI:** shared chapter dropdown and five-theme control; Chapter 1–4 numeric code preserved with Predict → Change → Observe → Explain reading stages.
+- **Mathematics:** shared KaTeX key relations and safe guided-derivation enhancement, with original math retained when conversion is ambiguous.
+- **Learning bridges:** ROC, inverse transforms, phasor cancellation, anti-aliasing and digital filter continuity; Chapter 5.7 and 8.8 contain an interactive RC-to-IIR coefficient bridge.
+- **QA:** tests/chapter-continuity-qa.mjs and .github/workflows/chapter-continuity-audit.yml exercise chapter navigation, lab controls, charts, math, themes and links.
 
 ## GitHub Pages setup
 
@@ -16,7 +25,7 @@ Interactive bilingual (English/Korean) Visual Labs for university Signals & Syst
 
 ## Versioning
 
-The current published revision is **Rev8**. Dark mode follows the OS by default, with optional System/Light/Dark selection. Previous Drive versions are retained in `Note/old/`; updating the homepage means replacing `index.html` with the latest verified revision. Existing URLs remain unchanged.
+The current standalone pages use Neutral Dark, Warm Dark, Navy Dark, Warm Neutral, and White Clean themes independently of OS appearance. The Rev7/Rev8 sections below describe historical releases. Previous Drive versions are retained in `Note/old/`; updating the homepage means replacing `index.html` with the latest verified revision. Existing URLs remain unchanged.
 
 For teaching, students should verify any reported errors with the course instructor; Issues are public, so avoid sharing personal information.
 
@@ -42,9 +51,9 @@ The Visual Learning Studio now uses the same light/dark semantic palette as the 
 - `assets/ss-site-theme.css`: visual adapter for the home page, transform map, engineering cases, feedback dialog, and chapter navigation.
 - `assets/ss-lab-theme.css`: adapter inserted into **all eight embedded chapter lab frames** at runtime, leaving original lab programs and graph drawing code unchanged.
 
-The parent uses system/light/dark selection as before; the active chapter continues to follow parent messages without reloading its graphs. Numeric simulation and plotting palettes are intentionally not changed by the UI theme adapter.
+The legacy parent/iframe model described here is historical; chapter pages now apply their own shared theme. Numeric simulation and plotting palettes are intentionally not changed by the UI theme adapter.
 
-**Important for offline copies:** The original experiment payload remains embedded in `index.html`, so standalone fallback lab behavior is retained; however, the new common palette depends on these three CSS files being available in the relative `assets/` folder. Publish/copy the entire repository (not just `index.html`) to preserve the identical new look. Individual downloaded chapter HTML files retain their original self-contained appearance.
+**Important for offline copies:** The experiment payload is no longer embedded in index.html. Preserve each chapter HTML file and the assets/ directory together; KaTeX also requires its referenced library. Publish/copy the entire repository (not just `index.html`) to preserve the identical new look. Individual downloaded chapter HTML files retain their original self-contained appearance.
 
 **Accessibility:** WCAG 2.2 AA text contrast is a design target, not a certified status. Browser-based desktop/mobile/keyboard/200%-zoom checks across all 62 experiments and 132 graphs remain necessary after this theme-only change. Prior numerical QA results are historical, not a new complete automated browser acceptance.
 
