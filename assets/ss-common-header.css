@@ -13,3 +13,37 @@
 .ss-common-header .ss-common-actions label,.ss-common-header .ss-common-actions .theme-picker{display:flex;align-items:center;gap:5px;margin:0;padding:0;min-width:0;font-size:11px;font-weight:600;white-space:nowrap;color:inherit}
 .ss-common-header .ss-common-actions select{width:auto;max-width:158px;min-height:30px;font-size:11px;padding:3px 6px;border:1px solid var(--els-border,var(--border,#777));border-radius:7px;background:var(--els-surface,var(--surface,#222));color:var(--els-ink,var(--ink,#eee))}
 @media(max-width:700px){.ss-common-header{height:auto!important;min-height:46px!important;flex-wrap:wrap!important;gap:6px!important;padding:7px 9px!important}.ss-common-header .ss-common-menu{flex:1 1 calc(100% - 95px);max-width:calc(100% - 95px)}.ss-common-header .ss-common-actions{width:100%;margin-left:auto;justify-content:flex-end}.ss-common-header .ss-common-actions label{font-size:11px}}
+
+
+/* Accessible shared chapter chooser, all themes including Neutral Dark.
+ * No white-on-light-accent combinations; keyboard and pointer states identical. */
+html[data-els-theme] .ss-common-header .ss-common-links{
+ isolation:isolate!important;
+ background:var(--els-surface)!important;
+ color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme] .ss-common-header .ss-common-links a{
+ background:transparent!important;color:var(--els-ink)!important;
+ font-size:13px!important;line-height:1.55!important;font-weight:600!important;
+ text-decoration:none!important;
+ min-height:39px!important;
+}
+html[data-els-theme] .ss-common-header .ss-common-links a:is(:hover,:focus-visible){
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
+ outline:2px solid var(--els-focus)!important;outline-offset:-2px!important;
+}
+html[data-els-theme] .ss-common-header .ss-common-links a[aria-current="page"]{
+ background:var(--els-info-bg)!important;color:var(--els-info-ink)!important;
+ border-left:3px solid var(--els-link)!important;
+ padding-left:9px!important;text-decoration:none!important;font-weight:800!important;
+}
+html[data-els-theme] .ss-common-header .ss-common-links a[aria-current="page"]:is(:hover,:focus-visible){
+ background:var(--els-info-bg)!important;color:var(--els-info-ink)!important;
+}
+html[data-els-theme] .ss-common-header .ss-common-title{
+ color:var(--els-ink)!important;font-size:13px!important
+}
+html[data-els-theme] .ss-common-header .ss-common-actions :is(select,option){
+ color:var(--els-ink)!important;background:var(--els-surface)!important;
+}
