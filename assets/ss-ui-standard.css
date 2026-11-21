@@ -1,0 +1,178 @@
+/* Signals & Systems shared UI design tokens and components — Chapters 5, 6, 7.
+ * Chapter 5 is the visual reference. Chapter-specific simulations, layout
+ * exceptions, and graph palettes remain in their own modules.
+ * Keep this stylesheet AFTER native chapter CSS on every standalone page.
+ */
+:root{
+  --ss-ui-header-height:46px;
+  --ss-ui-sidebar-width:230px;
+  --ss-ui-card-radius:12px;
+  --ss-ui-nav-radius:9px;
+  --ss-ui-stage-gap:14px;
+  --ss-ui-content-pad-x:clamp(12px,1.8vw,27px);
+  --ss-ui-focus:var(--els-focus,#a56a24);
+}
+/* One header surface, dimensions and text scale across all three chapters. */
+:is(html.ss5-native .ss5-site-header,
+    html.ss6-compact-workspace .ss6-site-header,
+    html.ss7-native .ss7-site-header){
+  box-sizing:border-box!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  position:sticky!important;
+  top:0!important;
+  z-index:90!important;
+  height:var(--ss-ui-header-height)!important;
+  min-height:var(--ss-ui-header-height)!important;
+  padding:5px 15px!important;
+  border-bottom:1px solid var(--els-border,#8a9b9b)!important;
+  background:var(--els-surface,#fff)!important;
+  color:var(--els-ink,#22313a)!important;
+}
+/* Shared navigation tabs: do not alter chapter-specific click handlers. */
+:is(html.ss5-native .tabs button,
+    html.ss6-compact-workspace .sidebar .nav button,
+    html.ss7-native #ss7-lesson-nav button){
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  min-height:47px!important;
+  padding:8px 10px!important;
+  border:1px solid transparent!important;
+  border-radius:var(--ss-ui-nav-radius)!important;
+  background:transparent!important;
+  color:var(--els-ink,#22313a)!important;
+  font-size:12px!important;
+  line-height:1.35!important;
+  text-align:left!important;
+  box-shadow:none!important;
+}
+:is(html.ss5-native .tabs button,
+    html.ss6-compact-workspace .sidebar .nav button,
+    html.ss7-native #ss7-lesson-nav button):hover{
+  background:var(--els-surface-alt,#ebf0f1)!important;
+  border-color:var(--els-border,#adbcbc)!important;
+}
+:is(html.ss5-native .tabs button.on,
+    html.ss6-compact-workspace .sidebar .nav button.active,
+    html.ss7-native #ss7-lesson-nav button[aria-current="true"]){
+  background:var(--els-surface-alt,#e8f0f0)!important;
+  border-color:var(--els-link,var(--els-accent,#157487))!important;
+  box-shadow:inset 3px 0 var(--els-link,var(--els-accent,#157487))!important;
+  font-weight:800!important;
+}
+/* Navigation number badges, independent from learning step numbers. */
+:is(html.ss5-native .tabs .num,
+    html.ss6-compact-workspace .sidebar .nav .num,
+    html.ss7-native .ss7-lab-number){
+  display:inline-grid!important;
+  place-items:center!important;
+  flex:none;
+  min-width:29px;
+  min-height:29px;
+  border:1px solid var(--els-border,#9babab)!important;
+  border-radius:7px;
+  background:var(--els-surface-alt,#edf1f1);
+  color:var(--els-link,var(--els-ink,#263e46))!important;
+  font-weight:800!important;
+  line-height:1.2;
+}
+:is(html.ss5-native .ss5-progress button,
+    html.ss6-compact-workspace .ss6-progress button,
+    html.ss7-native .ss7-progress button){
+  min-height:34px;
+  border:1px solid var(--els-border,#aabcbc)!important;
+  border-radius:8px!important;
+  background:var(--els-surface-alt,#edf1f1)!important;
+  color:var(--els-ink,#22313a)!important;
+  font-size:12px!important;
+  cursor:pointer;
+}
+:is(html.ss5-native .ss5-progress button,
+    html.ss6-compact-workspace .ss6-progress button,
+    html.ss7-native .ss7-progress button):hover{
+  border-color:var(--els-link,var(--els-accent,#157487))!important;
+}
+/* Shared sidebar collapse control. Keep existing collapse state and storage key. */
+:is(html.ss5-native .nav .ss-side-toggle,
+    html.ss6-compact-workspace .sidebar .ss-side-toggle,
+    html.ss7-native .ss7-sidebar .ss-side-toggle){
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:8px;
+  width:100%;
+  min-height:34px;
+  margin:0 0 12px;
+  padding:6px 10px;
+  border:1px solid var(--els-border,#9babab);
+  border-radius:8px;
+  background:var(--els-surface-alt,#eef2f2);
+  color:var(--els-ink,#243d42);
+  font-size:12px;
+  font-weight:650;
+  cursor:pointer;
+}
+/* Unified card corners and elevation; existing panel fills remain untouched. */
+:is(html.ss5-native #page :is(.panel,.figure,.ss5-predict,.ss5-observe,.ss5-check,.deriv-step,.reading-note),
+    html.ss6-compact-workspace :is(.ss6-step-card,.figure,.ss6-sequence-overview,.ss6-guide-details,.reading-note,.deriv-step),
+    html.ss7-native :is(.ss7-card,.plot-card,.step,.reading .note,.ss7-key-formula)){
+  border-radius:var(--ss-ui-card-radius)!important;
+  box-shadow:none!important;
+}
+/* One legible teaching-step hierarchy; step labels still use local semantics. */
+:is(html.ss5-native .ss5-flow-label,
+    html.ss6-compact-workspace .ss6-step-card h3,
+    html.ss7-native .ss7-stage-head){
+  font-size:18px!important;
+  line-height:1.45!important;
+  font-weight:800!important;
+  color:var(--els-ink,#22313a)!important;
+}
+/* Chapter 7 now inherits the same numbered-step palette used in Ch5/Ch6. */
+html.ss7-native .ss7-stage-index{
+  display:inline-grid!important;
+  place-items:center!important;
+  flex:0 0 var(--ss-step-size,31px)!important;
+  width:var(--ss-step-size,31px)!important;
+  height:var(--ss-step-size,31px)!important;
+  min-width:var(--ss-step-size,31px)!important;
+  border:1.5px solid var(--ss-step-stroke,var(--els-link,#28677c))!important;
+  border-radius:var(--ss-step-radius,8px)!important;
+  background:var(--ss-step-background,var(--els-surface-alt,#e5edee))!important;
+  color:var(--ss-step-foreground,var(--els-ink,#263e46))!important;
+  font:850 16px/1 system-ui,"Malgun Gothic",sans-serif!important;
+  text-shadow:none!important;
+  opacity:1!important;
+}
+:is(html.ss5-native,html.ss6-compact-workspace,html.ss7-native)
+ :is(a,button,input,select,textarea,summary):focus-visible{
+  outline:3px solid var(--ss-ui-focus)!important;
+  outline-offset:2px!important;
+}
+/* Match the shared chapter menu on smaller screens without hiding controls. */
+@media(max-width:780px){
+  :is(html.ss5-native .tabs button,
+      html.ss6-compact-workspace .sidebar .nav button,
+      html.ss7-native #ss7-lesson-nav button){
+    min-height:40px!important;
+    padding:6px 9px!important;
+  }
+  :is(html.ss5-native .ss5-flow-label,
+      html.ss6-compact-workspace .ss6-step-card h3,
+      html.ss7-native .ss7-stage-head){
+    font-size:17px!important;
+  }
+}
+@media(max-width:700px){
+  :is(html.ss5-native .ss5-site-header,
+      html.ss6-compact-workspace .ss6-site-header,
+      html.ss7-native .ss7-site-header){
+    min-height:46px!important;
+    height:auto!important;
+    flex-wrap:wrap!important;
+    gap:6px!important;
+    padding:7px 9px!important;
+  }
+}
