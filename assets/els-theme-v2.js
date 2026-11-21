@@ -15,7 +15,6 @@ function inferLegacy(){
 function selected(){
  const v=safeGet(KEY);
  // Migrate the retired pure-white option without losing user preference.
- if(v==="white")return "white-clean";
  return v==="white"?"white-clean":VALID.includes(v)?v:inferLegacy();
 }
 function apply(value,persist=true){
