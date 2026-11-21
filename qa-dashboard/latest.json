@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-21T07:39:13.404Z",
-  "sourceSha": "dbeafc0376e9e373875d2882a2b5135bd3dabce5",
-  "runId": "44881200298",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44881200298",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/dbeafc0376e9e373875d2882a2b5135bd3dabce5",
+  "generatedAt": "2026-11-21T07:41:56.140Z",
+  "sourceSha": "2c598be132f052083d9bc70b6e35f6a101c8d6d2",
+  "runId": "44881231446",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44881231446",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/2c598be132f052083d9bc70b6e35f6a101c8d6d2",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -21,37 +21,37 @@
     {
       "id": "G0",
       "label": "Catalog and source integrity",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G1",
       "label": "Sampling and transform mathematics",
-      "status": "NOT_RUN",
+      "status": "PASS",
       "required": true
     },
     {
       "id": "G2",
       "label": "Native Chapter 6 browser journey",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G2b",
       "label": "Native Chapter 5 and 6 five-palette Chromium/Edge regression",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G3",
       "label": "Theme and language persistence",
-      "status": "NOT_RUN",
+      "status": "PASS",
       "required": true
     },
     {
       "id": "G4",
       "label": "Learning aids and sonification",
-      "status": "NOT_RUN",
+      "status": "PASS",
       "required": true
     },
     {
