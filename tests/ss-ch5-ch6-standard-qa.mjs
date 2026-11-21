@@ -83,6 +83,9 @@ try{
        return {axis:pick(".figure .axis-key"),hint:pick(".ss-hover-hint"),
         predict:pick("#page>.ss5-predict"),panel:pick(".lab>.panel"),
         outputs:pick(".lab>.outputs"),plots:pick(".lab .plots"),follow:pick("#page>.ss5-followup"),
+        guide:pick(".deriv-math"),reading:pick(".reading-note"),button:pick(".guide-actions button"),
+        bodySize:getComputedStyle(document.querySelector(".reading-note p")||document.querySelector(".heading p")).fontSize,
+        bodyLine:getComputedStyle(document.querySelector(".reading-note p")||document.querySelector(".heading p")).lineHeight,
         steps:[...document.querySelectorAll(".ss5-flow-label")].map(el=>el.textContent.trim())};
       });
       check(id(lab+" axis-palette"),!!a.axis&&rgb(a.axis.background)===({"neutral-dark":"rgb(41, 41, 41)","warm-dark":"rgb(52, 65, 61)","navy-dark":"rgb(39, 57, 78)","warm-neutral":"rgb(237, 241, 235)","white-clean":"rgb(237, 242, 244)"}[theme]),a.axis);
@@ -95,6 +98,20 @@ try{
       check(id(lab+" derivation-full-left"),!!a.follow&&!!a.panel&&
        a.follow.x<=a.panel.x+4&&a.follow.width>=a.plots.right-a.panel.x-8,[a.follow,a.panel]);
       check(id(lab+" four-stages"),["Predict","Adjust","Observe","Explain"].every(z=>a.steps.some(t=>t.includes(z))),a.steps);
+      check(id(lab+" body-size-6.1"),parseFloat(a.bodySize)>=16&&parseFloat(a.bodyLine)>=25,[a.bodySize,a.bodyLine]);
+      check(id(lab+" reading-theme"),!!a.reading&&rgb(a.reading.background)===colors.surface,a.reading);
+      check(id(lab+" derivation-ink"),!!a.guide&&a.guide.color===({"neutral-dark":"rgb(240, 240, 237)","warm-dark":"rgb(229, 233, 227)","navy-dark":"rgb(237, 243, 250)","warm-neutral":"rgb(40, 49, 47)","white-clean":"rgb(27, 39, 48)"}[theme]),a.guide);
+      if(["roc","pairs","props","inverse","stability","second"].includes(lab)){
+       const px=await page.locator("#plot1").evaluate(canvas=>{
+        const x=Math.round(canvas.width*.79),y=Math.round(canvas.height*.36);
+        const data=canvas.getContext("2d").getImageData(x,y,1,1).data;
+        return {rgb:[data[0],data[1],data[2]],location:[x,y]};
+       });
+       const dark=["neutral-dark","warm-dark","navy-dark"].includes(theme);
+       const brightness=px.rgb.reduce((sum,v)=>sum+v,0)/3;
+       check(id(lab+" ROC-canvas-palette"),dark?brightness<145:brightness>170,{...px,brightness,dark});
+      }
+
      }
     }
     const oldTheme=await page.evaluate(()=>localStorage.getItem("els-theme-v2"));
