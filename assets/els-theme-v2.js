@@ -16,7 +16,7 @@ function selected(){
  const v=safeGet(KEY);
  // Migrate the retired pure-white option without losing user preference.
  if(v==="white")return "white-clean";
- return VALID.includes(v)?v:inferLegacy();
+ return v==="white"?"white-clean":VALID.includes(v)?v:inferLegacy();
 }
 function apply(value,persist=true){
  const normalized=value==="white"?"white-clean":value;
@@ -26,7 +26,7 @@ function apply(value,persist=true){
  root.dataset.theme=light?"light":"dark";
  root.dataset.mode=light?"light":"dark";
  root.style.colorScheme=light?"only light":"dark";
- if(persist)try{localStorage.setItem(KEY,v)}catch(e){}
+ if(persist||safeGet(KEY)==="white")try{localStorage.setItem(KEY,v)}catch(e){}
  document.querySelectorAll("[data-els-theme-picker]").forEach(s=>{if(s.value!==v)s.value=v});
  const schemeMeta=document.querySelector('meta[name="color-scheme"]');
  if(schemeMeta)schemeMeta.content=light?"only light":"dark";
