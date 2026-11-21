@@ -80,3 +80,14 @@ html.ss7-standard .ss7-predict-prompt{padding:4px 0}
  html.ss7-standard .ss7-workspace>nav button{width:auto;min-width:145px;max-width:200px;flex:0 0 auto}
  html.ss7-standard .ss7-workspace-content .ss7-stage-pair{grid-template-columns:1fr}
 }
+
+/* Chapter 7: the host's #ss-unified-nav is the ONLY chapter TOC.
+   Internal nav remains in the DOM (and continues receiving host clicks). */
+html.ss7-standard .ss-vertical-layout{display:block!important;grid-template-columns:minmax(0,1fr)!important}
+html.ss7-standard .ss-vertical-layout>.ss-vertical-sidebar{display:none!important}
+html.ss7-standard .ss-vertical-layout>.ss-vertical-main{padding:0!important;width:100%;min-width:0}
+html.ss7-standard .ss7-standard-layout{width:100%;min-width:0}
+html.ss7-standard main{max-width:none!important;width:100%;padding:12px clamp(10px,1.5vw,24px)}
+html.ss7-standard main>.ss-vertical-layout{min-height:0}
+html.ss7-standard .ss7-chapter-lead{padding:12px 16px}
+html.ss7-standard body>header{display:none!important}
