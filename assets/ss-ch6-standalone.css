@@ -225,11 +225,7 @@ html.ss6-compact-workspace .ss6-theory-key{
 html.ss6-compact-workspace .ss6-theory-item h4{
   margin:0 0 11px;font-size:15px;line-height:1.4;font-weight:800;color:var(--els-ink,#222)
 }
-html.ss6-compact-workspace .ss6-theory-equation{
-  font-size:clamp(14px,1.35vw,17px);line-height:2;font-weight:700;
-  color:var(--els-ink,#222);overflow-wrap:anywhere;min-width:0;margin:0 0 12px;
-  font-family:Cambria Math,Georgia,serif
-}
+html.ss6-compact-workspace .ss6-theory-equation{margin:0 0 12px;color:var(--els-ink,#222)}
 html.ss6-compact-workspace .ss6-eq-break{display:block}
 html.ss6-compact-workspace .ss6-unit{
   font:500 12px/1.5 system-ui,'Malgun Gothic',sans-serif;
@@ -329,30 +325,7 @@ html.ss6-compact-workspace .ss6-site-header{font-size:13px}
  html.ss6-compact-workspace .ss6-step-card :is(p,.ss6-compact-instruction,.ss6-reading-cue){font-size:14px!important}
 }
 
-/* Chapter 6.1: math typography, unit separation and responsive concept cards. */
-html.ss6-compact-workspace .ss6-theory-equation{
-  font-family:KaTeX_Main,'Cambria Math',Georgia,serif;
-  font-size:clamp(17px,1.35vw,22px)!important;
-  font-weight:400!important;
-  line-height:1.55!important;
-  overflow-x:auto!important;
-  overflow-wrap:normal!important;
-  padding:3px 1px 7px;
-}
-html.ss6-compact-workspace .ss6-theory-equation .katex-display{
-  margin:.35em 0!important;
-  text-align:left!important;
-  overflow-x:auto;
-  overflow-y:hidden;
-}
-html.ss6-compact-workspace .ss6-theory-equation .katex-display>.katex{
-  text-align:left;
-  white-space:nowrap;
-}
-html.ss6-compact-workspace .ss6-theory-equation math{
-  font-size:1em;
-  max-width:100%;
-}
+/* Chapter 6.1 concept cards; math typography now centralized. */
 html.ss6-compact-workspace .ss6-theory-item p{font-size:16px!important;line-height:1.6!important}
 html.ss6-compact-workspace .ss6-theory-item h4{font-size:17px!important}
 @media(max-width:1100px){
@@ -364,22 +337,8 @@ html.ss6-compact-workspace .ss6-theory-item h4{font-size:17px!important}
  html.ss6-compact-workspace .ss6-theory-item:last-child{grid-column:auto}
 }
 
-/* Chapter 6.1 equation audit: readable math in prose and guided derivations. */
-html.ss6-compact-workspace .ss6-inline-math{display:inline;white-space:nowrap;font-weight:500}
-html.ss6-compact-workspace .ss6-inline-math .katex{font-size:1.04em}
-html.ss6-compact-workspace .deriv-math{
-  font-family:KaTeX_Main,'Cambria Math',serif!important;
-  font-size:clamp(17px,1.35vw,22px)!important;
-  font-weight:400!important;
-  color:var(--els-ink,var(--ink))!important;
-  line-height:1.55!important;
-  overflow-x:auto!important;
-  overflow-wrap:normal!important;
-  padding:12px 14px!important;
-}
-html.ss6-compact-workspace .deriv-math .katex-display{margin:0!important;overflow-x:auto!important;overflow-y:hidden!important}
-html.ss6-compact-workspace .deriv-math .katex-display>.katex{text-align:left!important;white-space:nowrap!important}
-html.ss6-compact-workspace .deriv-math math{font-size:1em}
+/* Chapter 6 retains only its derivation-card spacing/color. */
+html.ss6-compact-workspace .deriv-math{padding:12px 14px!important;color:var(--els-ink,var(--ink))!important}
 html.ss6-compact-workspace .ss6-theory-takeaway,
 html.ss6-compact-workspace #insight,
 html.ss6-compact-workspace .ss6-top-question p,
