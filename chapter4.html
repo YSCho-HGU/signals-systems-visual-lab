@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="ko" class="ss-foundations-standard" data-ss-foundation-chapter="4">
+<head><script>window.__ssThemeFromParent=true;</script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0e2940"><meta name="description" content="Chapter 4 bilingual guided derivations and visual learning lab. Offline standalone application."><title>Chapter 4 Guided Visual Lab Rev6 | Signals & Systems</title><script>
+/* Standalone labs follow OS appearance. Integrated parent may override without reloading graphs. */
+(function(){
+ const query=window.matchMedia('(prefers-color-scheme: dark)');
+ function systemTheme(){if(!window.__ssThemeFromParent)document.documentElement.dataset.theme=query.matches?'dark':'light';}
+ systemTheme();
+ if(query.addEventListener)query.addEventListener('change',systemTheme);
+ else if(query.addListener)query.addListener(systemTheme);
+ window.addEventListener('message',function(event){
+   if(event.source!==window.parent||!event.data||event.data.type!=='ss-set-theme')return;
+   if(event.data.theme!=='dark'&&event.data.theme!=='light')return;
+   window.__ssThemeFromParent=true;
+   document.documentElement.dataset.theme=event.data.theme;
+ });
+})();
+</script>
+<style>
+:root{--bg:#f3f7f9;--nav:#112b41;--nav2:#173c53;--ink:#173046;--sub:#526a7c;--a:#0e8491;--coral:#f06d55;--gold:#e2ae3e;--line:#dce6ec;--paper:#fff;--pale:#ebf5f6;--r:18px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.58 system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #f3aa69;outline-offset:2px}h1,h2,h3,p{margin-top:0}a{color:var(--a)}
+.app{display:grid;grid-template-columns:280px minmax(0,1fr);min-height:100vh}.sidebar{background:linear-gradient(160deg,var(--nav),#0b2235);color:#eaf3f7;padding:28px 18px 22px;position:sticky;top:0;height:100vh;overflow:auto}.brand{padding:5px 13px 25px;border-bottom:1px solid #3b5263}.brand .over{font-size:11px;letter-spacing:.15em;font-weight:700;color:#88abbc}.brand h1{margin:12px 0 3px;font-size:23px;letter-spacing:-.04em;color:white}.brand p{font-size:12px;color:#b2cad5;margin:0}.side-label{color:#a7becb;letter-spacing:.12em;font-size:11px;font-weight:700;margin:25px 15px 10px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;border-radius:12px;display:flex;align-items:center;gap:10px;padding:12px 13px;color:#c7d6dc;text-align:left;transition:.12s ease;min-width:0}.nav button:hover{background:#254258}.nav button.active{color:#fff;background:#235766;box-shadow:inset 3px 0 #5fd0cc}.nav .num{border:1px solid #4c6b7a;color:#bad1dc;border-radius:7px;padding:2px 5px;font-size:11px;min-width:30px;text-align:center;font-weight:700}.nav button.active .num{border-color:#8bd9d4;color:#aeebe6}.nav-name{font-size:13px;font-weight:600;overflow-wrap:anywhere}.side-foot{margin-top:30px;background:#1b3b4f;border:1px solid #3f5969;border-radius:13px;padding:14px;font-size:12px;color:#c3d3df}.side-foot strong{display:block;color:white;margin-bottom:5px}
+.main{min-width:0;padding:29px clamp(18px,4vw,54px) 50px;max-width:1520px;width:100%;margin:0 auto}.topline{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}.breadcrumb{color:var(--sub);font-size:12px;font-weight:700;letter-spacing:.08em}.tag{font-size:11px;border-radius:30px;background:#d9eef0;color:#126b73;font-weight:700;padding:6px 10px}.heading{padding:0 0 20px;border-bottom:1px solid var(--line)}.heading h2{font-size:clamp(26px,3vw,37px);line-height:1.18;letter-spacing:-.045em;margin:0 0 10px}.heading p{color:var(--sub);max-width:960px;margin:0;font-size:15px}.hero-callout{margin:18px 0 22px;background:linear-gradient(100deg,#e5f4f5,#f4f9fa);padding:15px 19px;border:1px solid #d1e6e9;border-left:4px solid var(--a);border-radius:13px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}.hero-callout .formula{font-size:18px;font-family:Cambria,'Times New Roman',serif;color:#13495c;letter-spacing:.015em}.hero-callout .hint{font-size:12px;color:#55717e}.experiment{display:grid;grid-template-columns:minmax(230px,300px) minmax(0,1fr);gap:19px;align-items:start}.controls,.figure,.metric,.learning,.question{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 5px 19px #1e455407}.controls{padding:20px;position:sticky;top:16px}.overlabel{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--a);text-transform:uppercase}.controls h3{margin:5px 0 17px;font-size:20px;letter-spacing:-.02em}.ctrl{margin:0 0 20px}.ctrl label{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;font-weight:700;margin-bottom:8px}.ctrl output{font-size:12px;color:var(--a);font-variant-numeric:tabular-nums;white-space:nowrap}.ctrl input[type=range]{width:100%;accent-color:var(--a);cursor:pointer}.ctrl select{width:100%;background:#f9fcfd;border:1px solid #cfdee5;border-radius:10px;padding:9px}.ctrl .ends{display:flex;justify-content:space-between;color:#82929c;font-size:10px}.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.btn{border:1px solid #cadde4;background:white;border-radius:10px;color:#22516b;padding:10px 12px;font-weight:700;font-size:12px;flex:1}.btn:hover{border-color:#76b6bb;background:#f4fbfb}.btn.primary{background:#126f7d;color:white;border-color:#126f7d}.body-col{min-width:0;display:grid;gap:15px}.charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.charts.three{grid-template-columns:repeat(2,minmax(0,1fr))}.figure{padding:17px 17px 10px;min-width:0}.figure h3{font-size:15px;margin:0 0 2px}.figure p{font-size:11px;color:var(--sub);margin:0 0 10px}.figure canvas{width:100%;height:270px;display:block}.legend{display:none;gap:14px;flex-wrap:wrap;margin:8px 0 2px;font-size:11px;color:var(--sub)}.legend-item{display:flex;align-items:center;gap:6px}.legend-chip{--lc:#000;display:inline-block;position:relative;flex:0 0 auto}.legend-chip.line{width:18px;height:0;border-top:3px solid var(--lc)}.legend-chip.dashed{width:18px;height:0;border-top:3px dashed var(--lc)}.legend-chip.stem{width:18px;height:14px}.legend-chip.stem::before{content:'';position:absolute;left:8px;top:2px;width:2px;height:11px;background:var(--lc)}.legend-chip.stem::after{content:'';position:absolute;left:5px;top:0;width:8px;height:8px;border-radius:50%;background:var(--lc)}.legend-chip.vline{width:3px;height:14px;background:var(--lc);border-radius:999px}.fft-guide{background:#f0f8f8;border:1px solid #c7e1e4;border-left:4px solid #0e8491;border-radius:15px;padding:15px 19px}.fft-guide h3{font-size:17px;margin:5px 0}.fft-guide p{font-size:12px;color:#405d69;margin:5px 0 12px}.preset-row{display:flex;flex-wrap:wrap;gap:8px}.preset-row button{background:white;border:1px solid #a6c9cb;color:#17616a;border-radius:9px;font-size:12px;padding:8px 10px;font-weight:700}.preset-row button.selected{background:#0e8491;color:white;border-color:#0e8491}.fft-status{background:#fff;padding:9px 11px;border:1px solid #d6e7e9;border-radius:9px;margin:11px 0 0!important;font-size:12px}.fft-status span{display:block;margin-top:4px}.figure.wide{grid-column:span 2}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.metric{padding:14px 15px;overflow:hidden}.metric .k{color:var(--sub);font-size:11px;margin-bottom:4px}.metric .v{font-size:23px;font-weight:750;line-height:1.25;color:var(--ink);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.metric .detail{font-size:11px;color:var(--sub);margin-top:3px}.learning{padding:18px 20px;background:#fbfefe;border-left:4px solid var(--a)}.learning h3{margin:0 0 5px;font-size:15px}.learning p{margin:0;color:#3d6172}.question{padding:19px 20px}.question h3{font-size:16px;margin:0 0 9px}.question p{color:#405b6a;margin:0 0 11px}.question details{border-top:1px solid var(--line);padding-top:11px}.question summary{color:var(--a);font-weight:700;cursor:pointer}.question .answer{background:#f2f8f7;border-radius:10px;padding:13px;margin-top:10px;color:#2a4b55}.footer{margin-top:25px;font-size:12px;color:#7b8f9b;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.notice{color:var(--sub);font-size:12px;line-height:1.6;border-top:1px solid #e6eef1;padding-top:14px}.mono{font-family:ui-monospace,Consolas,'Courier New',monospace}.muted{color:var(--sub)}.mobile-bar{display:none}
+@media(max-width:1050px){.app{grid-template-columns:225px minmax(0,1fr)}.sidebar{padding:24px 10px}.main{padding:24px 22px 40px}.experiment{grid-template-columns:1fr}.controls{position:static}.control-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 20px}.charts .figure canvas{height:245px}}
+@media(max-width:750px){.app{display:block}.sidebar{position:relative;height:auto;padding:12px 12px 5px}.brand{padding:5px 10px 11px;border:0}.brand h1{font-size:19px;margin:3px 0}.brand p,.side-label,.side-foot{display:none}.nav{display:flex;overflow-x:auto;gap:8px;padding:4px 3px 13px}.nav button{white-space:nowrap;padding:9px;flex:0 0 auto;min-width:max-content}.nav .nav-name{white-space:nowrap;overflow-wrap:normal}.nav-name{font-size:12px}.main{padding:18px 13px 35px}.topline{margin-bottom:12px}.heading h2{font-size:27px}.charts,.charts.three{grid-template-columns:1fr}.figure.wide{grid-column:span 1}.metrics{grid-template-columns:1fr 1fr}.metric .v{font-size:20px}.hero-callout .formula{font-size:15px}.figure canvas{height:245px}.mobile-bar{display:block;color:#a7ced3;font-size:11px;padding-left:10px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+.figure{padding-bottom:15px}.figure h3{line-height:1.3}.figure canvas{height:270px}.figure p{line-height:1.4;min-height:15px}.learning p{line-height:1.65}.heading p{line-height:1.7}.hero-callout .formula{font-size:17px}.legend-item{line-height:1.4}.side-foot{line-height:1.9}
+
+/* Stable comparison axes and graph-reading notes. */
+.axis-note{display:none;font-size:11px;color:#567786;background:#edf7f8;border-radius:7px;padding:5px 9px;margin-top:8px;line-height:1.5}
+/* Student-centered, bilingual derivation and graph-reading sections. */
+.derivation-panel,.reading-panel{background:#fff;border:1px solid #dce6ec;border-radius:18px;box-shadow:0 5px 19px #1e455407;padding:20px;min-width:0}
+.guide-head{display:flex;justify-content:space-between;align-items:start;gap:16px;flex-wrap:wrap}.guide-head h3,.reading-panel h3{font-size:18px;line-height:1.35;margin:4px 0 8px;color:#173046}.guide-head p{font-size:12px;color:#526a7c;margin:0 0 14px}
+.progress-badge{display:inline-block;padding:5px 10px;border-radius:999px;background:#e6f4f5;color:#076b76;font-weight:700;font-size:12px;white-space:nowrap}
+.guide-steps{display:grid;gap:10px}.deriv-step{border:1px solid #e5edf1;border-radius:12px;padding:12px 14px;background:#fcfdfd;min-width:0}.deriv-top{display:flex;align-items:center;gap:9px;font-size:13px;color:#173046}.step-index{display:inline-flex;align-items:center;justify-content:center;background:#e3f2f3;color:#087680;border-radius:50%;height:24px;width:24px;min-width:24px;font-size:12px;font-weight:800}.deriv-math{margin:9px 0;color:#174b5d;font-family:Cambria,'Cambria Math','Times New Roman',serif;font-size:17px;line-height:1.7;overflow-wrap:anywhere;white-space:normal;overflow-x:auto;padding:6px 10px;background:#eef7f8;border-left:3px solid #0e8491;border-radius:6px}.deriv-step p{font-size:13px;color:#486272;margin:8px 0 0;line-height:1.68}
+.guide-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.guide-actions button{background:#fff;color:#20546a;border:1px solid #c8dce5;border-radius:9px;padding:8px 12px;font:700 12px system-ui,'Malgun Gothic',sans-serif;cursor:pointer}.guide-actions button:hover{background:#edf8f8;border-color:#0e8491}.guide-actions button:disabled{opacity:.4;cursor:not-allowed}.guide-actions button:focus-visible{outline:3px solid #e7ac3f;outline-offset:2px}
+.reading-panel{background:#fafdfd}.reading-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}.reading-note{padding:11px 12px;border:1px solid #dce9eb;border-radius:12px;background:white}.plot-number{font-size:10px;letter-spacing:.09em;color:#0e8491;font-weight:800;display:block;margin-bottom:5px}.reading-note strong{display:block;color:#173046;font-size:13px}.reading-note p{font-size:12px;line-height:1.62;margin:6px 0 0;color:#344f60}.reading-note .ko-explain{color:#617b8a}.guide-check{font-size:13px;margin:12px 0 0;color:#395b68;border-top:1px solid #dce9eb;padding-top:11px}
+@media(max-width:750px){.derivation-panel,.reading-panel{padding:15px}.deriv-math{font-size:15px}.reading-grid{grid-template-columns:1fr}.guide-actions button{flex:1 1 auto}}
+/* Guided Derivation: synchronized equation reveal and graph-reading panels */
+.derivation-panel,.reading-panel{background:#fff;border:1px solid #dce6ec;border-radius:16px;box-shadow:0 5px 19px #1e455407;padding:20px;min-width:0}
+.guide-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.guide-head h3,.reading-panel h3{font-size:18px;line-height:1.35;margin:5px 0 8px;color:#173046}
+.guide-head p{font-size:12px;color:#526a7c;margin:0 0 14px}
+.progress-badge{background:#e6f4f5;color:#086c76;font:700 12px system-ui,sans-serif;padding:6px 11px;border-radius:18px;white-space:nowrap}
+.guide-track{height:5px;background:#dcebee;border-radius:8px;margin:4px 0 14px;overflow:hidden}
+.guide-track>div{height:100%;background:#0e8491;border-radius:8px;transition:width .38s ease}
+.guide-steps{display:grid;gap:10px}
+.deriv-step{border:1px solid #dfe9ee;border-radius:12px;padding:12px 14px;background:#fcfdfd;min-width:0}
+.deriv-step.guide-enter{animation:guideReveal .58s cubic-bezier(.18,.65,.27,1) both;border-color:#75c5c7;background:#f2faf9}
+@keyframes guideReveal{from{opacity:0;transform:translateY(19px);filter:blur(2px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+.deriv-top{display:flex;align-items:center;gap:9px;font-size:13px;color:#173046;min-width:0}
+.step-index{display:inline-flex;align-items:center;justify-content:center;background:#e3f2f3;color:#087680;border-radius:50%;height:24px;width:24px;min-width:24px;font-size:12px;font-weight:800}
+.deriv-math{margin:9px 0;color:#174b5d;font-family:Cambria,'Cambria Math','Times New Roman',serif;font-size:17px;line-height:1.7;overflow-wrap:anywhere;white-space:normal;overflow-x:auto;padding:6px 10px;background:#eef7f8;border-left:3px solid #0e8491;border-radius:6px}
+.deriv-step p{font-size:13px;color:#486272;margin:8px 0 0;line-height:1.68}
+.guide-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.guide-actions button{background:#fff;color:#20546a;border:1px solid #c8dce5;border-radius:9px;padding:9px 12px;font:700 12px system-ui,'Malgun Gothic',sans-serif;cursor:pointer}
+.guide-actions button:hover{background:#edf8f8;border-color:#0e8491}
+.guide-actions button:disabled{opacity:.4;cursor:not-allowed}
+.guide-actions button.primary{color:#fff;background:#0e8491;border-color:#0e8491}
+.guide-actions button:focus-visible{outline:3px solid #e7ac3f;outline-offset:2px}
+.reading-panel{background:#fafdfd}
+.reading-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.reading-note{padding:11px 12px;border:1px solid #dce9eb;border-radius:12px;background:#fff}
+.plot-number{font-size:10px;letter-spacing:.09em;color:#0e8491;font-weight:800;display:block;margin-bottom:5px}
+.reading-note strong{display:block;color:#173046;font-size:13px}
+.reading-note p{font-size:12px;line-height:1.62;margin:6px 0 0;color:#344f60}
+.reading-note .ko-explain{color:#617b8a}
+.guide-check{font-size:13px;margin:12px 0 0;color:#395b68;border-top:1px solid #dce9eb;padding-top:11px}
+@media(max-width:750px){.derivation-panel,.reading-panel{padding:15px}.deriv-math{font-size:15px}.reading-grid{grid-template-columns:1fr}.guide-actions button{flex:1 1 auto}}
+@media(prefers-reduced-motion:reduce){.deriv-step.guide-enter{animation:none}.guide-track>div{transition:none}}
+
+
+/* S&S Integrated Studio — common visual design tokens and learning components. */
+:root{--bg:#f3f7f9;--nav:#112b41;--ink:#173046;--sub:#526a7c;--a:#0e8491;--accent:#0e8491;--line:#dce6ec;--paper:#fff;--card:#fff;--r:16px}
+body{font-family:system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif;background:#f3f7f9;color:#173046}
+.figure,.metric,.controls,.panel,.derivation-panel,.reading-panel,.learning,.question,.insight,.quiz{border-radius:16px!important;box-shadow:0 5px 18px #15374a08!important;border-color:#dce6ec!important}
+.derivation-panel,.reading-panel{padding:20px!important}
+.guide-head h3,.reading-panel h3{color:#173046!important;font-size:18px!important;line-height:1.4!important}
+.deriv-math{font-family:Cambria,'Times New Roman',serif!important;line-height:1.55!important;overflow-wrap:anywhere}
+.deriv-step{border-radius:12px!important;overflow-wrap:anywhere}
+.guide-actions{gap:8px!important}
+.guide-actions button{font-family:system-ui,'Malgun Gothic',sans-serif!important;font-weight:700!important;font-size:12px!important;border-radius:10px!important;min-height:37px}
+.guide-actions button.primary{background:#0e8491!important;color:white!important;border-color:#0e8491!important}
+.guide-track{border-radius:100px!important;overflow:hidden}
+.guide-track>div{background:linear-gradient(90deg,#0e8491,#49bcb3)!important}
+.figure h3{color:#173046!important;font-weight:750!important}
+.figure canvas{display:block;max-width:100%}
+.figure p,.reading-panel p,.guide-head p{line-height:1.65}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #e2ae3e!important;outline-offset:2px!important}
+#studio-back{position:fixed;right:17px;top:14px;z-index:9999;display:flex;align-items:center;gap:8px;background:#112b41;color:#fff;text-decoration:none;border-radius:100px;padding:9px 15px;box-shadow:0 5px 20px #071c3066;font-size:12px;font-weight:750}
+#studio-back:hover{background:#0e8491}
+#studio-back[hidden]{display:none!important}
+@media(max-width:750px){.derivation-panel,.reading-panel{padding:15px!important}#studio-back{top:8px;right:9px;padding:7px 10px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.deriv-step{animation:none!important}}
+
+
+/* Rev5 integrated + standalone: dark mode; graph canvas stays light for legible axes/curves. */
+html[data-theme="dark"]{color-scheme:dark;--bg:#0c1827;--nav:#0c2234;--nav2:#193c51;--ink:#e5f1f8;--sub:#b0c7d3;--muted:#b0c7d3;--a:#75d9e3;--accent:#75d9e3;--teal:#75d9e3;--coral:#ff9a86;--warm:#ff9a86;--gold:#efc36e;--line:#355266;--paper:#192e42;--card:#192e42;--pale:#1f4050}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] .main,
+html[data-theme="dark"] main{color:var(--ink)}
+html[data-theme="dark"] .controls,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .figure,
+html[data-theme="dark"] .metric,
+html[data-theme="dark"] .learning,
+html[data-theme="dark"] .question,
+html[data-theme="dark"] .insight,
+html[data-theme="dark"] .quiz,
+html[data-theme="dark"] .derivation-panel,
+html[data-theme="dark"] .reading-panel,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .plot-card{background:#192e42!important;border-color:#365468!important;box-shadow:0 5px 22px #0002!important;color:#e7f3f9}
+html[data-theme="dark"] .deriv-step,
+html[data-theme="dark"] .step,
+html[data-theme="dark"] .reading .note,
+html[data-theme="dark"] .control,
+html[data-theme="dark"] .hero-callout,
+html[data-theme="dark"] .formula,
+html[data-theme="dark"] .axis-note,
+html[data-theme="dark"] .plot-instruction,
+html[data-theme="dark"] .reading-note,
+html[data-theme="dark"] .interpretation,
+html[data-theme="dark"] .guide-note{background:#203c4e!important;color:#e2f1f7!important;border-color:#426278!important}
+html[data-theme="dark"] .deriv-step.guide-enter,
+html[data-theme="dark"] .deriv-step.active,
+html[data-theme="dark"] .step.active{background:#20505a!important;border-color:#62bfc7!important}
+html[data-theme="dark"] .deriv-math,
+html[data-theme="dark"] .step .math,
+html[data-theme="dark"] .math,
+html[data-theme="dark"] .mathline,
+html[data-theme="dark"] .hero-callout .formula{color:#d9f4f4!important;background:#204557!important;border-color:#426a78!important}
+html[data-theme="dark"] .figure canvas,
+html[data-theme="dark"] .plot-card svg,
+html[data-theme="dark"] .plot-card canvas{background:#fbfdfe!important;border-radius:7px;color:#19394c;filter:none}
+html[data-theme="dark"] .plot-card .plot-title{background:#254759;color:#e5f3f8;border-color:#426477}
+html[data-theme="dark"] select,
+html[data-theme="dark"] input[type="number"],
+html[data-theme="dark"] input[type="text"]{background:#142d40;color:#e6f2f7;border:1px solid #507083}
+html[data-theme="dark"] button:not(.active):not(.on):not(.primary):not(.guide-primary){border-color:#45677b}
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .pill{background:#204957;color:#9be5e8}
+html[data-theme="dark"] .breadcrumb,
+html[data-theme="dark"] .crumb,
+html[data-theme="dark"] .intro,
+html[data-theme="dark"] .hint,
+html[data-theme="dark"] .reading .note p,
+html[data-theme="dark"] .axis-note{color:#b9d1dd!important}
+html[data-theme="dark"] .nav button:not(.active),
+html[data-theme="dark"] .tabs button:not(.on){color:#d3e6ee}
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .shell>.nav{background:linear-gradient(160deg,#0a2030,#102c40)}
+html[data-theme="dark"] nav:not(.sidebar):not(.nav) button:not(.active){background:#1e3b4e;color:#e5f3f8;border-color:#43677a}
+html[data-theme="dark"] nav:not(.sidebar):not(.nav) button.active{background:#136477;color:#fff}
+html[data-theme="dark"] .plot-card svg text{fill:#203b4e}
+
+
+/* Rev7 audited text contrast: no Light Mode ink inside dark surfaces. */
+:root{--ss-axis-text:#274f64;--ss-axis-bg:#f1f8fa}
+.axis-key{display:flex;flex-wrap:wrap;align-items:center;gap:5px 13px;margin:8px 0 4px;padding:8px 11px;border-radius:8px;border:1px solid #cfe1e9;background:var(--ss-axis-bg);color:var(--ss-axis-text);font:600 12px/1.55 system-ui,'Malgun Gothic',sans-serif;overflow-wrap:anywhere}
+.axis-key .ax-strong{font-weight:850;color:#086d79}
+html[data-theme="dark"]{--ss-axis-text:#d5edf5;--ss-axis-bg:#244457}
+html[data-theme="dark"] .axis-key{background:#244457!important;border-color:#54788b!important;color:#d5edf5!important}
+html[data-theme="dark"] .axis-key .ax-strong{color:#91e8eb!important}
+html[data-theme="dark"] :is(.reading-panel h3,.guide-head h3,.deriv-top,.reading-note strong,.reading .note strong,.compare-title,.figure h3,.plot-card .plot-title,.step strong,.check b,.insight strong){color:#eff9ff!important}
+html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain,.guide-check,.guide-head p,.deriv-step p,.reading-panel p,.reading .note p,.step p,.insight p,.quiz p,.check,.check .answer,.compare-sub,.compare-footer,.figure .sub,.figure p,.formhint,.heading p,.intro,.desc,.smallnote,.rangeEnds,.metric .k,.metric .d,.metric b,.legend,.bridge,.footer,.foot,.hint,.source,.crumb,.breadcrumb,.plot-instruction,.axis-note){color:#cce3ee!important}
+html[data-theme="dark"] :is(.reading-note,.reading .note,.step,.deriv-step,.compare-card,.compare-wrap,.check,.axis-note){background:#234254!important;border-color:#517185!important}
+html[data-theme="dark"] :is(.guide-check,.quiz details){border-color:#517185!important}
+html[data-theme="dark"] :is(.overlabel,.over,.plot-number,.eyebrow,.heading .sup,.step-index,.progress-badge,.metric .v,.metric strong,.ctrl output,.control output){color:#90e8ec!important}
+html[data-theme="dark"] :is(.guide-actions button:not(.primary),.step-buttons button:not(.primary),.btn:not(.primary),.preset,.check button,.quiz button,.actions button:not(.primary)){color:#e6f5fc!important;background:#234657!important;border-color:#54798d!important}
+html[data-theme="dark"] :is(.guide-actions button.primary,.step-buttons button.primary,.btn.primary,.actions button.primary){background:#0d697b!important;border-color:#67c6d1!important;color:#fff!important}
+html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain){opacity:1!important}
+html[data-theme="dark"] :is(.learning p,.question p,.learning .body,.question .body,.notice,.metric .detail,.ctrl .ends,.rangeEnds,.range-ends,.reading-panel .check,.reading-panel .question){color:#d1e7f0!important}
+html[data-theme="dark"] :is(.progress-badge,.step-index){background:#285666!important;color:#a6f2f0!important;border-color:#5b8593!important}
+/* Additional animated-convolution and FFT presets: previously retained light-only colors. */
+html[data-theme="dark"] :is(.motion-panel,.detail-panel,.fft-guide){background:#1c3548!important;border-color:#4c7385!important;color:#e8f5fb!important}
+html[data-theme="dark"] :is(.motion-panel h3,.detail-head h4,.fft-guide h3,.motion-status strong,.detail-status strong){color:#f0f9fd!important}
+html[data-theme="dark"] :is(.motion-lead,.motion-speed,.motion-caution,.motion-status small,.detail-sub,.detail-note,.area-slider label,.area-slider .ends,.fft-guide p){color:#cfe4ed!important}
+html[data-theme="dark"] :is(.motion-stage,.motion-stage.done,.motion-status,.detail-status,.detail-pill,.area-slider){background:#28495b!important;color:#e4f2f9!important;border-color:#567a8d!important}
+html[data-theme="dark"] .motion-stage.current{background:#255b63!important;color:#fff!important;border-color:#78d3d5!important}
+html[data-theme="dark"] :is(.motion-stage b,.motion-eq){background:#30566b!important;color:#a3edf0!important}
+html[data-theme="dark"] :is(.motion-actions button:not(.motion-primary),.detail-actions button:not(.detail-primary),.preset-row button:not(.selected)){background:#29495c!important;color:#eaf6fb!important;border-color:#5c8191!important}
+html[data-theme="dark"] :is(.motion-primary,.detail-primary,.preset-row button.selected){background:#086a79!important;color:#fff!important;border-color:#6ccbd0!important}
+html[data-theme="dark"] :is(.mathline,.mathline b,.detail-status b,.detail-pill,.area-slider output,.detail-head .overlabel){color:#9be7ec!important}
+html[data-theme="dark"] .fft-status{background:#284b5e!important;color:#e0f1f7!important;border-color:#5b8091!important}
+html[data-theme="dark"] .fft-status :is(b,span,strong){color:#e0f1f7!important}
+html[data-theme="dark"] .plot-card svg text{fill:#274b5e}
+@media(max-width:560px){.axis-key{font-size:11px;gap:4px 9px;padding:7px 8px}}
+
+
+/* Rev8: interactive graph probe, color-contrast safe in both themes. */
+.ss-hover-tip{position:absolute;z-index:35;pointer-events:none;display:none;min-width:190px;max-width:min(310px,calc(100% - 16px));padding:11px 12px;border-radius:11px;border:1px solid #4c8190;background:#102d41;color:#f1fbff;box-shadow:0 9px 26px rgba(5,22,36,.32);font:500 12px/1.55 system-ui,'Malgun Gothic',sans-serif;white-space:normal;overflow-wrap:anywhere}
+.ss-hover-tip .ss-hover-title{font-weight:800;color:#adf2f2;font-size:12px;margin-bottom:4px}
+.ss-hover-tip .ss-hover-coord{color:#e1f4fb;font-size:11px;margin-bottom:5px}
+.ss-hover-tip .ss-hover-line{display:flex;align-items:baseline;gap:7px;margin:3px 0;color:#f1fbff}
+.ss-hover-tip .ss-hover-swatch{display:inline-block;width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:var(--ss-line,#6ccbd0)}
+.ss-hover-tip .ss-hover-line b{font-weight:750;color:#fff}
+.ss-hover-tip .ss-hover-line.primary b{color:#a8f7df}
+.ss-hover-tip .ss-hover-note{color:#c0dbe7;font-size:10.5px;margin-top:5px;border-top:1px solid #486579;padding-top:4px}
+.ss-hover-v,.ss-hover-h{position:absolute;display:none;pointer-events:none;z-index:30;background:#e26b4f;opacity:.85}
+.ss-hover-v{width:1px;border-left:1px dashed #f18b63;background:transparent}
+.ss-hover-h{height:1px;border-top:1px dashed #f18b63;background:transparent}
+.ss-hover-dot{position:absolute;display:none;pointer-events:none;z-index:31;width:11px;height:11px;border-radius:50%;border:2px solid #fff;background:#ed7954;box-shadow:0 0 0 1px #123a4e;transform:translate(-50%,-50%)}
+.ss-hover-hint{font:600 11px/1.5 system-ui,'Malgun Gothic',sans-serif;color:#23576a;margin:5px 0 2px;letter-spacing:.01em}
+html[data-theme="dark"] .ss-hover-hint{color:#c6e9f2!important}
+html[data-theme="dark"] .ss-hover-tip{background:#0d2739;border-color:#6a98a9;color:#f4fbff}
+html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hover-note){color:#d6e9f3!important}
+.ss-hover-target:focus-visible{outline:3px solid #ee9868;outline-offset:3px}
+@media(max-width:560px){.ss-hover-tip{max-width:min(290px,calc(100% - 12px));padding:9px 10px;font-size:11px}.ss-hover-hint{font-size:10px}}
+
+</style>
+<script>
+/* Rev8 shared graph probe. Displays the cursor coordinate and an independently
+   evaluated analytic value when a function exists, otherwise an actual drawn
+   sample. No interpolation is presented as an exact analytic answer. */
+(function(){
+ 'use strict';
+ const states=new WeakMap();let queued=[];
+ const fmt=v=>{if(!Number.isFinite(v))return String(v);if(Math.abs(v)<1e-11)return '0';const a=Math.abs(v);if(a>=1e4||a<1e-4)return v.toExponential(3);return Number(v.toFixed(a>=100?2:a>=1?4:6)).toString()};
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ function el(tag,cls,parent){const x=document.createElement(tag);x.className=cls;parent.appendChild(x);return x}
+ function labels(host){return [...host.querySelectorAll('.legend > .lgitem,.legend > .legend-item,.legend > span')].map(e=>e.textContent.trim())}
+ function bind(target,d){
+  if(typeof target==='string')target=document.getElementById(target);
+  if(!target||!d)return;
+  let st=states.get(target);
+  if(!st){
+   const host=target.closest('.plotbox,.figure,.compare-card,.plot-card')||target.parentElement;
+   if(!host)return;
+   if(getComputedStyle(host).position==='static')host.style.position='relative';
+   const tip=el('div','ss-hover-tip',host),v=el('div','ss-hover-v',host),h=el('div','ss-hover-h',host),dot=el('div','ss-hover-dot',host);
+   tip.setAttribute('role','status');tip.setAttribute('aria-live','off');
+   let hint=host.querySelector('.ss-hover-hint');if(!hint){hint=el('div','ss-hover-hint',host);hint.textContent='ⓘ Hover / Tap / Focus: coordinates + signal values · 마우스·터치·키보드로 값 확인'}
+   target.classList.add('ss-hover-target');target.setAttribute('tabindex','0');
+   target.setAttribute('aria-description','Move pointer, tap, or use arrow keys to inspect signal values and coordinates.');
+   st={target,host,tip,v,h,dot,d:null,lastX:null,lastType:null};states.set(target,st);
+   target.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;move(st,e.clientX,e.clientY,e.pointerType)});
+   target.addEventListener('pointerdown',e=>{move(st,e.clientX,e.clientY,e.pointerType)});
+   target.addEventListener('pointerleave',e=>{if(e.pointerType!=='touch')hide(st)});
+   target.addEventListener('blur',()=>hide(st));
+   target.addEventListener('focus',()=>{const r=target.getBoundingClientRect();move(st,r.left+r.width*.55,r.top+r.height*.45,'keyboard')});
+   target.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End','Escape'].includes(e.key))return;
+    if(e.key==='Escape'){hide(st);return}e.preventDefault();const r=target.getBoundingClientRect();
+    const p=st.d.pad||{l:0,r:0,t:0,b:0},w=st.d.w,h=st.d.h;
+    const left=r.left+p.l/w*r.width,right=r.right-p.r/w*r.width;
+    let px=st.lastX===null?(left+right)/2:st.lastX;
+    if(e.key==='Home')px=left;else if(e.key==='End')px=right;else px+=((e.shiftKey?.05:.0125)*(right-left))*(e.key==='ArrowLeft'?-1:1);
+    move(st,clamp(px,left,right),r.top+r.height*.5,'keyboard',true)
+   });
+  }
+  st.d=d;
+  // A parameter change redraws the graph; hide stale numerical values.
+  hide(st);
+ }
+ function hide(st){st.tip.style.display='none';st.v.style.display='none';st.h.style.display='none';st.dot.style.display='none';st.lastX=null}
+ function pointToView(st,cx,cy){const r=st.target.getBoundingClientRect();const d=st.d;
+  return {x:r.left+cx/d.w*r.width,y:r.top+cy/d.h*r.height}
+ }
+ function nearest(data,x,xmin=-Infinity,xmax=Infinity){let best=null,bestDelta=Infinity;
+  for(const p of data||[]){if(!p||!Number.isFinite(p[0])||!Number.isFinite(p[1])||p[0]<xmin-1e-9||p[0]>xmax+1e-9)continue;const delta=Math.abs(p[0]-x);if(delta<bestDelta){bestDelta=delta;best=p}}
+  return best
+ }
+ function readSeries(st,x,y){const d=st.d;const values=[];
+  for(let i=0;i<(d.series||[]).length;i++){
+   const s=d.series[i];let v=null,sx=x,method='formula';
+   if(typeof s.fn==='function'){
+    try{v=s.fn(x)}catch(e){continue}
+   }else if(Array.isArray(s.points)){
+    const p=nearest(s.points,x,d.xmin,d.xmax);if(!p)continue;sx=p[0];v=p[1];method=s.discrete?'discrete':'sample';
+   }else continue;
+   if(!Number.isFinite(v))continue;
+   const ypixel=d.toPixel?d.toPixel(sx,v).y:d.pad.t+(d.ymax-v)/(d.ymax-d.ymin)*(d.h-d.pad.t-d.pad.b);
+   const py=d.pad.t+(d.ymax-y)/(d.ymax-d.ymin)*(d.h-d.pad.t-d.pad.b);
+   const off=Math.abs(ypixel-py);
+   values.push({i,label:s.label||'',color:s.color||'#42c9d2',x:sx,y:v,method,off,inRange:v>=d.ymin&&v<=d.ymax});
+  }
+  values.sort((a,b)=>a.off-b.off);
+  const lab=labels(st.host);for(const v of values){if(!v.label)v.label=lab[v.i]||d.ylabel||`Signal ${v.i+1}`}
+  return values
+ }
+ function rocInfo(d,x,y){const r=d.roc;if(!r)return null;
+  if(d.plane==='z'){const a=Math.hypot(x,y);return (a>r.inner+1e-8&&a<r.outer-1e-8)?'ROC 내부 (boundary excluded)':'ROC 외부 또는 경계'}
+  if(r.type==='all')return 'ROC: entire s-plane';
+  if(r.type==='none')return 'No ROC';
+  const inside=r.type==='right'?x>r.a:r.type==='left'?x<r.a:r.type==='strip'?x>r.a&&x<r.b:false;
+  return inside?'ROC 내부 (boundary excluded)':'ROC 외부 또는 경계'
+ }
+ function move(st,clientX,clientY,pointerType,fromKeyboard=false){
+  const d=st.d;if(!d)return;const rect=st.target.getBoundingClientRect();if(!rect.width||!rect.height)return;
+  let px=(clientX-rect.left)*d.w/rect.width,py=(clientY-rect.top)*d.h/rect.height;
+  const pad=d.pad||{l:0,r:0,t:0,b:0};
+  if(fromKeyboard)py=pad.t+(d.h-pad.t-pad.b)*.5;
+  if(px<pad.l||px>d.w-pad.r||py<pad.t||py>d.h-pad.b){hide(st);return}
+  let x,y;
+  if(d.plane&&d.center){x=(px-d.center.cx)/d.center.scale;y=(d.center.cy-py)/d.center.scale}
+  else{x=d.xmin+(px-pad.l)/(d.w-pad.l-pad.r)*(d.xmax-d.xmin);y=d.ymax-(py-pad.t)/(d.h-pad.t-pad.b)*(d.ymax-d.ymin)}
+  const items=[];let marker=null;
+  if(d.plane){
+   items.push({label:`${d.plane} = ${fmt(x)} ${y<0?'−':'+'} j${fmt(Math.abs(y))}`,value:`|${d.plane}|=${fmt(Math.hypot(x,y))}, ∠=${fmt(Math.atan2(y,x)*180/Math.PI)}°`,color:'#6dd7d9'});
+   const r=d.markers||[];let closest=null,dist=Infinity;
+   for(const m of r){const q=d.center?{x:d.center.cx+m.x*d.center.scale,y:d.center.cy-m.y*d.center.scale}:{x:pad.l+(m.x-d.xmin)/(d.xmax-d.xmin)*(d.w-pad.l-pad.r),y:pad.t+(d.ymax-m.y)/(d.ymax-d.ymin)*(d.h-pad.t-pad.b)};const delta=Math.hypot(px-q.x,py-q.y);if(delta<dist){closest=m;dist=delta}}
+   if(closest&&dist<17){items.push({label:`${closest.type} @ (${fmt(closest.x)}, ${fmt(closest.y)})`,value:closest.type==='Pole'?'× pole':closest.type==='Zero'?'○ zero':'vector endpoint',color:closest.type==='Pole'?'#ffa19a':'#93e8ed'})}
+   const region=rocInfo(d,x,y);if(region)items.push({label:'Region of convergence',value:region,color:'#b8e8c4'});
+  }else{
+   const values=readSeries(st,x,y);
+   if(values.length){
+    const ordered=values.slice(0,4);
+    for(const v of ordered){
+     const method=v.method==='formula'?'f(x) 직접 계산':v.method==='discrete'?'이산 표본':'계산 표본 (보간 없음)';
+     const extra=v.method==='formula'?'':` @ x=${fmt(v.x)}`;
+     items.push({label:v.label,value:`${fmt(v.y)}${extra}${v.inRange?'':' · 표시 범위 밖'}`,color:v.color,method,primary:v===values[0]});
+    }
+    const v=values.find(z=>z.inRange);if(v){const xplot=v.method==='formula'?x:v.x;marker={x:xplot,y:v.y}}
+    if(values.length>4)items.push({label:`+ ${values.length-4} additional series`,value:'',color:'#bedde5'});
+   }else items.push({label:'No finite signal value at this coordinate',value:'',color:'#f2c39c'});
+  }
+  const hostRect=st.host.getBoundingClientRect();const cx=rect.left+px/d.w*rect.width,cy=rect.top+py/d.h*rect.height;
+  const xlocal=cx-hostRect.left,ylocal=cy-hostRect.top;
+  const minX=rect.left+pad.l/d.w*rect.width-hostRect.left,maxX=rect.right-pad.r/d.w*rect.width-hostRect.left;
+  const minY=rect.top+pad.t/d.h*rect.height-hostRect.top,maxY=rect.bottom-pad.b/d.h*rect.height-hostRect.top;
+  st.v.style.cssText=`display:block;left:${xlocal}px;top:${minY}px;height:${maxY-minY}px`;
+  const showMarker=marker&&Number.isFinite(marker.y);
+  if(showMarker){const q=d.toPixel?d.toPixel(marker.x,marker.y):{x:pad.l+(marker.x-d.xmin)/(d.xmax-d.xmin)*(d.w-pad.l-pad.r),y:pad.t+(d.ymax-marker.y)/(d.ymax-d.ymin)*(d.h-pad.t-pad.b)};
+   const qx=rect.left+q.x/d.w*rect.width-hostRect.left,qy=rect.top+q.y/d.h*rect.height-hostRect.top;
+   st.h.style.cssText=`display:block;left:${minX}px;top:${qy}px;width:${maxX-minX}px`;
+   st.dot.style.cssText=`display:block;left:${qx}px;top:${qy}px`;
+  }else{st.h.style.display='none';st.dot.style.display='none'}
+  st.tip.replaceChildren();
+  const title=el('div','ss-hover-title',st.tip);title.textContent=d.plane?'Complex-plane probe / 복소평면 좌표':'Graph probe / 그래프 값 읽기';
+  const coord=el('div','ss-hover-coord',st.tip);coord.textContent=`${d.xlabel||'x'} = ${fmt(x)}   |   ${d.ylabel||'y'} (cursor) = ${fmt(y)}`;
+  for(const it of items){const line=el('div','ss-hover-line'+(it.primary?' primary':''),st.tip);const sw=el('i','ss-hover-swatch',line);sw.style.setProperty('--ss-line',it.color);const text=el('span','',line);const name=el('b','',text);name.textContent=it.label;const val=el('span','',text);val.textContent=(it.value?' = '+it.value:'')}
+  const note=el('div','ss-hover-note',st.tip);note.textContent=d.plane?'복소평면 좌표는 위치값이며, pole/zero는 가까운 경우에만 표시합니다.':items.some(x=>x.method&&x.method!=='f(x) 직접 계산')?'fn(x): 수식 직접 계산 · sample: 실제 계산 표본 (보간하지 않음)':'수식 함수가 제공된 경우 커서 x에서 직접 계산한 값입니다.';
+  st.tip.style.display='block';
+  // Measure after writing and keep the tooltip inside the card.
+  const tw=st.tip.offsetWidth||230,th=st.tip.offsetHeight||90;
+  const hostW=st.host.clientWidth||hostRect.width,hostH=st.host.clientHeight||hostRect.height;
+  const tx=clamp(xlocal+15,5,Math.max(5,hostW-tw-5));
+  const ty=clamp(ylocal+13,5,Math.max(5,hostH-th-5));
+  st.tip.style.left=tx+'px';st.tip.style.top=ty+'px';
+  st.lastX=cx;st.lastType=pointerType;
+ }
+ window.ssHoverBind=bind;
+ window.ssHoverQueue=d=>{queued.push(d)};
+ window.ssHoverResetQueue=()=>{queued=[]};
+ window.ssHoverAttachQueued=()=>{const cards=[...document.querySelectorAll('#plots .plot-card')];const all=queued.splice(0);for(let i=0;i<Math.min(cards.length,all.length);i++){const svg=cards[i].querySelector('svg');if(svg)bind(svg,all[i])}};
+ window.__ssHoverDebug=()=>({count:document.querySelectorAll('.ss-hover-target').length,visible:document.querySelectorAll('.ss-hover-tip').length});
+})();
+</script>
+<script>
+function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
+ const el=document.getElementById(id);if(!el)return;
+ const host=el.closest('.plotbox,.figure,.compare-card');if(!host)return;
+ let key=host.querySelector('.axis-key');if(!key){key=document.createElement('div');key.className='axis-key';key.setAttribute('aria-label','Graph axis information');const legend=host.querySelector('.legend');if(legend)host.insertBefore(key,legend);else host.appendChild(key)}
+ const fmtAxis=v=>{if(!Number.isFinite(v))return String(v);const a=Math.abs(v);return (a>=100?Number(v.toFixed(0)):a>=10?Number(v.toFixed(1)):Number(v.toFixed(2))).toString()};
+ key.textContent=`X-axis: ${xlabel} [${fmtAxis(x0)} … ${fmtAxis(x1)}]   |   Y-axis: ${ylabel} [${fmtAxis(y0)} … ${fmtAxis(y1)}]`;
+}
+</script><meta name="ss-studio-version" content="Integrated Rev1">
+<link rel="stylesheet" href="./assets/design-system.css?v=1"><link rel="stylesheet" href="./assets/ss-lab-theme.css?v=5"><link rel="stylesheet" href="./assets/els-theme-v2.css?v=6"><link rel="stylesheet" href="./assets/ss-trace-palette.css?v=4"><link rel="stylesheet" href="./assets/els-typography-standard.css?v=1"><link rel="stylesheet" href="./assets/ss-common-header.css?v=2"><link rel="stylesheet" href="./assets/ss-readable-themes.css?v=1"><link rel="stylesheet" href="./assets/ss-formula-standard.css?v=3"><link rel="stylesheet" href="./assets/ss-foundations-standard.css?v=1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.js"></script><script defer src="./assets/els-theme-v2.js?v=20261121b"></script><script defer src="./assets/ss-common-header.js?v=4"></script><script defer src="./assets/ss-math-core.js?v=1"></script><script defer src="./assets/ss-foundations-standard.js?v=1"></script></head>
+<body><header class="ss-common-header ss-foundations-header" aria-label="Engineering Learning Studio navigation"><a class="ss-common-home" href="./index.html#overview">← Studio</a><details class="ss-common-menu"><summary class="ss-common-title">Signals &amp; Systems · Chapter 4 · CTFT <span aria-hidden="true">⌄</span></summary><nav class="ss-common-links" aria-label="Choose Chapter"></nav></details><div class="ss-common-actions"><label>Theme <select id="ss-foundations-theme" data-els-theme-picker aria-label="Theme"></select></label></div></header><a id="studio-back" href="../index.html#chapter=4" aria-label="Return to integrated Visual Lab">← Learning Studio</a><script>try{if(window.self!==window.top){document.getElementById("studio-back").hidden=true;}}catch(e){}</script><div class="app" id="app"></div><script>'use strict';
+// Standalone visual learning lab. No external libraries, network calls, or data access.
+const PI=Math.PI, TAU=2*Math.PI;
+const C={teal:'#0e8491',coral:'#ef7055',ink:'#193e51',gold:'#d9a138',gray:'#a4b5c2',muted:'#70889a',grid:'#e5edf1',light:'#b0dfe0',purple:'#7c67c4'};
+const $=id=>document.getElementById(id);
+const sinc=v=>Math.abs(v)<1e-10?1:Math.sin(v)/v;
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+const sample=(a,b,n,f)=>Array.from({length:n+1},(_,i)=>{const x=a+(b-a)*i/n;return [x,f(x)]});
+const clean=(n,d=3)=>Number.isFinite(n)?Number(n.toFixed(d)).toString():'-';
+const fmt=v=>{if(Math.abs(v)<1e-10)return'0';const a=Math.abs(v);return Number(v.toFixed(a>=10?1:a>=1?2: a>=.1?3:4)).toString()};
+function niceStep(span,target=5){const raw=Math.max(1e-12,span/Math.max(2,target)),p=Math.pow(10,Math.floor(Math.log10(raw))),s=raw/p;return (s<=1?1:s<=2?2:s<=2.5?2.5:s<=5?5:10)*p}
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+const lab={active:0,state:{},timer:null,guideSteps:{}};
+function ssGraphPalette(){const s=getComputedStyle(document.documentElement);const t=document.documentElement.dataset.elsTheme||'neutral-dark';const dark=['neutral-dark','warm-dark','navy-dark'].includes(t);const val=(key,f)=>s.getPropertyValue(key).trim()||f;return{bg:val('--els-surface',dark?'#1c1c1c':'#ffffff'),text:val('--els-ink',dark?'#f0f0ed':'#1b2730'),muted:val('--els-muted',dark?'#c1c5c1':'#455663'),grid:dark?'#485650':'#c9d3db',axis:dark?'#d7e3dc':'#344f62'};}
+const ssPlot=ssGraphPalette();function paintGraph(id,opt){const ssPlot=ssGraphPalette();const canvas=$(id);if(!canvas)return;const r=canvas.getBoundingClientRect(),w=Math.max(250,r.width),h=Math.max(210,r.height),d=Math.min(2,window.devicePixelRatio||1);canvas.width=Math.round(w*d);canvas.height=Math.round(h*d);const g=canvas.getContext('2d');g.setTransform(d,0,0,d,0,0);g.clearRect(0,0,w,h);
+ const xr=opt.x||[-4,4],yr=opt.y||[-2,2];const [x0,x1]=xr,[y0,y1]=yr;const m={l:58,r:17,t:18,b:47},W=w-m.l-m.r,H=h-m.t-m.b;const X=v=>m.l+(v-x0)*W/(x1-x0),Y=v=>m.t+(y1-v)*H/(y1-y0);g.fillStyle=ssPlot.bg;g.fillRect(0,0,w,h);
+ // Highlight reference intervals without changing data or axis scale.
+ for(const band of opt.bands||[]){const a=Math.max(x0,Math.min(x1,band.x0)),b=Math.max(x0,Math.min(x1,band.x1));if(b>a){g.fillStyle=band.color||'rgba(14,132,145,.085)';g.fillRect(X(a),m.t,X(b)-X(a),H)}}
+ const yt=opt.ystep||niceStep(y1-y0,5),xt=opt.xstep||niceStep(x1-x0,6);g.textBaseline='middle';g.font='11px system-ui';
+ for(let i=Math.ceil((y0-1e-10)/yt);i<=Math.floor((y1+1e-10)/yt);i++){const z=i*yt,y=Y(z);g.strokeStyle=ssPlot.grid;g.lineWidth=1;g.beginPath();g.moveTo(m.l,y);g.lineTo(w-m.r,y);g.stroke();g.fillStyle=ssPlot.muted;g.textAlign='right';g.fillText(fmt(z),m.l-9,y)}
+ for(let i=Math.ceil((x0-1e-10)/xt);i<=Math.floor((x1+1e-10)/xt);i++){const z=i*xt,x=X(z);g.strokeStyle=ssPlot.grid;g.lineWidth=1;g.beginPath();g.moveTo(x,m.t);g.lineTo(x,h-m.b);g.stroke();g.fillStyle=ssPlot.muted;g.textAlign='center';g.textBaseline='top';g.fillText(fmt(z),x,h-m.b+8)}
+ g.textBaseline='middle';g.strokeStyle=ssPlot.grid;g.lineWidth=1;g.strokeRect(m.l,m.t,W,H);if(x0<=0&&x1>=0){g.strokeStyle=ssPlot.axis;g.lineWidth=1.6;g.beginPath();g.moveTo(X(0),m.t);g.lineTo(X(0),h-m.b);g.stroke()}if(y0<=0&&y1>=0){g.strokeStyle=ssPlot.axis;g.lineWidth=1.6;g.beginPath();g.moveTo(m.l,Y(0));g.lineTo(w-m.r,Y(0));g.stroke()}if(x0<=0&&x1>=0&&y0<=0&&y1>=0){g.fillStyle=ssPlot.text;g.beginPath();g.arc(X(0),Y(0),3.6,0,TAU);g.fill()}
+ g.font='11px system-ui';g.fillStyle=ssPlot.text;g.textAlign='center';g.fillText(opt.xlabel||'t',m.l+W/2,h-10);g.save();g.translate(15,m.t+H/2);g.rotate(-PI/2);g.fillText(opt.ylabel||'x(t)',0,0);g.restore();
+ g.save();g.beginPath();g.rect(m.l+1,m.t+1,W-2,H-2);g.clip();
+ for(const s of opt.series||[]){const col=ssTraceColor(s.color||C.teal);g.strokeStyle=col;g.fillStyle=col;g.lineWidth=s.width||2.3;g.setLineDash(s.dash?[6,4]:[]);const data=s.data||[];
+ if(s.type==='stem'){for(const [xx,yy]of data){if(!Number.isFinite(yy))continue;g.beginPath();g.moveTo(X(xx),Y(clamp(0,y0,y1)));g.lineTo(X(xx),Y(yy));g.stroke();g.beginPath();g.arc(X(xx),Y(yy),s.radius||2.6,0,TAU);g.fill()}}
+ else {g.beginPath();let started=false;for(const [xx,yy]of data){if(!Number.isFinite(yy)||!Number.isFinite(xx)){started=false;continue}if(!started){g.moveTo(X(xx),Y(yy));started=true}else g.lineTo(X(xx),Y(yy))}g.stroke()}
+ g.setLineDash([])}
+ for(const p of opt.points||[]){g.beginPath();g.fillStyle=ssTraceColor(p.color||C.coral);g.arc(X(p.x),Y(p.y),p.r||4,0,TAU);g.fill()}
+ for(const v of opt.vlines||[]){g.strokeStyle=ssTraceColor(v.color||C.coral);g.lineWidth=1.8;g.setLineDash([5,4]);g.beginPath();g.moveTo(X(v.x),Y(y0));g.lineTo(X(v.x),Y(y1));g.stroke();g.setLineDash([])}
+ g.restore();
+ const el=$('legend'+id.replace('plot',''));if(el){const items=(opt.series||[]).filter(s=>s.label).map(s=>`<span class="legend-item"><span class="legend-chip ${s.type==='stem'?'stem':s.dash?'dashed':'line'}" style="--lc:${ssTraceColor(s.color||C.teal)}"></span>${esc(s.label)}</span>`);for(const v of opt.vlines||[])if(v.label)items.push(`<span class="legend-item"><span class="legend-chip vline" style="--lc:${ssTraceColor(v.color||C.coral)}"></span>${esc(v.label)}</span>`);el.innerHTML=items.join('');el.style.display=items.length?'flex':'none'}
+ const note=$('axisnote'+id.replace('plot',''));if(note){note.textContent=opt.axisnote||'';note.style.display=opt.axisnote?'block':'none'}ssAxisKey(id,opt.xlabel||'t (s)',opt.ylabel||'amplitude',x0,x1,y0,y1);ssHoverBind(canvas,{kind:'cart',w,h,pad:m,xmin:x0,xmax:x1,ymin:y0,ymax:y1,xlabel:opt.xlabel||'t (s)',ylabel:opt.ylabel||'amplitude',series:(opt.series||[]).map(s=>({label:s.label,color:ssTraceColor(s.color||C.teal),discrete:s.type==='stem',points:s.data||[]}))});
+}
+function setMetrics(items){for(let i=0;i<3;i++){const v=items[i]||['-',''];const x=$('met'+i),d=$('metd'+i);if(x)x.textContent=v[0];if(d)d.textContent=v[1]}}
+function setInsight(text){if($('insight'))$('insight').innerHTML=text}
+function setFormula(text){if($('formula'))$('formula').innerHTML=text}
+function renderShell(){const ln=MODULES.map((mod,i)=>`<button class="${i===lab.active?'active':''}" data-nav="${i}" aria-current="${i===lab.active?'page':'false'}"><span class="num">${String(i+1).padStart(2,'0')}</span><span class="nav-name">${mod.short}</span></button>`).join('');$('app').innerHTML=`<aside class="sidebar"><div class="brand"><div class="over">SIGNALS &amp; SYSTEMS / CHAPTER ${CHAPTER}</div><h1>${TOPIC} Visual Lab</h1><p>Explore signals and systems / 신호와 시스템을 직접 탐구하세요</p></div><div class="mobile-bar">Choose a topic / 실습 주제를 선택하세요</div><div class="side-label">LEARNING EXPERIMENTS / 학습 주제</div><nav class="nav" aria-label="Experiments">${ln}</nav><div class="side-foot"><strong>Learning sequence / 학습 순서</strong>1. Make a prediction · 결과 예측<br>2. Change one variable · 변수 변경<br>3. Observe and compare · 관찰·비교<br>4. Explain what you learned · 배운 내용 설명</div></aside><main class="main"><div class="topline"><span class="breadcrumb">CHAPTER ${CHAPTER} / INTERACTIVE CONCEPTS</span><span class="tag">No install / Offline ready</span></div><div id="content"></div><footer class="footer"><span>Core concepts and interactive models for Signals &amp; Systems</span><span>All computations run locally in this browser / 오프라인 실행</span></footer></main>`;document.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>{lab.active=Number(b.dataset.nav);if(lab.timer){clearInterval(lab.timer);lab.timer=null}renderShell();renderModule()}))}
+function ctl(c,s){const v=s[c.key];if(c.type==='select'){return `<div class="ctrl"><label for="ctl_${c.key}">${c.label}</label><select id="ctl_${c.key}" data-key="${c.key}">${c.options.map(o=>`<option value="${esc(o[0])}" ${String(v)===String(o[0])?'selected':''}>${esc(o[1])}</option>`).join('')}</select></div>`}return `<div class="ctrl"><label for="ctl_${c.key}">${c.label}<output id="out_${c.key}">${fmt(v)} ${c.unit||''}</output></label><input id="ctl_${c.key}" data-key="${c.key}" type="range" min="${c.min}" max="${c.max}" step="${c.step}" value="${v}"><div class="ends"><span>${c.min}${c.unit||''}</span><span>${c.max}${c.unit||''}</span></div></div>`}
+function renderModule(){stopGuidePlay();const m=MODULES[lab.active];const s=lab.state[m.id];$('content').innerHTML=`<header class="heading"><div class="overlabel">EXPERIMENT ${String(lab.active+1).padStart(2,'0')} / ${m.section}</div><h2>${m.title}</h2><p>${m.desc}</p></header><div class="hero-callout"><div class="formula" id="formula">${m.formula}</div><div class="hint">Fixed axes → Change one variable → Compare the graphs</div></div><div class="experiment"><aside class="controls"><div class="overlabel">EXPLORE / 실험 변수</div><h3>Change one thing</h3><div class="control-grid">${m.controls.map(c=>ctl(c,s)).join('')}</div><div class="btnrow"><button id="reset" class="btn" type="button">Reset / 초기화</button><button id="play" class="btn primary" type="button">Auto explore / 자동 탐색</button></div><p class="notice">Predict first, then change one control and explain the result. / 먼저 예측한 뒤 하나의 변수를 바꾸고 결과를 설명해 보세요.</p></aside><div class="body-col"><div class="charts ${m.plots.length===3?'three':''}">${m.plots.map((x,i)=>`<section class="figure"><h3>${x[0]}</h3><p>${x[1]}</p><canvas id="plot${i}" role="img" aria-label="${esc(x[0])}" width="600" height="270"></canvas><div class="legend" id="legend${i}"></div><div class="axis-note" id="axisnote${i}"></div></section>`).join('')}</div><div class="metrics">${[0,1,2].map(i=>`<div class="metric"><div class="k">${m.metrics[i]}</div><div class="v" id="met${i}">-</div><div class="detail" id="metd${i}"></div></div>`).join('')}</div><section id="derivationPanel" class="derivation-panel" aria-label="Guided derivation"></section><section id="readingPanel" class="reading-panel" aria-label="Graph interpretation"></section><section class="learning"><h3>Key insight / 핵심 이해</h3><p id="insight"></p></section><section class="question"><div class="overlabel">CHECK YOURSELF / 스스로 확인</div><h3>${m.question}</h3><p>${m.questionKo}</p><details><summary>Reveal explanation / 해설 보기</summary><div class="answer">${m.answer}</div></details></section></div></div>`;
+ document.querySelectorAll('[data-key]').forEach(el=>el.addEventListener('input',()=>{const v=el.value;const c=m.controls.find(c=>c.key===el.dataset.key);s[c.key]=c.type==='select'?v:Number(v);const out=$('out_'+c.key);if(out)out.textContent=fmt(s[c.key])+' '+(c.unit||'');updateModule()}));
+ $('reset').onclick=()=>{if(lab.timer){clearInterval(lab.timer);lab.timer=null}$('play').textContent='Auto explore / 자동 탐색';lab.state[m.id]=structuredClone(m.defaults);renderModule()};
+ $('play').onclick=()=>{if(lab.timer){clearInterval(lab.timer);lab.timer=null;$('play').textContent='Auto explore / 자동 탐색';return}const c=m.controls.find(c=>c.type==='range');if(!c)return;$('play').textContent='Pause / 일시 정지';lab.timer=setInterval(()=>{let n=Number(s[c.key])+Number(c.step);if(n>Number(c.max)+1e-8)n=Number(c.min);s[c.key]=Number(n.toFixed(6));const e=$('ctl_'+c.key);if(e)e.value=s[c.key];const o=$('out_'+c.key);if(o)o.textContent=fmt(s[c.key])+' '+(c.unit||'');updateModule()},240)};
+ updateModule()}
+function updateModule(){const m=MODULES[lab.active];m.draw(lab.state[m.id]);if(typeof renderGuidedLearning==="function")renderGuidedLearning(m,lab.state[m.id]);window.__visualLab={chapter:CHAPTER,active:m.id,state:structuredClone(lab.state),healthy:true}}
+function startLab(){for(const m of MODULES)lab.state[m.id]=structuredClone(m.defaults);renderShell();renderModule();window.addEventListener('resize',()=>updateModule())}
+
+const CHAPTER='04', TOPIC='CTFT', SOURCE_NOTE='401_Ch4_CTFT_Rev1g_Sol';
+const rect=(t,tau)=>Math.abs(t)<=tau/2?1:0;
+const pulseTrain=(t,T,tau)=>Math.abs((((t+T/2)%T)+T)%T-T/2)<=tau/2?1:0;
+const rectFT=(w,tau,A=1)=>A*tau*sinc(w*tau/2);
+const MODULES=[
+{id:'bridge',short:'From FS to FT / 급수에서 변환으로',section:'§4.1',title:'From Fourier Series to CTFT / 선에서 연속 스펙트럼으로',desc:'Increase the repetition period of one pulse. Harmonic frequency spacing shrinks, but Fourier-series coefficients are not the CTFT heights. / 주기가 커질수록 조화 주파수 간격이 줄어듭니다.',formula:'ω<sub>k</sub> = k(2π/T), &nbsp; T a<sub>k</sub> = X(jω<sub>k</sub>), &nbsp; Δω=2π/T',defaults:{T:'4',tau:1},controls:[{key:'T',label:'Repetition period T / 반복 주기',type:'select',options:[['2','2 s'],['4','4 s'],['8','8 s'],['16','16 s'],['32','32 s']]},{key:'tau',label:'Pulse width τ / 펄스 폭',type:'range',min:.5,max:1.5,step:.25,unit:' s'}],plots:[['Periodic extensions / 반복 펄스','Copies separate as the period grows'],['Samples of the CTFT / 연속 스펙트럼 표본','Stems represent T aₖ, NOT aₖ']],metrics:['Harmonic spacing Δω','FS DC coefficient a₀','Scaled DC value T a₀'],question:'Why must the displayed stems use T aₖ rather than aₖ?',questionKo:'주기 T를 늘릴 때 Fourier Series 계수 aₖ를 그대로 그래프로 그리면 왜 잘못된 비교가 되나요?',answer:'For a non-overlapping periodic extension, aₖ = X(jkω₀)/T. Thus T aₖ samples the same continuous CTFT curve; aₖ itself shrinks with T. / CTFT와 직접 비교할 값은 T aₖ입니다.',draw(s){const T=Number(s.T),tau=s.tau;paintGraph('plot0',{x:[-12,12],y:[-.15,1.3],xstep:4,bands:[{x0:-tau/2,x1:tau/2,color:'rgba(14,132,145,.07)'}],axisnote:'Fixed time view: −12 to +12 s. As T increases, repeated pulses move apart; the central pulse stays put. / T 변경에도 시간축은 일정합니다.',xlabel:'time t (s)',ylabel:'xₜ(t)',series:[{data:sample(-12,12,1400,t=>pulseTrain(t,T,tau)),color:C.teal,label:'periodic pulse train'}]});const stems=[];for(let k=-Math.ceil(10*T/TAU);k<=Math.ceil(10*T/TAU);k++){const w=k*TAU/T;if(Math.abs(w)<=12)stems.push([w,rectFT(w,tau)])}paintGraph('plot1',{x:[-12,12],y:[-.5,1.8],xstep:4,ystep:.5,axisnote:'Fixed ω-axis and amplitude scale: the frequency grid becomes denser as T increases. / Δω = 2π/T를 비교하세요.',xlabel:'angular frequency ω (rad/s)',ylabel:'signed X(jω)',series:[{data:sample(-12,12,700,w=>rectFT(w,tau)),color:C.ink,label:'continuous CTFT'},{data:stems,color:C.coral,type:'stem',label:'T aₖ (scaled FS)'}]});setMetrics([[`${fmt(TAU/T)} rad/s`,'spacing decreases with T'],[fmt(tau/T),'pulse area / period'],[fmt(tau),'pulse area = X(j0)']]);setInsight('The FS-to-FT limit involves both a finer frequency grid and the scaling T aₖ. The synthesis sum becomes an integral as Δω→0. / 간격만 좁아지는 것이 아니라 계수와 주기의 정규화도 함께 필요합니다.')}} ,
+{id:'rect',short:'Rectangular Pulse / 직사각 펄스',section:'§4.2',title:'Rectangular Pulse and Signed Sinc / 펄스와 sinc',desc:'The pulse duration controls spectral zeros and width. / 시간 폭과 주파수 폭의 역관계를 관찰합니다.',formula:'x(t)=A rect(t/τ), &nbsp; X(jω)=Aτ sinc(ωτ/2)',defaults:{tau:2,A:1},controls:[{key:'tau',label:'Pulse width τ / 폭',type:'range',min:.5,max:4,step:.25,unit:' s'},{key:'A',label:'Amplitude A / 높이',type:'range',min:.5,max:2,step:.25}],plots:[['Time-domain pulse / 시간 신호','Unit-height region is centered at t=0'],['Signed CTFT / 부호 있는 스펙트럼','Negative sidelobes are below the horizontal axis']],metrics:['DC X(j0)','First positive spectral zero','Time-frequency trade-off'],question:'Does doubling τ make the main lobe wider or narrower?',questionKo:'높이를 유지한 채 펄스 폭을 2배로 늘리면 spectrum의 main lobe는 어떻게 되나요?',answer:'The first spectral zero moves from 2π/τ to π/τ; the main lobe becomes half as wide. DC increases proportionally to pulse area Aτ. / 시간 폭이 커지면 스펙트럼은 좁아집니다.',draw(s){const tau=s.tau,A=s.A,wd=TAU/tau;paintGraph('plot0',{x:[-4,4],y:[-.15,2.6],xstep:1,ystep:.5,axisnote:'Fixed time and amplitude axes; changing τ widens the pulse rather than rescaling the plot. / 펄스 폭을 비교하세요.',xlabel:'time t (s)',ylabel:'x(t)',series:[{data:sample(-4,4,1200,t=>A*rect(t,tau)),color:C.teal,label:'rectangular pulse'}]});paintGraph('plot1',{x:[-14,14],y:[-2.6,9.2],xstep:4,ystep:2,axisnote:'Same ω-scale and amplitude axis for every τ and A. DC equals pulse area Aτ; zeros move as τ changes. / 첫 영점과 DC를 확인하세요.',xlabel:'angular frequency ω (rad/s)',ylabel:'X(jω), signed',series:[{data:sample(-14,14,850,w=>rectFT(w,tau,A)),color:C.coral,label:'signed sinc'}],vlines:[{x:wd,color:C.gray,label:'first positive zero'}]});setMetrics([[fmt(A*tau),'area ∫x(t)dt'],[`${fmt(wd)} rad/s`,'ω₀ = 2π/τ'],[`${fmt(tau)} × ${fmt(wd)} ≈ 2π`,'pulse width × first-zero frequency']]);setInsight('Real-even x(t) has a real-even CTFT. Do not confuse the signed spectrum X(jω) with its nonnegative magnitude |X(jω)|. / 음의 sidelobe와 크기 스펙트럼을 구분하세요.')}} ,
+{id:'exp',short:'Real-Even Exponential / 대칭 지수',section:'§4.2',title:'Exponential Decay and Spectrum / 지수 감쇠',desc:'Compare time-domain decay with the width of a smooth positive spectrum. / 감쇠율 변화가 스펙트럼의 폭을 바꿉니다.',formula:'x(t)=e<sup>−α|t|</sup>, &nbsp; X(jω)=2α/(α²+ω²), &nbsp; α&gt;0',defaults:{a:1},controls:[{key:'a',label:'Decay rate α / 감쇠율',type:'range',min:.25,max:3,step:.25,unit:' s⁻¹'}],plots:[['Time waveform / 시간 파형','Real, even, two-sided exponential'],['CTFT magnitude / 스펙트럼 크기','Positive, real and even spectrum']],metrics:['DC X(j0)','Magnitude at ω=α','Area under x(t)'],question:'Why does larger α give a broader spectrum but a lower DC value?',questionKo:'α가 증가하면 시간 신호는 더 빨리 감쇠하는데 왜 주파수 스펙트럼의 폭은 커질까요?',answer:'Increasing α narrows the pulse in time. X(jω)=2α/(α²+ω²) has half-maximum at |ω|=α; its DC 2/α decreases. / 빠른 감쇠는 넓은 주파수 분포와 연결됩니다.',draw(s){const a=s.a;paintGraph('plot0',{x:[-7,7],y:[-.1,1.22],xstep:2,axisnote:'Fixed time view: −7 to +7 s. A larger α creates a narrower signal. / 감쇠율을 변경해 폭을 비교하세요.',xlabel:'time t (s)',ylabel:'x(t)',series:[{data:sample(-7,7,700,t=>Math.exp(-a*Math.abs(t))),color:C.teal,label:'e^{−α|t|}'}]});paintGraph('plot1',{x:[-10,10],y:[0,Math.max(1,2/a*1.12)],xstep:2,axisnote:'Fixed ω-axis. Vertical scale adapts to X(0)=2/α so the spectral width remains visible. / y축 높이는 자동 조절됩니다.',xlabel:'angular frequency ω (rad/s)',ylabel:'X(jω)',series:[{data:sample(-10,10,700,w=>2*a/(a*a+w*w)),color:C.coral,label:'2α/(α²+ω²)'}]});setMetrics([[fmt(2/a),'X(0)=2/α'],[fmt(1/a),'X(α)=1/α'],[fmt(2/a),'∫x(t)dt']]);setInsight('Time localization and frequency spread are connected, but the exact mathematical trade-off depends on the signal family. / 감쇠하는 시간 신호와 넓어지는 주파수 분포를 관찰하세요.')}} ,
+{id:'shiftScale',short:'Time Shift & Scaling / 이동과 스케일링',section:'§4.3',title:'Shift, Width and Phase / 이동·폭·위상',desc:'Move a rectangular pulse and change its width to observe magnitude and phase separately. / 시간 이동과 시간 스케일링의 차이를 확인합니다.',formula:'rect[(t−t<sub>0</sub>)/τ] ↔ e<sup>−jωt<sub>0</sub></sup> τ sinc(ωτ/2)',defaults:{tau:1.5,t0:1},controls:[{key:'tau',label:'Pulse width τ / 폭',type:'range',min:.5,max:3,step:.25,unit:' s'},{key:'t0',label:'Time shift t₀ / 이동',type:'range',min:-2,max:2,step:.25,unit:' s'}],plots:[['Shifted waveform / 이동된 파형','Gray = centered pulse; teal = delayed/advanced'],['Magnitude |X| / 크기 스펙트럼','Independent of time shift'],['Shift-induced phase / 이동에 의한 위상','−ωt₀: not the full phase at negative sinc lobes']],metrics:['Pulse area X(j0)','First positive zero','Phase slope from shift'],question:'Which property changes the spectral width, and which changes the phase?',questionKo:'펄스의 폭과 위치를 조절할 때 스펙트럼 크기·위상이 각각 어떻게 변하나요?',answer:'Width τ changes the sinc envelope and zeros. Shift t₀ multiplies the CTFT by e^{−jωt₀}: its magnitude stays unchanged, while the additional phase is −ωt₀. At signed-sinc negative lobes the full phase includes π. / 위상 그래프는 시간 이동에 의한 추가 위상만 표시합니다.',draw(s){const tau=s.tau,t0=s.t0;paintGraph('plot0',{x:[-4,4],y:[-.15,1.3],axisnote:'Fixed time view: −4 to +4 s. Compare both the original and shifted pulses. / 이동 전·후를 같은 시간축에서 비교하세요.',xlabel:'time t (s)',ylabel:'x(t)',series:[{data:sample(-4,4,950,t=>rect(t,tau)),color:C.gray,dash:true,label:'centered'},{data:sample(-4,4,950,t=>rect(t-t0,tau)),color:C.teal,label:'shifted'}]});paintGraph('plot1',{x:[-12,12],y:[0,3.6],ystep:1,axisnote:'Fixed frequency and magnitude scale. A time shift changes phase but not this magnitude. / 시간 이동에 따른 크기 불변을 확인하세요.',xlabel:'ω (rad/s)',ylabel:'|X(jω)|',series:[{data:sample(-12,12,650,w=>Math.abs(rectFT(w,tau))),color:C.coral,label:'|τ sinc(ωτ/2)|'}]});paintGraph('plot2',{x:[-10,10],y:[-21,21],xstep:5,ystep:10,axisnote:'Fixed ω/phase axes. Phase slope = −t₀; compare the sign of the shift. / 기울기를 해석하세요.',xlabel:'ω (rad/s)',ylabel:'additional phase (rad)',series:[{data:sample(-10,10,400,w=>-w*t0),color:C.purple,label:'−ωt₀'}]});setMetrics([[fmt(tau),'∫x(t)dt'],[`${fmt(TAU/tau)} rad/s`,'2π/τ'],[`${fmt(-t0)} s`,'d(Δphase)/dω=−t₀']]);setInsight('The difference between magnitude and phase is essential: delaying x(t) does NOT alter |X(jω)|. / 주파수영역 크기와 위상을 분리해 해석합니다.')}} ,
+{id:'signed',short:'Signed Spectrum vs Magnitude / 부호와 크기',section:'§4.4',title:'Signed X(jω) versus |X(jω)| / 스펙트럼 읽기',desc:'A negative spectrum does not imply negative magnitude; it changes phase by π. / 실수 음수 스펙트럼과 양수 magnitude를 비교합니다.',formula:'X(jω)=τ sinc(ωτ/2), &nbsp; |X(jω)|≥0',defaults:{tau:2},controls:[{key:'tau',label:'Pulse width τ / 폭',type:'range',min:.75,max:4,step:.25,unit:' s'}],plots:[['Signed spectrum / 부호 있는 스펙트럼','Real-valued CTFT with positive and negative lobes'],['Magnitude spectrum / 크기 스펙트럼','Absolute values fold negative lobes upward']],metrics:['X(j0)','First spectral zero','Sign/phase relationship'],question:'At a negative sidelobe, is the magnitude negative?',questionKo:'부호가 음수인 sidelobe에서 magnitude도 음수가 되나요?',answer:'No. Magnitude |X| is nonnegative. A negative real X(jω) has phase ±π (away from zeros), but |X| stays positive. At exact zeros, phase is undefined. / 음수 값과 크기 절댓값을 구분하세요.',draw(s){const tau=s.tau,max=Math.max(1,tau);paintGraph('plot0',{x:[-14,14],y:[-1.2,4.7],xstep:4,ystep:1,axisnote:'Fixed ω and vertical axes: negative sidelobes stay below zero. / 부호가 음수인 영역을 확인하세요.',xlabel:'ω (rad/s)',ylabel:'X(jω)',series:[{data:sample(-14,14,850,w=>rectFT(w,tau)),color:C.coral,label:'signed X'}]});paintGraph('plot1',{x:[-14,14],y:[0,4.7],xstep:4,ystep:1,axisnote:'Same scale as the signed spectrum. Magnitude removes the negative sign. / 동일한 눈금에서 비교하세요.',xlabel:'ω (rad/s)',ylabel:'|X(jω)|',series:[{data:sample(-14,14,850,w=>Math.abs(rectFT(w,tau))),color:C.teal,label:'magnitude |X|'}]});setMetrics([[fmt(tau),'area of pulse'],[`${fmt(TAU/tau)} rad/s`,'first zero'],['negative real X → ±π','phase at nonzero negative lobes']]);setInsight('A signed real spectrum contains phase information through its sign. Magnitude plots suppress that sign and must be paired with phase for full reconstruction. / 크기만 보면 음수 부호에 포함된 위상 정보를 잃습니다.')}} ,
+{id:'rc',short:'LTI & RC Lowpass / 저역통과',section:'§4.5',title:'Convolution and RC Lowpass / 필터의 시간·주파수',desc:'Observe smoothing of a causal rectangular pulse without evaluating a convolution integral from scratch. / RC 필터에 의해 펄스의 시작과 끝이 완만해집니다.',formula:'Y(jω)=H(jω)X(jω), &nbsp; H(jω)=1/(1+jωτ)',defaults:{tau:.7,D:2},controls:[{key:'tau',label:'RC time constant τ / 시정수',type:'range',min:.2,max:2,step:.1,unit:' s'},{key:'D',label:'Input pulse duration D / 펄스 길이',type:'range',min:1,max:4,step:.25,unit:' s'}],plots:[['Pulse response / 시간영역 입출력','x(t)=u(t)−u(t−D); zero-state RC output'],['Magnitude CTFT / 주파수영역','Input |X| and attenuated output |Y|']],metrics:['Cutoff ωc','Peak output at t=D','Magnitude gain at cutoff'],question:'Why does the output keep decaying after the input pulse ends?',questionKo:'입력 펄스가 0이 된 후에도 출력이 즉시 0이 되지 않는 이유는 무엇인가요?',answer:'The RC system stores energy and its impulse response has an exponential tail. For t>D, y(t)=(1−e^{−D/τ})e^{−(t−D)/τ}. / 시스템의 기억 효과가 출력의 지수 감쇠 꼬리를 만듭니다.',draw(s){const tau=s.tau,D=s.D,output=t=>t<0?0:t<D?1-Math.exp(-t/tau):(1-Math.exp(-D/tau))*Math.exp(-(t-D)/tau);paintGraph('plot0',{x:[-2,14],y:[-.12,1.2],xstep:2,axisnote:'Fixed time view: −2 to +14 s for all τ and D. Pulse end is marked at t=D. / 입력 종료와 출력 감쇠를 비교하세요.',vlines:[{x:D,color:C.gold,label:'pulse end t=D'}],xlabel:'time t (s)',ylabel:'amplitude',series:[{data:sample(-2,14,1100,t=>t>=0&&t<D?1:0),color:C.gray,dash:true,label:'input pulse x(t)'},{data:sample(-2,14,1100,output),color:C.teal,label:'RC output y(t)'}]});paintGraph('plot1',{x:[-12,12],y:[0,4.8],xstep:4,ystep:1,axisnote:'Fixed ω-axis and magnitude scale: RC filtering reduces |Y| relative to |X|. / 같은 눈금에서 출력 감쇠를 비교하세요.',xlabel:'ω (rad/s)',ylabel:'|X|, |Y|',series:[{data:sample(-12,12,900,w=>Math.abs(rectFT(w,D))),color:C.gray,dash:true,label:'input |X|'},{data:sample(-12,12,900,w=>Math.abs(rectFT(w,D))/Math.hypot(1,w*tau)),color:C.coral,label:'output |Y|'}]});setMetrics([[`${fmt(1/tau)} rad/s`,'ωc=1/τ'],[fmt(1-Math.exp(-D/tau)),'1−e^{−D/τ}'],[fmt(1/Math.sqrt(2)),'−3 dB / 0.7071']]);setInsight('CTFT turns convolution into multiplication, Y=HX. The result is valid for this LTI zero-state RC filter. / 주파수응답이 높은 주파수를 줄이기 때문에 시간영역의 급격한 변화가 완화됩니다.')}} ,
+{id:'mod',short:'Cosine Modulation / 코사인 변조',section:'§4.6',title:'Modulation and Spectral Copies / 변조와 이동',desc:'Cosine multiplication creates two shifted copies of the baseband spectrum. / 코사인 변조로 양·음 주파수에 복사본이 생깁니다.',formula:'x(t)cos(ω<sub>c</sub>t) ↔ ½[X(j(ω−ω<sub>c</sub>))+X(j(ω+ω<sub>c</sub>))]',defaults:{wc:6,tau:2},controls:[{key:'wc',label:'Carrier ωc / 반송파',type:'range',min:1,max:11,step:.5,unit:' rad/s'},{key:'tau',label:'Pulse width τ / 폭',type:'range',min:.75,max:3,step:.25,unit:' s'}],plots:[['Modulated pulse / 변조된 시간 신호','Rectangular envelope times cosine'],['Shifted spectrum / 이동한 스펙트럼','Signed real CTFT; copies may overlap and add']],metrics:['Carrier frequency','Unmodulated DC X(0)','Modulated spectrum at ω=0'],question:'Why are there two copies rather than only one?',questionKo:'cos(ωct)를 곱하면 주파수영역에 왜 두 복사본이 생기나요?',answer:'cos(ωct)=(e^{jωct}+e^{−jωct})/2. Multiplication by the two complex exponentials shifts X by +ωc and −ωc, each with factor 1/2. / Euler 식의 두 복소 지수 항이 ±ωc 이동을 만듭니다.',draw(s){const tau=s.tau,wc=s.wc,F=w=>.5*(rectFT(w-wc,tau)+rectFT(w+wc,tau));paintGraph('plot0',{x:[-4,4],y:[-1.2,1.2],axisnote:'Fixed time view: −4 to +4 s. A higher carrier ωc increases oscillation count inside the pulse. / 동일 시간축에서 진동 수를 비교하세요.',xlabel:'time t (s)',ylabel:'x(t)',series:[{data:sample(-4,4,1000,t=>rect(t,tau)*Math.cos(wc*t)),color:C.teal,label:'modulated pulse'}]});paintGraph('plot1',{x:[-18,18],y:[-1.4,3.6],xstep:6,ystep:1,axisnote:'Fixed frequency scale: spectral copies move toward ±ωc. / 두 복사본의 위치를 비교하세요.',xlabel:'ω (rad/s)',ylabel:'signed Xmod(jω)',series:[{data:sample(-18,18,1000,F),color:C.coral,label:'two-copy sum'}],vlines:[{x:wc,color:C.gray,label:'carrier +ωc'},{x:-wc,color:C.gray,label:'carrier −ωc'}]});setMetrics([[`${fmt(wc)} rad/s`,'carrier shift ±ωc'],[fmt(tau),'area of base pulse'],[fmt(F(0)),'sum of two shifted copies at DC']]);setInsight('The two shifted spectra combine algebraically (with signs and phases); they can overlap and cancel or reinforce. / 주파수 이동 후 단순히 크기를 더하는 것이 아니라 복소 스펙트럼을 합합니다.')}} ,
+{id:'numeric',short:'Numerical CTFT / 수치 근사',section:'§4.7',title:'Numerical CTFT from Samples / 적분의 수치 근사',desc:'Sample a finite observation window and compare a Riemann-sum approximation against the analytic CTFT. / 유한 관측과 샘플 간격이 만드는 오차를 확인합니다.',formula:'X̂(jω)≈Δt Σ<sub>n=−M</sub><sup>M</sup> x(nΔt)e<sup>−jωnΔt</sup>, &nbsp; x(t)=e<sup>−|t|</sup>',defaults:{dt:.25,T:4},controls:[{key:'dt',label:'Sample interval Δt / 표본 간격',type:'range',min:.05,max:.5,step:.05,unit:' s'},{key:'T',label:'Observation half-width T / 관측 범위 ±T',type:'range',min:2,max:8,step:.5,unit:' s'}],plots:[['Observed samples / 관측 표본','Samples of e^{−|t|} over −T≤t≤T'],['Analytic vs numerical CTFT / 변환 비교','Re{X̂} on |ω|≤10; reference 2/(1+ω²)']],metrics:['Samples in record','Absolute DC approximation error','Sampling Nyquist angular frequency'],question:'Does zero-padding or smaller Δt correct the finite observation truncation?',questionKo:'샘플 간격 Δt를 줄이거나 zero padding만 하면 유한 관측 구간 밖의 정보를 복원할 수 있나요?',answer:'No. Smaller Δt improves integration sampling, but finite observation ±T still omits exponential tails. Increasing T reduces truncation error. FFT can compute discrete frequency samples efficiently but is not itself an exact continuous CTFT. / 샘플링 오차와 관측 구간 절단 오차를 구분해야 합니다.',draw(s){const dt=s.dt,T=s.T,M=Math.floor(T/dt),points=[],reSum=w=>{let r=0;for(let n=-M;n<=M;n++){const t=n*dt;r+=Math.exp(-Math.abs(t))*Math.cos(w*t)*dt}return r};for(let n=-M;n<=M;n++){const t=n*dt;points.push([t,Math.exp(-Math.abs(t))])}paintGraph('plot0',{x:[-8.5,8.5],y:[-.08,1.19],xstep:2,bands:[{x0:-T,x1:T,color:'rgba(14,132,145,.06)'}],vlines:[{x:-T,color:C.gold,label:'−T observation boundary'},{x:T,color:C.gold,label:'+T observation boundary'}],axisnote:'Fixed t-axis: −8.5 to +8.5 s; markers ±T show the observation window. / T 변경시 표본 범위만 바뀝니다.',xlabel:'time t (s)',ylabel:'x(nΔt)',series:[{data:points,color:C.teal,type:'stem',radius:2.4,label:'observed samples'}]});paintGraph('plot1',{x:[-10,10],y:[-.12,2.4],xstep:4,axisnote:'Fixed ω/height scale: compare the theoretical CTFT with a truncated numerical approximation. / 계산 오차를 동일 축에서 확인하세요.',xlabel:'angular frequency ω (rad/s)',ylabel:'Re{X(jω)}',series:[{data:sample(-10,10,750,w=>2/(1+w*w)),color:C.gray,dash:true,label:'analytic 2/(1+ω²)'},{data:sample(-10,10,280,reSum),color:C.coral,label:'finite numerical sum'}]});setMetrics([[`${2*M+1}`,'N = 2floor(T/Δt)+1'],[fmt(Math.abs(reSum(0)-2)),'|X̂(0)−2|'],[`${fmt(PI/dt)} rad/s`,'π/Δt (discrete sampling limit)']]);setInsight('This finite sum may show sampling and truncation errors. FFT accelerates a grid of sums; it does not bypass the assumptions needed to approximate a CTFT. / 적분의 수치 근사를 검증하고 aliasing·관측 길이의 영향을 구분하세요.')}}
+];
+// Bilingual, control-linked derivations: English terminology first, Korean explanation second.
+const item=(head,math,ko)=>({head,math,ko});
+const plotNote=(title,en,ko)=>({title,en,ko});
+// Shared bilingual learning UI, invoked from each lab's numeric update loop.
+const guideItem=(head,math,ko)=>({head,math,ko});
+const guidePlot=(title,en,ko)=>({title,en,ko});
+const guideView={count:{},previous:{},timer:null,playing:false,duration:2600,lastModule:null};
+function stopGuidePlay(){if(guideView.timer!==null){clearInterval(guideView.timer);guideView.timer=null}guideView.playing=false}
+function revealGuide(moduleId,state,guideFactory){
+ const pane=document.getElementById('derivationPanel'),rp=document.getElementById('readingPanel');if(!pane||!rp)return;
+ const d=guideFactory(state),total=d.steps.length;
+ const n=Math.max(1,Math.min(total,guideView.count[moduleId]||1));
+ const animate=guideView.previous[moduleId]!==undefined&&n>guideView.previous[moduleId]&&n===guideView.previous[moduleId]+1;
+ const displayStep=(v,i)=>`<article class="deriv-step ${animate&&i===n-1?'guide-enter':''}" aria-label="Step ${i+1} of ${total}"><div class="deriv-top"><span class="step-index">${i+1}</span><strong>${v.head}</strong></div><div class="deriv-math">${v.math}</div><p>${v.ko}</p></article>`;
+ pane.innerHTML=`<div class="guide-head"><div><div class="overlabel">GUIDED DERIVATION / 단계별 수식 유도</div><h3>Equation → Derivation → Meaning / 수식 유도와 의미</h3><p>Adjust a variable to update the equations. / 변수를 변경하면 아래 수식도 갱신됩니다.</p></div><span class="progress-badge" role="status">Step ${n} / ${total}</span></div><div class="guide-track" role="progressbar" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${n}" aria-label="Derivation progress"><div style="width:${100*n/total}%"></div></div><div class="guide-steps">${d.steps.slice(0,n).map(displayStep).join('')}</div><div class="guide-actions"><button id="previousStep" type="button" ${n<=1?'disabled':''}>◀ Previous / 이전</button><button id="nextStep" type="button" ${n>=total?'disabled':''}>Next step / 다음 ▶</button><button id="guidePlay" type="button" class="primary" aria-pressed="${guideView.playing}">${guideView.playing?'Pause animation / 일시정지':'▶ Play animation / 자동 전개'}</button><button id="allSteps" type="button">${n===total?'Restart / 처음부터':'Show all / 전체 보기'}</button></div>`;
+ const change=next=>{guideView.count[moduleId]=Math.max(1,Math.min(total,next));revealGuide(moduleId,state,guideFactory)};
+ pane.querySelector('#previousStep').onclick=()=>{stopGuidePlay();change(n-1)};
+ pane.querySelector('#nextStep').onclick=()=>{stopGuidePlay();change(n+1)};
+ pane.querySelector('#allSteps').onclick=()=>{stopGuidePlay();change(n===total?1:total)};
+ pane.querySelector('#guidePlay').onclick=()=>{
+  if(guideView.playing){stopGuidePlay();revealGuide(moduleId,state,guideFactory);return}
+  if(n===total)guideView.count[moduleId]=1;
+  guideView.playing=true;
+  revealGuide(moduleId,state,guideFactory);
+  guideView.timer=setInterval(()=>{
+   if(currentGuidedId()!==moduleId){stopGuidePlay();return}
+   const now=guideView.count[moduleId]||1;
+   if(now>=total){stopGuidePlay();revealGuide(moduleId,currentGuidedState(moduleId),guideFactory);return}
+   guideView.count[moduleId]=now+1;
+   revealGuide(moduleId,currentGuidedState(moduleId),guideFactory);
+   if(now+1>=total){stopGuidePlay();const b=pane.querySelector('#guidePlay');if(b){b.textContent='▶ Play animation / 자동 전개';b.setAttribute('aria-pressed','false')}}
+  },guideView.duration)
+ };
+ guideView.previous[moduleId]=n;
+ rp.innerHTML=`<div class="overlabel">READ THE GRAPHS / 그래프 해석</div><h3>What changed, and why? / 무엇이 왜 바뀌었을까요?</h3><div class="reading-grid">${d.graphs.map((v,i)=>`<div class="reading-note"><span class="plot-number">GRAPH ${String(i+1).padStart(2,'0')}</span><strong>${v.title}</strong><p>${v.en}</p><p class="ko-explain">${v.ko}</p></div>`).join('')}</div><p class="guide-check"><strong>Interpretation checkpoint / 해석 점검:</strong> ${d.check}</p>`;
+}
+
+function currentGuidedId(){return MODULES[lab.active].id}
+function currentGuidedState(id){return lab.state[id]}
+function renderGuidedLearning(mod,s){const guide=GUIDES[mod.id];if(guide)revealGuide(mod.id,s,guide)}
+
+const GUIDES={
+ bridge:s=>{const T=+s.T,dw=TAU/T,dc=s.tau/T;return{
+ steps:[item('Repeat one isolated pulse / 단일 펄스 반복','x<sub>T</sub>(t) = Σ<sub>m∈ℤ</sub> p(t−mT), &nbsp; T='+fmt(T)+' s, τ='+fmt(s.tau)+' s','폭 τ의 펄스를 T 간격으로 반복하고 T를 키워 인접한 복사본이 멀어지는 모습을 관찰합니다.'),
+ item('Write Fourier-series coefficients / Fourier 급수 계수','a<sub>k</sub> = (1/T)∫<sub>−T/2</sub><sup>T/2</sup>x<sub>T</sub>(t)e<sup>−jkω₀t</sup>dt, &nbsp; ω₀=2π/T','한 주기에 고립된 펄스 하나만 있으면 적분은 그 펄스 구간에만 존재합니다.'),
+ item('Identify CTFT samples / CTFT 표본과 연결','T a<sub>k</sub> = X(jkω₀), &nbsp; Δω = ω₀ = '+fmt(dw)+' rad/s, &nbsp; a<sub>0</sub>='+fmt(dc),'그래프의 stem은 aₖ 자체가 아니라 T aₖ입니다. aₖ는 T가 커지면 작아지므로 혼동하지 않습니다.'),
+ item('Take the Riemann-sum limit / 적분으로의 극한','x(t)=lim<sub>Δω→0</sub> (1/2π)Σ<sub>k</sub>X(jkΔω)e<sup>jkΔωt</sup>Δω','T가 커지면 Δω가 0으로 수렴하고 이 합은 CTFT 역변환 적분으로 연결됩니다.')],
+ graphs:[plotNote('Periodic extensions / 반복 신호','Increasing T separates the pulse copies while the pulse width τ stays fixed.','펄스의 폭을 고정하고 반복 주기만 키워 주변 펄스와의 간격이 넓어지는지 관찰합니다.'),plotNote('Scaled spectral samples / 스펙트럼 표본','The smooth signed CTFT curve is unchanged; the sample points kΔω become denser as T grows.','연속 곡선은 같은 펄스의 CTFT이며, 반복 주기를 늘리면 표본 격자만 촘촘해집니다.')],
+ check:'T='+fmt(T)+'에서 Δω='+fmt(dw)+' rad/s입니다. T를 두 배로 키우면 무엇이 절반이 될까요?'
+ }},
+ rect:s=>{const zero=TAU/s.tau;return{
+ steps:[item('Define the centered pulse / 중심 펄스 정의','x(t)=A for −τ/2≤t≤τ/2; &nbsp; A='+fmt(s.A)+', τ='+fmt(s.tau)+' s','중심이 0이고 높이가 A, 폭이 τ인 시간 영역 펄스를 사용합니다.'),
+ item('Write the CTFT integral / CTFT 정의 적용','X(jω)=∫<sub>−∞</sub><sup>∞</sup>x(t)e<sup>−jωt</sup>dt = A∫<sub>−τ/2</sub><sup>τ/2</sup>e<sup>−jωt</sup>dt','펄스 바깥에서는 0이므로 적분 구간을 펄스 폭으로 줄입니다.'),
+ item('Evaluate the exponential / 지수 적분','X(jω)=A[2sin(ωτ/2)/ω] = Aτ sinc(ωτ/2)','오일러 관계와 적분 상·하한을 이용하면 부호를 가진 실수 sinc 스펙트럼이 됩니다.'),
+ item('Check area and first zeros / 면적과 영점 검산','X(j0)=Aτ='+fmt(s.A*s.tau)+'; &nbsp; first zeros: ω=±2π/τ=±'+fmt(zero)+' rad/s','DC 값은 펄스 면적과 같습니다. 폭이 커지면 스펙트럼의 첫 영점은 원점에 가까워집니다.')],
+ graphs:[plotNote('Time pulse / 시간 신호','The rectangular pulse widens as τ increases; changing A scales height.','펄스 폭과 높이를 별도로 움직여 면적의 변화를 확인합니다.'),plotNote('Signed sinc / 부호 있는 sinc','Negative sidelobes are real negative values, not negative magnitudes.','0 아래 곡선은 음의 실수 변환값입니다. |X|는 별도로 절댓값을 취해야 합니다.')],
+ check:'τ를 두 배로 하면 첫 spectral zero는 원점으로 가까워질까요, 멀어질까요?'
+ }},
+ exp:s=>{const a=s.a;return{
+ steps:[item('Recognize even symmetry / 짝대칭 확인','x(t)=e<sup>−α|t|</sup>, &nbsp; α='+fmt(a)+' s⁻¹, &nbsp; x(−t)=x(t)','양의 시간과 음의 시간에서 감쇠가 대칭인 신호입니다.'),
+ item('Split the transform integral / 음·양의 시간 분리','X(jω)=∫<sub>−∞</sub><sup>0</sup>e<sup>(α−jω)t</sup>dt + ∫<sub>0</sub><sup>∞</sup>e<sup>−(α+jω)t</sup>dt','|t| 때문에 t=0에서 두 구간으로 나누면 각각 지수 적분으로 계산됩니다.'),
+ item('Combine conjugate fractions / 켤레 분수 합','X(jω)=1/(α−jω)+1/(α+jω)=2α/(α²+ω²)','α>0이면 두 적분이 수렴합니다. 결과는 양수이며 실수 짝함수입니다.'),
+ item('Read DC and bandwidth / DC와 폭','X(j0)=2/α='+fmt(2/a)+'; &nbsp; X(jα)=X(j0)/2','α가 커지면 시간신호는 빨리 감쇠하고 정규화한 주파수 분포는 넓어집니다. 동시에 전체 면적 X(0)는 줄어듭니다.')],
+ graphs:[plotNote('Time-domain decay / 시간 감쇠','Large α makes x(t) decrease faster on both sides of t=0.','t가 ±방향으로 커질 때 신호 크기가 빨리 작아지는지 확인합니다.'),plotNote('Positive even CTFT / 실수 짝대칭 스펙트럼','X(jω) is symmetric and nonnegative; its DC height varies inversely with α.','주파수축 원점 높이는 2/α입니다. 시간 폭과 주파수 폭의 관계를 함께 읽습니다.')],
+ check:'α를 1에서 2로 변경하면 X(j0)은 어떻게 달라질까요?'
+ }},
+ shiftScale:s=>{const zero=TAU/s.tau;return{
+ steps:[item('Begin with a centered rectangle / 중심 펄스','p(t)=rect(t/τ), &nbsp; P(jω)=τ sinc(ωτ/2)','폭 τ의 중심 펄스는 부호를 가진 실수 짝대칭 sinc 스펙트럼을 가집니다.'),
+ item('Apply a time shift / 시간 이동','x(t)=p(t−t₀), &nbsp; t₀='+fmt(s.t0)+' s','t₀>0이면 오른쪽으로, t₀<0이면 왼쪽으로 이동합니다.'),
+ item('Substitute in the integral / 치환을 통한 유도','X(jω)=e<sup>−jωt₀</sup>P(jω)=e<sup>−jωt₀</sup>τ sinc(ωτ/2)','u=t−t₀로 치환하면 e^(−jωt₀)인 위상 인자만 새롭게 곱해집니다.'),
+ item('Separate magnitude and phase / 크기와 위상','|X(jω)|=τ|sinc(ωτ/2)|; &nbsp; Δ∠X=−ωt₀; &nbsp; first zero=±'+fmt(zero),'이동은 magnitude를 바꾸지 않습니다. 표기한 −ωt₀는 추가 위상이며 음의 sinc lobe 자체의 π 위상은 별도입니다.')],
+ graphs:[plotNote('Shifted waveform / 이동 파형','The teal pulse moves with t₀ while the gray centered reference does not.','시간축에서 신호가 움직이는 방향을 확인하세요.'),plotNote('Magnitude |X| / 크기','Changing t₀ alone leaves the magnitude curve unchanged.','시간 이동만 하면 스펙트럼 높이는 동일합니다. 폭 τ를 바꾸면 영점 위치가 바뀝니다.'),plotNote('Added phase / 추가 위상','The slope of −ωt₀ changes sign when t₀ changes sign.','위상 기울기만 따로 표시한 그래프입니다. 원래 sinc의 부호와 위상은 포함되지 않습니다.')],
+ check:'t₀만 바꿀 때 magnitude가 고정되는 이유를 한 문장으로 설명해 보세요.'
+ }},
+ signed:s=>({
+ steps:[item('Use a real-even pulse / 실수 짝대칭 펄스','x(t)=rect(t/τ), &nbsp; τ='+fmt(s.tau)+' s','원점을 중심으로 한 실수 짝대칭 신호의 CTFT는 실수이고 짝대칭입니다.'),
+ item('Compute the signed spectrum / 부호 있는 스펙트럼','X(jω)=τ sinc(ωτ/2)','sinc 함수는 ω에 따라 양수와 음수가 번갈아 나타납니다.'),
+ item('Take the magnitude / 크기는 절댓값','|X(jω)|=τ |sinc(ωτ/2)| ≥ 0','음의 실수 스펙트럼 구간은 magnitude 그래프에서 위로 접힙니다.'),
+ item('Recover the phase / 부호와 위상 연결','∠X(jω)=0 (X>0), &nbsp; π mod 2π (X<0), &nbsp; undefined (X=0)','실수 스펙트럼의 음수 부호는 위상 π를 뜻합니다. 영점에서는 위상이 정의되지 않습니다.')],
+ graphs:[plotNote('Signed spectrum / 부호 스펙트럼','Look for values below the horizontal zero axis in the negative sinc lobes.','0 아래 부분을 magnitude가 음수라는 뜻으로 해석하면 안 됩니다.'),plotNote('Magnitude spectrum / 크기 스펙트럼','All lobes are nonnegative after taking the absolute value.','음의 lobe가 위로 반사되지만 영점 위치는 바뀌지 않습니다.')],
+ check:'X(jω)<0인 위치에서 magnitude와 phase는 각각 어떻게 표현할까요?'
+ }),
+ rc:s=>{const g=1/Math.SQRT2;return{
+ steps:[item('Write the RC impulse response / 임펄스 응답','h(t)=(1/τ)e<sup>−t/τ</sup>u(t), &nbsp; τ='+fmt(s.tau)+' s','인과적인 1차 RC 저역통과 시스템의 임펄스 응답입니다.'),
+ item('Transform the system / 시스템의 CTFT','H(jω)=∫<sub>0</sub><sup>∞</sup>(1/τ)e<sup>−t/τ</sup>e<sup>−jωt</sup>dt = 1/(1+jωτ)','지수 적분을 계산하면 주파수 응답을 얻습니다. |H|=1/√(1+(ωτ)²)입니다.'),
+ item('Represent the finite input pulse / 유한 입력 펄스','x(t)=u(t)−u(t−D), &nbsp; D='+fmt(s.D)+' s','단위계단 입력을 D초 후에 빼면 [0,D)에서만 1인 펄스가 됩니다.'),
+ item('Use linearity of step responses / 계단 응답 차이','y(t)=(1−e<sup>−t/τ</sup>)u(t) − (1−e<sup>−(t−D)/τ</sup>)u(t−D)','출력은 두 개의 계단 응답 차이입니다. 초기에는 증가하고 t=D 이후에는 감소합니다. 주파수영역에서는 Y=HX입니다.')],
+ graphs:[plotNote('Pulse response / 시간 응답','Compare the sharp input pulse with the smoothed output at t=0 and t=D.','입력이 켜지고 꺼질 때 출력이 즉시 점프하지 않고 지수적으로 변화합니다.'),plotNote('Frequency attenuation / 주파수 감쇠','The output magnitude is |Y|=|H||X|; high frequencies are attenuated.','높은 주파수에서 입력보다 출력의 스펙트럼이 더 많이 감소합니다.')],
+ check:'τ='+fmt(s.tau)+' s일 때 차단 각주파수 ωc='+fmt(1/s.tau)+' rad/s를 확인해 보세요.'
+ }},
+ mod:s=>({
+ steps:[item('Start with the baseband signal / 기본 신호','x(t)=rect(t/τ), &nbsp; X(jω)=τ sinc(ωτ/2), τ='+fmt(s.tau),'원점 중심의 유한 직사각형 펄스에서 시작합니다.'),
+ item('Multiply by a carrier cosine / 반송파 곱셈','y(t)=x(t)cos(ω<sub>c</sub>t), &nbsp; ω<sub>c</sub>='+fmt(s.wc)+' rad/s','시간영역 곱셈은 주파수영역의 convolution과 연결됩니다.'),
+ item('Expand Euler’s relation / 복소 지수로 분해','cos(ω<sub>c</sub>t)=[e<sup>jωct</sup>+e<sup>−jωct</sup>]/2','반송파 cosine이 양의 주파수와 음의 주파수 복소 지수 성분 두 개로 나뉩니다.'),
+ item('Obtain the two shifted copies / 이동된 두 스펙트럼','Y(jω)=½ X(j(ω−ω<sub>c</sub>)) + ½ X(j(ω+ω<sub>c</sub>))','두 복사본은 +ωc, −ωc를 중심으로 생깁니다. 중첩되는 구간에서는 복소수 값으로 더해야 합니다.')],
+ graphs:[plotNote('Modulated waveform / 변조 파형','The rectangular envelope remains, but the cosine oscillates inside it.','반송파 주파수가 커지면 펄스 안의 진동 횟수가 증가합니다.'),plotNote('Shifted copies / 이동된 스펙트럼','Look for peaks near ±ωc; overlapping signed lobes add algebraically.','두 복사본은 크기만 더하는 것이 아니라 부호와 위상을 가진 스펙트럼으로 합산됩니다.')],
+ check:'ωc를 키우면 스펙트럼의 두 중심 위치는 어떻게 이동할까요?'
+ }),
+ numeric:s=>{const M=Math.floor(s.T/s.dt),N=2*M+1;return{
+ steps:[item('Start with the analysis integral / 연속 적분','X(jω)=∫<sub>−∞</sub><sup>∞</sup> e<sup>−|t|</sup>e<sup>−jωt</sup>dt = 2/(1+ω²)','참조 신호 x(t)=e^{−|t|}의 정확한 CTFT를 먼저 구합니다.'),
+ item('Restrict the observed record / 관측 시간 제한','−T ≤ t ≤ T, &nbsp; T='+fmt(s.T)+' s, &nbsp; Δt='+fmt(s.dt)+' s','유한한 관측 구간 밖의 지수 꼬리는 포함하지 않습니다. 관측 절단 오차가 생깁니다.'),
+ item('Approximate with a Riemann sum / 리만 합','X̂(jω) ≈ Δt Σ<sub>n=−M</sub><sup>M</sup>e<sup>−|nΔt|</sup>e<sup>−jωnΔt</sup>','M=⌊T/Δt⌋='+M+'이며 총 '+N+'개 표본을 이용합니다.'),
+ item('Check numerical and sampling limits / 근사 오차와 주파수','X(j0)=2, &nbsp; X̂(j0)=Δt Σ e<sup>−|nΔt|</sup>, &nbsp; π/Δt='+fmt(PI/s.dt)+' rad/s','Δt를 줄이면 수치 적분이 개선될 수 있지만, 관측 구간을 늘리지 않으면 절단 오차는 여전히 남습니다.')],
+ graphs:[plotNote('Observed samples / 유한 표본','More closely spaced stems approximate the smooth exponential more densely.','Δt를 줄이면 관측 구간 내에서 샘플이 촘촘해집니다.'),plotNote('Exact vs approximate CTFT / 정확해와 근사','Compare the continuous analytic curve and the finite-sum approximation, including the value at ω=0.','원점에서의 오차와 곡선 차이를 확인하세요. 표본 간격의 영향과 관측 길이의 영향을 따로 비교합니다.')],
+ check:'Δt를 절반으로 줄인 뒤 T를 늘리면 각각 어떤 종류의 오차가 줄어드나요?'
+ }}
+};
+
+startLab();
+</script>
+<script>window.addEventListener('message',function(e){if(e.source!==parent||!e.data||e.data.type!=='ss-set-theme')return;try{if(typeof updateModule==='function')updateModule();}catch(err){console.warn('Plot recolor failed',err)}});</script>
+</body></html>
