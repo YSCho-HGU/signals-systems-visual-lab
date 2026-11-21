@@ -7,6 +7,7 @@ on:
     paths:
       - 'index.html'
       - 'chapter6.html'
+      - 'chapter5.html'
       - 'assets/**'
       - 'tests/**'
       - 'docs/qa/**'
@@ -55,6 +56,10 @@ jobs:
       - name: G3 - Verify shared theme and in-place language controls
         run: |
           if C_JOURNEY_BROWSER=1 node tests/ss-theme-qa.mjs; then echo PASS > qa-standard/G3.status; else echo FAIL > qa-standard/G3.status; fi
+
+      - name: G2b - Verify Chapter 5/6 five-palette native design standard
+        run: |
+          if node tests/ss-ch5-ch6-standard-qa.mjs; then echo PASS > qa-standard/G2b.status; else echo FAIL > qa-standard/G2b.status; fi
 
       - name: G4 - Test progress, prediction and sonification learning aids
         run: |
@@ -117,6 +122,7 @@ jobs:
             qa-output/
             qa-ch6-viewport/
             qa-ch5/
+            qa-ch5-ch6-standard/
             qa-learning-output/
             qa-phase0/
           if-no-files-found: warn
