@@ -1,0 +1,78 @@
+#!/usr/bin/env node
+/* Chapter 7 native regression: compare Chapter 5 shell contract; cover all seven lessons. */
+import {chromium} from 'playwright';
+import {spawn} from 'node:child_process';
+import {mkdirSync,writeFileSync} from 'node:fs';
+const base=process.env.SS_BASE_URL||'http://127.0.0.1:8765/';
+const widths=[390,900,1280,1440];
+const themes=['white-clean','neutral-dark'];
+const checks=[],failures=[];let server,browser;
+function check(label,ok,data){checks.push({label,pass:Boolean(ok),data});if(!ok)failures.push({label,data})}
+function snapshot(page){return page.evaluate(()=>{
+ const root=document.documentElement,stage=document.querySelector('.ss7-standard-layout'),pair=document.querySelector('.ss7-stage-pair');
+ const change=document.querySelector('.ss7-stage-change'),observe=document.querySelector('.ss7-stage-observe'),explain=document.querySelector('.ss7-stage-explain');
+ const rect=x=>x?.getBoundingClientRect().toJSON();
+ return {ready:!!window.__ss7Standard?.ready,lab:window.SSChapter7?.currentExperiment,iframe:document.querySelectorAll('iframe').length,
+ plots:document.querySelectorAll('#plots .plot-card svg').length,series:document.querySelectorAll('#plots svg polyline,#plots svg path').length,
+ panels:[...document.querySelectorAll('.ss7-stage-head')].map(x=>x.textContent.trim()),
+ stage:rect(stage),pair:rect(pair),change:rect(change),observe:rect(observe),explain:rect(explain),
+ supplementary:rect(document.querySelector('.ss7-periodicity')),content:document.querySelector('#insight')?.textContent?.length,
+ documentWidth:root.scrollWidth,viewport:innerWidth,theme:root.dataset.elsTheme,
+ unsupportedTopBar:!!document.querySelector('.ss7-topbar'),sidebar:!!document.querySelector('#ss7-lesson-nav'),
+ navCount:document.querySelectorAll('#ss7-lesson-nav button').length,
+ currentNav:document.querySelectorAll('#ss7-lesson-nav button[aria-current="true"]').length};
+})}
+try{
+ if(!process.env.SS_BASE_URL){server=spawn('python3',['-m','http.server','8765','--bind','127.0.0.1'],{stdio:'ignore'});await new Promise(r=>setTimeout(r,1200))}
+ browser=await chromium.launch({headless:true});
+ for(const width of widths){
+  const page=await browser.newPage({viewport:{width,height:820},deviceScaleFactor:1,reducedMotion:'reduce'});
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(base+'chapter7.html',{waitUntil:'load'});
+  await page.waitForFunction(()=>window.__ss7Standard?.ready&&window.__ss7Native?.ready,{timeout:20000});
+  const initial=await snapshot(page);
+  check(width+' native shell',initial.ready&&initial.iframe===0&&initial.sidebar&&initial.navCount===7&&!initial.unsupportedTopBar,initial);
+  check(width+' shared numbered stages',initial.panels.length===4&&initial.panels.every((v,i)=>v.startsWith(String(i+1))),initial.panels);
+  check(width+' no horizontal overflow',initial.documentWidth<=width+6,initial.documentWidth);
+  for(const theme of themes){
+   await page.locator('#ss7-theme-picker').selectOption(theme);
+   check(width+' theme '+theme,await page.evaluate(()=>document.documentElement.dataset.elsTheme)===theme);
+   for(let index=1;index<=7;index++){
+    await page.locator('#ss7-lesson-nav button').nth(index-1).click();
+    await page.waitForFunction(n=>window.SSChapter7?.currentExperiment===n,index);
+    const before=await snapshot(page);
+    check(width+'/'+theme+'/lesson'+index+' stage and plot',before.ready&&before.panels.length===4&&before.plots>0&&before.content>10&&before.currentNav===1,before);
+    check(width+'/'+theme+'/lesson'+index+' overflow',before.documentWidth<=width+6,before.documentWidth);
+    if(width>760){
+     check(width+'/'+theme+'/lesson'+index+' change and observe aligned',
+      Math.abs(before.change.y-before.observe.y)<8&&before.change.x<before.observe.x,before);
+    }else{
+     check(width+'/'+theme+'/lesson'+index+' mobile stack',before.observe.y>=before.change.y+before.change.height-8,before);
+    }
+    check(width+'/'+theme+'/lesson'+index+' explain below pair',
+      before.explain.y>=before.pair.y+before.pair.height-8,before);
+    const slider=page.locator('#controls input[type="range"]').first();
+    if(await slider.count()){
+     const outputBefore=await page.locator('#insight').textContent();
+     await slider.evaluate(el=>{el.value=el.max===el.value?el.min:el.max;el.dispatchEvent(new Event('input',{bubbles:true}))});
+     const outputAfter=await page.locator('#insight').textContent();
+     check(width+'/'+theme+'/lesson'+index+' reactive update',outputBefore!==outputAfter);
+    }
+   }
+  }
+  check(width+' no JS exceptions',errors.length===0,errors);
+  if(width===1280){
+   await page.locator('#ss7-lesson-nav button').first().click();
+   await page.locator('#ss7-mark-reviewed').click();
+   check('progress state persisted',await page.evaluate(()=>JSON.parse(localStorage.getItem('els-ss-lab-progress-v1')||'[]').includes('7:1')));
+   await page.reload();await page.waitForFunction(()=>window.__ss7Native?.ready);
+   check('progress state survives reload',await page.locator('#ss7-mark-reviewed').getAttribute('aria-pressed')==='true');
+   await page.locator('#ss7-mark-reviewed').click();
+  }
+  await page.close();
+ }
+}finally{if(browser)await browser.close();if(server)server.kill()}
+mkdirSync('qa-ch7',{recursive:true});
+writeFileSync('qa-ch7/report.json',JSON.stringify({checks:checks.length,failures},null,2));
+console.log(JSON.stringify({checks:checks.length,failures:failures.slice(0,25)},null,2));
+if(failures.length)process.exitCode=1;
