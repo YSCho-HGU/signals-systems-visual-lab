@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-21T03:36:31.205Z",
-  "sourceSha": "a754a783be0bd175fb2d1d69b4208eb58390f8ed",
-  "runId": "44861892783",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44861892783",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/a754a783be0bd175fb2d1d69b4208eb58390f8ed",
+  "generatedAt": "2026-11-21T03:37:02.274Z",
+  "sourceSha": "d36a6801b98c5bf5c6ba2e2aedf431ff2003c726",
+  "runId": "44862003055",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44862003055",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/d36a6801b98c5bf5c6ba2e2aedf431ff2003c726",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -27,13 +27,13 @@
     {
       "id": "G1",
       "label": "Sampling and transform mathematics",
-      "status": "PASS",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G2",
       "label": "Native Chapter 6 browser journey",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
@@ -45,7 +45,7 @@
     {
       "id": "G3",
       "label": "Theme and language persistence",
-      "status": "PASS",
+      "status": "NOT_RUN",
       "required": true
     },
     {
