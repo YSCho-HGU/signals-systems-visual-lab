@@ -79,9 +79,6 @@ html.ss8-native .check{font-size:15px;line-height:1.6;background:var(--els-surfa
 html.ss8-native .check b,html.ss8-native .check button{color:var(--els-link,#18708a)}
 html.ss8-native .check .answer{color:var(--els-ink,#263540)}
 html.ss8-native .foot{color:var(--els-muted,#536b71);font-size:12px}
-html.ss8-native .ss8-prose-math{display:inline-block;vertical-align:baseline;max-width:100%;color:inherit;white-space:nowrap;margin:0 .04em;line-height:1.5}
-html.ss8-native .ss8-prose-math .katex{font-size:1.08em;color:inherit}
-html.ss8-native .ss8-prose-math-error{border-bottom:2px dotted var(--els-accent,#16889a)}
 @media(max-width:1150px){html.ss8-native .ss8-shell{grid-template-columns:205px minmax(0,1fr)}html.ss8-native .ss8-stage-pair{grid-template-columns:minmax(205px,230px) minmax(0,1fr)}}
 @media(max-width:1050px){html.ss8-native .ss8-explain-grid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:780px){html.ss8-native .ss8-shell{display:block}html.ss8-native .ss8-sidebar{position:relative;top:0;height:auto;max-height:none;border-right:0;border-bottom:1px solid var(--els-border,#bccacc);padding:9px 12px}html.ss8-native .ss8-sidebar .brand{display:none}html.ss8-native .ss8-sidebar-title{margin:4px 6px 8px}html.ss8-native .ss8-lab-nav{display:flex!important;overflow-x:auto!important;gap:7px;padding-bottom:6px!important}html.ss8-native .ss8-lab-nav button{flex:0 0 auto;width:auto;min-width:145px;max-width:205px}html.ss8-native .ss8-progress{display:none}html.ss8-native .ss8-stage-pair{grid-template-columns:minmax(0,1fr)}html.ss8-native main{padding:12px!important}html.ss8-native .ss8-card{padding:13px}html.ss8-native[data-ss-sidebar="collapsed"] .ss8-shell{display:block}}
@@ -122,8 +119,8 @@ html.ss8-native .ss8-comparison-context small{font-size:13px;line-height:1.6}
 @media(max-width:650px){html.ss8-native .ss8-equation-row{grid-template-columns:1fr}html.ss8-native .ss8-82-stage{padding:9px}}
 
 /* Shared mathematical rendering: consistent layout and explicit failure states. */
-html.ss8-native [data-ss-math],
-html.ss8-native [data-latex]{
+html.ss8-native [data-ss-math]:not(.ss8-prose-math),
+html.ss8-native [data-latex]:not(.ss8-prose-math){
  color:var(--els-ink);
  min-width:0;
  max-width:100%;
@@ -138,9 +135,9 @@ html.ss8-native [data-latex] .katex-display{
  overflow-x:auto;
  overflow-y:hidden;
 }
-html.ss8-native [data-ss-math-state="error"],
-html.ss8-native [data-ss-math-state="missing"],
-html.ss8-native [data-ss-math-error]{
+html.ss8-native [data-ss-math-state="error"]:not(.ss8-prose-math),
+html.ss8-native [data-ss-math-state="missing"]:not(.ss8-prose-math),
+html.ss8-native [data-ss-math-error]:not(.ss8-prose-math){
  border-left:3px solid var(--els-accent,#c75b4e);
  padding-left:9px;
  font-family:"Cambria Math",serif;
@@ -149,25 +146,3 @@ html.ss8-native .ss8-math-source,
 html.ss8-native .ss8-latex{font-size:var(--ss-math-step-size,19px)}
 html.ss8-native .ss8-key-equation{font-size:var(--ss-math-key-size,20px)}
 
-/* Inline mathematical expressions in prose, Reading and Check Yourself. */
-html.ss8-native .ss8-prose-math{
- display:inline-block;
- vertical-align:baseline;
- max-width:100%;
- margin:0 .045em;
- line-height:1.45;
- color:inherit;
- white-space:nowrap;
- font-weight:inherit;
-}
-html.ss8-native .ss8-prose-math .katex{
- font-size:1.06em;
- color:inherit;
-}
-html.ss8-native .ss8-prose-math[data-ss-math-state="waiting"]{
- border-bottom:1px dotted var(--els-muted);
-}
-html.ss8-native .ss8-prose-math[data-ss-math-error]{
- border-bottom:2px dotted var(--els-accent,#c55d54);
- font-family:"Cambria Math",Georgia,serif;
-}
