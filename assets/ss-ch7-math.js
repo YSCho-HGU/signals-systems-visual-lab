@@ -4,11 +4,26 @@ const EQ=[["t=nT_s,\\qquad T_s=\\frac{1}{f_s}","x[n]=x_c(nT_s)=\\cos\\!\\left(2\
 
 function setup(){
 const host=document.getElementById('step-content');if(!host)return;
+const hero=document.getElementById('ss7-key-equation');
+const keyIndices=[1,3,3,3,1,1,2];
 let pending=false;
 function render(){
  pending=false;
  if(!window.katex?.render)return;
  const chapter=window.SSChapter7?.currentExperiment||1,eq=EQ[chapter-1];
+ if(hero&&eq){
+  const latex=eq[keyIndices[chapter-1]];
+  if(hero.dataset.ss7Key!==String(chapter)&&typeof latex==='string'){
+   try{
+    window.katex.render(latex,hero,{displayMode:true,throwOnError:true,strict:'ignore',trust:false});
+    hero.dataset.ss7Key=String(chapter);
+    hero.setAttribute('aria-label',latex);
+   }catch(error){
+    hero.textContent=latex;
+    console.warn('Chapter 7 key equation fallback',chapter,error);
+   }
+  }
+ }
  const info=document.getElementById('step-num')?.textContent||'';
  const all=/^All\s/i.test(info);
  const index=Number(info.match(/Step\s+(\d+)/)?.[1]||1)-1;
