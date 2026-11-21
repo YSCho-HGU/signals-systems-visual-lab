@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-21T06:37:09.158Z",
-  "sourceSha": "2f39f84cb32734ce8a926319cf6545b3bf8c9723",
-  "runId": "44876187503",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44876187503",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/2f39f84cb32734ce8a926319cf6545b3bf8c9723",
+  "generatedAt": "2026-11-21T06:39:43.731Z",
+  "sourceSha": "aaaed05d57ea6a45e081511592ccb40ab5c5e692",
+  "runId": "44876422139",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44876422139",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/aaaed05d57ea6a45e081511592ccb40ab5c5e692",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -39,7 +39,7 @@
     {
       "id": "G2b",
       "label": "Native Chapter 5 and 6 five-palette Chromium/Edge regression",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
@@ -51,25 +51,25 @@
     {
       "id": "G4",
       "label": "Learning aids and sonification",
-      "status": "PASS",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G5",
       "label": "Storage and 62-lab regression",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G6",
       "label": "248-screenshot visual and accessibility smoke audit",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G7",
       "label": "Evidence postprocessing",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     }
   ],
