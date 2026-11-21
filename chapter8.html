@@ -39,9 +39,6 @@ html[data-theme="dark"] .step .math,
 html[data-theme="dark"] .math,
 html[data-theme="dark"] .mathline,
 html[data-theme="dark"] .hero-callout .formula{color:#d9f4f4!important;background:#204557!important;border-color:#426a78!important}
-html[data-theme="dark"] .figure canvas,
-html[data-theme="dark"] .plot-card svg,
-html[data-theme="dark"] .plot-card canvas{background:#fbfdfe!important;border-radius:7px;color:#19394c;filter:none}
 html[data-theme="dark"] .plot-card .plot-title{background:#254759;color:#e5f3f8;border-color:#426477}
 html[data-theme="dark"] select,
 html[data-theme="dark"] input[type="number"],
@@ -61,7 +58,7 @@ html[data-theme="dark"] .sidebar,
 html[data-theme="dark"] .shell>.nav{background:linear-gradient(160deg,#0a2030,#102c40)}
 html[data-theme="dark"] nav:not(.sidebar):not(.nav) button:not(.active){background:#1e3b4e;color:#e5f3f8;border-color:#43677a}
 html[data-theme="dark"] nav:not(.sidebar):not(.nav) button.active{background:#136477;color:#fff}
-html[data-theme="dark"] .plot-card svg text{fill:#203b4e}
+
 
 
 /* Rev7 audited text contrast: no Light Mode ink inside dark surfaces. */
@@ -93,7 +90,7 @@ html[data-theme="dark"] :is(.motion-primary,.detail-primary,.preset-row button.s
 html[data-theme="dark"] :is(.mathline,.mathline b,.detail-status b,.detail-pill,.area-slider output,.detail-head .overlabel){color:#9be7ec!important}
 html[data-theme="dark"] .fft-status{background:#284b5e!important;color:#e0f1f7!important;border-color:#5b8091!important}
 html[data-theme="dark"] .fft-status :is(b,span,strong){color:#e0f1f7!important}
-html[data-theme="dark"] .plot-card svg text{fill:#274b5e}
+
 @media(max-width:560px){.axis-key{font-size:11px;gap:4px 9px;padding:7px 8px}}
 
 
@@ -265,6 +262,36 @@ html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hov
 <link rel="stylesheet" href="./assets/ss-formula-standard.css?v=2">
 <link rel="stylesheet" href="./assets/ss-ui-standard.css?v=4">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css">
+<style id="ss8-theme-aware-graphs">
+/* Graph surfaces, ROC shading and SVG labels use the selected ELS palette.
+   No fixed light canvas or OS prefers-color-scheme override. */
+html.ss8-native .plot-card {
+  background:var(--els-surface)!important;
+  border-color:var(--els-border)!important;
+  color:var(--els-ink)!important;
+}
+html.ss8-native .plot-card .plot-title {
+  background:var(--els-surface-alt)!important;
+  border-bottom-color:var(--els-border)!important;
+  color:var(--els-ink)!important;
+}
+html.ss8-native .plot-card svg {
+  background:var(--els-surface)!important;
+  color:var(--els-ink)!important;
+  filter:none!important;
+}
+html.ss8-native .plot-card svg text {
+  fill:var(--els-muted)!important;
+}
+html.ss8-native .plot-card .legend,
+html.ss8-native .plot-card .axis-key {
+  background:var(--els-surface-alt)!important;
+  color:var(--els-ink)!important;
+  border-color:var(--els-border)!important;
+}
+html.ss8-native .plot-card .legend i {border:1px solid var(--els-border)}
+</style>
+
 <script src="./assets/ss-trace-palette.js?v=1"></script>
 <script src="./assets/els-language.js?v=1"></script>
 <script src="./assets/els-theme-v2.js?v=20261121b"></script>
