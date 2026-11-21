@@ -53,6 +53,10 @@ jobs:
           node tests/ch5-viewport-e2e.mjs || status=1
           if [ "$status" -eq 0 ]; then echo PASS > qa-standard/G2.status; else echo FAIL > qa-standard/G2.status; fi
 
+      - name: Chapter 5 - Verify inline equations and guided derivations across eight labs
+        run: |
+          if node tests/ch5-prose-math-qa.mjs; then echo PASS > qa-standard/ch5-math.status; else echo FAIL > qa-standard/ch5-math.status; fi
+
       - name: G3 - Verify shared theme and in-place language controls
         run: |
           if C_JOURNEY_BROWSER=1 node tests/ss-theme-qa.mjs; then echo PASS > qa-standard/G3.status; else echo FAIL > qa-standard/G3.status; fi
@@ -131,6 +135,7 @@ jobs:
             qa-ch6-viewport/
             qa-ch5/
             qa-ch5-ch6-standard/
+            qa-ch5-math/
             qa-learning-output/
             qa-phase0/
           if-no-files-found: warn
