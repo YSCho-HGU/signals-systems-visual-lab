@@ -23,7 +23,7 @@ try{
   const math=window.ELSChapterFiveMath, cases=[
    {p:-1.1,z:-2.1,expect:["s+2.10","s+1.10"]},
    {p:0.8,z:1.2,expect:["s-1.20","s-0.80"]},
-   {p:0,z:0,expect:["{s}{(s)(s+4)}"]},
+   {p:0,z:0,expect:["{s}{s(s+4)}"]},
    {p:0.8,z:-4,expect:["s+4","s-0.80"]}
   ];
   return cases.map(({p,z,expect})=>{
