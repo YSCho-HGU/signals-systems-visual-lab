@@ -36,6 +36,9 @@ try{
   check(width+' shared palette loaded before plot computation',await page.evaluate(()=>typeof window.ssTraceColor==='function'));
   check(width+' shared numbered stages',initial.panels.length===4&&initial.panels.every((v,i)=>v.startsWith(String(i+1))),initial.panels);
   check(width+' audited equation dataset',await page.evaluate(()=>window.__ss7EquationAudit?.formulas===28));
+  await page.waitForFunction(()=>window.__ss7ProseMath&&document.querySelectorAll('#insight .ss7-prose-math .katex').length>0,{timeout:15000});
+  check(width+' prose math renderer loaded',await page.evaluate(()=>window.__ss7ProseMath?.rendered>0));
+  check(width+' math renderer has no failed expressions',await page.evaluate(()=>window.__ss7ProseMath?.failed===0));
   check(width+' no horizontal overflow',initial.documentWidth<=width+6,initial.documentWidth);
   const typography=await page.evaluate(()=>{
     const css=x=>{const n=document.querySelector(x);return n?getComputedStyle(n):null};
@@ -56,6 +59,13 @@ try{
     const before=await snapshot(page);
     check(width+'/'+theme+'/lesson'+index+' stage and plot',before.ready&&before.panels.length===4&&before.plots>0&&before.content>10&&before.currentNav===1,before);
     check(width+'/'+theme+'/lesson'+index+' guided formula present',await page.locator('#step-content .step .math').count()===1&&Boolean((await page.locator('#step-content .step .math').textContent())?.trim()));
+    await page.waitForFunction(()=>document.querySelectorAll('#insight .ss7-prose-math .katex').length>0,{timeout:10000});
+    check(width+'/'+theme+'/lesson'+index+' prose equations typeset',
+      await page.locator('#insight .ss7-prose-math .katex').count()>0);
+    const equationCount=await page.locator('#step-content .step .math .katex').count();
+    check(width+'/'+theme+'/lesson'+index+' guided derivation typeset',equationCount===1,equationCount);
+    check(width+'/'+theme+'/lesson'+index+' no KaTeX parse errors',
+      await page.evaluate(()=>!document.querySelector('.katex-error')&&window.__ss7ProseMath?.failed===0));
     const mathSize=await page.locator('#step-content .step .math').first().evaluate(el=>parseFloat(getComputedStyle(el).fontSize));
     check(width+'/'+theme+'/lesson'+index+' equation legibility',mathSize>=17,mathSize);
     check(width+'/'+theme+'/lesson'+index+' overflow',before.documentWidth<=width+6,before.documentWidth);
