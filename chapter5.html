@@ -435,7 +435,7 @@ function render(){stopGuidePlay();const L=LABS.find(x=>x.id===active),s=state[ac
 function switchLab(id){if(!LABS.some(x=>x.id===id))return;active=id;try{history.replaceState({},'',location.pathname+'?lab='+id)}catch(e){}render();scrollTo({top:0,behavior:'smooth'})}
 function setMetric(items){items.forEach((m,i)=>{if(!$('met'+i))return;$('met'+i).textContent=m[0];$('md'+i).textContent=m[1]||''})}
 function setInsight(s){$('insight').textContent=s}
-function setLegend(i,items){$('legend'+i).innerHTML=(items||[]).map(a=>`<span class="lgitem"><span class="lgtick ${a.dash?'dash':''}" style="--color:${a.color}"></span>${a.label}</span>`).join('')}
+function setLegend(i,items){$('legend'+i).innerHTML=(items||[]).map(a=>`<span class="lgitem"><span class="lgtick ${a.dash?'dash':''}" style="--color:${ssTraceColor(a.color)}"></span>${a.label}</span>`).join('')}
 function setFormula(s){$('formula').innerHTML=s;window.ELSChapterFiveMath?.renderHero(active,state[active])}
 function ctx(id){const el=$(id);const rect=el.getBoundingClientRect(),w=Math.max(220,rect.width),h=Math.max(230,rect.height),d=Math.min(devicePixelRatio||1,2);el.width=Math.round(w*d);el.height=Math.round(h*d);const g=el.getContext('2d');g.setTransform(d,0,0,d,0,0);return{g,w,h}}
 function bounds(points,lo=null,hi=null){let a=points.filter(p=>Number.isFinite(p[1])).map(p=>p[1]);if(!a.length)return[-1,1];let mn=lo??Math.min(...a),mx=hi??Math.max(...a);if(Math.abs(mx-mn)<1e-9){mn-=1;mx+=1}const p=(mx-mn)*.12;return[mn-(lo===null?p:0),mx+(hi===null?p:0)]}
