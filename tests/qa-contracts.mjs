@@ -34,7 +34,16 @@ check("G0-08a-native-ch5",policy.chapterRoutes["5"]==="native"&&policy.chapterRo
 try{new Script(read("assets/ss-ch5-standalone.js"),{filename:"assets/ss-ch5-standalone.js"});check("G0-js-ch5-native",true)}
 catch(e){check("G0-js-ch5-native",false,String(e).slice(0,200))}
 const ch7=read("chapter7.html");
-check("G0-08b-ch7-initial-observe-dependencies",ch7.includes('./assets/ss-trace-palette.js?v=1')&&ch7.includes('id="plots"')&&!ch7.includes("<iframe")&&ch7.includes('ss-ch7-math.js?v=1'));
+check("G0-08b-ch7-initial-observe-dependencies",ch7.includes('./assets/ss-trace-palette.js?v=1')&&ch7.includes('id="plots"')&&!ch7.includes("<iframe")&&ch7.includes('ss-ch7-math.js?v=2'));
+const sharedFormula=read("assets/ss-formula-standard.css");
+check("G0-shared-math-stylesheet-all-three",
+ [laplaceNative,native,ch7].every(x=>x.includes('ss-formula-standard.css?v=1')) &&
+ sharedFormula.includes(".ss5-prose-math") &&
+ sharedFormula.includes(".ss6-inline-math") &&
+ sharedFormula.includes(".ss7-prose-math"));
+check("G0-no-duplicate-prose-math-css",
+ !existsSync("assets/ss-ch5-prose-math.css")&&!existsSync("assets/ss-ch7-prose-math.css")&&
+ ![laplaceNative,native,ch7].some(x=>x.includes("ss-ch5-prose-math.css")||x.includes("ss-ch7-prose-math.css")));
 check("G0-08c-ch7-7-lessons",(ch7.match(/\\{short:'/g)||[]).length===7);
 for(const path of ["assets/ss-ch7-math.js","assets/ss-ch7-learning-standard.js","assets/ss-ch7-standalone.js"]){
  try{new Script(read(path),{filename:path});check("G0-js-"+path,true)}
