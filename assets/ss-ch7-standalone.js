@@ -11,10 +11,6 @@ function current(){return window.SSChapter7?.currentExperiment||1}
 function refresh(){
  const active=current(),saved=readProgress(),id='7:'+active;
  document.querySelectorAll('#ss7-lesson-nav button').forEach((b,i)=>{b.setAttribute('aria-current',String(i+1===active));b.setAttribute('aria-label','Lesson 7.'+(i+1)+' '+NAMES[i])});
- const previous=$('ss7-prev-lab'),next=$('ss7-next-lab');
- if(previous)previous.disabled=active<=1;
- if(next)next.disabled=active>=NAMES.length;
- if($('ss7-topbar-title'))$('ss7-topbar-title').textContent='CHAPTER 07 / '+active+' of '+NAMES.length+' · '+NAMES[active-1];
  const mark=$('ss7-mark-reviewed'),count=$('ss7-progress-count');
  if(count)count.textContent='My Lab Progress · '+saved.filter(x=>/^[1-8]:[1-9]\d*$/.test(x)).length+'/'+TOTAL;
  if(mark){mark.textContent=saved.includes(id)?'Undo reviewed · 확인 취소':'Mark lab reviewed · 학습 확인';mark.setAttribute('aria-pressed',String(saved.includes(id)))}
@@ -25,8 +21,6 @@ function setup(){
  const nav=$('ss7-lesson-nav');
  if(!nav||!window.SSChapter7)return;
  NAMES.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.innerHTML='<span class="ss7-lab-number">'+(i+1)+'</span><span>'+name+'</span>';b.addEventListener('click',()=>open(i+1));nav.appendChild(b)});
- $('ss7-prev-lab').addEventListener('click',()=>open(current()-1));
- $('ss7-next-lab').addEventListener('click',()=>open(current()+1));
  $('ss7-mark-reviewed').addEventListener('click',()=>{
   const id='7:'+current(),saved=readProgress(),next=saved.includes(id)?saved.filter(x=>x!==id):saved.concat(id);
   try{localStorage.setItem(PROGRESS_KEY,JSON.stringify(next))}catch(_){}
