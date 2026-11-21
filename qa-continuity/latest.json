@@ -1,0 +1,642 @@
+{
+  "status": "FAIL",
+  "total": 59,
+  "failures": [
+    {
+      "id": "chapter1-four-stage-layout",
+      "passed": false,
+      "detail": {
+        "title": "Chapter 1 · Signals & Systems — Interactive Visual Lab Rev3",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": true,
+        "canvas": 0,
+        "formula": true,
+        "math": true,
+        "main": "Chapter 1 · Foundations · Rev1← Learning Studio✎ 오류 제보01 · CT vs DT1.102 · Elementary1.403 · Time transforms1.204 · CT/D"
+      }
+    },
+    {
+      "id": "chapter1-render-after-switch",
+      "passed": false,
+      "detail": {
+        "stage": true,
+        "predict": true,
+        "pair": true,
+        "explain": true,
+        "canvases": 0,
+        "math": true
+      }
+    },
+    {
+      "id": "chapter1-no-js-errors",
+      "passed": false,
+      "detail": [
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined"
+      ]
+    },
+    {
+      "id": "chapter2-no-js-errors",
+      "passed": false,
+      "detail": [
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined"
+      ]
+    },
+    {
+      "id": "chapter3-no-js-errors",
+      "passed": false,
+      "detail": [
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined"
+      ]
+    },
+    {
+      "id": "chapter4-no-js-errors",
+      "passed": false,
+      "detail": [
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined"
+      ]
+    },
+    {
+      "id": "bridge-chapter5.html?lab=rc",
+      "passed": false,
+      "detail": {
+        "count": 1,
+        "head": "Connect the chaptersFrom analog RC to digital IIRA sampled first-order analog RC system with ZOH input has a discrete pole a = exp(-Ts/tau)."
+      }
+    }
+  ],
+  "results": [
+    {
+      "id": "chapter1-header-and-nav",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 1 · Signals & Systems — Interactive Visual Lab Rev3",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": true,
+        "canvas": 0,
+        "formula": true,
+        "math": true,
+        "main": "Chapter 1 · Foundations · Rev1← Learning Studio✎ 오류 제보01 · CT vs DT1.102 · Elementary1.403 · Time transforms1.204 · CT/D"
+      }
+    },
+    {
+      "id": "chapter1-theme",
+      "passed": true,
+      "detail": "neutral-dark"
+    },
+    {
+      "id": "chapter1-four-stage-layout",
+      "passed": false,
+      "detail": {
+        "title": "Chapter 1 · Signals & Systems — Interactive Visual Lab Rev3",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": true,
+        "canvas": 0,
+        "formula": true,
+        "math": true,
+        "main": "Chapter 1 · Foundations · Rev1← Learning Studio✎ 오류 제보01 · CT vs DT1.102 · Elementary1.403 · Time transforms1.204 · CT/D"
+      }
+    },
+    {
+      "id": "chapter1-hero-KaTeX",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 1 · Signals & Systems — Interactive Visual Lab Rev3",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": true,
+        "canvas": 0,
+        "formula": true,
+        "math": true,
+        "main": "Chapter 1 · Foundations · Rev1← Learning Studio✎ 오류 제보01 · CT vs DT1.102 · Elementary1.403 · Time transforms1.204 · CT/D"
+      }
+    },
+    {
+      "id": "chapter1-lab-count",
+      "passed": true,
+      "detail": {
+        "count": 9
+      }
+    },
+    {
+      "id": "chapter1-navigate",
+      "passed": true,
+      "detail": {
+        "before": "Continuous-Time vs Discrete-Time Signals",
+        "after": "Elementary Signals · Step, Impulse, Ramp"
+      }
+    },
+    {
+      "id": "chapter1-render-after-switch",
+      "passed": false,
+      "detail": {
+        "stage": true,
+        "predict": true,
+        "pair": true,
+        "explain": true,
+        "canvases": 0,
+        "math": true
+      }
+    },
+    {
+      "id": "chapter1-theme-switch",
+      "passed": true,
+      "detail": {
+        "theme": "warm-neutral"
+      }
+    },
+    {
+      "id": "chapter1-no-js-errors",
+      "passed": false,
+      "detail": [
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined"
+      ]
+    },
+    {
+      "id": "chapter2-header-and-nav",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 2 LTI Visual Lab Rev5 | Signals & Systems",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": true,
+        "canvas": 3,
+        "formula": true,
+        "math": true,
+        "main": "CHAPTER 02 / INTERACTIVE CONCEPTSNo install / Offline readyEXPERIMENT 01 / §2.1Impulse Decomposition and LTI Response / "
+      }
+    },
+    {
+      "id": "chapter2-theme",
+      "passed": true,
+      "detail": "neutral-dark"
+    },
+    {
+      "id": "chapter2-four-stage-layout",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 2 LTI Visual Lab Rev5 | Signals & Systems",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": true,
+        "canvas": 3,
+        "formula": true,
+        "math": true,
+        "main": "CHAPTER 02 / INTERACTIVE CONCEPTSNo install / Offline readyEXPERIMENT 01 / §2.1Impulse Decomposition and LTI Response / "
+      }
+    },
+    {
+      "id": "chapter2-hero-KaTeX",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 2 LTI Visual Lab Rev5 | Signals & Systems",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": true,
+        "canvas": 3,
+        "formula": true,
+        "math": true,
+        "main": "CHAPTER 02 / INTERACTIVE CONCEPTSNo install / Offline readyEXPERIMENT 01 / §2.1Impulse Decomposition and LTI Response / "
+      }
+    },
+    {
+      "id": "chapter2-lab-count",
+      "passed": true,
+      "detail": {
+        "count": 9
+      }
+    },
+    {
+      "id": "chapter2-navigate",
+      "passed": true,
+      "detail": {
+        "before": "Impulse Decomposition and LTI Response / 임펄스 분해와 LTI 응답",
+        "after": "Flip → Shift → Multiply → Sum / 이산 컨벌루션의 네 단계"
+      }
+    },
+    {
+      "id": "chapter2-render-after-switch",
+      "passed": true,
+      "detail": {
+        "stage": true,
+        "predict": true,
+        "pair": true,
+        "explain": true,
+        "canvases": 3,
+        "math": true
+      }
+    },
+    {
+      "id": "chapter2-theme-switch",
+      "passed": true,
+      "detail": {
+        "theme": "warm-neutral"
+      }
+    },
+    {
+      "id": "chapter2-no-js-errors",
+      "passed": false,
+      "detail": [
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined"
+      ]
+    },
+    {
+      "id": "chapter3-header-and-nav",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 3 Guided Visual Lab Rev6 | Signals & Systems",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": true,
+        "canvas": 2,
+        "formula": true,
+        "math": true,
+        "main": "CHAPTER 03 / INTERACTIVE CONCEPTSNo install / Offline readyEXPERIMENT 01 / §3.3Harmonically Related Sinusoids / 조화 정현파On"
+      }
+    },
+    {
+      "id": "chapter3-theme",
+      "passed": true,
+      "detail": "neutral-dark"
+    },
+    {
+      "id": "chapter3-four-stage-layout",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 3 Guided Visual Lab Rev6 | Signals & Systems",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": true,
+        "canvas": 2,
+        "formula": true,
+        "math": true,
+        "main": "CHAPTER 03 / INTERACTIVE CONCEPTSNo install / Offline readyEXPERIMENT 01 / §3.3Harmonically Related Sinusoids / 조화 정현파On"
+      }
+    },
+    {
+      "id": "chapter3-hero-KaTeX",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 3 Guided Visual Lab Rev6 | Signals & Systems",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": true,
+        "canvas": 2,
+        "formula": true,
+        "math": true,
+        "main": "CHAPTER 03 / INTERACTIVE CONCEPTSNo install / Offline readyEXPERIMENT 01 / §3.3Harmonically Related Sinusoids / 조화 정현파On"
+      }
+    },
+    {
+      "id": "chapter3-lab-count",
+      "passed": true,
+      "detail": {
+        "count": 7
+      }
+    },
+    {
+      "id": "chapter3-navigate",
+      "passed": true,
+      "detail": {
+        "before": "Harmonically Related Sinusoids / 조화 정현파",
+        "after": "CTFS of a Periodic Pulse / 주기 펄스의 CTFS"
+      }
+    },
+    {
+      "id": "chapter3-render-after-switch",
+      "passed": true,
+      "detail": {
+        "stage": true,
+        "predict": true,
+        "pair": true,
+        "explain": true,
+        "canvases": 2,
+        "math": true
+      }
+    },
+    {
+      "id": "chapter3-theme-switch",
+      "passed": true,
+      "detail": {
+        "theme": "warm-neutral"
+      }
+    },
+    {
+      "id": "chapter3-no-js-errors",
+      "passed": false,
+      "detail": [
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined"
+      ]
+    },
+    {
+      "id": "chapter4-header-and-nav",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 4 Guided Visual Lab Rev6 | Signals & Systems",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": true,
+        "canvas": 2,
+        "formula": true,
+        "math": true,
+        "main": "CHAPTER 04 / INTERACTIVE CONCEPTSNo install / Offline readyEXPERIMENT 01 / §4.1From Fourier Series to CTFT / 선에서 연속 스펙트럼"
+      }
+    },
+    {
+      "id": "chapter4-theme",
+      "passed": true,
+      "detail": "neutral-dark"
+    },
+    {
+      "id": "chapter4-four-stage-layout",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 4 Guided Visual Lab Rev6 | Signals & Systems",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": true,
+        "canvas": 2,
+        "formula": true,
+        "math": true,
+        "main": "CHAPTER 04 / INTERACTIVE CONCEPTSNo install / Offline readyEXPERIMENT 01 / §4.1From Fourier Series to CTFT / 선에서 연속 스펙트럼"
+      }
+    },
+    {
+      "id": "chapter4-hero-KaTeX",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 4 Guided Visual Lab Rev6 | Signals & Systems",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": true,
+        "canvas": 2,
+        "formula": true,
+        "math": true,
+        "main": "CHAPTER 04 / INTERACTIVE CONCEPTSNo install / Offline readyEXPERIMENT 01 / §4.1From Fourier Series to CTFT / 선에서 연속 스펙트럼"
+      }
+    },
+    {
+      "id": "chapter4-lab-count",
+      "passed": true,
+      "detail": {
+        "count": 8
+      }
+    },
+    {
+      "id": "chapter4-navigate",
+      "passed": true,
+      "detail": {
+        "before": "From Fourier Series to CTFT / 선에서 연속 스펙트럼으로",
+        "after": "Rectangular Pulse and Signed Sinc / 펄스와 sinc"
+      }
+    },
+    {
+      "id": "chapter4-render-after-switch",
+      "passed": true,
+      "detail": {
+        "stage": true,
+        "predict": true,
+        "pair": true,
+        "explain": true,
+        "canvases": 2,
+        "math": true
+      }
+    },
+    {
+      "id": "chapter4-theme-switch",
+      "passed": true,
+      "detail": {
+        "theme": "warm-neutral"
+      }
+    },
+    {
+      "id": "chapter4-no-js-errors",
+      "passed": false,
+      "detail": [
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined",
+        "ReferenceError: ssTraceColor is not defined"
+      ]
+    },
+    {
+      "id": "chapter5-header-and-nav",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 5 · Laplace Transform | Engineering Learning Studio",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": false,
+        "canvas": 2,
+        "formula": false,
+        "math": false,
+        "main": "CHAPTER 05 / VISUAL LEARNINGRev7 · Offline · No installEXPERIMENT 01 / Exponential WeightingFourier → Laplace / 변환의 확장가중"
+      }
+    },
+    {
+      "id": "chapter5-theme",
+      "passed": true,
+      "detail": "neutral-dark"
+    },
+    {
+      "id": "chapter5-no-js-errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "id": "chapter6-header-and-nav",
+      "passed": true,
+      "detail": {
+        "title": "Digital Frequency and DTFT Periodicity | DTFT Visual Lab",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": false,
+        "canvas": 4,
+        "formula": false,
+        "math": false,
+        "main": "CHAPTER 06 / INTERACTIVE CONCEPTSNo install / Offline readyEXPERIMENT 01 / Digital Frequency and DTFT PeriodicityDigital"
+      }
+    },
+    {
+      "id": "chapter6-theme",
+      "passed": true,
+      "detail": "neutral-dark"
+    },
+    {
+      "id": "chapter6-no-js-errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "id": "chapter7-header-and-nav",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 7 · Sampling & Reconstruction | Engineering Learning Studio",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": false,
+        "canvas": 0,
+        "formula": false,
+        "math": false,
+        "main": "\n\n\nINTERACTIVE EXPERIMENT\n7.1 · Sampling Theorem / 표본화 정리\n같은 아날로그 정현파를 서로 다른 sampling rate로 관찰합니다. 시간축은 항상 0–0.20 s로 고정합"
+      }
+    },
+    {
+      "id": "chapter7-theme",
+      "passed": true,
+      "detail": "neutral-dark"
+    },
+    {
+      "id": "chapter7-no-js-errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "id": "chapter8-header-and-nav",
+      "passed": true,
+      "detail": {
+        "title": "Chapter 8 · Z-Transform | Engineering Learning Studio",
+        "header": true,
+        "links": 8,
+        "frame": 0,
+        "theme": "neutral-dark",
+        "stage": false,
+        "canvas": 0,
+        "formula": false,
+        "math": false,
+        "main": "\n\nINTERACTIVE EXPERIMENT8.1 · Why the Z-Transform? / 복소 z-평면감쇠·증가하는 이산 지수수열의 pole과 ROC를 연결합니다. 시간축 n=0,…,15n=0,\\ldots,15"
+      }
+    },
+    {
+      "id": "chapter8-theme",
+      "passed": true,
+      "detail": "neutral-dark"
+    },
+    {
+      "id": "chapter8-no-js-errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "id": "bridge-chapter5.html?lab=rc",
+      "passed": false,
+      "detail": {
+        "count": 1,
+        "head": "Connect the chaptersFrom analog RC to digital IIRA sampled first-order analog RC system with ZOH input has a discrete pole a = exp(-Ts/tau)."
+      }
+    },
+    {
+      "id": "bridge-chapter5.html?lab=rc-errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "id": "rc-IIR-interactive",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "id": "rc-IIR-coefficient-recomputed",
+      "passed": true,
+      "detail": {
+        "value": "CT pole: -0.500 rad/s  |  DT pole a: 0.9048  |  y[n] = 0.905 y[n-1] + 0.095 x[n]"
+      }
+    },
+    {
+      "id": "bridge-chapter6.html?lab=periodic",
+      "passed": true,
+      "detail": {
+        "count": 1,
+        "head": "Connect the chaptersDigital periodicity becomes aliasingChapter 6 proves 2pi periodicity on an integer sample index. Chapter 7 applies this "
+      }
+    },
+    {
+      "id": "bridge-chapter6.html?lab=periodic-errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "id": "bridge-chapter7.html#lab=3",
+      "passed": true,
+      "detail": {
+        "count": 1,
+        "head": "Connect the chaptersCT ambiguity follows DT periodicityUse the frequency periodicity derived in Chapter 6 to explain why f and f+k fs produc"
+      }
+    },
+    {
+      "id": "bridge-chapter7.html#lab=3-errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "id": "bridge-chapter8.html#lab=6",
+      "passed": true,
+      "detail": {
+        "count": 1,
+        "head": "Connect the chaptersFrom phasors to unit-circle zerosRevisit Chapter 6 phasor cancellation and identify the same frequencies as zeros of H(z"
+      }
+    },
+    {
+      "id": "bridge-chapter8.html#lab=6-errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "id": "index-ch2-standalone-route",
+      "passed": true,
+      "detail": {
+        "url": "http://127.0.0.1:8891/chapter2.html"
+      }
+    }
+  ],
+  "sourceSha": "44e268e9d8edb2a0da799e595a0a7c6edf198737",
+  "runId": 44912682963,
+  "generatedAt": "2026-11-21T14:12:44.742Z"
+}
