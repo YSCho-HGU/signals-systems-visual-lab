@@ -393,7 +393,7 @@ function chart(id,opt){
  for(let k=Math.ceil(xmin/xStep-1e-8),count=0;k<=Math.floor(xmax/xStep+1e-8)&&count<30;k++,count++){
    const v=k*xStep;g.textAlign='center';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.font=(Math.abs(v)<1e-9?'bold ':'')+(mini?'12px':'15px')+' system-ui';g.fillText(tickLabel(v,xStep),X(v),h-m.b+16);
  }
- g.font=(mini?'12px':'15px')+' system-ui';g.fillStyle=plotTheme.muted;g.textAlign='center';g.fillText(opt.xlabel||'time t (s)',m.l+W/2,h-16);
+ g.font='bold '+(mini?'13px':'17px')+' system-ui';g.fillStyle=plotTheme.ink;g.textAlign='center';g.fillText(opt.xlabel||'time t (s)',m.l+W/2,h-16);
  g.save();g.translate(mini?16:19,m.t+H/2);g.rotate(-PI/2);g.fillText(opt.ylabel||'amplitude',0,0);g.restore();
  if(opt.originLabel&&xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0&&!mini){g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle=plotTheme.ink;g.fillText('(0, 0)',Math.min(w-62,X(0)+9),Math.max(m.t+23,Y(0)-14))}
  if(opt.valueAtZeroLabel&&xmin<=0&&xmax>=0&&!mini){const yy=opt.valueAtZeroLabel.y;g.fillStyle=COLORS.orange;g.beginPath();g.arc(X(0),Y(yy),4.3,0,TAU);g.fill();g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle='#ba6036';g.fillText(opt.valueAtZeroLabel.text,Math.min(w-122,X(0)+10),Math.min(h-m.b-7,Y(yy)+17))}
