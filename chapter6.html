@@ -7,20 +7,7 @@
 <meta name="description" content="DTFT Visual Lab: interactive signals, spectra, digital filters, phasors, FFT leakage. No installations or external libraries.">
 <title>Chapter 6 · DTFT | Engineering Learning Studio</title>
 <script>
-/* Standalone labs follow OS appearance. Integrated parent may override without reloading graphs. */
-(function(){
- const query=window.matchMedia('(prefers-color-scheme: dark)');
- function systemTheme(){if(!window.__ssThemeFromParent&&!document.documentElement.dataset.elsTheme)document.documentElement.dataset.theme=query.matches?'dark':'light';}
- systemTheme();
- if(query.addEventListener)query.addEventListener('change',systemTheme);
- else if(query.addListener)query.addListener(systemTheme);
- window.addEventListener('message',function(event){
-   if(event.source!==window.parent||!event.data||event.data.type!=='ss-set-theme')return;
-   if(event.data.theme!=='dark'&&event.data.theme!=='light')return;
-   window.__ssThemeFromParent=true;
-   if(!document.documentElement.dataset.elsTheme)document.documentElement.dataset.theme=event.data.theme;
- });
-})();
+/* Explicit Engineering Learning Studio theme selection is authoritative. */
 </script>
 <style>
 :root{--bg:#f3f7f9;--nav:#112b41;--nav2:#173c53;--ink:#173046;--sub:#526a7c;--a:#0e8491;--coral:#f06d55;--gold:#e2ae3e;--line:#dce6ec;--paper:#fff;--pale:#ebf5f6;--r:18px}
@@ -126,9 +113,7 @@ html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white
 html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .math,
 html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .mathline,
 html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .hero-callout .formula{color:#d9f4f4!important;background:#204557!important;border-color:#426a78!important}
-html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .figure canvas,
-html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .plot-card svg,
-html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .plot-card canvas{background:#fbfdfe!important;border-radius:7px;color:#19394c;filter:none}
+
 html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .plot-card .plot-title{background:#254759;color:#e5f3f8;border-color:#426477}
 html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) select,
 html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) input[type="number"],
@@ -148,7 +133,7 @@ html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white
 html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .shell>.nav{background:linear-gradient(160deg,#0a2030,#102c40)}
 html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) nav:not(.sidebar):not(.nav) button:not(.active){background:#1e3b4e;color:#e5f3f8;border-color:#43677a}
 html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) nav:not(.sidebar):not(.nav) button.active{background:#136477;color:#fff}
-html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .plot-card svg text{fill:#203b4e}
+
 
 
 /* Rev7 audited text contrast: no Light Mode ink inside dark surfaces. */
@@ -180,7 +165,7 @@ html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white
 html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) :is(.mathline,.mathline b,.detail-status b,.detail-pill,.area-slider output,.detail-head .overlabel){color:#9be7ec!important}
 html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .fft-status{background:#284b5e!important;color:#e0f1f7!important;border-color:#5b8091!important}
 html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .fft-status :is(b,span,strong){color:#e0f1f7!important}
-html[data-theme="dark"]:not([data-els-theme="white"]):not([data-els-theme="white-clean"]):not([data-els-theme="warm-neutral"]) .plot-card svg text{fill:#274b5e}
+
 @media(max-width:560px){.axis-key{font-size:11px;gap:4px 9px;padding:7px 8px}}
 
 
@@ -371,7 +356,7 @@ function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
 
 <script src="./assets/els-language.js?v=1"></script>
 <script src="./assets/els-theme-v2.js?v=6"></script>
-<link rel="stylesheet" href="./assets/ss-trace-palette.css?v=1"><script src="./assets/ss-trace-palette.js?v=1"></script><script src="./assets/ss-sidebar-toggle.js?v=1" defer></script><link rel="stylesheet" href="./assets/els-typography-standard.css?v=1"><link rel="stylesheet" href="./assets/ss-common-header.css?v=1"><link rel="stylesheet" href="./assets/ss-readable-themes.css?v=1"><script src="./assets/ss-common-header.js?v=3" defer></script></head>
+<link rel="stylesheet" href="./assets/ss-trace-palette.css?v=2"><script src="./assets/ss-trace-palette.js?v=2"></script><script src="./assets/ss-sidebar-toggle.js?v=1" defer></script><link rel="stylesheet" href="./assets/els-typography-standard.css?v=1"><link rel="stylesheet" href="./assets/ss-common-header.css?v=1"><link rel="stylesheet" href="./assets/ss-readable-themes.css?v=1"><script src="./assets/ss-common-header.js?v=3" defer></script></head>
 <body><header class="ss6-site-header ss-common-header" aria-label="Engineering Learning Studio navigation">
 <a class="ss6-home ss-common-home" href="./index.html#overview">← Studio</a>
 <details class="els-ss-chapter-menu ss-common-menu"><summary class="ss6-site-title ss-common-title">Signals &amp; Systems · Chapter 6 · DTFT <span aria-hidden="true">⌄</span></summary><nav class="els-ss-chapter-links ss-common-links" aria-label="Choose Chapter"></nav></details>
