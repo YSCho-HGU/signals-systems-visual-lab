@@ -35,6 +35,7 @@ try{
   check(width+' initial graph visible without touching controls',initial.plots>0&&initial.content>10&&initial.series>0,initial);
   check(width+' shared palette loaded before plot computation',await page.evaluate(()=>typeof window.ssTraceColor==='function'));
   check(width+' shared numbered stages',initial.panels.length===4&&initial.panels.every((v,i)=>v.startsWith(String(i+1))),initial.panels);
+  check(width+' audited equation dataset',await page.evaluate(()=>window.__ss7EquationAudit?.formulas===28));
   check(width+' no horizontal overflow',initial.documentWidth<=width+6,initial.documentWidth);
   for(const theme of themes){
    await page.locator('#ss7-theme-picker').selectOption(theme);
@@ -44,6 +45,7 @@ try{
     await page.waitForFunction(n=>window.SSChapter7?.currentExperiment===n,index);
     const before=await snapshot(page);
     check(width+'/'+theme+'/lesson'+index+' stage and plot',before.ready&&before.panels.length===4&&before.plots>0&&before.content>10&&before.currentNav===1,before);
+    check(width+'/'+theme+'/lesson'+index+' guided formula present',await page.locator('#step-content .step .math').count()===1&&Boolean((await page.locator('#step-content .step .math').textContent())?.trim()));
     check(width+'/'+theme+'/lesson'+index+' overflow',before.documentWidth<=width+6,before.documentWidth);
     if(width>760){
      check(width+'/'+theme+'/lesson'+index+' change and observe aligned',
