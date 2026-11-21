@@ -514,10 +514,10 @@ function chart(id,opt){
 function sample(fn,t0,t1,N=400){let out=[];for(let i=0;i<=N;i++){let t=t0+(t1-t0)*i/N;out.push([t,fn(t)])}return out}
 let planeViewport=null;
 function plane(id,{poles=[],zeros=[],roc={type:'right',a:-1},xmin=-5.5,xmax=3,ymin=-4.7,ymax=4.7,probe=null,handles=null}){
- const {g,w,h}=ctx(id),m={l:67,r:18,t:22,b:47},W=w-m.l-m.r,H=h-m.t-m.b;
+ const {g,w,h}=ctx(id),plotTheme=elsPlotColors(),m={l:67,r:18,t:22,b:47},W=w-m.l-m.r,H=h-m.t-m.b;
  const X=x=>m.l+(x-xmin)*W/(xmax-xmin),Y=y=>m.t+(ymax-y)*H/(ymax-ymin);
  planeViewport={id,X,Y,xmin,xmax,ymin,ymax,m,w,h,toX:px=>xmin+(px-m.l)/W*(xmax-xmin)};
- g.fillStyle='white';g.fillRect(0,0,w,h);
+ g.fillStyle=plotTheme.background;g.fillRect(0,0,w,h);
  g.save();g.beginPath();g.rect(m.l,m.t,W,H);g.clip();
  let left=xmin,right=xmax;
  if(roc.type==='right')left=roc.a;
@@ -526,10 +526,10 @@ function plane(id,{poles=[],zeros=[],roc={type:'right',a:-1},xmin=-5.5,xmax=3,ym
  if(roc.type==='all'){left=xmin;right=xmax}
  if(roc.type!=='none'){g.fillStyle='#e1f3ef';const a=Math.max(left,xmin),b=Math.min(right,xmax);if(b>a)g.fillRect(X(a),m.t,X(b)-X(a),H)}
  const xStep=niceStep(xmax-xmin,6),yStep=niceStep(ymax-ymin,6);
- for(let k=Math.ceil(xmin/xStep-1e-8);k<=Math.floor(xmax/xStep+1e-8);k++){g.strokeStyle=COLORS.grid;g.lineWidth=1;g.beginPath();g.moveTo(X(k*xStep),m.t);g.lineTo(X(k*xStep),m.t+H);g.stroke()}
- for(let k=Math.ceil(ymin/yStep-1e-8);k<=Math.floor(ymax/yStep+1e-8);k++){g.strokeStyle=COLORS.grid;g.lineWidth=1;g.beginPath();g.moveTo(m.l,Y(k*yStep));g.lineTo(m.l+W,Y(k*yStep));g.stroke()}
- if(ymin<=0&&ymax>=0){g.strokeStyle='#344f62';g.lineWidth=2;g.beginPath();g.moveTo(m.l,Y(0));g.lineTo(m.l+W,Y(0));g.stroke()}
- if(xmin<=0&&xmax>=0){g.strokeStyle='#344f62';g.lineWidth=2;g.beginPath();g.moveTo(X(0),m.t);g.lineTo(X(0),m.t+H);g.stroke()}
+ for(let k=Math.ceil(xmin/xStep-1e-8);k<=Math.floor(xmax/xStep+1e-8);k++){g.strokeStyle=plotTheme.grid;g.lineWidth=1;g.beginPath();g.moveTo(X(k*xStep),m.t);g.lineTo(X(k*xStep),m.t+H);g.stroke()}
+ for(let k=Math.ceil(ymin/yStep-1e-8);k<=Math.floor(ymax/yStep+1e-8);k++){g.strokeStyle=plotTheme.grid;g.lineWidth=1;g.beginPath();g.moveTo(m.l,Y(k*yStep));g.lineTo(m.l+W,Y(k*yStep));g.stroke()}
+ if(ymin<=0&&ymax>=0){g.strokeStyle=plotTheme.axis;g.lineWidth=2;g.beginPath();g.moveTo(m.l,Y(0));g.lineTo(m.l+W,Y(0));g.stroke()}
+ if(xmin<=0&&xmax>=0){g.strokeStyle=plotTheme.axis;g.lineWidth=2;g.beginPath();g.moveTo(X(0),m.t);g.lineTo(X(0),m.t+H);g.stroke()}
  g.strokeStyle=COLORS.teal;g.setLineDash([5,4]);g.lineWidth=1.4;
  const rocbounds=roc.type==='strip'?[roc.a,roc.b]:(roc.type==='all'||roc.type==='none')?[]:[roc.a];
  for(const boundary of rocbounds){g.beginPath();g.moveTo(X(boundary),m.t);g.lineTo(X(boundary),m.t+H);g.stroke()}
@@ -541,7 +541,7 @@ function plane(id,{poles=[],zeros=[],roc={type:'right',a:-1},xmin=-5.5,xmax=3,ym
  }
  for(const p of poles){let x=X(p.re),y=Y(p.im);g.strokeStyle=p.canceled?'#7f919c':COLORS.orange;g.lineWidth=3.1;g.beginPath();g.moveTo(x-7,y-7);g.lineTo(x+7,y+7);g.moveTo(x-7,y+7);g.lineTo(x+7,y-7);g.stroke();if(p.canceled){g.strokeStyle=COLORS.purple;g.beginPath();g.arc(x,y,10,0,TAU);g.stroke()}}
  for(const z of zeros){g.strokeStyle=COLORS.purple;g.lineWidth=3;g.beginPath();g.arc(X(z.re),Y(z.im),7,0,TAU);g.stroke()}
- if(xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0){g.fillStyle='white';g.strokeStyle='#253f53';g.lineWidth=1.7;g.beginPath();g.arc(X(0),Y(0),4.8,0,TAU);g.fill();g.stroke()}
+ if(xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0){g.fillStyle=plotTheme.background;g.strokeStyle=plotTheme.axis;g.lineWidth=1.7;g.beginPath();g.arc(X(0),Y(0),4.8,0,TAU);g.fill();g.stroke()}
  if(handles){
   g.font='bold 11px system-ui';g.textAlign='center';
   if(handles.p!==undefined){const px=X(handles.p),py=Y(0);g.fillStyle=COLORS.orange;g.fillText('drag P',px,py-17)}
@@ -550,9 +550,9 @@ function plane(id,{poles=[],zeros=[],roc={type:'right',a:-1},xmin=-5.5,xmax=3,ym
  if(roc.type!=='none'){const a=Math.max(left,xmin),b=Math.min(right,xmax);if(b>a){g.fillStyle='#087d85';g.font='bold 11px system-ui';g.textAlign='center';g.fillText('ROC',Math.max(m.l+25,Math.min(m.l+W-25,(X(a)+X(b))/2)),m.t+17)}}
  g.restore();
  g.font='11px system-ui';g.textBaseline='middle';
- for(let k=Math.ceil(xmin/xStep-1e-8);k<=Math.floor(xmax/xStep+1e-8);k++){const v=k*xStep;g.fillStyle=Math.abs(v)<1e-9?'#224559':'#647f90';g.font=(Math.abs(v)<1e-9?'bold ':'')+'11px system-ui';g.textAlign='center';g.fillText(tickLabel(v,xStep),X(v),h-m.b+16)}
- for(let k=Math.ceil(ymin/yStep-1e-8);k<=Math.floor(ymax/yStep+1e-8);k++){const v=k*yStep;g.fillStyle=Math.abs(v)<1e-9?'#224559':'#647f90';g.font=(Math.abs(v)<1e-9?'bold ':'')+'11px system-ui';g.textAlign='right';g.fillText(tickLabel(v,yStep),m.l-9,Y(v))}
- g.fillStyle='#516d7d';g.textAlign='center';g.font='11px system-ui';g.fillText('Re(s)  σ',m.l+W/2,h-12);
+ for(let k=Math.ceil(xmin/xStep-1e-8);k<=Math.floor(xmax/xStep+1e-8);k++){const v=k*xStep;g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.font=(Math.abs(v)<1e-9?'bold ':'')+'11px system-ui';g.textAlign='center';g.fillText(tickLabel(v,xStep),X(v),h-m.b+16)}
+ for(let k=Math.ceil(ymin/yStep-1e-8);k<=Math.floor(ymax/yStep+1e-8);k++){const v=k*yStep;g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.font=(Math.abs(v)<1e-9?'bold ':'')+'11px system-ui';g.textAlign='right';g.fillText(tickLabel(v,yStep),m.l-9,Y(v))}
+ g.fillStyle=plotTheme.muted;g.textAlign='center';g.font='11px system-ui';g.fillText('Re(s)  σ',m.l+W/2,h-12);
  g.save();g.translate(16,m.t+H/2);g.rotate(-PI/2);g.fillText('Im(s)  ω',0,0);g.restore();
  ssAxisKey(id,'Re(s) = σ','Im(s) = ω',xmin,xmax,ymin,ymax);
  ssHoverBind(id,{kind:'complex',plane:'s',w,h,pad:m,xmin,xmax,ymin,ymax,xlabel:'Re(s) = σ',ylabel:'Im(s) = ω',markers:[...poles.map(p=>({x:p.re,y:p.im,type:'Pole'})),...zeros.map(z=>({x:z.re,y:z.im,type:'Zero'}))],roc});
