@@ -1,0 +1,340 @@
+<!doctype html><html lang="ko" class="ss7-native"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#112b41"><title>Chapter 7 · Sampling & Reconstruction | Engineering Learning Studio</title><style>
+:root{--navy:#112b41;--ink:#18394c;--muted:#597484;--teal:#0d8290;--line:#dce8ee;--bg:#f3f7f9;--gold:#d8a13d}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.7 system-ui,-apple-system,'Malgun Gothic',Arial,sans-serif}button,select,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #e8b349;outline-offset:2px}header{padding:28px max(20px,calc((100% - 1220px)/2));background:linear-gradient(110deg,#102d44,#165b6b);color:#fff}header .eyebrow{font-size:11px;font-weight:850;letter-spacing:.14em;color:#a7e6e2}header h1{font-size:clamp(24px,3.6vw,38px);margin:8px 0 5px;line-height:1.2}header p{margin:0;color:#d6e8ec;font-size:13px}main{max-width:1220px;margin:auto;padding:20px}nav{display:flex;gap:8px;overflow-x:auto;padding:12px 0 18px;scrollbar-width:thin}nav button{flex:0 0 auto;border:1px solid #cddfe6;border-radius:11px;background:#fff;color:#31576b;text-align:left;padding:10px 13px;font-size:12px;font-weight:750;max-width:210px}nav button.active{background:#115d70;border-color:#115d70;color:#fff}nav button small{display:block;font-weight:500;opacity:.78;font-size:10px}.experiment{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(270px,.85fr);gap:18px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:19px;box-shadow:0 4px 16px #1b4b5910;min-width:0}.card h2,.card h3{margin:0 0 8px;line-height:1.35}.card h2{font-size:23px}.card h3{font-size:17px}.intro{color:var(--muted);margin:0 0 13px}.eyebrow{font-size:10px;letter-spacing:.11em;font-weight:900;color:#0d8290}.controls{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}.control{display:flex;align-items:center;gap:10px;flex:1 1 220px;border:1px solid #e1ebef;border-radius:10px;padding:9px 12px;background:#f8fbfc}.control label{font-size:12px;font-weight:800;min-width:105px}.control input[type=range]{flex:1;min-width:75px;accent-color:#0d8290}.control select{border:1px solid #ccdde4;border-radius:7px;padding:6px;background:white;max-width:100%}.control output{min-width:49px;text-align:right;font-variant-numeric:tabular-nums;font-weight:850;color:#116b78}.plot-card{border:1px solid #e2ebef;border-radius:12px;overflow:hidden;margin-top:12px;background:#fff}.plot-card .plot-title{padding:10px 14px;font-size:12px;font-weight:800;background:#f3f9fa;border-bottom:1px solid #e2ebef}.plot-card svg{display:block;width:100%;height:auto}.legend{display:flex;gap:13px;flex-wrap:wrap;padding:8px 13px 10px;color:#496b7d;font-size:11px}.legend span i{display:inline-block;width:16px;height:3px;vertical-align:middle;margin-right:5px}.insight{background:#eaf7f6;border-left:4px solid #0d8290;border-radius:9px;padding:13px 15px;margin-top:14px;font-size:13px;line-height:1.7}.insight strong{color:#0b6f7d}.deriv-top{display:flex;justify-content:space-between;align-items:center;gap:12px}.progress{height:6px;border-radius:20px;background:#e5eef2;overflow:hidden;margin:13px 0 18px}.progress div{height:100%;background:linear-gradient(90deg,#0e8491,#48b7b0);transition:width .2s}.step{border:1px solid #d5e8eb;border-radius:12px;padding:14px;background:#f7fbfc;animation:rise .22s ease}.step strong{display:block;font-size:14px}.step .math{background:#eef7f7;color:#164b61;border-radius:8px;padding:11px 12px;margin:11px 0;font:18px/1.7 Cambria,'Times New Roman',serif;overflow-x:auto}.step p{margin:5px 0;color:#496a7b;font-size:13px}.step-buttons{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.step-buttons button{border:1px solid #c9dde5;background:white;border-radius:9px;padding:8px 10px;font-size:12px;font-weight:750}.step-buttons .primary{background:#0e8491;color:white;border-color:#0e8491}.step-buttons button:disabled{opacity:.35;cursor:not-allowed}.reading{margin-top:15px}.reading .note{border:1px solid #e0ebef;border-radius:10px;padding:11px 13px;margin-top:8px;background:#fbfdfd}.reading .note strong{display:block;font-size:12px;color:#24566b}.reading .note p{font-size:12px;color:#567282;margin:4px 0}.check{margin-top:16px;padding:13px 14px;border:1px dashed #aacdd2;background:#f2fafa;border-radius:10px;font-size:12px}.check b{color:#0a7684}.check button{border:0;background:transparent;color:#096c7a;text-decoration:underline;font-weight:850}.check .answer{display:none;margin-top:9px;color:#31596a}.check.open .answer{display:block}.foot{padding:18px 0 35px;color:#668293;font-size:11px}.foot a{color:#0c7684}.hint{font-size:11px;color:#667e8b;margin-top:8px}.plot-grid{display:grid;grid-template-columns:1fr;gap:12px}@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}@media(max-width:900px){.experiment{grid-template-columns:1fr}main{padding:13px}.card{padding:14px}header{padding:23px 18px}.control{flex:1 1 190px}}@media(max-width:520px){.control{flex:1 1 100%}.control label{min-width:90px}.card h2{font-size:20px}.step .math{font-size:16px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+
+/* Rev5 integrated + standalone: dark mode; graph canvas stays light for legible axes/curves. */
+html[data-theme="dark"]{color-scheme:dark;--bg:#0c1827;--nav:#0c2234;--nav2:#193c51;--ink:#e5f1f8;--sub:#b0c7d3;--muted:#b0c7d3;--a:#75d9e3;--accent:#75d9e3;--teal:#75d9e3;--coral:#ff9a86;--warm:#ff9a86;--gold:#efc36e;--line:#355266;--paper:#192e42;--card:#192e42;--pale:#1f4050}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] .main,
+html[data-theme="dark"] main{color:var(--ink)}
+html[data-theme="dark"] .controls,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .figure,
+html[data-theme="dark"] .metric,
+html[data-theme="dark"] .learning,
+html[data-theme="dark"] .question,
+html[data-theme="dark"] .insight,
+html[data-theme="dark"] .quiz,
+html[data-theme="dark"] .derivation-panel,
+html[data-theme="dark"] .reading-panel,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .plot-card{background:#192e42!important;border-color:#365468!important;box-shadow:0 5px 22px #0002!important;color:#e7f3f9}
+html[data-theme="dark"] .deriv-step,
+html[data-theme="dark"] .step,
+html[data-theme="dark"] .reading .note,
+html[data-theme="dark"] .control,
+html[data-theme="dark"] .hero-callout,
+html[data-theme="dark"] .formula,
+html[data-theme="dark"] .axis-note,
+html[data-theme="dark"] .plot-instruction,
+html[data-theme="dark"] .reading-note,
+html[data-theme="dark"] .interpretation,
+html[data-theme="dark"] .guide-note{background:#203c4e!important;color:#e2f1f7!important;border-color:#426278!important}
+html[data-theme="dark"] .deriv-step.guide-enter,
+html[data-theme="dark"] .deriv-step.active,
+html[data-theme="dark"] .step.active{background:#20505a!important;border-color:#62bfc7!important}
+html[data-theme="dark"] .deriv-math,
+html[data-theme="dark"] .step .math,
+html[data-theme="dark"] .math,
+html[data-theme="dark"] .mathline,
+html[data-theme="dark"] .hero-callout .formula{color:#d9f4f4!important;background:#204557!important;border-color:#426a78!important}
+html[data-theme="dark"] .figure canvas,
+html[data-theme="dark"] .plot-card svg,
+html[data-theme="dark"] .plot-card canvas{background:#fbfdfe!important;border-radius:7px;color:#19394c;filter:none}
+html[data-theme="dark"] .plot-card .plot-title{background:#254759;color:#e5f3f8;border-color:#426477}
+html[data-theme="dark"] select,
+html[data-theme="dark"] input[type="number"],
+html[data-theme="dark"] input[type="text"]{background:#142d40;color:#e6f2f7;border:1px solid #507083}
+html[data-theme="dark"] button:not(.active):not(.on):not(.primary):not(.guide-primary){border-color:#45677b}
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .pill{background:#204957;color:#9be5e8}
+html[data-theme="dark"] .breadcrumb,
+html[data-theme="dark"] .crumb,
+html[data-theme="dark"] .intro,
+html[data-theme="dark"] .hint,
+html[data-theme="dark"] .reading .note p,
+html[data-theme="dark"] .axis-note{color:#b9d1dd!important}
+html[data-theme="dark"] .nav button:not(.active),
+html[data-theme="dark"] .tabs button:not(.on){color:#d3e6ee}
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .shell>.nav{background:linear-gradient(160deg,#0a2030,#102c40)}
+html[data-theme="dark"] nav:not(.sidebar):not(.nav) button:not(.active){background:#1e3b4e;color:#e5f3f8;border-color:#43677a}
+html[data-theme="dark"] nav:not(.sidebar):not(.nav) button.active{background:#136477;color:#fff}
+html[data-theme="dark"] .plot-card svg text{fill:#203b4e}
+
+
+/* Rev7 audited text contrast: no Light Mode ink inside dark surfaces. */
+:root{--ss-axis-text:#274f64;--ss-axis-bg:#f1f8fa}
+.axis-key{display:flex;flex-wrap:wrap;align-items:center;gap:5px 13px;margin:8px 0 4px;padding:8px 11px;border-radius:8px;border:1px solid #cfe1e9;background:var(--ss-axis-bg);color:var(--ss-axis-text);font:600 12px/1.55 system-ui,'Malgun Gothic',sans-serif;overflow-wrap:anywhere}
+.axis-key .ax-strong{font-weight:850;color:#086d79}
+html[data-theme="dark"]{--ss-axis-text:#d5edf5;--ss-axis-bg:#244457}
+html[data-theme="dark"] .axis-key{background:#244457!important;border-color:#54788b!important;color:#d5edf5!important}
+html[data-theme="dark"] .axis-key .ax-strong{color:#91e8eb!important}
+html[data-theme="dark"] :is(.reading-panel h3,.guide-head h3,.deriv-top,.reading-note strong,.reading .note strong,.compare-title,.figure h3,.plot-card .plot-title,.step strong,.check b,.insight strong){color:#eff9ff!important}
+html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain,.guide-check,.guide-head p,.deriv-step p,.reading-panel p,.reading .note p,.step p,.insight p,.quiz p,.check,.check .answer,.compare-sub,.compare-footer,.figure .sub,.figure p,.formhint,.heading p,.intro,.desc,.smallnote,.rangeEnds,.metric .k,.metric .d,.metric b,.legend,.bridge,.footer,.foot,.hint,.source,.crumb,.breadcrumb,.plot-instruction,.axis-note){color:#cce3ee!important}
+html[data-theme="dark"] :is(.reading-note,.reading .note,.step,.deriv-step,.compare-card,.compare-wrap,.check,.axis-note){background:#234254!important;border-color:#517185!important}
+html[data-theme="dark"] :is(.guide-check,.quiz details){border-color:#517185!important}
+html[data-theme="dark"] :is(.overlabel,.over,.plot-number,.eyebrow,.heading .sup,.step-index,.progress-badge,.metric .v,.metric strong,.ctrl output,.control output){color:#90e8ec!important}
+html[data-theme="dark"] :is(.guide-actions button:not(.primary),.step-buttons button:not(.primary),.btn:not(.primary),.preset,.check button,.quiz button,.actions button:not(.primary)){color:#e6f5fc!important;background:#234657!important;border-color:#54798d!important}
+html[data-theme="dark"] :is(.guide-actions button.primary,.step-buttons button.primary,.btn.primary,.actions button.primary){background:#0d697b!important;border-color:#67c6d1!important;color:#fff!important}
+html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain){opacity:1!important}
+html[data-theme="dark"] :is(.learning p,.question p,.learning .body,.question .body,.notice,.metric .detail,.ctrl .ends,.rangeEnds,.range-ends,.reading-panel .check,.reading-panel .question){color:#d1e7f0!important}
+html[data-theme="dark"] :is(.progress-badge,.step-index){background:#285666!important;color:#a6f2f0!important;border-color:#5b8593!important}
+/* Additional animated-convolution and FFT presets: previously retained light-only colors. */
+html[data-theme="dark"] :is(.motion-panel,.detail-panel,.fft-guide){background:#1c3548!important;border-color:#4c7385!important;color:#e8f5fb!important}
+html[data-theme="dark"] :is(.motion-panel h3,.detail-head h4,.fft-guide h3,.motion-status strong,.detail-status strong){color:#f0f9fd!important}
+html[data-theme="dark"] :is(.motion-lead,.motion-speed,.motion-caution,.motion-status small,.detail-sub,.detail-note,.area-slider label,.area-slider .ends,.fft-guide p){color:#cfe4ed!important}
+html[data-theme="dark"] :is(.motion-stage,.motion-stage.done,.motion-status,.detail-status,.detail-pill,.area-slider){background:#28495b!important;color:#e4f2f9!important;border-color:#567a8d!important}
+html[data-theme="dark"] .motion-stage.current{background:#255b63!important;color:#fff!important;border-color:#78d3d5!important}
+html[data-theme="dark"] :is(.motion-stage b,.motion-eq){background:#30566b!important;color:#a3edf0!important}
+html[data-theme="dark"] :is(.motion-actions button:not(.motion-primary),.detail-actions button:not(.detail-primary),.preset-row button:not(.selected)){background:#29495c!important;color:#eaf6fb!important;border-color:#5c8191!important}
+html[data-theme="dark"] :is(.motion-primary,.detail-primary,.preset-row button.selected){background:#086a79!important;color:#fff!important;border-color:#6ccbd0!important}
+html[data-theme="dark"] :is(.mathline,.mathline b,.detail-status b,.detail-pill,.area-slider output,.detail-head .overlabel){color:#9be7ec!important}
+html[data-theme="dark"] .fft-status{background:#284b5e!important;color:#e0f1f7!important;border-color:#5b8091!important}
+html[data-theme="dark"] .fft-status :is(b,span,strong){color:#e0f1f7!important}
+html[data-theme="dark"] .plot-card svg text{fill:#274b5e}
+@media(max-width:560px){.axis-key{font-size:11px;gap:4px 9px;padding:7px 8px}}
+
+
+/* Rev8: interactive graph probe, color-contrast safe in both themes. */
+.ss-hover-tip{position:absolute;z-index:35;pointer-events:none;display:none;min-width:190px;max-width:min(310px,calc(100% - 16px));padding:11px 12px;border-radius:11px;border:1px solid #4c8190;background:#102d41;color:#f1fbff;box-shadow:0 9px 26px rgba(5,22,36,.32);font:500 12px/1.55 system-ui,'Malgun Gothic',sans-serif;white-space:normal;overflow-wrap:anywhere}
+.ss-hover-tip .ss-hover-title{font-weight:800;color:#adf2f2;font-size:12px;margin-bottom:4px}
+.ss-hover-tip .ss-hover-coord{color:#e1f4fb;font-size:11px;margin-bottom:5px}
+.ss-hover-tip .ss-hover-line{display:flex;align-items:baseline;gap:7px;margin:3px 0;color:#f1fbff}
+.ss-hover-tip .ss-hover-swatch{display:inline-block;width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:var(--ss-line,#6ccbd0)}
+.ss-hover-tip .ss-hover-line b{font-weight:750;color:#fff}
+.ss-hover-tip .ss-hover-line.primary b{color:#a8f7df}
+.ss-hover-tip .ss-hover-note{color:#c0dbe7;font-size:10.5px;margin-top:5px;border-top:1px solid #486579;padding-top:4px}
+.ss-hover-v,.ss-hover-h{position:absolute;display:none;pointer-events:none;z-index:30;background:#e26b4f;opacity:.85}
+.ss-hover-v{width:1px;border-left:1px dashed #f18b63;background:transparent}
+.ss-hover-h{height:1px;border-top:1px dashed #f18b63;background:transparent}
+.ss-hover-dot{position:absolute;display:none;pointer-events:none;z-index:31;width:11px;height:11px;border-radius:50%;border:2px solid #fff;background:#ed7954;box-shadow:0 0 0 1px #123a4e;transform:translate(-50%,-50%)}
+.ss-hover-hint{font:600 11px/1.5 system-ui,'Malgun Gothic',sans-serif;color:#23576a;margin:5px 0 2px;letter-spacing:.01em}
+html[data-theme="dark"] .ss-hover-hint{color:#c6e9f2!important}
+html[data-theme="dark"] .ss-hover-tip{background:#0d2739;border-color:#6a98a9;color:#f4fbff}
+html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hover-note){color:#d6e9f3!important}
+.ss-hover-target:focus-visible{outline:3px solid #ee9868;outline-offset:3px}
+@media(max-width:560px){.ss-hover-tip{max-width:min(290px,calc(100% - 12px));padding:9px 10px;font-size:11px}.ss-hover-hint{font-size:10px}}
+
+</style>
+<script>
+/* Rev8 shared graph probe. Displays the cursor coordinate and an independently
+   evaluated analytic value when a function exists, otherwise an actual drawn
+   sample. No interpolation is presented as an exact analytic answer. */
+(function(){
+ 'use strict';
+ const states=new WeakMap();let queued=[];
+ const fmt=v=>{if(!Number.isFinite(v))return String(v);if(Math.abs(v)<1e-11)return '0';const a=Math.abs(v);if(a>=1e4||a<1e-4)return v.toExponential(3);return Number(v.toFixed(a>=100?2:a>=1?4:6)).toString()};
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ function el(tag,cls,parent){const x=document.createElement(tag);x.className=cls;parent.appendChild(x);return x}
+ function labels(host){return [...host.querySelectorAll('.legend > .lgitem,.legend > .legend-item,.legend > span')].map(e=>e.textContent.trim())}
+ function bind(target,d){
+  if(typeof target==='string')target=document.getElementById(target);
+  if(!target||!d)return;
+  let st=states.get(target);
+  if(!st){
+   const host=target.closest('.plotbox,.figure,.compare-card,.plot-card')||target.parentElement;
+   if(!host)return;
+   if(getComputedStyle(host).position==='static')host.style.position='relative';
+   const tip=el('div','ss-hover-tip',host),v=el('div','ss-hover-v',host),h=el('div','ss-hover-h',host),dot=el('div','ss-hover-dot',host);
+   tip.setAttribute('role','status');tip.setAttribute('aria-live','off');
+   let hint=host.querySelector('.ss-hover-hint');if(!hint){hint=el('div','ss-hover-hint',host);hint.textContent='ⓘ Hover / Tap / Focus: coordinates + signal values · 마우스·터치·키보드로 값 확인'}
+   target.classList.add('ss-hover-target');target.setAttribute('tabindex','0');
+   target.setAttribute('aria-description','Move pointer, tap, or use arrow keys to inspect signal values and coordinates.');
+   st={target,host,tip,v,h,dot,d:null,lastX:null,lastType:null};states.set(target,st);
+   target.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;move(st,e.clientX,e.clientY,e.pointerType)});
+   target.addEventListener('pointerdown',e=>{move(st,e.clientX,e.clientY,e.pointerType)});
+   target.addEventListener('pointerleave',e=>{if(e.pointerType!=='touch')hide(st)});
+   target.addEventListener('blur',()=>hide(st));
+   target.addEventListener('focus',()=>{const r=target.getBoundingClientRect();move(st,r.left+r.width*.55,r.top+r.height*.45,'keyboard')});
+   target.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End','Escape'].includes(e.key))return;
+    if(e.key==='Escape'){hide(st);return}e.preventDefault();const r=target.getBoundingClientRect();
+    const p=st.d.pad||{l:0,r:0,t:0,b:0},w=st.d.w,h=st.d.h;
+    const left=r.left+p.l/w*r.width,right=r.right-p.r/w*r.width;
+    let px=st.lastX===null?(left+right)/2:st.lastX;
+    if(e.key==='Home')px=left;else if(e.key==='End')px=right;else px+=((e.shiftKey?.05:.0125)*(right-left))*(e.key==='ArrowLeft'?-1:1);
+    move(st,clamp(px,left,right),r.top+r.height*.5,'keyboard',true)
+   });
+  }
+  st.d=d;
+  // A parameter change redraws the graph; hide stale numerical values.
+  hide(st);
+ }
+ function hide(st){st.tip.style.display='none';st.v.style.display='none';st.h.style.display='none';st.dot.style.display='none';st.lastX=null}
+ function pointToView(st,cx,cy){const r=st.target.getBoundingClientRect();const d=st.d;
+  return {x:r.left+cx/d.w*r.width,y:r.top+cy/d.h*r.height}
+ }
+ function nearest(data,x,xmin=-Infinity,xmax=Infinity){let best=null,bestDelta=Infinity;
+  for(const p of data||[]){if(!p||!Number.isFinite(p[0])||!Number.isFinite(p[1])||p[0]<xmin-1e-9||p[0]>xmax+1e-9)continue;const delta=Math.abs(p[0]-x);if(delta<bestDelta){bestDelta=delta;best=p}}
+  return best
+ }
+ function readSeries(st,x,y){const d=st.d;const values=[];
+  for(let i=0;i<(d.series||[]).length;i++){
+   const s=d.series[i];let v=null,sx=x,method='formula';
+   if(typeof s.fn==='function'){
+    try{v=s.fn(x)}catch(e){continue}
+   }else if(Array.isArray(s.points)){
+    const p=nearest(s.points,x,d.xmin,d.xmax);if(!p)continue;sx=p[0];v=p[1];method=s.discrete?'discrete':'sample';
+   }else continue;
+   if(!Number.isFinite(v))continue;
+   const ypixel=d.toPixel?d.toPixel(sx,v).y:d.pad.t+(d.ymax-v)/(d.ymax-d.ymin)*(d.h-d.pad.t-d.pad.b);
+   const py=d.pad.t+(d.ymax-y)/(d.ymax-d.ymin)*(d.h-d.pad.t-d.pad.b);
+   const off=Math.abs(ypixel-py);
+   values.push({i,label:s.label||'',color:s.color||'#42c9d2',x:sx,y:v,method,off,inRange:v>=d.ymin&&v<=d.ymax});
+  }
+  values.sort((a,b)=>a.off-b.off);
+  const lab=labels(st.host);for(const v of values){if(!v.label)v.label=lab[v.i]||d.ylabel||`Signal ${v.i+1}`}
+  return values
+ }
+ function rocInfo(d,x,y){const r=d.roc;if(!r)return null;
+  if(d.plane==='z'){const a=Math.hypot(x,y);return (a>r.inner+1e-8&&a<r.outer-1e-8)?'ROC 내부 (boundary excluded)':'ROC 외부 또는 경계'}
+  if(r.type==='all')return 'ROC: entire s-plane';
+  if(r.type==='none')return 'No ROC';
+  const inside=r.type==='right'?x>r.a:r.type==='left'?x<r.a:r.type==='strip'?x>r.a&&x<r.b:false;
+  return inside?'ROC 내부 (boundary excluded)':'ROC 외부 또는 경계'
+ }
+ function move(st,clientX,clientY,pointerType,fromKeyboard=false){
+  const d=st.d;if(!d)return;const rect=st.target.getBoundingClientRect();if(!rect.width||!rect.height)return;
+  let px=(clientX-rect.left)*d.w/rect.width,py=(clientY-rect.top)*d.h/rect.height;
+  const pad=d.pad||{l:0,r:0,t:0,b:0};
+  if(fromKeyboard)py=pad.t+(d.h-pad.t-pad.b)*.5;
+  if(px<pad.l||px>d.w-pad.r||py<pad.t||py>d.h-pad.b){hide(st);return}
+  let x,y;
+  if(d.plane&&d.center){x=(px-d.center.cx)/d.center.scale;y=(d.center.cy-py)/d.center.scale}
+  else{x=d.xmin+(px-pad.l)/(d.w-pad.l-pad.r)*(d.xmax-d.xmin);y=d.ymax-(py-pad.t)/(d.h-pad.t-pad.b)*(d.ymax-d.ymin)}
+  const items=[];let marker=null;
+  if(d.plane){
+   items.push({label:`${d.plane} = ${fmt(x)} ${y<0?'−':'+'} j${fmt(Math.abs(y))}`,value:`|${d.plane}|=${fmt(Math.hypot(x,y))}, ∠=${fmt(Math.atan2(y,x)*180/Math.PI)}°`,color:'#6dd7d9'});
+   const r=d.markers||[];let closest=null,dist=Infinity;
+   for(const m of r){const q=d.center?{x:d.center.cx+m.x*d.center.scale,y:d.center.cy-m.y*d.center.scale}:{x:pad.l+(m.x-d.xmin)/(d.xmax-d.xmin)*(d.w-pad.l-pad.r),y:pad.t+(d.ymax-m.y)/(d.ymax-d.ymin)*(d.h-pad.t-pad.b)};const delta=Math.hypot(px-q.x,py-q.y);if(delta<dist){closest=m;dist=delta}}
+   if(closest&&dist<17){items.push({label:`${closest.type} @ (${fmt(closest.x)}, ${fmt(closest.y)})`,value:closest.type==='Pole'?'× pole':closest.type==='Zero'?'○ zero':'vector endpoint',color:closest.type==='Pole'?'#ffa19a':'#93e8ed'})}
+   const region=rocInfo(d,x,y);if(region)items.push({label:'Region of convergence',value:region,color:'#b8e8c4'});
+  }else{
+   const values=readSeries(st,x,y);
+   if(values.length){
+    const ordered=values.slice(0,4);
+    for(const v of ordered){
+     const method=v.method==='formula'?'f(x) 직접 계산':v.method==='discrete'?'이산 표본':'계산 표본 (보간 없음)';
+     const extra=v.method==='formula'?'':` @ x=${fmt(v.x)}`;
+     items.push({label:v.label,value:`${fmt(v.y)}${extra}${v.inRange?'':' · 표시 범위 밖'}`,color:v.color,method,primary:v===values[0]});
+    }
+    const v=values.find(z=>z.inRange);if(v){const xplot=v.method==='formula'?x:v.x;marker={x:xplot,y:v.y}}
+    if(values.length>4)items.push({label:`+ ${values.length-4} additional series`,value:'',color:'#bedde5'});
+   }else items.push({label:'No finite signal value at this coordinate',value:'',color:'#f2c39c'});
+  }
+  const hostRect=st.host.getBoundingClientRect();const cx=rect.left+px/d.w*rect.width,cy=rect.top+py/d.h*rect.height;
+  const xlocal=cx-hostRect.left,ylocal=cy-hostRect.top;
+  const minX=rect.left+pad.l/d.w*rect.width-hostRect.left,maxX=rect.right-pad.r/d.w*rect.width-hostRect.left;
+  const minY=rect.top+pad.t/d.h*rect.height-hostRect.top,maxY=rect.bottom-pad.b/d.h*rect.height-hostRect.top;
+  st.v.style.cssText=`display:block;left:${xlocal}px;top:${minY}px;height:${maxY-minY}px`;
+  const showMarker=marker&&Number.isFinite(marker.y);
+  if(showMarker){const q=d.toPixel?d.toPixel(marker.x,marker.y):{x:pad.l+(marker.x-d.xmin)/(d.xmax-d.xmin)*(d.w-pad.l-pad.r),y:pad.t+(d.ymax-marker.y)/(d.ymax-d.ymin)*(d.h-pad.t-pad.b)};
+   const qx=rect.left+q.x/d.w*rect.width-hostRect.left,qy=rect.top+q.y/d.h*rect.height-hostRect.top;
+   st.h.style.cssText=`display:block;left:${minX}px;top:${qy}px;width:${maxX-minX}px`;
+   st.dot.style.cssText=`display:block;left:${qx}px;top:${qy}px`;
+  }else{st.h.style.display='none';st.dot.style.display='none'}
+  st.tip.replaceChildren();
+  const title=el('div','ss-hover-title',st.tip);title.textContent=d.plane?'Complex-plane probe / 복소평면 좌표':'Graph probe / 그래프 값 읽기';
+  const coord=el('div','ss-hover-coord',st.tip);coord.textContent=`${d.xlabel||'x'} = ${fmt(x)}   |   ${d.ylabel||'y'} (cursor) = ${fmt(y)}`;
+  for(const it of items){const line=el('div','ss-hover-line'+(it.primary?' primary':''),st.tip);const sw=el('i','ss-hover-swatch',line);sw.style.setProperty('--ss-line',it.color);const text=el('span','',line);const name=el('b','',text);name.textContent=it.label;const val=el('span','',text);val.textContent=(it.value?' = '+it.value:'')}
+  const note=el('div','ss-hover-note',st.tip);note.textContent=d.plane?'복소평면 좌표는 위치값이며, pole/zero는 가까운 경우에만 표시합니다.':items.some(x=>x.method&&x.method!=='f(x) 직접 계산')?'fn(x): 수식 직접 계산 · sample: 실제 계산 표본 (보간하지 않음)':'수식 함수가 제공된 경우 커서 x에서 직접 계산한 값입니다.';
+  st.tip.style.display='block';
+  // Measure after writing and keep the tooltip inside the card.
+  const tw=st.tip.offsetWidth||230,th=st.tip.offsetHeight||90;
+  const hostW=st.host.clientWidth||hostRect.width,hostH=st.host.clientHeight||hostRect.height;
+  const tx=clamp(xlocal+15,5,Math.max(5,hostW-tw-5));
+  const ty=clamp(ylocal+13,5,Math.max(5,hostH-th-5));
+  st.tip.style.left=tx+'px';st.tip.style.top=ty+'px';
+  st.lastX=cx;st.lastType=pointerType;
+ }
+ window.ssHoverBind=bind;
+ window.ssHoverQueue=d=>{queued.push(d)};
+ window.ssHoverResetQueue=()=>{queued=[]};
+ window.ssHoverAttachQueued=()=>{const cards=[...document.querySelectorAll('#plots .plot-card')];const all=queued.splice(0);for(let i=0;i<Math.min(cards.length,all.length);i++){const svg=cards[i].querySelector('svg');if(svg)bind(svg,all[i])}};
+ window.__ssHoverDebug=()=>({count:document.querySelectorAll('.ss-hover-target').length,visible:document.querySelectorAll('.ss-hover-tip').length});
+})();
+</script><link rel="stylesheet" href="./assets/design-system.css?v=1">
+<link rel="stylesheet" href="./assets/ss-lab-theme.css?v=5">
+<link rel="stylesheet" href="./assets/els-theme-v2.css?v=20261121b">
+<link rel="stylesheet" href="./assets/els-typography-standard.css?v=1">
+<link rel="stylesheet" href="./assets/ss-ch7-learning-standard.css?v=11">
+<link rel="stylesheet" href="./assets/ss-common-header.css?v=2">
+<link rel="stylesheet" href="./assets/ss-ch7-standalone.css?v=1">
+<script src="./assets/els-language.js?v=1"></script>
+<script src="./assets/els-theme-v2.js?v=20261121b"></script>
+<script defer src="./assets/ss-ch7-learning-standard.js?v=11"></script>
+<script defer src="./assets/ss-common-header.js?v=2"></script>
+<script defer src="./assets/ss-ch7-standalone.js?v=1"></script>
+<script defer src="./assets/ss-sidebar-toggle.js?v=1"></script>
+</head><body>
+<header class="ss7-site-header ss-common-header" aria-label="Engineering Learning Studio navigation">
+<a class="ss7-home ss-common-home" href="./index.html#overview">← Studio</a>
+<details class="ss7-chapter-menu ss-common-menu">
+<summary class="ss7-site-title ss-common-title">Signals &amp; Systems · Chapter 7 · Sampling <span aria-hidden="true">⌄</span></summary>
+<nav class="ss7-chapter-links ss-common-links" aria-label="Choose Chapter"></nav>
+</details>
+<div class="ss7-header-actions ss-common-actions">
+<label for="ss7-language-picker">Language <select id="ss7-language-picker" aria-label="Language"><option value="mixed">Mixed</option><option value="en">English</option><option value="ko">한국어</option></select></label>
+<label for="ss7-theme-picker">Theme <select id="ss7-theme-picker" data-els-theme-picker aria-label="Theme"></select></label>
+</div>
+</header>
+<div class="ss7-shell shell">
+<aside class="ss7-sidebar nav" aria-label="Chapter 7 learning navigation">
+<div class="brand"><div class="eyebrow">SIGNALS &amp; SYSTEMS / CHAPTER 07</div><h2>Sampling Visual Lab</h2><p>Sampling · Aliasing · Reconstruction</p></div>
+<div class="ss7-sidebar-title">LEARNING EXPERIMENTS / 학습 주제</div>
+<nav id="ss7-lesson-nav" aria-label="Chapter 7 experiments"></nav>
+<section class="ss7-progress" id="ss7-progress"><strong id="ss7-progress-count">My Lab Progress</strong><button type="button" id="ss7-mark-reviewed">Mark lab reviewed · 학습 확인</button><small>Self-reported study · 채점 결과 아님</small></section>
+</aside>
+<div class="ss7-workspace">
+<div class="ss7-topbar" aria-label="Experiment navigation">
+<span class="ss7-topbar-title" id="ss7-topbar-title">CHAPTER 07 / 1 of 7 · Sampling theorem</span>
+<div class="ss7-topbar-actions"><button type="button" id="ss7-prev-lab" aria-label="Previous experiment">← Previous</button><button type="button" id="ss7-next-lab" aria-label="Next experiment">Next →</button></div>
+</div>
+<main><div class="experiment"><section class="card"><div class="eyebrow">INTERACTIVE EXPERIMENT</div><h2 id="title"></h2><p id="intro" class="intro"></p><div id="controls" class="controls"></div><div id="plots" class="plot-grid"></div><div id="insight" class="insight"></div><div class="hint">그래프의 비교축은 각 실습에서 고정됩니다. 실습 간 서로 다른 단위는 제목에서 확인하세요.</div></section><aside class="card"><div class="deriv-top"><div><div class="eyebrow">STEP-BY-STEP ANIMATED MATH</div><h3>Guided Derivation</h3></div><span id="step-num" class="eyebrow"></span></div><div class="progress"><div id="progress-bar"></div></div><div id="step-content"></div><div class="step-buttons"><button id="prev">← Previous</button><button class="primary" id="next">Next step →</button><button id="all">Reveal all steps</button><button id="reset">Reset</button></div><div class="reading"><div class="eyebrow">GRAPH INTERPRETATION</div><h3>What does this graph mean?</h3><div id="reading"></div></div><div class="check" id="check"><b>CHECK YOURSELF · </b><span id="check-q"></span> <button id="check-toggle">Show / Hide answer</button><div class="answer" id="check-a"></div></div></aside></div><div class="foot">Lecture support · Chapter 7 · Mathematical models for learning, not instrument calibration · All calculations run in your browser.</div></main></div></div><script>
+'use strict';
+const $=id=>document.getElementById(id),PI=Math.PI;
+const fmt=(v,d=2)=>Number(v).toFixed(d).replace(/\.00$/,'');
+const sinc=x=>Math.abs(x)<1e-10?1:Math.sin(PI*x)/(PI*x);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function chart({xmin,xmax,ymin,ymax,xlab='t (s)',ylab='Normalized amplitude',curves=[],stems=[],vlines=[],title=''}){
+ const W=780,H=310,L=60,R=22,T=23,B=46,pw=W-L-R,ph=H-T-B;
+ const xx=x=>L+(x-xmin)/(xmax-xmin)*pw,yy=y=>T+(ymax-y)/(ymax-ymin)*ph;
+ let s=`<div class="plot-card"><div class="plot-title">${title}</div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}"><rect width="${W}" height="${H}" fill="var(--els-surface,white)"/>`;
+ for(let i=0;i<=5;i++){let x=xmin+(xmax-xmin)*i/5,y=ymin+(ymax-ymin)*i/5;s+=`<line x1="${xx(x)}" y1="${T}" x2="${xx(x)}" y2="${H-B}" stroke="var(--els-border,#c9d3db)"/><text x="${xx(x)}" y="${H-B+20}" font-size="12" fill="var(--els-muted,#455663)" text-anchor="middle">${fmt(x,2)}</text><line x1="${L}" y1="${yy(y)}" x2="${W-R}" y2="${yy(y)}" stroke="var(--els-border,#c9d3db)"/><text x="${L-9}" y="${yy(y)+4}" text-anchor="end" font-size="12" fill="var(--els-muted,#455663)">${fmt(y,2)}</text>`}
+ if(ymin<=0&&ymax>=0)s+=`<line x1="${L}" y1="${yy(0)}" x2="${W-R}" y2="${yy(0)}" stroke="var(--els-muted,#455663)"/>`;
+ if(xmin<=0&&xmax>=0)s+=`<line x1="${xx(0)}" y1="${T}" x2="${xx(0)}" y2="${H-B}" stroke="var(--els-muted,#455663)"/>`;
+ for(const c of curves){const pts=c.pts||(Array.from({length:c.samples||500},(_,i)=>{const x=xmin+(xmax-xmin)*i/((c.samples||500)-1);return [x,c.fn(x)]}));let parts=[];for(const [x,y] of pts){if(Number.isFinite(y))parts.push(`${xx(x).toFixed(2)},${yy(clamp(y,ymin,ymax)).toFixed(2)}`)}s+=`<polyline fill="none" stroke="${ssTraceColor(c.color)}" stroke-width="${c.width||2.5}" ${c.dash?`stroke-dasharray="${c.dash}"`:''} stroke-linecap="round" stroke-linejoin="round" points="${parts.join(' ')}"/>`}
+ for(const c of stems){for(let i=0;i<c.xs.length;i++){let x=c.xs[i],y=c.ys[i];if(x<xmin-1e-8||x>xmax+1e-8)continue;const xp=xx(x),yp=yy(clamp(y,ymin,ymax));s+=`<line x1="${xp}" y1="${yy(clamp(0,ymin,ymax))}" x2="${xp}" y2="${yp}" stroke="${ssTraceColor(c.color)}" stroke-width="1.6"/><circle cx="${xp}" cy="${yp}" r="3.1" fill="${ssTraceColor(c.color)}"/>`}}
+ for(const v of vlines){if(v.x<xmin||v.x>xmax)continue;s+=`<line x1="${xx(v.x)}" y1="${T}" x2="${xx(v.x)}" y2="${H-B}" stroke="${ssTraceColor(v.color||'#bc704c')}" stroke-dasharray="5 5" stroke-width="1.7"/>`}
+ s+=`<text x="${(L+W-R)/2}" y="${H-6}" text-anchor="middle" font-size="13" fill="var(--els-ink,#1b2730)">${xlab}</text><text transform="translate(15 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle" font-size="13" fill="var(--els-ink,#1b2730)">${ylab}</text></svg><div class="axis-key">X-axis: ${xlab} [${fmt(xmin,2)} … ${fmt(xmax,2)}] &nbsp; | &nbsp; Y-axis: ${ylab} [${fmt(ymin,2)} … ${fmt(ymax,2)}]</div><div class="legend">${[...curves,...stems].filter(x=>x.label).map(x=>`<span><i style="background:${ssTraceColor(x.color)}"></i>${x.label}</span>`).join('')}</div></div>`;ssHoverQueue({kind:'cart',w:W,h:H,pad:{l:L,r:R,t:T,b:B},xmin,xmax,ymin,ymax,xlabel:xlab,ylabel:ylab,series:[...curves.map(c=>({label:c.label,color:ssTraceColor(c.color),fn:c.fn,points:c.pts,discrete:false})),...stems.map(c=>({label:c.label,color:ssTraceColor(c.color),points:c.xs.map((x,i)=>[x,c.ys[i]]),discrete:true}))]});return s;
+}
+function zplot({title='z-plane · pole / zero / ROC',poles=[],zeros=[],inner=0,outer=Infinity,scale=95,unit=true}){
+ const W=780,H=310,cx=390,cy=154,r=v=>v*scale;let s=`<div class="plot-card"><div class="plot-title">${title}</div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}"><rect width="${W}" height="${H}" fill="var(--els-surface,#ffffff)"/>`;
+ if(outer===Infinity){s+=`<rect width="${W}" height="${H}" fill="var(--els-info-bg,#e6f5ee)"/>`;if(inner>0)s+=`<circle cx="${cx}" cy="${cy}" r="${r(inner)}" fill="var(--els-surface,#ffffff)"/>`}
+ else{s+=`<circle cx="${cx}" cy="${cy}" r="${r(outer)}" fill="var(--els-info-bg,#e6f5ee)"/>`;if(inner>0)s+=`<circle cx="${cx}" cy="${cy}" r="${r(inner)}" fill="var(--els-surface,#ffffff)"/>`}
+ for(let v=-3;v<=3;v++){const x=cx+r(v),y=cy-r(v);if(x>=20&&x<=760)s+=`<line x1="${x}" y1="15" x2="${x}" y2="${H-20}" stroke="var(--els-border,#c9d3db)" stroke-dasharray="3 6"/>`;if(y>=15&&y<=H-20)s+=`<line x1="20" y1="${y}" x2="760" y2="${y}" stroke="var(--els-border,#c9d3db)" stroke-dasharray="3 6"/>`}
+ s+=`<line x1="20" y1="${cy}" x2="760" y2="${cy}" stroke="var(--els-muted,#455663)" stroke-width="1.3"/><line x1="${cx}" y1="10" x2="${cx}" y2="${H-20}" stroke="var(--els-muted,#455663)" stroke-width="1.3"/>`;
+ if(unit)s+=`<circle cx="${cx}" cy="${cy}" r="${r(1)}" fill="none" stroke="#b98635" stroke-width="2.5" stroke-dasharray="7 5"/><text x="${cx+r(.7)}" y="${cy-r(.7)-8}" fill="var(--els-link,#145b78)" font-size="11">|z| = 1</text>`;
+ for(const [x,y] of poles){const xp=cx+r(x),yp=cy-r(y);s+=`<path d="M ${xp-7} ${yp-7} L ${xp+7} ${yp+7} M ${xp+7} ${yp-7} L ${xp-7} ${yp+7}" stroke="var(--ss-trace-coral,#b54e35)" stroke-width="3.5" stroke-linecap="round"/>`}
+ for(const [x,y] of zeros){const xp=cx+r(x),yp=cy-r(y);s+=`<circle cx="${xp}" cy="${yp}" r="7" fill="var(--els-surface,#ffffff)" stroke="var(--ss-trace-teal,#006b75)" stroke-width="3"/>`}
+ s+=`<text x="746" y="${cy-9}" text-anchor="end" fill="var(--els-ink,#1b2730)" font-size="12">Re(z)</text><text x="${cx+9}" y="17" fill="var(--els-ink,#1b2730)" font-size="12">Im(z)</text><text x="${cx+r(1)+4}" y="${cy+16}" fill="var(--els-link,#145b78)" font-size="11">1</text><text x="${cx-r(1)-4}" y="${cy+16}" text-anchor="end" fill="#274b5e" font-size="11">−1</text><text x="${cx+8}" y="${cy-r(1)-5}" fill="#274b5e" font-size="11">+j</text><text x="${cx+8}" y="${cy+r(1)+15}" fill="#274b5e" font-size="11">−j</text><text x="${cx+6}" y="${cy+15}" fill="#274b5e" font-size="11">0</text></svg><div class="axis-key">X-axis: Re(z) &nbsp; | &nbsp; Y-axis: Im(z) &nbsp; | &nbsp; grid spacing: 1 &nbsp; | &nbsp; dashed circle: |z|=1</div><div class="legend"><span><i style="background:#c55d54"></i>× Pole</span><span><i style="background:#277d9b"></i>○ Zero</span><span><i style="background:#9ad4b9"></i>Green: ROC (boundaries excluded)</span><span><i style="background:#b98635"></i>Unit circle</span></div></div>`;ssHoverQueue({kind:'complex',plane:'z',w:W,h:H,pad:{l:20,r:20,t:10,b:20},center:{cx,cy,scale},xmin:-3.8,xmax:3.8,ymin:-1.4,ymax:1.4,xlabel:'Re(z)',ylabel:'Im(z)',markers:[...poles.map(p=>({x:p[0],y:p[1],type:'Pole'})),...zeros.map(p=>({x:p[0],y:p[1],type:'Zero'}))],roc:{inner,outer}});return s;
+}
+const stepsState={};let current=0,step=0,all=false;
+function controlHTML(c,val){const id='ctl-'+c.key;if(c.type==='select')return `<div class="control"><label for="${id}">${c.label}</label><select id="${id}" data-param="${c.key}">${c.options.map(o=>`<option value="${o[0]}" ${String(val)===String(o[0])?'selected':''}>${o[1]}</option>`).join('')}</select></div>`;return `<div class="control"><label for="${id}">${c.label}</label><input id="${id}" data-param="${c.key}" type="range" min="${c.min}" max="${c.max}" step="${c.step||1}" value="${val}"><output id="out-${c.key}">${val}</output></div>`}
+function render(){const ex=EXPERIMENTS[current],state=stepsState[current]||(stepsState[current]={...ex.defaults});$('title').textContent=ex.title;$('intro').textContent=ex.desc;$('controls').innerHTML=ex.controls.map(c=>controlHTML(c,state[c.key])).join('');draw();renderStep();$('reading').innerHTML=ex.readings.map((x,i)=>`<div class="note"><strong>${String(i+1).padStart(2,'0')} · ${x[0]}</strong><p>${x[1]}</p></div>`).join('');$('check').classList.remove('open');$('check-q').innerHTML=ex.check[0];$('check-a').innerHTML=ex.check[1];}
+function draw(){const ex=EXPERIMENTS[current],state=stepsState[current];ssHoverResetQueue();const out=ex.draw(state);$('plots').innerHTML=out.plots;ssHoverAttachQueued();$('insight').innerHTML=out.insight;for(const c of ex.controls){const o=$('out-'+c.key);if(o)o.textContent=String(state[c.key])}}
+function renderStep(){const ex=EXPERIMENTS[current],arr=ex.steps;$('step-num').textContent=all?`All ${arr.length} steps`:`Step ${step+1} / ${arr.length}`;$('progress-bar').style.width=`${all?100:(step+1)/arr.length*100}%`;$('step-content').innerHTML=(all?arr:[arr[step]]).map((s,i)=>`<div class="step" style="margin-bottom:${all?'10px':'0'}"><strong>${all?`Step ${i+1} · `:''}${s[0]}</strong><div class="math">${s[1]}</div><p>${s[2]}</p></div>`).join('');$('prev').disabled=step===0||all;$('next').disabled=step===arr.length-1||all;$('all').textContent=all?'Show one step':'Reveal all steps';}
+function init(){EXPERIMENTS.forEach((e,i)=>stepsState[i]={...e.defaults});$('controls').addEventListener('input',e=>{const el=e.target.closest('[data-param]');if(!el)return;const k=el.dataset.param;stepsState[current][k]=el.type==='range'?Number(el.value):el.value;draw()});$('controls').addEventListener('change',e=>{const el=e.target.closest('[data-param]');if(!el)return;const k=el.dataset.param;stepsState[current][k]=el.type==='range'?Number(el.value):el.value;draw()});$('prev').onclick=()=>{step=Math.max(0,step-1);renderStep()};$('next').onclick=()=>{step=Math.min(EXPERIMENTS[current].steps.length-1,step+1);renderStep()};$('all').onclick=()=>{all=!all;renderStep()};$('reset').onclick=()=>{step=0;all=false;renderStep()};$('check-toggle').onclick=()=>$('check').classList.toggle('open');render()}
+window.SSChapter7=Object.freeze({openExperiment(index){const n=Number(index)-1;if(!Number.isInteger(n)||n<0||n>=EXPERIMENTS.length)return false;if(current!==n){current=n;step=0;all=false;render();document.dispatchEvent(new Event('ss-ch7-experiment-change'))}return true},get currentExperiment(){return current+1},get experimentCount(){return EXPERIMENTS.length}});window.addEventListener('DOMContentLoaded',init);
+
+const EXPERIMENTS=[
+{short:'Sampling theorem',topic:'Time-domain samples',title:'7.1 · Sampling Theorem / 표본화 정리',desc:'같은 아날로그 정현파를 서로 다른 sampling rate로 관찰합니다. 시간축은 항상 0–0.20 s로 고정합니다.',defaults:{f:30,fs:90},controls:[{key:'f',label:'Analog tone f (Hz)',min:10,max:70,step:5},{key:'fs',label:'Sampling fₛ (Hz)',min:40,max:180,step:5}],draw:p=>{const xs=Array.from({length:Math.floor(.2*p.fs)+1},(_,n)=>n/p.fs),ys=xs.map(t=>Math.cos(2*PI*p.f*t)),valid=p.fs>2*p.f;return {plots:chart({xmin:0,xmax:.2,ymin:-1.3,ymax:1.3,title:'Fixed 0–0.20 s · analog waveform and samples',curves:[{fn:t=>Math.cos(2*PI*p.f*t),color:'#0b8491',label:'Original analog cosine'}],stems:[{xs,ys,color:'#cc8841',label:'Samples at t=n/fₛ'}],xlab:'t (s)',ylab:'Normalized amplitude'})+chart({xmin:0,xmax:Math.max(1,xs.length-1),ymin:-1.3,ymax:1.3,xlab:'Sample index n',ylab:'x[n] (normalized)',title:'Discrete-time sequence x[n] = cos(2π(f/fₛ)n)',stems:[{xs:xs.map((_,n)=>n),ys,color:'#cc8841',label:'x[n] at integer n'}]}),insight:`<strong>f=${p.f} Hz, fₛ=${p.fs} samples/s.</strong> Tₛ=${fmt(1000/p.fs,2)} ms; f/fₛ=${fmt(p.f/p.fs,3)} cycles/sample; Ω=${fmt(2*PI*p.f/p.fs,3)} rad/sample. Nyquist frequency = ${fmt(p.fs/2)} Hz. ${valid?'<strong>fₛ > 2f</strong>이므로 이 단일 톤에 대한 이상적 복원 조건을 만족합니다.':'<strong>fₛ ≤ 2f</strong>: 이 주파수의 일반적인 위상/진폭을 유일하게 복원한다고 보장할 수 없습니다.'} 실제 입력의 대역제한과 anti-aliasing filter가 별도로 필요합니다.`}},steps:[['Sample at uniform instants','t=nTₛ, &nbsp; Tₛ=1/fₛ','연속시간 t에서 정수 sample index n으로 변환합니다.'],['Substitute the sampling times','x[n]=x꜀(nTₛ)=cos(2πf n/fₛ)','디지털 주파수는 Ω=2πf/fₛ rad/sample입니다.'],['Require separated replicas','fₛ > 2f<sub>max</sub>','신호가 fmax 아래로 대역 제한되어 있으면 복제 스펙트럼이 겹치지 않습니다.'],['Recover under ideal assumptions','x꜀(t)=Σₙ x[n] sinc(fₛt−n)','이상적인 sinc interpolation은 대역제한 조건에서 연속신호를 복원합니다.']],readings:[['Fixed time axis','시간축을 바꾸지 않아 sampling density만 달라지는 것을 직접 비교합니다.'],['Rate vs frequency','Nyquist rate=2fmax; Nyquist frequency=fₛ/2입니다.'],['Boundary caution','fₛ=2fmax에서는 경계 정현파의 위상·진폭 복원이 모호할 수 있습니다.']],check:['30 Hz 성분을 포함하는 bandlimited 센서에 fₛ=50 Hz를 사용하면 충분한가요?','아닙니다. 2×30=60 Hz보다 큰 fₛ가 필요합니다. 실제로는 필터 전이대역을 고려하여 여유를 둡니다.']},
+{short:'Spectral replicas',topic:'Frequency-domain proof',title:'7.2 · Spectral Replication / 스펙트럼 복제',desc:'시간 샘플링이 주파수축에서 스펙트럼의 반복을 만드는 이유를 관찰합니다. 주파수축은 −500~500 Hz로 고정합니다.',defaults:{B:80,fs:200},controls:[{key:'B',label:'Signal band B (Hz)',min:30,max:130,step:10},{key:'fs',label:'Sampling fₛ (Hz)',min:100,max:320,step:10}],draw:p=>{const tri=(f,c)=>Math.max(0,1-Math.abs(f-c)/p.B),copies=Array.from({length:7},(_,i)=>({fn:f=>tri(f,(i-3)*p.fs),color:i===3?'#0b8491':'#a9bfc8',label:i===3?'Baseband spectrum':null,width:i===3?3:1.8}));const sum=f=>Array.from({length:7},(_,i)=>tri(f,(i-3)*p.fs)).reduce((a,b)=>a+b,0);return {plots:chart({xmin:-500,xmax:500,ymin:0,ymax:2.3,xlab:'f (Hz)',ylab:'Relative magnitude',title:'Fixed frequency axis · replicas spaced by fₛ',curves:[...copies,{fn:sum,color:'#c88936',label:'Overlapped sampled spectrum',width:3}],vlines:[{x:p.fs/2},{x:-p.fs/2}]}),insight:`<strong>B=${p.B} Hz, fₛ=${p.fs} Hz.</strong> Replica centers: …, −fₛ, 0, +fₛ, …. ${p.fs>2*p.B?'<strong>No baseband overlap:</strong> fₛ > 2B.':'<strong>Aliasing:</strong> fₛ ≤ 2B, so spectral replicas overlap or touch.'} 수직 크기는 비교를 위한 상대값이며 실제 임펄스열 모델에는 1/Tₛ 배율이 있습니다.`}},steps:[['Model the sampling train','p(t)=Σₙδ(t−nTₛ)','이상적 sampling을 impulse train의 곱셈으로 표현합니다.'],['Transform the impulse train','P(jω)=(2π/Tₛ) Σₖ δ(ω−kωₛ)','ωₛ=2π/Tₛ이며 CTFS를 통해 유도할 수 있습니다.'],['Use time multiplication','Xₚ(jω)=(1/2π) X꜀(jω)*P(jω)','시간영역의 곱은 주파수영역의 convolution에 대응합니다.'],['Read the shifted copies','Xₚ(jω)=(1/Tₛ) Σₖ X꜀(j(ω−kωₛ))','원본 스펙트럼이 kωₛ마다 반복되며 겹치지 않으면 이상적 복원이 가능합니다.']],readings:[['Why copies appear','주기적 impulse train의 line spectrum과 원신호 스펙트럼을 convolution하기 때문입니다.'],['Fixed frequency axis','샘플링률이 바뀌면 복제본 사이의 거리만 변합니다.'],['Anti-alias filter','ADC 전에 고주파 성분을 제거해야 겹침을 예방할 수 있습니다.']],check:['최대 주파수 80 Hz의 대역제한 신호를 fₛ=140 Hz로 표본화하면?','140 Hz는 160 Hz보다 작으므로 복제 스펙트럼이 겹쳐 aliasing이 발생할 수 있습니다.']},
+{short:'Aliasing',topic:'Ambiguous frequencies',title:'7.3 · Aliasing / 서로 다른 주파수, 같은 표본',desc:'아날로그 원래 파형과 alias 파형이 다르지만 표본 지점에서는 일치하는 현상을 관찰합니다. 시간축은 고정합니다.',defaults:{f:70,fs:100},controls:[{key:'f',label:'Analog tone f (Hz)',min:5,max:180,step:5},{key:'fs',label:'Sampling fₛ (Hz)',min:70,max:180,step:10}],draw:p=>{const signed=((p.f+p.fs/2)%p.fs+p.fs)%p.fs-p.fs/2,alias=Math.abs(signed),xs=Array.from({length:Math.floor(.15*p.fs)+1},(_,n)=>n/p.fs),ys=xs.map(t=>Math.cos(2*PI*p.f*t));return {plots:chart({xmin:0,xmax:.15,ymin:-1.25,ymax:1.25,xlab:'t (s)',title:'Fixed 0–0.15 s · original and aliased cosine',curves:[{fn:t=>Math.cos(2*PI*p.f*t),color:'#0b8491',label:`Original ${p.f} Hz`},{fn:t=>Math.cos(2*PI*alias*t),color:'#c66c52',label:`Alias ${fmt(alias)} Hz`,dash:'7 5'}],stems:[{xs,ys,color:'#bd8734',label:'Identical sample values'}]}),insight:`<strong>f=${p.f} Hz, fₛ=${p.fs} Hz → apparent cosine frequency ${fmt(alias)} Hz.</strong> 복소 지수에서는 부호 있는 alias ${fmt(signed)} Hz가 중요하지만, 실수 코사인은 ±주파수에서 동일합니다. 원래 f를 FFT만으로 되찾을 수 없습니다.`}},steps:[['Start with a CT sinusoid','x꜀(t)=cos(2πft)','연속시간에서는 원래 주파수 f가 파형의 빠르기를 결정합니다.'],['Sample at integer n','x[n]=cos(2πfn/fₛ)','표본화 후에는 정수 n에서의 위상만 남습니다.'],['Add any integer multiple of fₛ','cos(2π(f+mfₛ)n/fₛ)=cos(2πfn/fₛ)','2πmn은 정수 회전이므로 모든 표본이 같습니다.'],['Fold to the Nyquist interval','f<sub>alias</sub>=|f−mfₛ| ≤ fₛ/2','실수 코사인은 Nyquist 범위 안의 주파수와 구별되지 않을 수 있습니다.']],readings:[['Analog vs digital','연속 곡선은 다르지만 표본은 동일할 수 있습니다.'],['Why FFT cannot undo aliasing','표본 수열에 원래 아날로그 주파수를 식별할 정보가 남지 않습니다.'],['Real engineering','오디오, 모터 진동, 영상 moiré 등에서 같은 원리가 발생합니다.']],check:['fₛ=100 Hz에서 90 Hz 코사인은 몇 Hz처럼 보이나요?','10 Hz입니다. cos(2π·90n/100)=cos(2π·10n/100)입니다.']},
+{short:'Sinc reconstruction',topic:'Ideal interpolation',title:'7.4 · Sinc Reconstruction / 이상적 복원',desc:'유한 개의 표본을 이용한 sinc 보간 근사를 확인합니다. 표본 수가 유한하므로 가장자리에서 작은 오차가 남을 수 있습니다.',defaults:{f:25,fs:100},controls:[{key:'f',label:'Tone f (Hz)',min:10,max:65,step:5},{key:'fs',label:'Sampling fₛ (Hz)',min:60,max:180,step:10}],draw:p=>{const samples=Array.from({length:101},(_,i)=>i-50),fn=t=>samples.reduce((sum,n)=>sum+Math.cos(2*PI*p.f*n/p.fs)*sinc(p.fs*t-n),0),xs=samples.map(n=>n/p.fs).filter(t=>t>=-.12&&t<=.12),ys=xs.map(t=>Math.cos(2*PI*p.f*t)),err=Math.abs(fn(.037)-Math.cos(2*PI*p.f*.037));return {plots:chart({xmin:-.12,xmax:.12,ymin:-1.3,ymax:1.3,xlab:'t (s)',title:'Fixed −0.12…0.12 s · ideal sinc kernel, finite-sum approximation',curves:[{fn:t=>Math.cos(2*PI*p.f*t),color:'#0b8491',label:'Original CT signal'},{fn,color:'#c9843d',label:'Finite sinc sum (101 samples)',dash:'6 4'}],stems:[{xs,ys,color:'#375f9d',label:'Available samples'}]}),insight:`<strong>f=${p.f} Hz, fₛ=${p.fs} Hz.</strong> ${p.fs>2*p.f?'Ideal bandlimited reconstruction is theoretically possible.':'Nyquist condition fails: sinc interpolation reconstructs a lower-frequency alias, not the original.'} 중앙 t=0.037 s에서 유한합 오차 ≈ ${fmt(err,4)}. 무한합의 이상적 조건과 유한 계산 근사를 구별합니다.`}},steps:[['Choose the ideal reconstruction filter','H<sub>r</sub>(jω)=Tₛ, &nbsp; |ω|<ωₛ/2','이상적 LPF는 baseband를 선택하고 impulse-train sampling의 1/Tₛ 배율을 보상합니다.'],['Inverse transform of the LPF','h<sub>r</sub>(t)=sinc(t/Tₛ)','정규화 sinc(x)=sin(πx)/(πx)를 사용합니다.'],['Convolve with the impulse samples','x̂(t)=Σₙ x[n]h<sub>r</sub>(t−nTₛ)','각 표본이 shifted sinc 함수를 만들고 모두 더해집니다.'],['Write the interpolation formula','x꜀(t)=Σₙ x[n]sinc(fₛt−n)','대역제한과 fₛ>2fmax 등 이상적 가정 아래 무한합이 원신호를 복원합니다.']],readings:[['At sample instants','sinc(k)=0 for nonzero integer k이므로 다른 표본의 기여가 사라집니다.'],['Between samples','단순 직선 연결이 아니라 주변 모든 표본의 sinc 가중합입니다.'],['Finite-sum limitation','이 그래프는 101개 표본만 사용한 근사입니다. 가장자리 오차는 truncation 때문일 수 있습니다.']],check:['왜 직선 보간과 sinc interpolation은 다를까요?','sinc는 이상적 대역제한 조건에 맞는 LPF impulse response를 사용하지만, 직선 보간은 다른 주파수 응답을 갖습니다.']},
+{short:'Anti-alias filter',topic:'Before ADC',title:'7.5 · Anti-Aliasing Filter / ADC 이전 필터',desc:'원하는 25 Hz 성분과 140 Hz 간섭 성분을 fₛ=160 Hz로 샘플링합니다. 간섭을 ADC 전에 감쇠시키는 효과를 확인합니다.',defaults:{atten:0},controls:[{key:'atten',label:'Interference rejection (%)',min:0,max:100,step:10}],draw:p=>{const a=1-p.atten/100,fs=160,fn=t=>Math.cos(2*PI*25*t)+a*.7*Math.cos(2*PI*140*t),xs=Array.from({length:25},(_,n)=>n/fs),ys=xs.map(fn);return {plots:chart({xmin:0,xmax:.15,ymin:-2,ymax:2,xlab:'t (s)',title:'Fixed 0–0.15 s · filtered analog input and ADC samples',curves:[{fn:t=>Math.cos(2*PI*25*t),color:'#0b8491',label:'Desired 25 Hz'},{fn,color:'#c96d51',label:'After analog anti-alias filter'}],stems:[{xs,ys,color:'#b98736',label:'ADC samples'}]}),insight:`<strong>fₛ=160 Hz, Nyquist=80 Hz.</strong> 140 Hz interference aliases to <strong>20 Hz</strong>. Analog rejection ${p.atten}% leaves interference amplitude ${fmt(.7*a,2)} before ADC. 이미 aliasing된 20 Hz 성분을 후처리 FFT만으로 원래 140 Hz로 판별할 수 없습니다.`}},steps:[['Identify wanted and unwanted bands','f<sub>wanted</sub>=25 Hz, &nbsp; f<sub>noise</sub>=140 Hz','ADC의 Nyquist frequency는 80 Hz입니다.'],['Predict the alias','f<sub>alias</sub>=|140−160|=20 Hz','140 Hz 간섭은 20 Hz 저주파 간섭으로 나타납니다.'],['Filter before sampling','x<sub>filtered</sub>(t)=x<sub>wanted</sub>(t)+αx<sub>noise</sub>(t)','아날로그 anti-alias filter가 간섭의 크기를 줄입니다.'],['Sample the filtered input','x[n]=x<sub>filtered</sub>(n/fₛ)','ADC 이후 디지털 필터는 이미 겹친 원래 성분을 식별하지 못합니다.']],readings:[['Order matters','아날로그 필터 → ADC → 디지털 필터의 순서가 중요합니다.'],['Band design','필터의 통과대역과 전이대역은 Nyquist frequency 아래에서 설계합니다.'],['Practical example','기계 센서의 고주파 진동이 저주파 고장 성분처럼 보이는 오류를 막습니다.']],check:['왜 디지털 LPF만으로 140 Hz 간섭을 제거하지 못하나요?','ADC 뒤에는 간섭이 20 Hz로 접혀 원하는 25 Hz와 가까운 저주파 성분이 되기 때문입니다.']},
+{short:'Quantization',topic:'ADC resolution',title:'7.6 · Sampling vs Quantization / ADC 분해능',desc:'시간 표본화와 진폭 양자화는 별개입니다. 동일한 샘플링률에서 bit depth만 변경하여 양자화 오차를 확인합니다.',defaults:{bits:4},controls:[{key:'bits',label:'ADC bits',min:2,max:12,step:1}],draw:p=>{const fs=200,f=20,levels=2**p.bits,step=2/(levels-1),xs=Array.from({length:21},(_,n)=>n/fs),raw=xs.map(t=>Math.cos(2*PI*f*t)),ys=raw.map(y=>-1+Math.round((y+1)/step)*step),err=Math.max(...ys.map((y,i)=>Math.abs(y-raw[i])));return {plots:chart({xmin:0,xmax:.1,ymin:-1.3,ymax:1.3,xlab:'t (s)',title:'Fixed 0–0.10 s · analog waveform vs quantized samples',curves:[{fn:t=>Math.cos(2*PI*f*t),color:'#0b8491',label:'Analog input'}],stems:[{xs,ys,color:'#c88939',label:`${p.bits}-bit quantized samples`},{xs,ys:raw,color:'#497aaf',label:'Ideal sampled values'}]}),insight:`<strong>${p.bits} bits → ${levels} quantization levels.</strong> Step Δ=${fmt(step,5)}, theoretical max rounding error ≤Δ/2=${fmt(step/2,5)}; observed max error ${fmt(err,5)}. Full-scale sinusoid ideal SQNR ≈ ${fmt(6.02*p.bits+1.76,1)} dB (표준 근사, 실제 신호·잡음에 따라 다름).`}},steps:[['Sampling chooses time instants','x[n]=x꜀(nTₛ)','시간축에서 언제 측정할지를 결정합니다.'],['Quantization chooses amplitude levels','Q(x)=Δ·round((x+1)/Δ)−1','이 예제는 입력 범위 [−1,1]에서 2ᴮ개 균일한 레벨을 사용합니다.'],['Bound the rounding error','|e<sub>q</sub>[n]| ≤ Δ/2','포화되지 않고 최근접 레벨로 반올림할 때의 오차 상한입니다.'],['Interpret ADC specifications','SQNR ≈ 6.02B + 1.76 dB','이상적 full-scale sinusoid에 대한 널리 쓰이는 근사입니다.']],readings:[['Different axes','Sampling은 시간 분해능, Quantization은 진폭 분해능과 관련됩니다.'],['Bit depth','비트 수를 늘리면 레벨 간격이 줄어듭니다.'],['Not the whole noise story','실제 ADC에는 열잡음, 지터, 비선형성, 포화 등 다른 오차도 있습니다.']],check:['4-bit ADC와 8-bit ADC 중 어느 쪽이 더 많은 진폭 레벨을 갖나요?','4-bit는 16개, 8-bit는 256개입니다. 시간 샘플링률은 비트 수와 독립적으로 지정합니다.']},
+{short:'DAC / ZOH',topic:'Reconstruction hardware',title:'7.7 · Zero-Order Hold vs Ideal Reconstruction',desc:'실제 DAC의 계단형 출력(ZOH)과 이상적 sinc 복원을 비교합니다. 시간축을 0–0.25 s로 고정합니다.',defaults:{fs:50,f:12},controls:[{key:'fs',label:'DAC sample rate (Hz)',min:35,max:110,step:5},{key:'f',label:'Tone f (Hz)',min:5,max:25,step:1}],draw:p=>{const zoh=t=>Math.cos(2*PI*p.f*Math.floor(t*p.fs)/p.fs),ideal=t=>Array.from({length:141},(_,i)=>i-70).reduce((s,n)=>s+Math.cos(2*PI*p.f*n/p.fs)*sinc(p.fs*t-n),0);let pts=[];for(let n=0;n<=Math.ceil(.25*p.fs);n++){let t=n/p.fs,v=Math.cos(2*PI*p.f*t),t2=Math.min(.25,(n+1)/p.fs);if(t>.25)break;pts.push([t,v],[t2,v]);if(t2<.25)pts.push([t2,Math.cos(2*PI*p.f*(n+1)/p.fs)])}return {plots:chart({xmin:0,xmax:.25,ymin:-1.35,ymax:1.35,xlab:'t (s)',title:'Fixed 0–0.25 s · original / ZOH / sinc approximation',curves:[{fn:t=>Math.cos(2*PI*p.f*t),color:'#0b8491',label:'Original'},{pts,color:'#c88939',label:'DAC ZOH staircase',width:2.5},{fn:ideal,color:'#4d6fa8',label:'Finite sinc approximation',dash:'5 4'}]}),insight:`<strong>f=${p.f} Hz, fₛ=${p.fs} Hz.</strong> ZOH holds each value for Tₛ=${fmt(1000/p.fs,1)} ms, producing a staircase. ${p.fs>2*p.f?'Sinc reconstruction is theoretically valid under ideal assumptions.':'Nyquist condition fails; ideal reconstruction cannot identify the original tone.'} 실제 DAC에는 reconstruction smoothing filter가 필요합니다.`}},steps:[['Digital samples are numbers','x[n]=x꜀(nTₛ)','DAC는 이산시간 표본을 전압·전류 출력으로 변환합니다.'],['Zero-order hold','y<sub>ZOH</sub>(t)=x[n], &nbsp; nTₛ≤t<(n+1)Tₛ','각 값을 다음 샘플이 올 때까지 유지하여 계단형 파형을 만듭니다.'],['Frequency-domain consequence','H<sub>ZOH</sub>(jω)=Tₛe<sup>−jωTₛ/2</sup>sinc(ωTₛ/2π)','ZOH는 주파수에 따른 magnitude droop과 지연을 갖습니다.'],['Smooth / reconstruct','Ideal LPF → sinc interpolation','대역제한 조건에서는 이상적 LPF가 baseband를 선택하고 영상 주파수를 제거합니다.']],readings:[['Step waveform','계단형 출력은 원래 정현파와 다르며 고주파 image를 포함합니다.'],['Fixed time axis','샘플링률만 바꾸면 계단 폭이 달라집니다.'],['Physical reconstruction','실제 DAC 뒤의 analog reconstruction filter가 계단 성분을 완화합니다.']],check:['DAC의 ZOH 출력은 이상적인 sinc 복원과 동일한가요?','아닙니다. ZOH는 값을 일정 시간 유지하고, 이상적 sinc 복원은 전체 표본의 대역제한 보간을 사용합니다.']}
+];
+
+</script></body></html>
