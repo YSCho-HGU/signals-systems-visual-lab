@@ -30,7 +30,7 @@ const laplaceNative=read("chapter5.html");
 check("G0-08a-native-ch5",policy.chapterRoutes["5"]==="native"&&policy.chapterRoutes["6"]==="native"&&
  !/<iframe(?:\s|>)/i.test(laplaceNative)&&laplaceNative.includes('id="ss5-chapter-picker"')&&
  laplaceNative.includes("window.__labNumerics")&&laplaceNative.includes("function installPlotInteractions()")&&
- page.includes("if(ch===5){location.replace('./chapter5.html?build=20261121-ch5-roc8');return;}"));
+ page.includes("if(ch===5){location.replace('./chapter5.html?build=20261121-ch5-factor9');return;}"));
 try{new Script(read("assets/ss-ch5-standalone.js"),{filename:"assets/ss-ch5-standalone.js"});check("G0-js-ch5-native",true)}
 catch(e){check("G0-js-ch5-native",false,String(e).slice(0,200))}
 check("G0-09-six-modules",flow.includes('["periodic","pairs","phase","phasor","filter","fft"]'));
