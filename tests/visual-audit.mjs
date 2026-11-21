@@ -126,8 +126,13 @@ try{
          const input=[...document.querySelectorAll('#controls input[type="range"],#controls select')];
          const unlabeled=input.filter(x=>!(x.labels?.length||x.hasAttribute("aria-label")||x.hasAttribute("title")));
          const style=getComputedStyle(body);
+         const rgb=value=>(value.match(/[0-9]+(?:[.][0-9]+)?/g)||[]).slice(0,3).map(Number);
+         const light=x=>{x/=255;return x<=.04045?x/12.92:((x+.055)/1.055)**2.4};
+         const lum=value=>{const [red,green,blue]=rgb(value).map(light);return .2126*red+.7152*green+.0722*blue};
+         const ink=lum(style.color),paper=lum(style.backgroundColor);
+         const contrast=(Math.max(ink,paper)+.05)/(Math.min(ink,paper)+.05);
          return {overflow:root.scrollWidth>innerWidth+6,overflowWidth:root.scrollWidth,viewport:innerWidth,
-          inputs:input.length,unlabeled:unlabeled.length,bodyTextContrast:4.5,
+          inputs:input.length,unlabeled:unlabeled.length,bodyTextContrast:Number(contrast.toFixed(2)),
           active:window.SSChapter7?.currentExperiment,theme:root.dataset.theme,
           iframes:document.querySelectorAll("iframe").length,plots:document.querySelectorAll("#plots svg").length,
           stages:document.querySelectorAll(".ss7-stage-head").length};
@@ -138,6 +143,7 @@ try{
         if(result.unlabeled)errors.push({width,theme,chapter:ch,experiment:n,error:"Unlabeled Chapter 7 input "+result.unlabeled});
         if(result.theme!==(theme==="warm-neutral"?"light":"dark"))errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 7 theme "+result.theme});
         if(result.overflow)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 7 overflow "+result.overflowWidth+"/"+result.viewport});
+        if(result.bodyTextContrast<4.5)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 7 contrast "+result.bodyTextContrast});
         record.push({...result,width,theme,chapter:ch,experiment:n,scheme:result.theme});
         await page.screenshot({path:join(chDir,String(n).padStart(2,"0")+".png"),fullPage:false});
       }
