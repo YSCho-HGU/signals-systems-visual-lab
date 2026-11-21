@@ -3,12 +3,6 @@
  */
 html.ss5-native{scroll-behavior:smooth}
 html.ss5-native body{min-height:100dvh;overflow-x:hidden;margin:0;background:var(--els-page,#fff);color:var(--els-ink,#213240)}
-html.ss5-native .ss5-site-header{
-  box-sizing:border-box;height:46px;position:sticky;top:0;z-index:90;
-  display:flex;align-items:center;gap:12px;padding:5px 15px;
-  border-bottom:1px solid var(--els-border,#ccc);
-  background:var(--els-surface,#fff)!important;color:var(--els-ink,#222)!important;
-}
 html.ss5-native .ss5-home{font-size:12px;font-weight:750;text-decoration:none;white-space:nowrap;color:var(--els-link,#216178)}
 html.ss5-native .ss5-site-title{font-size:13px;font-weight:750;flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 html.ss5-native .ss5-header-actions{display:flex;gap:8px;align-items:center;min-width:0}
