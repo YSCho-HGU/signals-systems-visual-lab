@@ -1,0 +1,125 @@
+/* Shared Signals & Systems mathematical typography — Chapters 5, 6, 7.
+ * Rendering logic stays chapter-specific; only presentation is shared.
+ * Loaded LAST in each chapter, after its native layout/theme styles.
+ */
+:is(html.ss5-native,html.ss6-compact-workspace,html.ss7-native){
+  --ss-math-inline-scale:1.08em;
+  --ss-math-key-size:clamp(18px,1.6vw,22px);
+  --ss-math-step-size:clamp(18px,1.55vw,22px);
+  --ss-math-line-height:1.7;
+}
+:is(
+ html.ss5-native .ss5-prose-math,
+ html.ss5-native .ss5-inline-equation,
+ html.ss6-compact-workspace .ss6-inline-math,
+ html.ss7-native .ss7-prose-math
+){
+  display:inline-block;
+  vertical-align:baseline;
+  max-width:100%;
+  white-space:nowrap;
+  margin:0 .04em;
+  line-height:1.5;
+  color:inherit;
+  font-weight:inherit;
+}
+:is(
+ html.ss5-native .ss5-prose-math .katex,
+ html.ss5-native .ss5-inline-equation .katex,
+ html.ss6-compact-workspace .ss6-inline-math .katex,
+ html.ss7-native .ss7-prose-math .katex
+){
+  font-size:var(--ss-math-inline-scale);
+  line-height:1.4;
+  color:inherit;
+}
+:is(html.ss5-native .ss5-prose-math-error,html.ss7-native .ss7-prose-math-error){
+  border-bottom:2px dotted var(--els-accent,#b24e43);
+  font-family:"Cambria Math",Georgia,serif;
+}
+:is(
+ html.ss5-native .formula .math,
+ html.ss6-compact-workspace .ss6-theory-equation,
+ html.ss7-native .ss7-key-equation
+){
+  min-width:0;
+  max-width:100%;
+  font-family:KaTeX_Main,"Cambria Math",Georgia,serif;
+  font-size:var(--ss-math-key-size)!important;
+  font-weight:400!important;
+  line-height:1.55!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  overflow-wrap:normal!important;
+  scrollbar-width:thin;
+}
+:is(
+ html.ss5-native .deriv-math,
+ html.ss6-compact-workspace .deriv-math,
+ html.ss7-native .ss7-stage-explain .step .math
+){
+  min-width:0;
+  max-width:100%;
+  font-family:KaTeX_Main,"Cambria Math",Georgia,serif!important;
+  font-size:var(--ss-math-step-size)!important;
+  font-weight:400!important;
+  line-height:var(--ss-math-line-height)!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  overflow-wrap:normal!important;
+  scrollbar-width:thin;
+}
+:is(
+ html.ss5-native .formula .math,
+ html.ss5-native .deriv-math,
+ html.ss6-compact-workspace .ss6-theory-equation,
+ html.ss6-compact-workspace .deriv-math,
+ html.ss7-native .ss7-key-equation,
+ html.ss7-native .ss7-stage-explain .step .math
+) .katex-display{
+  margin:.25em 0!important;
+  text-align:left!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+}
+:is(
+ html.ss5-native .formula .math,
+ html.ss5-native .deriv-math,
+ html.ss6-compact-workspace .ss6-theory-equation,
+ html.ss6-compact-workspace .deriv-math,
+ html.ss7-native .ss7-key-equation,
+ html.ss7-native .ss7-stage-explain .step .math
+) .katex-display>.katex{
+  text-align:left!important;
+  white-space:nowrap;
+}
+:is(
+ html.ss5-native .formula .math,
+ html.ss5-native .deriv-math,
+ html.ss6-compact-workspace .ss6-theory-equation,
+ html.ss6-compact-workspace .deriv-math,
+ html.ss7-native .ss7-key-equation,
+ html.ss7-native .ss7-stage-explain .step .math
+) .katex{
+  font-size:1em!important;
+  line-height:1.4;
+  color:inherit;
+}
+:is(html.ss5-native .deriv-step,html.ss6-compact-workspace .deriv-step,html.ss7-native .ss7-stage-explain .step){
+  min-width:0;
+}
+html.ss5-native :is(.heading p,.reading-note p,.figure .sub,.quiz p,.deriv-step p,.guide-check),
+html.ss7-native :is(#intro,.ss7-predict-prompt,#insight,#reading,#check-q,#check-a,.step p,.ss7-sampling-concepts,.ss7-periodicity,.plot-title,.legend,.axis-key){
+  overflow-wrap:break-word;
+}
+html.ss7-native .ss7-period-equation .ss7-prose-math{
+  font-size:clamp(15px,1.3vw,19px);
+}
+html.ss7-native .ss7-stage-change .ss7-prose-math,
+html.ss7-native .ss7-stage-observe .ss7-prose-math{
+  color:var(--els-ink);
+}
+@media(max-width:780px){
+  html.ss7-native .ss7-key-equation,
+  html.ss7-native .ss7-stage-explain .step .math{font-size:18px!important}
+}
