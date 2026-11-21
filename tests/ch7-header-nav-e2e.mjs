@@ -58,9 +58,9 @@ try{
     check(changed.before!==changed.after,size+'-lesson-'+n+'-slider-recalculates');
    }
   }
-  check(await f.locator('#ss-progress-panel').count()===1,size+'-single-progress');
-  check(await f.locator('#ss-progress-panel').count()===1,size+'-progress-present');
-  const toggled=await f.locator('#ss-progress-panel button').first().isEnabled();
+  check(await page.locator('#ss-progress-panel').count()===1,size+'-single-progress');
+  check(await page.locator('#ss-unified-nav #ss-progress-panel').count()===1,size+'-progress-in-host-sidebar');
+  const toggled=await page.locator('#ss-progress-panel button').first().isEnabled();
   check(toggled,size+'-progress-enabled');
   const headerGeom=await page.locator('.els-ss-unified-header').evaluate(h=>({height:h.getBoundingClientRect().height,overflow:document.documentElement.scrollWidth-innerWidth}));
   check(headerGeom.height<=90,size+'-compact-header',headerGeom);
