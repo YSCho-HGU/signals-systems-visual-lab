@@ -41,7 +41,7 @@ try{
   await page.close();
  }
  const bridgeCases=[
-  ['chapter5.html?lab=rc','RC time constant becomes'],
+  ['chapter5.html?lab=rc','From analog RC to digital IIR'],
   ['chapter6.html?lab=periodic','Digital periodicity'],
   ['chapter7.html#lab=3','CT ambiguity'],
   ['chapter8.html#lab=6','From phasors']
