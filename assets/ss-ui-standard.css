@@ -130,6 +130,13 @@
   font-weight:800!important;
   color:var(--els-ink,#22313a)!important;
 }
+/* Shared theme mapping for chapter-numbered steps.
+ * These values match ss-four-step-standard.css without importing its unrelated layouts. */
+html.ss7-native[data-els-theme="neutral-dark"]{--ss-step-foreground:#d6f5e7;--ss-step-background:#315448;--ss-step-stroke:#a0d8c1}
+html.ss7-native[data-els-theme="warm-dark"]{--ss-step-foreground:#d7f5df;--ss-step-background:#385647;--ss-step-stroke:#a6d2b8}
+html.ss7-native[data-els-theme="navy-dark"]{--ss-step-foreground:#ddf2ff;--ss-step-background:#2d5270;--ss-step-stroke:#a9daff}
+html.ss7-native[data-els-theme="warm-neutral"]{--ss-step-foreground:#214c39;--ss-step-background:#e2ede4;--ss-step-stroke:#46765d}
+html.ss7-native[data-els-theme="white-clean"]{--ss-step-foreground:#194d65;--ss-step-background:#eaf4f9;--ss-step-stroke:#367793}
 /* Chapter 7 now inherits the same numbered-step palette used in Ch5/Ch6. */
 html.ss7-native .ss7-stage-index{
   display:inline-grid!important;
