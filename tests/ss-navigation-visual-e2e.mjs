@@ -1,0 +1,100 @@
+/* Full Chapter 1-8 visual navigation and theme regression.
+ * Run from repository root: npm run qa:navigation:visual
+ */
+import assert from 'node:assert/strict';
+import { chromium } from 'playwright';
+import { spawn } from 'node:child_process';
+import { mkdirSync, writeFileSync } from 'node:fs';
+const base=process.env.SS_BASE_URL||'http://127.0.0.1:8788/';
+const own=!process.env.SS_BASE_URL;
+const server=own?spawn('python3',['-m','http.server','8788','--bind','127.0.0.1'],{stdio:'ignore'}):null;
+const folder='qa-navigation';mkdirSync(folder,{recursive:true});
+if(own)await new Promise(r=>setTimeout(r,1250));
+const browser=await chromium.launch({headless:true});
+const results=[];
+function record(ok,name,details=''){results.push({pass:!!ok,name,details});console.log((ok?'PASS ':'FAIL ')+name+(details?' '+details:''))}
+const selectors={
+ 1:['.ss-ch1-sidebar','.ss-ch1-sidebar nav#nav button','.ss-ch1-lab-number'],
+ 2:['.app>.sidebar','.app>.sidebar nav.nav button','.app>.sidebar .num'],
+ 3:['.app>.sidebar','.app>.sidebar nav.nav button','.app>.sidebar .num'],
+ 4:['.app>.sidebar','.app>.sidebar nav.nav button','.app>.sidebar .num'],
+ 5:['.shell>aside.nav','.shell .tabs button','.shell .tabs .num'],
+ 6:['.app>.sidebar','.app>.sidebar nav.nav button','.app>.sidebar .num'],
+ 7:['.ss7-sidebar','#ss7-lesson-nav button','.ss7-lab-number'],
+ 8:['.ss8-sidebar','#nav button','.ss8-lab-number']
+};
+function luminance(rgb){
+ const a=(rgb.match(/[\d.]+/g)||[]).slice(0,3).map(v=>{
+  const n=Number(v)/255;return n<=.04045?n/12.92:Math.pow((n+.055)/1.055,2.4)
+ });
+ return a[0]*.2126+a[1]*.7152+a[2]*.0722
+}
+function contrast(a,b){const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+try{
+ for(const width of [1440,980]){
+  for(let ch=1;ch<=8;ch++){
+   const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'});
+   page.on('pageerror',e=>record(false,'chapter-'+ch+'-page-error',e.message));
+   await page.addInitScript(()=>{try{localStorage.setItem('els-theme-v2','neutral-dark');localStorage.setItem('ss-sidebar-collapsed-v1','0')}catch{}});
+   await page.goto(base+'chapter'+ch+'.html',{waitUntil:'domcontentloaded',timeout:45000});
+   const [side,buttons,badge]=selectors[ch];
+   try{
+    await page.locator(buttons).first().waitFor({state:'visible',timeout:25000});
+    await page.locator('.ss-side-toggle').waitFor({state:'visible',timeout:12000});
+    const before=await page.evaluate(({side,buttons,badge})=>{
+     const el=document.querySelector(side),button=document.querySelector(buttons),num=document.querySelector(badge);
+     const panel=el?.parentElement?.querySelector(':scope > main, :scope > .ss7-workspace, :scope > .ss8-workspace, :scope > .ss-found-four-step');
+     const chosen=document.querySelector(buttons+'[aria-current="page"],'+buttons+'[aria-current="true"],'+buttons+'.on,'+buttons+'.active')||button;
+     const x=getComputedStyle(chosen);
+     return {
+      width:el?.getBoundingClientRect().width||0,number:num?.textContent?.trim()||'',
+      font:parseFloat(getComputedStyle(button).fontSize),
+      panelWidth:panel?.getBoundingClientRect().width||0,
+      foreground:x.color,background:x.backgroundColor,
+      overflow:document.documentElement.scrollWidth-innerWidth
+     };
+    },{side,buttons,badge});
+    record(before.width>=160&&before.width<=270,'ch'+ch+'-'+width+'-expanded-width',JSON.stringify(before.width));
+    record(before.number==='01','ch'+ch+'-'+width+'-two-digit-first-number',before.number);
+    record(before.font>=12&&before.font<=14,'ch'+ch+'-'+width+'-nav-font',String(before.font));
+    record(before.overflow<15,'ch'+ch+'-'+width+'-no-horizontal-overflow',String(before.overflow));
+    record(contrast(before.foreground,before.background)>=4.5,'ch'+ch+'-'+width+'-selected-contrast',String(contrast(before.foreground,before.background).toFixed(2)));
+    await page.locator('.ss-side-toggle').click();
+    const after=await page.evaluate(({side})=>{
+     const el=document.querySelector(side);
+     return {width:el.getBoundingClientRect().width,grid:getComputedStyle(el.parentElement).gridTemplateColumns};
+    },{side});
+    record(after.width<=60,'ch'+ch+'-'+width+'-collapsed-width',JSON.stringify(after));
+    record(after.grid.startsWith('52px'),'ch'+ch+'-'+width+'-collapsed-grid',after.grid);
+    const menu=page.locator('.ss-common-menu');
+    await menu.locator('summary').click();
+    const links=menu.locator('.ss-common-links a');
+    record(await links.count()===10,'ch'+ch+'-'+width+'-menu-10-entries');
+    await links.first().hover();
+    const dropdown=await links.first().evaluate(el=>{
+      const cs=getComputedStyle(el);
+      return {fg:cs.color,bg:cs.backgroundColor}
+    });
+    record(contrast(dropdown.fg,dropdown.bg)>=4.5,'ch'+ch+'-'+width+'-dropdown-contrast',String(contrast(dropdown.fg,dropdown.bg).toFixed(2)));
+    await page.screenshot({path:folder+'/ch'+ch+'-'+width+'.png'});
+   }catch(e){record(false,'ch'+ch+'-'+width+'-setup',String(e))}
+   await page.close();
+  }
+ }
+ const overview=await browser.newPage({viewport:{width:1440,height:900}});
+ await overview.addInitScript(()=>{try{localStorage.setItem('els-theme-v2','neutral-dark')}catch{}});
+ await overview.goto(base+'index.html#overview',{waitUntil:'domcontentloaded',timeout:45000});
+ record(await overview.locator('.ss-common-links a').count()===10,'overview-menu-count');
+ record(await overview.locator('#chapter-grid .chapter-card').count()===8,'overview-eight-chapter-cards');
+ await overview.screenshot({path:folder+'/overview-dark.png'});
+ await overview.goto(base+'index.html#map',{waitUntil:'domcontentloaded'});
+ record(await overview.locator('#tm-detail .tm-formula').count()===1,'learning-map-math-panel');
+ await overview.screenshot({path:folder+'/learning-map-dark.png'});
+ await overview.close();
+}finally{
+ await browser.close();if(server)server.kill();
+}
+writeFileSync(folder+'/results.json',JSON.stringify(results,null,2));
+const failed=results.filter(x=>!x.pass);
+console.log('Navigation visual QA: '+(results.length-failed.length)+'/'+results.length+' checks passed');
+assert.equal(failed.length,0,'Navigation visual regressions found: '+failed.map(x=>x.name).join(', '));
