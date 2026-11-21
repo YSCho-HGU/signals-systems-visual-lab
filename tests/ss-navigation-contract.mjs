@@ -10,7 +10,7 @@ const math=read('assets/ss-overview-standard.js');
 assert.match(header,/Learning Map · Transform Connections/);
 assert.ok(header.indexOf("overview.textContent")<header.indexOf("map.textContent"));
 assert.ok(header.indexOf("map.textContent")<header.indexOf("CHAPTERS.forEach"));
-assert.match(header,/index\.html/);
+assert.ok(header.includes('const onOverview='));
 assert.match(controller,/ss-sidebar-collapsed-v1/);
 assert.match(controller,/ss-ch1-sidebar/);
 assert.match(controller,/ss:sidebar-resized/);
