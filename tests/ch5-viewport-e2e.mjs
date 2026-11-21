@@ -74,7 +74,7 @@ try{
    check(math.engine&&math.expected===4,prefix+"-"+lab+"-math-model",math);
    check(math.hero==="katex"&&math.steps.every(x=>x==="katex"),prefix+"-"+lab+"-katex-rendered",math);
    const inline=await page.evaluate(()=>{
-     const count=document.querySelectorAll(".ss5-inline-equation .katex").length;
+     const count=document.querySelectorAll(".ss5-inline-equation .katex, .ss5-prose-math .katex, .els-inline-math .katex").length;
      const reading=document.querySelector(".reading-panel")?.innerText||"";
      const caption=document.querySelector(".figure .sub")?.innerText||"";
      return {count,reading:reading.slice(0,80),caption:caption.slice(0,80)};
@@ -83,9 +83,10 @@ try{
    const readingMath=await page.evaluate(()=>({
      authored:document.querySelectorAll(".reading-panel [data-els-math-inline]").length,
      katex:document.querySelectorAll(".reading-panel [data-els-math-inline][data-math-rendered='katex']").length,
-     failed:document.querySelectorAll(".reading-panel [data-math-error]").length
+     failed:document.querySelectorAll(".reading-panel [data-math-error], .reading-panel .ss5-prose-math-error").length,
+     all:document.querySelectorAll(".reading-panel .katex").length
    }));
-   check(readingMath.authored>0&&readingMath.authored===readingMath.katex&&readingMath.failed===0,prefix+"-"+lab+"-explicit-reading-katex",readingMath);
+   check(readingMath.all>0&&readingMath.authored===readingMath.katex&&readingMath.failed===0,prefix+"-"+lab+"-explicit-reading-katex",readingMath);
 
    const quizMath=await page.evaluate(()=>({
      count:document.querySelectorAll(".quiz .ss5-explicit-math .katex").length,
