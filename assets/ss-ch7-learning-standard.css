@@ -123,3 +123,10 @@ html.ss7-standard .ss7-ct-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-s
 html.ss7-standard .ss7-ct-legend span:nth-child(1){color:#168c91}
 html.ss7-standard .ss7-ct-legend span:nth-child(2){color:#cc8841}
 html.ss7-standard .ss7-ct-legend span:nth-child(3){color:#9864b3}
+
+html.ss7-standard .ss7-alias-animate{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0 12px}
+html.ss7-standard .ss7-alias-animate button{padding:5px 12px;border-radius:7px;border:1px solid var(--els-border);background:var(--els-surface);color:var(--els-ink);cursor:pointer}
+html.ss7-standard .ss7-alias-animate label{display:flex;align-items:center;gap:6px;font-size:13px}
+html.ss7-standard .ss7-alias-animate input{width:115px;accent-color:var(--els-accent)}
+html.ss7-standard .ss7-alias-status{font-size:12px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+@media(prefers-reduced-motion:reduce){html.ss7-standard .ss7-alias-animate{scroll-behavior:auto}}
