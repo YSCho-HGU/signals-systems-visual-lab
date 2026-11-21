@@ -126,9 +126,10 @@ try{
    }
   }
   const review=page.locator("#ss5-progress button");
-  await review.click();
+  // Mobile navigation intentionally hides the progress control; test its handler without a Playwright visibility timeout.
+  if(await review.isVisible())await review.click();else await review.evaluate(el=>el.click());
   check(await page.evaluate(()=>JSON.parse(localStorage.getItem("els-ss-lab-progress-v1")||"[]").includes("5:8")),prefix+"-progress-recorded");
-  await review.click();
+  if(await review.isVisible())await review.click();else await review.evaluate(el=>el.click());
   check(!(await page.evaluate(()=>JSON.parse(localStorage.getItem("els-ss-lab-progress-v1")||"[]").includes("5:8"))),prefix+"-progress-undo");
   await page.screenshot({path:output+"/ch5-"+prefix+".png",fullPage:false});
   check(errors.length===0,prefix+"-no-page-errors",errors.slice(0,5));
