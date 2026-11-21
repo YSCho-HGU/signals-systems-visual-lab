@@ -193,3 +193,192 @@ html[data-els-theme] #map-view .tm-formula .katex-display{
   min-width:650px!important;width:650px!important;
  }
 }
+
+
+/* Curriculum-scale Learning Map readability + five explicit theme variants. */
+html[data-els-theme] #map-view{
+ --tm-ink:var(--els-ink);--tm-muted:var(--els-muted);
+ color:var(--els-ink)!important;font-size:16px!important;line-height:1.7!important;
+}
+html[data-els-theme] #map-view .tm{
+ --tm-ink:var(--els-ink);--tm-muted:var(--els-muted);
+ color:var(--els-ink)!important;
+}
+html[data-els-theme] #map-view :is(.tm-panel,.tm-detail-main,.tm-detail-side,.tm-map-scroll,.tm-map-board,
+ .tm-node,.tm-edge-btn,.tm-lane,.tm-demo-chart,.tm-demo-insight,.tm-decision-answer,.tm-mis,
+ .eng-cards,.eng-detail,.eng-card,.eng-quiz,.eng-quiz-feedback,.eng-question,.eng-number,.eng-watch,
+ .tm-formula,.tm-control,.tm-chip,.tm-condition,.tm-demo-select,.tm-toggle,.tm-scenario-row button,
+ .tm-choice-group button,.eng-filters button,.eng-quiz-choices button,.eng-path span){
+ background:var(--els-surface)!important;
+ color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+ box-shadow:none!important;
+}
+html[data-els-theme] #map-view :is(.tm-lane,.tm-decision-answer,.tm-demo-insight,.tm-condition,
+ .eng-question,.eng-number,.eng-watch,.eng-quiz-feedback,.tm-formula,.tm-control,.eng-path span){
+ background:var(--els-surface-alt)!important;
+}
+html[data-els-theme] #map-view :is(.tm h3,.tm h4,.tm-detail h4,.tm-node strong,.tm-node .tm-node-top,
+ .tm-node small,.tm-node .tm-available,.tm-lane span,.tm-detail p,.tm-sub,.tm-note,.tm-legend,
+ .tm-legend span,.tm-chip,.tm-eyebrow,.tm-control label,.tm-control output,.tm-demo-insight,
+ .tm-demo-insight strong,.tm-condition,.tm-mis strong,.tm-mis span,.tm-source,.tm-source a,
+ .eng-detail p,.eng-detail h4,.eng-card strong,.eng-card small,.eng-label,.eng-case-number,
+ .eng-question b,.eng-number b,.eng-watch b,.eng-quiz-q,.eng-quiz-feedback,.eng-quiz-progress,
+ .tm-decision-answer h4,.tm-decision-answer p,.eng-path span){
+ color:var(--els-ink)!important;opacity:1!important;
+}
+html[data-els-theme] #map-view .tm-panel-head .tm-sub,
+html[data-els-theme] #map-view .tm-source,
+html[data-els-theme] #map-view .eng-card small,
+html[data-els-theme] #map-view .tm-node small{
+ color:var(--els-muted)!important;
+}
+html[data-els-theme] #map-view .tm-sub,
+html[data-els-theme] #map-view .tm-detail p,
+html[data-els-theme] #map-view .tm-decision-answer p,
+html[data-els-theme] #map-view .eng-detail p,
+html[data-els-theme] #map-view .tm-mis span,
+html[data-els-theme] #map-view .tm-demo-insight,
+html[data-els-theme] #map-view .tm-condition{
+ font-size:15px!important;line-height:1.75!important;
+}
+html[data-els-theme] #map-view .tm-panel-head .tm-eyebrow{font-size:12px!important;letter-spacing:.075em!important}
+html[data-els-theme] #map-view :is(.tm-chip,.tm-toggle,.tm-scenario-row button,.tm-choice-group button,
+ .eng-filters button,.eng-quiz-choices button,.tm-demo-select,.tm-control label,.tm-control output){
+ font-size:14px!important;min-height:36px!important;
+}
+html[data-els-theme] #map-view :is(.tm-toggle.active,.tm-choice-group button.active,
+ .eng-filters button.active,.eng-card.active,.eng-quiz-choices button.correct){
+ background:var(--els-info-bg)!important;color:var(--els-info-ink)!important;
+ border-color:var(--els-link)!important;
+}
+html[data-els-theme] #map-view .eng-quiz-choices button.wrong{
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
+ border-color:var(--els-border)!important;
+}
+html[data-els-theme] #map-view .tm-node{padding:10px 12px!important}
+html[data-els-theme] #map-view .tm-node strong{font-size:20px!important;line-height:1.25!important}
+html[data-els-theme] #map-view .tm-node .tm-node-top{font-size:12px!important;letter-spacing:0!important}
+html[data-els-theme] #map-view .tm-node small{font-size:13px!important;line-height:1.28!important;padding-right:26px!important}
+html[data-els-theme] #map-view .tm-node .tm-available{
+ font-size:11px!important;bottom:6px!important;right:8px!important;
+ background:var(--els-surface-alt)!important;
+}
+html[data-els-theme] #map-view .tm-node.dim{opacity:.62!important}
+html[data-els-theme] #map-view .tm-edge-btn{
+ font-size:12px!important;min-height:33px!important;padding:5px 9px!important;
+ background:var(--els-surface)!important;
+}
+html[data-els-theme] #map-view .tm-edge-btn.dim{opacity:.55!important}
+html[data-els-theme] #map-view .tm-edge-btn:is(:hover,.active),
+html[data-els-theme] #map-view .tm-node:is(:hover,.active){
+ background:var(--els-info-bg)!important;color:var(--els-info-ink)!important;
+ border-color:var(--els-link)!important;
+}
+html[data-els-theme] #map-view .tm-lane span{font-size:13px!important}
+html[data-els-theme] #map-view .tm-legend{font-size:13px!important;gap:10px 17px!important}
+html[data-els-theme] #map-view .tm-map-scroll{
+ background:var(--els-surface-alt)!important;scrollbar-color:var(--els-border) var(--els-surface-alt)!important;
+}
+html[data-els-theme] #map-view .tm-map-board{
+ background:var(--els-surface-alt)!important;
+}
+html[data-els-theme] #map-view .tm-lane{background:var(--els-surface)!important}
+html[data-els-theme] #map-view .eng-card strong{font-size:15px!important;line-height:1.4!important}
+html[data-els-theme] #map-view .eng-card small{font-size:12px!important;line-height:1.5!important}
+html[data-els-theme] #map-view :is(.eng-label,.eng-question b,.eng-number b,.eng-watch b,
+ .eng-case-number,.eng-quiz-progress,.tm-source){font-size:13px!important}
+html[data-els-theme] #map-view .eng-path span{font-size:13px!important}
+html[data-els-theme] #map-view .tm-demo-chart :is(svg>rect:first-child,svg rect[fill="white"],svg rect[fill="#fff"]){
+ fill:var(--els-surface)!important
+}
+html[data-els-theme] #map-view .tm-demo-chart svg rect[fill="#e0f2ed"]{
+ fill:var(--els-info-bg)!important
+}
+html[data-els-theme] #map-view .tm-demo-chart svg text{
+ fill:var(--els-ink)!important;font-size:13px!important
+}
+html[data-els-theme] #map-view .tm-demo-chart svg :is(line,path)[stroke="#edf2f5"]{
+ stroke:var(--els-border)!important
+}
+html[data-els-theme] #map-view .tm-demo-chart svg{
+ background:var(--els-surface)!important
+}
+html[data-els-theme] #map-view .tm-control input[type="range"]{
+ accent-color:var(--els-primary)!important
+}
+html[data-els-theme] #map-view .tm-actions .tm-action,
+html[data-els-theme] #map-view .tm-action,
+html[data-els-theme] #map-view .ss-curriculum-steps button{
+ background:var(--els-primary)!important;color:var(--els-primary-text)!important;
+ border:1px solid var(--els-primary)!important;font-size:14px!important;
+}
+html[data-els-theme] #map-view .tm-action.secondary{
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
+ border:1px solid var(--els-border)!important
+}
+html[data-els-theme] #map-view :is(.tm-action,.tm-toggle,.tm-node,.tm-edge-btn,.eng-card):focus-visible{
+ outline:3px solid var(--els-focus)!important;outline-offset:2px!important
+}
+html[data-els-theme] #map-view .ss-curriculum-path,
+html[data-els-theme] #map-view .ss-application-preview{
+ border:1px solid var(--els-border)!important;
+ border-radius:13px!important;background:var(--els-surface)!important;
+ padding:20px!important;margin:0 0 19px!important;color:var(--els-ink)!important
+}
+html[data-els-theme] #map-view .ss-curriculum-path h3{
+ margin:0 0 8px;font-size:23px!important;color:var(--els-ink)!important
+}
+html[data-els-theme] #map-view .ss-curriculum-path h3 span{
+ font-size:17px;color:var(--els-muted)!important
+}
+html[data-els-theme] #map-view .ss-curriculum-intro,
+html[data-els-theme] #map-view .ss-curriculum-bridge{
+ font-size:16px!important;line-height:1.75!important;color:var(--els-ink)!important
+}
+html[data-els-theme] #map-view .ss-curriculum-steps{
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0
+}
+html[data-els-theme] #map-view .ss-curriculum-steps>div{
+ display:flex;flex-direction:column;gap:8px;padding:16px;border-radius:10px;
+ border:1px solid var(--els-border);background:var(--els-surface-alt);
+ min-width:0
+}
+html[data-els-theme] #map-view .ss-curriculum-steps strong{
+ font-size:16px!important;color:var(--els-ink)!important
+}
+html[data-els-theme] #map-view .ss-curriculum-steps span{
+ font-size:14px!important;line-height:1.6!important;color:var(--els-muted)!important;flex:1
+}
+html[data-els-theme] #map-view .ss-curriculum-steps button{
+ border-radius:9px;padding:8px 10px;cursor:pointer;text-align:center
+}
+html[data-els-theme] #map-view .ss-curriculum-bridge{
+ border-top:1px solid var(--els-border);padding-top:12px;margin-bottom:0
+}
+html[data-els-theme] #map-view .ss-application-preview{
+ display:flex;align-items:center;justify-content:space-between;gap:20px
+}
+html[data-els-theme] #map-view .ss-application-preview strong{
+ font-size:18px!important;color:var(--els-ink)!important
+}
+html[data-els-theme] #map-view .ss-application-preview p{
+ font-size:15px!important;line-height:1.7!important;color:var(--els-muted)!important
+}
+html[data-els-theme] #map-view .ss-application-preview>span{
+ white-space:nowrap;font-size:13px!important;color:var(--els-muted)!important
+}
+html[data-els-theme] #map-view .ss-map-foundation-note{
+ font-size:15px!important;line-height:1.7!important;
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
+ border-left:4px solid var(--els-link)!important;border-radius:9px;
+ padding:12px 14px!important;margin-bottom:15px!important;
+}
+@media(max-width:1150px){
+ html[data-els-theme] #map-view .ss-curriculum-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){
+ html[data-els-theme] #map-view .ss-curriculum-steps{grid-template-columns:1fr}
+ html[data-els-theme] #map-view .ss-application-preview{display:block}
+ html[data-els-theme] #map-view .ss-application-preview>span{display:block;margin-top:8px}
+}
