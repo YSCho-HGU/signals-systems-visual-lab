@@ -58,10 +58,11 @@ try{
     const panel=document.querySelector(".lab .panel"),plots=document.querySelector(".plots"),predict=document.querySelector(".ss5-predict");
     const a=panel.getBoundingClientRect(),b=plots.getBoundingClientRect(),p=predict.getBoundingClientRect();
     return {sideBySide:innerWidth>780?a.right<=b.left+4:true,
-      predictionInsidePanel:panel.contains(predict),predictionAboveControls:p.bottom<=panel.querySelector(".controlgrid").getBoundingClientRect().top+2,
-      panelPosition:getComputedStyle(panel).position,plotVisible: b.width>0&&b.height>0};
+      predictionIsFullRow:predict.parentElement?.id==="page"&&p.left<=a.left+3&&p.right>=b.right-3,
+      predictionAboveWorkbench:p.bottom<=a.top+2&&p.bottom<=b.top+2,
+      panelPosition:getComputedStyle(panel).position,plotVisible:b.width>0&&b.height>0};
    });
-   check(layout.predictionInsidePanel&&layout.predictionAboveControls,prefix+"-"+lab+"-prediction-near-sliders",layout);
+   check(layout.predictionIsFullRow&&layout.predictionAboveWorkbench,prefix+"-"+lab+"-prediction-full-width-top-row",layout);
    check(layout.sideBySide&&layout.plotVisible&&layout.panelPosition!=="sticky"&&layout.panelPosition!=="fixed",prefix+"-"+lab+"-controls-and-plots-layout",layout);
 
    const math=await page.evaluate(()=>{
