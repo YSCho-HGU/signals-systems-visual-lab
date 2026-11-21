@@ -146,6 +146,7 @@ jobs:
             qa-ch5/
             qa-ch5-ch6-standard/
             qa-ch5-math/
+            qa-ch8-math/
             qa-learning-output/
             qa-phase0/
           if-no-files-found: warn
