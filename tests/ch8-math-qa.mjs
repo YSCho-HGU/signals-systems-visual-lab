@@ -60,6 +60,23 @@ try{
   await page.evaluate(()=>window.SSMathCore.renderNow());
   const prose=await page.evaluate(()=>window.__ss8ProseMath?.audit?.()||null);
   check('8.'+n+'-prose-inline-math',!!prose&&prose.visible>0&&prose.failures.length===0&&prose.conversionErrors.length===0,prose);
+  const inlineStyle=await page.evaluate(()=>{
+   const p=document.querySelector('#ss8-predict-question .ss8-predict-background p')||
+     document.querySelector('#reading .note p');
+   const math=p?.querySelector('.ss8-prose-math');
+   if(!p||!math)return {found:false};
+   const parent=getComputedStyle(p),outer=getComputedStyle(math);
+   const inner=getComputedStyle(math.querySelector('.katex')||math);
+   return {found:true,parentSize:parseFloat(parent.fontSize),
+     outerSize:parseFloat(outer.fontSize),innerSize:parseFloat(inner.fontSize),
+     display:outer.display,overflowX:outer.overflowX,
+     fraction:math.getAttribute('data-ss-math')||''};
+  });
+  if(inlineStyle.found)
+   check('8.'+n+'-inline-math-baseline',
+    inlineStyle.display==='inline'&&inlineStyle.overflowX==='visible'&&
+    Math.abs(inlineStyle.innerSize-inlineStyle.parentSize)<=1,inlineStyle);
+
   const one=await snapshot(page);
   check('8.'+n+'-default',one.report?.passed&&one.key.rendered&&
     one.steps.length===1&&one.steps[0].rendered&&one.blanks===0&&one.errors===0,one);
