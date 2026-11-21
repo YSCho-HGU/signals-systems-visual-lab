@@ -1,34 +1,7 @@
 {
-  "status": "FAIL",
+  "status": "PASS",
   "total": 59,
-  "failures": [
-    {
-      "id": "chapter3-no-js-errors",
-      "passed": false,
-      "detail": [
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined"
-      ]
-    },
-    {
-      "id": "chapter4-no-js-errors",
-      "passed": false,
-      "detail": [
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined"
-      ]
-    },
-    {
-      "id": "bridge-chapter5.html?lab=rc",
-      "passed": false,
-      "detail": {
-        "count": 1,
-        "head": "Connect the chaptersFrom analog RC to digital IIRA sampled first-order analog RC system with ZOH input has a discrete pole a = exp(-Ts/tau)."
-      }
-    }
-  ],
+  "failures": [],
   "results": [
     {
       "id": "chapter1-header-and-nav",
@@ -303,12 +276,8 @@
     },
     {
       "id": "chapter3-no-js-errors",
-      "passed": false,
-      "detail": [
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined"
-      ]
+      "passed": true,
+      "detail": []
     },
     {
       "id": "chapter4-header-and-nav",
@@ -399,12 +368,8 @@
     },
     {
       "id": "chapter4-no-js-errors",
-      "passed": false,
-      "detail": [
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined"
-      ]
+      "passed": true,
+      "detail": []
     },
     {
       "id": "chapter5-header-and-nav",
@@ -512,7 +477,7 @@
     },
     {
       "id": "bridge-chapter5.html?lab=rc",
-      "passed": false,
+      "passed": true,
       "detail": {
         "count": 1,
         "head": "Connect the chaptersFrom analog RC to digital IIRA sampled first-order analog RC system with ZOH input has a discrete pole a = exp(-Ts/tau)."
@@ -582,7 +547,7 @@
       }
     }
   ],
-  "sourceSha": "9a5659949a81ea3a1223e3610d05533434721afa",
-  "runId": 44912797547,
-  "generatedAt": "2026-11-21T14:14:33.793Z"
+  "sourceSha": "ed14939679df83e0a17512f2e982be1a35d57720",
+  "runId": 44913081654,
+  "generatedAt": "2026-11-21T14:17:16.390Z"
 }
