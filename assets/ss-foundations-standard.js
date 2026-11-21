@@ -67,6 +67,54 @@ function typeset(){
  if(window.SSMathCore)window.SSMathCore.queue();
  else if(window.katex?.render){try{window.katex.render(tex,wrap,{displayMode:true,throwOnError:true,strict:'ignore'})}catch(e){wrap.textContent=tex}}
 }
+function mathMarkupToLatex(markup){
+ const box=document.createElement('div');box.innerHTML=markup;
+ function convert(node){
+  if(node.nodeType===3)return node.nodeValue||'';
+  if(node.nodeType!==1)return '';
+  const core=Array.from(node.childNodes).map(convert).join('');
+  const tag=node.tagName?.toLowerCase();
+  return tag==='sub'?'_{'+core+'}':tag==='sup'?'^{'+core+'}':tag==='br'?'\\quad ':core;
+ }
+ let val=Array.from(box.childNodes).map(convert).join('');
+ val=val.replace(/[\u00a0]/g,' ').replaceAll('−','-').replaceAll('∞','\\infty ')
+ .replaceAll('π','\\pi ').replaceAll('ω','\\omega ').replaceAll('Ω','\\Omega ')
+ .replaceAll('σ','\\sigma ').replaceAll('τ','\\tau ').replaceAll('α','\\alpha ')
+ .replaceAll('β','\\beta ').replaceAll('δ','\\delta ').replaceAll('Δ','\\Delta ')
+ .replaceAll('ζ','\\zeta ').replaceAll('φ','\\phi ').replaceAll('θ','\\theta ')
+ .replaceAll('λ','\\lambda ').replaceAll('Σ','\\sum ').replaceAll('∑','\\sum ')
+ .replaceAll('∫','\\int ').replaceAll('√','\\sqrt ')
+ .replaceAll('⇒','\\Rightarrow ').replaceAll('→','\\to ').replaceAll('↔','\\leftrightarrow ')
+ .replaceAll('≤','\\le ').replaceAll('≥','\\ge ').replaceAll('≠','\\ne ')
+ .replaceAll('≈','\\approx ').replaceAll('∈','\\in ')
+ .replaceAll('·','\\cdot ').replaceAll('×','\\times ')
+ .replaceAll('²','^2').replaceAll('³','^3').replaceAll('₀','_0')
+ .replaceAll('⁻¹','^{-1}').replaceAll('ⁿ','^n')
+ .replace(/(^|[^a-zA-Z])(sin|cos|tan|sinc)(?=\()/g,(m,pre,fn)=>pre+'\\'+fn)
+ .replace(/\bROC\b/g,'\\mathrm{ROC}')
+ .replace(/\s+/g,' ').trim();
+ return val;
+}
+function enhanceGuidedMath(){
+ if(chapter===1)return;
+ if(!window.katex?.render)return;
+ for(const el of document.querySelectorAll('#derivationPanel .deriv-math')){
+  if(el.querySelector('.katex')||el.dataset.ssFoundMath==='done')continue;
+  const source=el.innerHTML,latex=mathMarkupToLatex(source);
+  // Preserve narrative text rather than falsely typeset it as a long sequence
+  // of separate algebraic symbols.
+  if(!latex||/\b(for|otherwise|where|when|supply|from|with|valid|pole|frequency)\b/i.test(latex)){
+   el.dataset.ssFoundMath='narrative';continue;
+  }
+  try{
+   window.katex.render(latex,el,{displayMode:true,throwOnError:true,strict:'ignore',trust:false});
+   el.dataset.ssFoundMath='done';
+   el.dataset.ssMathSource=latex;
+  }catch(e){
+   el.innerHTML=source;el.dataset.ssFoundMath='fallback';
+  }
+ }
+}
 function stageHeading(num,label){
  const h=document.createElement('div');h.className='ss-found-stage';
  const n=document.createElement('span');n.textContent=String(num);h.append(n,document.createTextNode(label));return h;
@@ -118,7 +166,7 @@ function content1(){
  block.append(pre,pair,explain);grid.replaceWith(block);refreshPredict(block);typeset();
 }
 let busy=false;
-function schedule(){if(busy)return;busy=true;queueMicrotask(()=>{busy=false;try{chapter===1?content1():content234();refreshPredict(document.querySelector('.ss-found-four-step'));typeset();setNewTitle()}catch(e){console.warn('Foundation standard enhancement',e)}})}
+function schedule(){if(busy)return;busy=true;queueMicrotask(()=>{busy=false;try{chapter===1?content1():content234();refreshPredict(document.querySelector('.ss-found-four-step'));typeset();enhanceGuidedMath();setNewTitle()}catch(e){console.warn('Foundation standard enhancement',e)}})}
 function init(){
  // The native experiment scripts still own every simulation and state change.
  const root=document.querySelector(chapter===1?'main':'#content');if(!root)return;
@@ -126,6 +174,8 @@ function init(){
  const nav=document.querySelector(chapter===1?'#nav':'[data-nav]')?.closest('nav')||document.querySelector('nav');
  nav?.addEventListener('click',()=>setTimeout(schedule,60));
  root.addEventListener('input',()=>setTimeout(schedule,70));
+ root.addEventListener('click',e=>{if(e.target.closest('#previousStep,#nextStep,#allSteps,#guidePlay'))setTimeout(enhanceGuidedMath,80)});
+ new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches?.('.deriv-step')||n.querySelector?.('.deriv-step')))))queueMicrotask(enhanceGuidedMath)}).observe(root,{childList:true,subtree:true});
  document.addEventListener('els:themechange',()=>{if(typeof updateModule==='function')updateModule();else if(typeof draw==='function')draw()});
  if(window.katex?.render)typeset();window.addEventListener('load',schedule);schedule();
 }
