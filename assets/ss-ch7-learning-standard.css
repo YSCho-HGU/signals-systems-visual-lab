@@ -61,7 +61,8 @@ html.ss7-standard[data-els-theme] :is(.card,.ss7-card,.step,.control,.reading .n
 /* Chapter 7 uses the single shared navigation in the host page. */
 html.ss7-standard main{max-width:none;width:100%;padding:12px clamp(10px,1.6vw,24px)}
 html.ss7-standard .ss7-standard-layout{max-width:none;width:100%;min-width:0}
-@media(max-width:850px){html.ss7-standard .ss7-stage-pair{grid-template-columns:1fr}}
+/* Preserve side-by-side Change/Observe on laptop and tablet widths; stack only on narrow screens. */
+@media(max-width:730px){html.ss7-standard .ss7-stage-pair{grid-template-columns:1fr}}
 
 /* Chapter 7 SVG plot palette: use the same semantic axes/grid/labels as
    Chapters 5 and 6. Series paths keep their semantic trace colors. */
@@ -98,7 +99,7 @@ html.ss7-standard .ss7-sampling-active #plots>.plot-card{min-width:0;margin:0}
 html.ss7-standard .ss7-sampling-active #plots>.plot-card svg{width:100%;height:auto}
 html.ss7-standard .ss7-sampling-active .plot-card .plot-title{font-size:13px}
 html.ss7-standard .ss7-sampling-active .plot-card .axis-key{font-size:12px}
-@media(max-width:1150px){html.ss7-standard .ss7-sampling-active .ss7-stage-pair{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:730px){html.ss7-standard .ss7-sampling-active .ss7-stage-pair{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:780px){html.ss7-standard .ss7-sampling-active #plots{grid-template-columns:minmax(0,1fr)}}
 
 /* 7.1 integer frequency-shift experiment. */
