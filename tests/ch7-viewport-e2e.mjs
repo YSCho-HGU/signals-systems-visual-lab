@@ -37,6 +37,16 @@ try{
   check(width+' shared numbered stages',initial.panels.length===4&&initial.panels.every((v,i)=>v.startsWith(String(i+1))),initial.panels);
   check(width+' audited equation dataset',await page.evaluate(()=>window.__ss7EquationAudit?.formulas===28));
   check(width+' no horizontal overflow',initial.documentWidth<=width+6,initial.documentWidth);
+  const typography=await page.evaluate(()=>{
+    const css=x=>{const n=document.querySelector(x);return n?getComputedStyle(n):null};
+    const header=css('.ss7-stage-head'),intro=css('#intro'),label=css('.control label'),plot=css('#plots svg'),title=css('#title');
+    return {header:parseFloat(header?.fontSize||'0'),intro:parseFloat(intro?.fontSize||'0'),label:parseFloat(label?.fontSize||'0'),
+      title:parseFloat(title?.fontSize||'0'),svgHeight:document.querySelector('#plots svg')?.getBoundingClientRect().height||0};
+  });
+  check(width+' Chapter 5-equivalent title and body sizes',typography.title>=21&&typography.intro>=16,typography);
+  check(width+' readable stage-heading size',typography.header>=18,typography);
+  check(width+' readable control size',typography.label>=14,typography);
+  if(width>=900)check(width+' chart legibility',typography.svgHeight>=150,typography);
   for(const theme of themes){
    await page.locator('#ss7-theme-picker').selectOption(theme);
    check(width+' theme '+theme,await page.evaluate(()=>document.documentElement.dataset.elsTheme)===theme);
@@ -46,6 +56,8 @@ try{
     const before=await snapshot(page);
     check(width+'/'+theme+'/lesson'+index+' stage and plot',before.ready&&before.panels.length===4&&before.plots>0&&before.content>10&&before.currentNav===1,before);
     check(width+'/'+theme+'/lesson'+index+' guided formula present',await page.locator('#step-content .step .math').count()===1&&Boolean((await page.locator('#step-content .step .math').textContent())?.trim()));
+    const mathSize=await page.locator('#step-content .step .math').first().evaluate(el=>parseFloat(getComputedStyle(el).fontSize));
+    check(width+'/'+theme+'/lesson'+index+' equation legibility',mathSize>=17,mathSize);
     check(width+'/'+theme+'/lesson'+index+' overflow',before.documentWidth<=width+6,before.documentWidth);
     if(width>760){
      check(width+'/'+theme+'/lesson'+index+' change and observe aligned',
