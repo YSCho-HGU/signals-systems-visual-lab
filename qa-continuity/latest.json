@@ -3,43 +3,6 @@
   "total": 59,
   "failures": [
     {
-      "id": "chapter1-four-stage-layout",
-      "passed": false,
-      "detail": {
-        "title": "Chapter 1 · Signals & Systems — Interactive Visual Lab Rev3",
-        "header": true,
-        "links": 8,
-        "frame": 0,
-        "theme": "neutral-dark",
-        "stage": true,
-        "canvas": 0,
-        "formula": true,
-        "math": true,
-        "main": "Chapter 1 · Foundations · Rev1← Learning Studio✎ 오류 제보01 · CT vs DT1.102 · Elementary1.403 · Time transforms1.204 · CT/D"
-      }
-    },
-    {
-      "id": "chapter1-render-after-switch",
-      "passed": false,
-      "detail": {
-        "stage": true,
-        "predict": true,
-        "pair": true,
-        "explain": true,
-        "canvases": 0,
-        "math": true
-      }
-    },
-    {
-      "id": "chapter1-no-js-errors",
-      "passed": false,
-      "detail": [
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined"
-      ]
-    },
-    {
       "id": "chapter2-no-js-errors",
       "passed": false,
       "detail": [
@@ -86,7 +49,7 @@
         "frame": 0,
         "theme": "neutral-dark",
         "stage": true,
-        "canvas": 0,
+        "canvas": 2,
         "formula": true,
         "math": true,
         "main": "Chapter 1 · Foundations · Rev1← Learning Studio✎ 오류 제보01 · CT vs DT1.102 · Elementary1.403 · Time transforms1.204 · CT/D"
@@ -99,7 +62,7 @@
     },
     {
       "id": "chapter1-four-stage-layout",
-      "passed": false,
+      "passed": true,
       "detail": {
         "title": "Chapter 1 · Signals & Systems — Interactive Visual Lab Rev3",
         "header": true,
@@ -107,7 +70,7 @@
         "frame": 0,
         "theme": "neutral-dark",
         "stage": true,
-        "canvas": 0,
+        "canvas": 2,
         "formula": true,
         "math": true,
         "main": "Chapter 1 · Foundations · Rev1← Learning Studio✎ 오류 제보01 · CT vs DT1.102 · Elementary1.403 · Time transforms1.204 · CT/D"
@@ -123,7 +86,7 @@
         "frame": 0,
         "theme": "neutral-dark",
         "stage": true,
-        "canvas": 0,
+        "canvas": 2,
         "formula": true,
         "math": true,
         "main": "Chapter 1 · Foundations · Rev1← Learning Studio✎ 오류 제보01 · CT vs DT1.102 · Elementary1.403 · Time transforms1.204 · CT/D"
@@ -146,13 +109,13 @@
     },
     {
       "id": "chapter1-render-after-switch",
-      "passed": false,
+      "passed": true,
       "detail": {
         "stage": true,
         "predict": true,
         "pair": true,
         "explain": true,
-        "canvases": 0,
+        "canvases": 1,
         "math": true
       }
     },
@@ -165,12 +128,8 @@
     },
     {
       "id": "chapter1-no-js-errors",
-      "passed": false,
-      "detail": [
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined",
-        "ReferenceError: ssTraceColor is not defined"
-      ]
+      "passed": true,
+      "detail": []
     },
     {
       "id": "chapter2-header-and-nav",
@@ -636,7 +595,7 @@
       }
     }
   ],
-  "sourceSha": "0245579587ff47f67a9f740cc6f844e5c215ae29",
-  "runId": 44912704723,
-  "generatedAt": "2026-11-21T14:12:58.731Z"
+  "sourceSha": "7fb07ef0eaf56043b5daa0adfb2cafd57f2d0c91",
+  "runId": 44912791842,
+  "generatedAt": "2026-11-21T14:13:59.172Z"
 }
