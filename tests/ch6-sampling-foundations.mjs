@@ -12,15 +12,15 @@ const errors=[];
 function check(ok,msg){if(!ok)errors.push(msg)}
 new Script(src,{filename:"ss-ch6-frequency-foundations.js"});
 const standalone=readFileSync("chapter6.html","utf8");
-check(standalone.includes('ss-ch6-frequency-foundations.js?v=5'),"Native Chapter 6 does not load teaching extension");
-check(standalone.includes('ss-ch6-learning-flow.js?v=3'),"Native Chapter 6 learning sequence missing");
+check(/ss-ch6-frequency-foundations\.js\?v=\d+/.test(standalone),"Native Chapter 6 does not load teaching extension");
+check(/ss-ch6-learning-flow\.js\?v=\d+/.test(standalone),"Native Chapter 6 learning sequence missing");
 check(!standalone.includes("<iframe"),"Native Chapter 6 must not use iframe");
 check(src.includes('["frequency"')&&src.includes('["rate"')&&src.includes('["alias"'),"Three ordered learning modes missing");
 check(src.includes("duration=0.2, N=21"),"Fixed first 21 displayed samples missing");
 check(src.includes("xmin:0,xmax:200"),"CT physical time axis not fixed");
 check(src.includes("xmin:0,xmax:N-1"),"DT sample-index axis not fixed");
 check(!src.includes('markup.replace("<input ","<input disabled "'),"Step-controlled slider lock must not return");
-check(src.includes('setFormula(')&&src.includes('setMetrics('),"Digital F and Ω formulas or metrics missing");
+check(src.includes('renderFrequencyMath(s)')&&src.includes('setMetrics('),"Digital F and Ω formulas or metrics missing");
 check(src.includes('oldDrawing(s)')&&src.includes('oldGuide(s)'),"Original aliasing comparison or derivation lost");
 check(src.includes("N0=fs/gcd(fs,f)"),"Discrete fundamental period calculation missing");
 check(!src.includes("localStorage.setItem"),"New chapter experiment must not overwrite progress storage");
