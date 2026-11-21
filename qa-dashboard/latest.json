@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-20T23:28:27.070Z",
-  "sourceSha": "71e1f506387f9afcc528ea89d6a56109bd747090",
-  "runId": "44836655050",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44836655050",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/71e1f506387f9afcc528ea89d6a56109bd747090",
+  "generatedAt": "2026-11-21T00:35:15.255Z",
+  "sourceSha": "de882b65cad54df8879437935b58463fd7704144",
+  "runId": "44844734106",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44844734106",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/de882b65cad54df8879437935b58463fd7704144",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -13,9 +13,9 @@
   "labsCount": 62,
   "visual": {
     "expected": 248,
-    "observed": 248,
-    "issues": 2,
-    "qualityStatus": "FAIL"
+    "observed": 0,
+    "issues": null,
+    "qualityStatus": "NOT_RUN"
   },
   "gates": [
     {
@@ -33,37 +33,37 @@
     {
       "id": "G2",
       "label": "Native Chapter 6 browser journey",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G3",
       "label": "Theme and language persistence",
-      "status": "PASS",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G4",
       "label": "Learning aids and sonification",
-      "status": "PASS",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G5",
       "label": "Storage and 62-lab regression",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G6",
       "label": "248-screenshot visual and accessibility smoke audit",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G7",
       "label": "Evidence postprocessing",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     }
   ],
@@ -73,14 +73,23 @@
       "title": "Signals & Systems",
       "labCount": 9,
       "visual": {
-        "status": "PASS",
+        "status": "NOT_RUN",
         "expected": 36,
-        "observed": 36,
+        "observed": 0,
         "issues": 0,
-        "missing": 0
+        "missing": 36
       },
       "issueExamples": [],
-      "missingExamples": [],
+      "missingExamples": [
+        "1:1:390:warm-neutral",
+        "1:1:390:neutral-dark",
+        "1:1:1280:warm-neutral",
+        "1:1:1280:neutral-dark",
+        "1:2:390:warm-neutral",
+        "1:2:390:neutral-dark",
+        "1:2:1280:warm-neutral",
+        "1:2:1280:neutral-dark"
+      ],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
@@ -96,14 +105,23 @@
       "title": "Convolution and LTI",
       "labCount": 9,
       "visual": {
-        "status": "PASS",
+        "status": "NOT_RUN",
         "expected": 36,
-        "observed": 36,
+        "observed": 0,
         "issues": 0,
-        "missing": 0
+        "missing": 36
       },
       "issueExamples": [],
-      "missingExamples": [],
+      "missingExamples": [
+        "2:1:390:warm-neutral",
+        "2:1:390:neutral-dark",
+        "2:1:1280:warm-neutral",
+        "2:1:1280:neutral-dark",
+        "2:2:390:warm-neutral",
+        "2:2:390:neutral-dark",
+        "2:2:1280:warm-neutral",
+        "2:2:1280:neutral-dark"
+      ],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
@@ -119,14 +137,23 @@
       "title": "Fourier Series",
       "labCount": 7,
       "visual": {
-        "status": "PASS",
+        "status": "NOT_RUN",
         "expected": 28,
-        "observed": 28,
+        "observed": 0,
         "issues": 0,
-        "missing": 0
+        "missing": 28
       },
       "issueExamples": [],
-      "missingExamples": [],
+      "missingExamples": [
+        "3:1:390:warm-neutral",
+        "3:1:390:neutral-dark",
+        "3:1:1280:warm-neutral",
+        "3:1:1280:neutral-dark",
+        "3:2:390:warm-neutral",
+        "3:2:390:neutral-dark",
+        "3:2:1280:warm-neutral",
+        "3:2:1280:neutral-dark"
+      ],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
@@ -142,14 +169,23 @@
       "title": "Continuous-Time Fourier Transform",
       "labCount": 8,
       "visual": {
-        "status": "PASS",
+        "status": "NOT_RUN",
         "expected": 32,
-        "observed": 32,
+        "observed": 0,
         "issues": 0,
-        "missing": 0
+        "missing": 32
       },
       "issueExamples": [],
-      "missingExamples": [],
+      "missingExamples": [
+        "4:1:390:warm-neutral",
+        "4:1:390:neutral-dark",
+        "4:1:1280:warm-neutral",
+        "4:1:1280:neutral-dark",
+        "4:2:390:warm-neutral",
+        "4:2:390:neutral-dark",
+        "4:2:1280:warm-neutral",
+        "4:2:1280:neutral-dark"
+      ],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
@@ -165,14 +201,23 @@
       "title": "Laplace Transform",
       "labCount": 8,
       "visual": {
-        "status": "PASS",
+        "status": "NOT_RUN",
         "expected": 32,
-        "observed": 32,
+        "observed": 0,
         "issues": 0,
-        "missing": 0
+        "missing": 32
       },
       "issueExamples": [],
-      "missingExamples": [],
+      "missingExamples": [
+        "5:1:390:warm-neutral",
+        "5:1:390:neutral-dark",
+        "5:1:1280:warm-neutral",
+        "5:1:1280:neutral-dark",
+        "5:2:390:warm-neutral",
+        "5:2:390:neutral-dark",
+        "5:2:1280:warm-neutral",
+        "5:2:1280:neutral-dark"
+      ],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
@@ -188,39 +233,23 @@
       "title": "Discrete-Time Fourier Transform",
       "labCount": 6,
       "visual": {
-        "status": "FAIL",
+        "status": "NOT_RUN",
         "expected": 24,
-        "observed": 24,
-        "issues": 4,
-        "missing": 0
+        "observed": 0,
+        "issues": 0,
+        "missing": 24
       },
-      "issueExamples": [
-        {
-          "lab": 6,
-          "width": 390,
-          "theme": "warm-neutral",
-          "message": "가로 스크롤 초과"
-        },
-        {
-          "lab": 6,
-          "width": 390,
-          "theme": "neutral-dark",
-          "message": "가로 스크롤 초과"
-        },
-        {
-          "lab": 6,
-          "width": 390,
-          "theme": "warm-neutral",
-          "message": "Native Chapter 6 overflow 490/390"
-        },
-        {
-          "lab": 6,
-          "width": 390,
-          "theme": "neutral-dark",
-          "message": "Native Chapter 6 overflow 490/390"
-        }
+      "issueExamples": [],
+      "missingExamples": [
+        "6:1:390:warm-neutral",
+        "6:1:390:neutral-dark",
+        "6:1:1280:warm-neutral",
+        "6:1:1280:neutral-dark",
+        "6:2:390:warm-neutral",
+        "6:2:390:neutral-dark",
+        "6:2:1280:warm-neutral",
+        "6:2:1280:neutral-dark"
       ],
-      "missingExamples": [],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "6.1 sampling identity only"
@@ -236,14 +265,23 @@
       "title": "Sampling",
       "labCount": 7,
       "visual": {
-        "status": "PASS",
+        "status": "NOT_RUN",
         "expected": 28,
-        "observed": 28,
+        "observed": 0,
         "issues": 0,
-        "missing": 0
+        "missing": 28
       },
       "issueExamples": [],
-      "missingExamples": [],
+      "missingExamples": [
+        "7:1:390:warm-neutral",
+        "7:1:390:neutral-dark",
+        "7:1:1280:warm-neutral",
+        "7:1:1280:neutral-dark",
+        "7:2:390:warm-neutral",
+        "7:2:390:neutral-dark",
+        "7:2:1280:warm-neutral",
+        "7:2:1280:neutral-dark"
+      ],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
@@ -259,14 +297,23 @@
       "title": "Z-Transform",
       "labCount": 8,
       "visual": {
-        "status": "PASS",
+        "status": "NOT_RUN",
         "expected": 32,
-        "observed": 32,
+        "observed": 0,
         "issues": 0,
-        "missing": 0
+        "missing": 32
       },
       "issueExamples": [],
-      "missingExamples": [],
+      "missingExamples": [
+        "8:1:390:warm-neutral",
+        "8:1:390:neutral-dark",
+        "8:1:1280:warm-neutral",
+        "8:1:1280:neutral-dark",
+        "8:2:390:warm-neutral",
+        "8:2:390:neutral-dark",
+        "8:2:1280:warm-neutral",
+        "8:2:1280:neutral-dark"
+      ],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
