@@ -57,9 +57,17 @@ jobs:
         run: |
           if C_JOURNEY_BROWSER=1 node tests/ss-theme-qa.mjs; then echo PASS > qa-standard/G3.status; else echo FAIL > qa-standard/G3.status; fi
 
-      - name: G2b - Verify Chapter 5/6 five-palette native design standard
+      - name: G2b - Verify five palettes in Chromium and Edge
         run: |
-          if node tests/ss-ch5-ch6-standard-qa.mjs; then echo PASS > qa-standard/G2b.status; else echo FAIL > qa-standard/G2b.status; fi
+          status=0
+          node tests/ss-ch5-ch6-standard-qa.mjs || status=1
+          if npx playwright install msedge; then
+            SS_BROWSER_CHANNEL=msedge node tests/ss-ch5-ch6-standard-qa.mjs || status=1
+          else
+            echo "Microsoft Edge installation failed; browser verification incomplete"
+            status=1
+          fi
+          if [ "$status" -eq 0 ]; then echo PASS > qa-standard/G2b.status; else echo FAIL > qa-standard/G2b.status; fi
 
       - name: G4 - Test progress, prediction and sonification learning aids
         run: |
