@@ -68,6 +68,16 @@ try{
   await page.screenshot({path:out+'/chapter7-'+size+'.png'});
   await page.close();
  }
+ // Cross-chapter shared header regression: Chapter 5, Chapter 6, and integrated Chapter 7.
+ for(const [chapter,path,selector] of [[5,'chapter5.html','.ss5-site-header'],[6,'chapter6.html','.ss6-site-header']]){
+  const p=await browser.newPage({viewport:{width:1366,height:768}});
+  p.on('pageerror',e=>errors.push('chapter '+chapter+': '+String(e)));
+  await p.goto(new URL(path,base).href,{waitUntil:'domcontentloaded',timeout:45000});
+  check(await p.locator(selector).count()===1,'chapter-'+chapter+'-single-header');
+  check(await p.locator('header details summary').count()>=1,'chapter-'+chapter+'-chapter-dropdown');
+  check(await p.locator('header select').count()>=2,'chapter-'+chapter+'-language-theme');
+  await p.close();
+ }
  check(errors.length===0,'no-uncaught-page-errors',errors);
 }finally{await browser.close();server?.kill();writeFileSync(out+'/results.json',JSON.stringify({tests,errors},null,2))}
 const failed=tests.filter(x=>!x.pass);
