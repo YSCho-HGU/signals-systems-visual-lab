@@ -23,3 +23,47 @@ html[data-ss-sidebar="collapsed"] .ss-side-toggle{width:46px;margin:9px 4px;padd
 html[data-ss-sidebar="collapsed"] .ss-side-toggle .ss-toggle-text{display:none}
 html[data-ss-sidebar="collapsed"] #app{grid-template-columns:58px minmax(0,1fr)!important}
 @media(max-width:760px){html[data-ss-sidebar="collapsed"] .shell,html[data-ss-sidebar="collapsed"] #app{grid-template-columns:1fr!important}html[data-ss-sidebar="collapsed"] :is(.sidebar,.shell>aside.nav){width:auto!important;min-width:0!important}html[data-ss-sidebar="collapsed"] .ss-side-toggle{width:calc(100% - 22px);margin-inline:11px}html[data-ss-sidebar="collapsed"] .ss-side-toggle .ss-toggle-text{display:inline}}
+
+/* SS GRAPH DESIGN SYSTEM v1: shared by Chapters 5-8.
+   All five explicit themes override OS/browser color preference. */
+:root[data-els-theme="neutral-dark"]{
+ --ss-plot-grid:#626b66;--ss-plot-axis:#d4ded7;
+ --ss-plot-label:var(--els-muted);--ss-plot-background:var(--els-surface);
+ --ss-plot-roc:var(--els-info-bg);
+}
+:root[data-els-theme="warm-dark"]{
+ --ss-plot-grid:#64766c;--ss-plot-axis:#d3e1d7;
+ --ss-plot-label:var(--els-muted);--ss-plot-background:var(--els-surface);
+ --ss-plot-roc:var(--els-info-bg);
+}
+:root[data-els-theme="navy-dark"]{
+ --ss-plot-grid:#637c96;--ss-plot-axis:#d3dfed;
+ --ss-plot-label:var(--els-muted);--ss-plot-background:var(--els-surface);
+ --ss-plot-roc:var(--els-info-bg);
+}
+:root[data-els-theme="warm-neutral"]{
+ --ss-plot-grid:#b9c8bb;--ss-plot-axis:#41584b;
+ --ss-plot-label:var(--els-muted);--ss-plot-background:var(--els-surface);
+ --ss-plot-roc:var(--els-info-bg);
+}
+:root[data-els-theme="white-clean"]{
+ --ss-plot-grid:#c6d2da;--ss-plot-axis:#344f62;
+ --ss-plot-label:var(--els-muted);--ss-plot-background:var(--els-surface);
+ --ss-plot-roc:var(--els-info-bg);
+}
+/* Shared surface and axis contrast for Canvas-backed Ch5/6 and SVG-backed Ch7/8. */
+:root[data-els-theme] :is(.plot-card,.figure,.plotbox){
+ border-color:var(--els-border);
+ color:var(--els-ink);
+}
+:root[data-els-theme] :is(.plot-card,.figure,.plotbox) :is(canvas,svg){
+ background:var(--ss-plot-background)!important;
+ color:var(--els-ink);
+ filter:none!important;
+}
+:root[data-els-theme] .plot-card{background:var(--els-surface)!important;border-color:var(--els-border)!important;color:var(--els-ink)!important}
+:root[data-els-theme] .plot-card .plot-title{background:var(--els-surface-alt)!important;color:var(--els-ink)!important;border-color:var(--els-border)!important}
+:root[data-els-theme] .plot-card svg text{fill:var(--ss-plot-label)!important}
+:root[data-els-theme] .plot-card :is(.axis-key,.legend){color:var(--els-ink)!important;border-color:var(--els-border)!important}
+:root[data-els-theme] .plot-card .axis-key{background:var(--els-surface-alt)!important}
+:root[data-els-theme] .plot-card .legend i{border:1px solid var(--els-border)}
