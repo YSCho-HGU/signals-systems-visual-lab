@@ -473,7 +473,7 @@ function drawChart(id,opt){
  if(xmin<=0&&xmax>=0){g.strokeStyle=plotTheme.axis;g.lineWidth=2;g.beginPath();g.moveTo(X(0),m.t);g.lineTo(X(0),m.t+H);g.stroke()}
  // Draw and clip every waveform, line, marker and stem to the plot rectangle.
  for(const ss of opt.series||[]){
-  const col=ss.color||C.teal;g.strokeStyle=col;g.fillStyle=col;g.lineWidth=ss.width||2.2;g.setLineDash(ss.dash?[6,4]:[]);
+  const col=ssTraceColor(ss.color||C.teal);g.strokeStyle=col;g.fillStyle=col;g.lineWidth=ss.width||2.2;g.setLineDash(ss.dash?[6,4]:[]);
   if(ss.type==='stem'){
    const baseline=Y(clamp(0,ymin,ymax));
    for(const p of ss.xy){const vx=p[0],vy=p[1];if(!Number.isFinite(vy)||vx<xmin||vx>xmax)continue;g.beginPath();g.moveTo(X(vx),baseline);g.lineTo(X(vx),Y(vy));g.stroke();g.beginPath();g.arc(X(vx),Y(vy),ss.radius||2.9,0,TAU);g.fill()}
@@ -484,8 +484,8 @@ function drawChart(id,opt){
   }
   g.setLineDash([]);
  }
- for(const v of opt.vlines||[]){if(v.x<xmin||v.x>xmax)continue;g.strokeStyle=v.color||C.coral;g.lineWidth=1.5;g.setLineDash([5,4]);g.beginPath();g.moveTo(X(v.x),m.t);g.lineTo(X(v.x),m.t+H);g.stroke();g.setLineDash([])}
- for(const p of opt.points||[]){if(!Number.isFinite(p.y)||p.x<xmin||p.x>xmax)continue;g.beginPath();g.fillStyle=p.color||C.coral;g.strokeStyle='#fff';g.lineWidth=1.5;g.arc(X(p.x),Y(p.y),p.radius||4.4,0,TAU);g.fill();g.stroke()}
+ for(const v of opt.vlines||[]){if(v.x<xmin||v.x>xmax)continue;g.strokeStyle=ssTraceColor(v.color||C.coral);g.lineWidth=1.5;g.setLineDash([5,4]);g.beginPath();g.moveTo(X(v.x),m.t);g.lineTo(X(v.x),m.t+H);g.stroke();g.setLineDash([])}
+ for(const p of opt.points||[]){if(!Number.isFinite(p.y)||p.x<xmin||p.x>xmax)continue;g.beginPath();g.fillStyle=ssTraceColor(p.color||C.coral);g.strokeStyle='#fff';g.lineWidth=1.5;g.arc(X(p.x),Y(p.y),p.radius||4.4,0,TAU);g.fill();g.stroke()}
  // White center makes crossing at (0,0) recognizable, even when it is on the plot boundary.
  if(xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0){g.fillStyle=plotTheme.background;g.strokeStyle=plotTheme.axis;g.lineWidth=1.7;g.beginPath();g.arc(X(0),Y(0),4.8,0,TAU);g.fill();g.stroke()}
  g.restore();
@@ -497,7 +497,7 @@ function drawChart(id,opt){
  if(opt.xlabel){g.textAlign='center';g.fillText(opt.xlabel,m.l+W/2,h-12)}
  if(opt.ylabel){g.save();g.translate(16,m.t+H/2);g.rotate(-PI/2);g.textAlign='center';g.fillText(opt.ylabel,0,0);g.restore()}
  ssAxisKey(id,opt.xlabel||'sample index n',opt.ylabel||'amplitude',xmin,xmax,ymin,ymax);
- ssHoverBind(id,{kind:'cart',w,h,pad:m,xmin,xmax,ymin,ymax,xlabel:opt.xlabel||'sample index n',ylabel:opt.ylabel||'amplitude',series:(opt.series||[]).map(s=>({label:s.label,color:s.color,points:s.xy||[],discrete:s.type==='stem'}))});
+ ssHoverBind(id,{kind:'cart',w,h,pad:m,xmin,xmax,ymin,ymax,xlabel:opt.xlabel||'sample index n',ylabel:opt.ylabel||'amplitude',series:(opt.series||[]).map(s=>({label:s.label,color:ssTraceColor(s.color||C.teal),points:s.xy||[],discrete:s.type==='stem'}))});
 }
 function drawPhasors(id,M,w){const z=initCanvas(id);if(!z)return;const plotTheme=elsPlotColors();const{g,h,w:width}=z;const cx=width/2,cy=h/2,scale=Math.min((width-50)/2,(h-40)/2)*.85;g.fillStyle=plotTheme.background;g.fillRect(0,0,width,h);g.strokeStyle=plotTheme.grid;g.lineWidth=1;for(let j=-1;j<=1;j++){g.beginPath();g.moveTo(cx+j*scale,10);g.lineTo(cx+j*scale,h-10);g.stroke();g.beginPath();g.moveTo(10,cy+j*scale);g.lineTo(width-10,cy+j*scale);g.stroke()}g.strokeStyle='#afc4cf';g.beginPath();g.arc(cx,cy,scale,0,TAU);g.stroke();
  g.strokeStyle=plotTheme.axis;g.lineWidth=2;g.beginPath();g.moveTo(10,cy);g.lineTo(width-10,cy);g.moveTo(cx,10);g.lineTo(cx,h-10);g.stroke();
