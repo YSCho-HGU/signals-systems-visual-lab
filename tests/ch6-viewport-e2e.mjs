@@ -46,7 +46,8 @@ try{
     });
     assert(ordered.every((y,i)=>Number.isFinite(y)&&(i===0||y>=ordered[i-1]-1)),
       name+": theory-to-visual-lab order broken: "+JSON.stringify(ordered));
-    // Steps 2 and 3 intentionally share the same vertical position.\n    const labels=await page.locator(".ss6-step-card[data-ss6-step]").evaluateAll(list=>list.map(x=>x.dataset.ss6Step));
+    // Steps 2 and 3 intentionally share the same vertical position.
+    const labels=await page.locator(".ss6-step-card[data-ss6-step]").evaluateAll(list=>list.map(x=>x.dataset.ss6Step));
     assert(labels.join(",")==="1,2,3,4",name+": step marker hierarchy does not show 1–4");
     await page.locator("#ss6-theme-picker").selectOption("white-clean");
     assert(await page.evaluate(()=>document.documentElement.dataset.elsTheme)==="white-clean",name+": White theme not selectable");
