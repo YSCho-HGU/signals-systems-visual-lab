@@ -15,20 +15,6 @@
  color-scheme:light;--els-page:#f7f6f2;--els-surface:#fffefa;--els-surface-alt:#edf1eb;--els-ink:#28312f;--els-muted:#51665b;--els-border:#aab9ac;--els-primary:#355e4e;--els-primary-text:#ffffff;--els-link:#2c5c48;--els-focus:#28584a;--els-success:#246548;--els-info-bg:#e0eae1;--els-info-ink:#283f32;--els-code-bg:#232725;--els-code-ink:#f4f5ee;
  --page:#f7f6f2;--bg:#f7f6f2;--surface:#fffefa;--paper:#fffefa;--panel:#fffefa;--ink:#28312f;--text:#28312f;--muted:#51665b;--line:#aab9ac;--border:#aab9ac;--soft:#edf1eb;--blue:#2c5c48;--accent:#2c5c48;--link:#2c5c48;--code:#232725;--codeink:#f4f5ee;
 }
-/* Clean white for reading/lecture projection; explicitly distinct from warm-neutral. */
-:root[data-els-theme="white"]{
- color-scheme:light;
- --els-page:#ffffff;--els-surface:#ffffff;--els-surface-alt:#f4f6f7;
- --els-ink:#1b2730;--els-muted:#455663;--els-border:#c9d3db;
- --els-primary:#205b73;--els-primary-text:#ffffff;--els-link:#145b78;
- --els-focus:#b56b18;--els-success:#216f50;--els-info-bg:#eef5f9;
- --els-info-ink:#23485b;--els-code-bg:#202b35;--els-code-ink:#ffffff;
- --page:#ffffff;--bg:#ffffff;--surface:#ffffff;--paper:#ffffff;
- --panel:#ffffff;--ink:#1b2730;--text:#1b2730;--muted:#455663;
- --line:#c9d3db;--border:#c9d3db;--soft:#f4f6f7;
- --blue:#145b78;--accent:#145b78;--link:#145b78;
- --code:#202b35;--codeink:#ffffff;
-}
 /* White Clean retains the previous softly tinted reading palette. */
 :root[data-els-theme="white-clean"]{
  color-scheme:light;
@@ -43,18 +29,13 @@
  --blue:#145b78;--accent:#145b78;--link:#145b78;
  --code:#202b35;--codeink:#ffffff;
 }
-/* True White is a white canvas, not a pale gray-blue page. */
-:root[data-els-theme="white"]{
- --els-page:#ffffff;--els-surface:#ffffff;--els-surface-alt:#ffffff;
- --els-info-bg:#ffffff;
- --page:#ffffff;--bg:#ffffff;--surface:#ffffff;--paper:#ffffff;
- --panel:#ffffff;--soft:#ffffff;
+/* Edge and Chromium: explicit White Clean and Warm Neutral override Auto Dark. */
+:root[data-els-theme="white-clean"],
+:root[data-els-theme="warm-neutral"]{
+ color-scheme:only light!important;
 }
-:root[data-els-theme="white"] :is(body,main,.main,.stage,.workspace,.work,.content,.experiment,.grid,.shell,.app,.ss-home-wrap,.ss5-native .main){
- background:#ffffff!important;
-}
-:root[data-els-theme="white"] :is(.hero,.course-header,.ss-course-hero,.intro,.ss-method-strip,.hero-aside,.ss5-predict,.ss5-observe,.ss5-check){
- background:#ffffff!important;background-image:none!important;
+:root[data-els-theme="white-clean"] :is(body,.app,.shell,main,.main,.workspace,.work,.content,.experiment,.grid){
+ background:var(--els-page)!important;color:var(--els-ink)!important;
 }
 :root[data-els-theme] body{background:var(--els-page)!important;color:var(--els-ink)!important}
 :root[data-els-theme] :is(.stage,.side,.sidebar,.card,.panel,.phase,.route-card,.nav,.work,.cp-menu,.cp-content,.method,.unit,.chapter-card,.ss-home-section,.ss-method-strip,.ss-course-card){background-color:var(--els-surface);color:var(--els-ink);border-color:var(--els-border)}
