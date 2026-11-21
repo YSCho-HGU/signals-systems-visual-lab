@@ -39,25 +39,11 @@ homeLink.style.cssText="display:inline-flex;align-items:center;gap:6px;margin:8p
 if(homeActions)homeActions.after(homeLink);
 function placeProgress(){
  const ch=Number((location.hash.match(/^#chapter=(\d+)/)||[])[1]);
- if(ch===7){
-  let doc;try{doc=frame.contentDocument}catch(e){}
-  const sidebar=doc?.querySelector('.ss-vertical-layout>.ss-vertical-sidebar');
-  if(sidebar){
-   if(panel.ownerDocument!==doc)doc.adoptNode(panel);
-   if(panel.parentElement!==sidebar)sidebar.appendChild(panel);
-   if(!doc.getElementById('ss7-sidebar-progress-style')){
-    const custom=doc.createElement('style');custom.id='ss7-sidebar-progress-style';
-    custom.textContent=style.textContent+`
-    #ss-progress-panel{display:flex;flex-direction:column;align-items:stretch;gap:8px;margin:14px 2px 0;padding:12px;font-size:12px}
-    #ss-progress-panel .ss-progress-meter{width:100%}
-    #ss-progress-panel .ss-progress-note{flex-basis:auto;font-size:11px;line-height:1.5}
-    #ss-progress-panel button{width:100%;text-align:center}
-    html[data-ss-sidebar="collapsed"] #ss-progress-panel{display:none!important}`;
-    doc.head.appendChild(custom);
-   }
-  }
+ const outer=ch===7?document.querySelector("#ss-unified-nav .ss-unified-body"):null;
+ if(panel.ownerDocument!==document)document.adoptNode(panel);
+ if(outer){
+  if(panel.parentElement!==outer)outer.appendChild(panel);
  }else if(top&&panel.parentElement!==top.parentElement){
-  if(panel.ownerDocument!==document)document.adoptNode(panel);
   top.after(panel);
  }
 }
