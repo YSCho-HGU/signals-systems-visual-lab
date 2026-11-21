@@ -27,22 +27,10 @@ const style=document.createElement("style");style.textContent=`
 .ss-touch-stepper{display:inline-flex;gap:5px;align-items:center;margin:0 5px}
 .ss-touch-stepper button{min-width:38px;min-height:40px;font-size:17px;border:1px solid currentColor;border-radius:7px;background:transparent;color:inherit}
 .ss-touch-stepper button:focus-visible,#ss-hintbar button:focus-visible{outline:3px solid var(--els-link,#b9d7c8);outline-offset:2px}
-
-/* Chapter 7 host-side standard shell v4 */
-html[data-ss-chapter='7'] #lab-view .lab-head,
-html[data-ss-chapter='7'] #ss-hintbar,
-html[data-ss-chapter='7'] #ss-predict-check,
-html[data-ss-chapter='7'] #lab-view .lab-foot{display:none!important}
-html[data-ss-chapter='7'] #lab-view .lab-area:not(.focus){height:calc(100dvh - 46px)!important;min-height:0!important;display:flex;flex-direction:column}
-html[data-ss-chapter='7'] #lab-view .lab-frame-wrap{height:auto!important;min-height:0!important;flex:1 1 auto!important}
-html[data-ss-chapter='7'] #lab-view .lab-frame{height:100%!important}
 `;document.head.append(style);
 const bar=document.createElement("section");bar.id="ss-hintbar";const btn=document.createElement("button"),txt=document.createElement("p");btn.type="button";bar.append(btn,txt);const target=document.getElementById("ss-applications")||document.getElementById("ss-progress-panel")||head;target.after(bar);
 let revealed=false,seenDoc=null,observer=null;
 function ch(){return Number((location.hash.match(/^#chapter=(\d+)/)||[])[1])||0}
-function syncShellRoute(){document.documentElement.dataset.ssChapter=String(ch()||'')}
-window.addEventListener('hashchange',syncShellRoute);
-syncShellRoute();
 function lang(){return window.ELSLanguage?.get()||"mixed"}
 function text(pair){return lang()==="en"?pair.en:lang()==="ko"?pair.ko:pair.en+" · "+pair.ko}
 function render(){

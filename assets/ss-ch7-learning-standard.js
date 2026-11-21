@@ -34,8 +34,8 @@ function init(){
  if(chapterHeader)chapterHeader.textContent='Predict → Change → Observe → Explain · Interactive Sampling Lab';
  function updatePrompt(){var q=document.getElementById('check-q');prompt.textContent=q?q.textContent.trim():'Predict how the output changes when a parameter moves.'}
  updatePrompt();
- document.addEventListener('ss-ch7-experiment-change',updatePrompt);
- window.__ss7Standard={ready:true,stages:4,chapter:7,experiments:window.SSChapter7?.experimentCount||0,sidebarColumns:1};
+ var nav=document.getElementById('nav');if(nav)nav.addEventListener('click',function(){queueMicrotask(updatePrompt)});
+ window.__ss7Standard={ready:true,stages:4,chapter:7,experiments:document.querySelectorAll('#nav button').length,sidebarColumns:1};
 }
 window.addEventListener('DOMContentLoaded',init);
 })();
