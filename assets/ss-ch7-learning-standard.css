@@ -62,3 +62,27 @@ html.ss7-standard[data-els-theme] :is(.card,.ss7-card,.step,.control,.reading .n
 html.ss7-standard main{max-width:none;width:100%;padding:12px clamp(10px,1.6vw,24px)}
 html.ss7-standard .ss7-standard-layout{max-width:none;width:100%;min-width:0}
 @media(max-width:850px){html.ss7-standard .ss7-stage-pair{grid-template-columns:1fr}}
+
+/* Chapter 7 SVG plot palette: use the same semantic axes/grid/labels as
+   Chapters 5 and 6. Series paths keep their semantic trace colors. */
+html.ss7-standard[data-els-theme="white-clean"]{
+ --ss7-plot-axis:#344f62;--ss7-plot-grid:#c6d2da;--ss7-plot-label:#455663;
+}
+html.ss7-standard[data-els-theme="neutral-dark"]{
+ --ss7-plot-axis:#d0dbd7;--ss7-plot-grid:#56615d;--ss7-plot-label:#c1c5c1;
+}
+html.ss7-standard:is([data-els-theme="white-clean"],[data-els-theme="neutral-dark"]) .plot-card svg rect:first-child{
+ fill:var(--els-surface)!important;
+}
+html.ss7-standard:is([data-els-theme="white-clean"],[data-els-theme="neutral-dark"]) .plot-card svg line[stroke^="var(--els-border"]{
+ stroke:var(--ss7-plot-grid)!important;
+}
+html.ss7-standard:is([data-els-theme="white-clean"],[data-els-theme="neutral-dark"]) .plot-card svg line[stroke^="var(--els-muted"]{
+ stroke:var(--ss7-plot-axis)!important;
+}
+html.ss7-standard:is([data-els-theme="white-clean"],[data-els-theme="neutral-dark"]) .plot-card svg text[fill^="var(--els-muted"]{
+ fill:var(--ss7-plot-label)!important;
+}
+html.ss7-standard:is([data-els-theme="white-clean"],[data-els-theme="neutral-dark"]) .plot-card svg text[fill^="var(--els-ink"]{
+ fill:var(--els-ink)!important;
+}
