@@ -1,0 +1,18 @@
+/* Chapter 7 mathematical prose follows Chapter 5 display clarity. */
+html.ss7-native .ss7-prose-math{
+ display:inline-block;vertical-align:baseline;max-width:100%;
+ margin:0 .06em;color:inherit;line-height:1.55;
+ overflow-wrap:normal;white-space:nowrap
+}
+html.ss7-native .ss7-prose-math .katex{font-size:1.09em;line-height:1.4;color:inherit}
+html.ss7-native .ss7-prose-math .katex-html{color:inherit}
+html.ss7-native .ss7-prose-math-error{
+ font-family:"Cambria Math",Georgia,serif;
+ border-bottom:2px dotted var(--els-accent,#c34a3e)
+}
+html.ss7-native :is(#intro,.ss7-predict-prompt,#insight,#reading,#check-q,#check-a,.step p,.ss7-sampling-concepts,.ss7-periodicity,.plot-title,.legend,.axis-key){
+ overflow-wrap:break-word
+}
+html.ss7-native .ss7-period-equation .ss7-prose-math{font-size:clamp(15px,1.3vw,19px)}
+html.ss7-native .ss7-stage-change .ss7-prose-math,
+html.ss7-native .ss7-stage-observe .ss7-prose-math{color:var(--els-ink)}
