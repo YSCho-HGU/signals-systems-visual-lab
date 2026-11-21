@@ -1,7 +1,6 @@
 /* Chapter 6 native workspace: no iframe, one browser scroll, six experiments. */
 html.ss6-compact-workspace {scroll-behavior:smooth}
 html.ss6-compact-workspace body{min-height:100dvh;overflow-x:hidden}
-.ss6-site-header{height:46px;position:sticky;top:0;z-index:90;display:flex;align-items:center;gap:12px;padding:5px 15px;background:var(--els-surface,#202222);border-bottom:1px solid var(--els-border,#444);color:var(--els-ink,#eee)}
 .ss6-site-header .ss6-home{font-size:12px;font-weight:750;color:var(--els-link,#b4d7ca);text-decoration:none;white-space:nowrap}
 .ss6-site-header .ss6-site-title{font-size:13px;font-weight:700;flex:1 1 auto;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .ss6-site-header .ss6-header-actions{display:flex;align-items:center;gap:8px}
