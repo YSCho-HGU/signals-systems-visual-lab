@@ -16,14 +16,14 @@ try{
   page.on('pageerror',e=>errors.push(String(e)));
   const size=String(viewport.width);
   await page.goto(base+'#chapter=7',{waitUntil:'commit',timeout:45000});
-  await page.waitForFunction(()=>document.querySelector('#lab-frame')?.contentDocument?.querySelectorAll('#nav button').length===7,null,{timeout:30000});
+  await page.waitForFunction(()=>document.querySelector('#lab-frame')?.contentWindow?.SSChapter7?.experimentCount===7,null,{timeout:30000});
   const f=page.frameLocator('#lab-frame');
   check(await page.locator('.els-ss-unified-header').count()===1,size+'-ch5-style-header');
   check(await page.locator('#els-ss-chapter-title').innerText().then(s=>s.includes('Chapter 7')&&s.includes('Sampling')),size+'-chapter-title');
   check(await page.locator('#ss-language-select').count()===1&&await page.locator('#theme-select').count()===1,size+'-single-language-theme');
   check(await page.locator('.els-ss-chapter-links a').count()===8,size+'-chapter-titles');
   check(await page.locator('#ss-unified-nav').count()===1,size+'-outer-toc');
-  check(await f.locator('#nav button').count()===7,size+'-seven-internal-lab-buttons');
+  check(await f.locator('#nav').count()===0,size+'-internal-nav-deleted');
   check(await f.locator('.ss-vertical-sidebar').count()===0,size+'-no-duplicate-sidebar');
   check(await f.locator('.ss7-stage-predict').count()===1,size+'-four-step-layout');
   const lang=page.locator('#ss-language-select');
@@ -41,7 +41,7 @@ try{
    if(size==='390'&&await page.locator('#ss-unified-nav').evaluate(x=>x.classList.contains('collapsed'))) await page.locator('#ss-unified-nav .ss-unified-toggle').click();
    const button=page.locator('#ss-unified-nav .ss-unified-link').nth(n-1);
    await button.click();
-   await page.waitForFunction(v=>document.querySelector('#lab-frame')?.contentDocument?.querySelector('#title')?.textContent?.startsWith('7.'+v),n);
+   await page.waitForFunction(v=>document.querySelector('#lab-frame')?.contentWindow?.SSChapter7?.currentExperiment===v,n);
    const snapshot=await page.locator('#lab-frame').evaluate(iframe=>{
     const doc=iframe.contentDocument;
     return {plots:doc.querySelectorAll('#plots svg').length,title:doc.querySelector('#title')?.textContent||'',sliders:doc.querySelectorAll('#controls input[type=range]').length};
