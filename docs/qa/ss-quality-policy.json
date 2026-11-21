@@ -69,6 +69,13 @@
       "script": "tests/ch6-viewport-e2e.mjs"
     },
     {
+      "id": "G2b",
+      "name": "Native Chapter 5 and 6 five-palette Chromium/Edge regression",
+      "required": true,
+      "script": "tests/ss-ch5-ch6-standard-qa.mjs",
+      "scope": "Ch5 and Ch6 only; 5 theme palettes x 2 OS appearances x 2 browsers"
+    },
+    {
       "id": "G3",
       "name": "Theme and language persistence",
       "required": true,
