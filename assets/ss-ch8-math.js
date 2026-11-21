@@ -40,7 +40,7 @@ function render(){
  if(!container)return;
  const all=window.SSChapter8?.showAll;
  const current=window.SSChapter8?.stepIndex||0;
- document.querySelectorAll('#plots .ss8-latex').forEach(el=>{
+ document.querySelectorAll('#plots .ss8-latex, #ss8-predict-question .ss8-latex').forEach(el=>{
   const latex=el.dataset.latex||'';
   if(!latex||el.dataset.ss8Math===latex)return;
   try{window.katex.render(latex,el,{displayMode:true,throwOnError:true,strict:'ignore'});el.dataset.ss8Math=latex;}
