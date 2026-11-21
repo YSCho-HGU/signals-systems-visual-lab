@@ -34,7 +34,7 @@ function init(){
  concept.innerHTML='<strong>From x(t) to x[n]</strong><p>Sample at t = nTₛ, where Tₛ = 1/fₛ. Then x[n] = cos(Ωn), Ω = 2πf/fₛ rad/sample.</p><div class="ss7-sampling-metrics" aria-live="polite"></div><p class="ss7-sampling-guidance">Change f with fₛ fixed: the discrete-time frequency changes although the index spacing stays at one sample. Change fₛ with f fixed: the sampling instants and x[n] change together. Compare frequencies that differ by an integer multiple of fₛ to investigate aliasing.</p>';
  change.appendChild(concept);
  function syncSampling(){
-  var isFirst=/^7\\.1(?:\\D|$)/.test((document.getElementById('title')||{}).textContent||'');
+  var isFirst=/^7\.1(?:\D|$)/.test((document.getElementById('title')||{}).textContent||'');
   layout.classList.toggle('ss7-sampling-active',isFirst);
   if(!isFirst)return;
   var sliders=Array.from(controls.querySelectorAll('input[type="range"]'));
