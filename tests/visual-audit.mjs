@@ -149,6 +149,46 @@ try{
       }
       continue;
     }
+    if(ch===8){
+      await page.goto(BASE+"chapter8.html",{waitUntil:"load",timeout:45000});
+      await page.waitForFunction(()=>window.__ss8Native?.ready&&window.SSChapter8?.experimentCount===8,{timeout:20000});
+      await page.locator("#ss8-theme-picker").selectOption(theme);
+      const chDir=join(dir,"ch8");mkdirSync(chDir,{recursive:true});
+      const tabs=page.locator("#nav [data-exp]");
+      const found=await tabs.count(),expected=EXP_COUNTS[ch-1];
+      if(found!==expected)errors.push({width,theme,chapter:ch,error:"Native Chapter 8 nav count "+found+" vs "+expected});
+      for(let n=1;n<=Math.min(found,expected);n++){
+        await tabs.nth(n-1).click();
+        await page.waitForFunction(i=>window.SSChapter8?.currentExperiment===i,n,{timeout:10000});
+        const result=await page.evaluate(()=>{
+          const root=document.documentElement,body=document.body;
+          const input=[...document.querySelectorAll('#controls input[type="range"],#controls select')];
+          const unlabeled=input.filter(x=>!(x.labels?.length||x.hasAttribute('aria-label')||x.hasAttribute('title')));
+          const rgb=value=>(value.match(/[0-9]+(?:[.][0-9]+)?/g)||[]).slice(0,3).map(Number);
+          const light=x=>{x/=255;return x<=.04045?x/12.92:((x+.055)/1.055)**2.4};
+          const lum=value=>{const [red,green,blue]=rgb(value).map(light);return .2126*red+.7152*green+.0722*blue};
+          const style=getComputedStyle(body),ink=lum(style.color),paper=lum(style.backgroundColor);
+          const contrast=(Math.max(ink,paper)+.05)/(Math.min(ink,paper)+.05);
+          return {overflow:root.scrollWidth>innerWidth+6,overflowWidth:root.scrollWidth,viewport:innerWidth,
+            inputs:input.length,unlabeled:unlabeled.length,bodyTextContrast:Number(contrast.toFixed(2)),
+            active:window.SSChapter8?.currentExperiment,theme:root.dataset.theme,
+            iframes:document.querySelectorAll('iframe').length,plots:document.querySelectorAll('#plots svg').length,
+            stages:document.querySelectorAll('.ss8-stage-head').length,
+            guided:document.querySelectorAll('#step-content .step .math .katex').length};
+        });
+        if(result.iframes)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 8 unexpectedly contains iframe"});
+        if(result.plots<1)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 8 missing plot"});
+        if(result.stages!==4)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 8 missing learning stages"});
+        if(result.guided!==1)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 8 missing guided KaTeX"});
+        if(result.unlabeled)errors.push({width,theme,chapter:ch,experiment:n,error:"Unlabeled Chapter 8 input "+result.unlabeled});
+        if(result.theme!==(theme==="warm-neutral"?"light":"dark"))errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 8 theme "+result.theme});
+        if(result.overflow)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 8 overflow "+result.overflowWidth+"/"+result.viewport});
+        if(result.bodyTextContrast<4.5)errors.push({width,theme,chapter:ch,experiment:n,error:"Native Chapter 8 contrast "+result.bodyTextContrast});
+        record.push({...result,width,theme,chapter:ch,experiment:n,scheme:result.theme});
+        await page.screenshot({path:join(chDir,String(n).padStart(2,"0")+".png"),fullPage:false});
+      }
+      continue;
+    }
     await page.goto(BASE+"#chapter="+ch,{waitUntil:"domcontentloaded",timeout:45000});
     await page.locator("#lab-loading").waitFor({state:"hidden",timeout:45000});
     const iframe=page.frameLocator("#lab-frame");
