@@ -18,6 +18,25 @@ try{
  await page.goto(BASE+"chapter5.html",{waitUntil:"load"});
  await page.waitForFunction(()=>!!window.katex?.render&&!!window.ELSChapterFiveProseMath);
  check("math-engine",await page.evaluate(()=>!!window.ELSChapterFiveProseMath?.render&&!!window.ELSChapterFiveMath?.renderAll));
+
+ const signed=await page.evaluate(()=>{
+  const math=window.ELSChapterFiveMath, cases=[
+   {p:-1.1,z:-2.1,expect:["s+2.10","s+1.10"]},
+   {p:0.8,z:1.2,expect:["s-1.20","s-0.80"]},
+   {p:0,z:0,expect:["\\\\frac{s}{(s)(s+4)}"]},
+   {p:0.8,z:-4,expect:["s+4","s-0.80"]}
+  ];
+  return cases.map(({p,z,expect})=>{
+   const steps=math.guides("stability",{p,z}),hero=math.hero("stability",{p,z});
+   return {p,z,steps,hero,valid:expect.every(x=>steps[0].includes(x))&&
+      !steps[0].includes("-(-")&&!hero.includes("-(-")};
+  });
+ });
+ for(const item of signed)check("stability-natural-factor-p"+item.p+"-z"+item.z,item.valid,
+  {hero:item.hero,first:item.steps[0]});
+ const canceled=await page.evaluate(()=>window.ELSChapterFiveMath.guides("stability",{p:0.8,z:-4})[1]);
+ check("stability-cancel-four-natural-factor",canceled.includes("s-0.80")&&!canceled.includes("s-p"),canceled);
+
  for(const lab of labs){
   await page.locator('#tabs [data-lab="'+lab+'"]').click();
   await page.waitForFunction(id=>window.__laplaceVisualLab?.active===id,lab);
