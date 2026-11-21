@@ -16,8 +16,6 @@ html.ss7-native #ss7-lesson-nav button:hover{background:var(--els-surface-alt,#e
 html.ss7-native #ss7-lesson-nav button[aria-current="true"]{background:var(--els-surface-alt,#e6f4f3);border-color:var(--els-accent,#0d8290);font-weight:800}
 html.ss7-native .ss7-lab-number{display:inline-grid;place-items:center;min-width:29px;min-height:29px;border-radius:7px;background:var(--els-surface-alt,#eee);color:var(--els-ink,#222);font-weight:750}
 html.ss7-native .ss7-workspace{min-width:0;max-width:none;padding:0}
-html.ss7-native .ss7-progress button{background:var(--els-surface,#fff);color:var(--els-ink,#222);border:1px solid var(--els-border,#ccc);border-radius:8px;padding:7px 12px;font-size:13px;min-height:34px;cursor:pointer}
-html.ss7-native .ss7-progress button:hover{border-color:var(--els-accent,#0d8290)}
 html.ss7-native .ss7-progress{margin:17px 8px;padding:12px;border:1px solid var(--els-border,#ccc);border-radius:10px;background:var(--els-page,#f7f7f7);font-size:12px;line-height:1.6}
 html.ss7-native .ss7-progress strong{display:block;font-size:13px;margin-bottom:8px}
 html.ss7-native .ss7-progress button{display:block;width:100%;margin:8px 0}
@@ -34,7 +32,6 @@ html.ss7-native[data-els-theme] .ss7-sidebar{color:var(--els-ink);background:var
 html.ss7-native[data-ss-sidebar="collapsed"] .ss7-shell{grid-template-columns:52px minmax(0,1fr)}
 html.ss7-native[data-ss-sidebar="collapsed"] .ss7-sidebar{overflow:hidden}
 html.ss7-native[data-ss-sidebar="collapsed"] .ss7-sidebar>*:not(.ss-side-toggle){display:none!important}
-html.ss7-native .ss7-sidebar .ss-side-toggle{display:flex;align-items:center;gap:8px;justify-content:flex-start;width:100%;min-height:34px;margin:0 0 12px;padding:6px 10px;border-radius:8px;border:1px solid var(--els-border);background:var(--els-surface-alt);color:var(--els-ink);font-size:12px;font-weight:650;cursor:pointer}
 html.ss7-native .ss7-sidebar .ss-side-toggle:hover{border-color:var(--els-accent)}
 html.ss7-native .ss7-sidebar .ss-side-toggle:focus-visible{outline:2px solid var(--els-accent);outline-offset:2px}
 html.ss7-native[data-ss-sidebar="collapsed"] .ss7-sidebar .ss-side-toggle{width:34px;height:34px;justify-content:center;padding:4px}
