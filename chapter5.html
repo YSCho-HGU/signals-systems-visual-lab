@@ -277,7 +277,7 @@ function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
 @media(max-width:780px){.ss5-native .ss5-predict,.ss5-native .ss5-observe,.ss5-native .ss5-check{padding:11px 12px}}
 </style>
 
-<link rel="stylesheet" href="./assets/ss-trace-palette.css?v=3"><script src="./assets/ss-trace-palette.js?v=2"></script><script src="./assets/ss-sidebar-toggle.js?v=1" defer></script><link rel="stylesheet" href="./assets/els-typography-standard.css?v=1"><link rel="stylesheet" href="./assets/ss-reading-rhythm.css?v=20261121b"><link rel="stylesheet" href="./assets/ss-four-step-standard.css?v=20261121b"><link rel="stylesheet" href="./assets/ss-ch5-standalone.css?v=11"><link rel="stylesheet" href="./assets/ss-common-header.css?v=1"><link rel="stylesheet" href="./assets/ss-readable-themes.css?v=1"><link rel="stylesheet" href="./assets/ss-formula-standard.css?v=1"><link rel="stylesheet" href="./assets/ss-ui-standard.css?v=3"><script src="./assets/ss-common-header.js?v=3" defer></script></head>
+<link rel="stylesheet" href="./assets/ss-trace-palette.css?v=4"><script src="./assets/ss-trace-palette.js?v=2"></script><script src="./assets/ss-sidebar-toggle.js?v=1" defer></script><link rel="stylesheet" href="./assets/els-typography-standard.css?v=1"><link rel="stylesheet" href="./assets/ss-reading-rhythm.css?v=20261121b"><link rel="stylesheet" href="./assets/ss-four-step-standard.css?v=20261121b"><link rel="stylesheet" href="./assets/ss-ch5-standalone.css?v=11"><link rel="stylesheet" href="./assets/ss-common-header.css?v=1"><link rel="stylesheet" href="./assets/ss-readable-themes.css?v=1"><link rel="stylesheet" href="./assets/ss-formula-standard.css?v=1"><link rel="stylesheet" href="./assets/ss-ui-standard.css?v=3"><script src="./assets/ss-common-header.js?v=3" defer></script></head>
 <body>
 <header class="ss5-site-header ss-common-header" aria-label="Engineering Learning Studio navigation">
 <a class="ss5-home ss-common-home" href="./index.html#overview">← Studio</a>
@@ -357,7 +357,7 @@ function tickLabel(v,step){
 function elsPlotColors(){return window.ssPlotColors?window.ssPlotColors():{background:'#ffffff',ink:'#1b2730',muted:'#455663',axis:'#344f62',grid:'#c6d2da',rocFill:'rgba(19,133,120,0.13)',rocLabel:'#14736d'};}
 function chart(id,opt){
  const {g,w,h}=ctx(id),mini=id.startsWith('cmp_'),plotTheme=elsPlotColors();
- const m=mini?{l:65,r:13,t:18,b:49}:{l:77,r:19,t:25,b:56};
+ const m=mini?{l:76,r:15,t:20,b:57}:{l:77,r:19,t:25,b:56};
  const W=w-m.l-m.r,H=h-m.t-m.b,{xmin,xmax,ymin,ymax}=opt;
  const X=x=>m.l+(x-xmin)*W/(xmax-xmin),Y=y=>m.t+(ymax-y)*H/(ymax-ymin);
  g.fillStyle=plotTheme.background;g.fillRect(0,0,w,h);
@@ -366,7 +366,7 @@ function chart(id,opt){
    const fills=opt.activeSide==='right'?[[Math.max(0,xmin),xmax,'rgba(14,135,151,.065)']]:opt.activeSide==='left'?[[xmin,Math.min(0,xmax),'rgba(14,135,151,.065)']]:[[xmin,Math.min(0,xmax),'rgba(14,135,151,.055)'],[Math.max(0,xmin),xmax,'rgba(237,120,75,.055)']];
    for(const [a,b,fill] of fills)if(b>a){g.fillStyle=fill;g.fillRect(X(a),m.t,X(b)-X(a),H)}
  }
- g.font=(mini?'12px':'15px')+' system-ui';g.textBaseline='middle';
+ g.font=(mini?'15px':'15px')+' system-ui';g.textBaseline='middle';
  const yStep=niceStep(ymax-ymin,mini?4:5),xStep=niceStep(xmax-xmin,mini?4:6);
  // Every graph shares the same integer-friendly 'niceStep' rule; use decimals only for subunit amplitudes.
  for(let k=Math.ceil(ymin/yStep-1e-8),count=0;k<=Math.floor(ymax/yStep+1e-8)&&count<28;k++,count++){
@@ -386,15 +386,15 @@ function chart(id,opt){
  if(opt.activeSide&&xmin<0&&xmax>0&&!mini){g.textAlign='center';g.font='bold 10px system-ui';g.fillStyle='#0b7786';if(opt.activeSide==='right')g.fillText('t ≥ 0',X(Math.max(.45,xmax/2)),m.t+13);if(opt.activeSide==='left')g.fillText('t < 0',X(xmin/2),m.t+13);if(opt.activeSide==='both'){g.fillText('t < 0',X(xmin/2),m.t+13);g.fillStyle='#c87947';g.fillText('t ≥ 0',X(xmax/2),m.t+13)}}
  g.restore();
  // Tick labels are drawn outside clipping so all zeros are fully visible.
- g.font=(mini?'12px':'15px')+' system-ui';g.textBaseline='middle';g.fillStyle=plotTheme.ink;
+ g.font=(mini?'15px':'15px')+' system-ui';g.textBaseline='middle';g.fillStyle=plotTheme.ink;
  for(let k=Math.ceil(ymin/yStep-1e-8),count=0;k<=Math.floor(ymax/yStep+1e-8)&&count<28;k++,count++){
-   const v=k*yStep;g.textAlign='right';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.font=(Math.abs(v)<1e-9?'bold ':'')+(mini?'12px':'15px')+' system-ui';g.fillText(tickLabel(v,yStep),m.l-9,Y(v));
+   const v=k*yStep;g.textAlign='right';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.font=(Math.abs(v)<1e-9?'bold ':'')+(mini?'15px':'15px')+' system-ui';g.fillText(tickLabel(v,yStep),m.l-9,Y(v));
  }
  for(let k=Math.ceil(xmin/xStep-1e-8),count=0;k<=Math.floor(xmax/xStep+1e-8)&&count<30;k++,count++){
-   const v=k*xStep;g.textAlign='center';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.font=(Math.abs(v)<1e-9?'bold ':'')+(mini?'12px':'15px')+' system-ui';g.fillText(tickLabel(v,xStep),X(v),h-m.b+16);
+   const v=k*xStep;g.textAlign='center';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.font=(Math.abs(v)<1e-9?'bold ':'')+(mini?'15px':'15px')+' system-ui';g.fillText(tickLabel(v,xStep),X(v),h-m.b+16);
  }
- g.font='bold '+(mini?'13px':'17px')+' system-ui';g.fillStyle=plotTheme.ink;g.textAlign='center';g.fillText(opt.xlabel||'time t (s)',m.l+W/2,h-16);
- g.save();g.translate(mini?16:19,m.t+H/2);g.rotate(-PI/2);g.fillText(opt.ylabel||'amplitude',0,0);g.restore();
+ g.font='bold '+(mini?'16px':'17px')+' system-ui';g.fillStyle=plotTheme.ink;g.textAlign='center';g.fillText(opt.xlabel||'time t (s)',m.l+W/2,h-16);
+ g.save();g.translate(mini?20:19,m.t+H/2);g.rotate(-PI/2);g.fillText(opt.ylabel||'amplitude',0,0);g.restore();
  if(opt.originLabel&&xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0&&!mini){g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle=plotTheme.ink;g.fillText('(0, 0)',Math.min(w-62,X(0)+9),Math.max(m.t+23,Y(0)-14))}
  if(opt.valueAtZeroLabel&&xmin<=0&&xmax>=0&&!mini){const yy=opt.valueAtZeroLabel.y;g.fillStyle=COLORS.orange;g.beginPath();g.arc(X(0),Y(yy),4.3,0,TAU);g.fill();g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle='#ba6036';g.fillText(opt.valueAtZeroLabel.text,Math.min(w-122,X(0)+10),Math.min(h-m.b-7,Y(yy)+17))}
  if(opt.startLabel&&xmin<=0&&xmax>=0&&!mini){g.fillStyle=COLORS.orange;g.beginPath();g.arc(X(0),Y(0),4,0,TAU);g.fill();g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle='#ba6036';g.fillText('x(0) = 0',Math.min(w-92,X(0)+9),Math.max(m.t+35,Y(0)-18))}
