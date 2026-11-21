@@ -4,6 +4,8 @@
 (function(global){
  "use strict";
  const f=(v,d=2)=>Number(v).toFixed(d);
+ // Present pole and zero locations as natural factors (p=-1.10 -> s+1.10).
+ const factor=(value)=>{const n=Number(f(value));return n<0?'s+'+f(-n):n>0?'s-'+f(n):'s';};
  const L=String.raw;
  const E=global.ELSLabUI;
  function guides(id,s){
@@ -76,8 +78,8 @@
    const p=Number(s.p),z=Number(s.z),cancelP=Math.abs(p-z)<1e-8,cancel4=Math.abs(z+4)<1e-8,
     active=cancelP?-4:cancel4?p:Math.max(p,-4);
    return [
-    'H(s)=\\frac{s-('+f(z)+')}{[s-('+f(p)+')](s+4)}',
-    cancelP?'z=p='+f(p)+'\\Longrightarrow H_{\\mathrm{red}}(s)=\\frac1{s+4}':cancel4?'z=-4\\Longrightarrow H_{\\mathrm{red}}(s)=\\frac1{s-p}':
+    'H(s)=\\frac{'+factor(z)+'}{('+factor(p)+')(s+4)}',
+    cancelP?'z=p='+f(p)+'\\Longrightarrow H_{\\mathrm{red}}(s)=\\frac1{s+4}':cancel4?'z=-4\\Longrightarrow H_{\\mathrm{red}}(s)=\\frac1{'+factor(p)+'}':
      'z\\neq p,\\quad z\\neq-4\\Longrightarrow\\text{two active poles}',
     '\\mathrm{ROC}:\\operatorname{Re}(s)>'+f(active)+'\\quad(\\text{causal})',
     'j\\omega\\text{ axis }'+(active<0?'\\subset\\mathrm{ROC}':'\\not\\subset\\mathrm{ROC}')+'\\ \\Longrightarrow\\ \\text{BIBO '+(active<0?'stable':'unstable')+'}'
