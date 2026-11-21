@@ -15,8 +15,8 @@ try{
   const page=await browser.newPage({viewport,reducedMotion:'reduce'});
   page.on('pageerror',e=>errors.push(String(e)));
   const size=String(viewport.width);
-  await page.goto(base+'#chapter=7',{waitUntil:'load',timeout:45000});
-  await page.waitForFunction(()=>document.querySelector('#lab-frame')?.contentWindow?.SSChapter7?.experimentCount===7,{timeout:30000});
+  await page.goto(base+'#chapter=7',{waitUntil:'domcontentloaded',timeout:45000});
+  await page.waitForFunction(()=>document.querySelector('#lab-frame')?.contentWindow?.SSChapter7?.experimentCount===7,null,{timeout:30000});
   const f=page.frameLocator('#lab-frame');
   check(await page.locator('.ss5-site-header').count()===1,size+'-ch5-style-header');
   check(await page.locator('#els-ss-chapter-title').innerText().then(s=>s.includes('Chapter 7')&&s.includes('Sampling')),size+'-chapter-title');
