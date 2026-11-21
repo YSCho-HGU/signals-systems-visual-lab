@@ -38,7 +38,7 @@ try{
    for(let lesson=0;lesson<count;lesson++){
      await nav.nth(lesson).click();
      await page.waitForTimeout(130);
-     const content=await page.evaluate(()=>({
+     const content=await page.evaluate(ch=>({
       title:(document.querySelector('#title')||document.querySelector('#content .heading h2'))?.textContent,
       stage:!!document.querySelector('.ss-found-four-step'),
       predict:!!document.querySelector('.ss-found-predict .ss-found-intro')?.textContent.trim(),
@@ -48,7 +48,7 @@ try{
       guided:!!document.querySelector(ch===1?'#step-text':'#derivationPanel .deriv-step'),
       nextChapter:!!document.querySelector('.ss-found-explain a.ss-bridge-link'),
       hasReferenceError:document.body.textContent.includes('ReferenceError:')
-     }));
+     }),ch);
      lessonResults.push({lesson:lesson+1,...content});
      const c=page.locator(ch===1?'#controls input[type=range]':'#content .ss-found-controls input[type=range]').first();
      if(await c.count())await c.evaluate(el=>{el.value=el.max;el.dispatchEvent(new Event('input',{bubbles:true}))});
