@@ -17,7 +17,7 @@ body{font-family:var(--els-body-font);font-size:var(--els-body-size);line-height
 /* Narrative text: applicable across C course pages and all Signals & Systems labs.
    Scope to semantic prose, preserving special-purpose widgets and controls. */
 :is(main,.main,.stage,.ss-vertical-main,.content,.cp-content,.lab-view,.ss-home-wrap)
-:is(p,.desc,.description,.intro,.subtitle,.explain,.explanation,.insight,.interpretation,.learning-note,.concept-text,.guide-intro,.reading-note p,.reading .note p,.step p,.steptext,.step-text,.guide-step p,.deriv-step p,.derivation-step p,.theory,.lesson-body,.concept-body,.question-context,.ss5-flow-intro):not(.plot-caption):not(.axis-key):not(.axis-note):not(.plot-instruction):not(.legend):not(.hint):not(.metric):not(.metadata):not(.small):not(.eyebrow) {
+:is(p,.desc,.description,.intro,.subtitle,.explain,.explanation,.insight,.interpretation,.learning-note,.concept-text,.guide-intro,.reading-note p,.reading .note p,.step p,.steptext,.step-text,.guide-step p,.deriv-step p,.derivation-step p,.theory,.lesson-body,.concept-body,.question-context,.ss5-flow-intro):not(.plot-caption):not(.figure-caption):not(.graph-note):not(.sub):not(.axis-key):not(.axis-note):not(.axis-label):not(.plot-instruction):not(.legend):not(.hint):not(.metric):not(.metadata):not(.small):not(.eyebrow) {
  font-size:var(--els-body-size)!important;
  line-height:var(--els-body-leading)!important;
 }
