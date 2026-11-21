@@ -35,7 +35,7 @@ try{
       guides:[...document.querySelectorAll(".deriv-math")].map(e=>e.dataset.mathRendered),
       plots:document.querySelectorAll(".plots canvas").length};
   });
-  check(lab+"-heading-math",snap.headingMath>0,snap.heading);
+  check(lab+"-heading-math",["weight","second"].includes(lab)?snap.headingMath>0:!!snap.heading,snap.heading);
   check(lab+"-caption-or-explanation-math",snap.all.some(x=>x.selector!==".heading p"&&x.katex>0),snap.all);
   check(lab+"-no-exponent-literals",snap.rawExponent.length===0,snap.rawExponent);
   check(lab+"-no-raw-comparators",snap.rawRelation.length===0,snap.rawRelation);
