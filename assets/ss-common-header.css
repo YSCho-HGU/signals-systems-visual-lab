@@ -12,5 +12,4 @@
 .ss-common-header .ss-common-actions{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:10px;flex:0 0 auto}
 .ss-common-header .ss-common-actions label,.ss-common-header .ss-common-actions .theme-picker{display:flex;align-items:center;gap:5px;margin:0;padding:0;min-width:0;font-size:11px;font-weight:600;white-space:nowrap;color:inherit}
 .ss-common-header .ss-common-actions select{width:auto;max-width:158px;min-height:30px;font-size:11px;padding:3px 6px;border:1px solid var(--els-border,var(--border,#777));border-radius:7px;background:var(--els-surface,var(--surface,#222));color:var(--els-ink,var(--ink,#eee))}
-.ss-common-header .els-ss-hidden-nav{display:none!important}
 @media(max-width:700px){.ss-common-header{height:auto!important;min-height:46px!important;flex-wrap:wrap!important;gap:6px!important;padding:7px 9px!important}.ss-common-header .ss-common-menu{flex:1 1 calc(100% - 95px);max-width:calc(100% - 95px)}.ss-common-header .ss-common-actions{width:100%;margin-left:auto;justify-content:flex-end}.ss-common-header .ss-common-actions label{font-size:11px}}
