@@ -339,11 +339,11 @@ function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
 <meta name="ss-studio-version" content="Chapter 5 Native v1">
 <link rel="stylesheet" href="./assets/design-system.css?v=1">
 <link rel="stylesheet" href="./assets/ss-lab-theme.css?v=5">
-<link rel="stylesheet" href="./assets/els-theme-v2.css?v=5">
+<link rel="stylesheet" href="./assets/els-theme-v2.css?v=6">
 <link rel="stylesheet" href="./assets/ss-ch5-standalone.css?v=1">
 <link rel="stylesheet" href="./assets/ss5-light-theme-fix.css?v=1">
 <script src="./assets/els-language.js?v=1"></script>
-<script src="./assets/els-theme-v2.js?v=4"></script>
+<script src="./assets/els-theme-v2.js?v=6"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.js"></script>
 <link rel="stylesheet" href="./assets/els-lab-components.css?v=1">
@@ -453,12 +453,23 @@ function tickLabel(v,step){
   const decimals=isIntegerStep?0:Math.min(5,Math.max(1,Math.ceil(-Math.log10(step))+1));
   return Number(v.toFixed(decimals)).toString();
 }
+function elsPlotColors(){
+ const style=getComputedStyle(document.documentElement);
+ const theme=document.documentElement.dataset.elsTheme||'neutral-dark';
+ const dark=['neutral-dark','warm-dark','navy-dark'].includes(theme);
+ const token=(name,fallback)=>style.getPropertyValue(name).trim()||fallback;
+ return {background:token('--els-surface',dark?'#1c1c1c':'#ffffff'),
+ ink:token('--els-ink',dark?'#f0f0ed':'#1b2730'),
+ muted:token('--els-muted',dark?'#c1c5c1':'#455663'),
+ axis:dark?'#d0dbd7':'#344f62',
+ grid:dark?'#46514d':'#dfe7ec'};
+}
 function chart(id,opt){
- const {g,w,h}=ctx(id),mini=id.startsWith('cmp_');
+ const {g,w,h}=ctx(id),mini=id.startsWith('cmp_'),plotTheme=elsPlotColors();
  const m=mini?{l:57,r:11,t:14,b:40}:{l:67,r:17,t:22,b:47};
  const W=w-m.l-m.r,H=h-m.t-m.b,{xmin,xmax,ymin,ymax}=opt;
  const X=x=>m.l+(x-xmin)*W/(xmax-xmin),Y=y=>m.t+(ymax-y)*H/(ymax-ymin);
- g.fillStyle='white';g.fillRect(0,0,w,h);
+ g.fillStyle=plotTheme.background;g.fillRect(0,0,w,h);
  g.save();g.beginPath();g.rect(m.l,m.t,W,H);g.clip();
  if(opt.activeSide){
    const fills=opt.activeSide==='right'?[[Math.max(0,xmin),xmax,'rgba(14,135,151,.065)']]:opt.activeSide==='left'?[[xmin,Math.min(0,xmax),'rgba(14,135,151,.065)']]:[[xmin,Math.min(0,xmax),'rgba(14,135,151,.055)'],[Math.max(0,xmin),xmax,'rgba(237,120,75,.055)']];
@@ -469,31 +480,31 @@ function chart(id,opt){
  // Every graph shares the same integer-friendly 'niceStep' rule; use decimals only for subunit amplitudes.
  for(let k=Math.ceil(ymin/yStep-1e-8),count=0;k<=Math.floor(ymax/yStep+1e-8)&&count<28;k++,count++){
    const v=k*yStep,py=Y(v);if(v<ymin-1e-8||v>ymax+1e-8)continue;
-   g.strokeStyle=COLORS.grid;g.lineWidth=1;g.beginPath();g.moveTo(m.l,py);g.lineTo(w-m.r,py);g.stroke();
+   g.strokeStyle=plotTheme.grid;g.lineWidth=1;g.beginPath();g.moveTo(m.l,py);g.lineTo(w-m.r,py);g.stroke();
  }
  for(let k=Math.ceil(xmin/xStep-1e-8),count=0;k<=Math.floor(xmax/xStep+1e-8)&&count<30;k++,count++){
    const v=k*xStep,px=X(v);if(v<xmin-1e-8||v>xmax+1e-8)continue;
-   g.strokeStyle=COLORS.grid;g.lineWidth=1;g.beginPath();g.moveTo(px,m.t);g.lineTo(px,m.t+H);g.stroke();
+   g.strokeStyle=plotTheme.grid;g.lineWidth=1;g.beginPath();g.moveTo(px,m.t);g.lineTo(px,m.t+H);g.stroke();
  }
- if(ymin<=0&&ymax>=0){g.strokeStyle='#344f62';g.lineWidth=2.0;g.beginPath();g.moveTo(m.l,Y(0));g.lineTo(m.l+W,Y(0));g.stroke()}
- if(xmin<=0&&xmax>=0){g.strokeStyle='#344f62';g.lineWidth=2.0;g.beginPath();g.moveTo(X(0),m.t);g.lineTo(X(0),m.t+H);g.stroke()}
+ if(ymin<=0&&ymax>=0){g.strokeStyle=plotTheme.axis;g.lineWidth=2.0;g.beginPath();g.moveTo(m.l,Y(0));g.lineTo(m.l+W,Y(0));g.stroke()}
+ if(xmin<=0&&xmax>=0){g.strokeStyle=plotTheme.axis;g.lineWidth=2.0;g.beginPath();g.moveTo(X(0),m.t);g.lineTo(X(0),m.t+H);g.stroke()}
  for(const v of opt.vlines||[]){if(v.x<xmin||v.x>xmax)continue;g.strokeStyle=v.color||COLORS.orange;g.setLineDash([5,4]);g.lineWidth=1.5;g.beginPath();g.moveTo(X(v.x),m.t);g.lineTo(X(v.x),m.t+H);g.stroke();g.setLineDash([])}
  for(const se of opt.series||[]){g.strokeStyle=se.color||COLORS.teal;g.fillStyle=se.color||COLORS.teal;g.lineWidth=se.width||2.3;g.setLineDash(se.dash?[5,4]:[]);g.beginPath();let connected=false;for(const p of se.xy){if(!Number.isFinite(p[1])||p[0]<xmin||p[0]>xmax){connected=false;continue}if(!connected){g.moveTo(X(p[0]),Y(p[1]));connected=true}else g.lineTo(X(p[0]),Y(p[1]))}g.stroke();g.setLineDash([])}
  for(const p of opt.points||[]){if(!Number.isFinite(p.x)||!Number.isFinite(p.y)||p.x<xmin||p.x>xmax||p.y<ymin||p.y>ymax)continue;g.fillStyle=p.color||COLORS.orange;g.beginPath();g.arc(X(p.x),Y(p.y),p.r||4.5,0,TAU);g.fill()}
- if(xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0){g.fillStyle='white';g.strokeStyle='#253f53';g.lineWidth=1.7;g.beginPath();g.arc(X(0),Y(0),4.8,0,TAU);g.fill();g.stroke()}
+ if(xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0){g.fillStyle=plotTheme.background;g.strokeStyle=plotTheme.axis;g.lineWidth=1.7;g.beginPath();g.arc(X(0),Y(0),4.8,0,TAU);g.fill();g.stroke()}
  if(opt.activeSide&&xmin<0&&xmax>0&&!mini){g.textAlign='center';g.font='bold 10px system-ui';g.fillStyle='#0b7786';if(opt.activeSide==='right')g.fillText('t ≥ 0',X(Math.max(.45,xmax/2)),m.t+13);if(opt.activeSide==='left')g.fillText('t < 0',X(xmin/2),m.t+13);if(opt.activeSide==='both'){g.fillText('t < 0',X(xmin/2),m.t+13);g.fillStyle='#c87947';g.fillText('t ≥ 0',X(xmax/2),m.t+13)}}
  g.restore();
  // Tick labels are drawn outside clipping so all zeros are fully visible.
  g.font=(mini?'10px':'11px')+' system-ui';g.textBaseline='middle';g.fillStyle='#556f82';
  for(let k=Math.ceil(ymin/yStep-1e-8),count=0;k<=Math.floor(ymax/yStep+1e-8)&&count<28;k++,count++){
-   const v=k*yStep;g.textAlign='right';g.fillStyle=Math.abs(v)<1e-9?'#224559':'#647f90';g.font=(Math.abs(v)<1e-9?'bold ':'')+(mini?'10px':'11px')+' system-ui';g.fillText(tickLabel(v,yStep),m.l-9,Y(v));
+   const v=k*yStep;g.textAlign='right';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.font=(Math.abs(v)<1e-9?'bold ':'')+(mini?'10px':'11px')+' system-ui';g.fillText(tickLabel(v,yStep),m.l-9,Y(v));
  }
  for(let k=Math.ceil(xmin/xStep-1e-8),count=0;k<=Math.floor(xmax/xStep+1e-8)&&count<30;k++,count++){
-   const v=k*xStep;g.textAlign='center';g.fillStyle=Math.abs(v)<1e-9?'#224559':'#647f90';g.font=(Math.abs(v)<1e-9?'bold ':'')+(mini?'10px':'11px')+' system-ui';g.fillText(tickLabel(v,xStep),X(v),h-m.b+16);
+   const v=k*xStep;g.textAlign='center';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.font=(Math.abs(v)<1e-9?'bold ':'')+(mini?'10px':'11px')+' system-ui';g.fillText(tickLabel(v,xStep),X(v),h-m.b+16);
  }
- g.font=(mini?'10px':'11px')+' system-ui';g.fillStyle='#516d7d';g.textAlign='center';g.fillText(opt.xlabel||'time t (s)',m.l+W/2,h-12);
+ g.font=(mini?'10px':'11px')+' system-ui';g.fillStyle=plotTheme.muted;g.textAlign='center';g.fillText(opt.xlabel||'time t (s)',m.l+W/2,h-12);
  g.save();g.translate(mini?15:16,m.t+H/2);g.rotate(-PI/2);g.fillText(opt.ylabel||'amplitude',0,0);g.restore();
- if(opt.originLabel&&xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0&&!mini){g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle='#304a5d';g.fillText('(0, 0)',Math.min(w-62,X(0)+9),Math.max(m.t+23,Y(0)-14))}
+ if(opt.originLabel&&xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0&&!mini){g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle=plotTheme.ink;g.fillText('(0, 0)',Math.min(w-62,X(0)+9),Math.max(m.t+23,Y(0)-14))}
  if(opt.valueAtZeroLabel&&xmin<=0&&xmax>=0&&!mini){const yy=opt.valueAtZeroLabel.y;g.fillStyle=COLORS.orange;g.beginPath();g.arc(X(0),Y(yy),4.3,0,TAU);g.fill();g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle='#ba6036';g.fillText(opt.valueAtZeroLabel.text,Math.min(w-122,X(0)+10),Math.min(h-m.b-7,Y(yy)+17))}
  if(opt.startLabel&&xmin<=0&&xmax>=0&&!mini){g.fillStyle=COLORS.orange;g.beginPath();g.arc(X(0),Y(0),4,0,TAU);g.fill();g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle='#ba6036';g.fillText('x(0) = 0',Math.min(w-92,X(0)+9),Math.max(m.t+35,Y(0)-18))}
  ssAxisKey(id,opt.xlabel||'t (s)',opt.ylabel||'amplitude',xmin,xmax,ymin,ymax);
@@ -802,6 +813,7 @@ function currentGuidedId(){return active}
 function currentGuidedState(id){return state[id]}
 function update(){const s=state[active];({weight:drawWeight,roc:drawROC,pairs:drawPairs,props:drawProps,inverse:drawInverse,stability:drawStability,rc:drawRC,second:drawSecond})[active](s);revealGuide(active,s,GUIDES5[active]);window.ELSChapterFiveMath?.renderHero(active,s);window.ELSChapterFiveInlineMath?.render(document.getElementById("page"));window.__laplaceVisualLab={active,healthy:true,state:JSON.parse(JSON.stringify(state)),planeDrag:active==='inverse'?'sigma ROC probe':active==='stability'?'pole/zero':'pole'}}
 render();window.addEventListener("load",()=>{window.ELSChapterFiveMath?.renderHero(active,state[active]);window.ELSChapterFiveMath?.renderGuide(active,state[active],document.getElementById("derivationPanel"));window.ELSChapterFiveInlineMath?.render(document.getElementById("page"));window.ELSChapterFiveExplicitMath?.apply(active,LABS.find(x=>x.id===active))});window.addEventListener('resize',()=>update());
+window.addEventListener('els:themechange',()=>update());
 window.__labNumerics={rc63:rcRise(1,1),secondStepInitial:secondStep(0,.4,3),inverseRightZero:invX(0,'right'),cancellation:reduced({p:.8,z:.8}).poles[0],rcCutoff:1/Math.sqrt(2),secondPeak:secondStep(PI/(3*Math.sqrt(1-.25**2)),.25,3)};
 </script><script src="./assets/ss-ch5-standalone.js?v=1"></script>
 <script src="./assets/ss5-language-content.js?v=1"></script>
