@@ -8,7 +8,7 @@ import {chromium} from "playwright";
 import {spawn} from "node:child_process";
 import {mkdirSync,writeFileSync} from "node:fs";
 const PORT=8879,BASE=process.env.SS_BASE_URL||"http://127.0.0.1:"+PORT+"/";
-const output="qa-ch5-ch6-standard";mkdirSync(output,{recursive:true});
+const output="qa-ch5-ch6-standard/"+(process.env.SS_BROWSER_CHANNEL||"chromium");mkdirSync(output,{recursive:true});
 const palettes={
  "neutral-dark":{page:"rgb(16, 16, 16)",surface:"rgb(28, 28, 28)"},
  "warm-dark":{page:"rgb(29, 35, 35)",surface:"rgb(41, 49, 48)"},
@@ -25,7 +25,8 @@ const rgb=value=>{
 let server,browser;
 try{
  if(!process.env.SS_BASE_URL){server=spawn("python3",["-m","http.server",String(PORT),"--bind","127.0.0.1"],{stdio:"ignore"});await new Promise(r=>setTimeout(r,1100))}
- browser=await chromium.launch({headless:true});
+ const channel=process.env.SS_BROWSER_CHANNEL||"chromium";
+ browser=await chromium.launch(channel==="chromium"?{headless:true}:{headless:true,channel});
  for(const chapter of [5,6]){
   for(const os of ["dark","light"]){
    const context=await browser.newContext({viewport:{width:1366,height:850},colorScheme:os,reducedMotion:"reduce"});
@@ -92,7 +93,7 @@ try{
  }
 } catch(e){errors.push("RUNNER: "+String(e.stack||e))}
 finally{if(browser)await browser.close();if(server)server.kill()}
-const result={status:errors.length?"FAIL":"PASS",engine:"Chromium",edgeStatus:"NOT_RUN (Microsoft Edge executable not provisioned in CI)",checks:findings.length,failures:errors,findings};
+const result={status:errors.length?"FAIL":"PASS",engine:process.env.SS_BROWSER_CHANNEL||"chromium",checks:findings.length,failures:errors,findings};
 writeFileSync(output+"/results.json",JSON.stringify(result,null,2));
 console.log(JSON.stringify({status:result.status,checks:result.checks,failures:errors.slice(0,30)},null,2));
 if(errors.length)process.exitCode=1;
