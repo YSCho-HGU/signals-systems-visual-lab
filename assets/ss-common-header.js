@@ -1,6 +1,21 @@
 /* Shared chapter header controller; preserve each page's existing language/theme selectors. */
 (function(){
 'use strict';
+const CHAPTERS=["Signals & Systems","LTI Systems","Fourier Series","CTFT","Laplace Transform","DTFT","Sampling","Z-Transform"];
+function buildLinks(nav){
+ if(nav.dataset.ssLinksBuilt)return;
+ const fragment=document.createDocumentFragment();
+ CHAPTERS.forEach((name,i)=>{
+  const number=i+1;
+  const link=document.createElement('a');
+  link.href=number===5?'./chapter5.html':number===6?'./chapter6.html':'./index.html#chapter='+number;
+  link.dataset.ssChapter=String(number);
+  link.textContent='Chapter '+number+' · '+name;
+  fragment.appendChild(link);
+ });
+ nav.replaceChildren(fragment);
+ nav.dataset.ssLinksBuilt='true';
+}
 function init(){
  const header=document.querySelector('.ss-common-header');
  if(!header)return;
@@ -8,6 +23,7 @@ function init(){
  const title=header.querySelector('.ss-common-title');
  const links=header.querySelector('.ss-common-links');
  if(!menu||!title||!links)return;
+ buildLinks(links);
  const path=location.pathname;
  function sync(){
   const ch=path.endsWith('/chapter5.html')?5:path.endsWith('/chapter6.html')?6:Number((location.hash.match(/^#chapter=(\d+)/)||[])[1])||0;
