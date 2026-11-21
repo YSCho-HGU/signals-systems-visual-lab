@@ -53,6 +53,17 @@ check("G0-ui-standard-shared-focus-and-step",
 check("G0-no-duplicate-prose-math-css",
  !existsSync("assets/ss-ch5-prose-math.css")&&!existsSync("assets/ss-ch7-prose-math.css")&&
  ![laplaceNative,native,ch7].some(x=>x.includes("ss-ch5-prose-math.css")||x.includes("ss-ch7-prose-math.css")));
+const ch8=read("chapter8.html");
+check("G0-08d-ch8-native-and-route",
+ ch8.includes('class="ss8-shell"')&&!/<iframe(?:\\s|>)/i.test(ch8)&&
+ ch8.includes('ss-ui-standard.css?v=4')&&ch8.includes('ss-formula-standard.css?v=2')&&
+ page.includes("if(ch===8){location.replace('./chapter8.html');return;}")&&
+ (ch8.match(/\\{short:'/g)||[]).length===8&&
+ (ch8.match(/class="ss8-stage-head"/g)||[]).length===4);
+for(const path of ["assets/ss-ch8-native.js","assets/ss-ch8-math.js"]){
+ try{new Script(read(path),{filename:path});check("G0-js-"+path,true)}
+ catch(e){check("G0-js-"+path,false,String(e).slice(0,200))}
+}
 check("G0-08c-ch7-7-lessons",(ch7.match(/\{short:'/g)||[]).length===7);
 for(const path of ["assets/ss-ch7-math.js","assets/ss-ch7-learning-standard.js","assets/ss-ch7-standalone.js"]){
  try{new Script(read(path),{filename:path});check("G0-js-"+path,true)}
