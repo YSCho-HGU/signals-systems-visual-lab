@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="ko" class="ss-foundations-standard" data-ss-foundation-chapter="3">
+<head><script>window.__ssThemeFromParent=true;</script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0e2940"><meta name="description" content="Chapter 3 bilingual guided derivations and visual learning lab. Offline standalone application."><title>Chapter 3 Guided Visual Lab Rev6 | Signals & Systems</title><script>
+/* Standalone labs follow OS appearance. Integrated parent may override without reloading graphs. */
+(function(){
+ const query=window.matchMedia('(prefers-color-scheme: dark)');
+ function systemTheme(){if(!window.__ssThemeFromParent)document.documentElement.dataset.theme=query.matches?'dark':'light';}
+ systemTheme();
+ if(query.addEventListener)query.addEventListener('change',systemTheme);
+ else if(query.addListener)query.addListener(systemTheme);
+ window.addEventListener('message',function(event){
+   if(event.source!==window.parent||!event.data||event.data.type!=='ss-set-theme')return;
+   if(event.data.theme!=='dark'&&event.data.theme!=='light')return;
+   window.__ssThemeFromParent=true;
+   document.documentElement.dataset.theme=event.data.theme;
+ });
+})();
+</script>
+<style>
+:root{--bg:#f3f7f9;--nav:#112b41;--nav2:#173c53;--ink:#173046;--sub:#526a7c;--a:#0e8491;--coral:#f06d55;--gold:#e2ae3e;--line:#dce6ec;--paper:#fff;--pale:#ebf5f6;--r:18px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.58 system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #f3aa69;outline-offset:2px}h1,h2,h3,p{margin-top:0}a{color:var(--a)}
+.app{display:grid;grid-template-columns:280px minmax(0,1fr);min-height:100vh}.sidebar{background:linear-gradient(160deg,var(--nav),#0b2235);color:#eaf3f7;padding:28px 18px 22px;position:sticky;top:0;height:100vh;overflow:auto}.brand{padding:5px 13px 25px;border-bottom:1px solid #3b5263}.brand .over{font-size:11px;letter-spacing:.15em;font-weight:700;color:#88abbc}.brand h1{margin:12px 0 3px;font-size:23px;letter-spacing:-.04em;color:white}.brand p{font-size:12px;color:#b2cad5;margin:0}.side-label{color:#a7becb;letter-spacing:.12em;font-size:11px;font-weight:700;margin:25px 15px 10px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;border-radius:12px;display:flex;align-items:center;gap:10px;padding:12px 13px;color:#c7d6dc;text-align:left;transition:.12s ease;min-width:0}.nav button:hover{background:#254258}.nav button.active{color:#fff;background:#235766;box-shadow:inset 3px 0 #5fd0cc}.nav .num{border:1px solid #4c6b7a;color:#bad1dc;border-radius:7px;padding:2px 5px;font-size:11px;min-width:30px;text-align:center;font-weight:700}.nav button.active .num{border-color:#8bd9d4;color:#aeebe6}.nav-name{font-size:13px;font-weight:600;overflow-wrap:anywhere}.side-foot{margin-top:30px;background:#1b3b4f;border:1px solid #3f5969;border-radius:13px;padding:14px;font-size:12px;color:#c3d3df}.side-foot strong{display:block;color:white;margin-bottom:5px}
+.main{min-width:0;padding:29px clamp(18px,4vw,54px) 50px;max-width:1520px;width:100%;margin:0 auto}.topline{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}.breadcrumb{color:var(--sub);font-size:12px;font-weight:700;letter-spacing:.08em}.tag{font-size:11px;border-radius:30px;background:#d9eef0;color:#126b73;font-weight:700;padding:6px 10px}.heading{padding:0 0 20px;border-bottom:1px solid var(--line)}.heading h2{font-size:clamp(26px,3vw,37px);line-height:1.18;letter-spacing:-.045em;margin:0 0 10px}.heading p{color:var(--sub);max-width:960px;margin:0;font-size:15px}.hero-callout{margin:18px 0 22px;background:linear-gradient(100deg,#e5f4f5,#f4f9fa);padding:15px 19px;border:1px solid #d1e6e9;border-left:4px solid var(--a);border-radius:13px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}.hero-callout .formula{font-size:18px;font-family:Cambria,'Times New Roman',serif;color:#13495c;letter-spacing:.015em}.hero-callout .hint{font-size:12px;color:#55717e}.experiment{display:grid;grid-template-columns:minmax(230px,300px) minmax(0,1fr);gap:19px;align-items:start}.controls,.figure,.metric,.learning,.question{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 5px 19px #1e455407}.controls{padding:20px;position:sticky;top:16px}.overlabel{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--a);text-transform:uppercase}.controls h3{margin:5px 0 17px;font-size:20px;letter-spacing:-.02em}.ctrl{margin:0 0 20px}.ctrl label{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;font-weight:700;margin-bottom:8px}.ctrl output{font-size:12px;color:var(--a);font-variant-numeric:tabular-nums;white-space:nowrap}.ctrl input[type=range]{width:100%;accent-color:var(--a);cursor:pointer}.ctrl select{width:100%;background:#f9fcfd;border:1px solid #cfdee5;border-radius:10px;padding:9px}.ctrl .ends{display:flex;justify-content:space-between;color:#82929c;font-size:10px}.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.btn{border:1px solid #cadde4;background:white;border-radius:10px;color:#22516b;padding:10px 12px;font-weight:700;font-size:12px;flex:1}.btn:hover{border-color:#76b6bb;background:#f4fbfb}.btn.primary{background:#126f7d;color:white;border-color:#126f7d}.body-col{min-width:0;display:grid;gap:15px}.charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.charts.three{grid-template-columns:repeat(2,minmax(0,1fr))}.figure{padding:17px 17px 10px;min-width:0}.figure h3{font-size:15px;margin:0 0 2px}.figure p{font-size:11px;color:var(--sub);margin:0 0 10px}.figure canvas{width:100%;height:270px;display:block}.legend{display:none;gap:14px;flex-wrap:wrap;margin:8px 0 2px;font-size:11px;color:var(--sub)}.legend-item{display:flex;align-items:center;gap:6px}.legend-chip{--lc:#000;display:inline-block;position:relative;flex:0 0 auto}.legend-chip.line{width:18px;height:0;border-top:3px solid var(--lc)}.legend-chip.dashed{width:18px;height:0;border-top:3px dashed var(--lc)}.legend-chip.stem{width:18px;height:14px}.legend-chip.stem::before{content:'';position:absolute;left:8px;top:2px;width:2px;height:11px;background:var(--lc)}.legend-chip.stem::after{content:'';position:absolute;left:5px;top:0;width:8px;height:8px;border-radius:50%;background:var(--lc)}.legend-chip.vline{width:3px;height:14px;background:var(--lc);border-radius:999px}.fft-guide{background:#f0f8f8;border:1px solid #c7e1e4;border-left:4px solid #0e8491;border-radius:15px;padding:15px 19px}.fft-guide h3{font-size:17px;margin:5px 0}.fft-guide p{font-size:12px;color:#405d69;margin:5px 0 12px}.preset-row{display:flex;flex-wrap:wrap;gap:8px}.preset-row button{background:white;border:1px solid #a6c9cb;color:#17616a;border-radius:9px;font-size:12px;padding:8px 10px;font-weight:700}.preset-row button.selected{background:#0e8491;color:white;border-color:#0e8491}.fft-status{background:#fff;padding:9px 11px;border:1px solid #d6e7e9;border-radius:9px;margin:11px 0 0!important;font-size:12px}.fft-status span{display:block;margin-top:4px}.figure.wide{grid-column:span 2}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.metric{padding:14px 15px;overflow:hidden}.metric .k{color:var(--sub);font-size:11px;margin-bottom:4px}.metric .v{font-size:23px;font-weight:750;line-height:1.25;color:var(--ink);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.metric .detail{font-size:11px;color:var(--sub);margin-top:3px}.learning{padding:18px 20px;background:#fbfefe;border-left:4px solid var(--a)}.learning h3{margin:0 0 5px;font-size:15px}.learning p{margin:0;color:#3d6172}.question{padding:19px 20px}.question h3{font-size:16px;margin:0 0 9px}.question p{color:#405b6a;margin:0 0 11px}.question details{border-top:1px solid var(--line);padding-top:11px}.question summary{color:var(--a);font-weight:700;cursor:pointer}.question .answer{background:#f2f8f7;border-radius:10px;padding:13px;margin-top:10px;color:#2a4b55}.footer{margin-top:25px;font-size:12px;color:#7b8f9b;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.notice{color:var(--sub);font-size:12px;line-height:1.6;border-top:1px solid #e6eef1;padding-top:14px}.mono{font-family:ui-monospace,Consolas,'Courier New',monospace}.muted{color:var(--sub)}.mobile-bar{display:none}
+@media(max-width:1050px){.app{grid-template-columns:225px minmax(0,1fr)}.sidebar{padding:24px 10px}.main{padding:24px 22px 40px}.experiment{grid-template-columns:1fr}.controls{position:static}.control-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 20px}.charts .figure canvas{height:245px}}
+@media(max-width:750px){.app{display:block}.sidebar{position:relative;height:auto;padding:12px 12px 5px}.brand{padding:5px 10px 11px;border:0}.brand h1{font-size:19px;margin:3px 0}.brand p,.side-label,.side-foot{display:none}.nav{display:flex;overflow-x:auto;gap:8px;padding:4px 3px 13px}.nav button{white-space:nowrap;padding:9px;flex:0 0 auto;min-width:max-content}.nav .nav-name{white-space:nowrap;overflow-wrap:normal}.nav-name{font-size:12px}.main{padding:18px 13px 35px}.topline{margin-bottom:12px}.heading h2{font-size:27px}.charts,.charts.three{grid-template-columns:1fr}.figure.wide{grid-column:span 1}.metrics{grid-template-columns:1fr 1fr}.metric .v{font-size:20px}.hero-callout .formula{font-size:15px}.figure canvas{height:245px}.mobile-bar{display:block;color:#a7ced3;font-size:11px;padding-left:10px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+.figure{padding-bottom:15px}.figure h3{line-height:1.3}.figure canvas{height:270px}.figure p{line-height:1.4;min-height:15px}.learning p{line-height:1.65}.heading p{line-height:1.7}.hero-callout .formula{font-size:17px}.legend-item{line-height:1.4}.side-foot{line-height:1.9}
+
+/* Stable comparison axes and graph-reading notes. */
+.axis-note{display:none;font-size:11px;color:#567786;background:#edf7f8;border-radius:7px;padding:5px 9px;margin-top:8px;line-height:1.5}
+/* Student-centered, bilingual derivation and graph-reading sections. */
+.derivation-panel,.reading-panel{background:#fff;border:1px solid #dce6ec;border-radius:18px;box-shadow:0 5px 19px #1e455407;padding:20px;min-width:0}
+.guide-head{display:flex;justify-content:space-between;align-items:start;gap:16px;flex-wrap:wrap}.guide-head h3,.reading-panel h3{font-size:18px;line-height:1.35;margin:4px 0 8px;color:#173046}.guide-head p{font-size:12px;color:#526a7c;margin:0 0 14px}
+.progress-badge{display:inline-block;padding:5px 10px;border-radius:999px;background:#e6f4f5;color:#076b76;font-weight:700;font-size:12px;white-space:nowrap}
+.guide-steps{display:grid;gap:10px}.deriv-step{border:1px solid #e5edf1;border-radius:12px;padding:12px 14px;background:#fcfdfd;min-width:0}.deriv-top{display:flex;align-items:center;gap:9px;font-size:13px;color:#173046}.step-index{display:inline-flex;align-items:center;justify-content:center;background:#e3f2f3;color:#087680;border-radius:50%;height:24px;width:24px;min-width:24px;font-size:12px;font-weight:800}.deriv-math{margin:9px 0;color:#174b5d;font-family:Cambria,'Cambria Math','Times New Roman',serif;font-size:17px;line-height:1.7;overflow-wrap:anywhere;white-space:normal;overflow-x:auto;padding:6px 10px;background:#eef7f8;border-left:3px solid #0e8491;border-radius:6px}.deriv-step p{font-size:13px;color:#486272;margin:8px 0 0;line-height:1.68}
+.guide-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.guide-actions button{background:#fff;color:#20546a;border:1px solid #c8dce5;border-radius:9px;padding:8px 12px;font:700 12px system-ui,'Malgun Gothic',sans-serif;cursor:pointer}.guide-actions button:hover{background:#edf8f8;border-color:#0e8491}.guide-actions button:disabled{opacity:.4;cursor:not-allowed}.guide-actions button:focus-visible{outline:3px solid #e7ac3f;outline-offset:2px}
+.reading-panel{background:#fafdfd}.reading-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}.reading-note{padding:11px 12px;border:1px solid #dce9eb;border-radius:12px;background:white}.plot-number{font-size:10px;letter-spacing:.09em;color:#0e8491;font-weight:800;display:block;margin-bottom:5px}.reading-note strong{display:block;color:#173046;font-size:13px}.reading-note p{font-size:12px;line-height:1.62;margin:6px 0 0;color:#344f60}.reading-note .ko-explain{color:#617b8a}.guide-check{font-size:13px;margin:12px 0 0;color:#395b68;border-top:1px solid #dce9eb;padding-top:11px}
+@media(max-width:750px){.derivation-panel,.reading-panel{padding:15px}.deriv-math{font-size:15px}.reading-grid{grid-template-columns:1fr}.guide-actions button{flex:1 1 auto}}
+/* Guided Derivation: synchronized equation reveal and graph-reading panels */
+.derivation-panel,.reading-panel{background:#fff;border:1px solid #dce6ec;border-radius:16px;box-shadow:0 5px 19px #1e455407;padding:20px;min-width:0}
+.guide-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.guide-head h3,.reading-panel h3{font-size:18px;line-height:1.35;margin:5px 0 8px;color:#173046}
+.guide-head p{font-size:12px;color:#526a7c;margin:0 0 14px}
+.progress-badge{background:#e6f4f5;color:#086c76;font:700 12px system-ui,sans-serif;padding:6px 11px;border-radius:18px;white-space:nowrap}
+.guide-track{height:5px;background:#dcebee;border-radius:8px;margin:4px 0 14px;overflow:hidden}
+.guide-track>div{height:100%;background:#0e8491;border-radius:8px;transition:width .38s ease}
+.guide-steps{display:grid;gap:10px}
+.deriv-step{border:1px solid #dfe9ee;border-radius:12px;padding:12px 14px;background:#fcfdfd;min-width:0}
+.deriv-step.guide-enter{animation:guideReveal .58s cubic-bezier(.18,.65,.27,1) both;border-color:#75c5c7;background:#f2faf9}
+@keyframes guideReveal{from{opacity:0;transform:translateY(19px);filter:blur(2px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+.deriv-top{display:flex;align-items:center;gap:9px;font-size:13px;color:#173046;min-width:0}
+.step-index{display:inline-flex;align-items:center;justify-content:center;background:#e3f2f3;color:#087680;border-radius:50%;height:24px;width:24px;min-width:24px;font-size:12px;font-weight:800}
+.deriv-math{margin:9px 0;color:#174b5d;font-family:Cambria,'Cambria Math','Times New Roman',serif;font-size:17px;line-height:1.7;overflow-wrap:anywhere;white-space:normal;overflow-x:auto;padding:6px 10px;background:#eef7f8;border-left:3px solid #0e8491;border-radius:6px}
+.deriv-step p{font-size:13px;color:#486272;margin:8px 0 0;line-height:1.68}
+.guide-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.guide-actions button{background:#fff;color:#20546a;border:1px solid #c8dce5;border-radius:9px;padding:9px 12px;font:700 12px system-ui,'Malgun Gothic',sans-serif;cursor:pointer}
+.guide-actions button:hover{background:#edf8f8;border-color:#0e8491}
+.guide-actions button:disabled{opacity:.4;cursor:not-allowed}
+.guide-actions button.primary{color:#fff;background:#0e8491;border-color:#0e8491}
+.guide-actions button:focus-visible{outline:3px solid #e7ac3f;outline-offset:2px}
+.reading-panel{background:#fafdfd}
+.reading-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.reading-note{padding:11px 12px;border:1px solid #dce9eb;border-radius:12px;background:#fff}
+.plot-number{font-size:10px;letter-spacing:.09em;color:#0e8491;font-weight:800;display:block;margin-bottom:5px}
+.reading-note strong{display:block;color:#173046;font-size:13px}
+.reading-note p{font-size:12px;line-height:1.62;margin:6px 0 0;color:#344f60}
+.reading-note .ko-explain{color:#617b8a}
+.guide-check{font-size:13px;margin:12px 0 0;color:#395b68;border-top:1px solid #dce9eb;padding-top:11px}
+@media(max-width:750px){.derivation-panel,.reading-panel{padding:15px}.deriv-math{font-size:15px}.reading-grid{grid-template-columns:1fr}.guide-actions button{flex:1 1 auto}}
+@media(prefers-reduced-motion:reduce){.deriv-step.guide-enter{animation:none}.guide-track>div{transition:none}}
+
+
+/* S&S Integrated Studio — common visual design tokens and learning components. */
+:root{--bg:#f3f7f9;--nav:#112b41;--ink:#173046;--sub:#526a7c;--a:#0e8491;--accent:#0e8491;--line:#dce6ec;--paper:#fff;--card:#fff;--r:16px}
+body{font-family:system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',Arial,sans-serif;background:#f3f7f9;color:#173046}
+.figure,.metric,.controls,.panel,.derivation-panel,.reading-panel,.learning,.question,.insight,.quiz{border-radius:16px!important;box-shadow:0 5px 18px #15374a08!important;border-color:#dce6ec!important}
+.derivation-panel,.reading-panel{padding:20px!important}
+.guide-head h3,.reading-panel h3{color:#173046!important;font-size:18px!important;line-height:1.4!important}
+.deriv-math{font-family:Cambria,'Times New Roman',serif!important;line-height:1.55!important;overflow-wrap:anywhere}
+.deriv-step{border-radius:12px!important;overflow-wrap:anywhere}
+.guide-actions{gap:8px!important}
+.guide-actions button{font-family:system-ui,'Malgun Gothic',sans-serif!important;font-weight:700!important;font-size:12px!important;border-radius:10px!important;min-height:37px}
+.guide-actions button.primary{background:#0e8491!important;color:white!important;border-color:#0e8491!important}
+.guide-track{border-radius:100px!important;overflow:hidden}
+.guide-track>div{background:linear-gradient(90deg,#0e8491,#49bcb3)!important}
+.figure h3{color:#173046!important;font-weight:750!important}
+.figure canvas{display:block;max-width:100%}
+.figure p,.reading-panel p,.guide-head p{line-height:1.65}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #e2ae3e!important;outline-offset:2px!important}
+#studio-back{position:fixed;right:17px;top:14px;z-index:9999;display:flex;align-items:center;gap:8px;background:#112b41;color:#fff;text-decoration:none;border-radius:100px;padding:9px 15px;box-shadow:0 5px 20px #071c3066;font-size:12px;font-weight:750}
+#studio-back:hover{background:#0e8491}
+#studio-back[hidden]{display:none!important}
+@media(max-width:750px){.derivation-panel,.reading-panel{padding:15px!important}#studio-back{top:8px;right:9px;padding:7px 10px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.deriv-step{animation:none!important}}
+
+
+/* Rev5 integrated + standalone: dark mode; graph canvas stays light for legible axes/curves. */
+html[data-theme="dark"]{color-scheme:dark;--bg:#0c1827;--nav:#0c2234;--nav2:#193c51;--ink:#e5f1f8;--sub:#b0c7d3;--muted:#b0c7d3;--a:#75d9e3;--accent:#75d9e3;--teal:#75d9e3;--coral:#ff9a86;--warm:#ff9a86;--gold:#efc36e;--line:#355266;--paper:#192e42;--card:#192e42;--pale:#1f4050}
+html[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+html[data-theme="dark"] .main,
+html[data-theme="dark"] main{color:var(--ink)}
+html[data-theme="dark"] .controls,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .figure,
+html[data-theme="dark"] .metric,
+html[data-theme="dark"] .learning,
+html[data-theme="dark"] .question,
+html[data-theme="dark"] .insight,
+html[data-theme="dark"] .quiz,
+html[data-theme="dark"] .derivation-panel,
+html[data-theme="dark"] .reading-panel,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .plot-card{background:#192e42!important;border-color:#365468!important;box-shadow:0 5px 22px #0002!important;color:#e7f3f9}
+html[data-theme="dark"] .deriv-step,
+html[data-theme="dark"] .step,
+html[data-theme="dark"] .reading .note,
+html[data-theme="dark"] .control,
+html[data-theme="dark"] .hero-callout,
+html[data-theme="dark"] .formula,
+html[data-theme="dark"] .axis-note,
+html[data-theme="dark"] .plot-instruction,
+html[data-theme="dark"] .reading-note,
+html[data-theme="dark"] .interpretation,
+html[data-theme="dark"] .guide-note{background:#203c4e!important;color:#e2f1f7!important;border-color:#426278!important}
+html[data-theme="dark"] .deriv-step.guide-enter,
+html[data-theme="dark"] .deriv-step.active,
+html[data-theme="dark"] .step.active{background:#20505a!important;border-color:#62bfc7!important}
+html[data-theme="dark"] .deriv-math,
+html[data-theme="dark"] .step .math,
+html[data-theme="dark"] .math,
+html[data-theme="dark"] .mathline,
+html[data-theme="dark"] .hero-callout .formula{color:#d9f4f4!important;background:#204557!important;border-color:#426a78!important}
+html[data-theme="dark"] .figure canvas,
+html[data-theme="dark"] .plot-card svg,
+html[data-theme="dark"] .plot-card canvas{background:#fbfdfe!important;border-radius:7px;color:#19394c;filter:none}
+html[data-theme="dark"] .plot-card .plot-title{background:#254759;color:#e5f3f8;border-color:#426477}
+html[data-theme="dark"] select,
+html[data-theme="dark"] input[type="number"],
+html[data-theme="dark"] input[type="text"]{background:#142d40;color:#e6f2f7;border:1px solid #507083}
+html[data-theme="dark"] button:not(.active):not(.on):not(.primary):not(.guide-primary){border-color:#45677b}
+html[data-theme="dark"] .tag,
+html[data-theme="dark"] .pill{background:#204957;color:#9be5e8}
+html[data-theme="dark"] .breadcrumb,
+html[data-theme="dark"] .crumb,
+html[data-theme="dark"] .intro,
+html[data-theme="dark"] .hint,
+html[data-theme="dark"] .reading .note p,
+html[data-theme="dark"] .axis-note{color:#b9d1dd!important}
+html[data-theme="dark"] .nav button:not(.active),
+html[data-theme="dark"] .tabs button:not(.on){color:#d3e6ee}
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .shell>.nav{background:linear-gradient(160deg,#0a2030,#102c40)}
+html[data-theme="dark"] nav:not(.sidebar):not(.nav) button:not(.active){background:#1e3b4e;color:#e5f3f8;border-color:#43677a}
+html[data-theme="dark"] nav:not(.sidebar):not(.nav) button.active{background:#136477;color:#fff}
+html[data-theme="dark"] .plot-card svg text{fill:#203b4e}
+
+
+/* Rev7 audited text contrast: no Light Mode ink inside dark surfaces. */
+:root{--ss-axis-text:#274f64;--ss-axis-bg:#f1f8fa}
+.axis-key{display:flex;flex-wrap:wrap;align-items:center;gap:5px 13px;margin:8px 0 4px;padding:8px 11px;border-radius:8px;border:1px solid #cfe1e9;background:var(--ss-axis-bg);color:var(--ss-axis-text);font:600 12px/1.55 system-ui,'Malgun Gothic',sans-serif;overflow-wrap:anywhere}
+.axis-key .ax-strong{font-weight:850;color:#086d79}
+html[data-theme="dark"]{--ss-axis-text:#d5edf5;--ss-axis-bg:#244457}
+html[data-theme="dark"] .axis-key{background:#244457!important;border-color:#54788b!important;color:#d5edf5!important}
+html[data-theme="dark"] .axis-key .ax-strong{color:#91e8eb!important}
+html[data-theme="dark"] :is(.reading-panel h3,.guide-head h3,.deriv-top,.reading-note strong,.reading .note strong,.compare-title,.figure h3,.plot-card .plot-title,.step strong,.check b,.insight strong){color:#eff9ff!important}
+html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain,.guide-check,.guide-head p,.deriv-step p,.reading-panel p,.reading .note p,.step p,.insight p,.quiz p,.check,.check .answer,.compare-sub,.compare-footer,.figure .sub,.figure p,.formhint,.heading p,.intro,.desc,.smallnote,.rangeEnds,.metric .k,.metric .d,.metric b,.legend,.bridge,.footer,.foot,.hint,.source,.crumb,.breadcrumb,.plot-instruction,.axis-note){color:#cce3ee!important}
+html[data-theme="dark"] :is(.reading-note,.reading .note,.step,.deriv-step,.compare-card,.compare-wrap,.check,.axis-note){background:#234254!important;border-color:#517185!important}
+html[data-theme="dark"] :is(.guide-check,.quiz details){border-color:#517185!important}
+html[data-theme="dark"] :is(.overlabel,.over,.plot-number,.eyebrow,.heading .sup,.step-index,.progress-badge,.metric .v,.metric strong,.ctrl output,.control output){color:#90e8ec!important}
+html[data-theme="dark"] :is(.guide-actions button:not(.primary),.step-buttons button:not(.primary),.btn:not(.primary),.preset,.check button,.quiz button,.actions button:not(.primary)){color:#e6f5fc!important;background:#234657!important;border-color:#54798d!important}
+html[data-theme="dark"] :is(.guide-actions button.primary,.step-buttons button.primary,.btn.primary,.actions button.primary){background:#0d697b!important;border-color:#67c6d1!important;color:#fff!important}
+html[data-theme="dark"] :is(.reading-note p,.reading-note .ko-explain){opacity:1!important}
+html[data-theme="dark"] :is(.learning p,.question p,.learning .body,.question .body,.notice,.metric .detail,.ctrl .ends,.rangeEnds,.range-ends,.reading-panel .check,.reading-panel .question){color:#d1e7f0!important}
+html[data-theme="dark"] :is(.progress-badge,.step-index){background:#285666!important;color:#a6f2f0!important;border-color:#5b8593!important}
+/* Additional animated-convolution and FFT presets: previously retained light-only colors. */
+html[data-theme="dark"] :is(.motion-panel,.detail-panel,.fft-guide){background:#1c3548!important;border-color:#4c7385!important;color:#e8f5fb!important}
+html[data-theme="dark"] :is(.motion-panel h3,.detail-head h4,.fft-guide h3,.motion-status strong,.detail-status strong){color:#f0f9fd!important}
+html[data-theme="dark"] :is(.motion-lead,.motion-speed,.motion-caution,.motion-status small,.detail-sub,.detail-note,.area-slider label,.area-slider .ends,.fft-guide p){color:#cfe4ed!important}
+html[data-theme="dark"] :is(.motion-stage,.motion-stage.done,.motion-status,.detail-status,.detail-pill,.area-slider){background:#28495b!important;color:#e4f2f9!important;border-color:#567a8d!important}
+html[data-theme="dark"] .motion-stage.current{background:#255b63!important;color:#fff!important;border-color:#78d3d5!important}
+html[data-theme="dark"] :is(.motion-stage b,.motion-eq){background:#30566b!important;color:#a3edf0!important}
+html[data-theme="dark"] :is(.motion-actions button:not(.motion-primary),.detail-actions button:not(.detail-primary),.preset-row button:not(.selected)){background:#29495c!important;color:#eaf6fb!important;border-color:#5c8191!important}
+html[data-theme="dark"] :is(.motion-primary,.detail-primary,.preset-row button.selected){background:#086a79!important;color:#fff!important;border-color:#6ccbd0!important}
+html[data-theme="dark"] :is(.mathline,.mathline b,.detail-status b,.detail-pill,.area-slider output,.detail-head .overlabel){color:#9be7ec!important}
+html[data-theme="dark"] .fft-status{background:#284b5e!important;color:#e0f1f7!important;border-color:#5b8091!important}
+html[data-theme="dark"] .fft-status :is(b,span,strong){color:#e0f1f7!important}
+html[data-theme="dark"] .plot-card svg text{fill:#274b5e}
+@media(max-width:560px){.axis-key{font-size:11px;gap:4px 9px;padding:7px 8px}}
+
+
+/* Rev8: interactive graph probe, color-contrast safe in both themes. */
+.ss-hover-tip{position:absolute;z-index:35;pointer-events:none;display:none;min-width:190px;max-width:min(310px,calc(100% - 16px));padding:11px 12px;border-radius:11px;border:1px solid #4c8190;background:#102d41;color:#f1fbff;box-shadow:0 9px 26px rgba(5,22,36,.32);font:500 12px/1.55 system-ui,'Malgun Gothic',sans-serif;white-space:normal;overflow-wrap:anywhere}
+.ss-hover-tip .ss-hover-title{font-weight:800;color:#adf2f2;font-size:12px;margin-bottom:4px}
+.ss-hover-tip .ss-hover-coord{color:#e1f4fb;font-size:11px;margin-bottom:5px}
+.ss-hover-tip .ss-hover-line{display:flex;align-items:baseline;gap:7px;margin:3px 0;color:#f1fbff}
+.ss-hover-tip .ss-hover-swatch{display:inline-block;width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:var(--ss-line,#6ccbd0)}
+.ss-hover-tip .ss-hover-line b{font-weight:750;color:#fff}
+.ss-hover-tip .ss-hover-line.primary b{color:#a8f7df}
+.ss-hover-tip .ss-hover-note{color:#c0dbe7;font-size:10.5px;margin-top:5px;border-top:1px solid #486579;padding-top:4px}
+.ss-hover-v,.ss-hover-h{position:absolute;display:none;pointer-events:none;z-index:30;background:#e26b4f;opacity:.85}
+.ss-hover-v{width:1px;border-left:1px dashed #f18b63;background:transparent}
+.ss-hover-h{height:1px;border-top:1px dashed #f18b63;background:transparent}
+.ss-hover-dot{position:absolute;display:none;pointer-events:none;z-index:31;width:11px;height:11px;border-radius:50%;border:2px solid #fff;background:#ed7954;box-shadow:0 0 0 1px #123a4e;transform:translate(-50%,-50%)}
+.ss-hover-hint{font:600 11px/1.5 system-ui,'Malgun Gothic',sans-serif;color:#23576a;margin:5px 0 2px;letter-spacing:.01em}
+html[data-theme="dark"] .ss-hover-hint{color:#c6e9f2!important}
+html[data-theme="dark"] .ss-hover-tip{background:#0d2739;border-color:#6a98a9;color:#f4fbff}
+html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hover-note){color:#d6e9f3!important}
+.ss-hover-target:focus-visible{outline:3px solid #ee9868;outline-offset:3px}
+@media(max-width:560px){.ss-hover-tip{max-width:min(290px,calc(100% - 12px));padding:9px 10px;font-size:11px}.ss-hover-hint{font-size:10px}}
+
+</style>
+<script>
+/* Rev8 shared graph probe. Displays the cursor coordinate and an independently
+   evaluated analytic value when a function exists, otherwise an actual drawn
+   sample. No interpolation is presented as an exact analytic answer. */
+(function(){
+ 'use strict';
+ const states=new WeakMap();let queued=[];
+ const fmt=v=>{if(!Number.isFinite(v))return String(v);if(Math.abs(v)<1e-11)return '0';const a=Math.abs(v);if(a>=1e4||a<1e-4)return v.toExponential(3);return Number(v.toFixed(a>=100?2:a>=1?4:6)).toString()};
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ function el(tag,cls,parent){const x=document.createElement(tag);x.className=cls;parent.appendChild(x);return x}
+ function labels(host){return [...host.querySelectorAll('.legend > .lgitem,.legend > .legend-item,.legend > span')].map(e=>e.textContent.trim())}
+ function bind(target,d){
+  if(typeof target==='string')target=document.getElementById(target);
+  if(!target||!d)return;
+  let st=states.get(target);
+  if(!st){
+   const host=target.closest('.plotbox,.figure,.compare-card,.plot-card')||target.parentElement;
+   if(!host)return;
+   if(getComputedStyle(host).position==='static')host.style.position='relative';
+   const tip=el('div','ss-hover-tip',host),v=el('div','ss-hover-v',host),h=el('div','ss-hover-h',host),dot=el('div','ss-hover-dot',host);
+   tip.setAttribute('role','status');tip.setAttribute('aria-live','off');
+   let hint=host.querySelector('.ss-hover-hint');if(!hint){hint=el('div','ss-hover-hint',host);hint.textContent='ⓘ Hover / Tap / Focus: coordinates + signal values · 마우스·터치·키보드로 값 확인'}
+   target.classList.add('ss-hover-target');target.setAttribute('tabindex','0');
+   target.setAttribute('aria-description','Move pointer, tap, or use arrow keys to inspect signal values and coordinates.');
+   st={target,host,tip,v,h,dot,d:null,lastX:null,lastType:null};states.set(target,st);
+   target.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;move(st,e.clientX,e.clientY,e.pointerType)});
+   target.addEventListener('pointerdown',e=>{move(st,e.clientX,e.clientY,e.pointerType)});
+   target.addEventListener('pointerleave',e=>{if(e.pointerType!=='touch')hide(st)});
+   target.addEventListener('blur',()=>hide(st));
+   target.addEventListener('focus',()=>{const r=target.getBoundingClientRect();move(st,r.left+r.width*.55,r.top+r.height*.45,'keyboard')});
+   target.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End','Escape'].includes(e.key))return;
+    if(e.key==='Escape'){hide(st);return}e.preventDefault();const r=target.getBoundingClientRect();
+    const p=st.d.pad||{l:0,r:0,t:0,b:0},w=st.d.w,h=st.d.h;
+    const left=r.left+p.l/w*r.width,right=r.right-p.r/w*r.width;
+    let px=st.lastX===null?(left+right)/2:st.lastX;
+    if(e.key==='Home')px=left;else if(e.key==='End')px=right;else px+=((e.shiftKey?.05:.0125)*(right-left))*(e.key==='ArrowLeft'?-1:1);
+    move(st,clamp(px,left,right),r.top+r.height*.5,'keyboard',true)
+   });
+  }
+  st.d=d;
+  // A parameter change redraws the graph; hide stale numerical values.
+  hide(st);
+ }
+ function hide(st){st.tip.style.display='none';st.v.style.display='none';st.h.style.display='none';st.dot.style.display='none';st.lastX=null}
+ function pointToView(st,cx,cy){const r=st.target.getBoundingClientRect();const d=st.d;
+  return {x:r.left+cx/d.w*r.width,y:r.top+cy/d.h*r.height}
+ }
+ function nearest(data,x,xmin=-Infinity,xmax=Infinity){let best=null,bestDelta=Infinity;
+  for(const p of data||[]){if(!p||!Number.isFinite(p[0])||!Number.isFinite(p[1])||p[0]<xmin-1e-9||p[0]>xmax+1e-9)continue;const delta=Math.abs(p[0]-x);if(delta<bestDelta){bestDelta=delta;best=p}}
+  return best
+ }
+ function readSeries(st,x,y){const d=st.d;const values=[];
+  for(let i=0;i<(d.series||[]).length;i++){
+   const s=d.series[i];let v=null,sx=x,method='formula';
+   if(typeof s.fn==='function'){
+    try{v=s.fn(x)}catch(e){continue}
+   }else if(Array.isArray(s.points)){
+    const p=nearest(s.points,x,d.xmin,d.xmax);if(!p)continue;sx=p[0];v=p[1];method=s.discrete?'discrete':'sample';
+   }else continue;
+   if(!Number.isFinite(v))continue;
+   const ypixel=d.toPixel?d.toPixel(sx,v).y:d.pad.t+(d.ymax-v)/(d.ymax-d.ymin)*(d.h-d.pad.t-d.pad.b);
+   const py=d.pad.t+(d.ymax-y)/(d.ymax-d.ymin)*(d.h-d.pad.t-d.pad.b);
+   const off=Math.abs(ypixel-py);
+   values.push({i,label:s.label||'',color:s.color||'#42c9d2',x:sx,y:v,method,off,inRange:v>=d.ymin&&v<=d.ymax});
+  }
+  values.sort((a,b)=>a.off-b.off);
+  const lab=labels(st.host);for(const v of values){if(!v.label)v.label=lab[v.i]||d.ylabel||`Signal ${v.i+1}`}
+  return values
+ }
+ function rocInfo(d,x,y){const r=d.roc;if(!r)return null;
+  if(d.plane==='z'){const a=Math.hypot(x,y);return (a>r.inner+1e-8&&a<r.outer-1e-8)?'ROC 내부 (boundary excluded)':'ROC 외부 또는 경계'}
+  if(r.type==='all')return 'ROC: entire s-plane';
+  if(r.type==='none')return 'No ROC';
+  const inside=r.type==='right'?x>r.a:r.type==='left'?x<r.a:r.type==='strip'?x>r.a&&x<r.b:false;
+  return inside?'ROC 내부 (boundary excluded)':'ROC 외부 또는 경계'
+ }
+ function move(st,clientX,clientY,pointerType,fromKeyboard=false){
+  const d=st.d;if(!d)return;const rect=st.target.getBoundingClientRect();if(!rect.width||!rect.height)return;
+  let px=(clientX-rect.left)*d.w/rect.width,py=(clientY-rect.top)*d.h/rect.height;
+  const pad=d.pad||{l:0,r:0,t:0,b:0};
+  if(fromKeyboard)py=pad.t+(d.h-pad.t-pad.b)*.5;
+  if(px<pad.l||px>d.w-pad.r||py<pad.t||py>d.h-pad.b){hide(st);return}
+  let x,y;
+  if(d.plane&&d.center){x=(px-d.center.cx)/d.center.scale;y=(d.center.cy-py)/d.center.scale}
+  else{x=d.xmin+(px-pad.l)/(d.w-pad.l-pad.r)*(d.xmax-d.xmin);y=d.ymax-(py-pad.t)/(d.h-pad.t-pad.b)*(d.ymax-d.ymin)}
+  const items=[];let marker=null;
+  if(d.plane){
+   items.push({label:`${d.plane} = ${fmt(x)} ${y<0?'−':'+'} j${fmt(Math.abs(y))}`,value:`|${d.plane}|=${fmt(Math.hypot(x,y))}, ∠=${fmt(Math.atan2(y,x)*180/Math.PI)}°`,color:'#6dd7d9'});
+   const r=d.markers||[];let closest=null,dist=Infinity;
+   for(const m of r){const q=d.center?{x:d.center.cx+m.x*d.center.scale,y:d.center.cy-m.y*d.center.scale}:{x:pad.l+(m.x-d.xmin)/(d.xmax-d.xmin)*(d.w-pad.l-pad.r),y:pad.t+(d.ymax-m.y)/(d.ymax-d.ymin)*(d.h-pad.t-pad.b)};const delta=Math.hypot(px-q.x,py-q.y);if(delta<dist){closest=m;dist=delta}}
+   if(closest&&dist<17){items.push({label:`${closest.type} @ (${fmt(closest.x)}, ${fmt(closest.y)})`,value:closest.type==='Pole'?'× pole':closest.type==='Zero'?'○ zero':'vector endpoint',color:closest.type==='Pole'?'#ffa19a':'#93e8ed'})}
+   const region=rocInfo(d,x,y);if(region)items.push({label:'Region of convergence',value:region,color:'#b8e8c4'});
+  }else{
+   const values=readSeries(st,x,y);
+   if(values.length){
+    const ordered=values.slice(0,4);
+    for(const v of ordered){
+     const method=v.method==='formula'?'f(x) 직접 계산':v.method==='discrete'?'이산 표본':'계산 표본 (보간 없음)';
+     const extra=v.method==='formula'?'':` @ x=${fmt(v.x)}`;
+     items.push({label:v.label,value:`${fmt(v.y)}${extra}${v.inRange?'':' · 표시 범위 밖'}`,color:v.color,method,primary:v===values[0]});
+    }
+    const v=values.find(z=>z.inRange);if(v){const xplot=v.method==='formula'?x:v.x;marker={x:xplot,y:v.y}}
+    if(values.length>4)items.push({label:`+ ${values.length-4} additional series`,value:'',color:'#bedde5'});
+   }else items.push({label:'No finite signal value at this coordinate',value:'',color:'#f2c39c'});
+  }
+  const hostRect=st.host.getBoundingClientRect();const cx=rect.left+px/d.w*rect.width,cy=rect.top+py/d.h*rect.height;
+  const xlocal=cx-hostRect.left,ylocal=cy-hostRect.top;
+  const minX=rect.left+pad.l/d.w*rect.width-hostRect.left,maxX=rect.right-pad.r/d.w*rect.width-hostRect.left;
+  const minY=rect.top+pad.t/d.h*rect.height-hostRect.top,maxY=rect.bottom-pad.b/d.h*rect.height-hostRect.top;
+  st.v.style.cssText=`display:block;left:${xlocal}px;top:${minY}px;height:${maxY-minY}px`;
+  const showMarker=marker&&Number.isFinite(marker.y);
+  if(showMarker){const q=d.toPixel?d.toPixel(marker.x,marker.y):{x:pad.l+(marker.x-d.xmin)/(d.xmax-d.xmin)*(d.w-pad.l-pad.r),y:pad.t+(d.ymax-marker.y)/(d.ymax-d.ymin)*(d.h-pad.t-pad.b)};
+   const qx=rect.left+q.x/d.w*rect.width-hostRect.left,qy=rect.top+q.y/d.h*rect.height-hostRect.top;
+   st.h.style.cssText=`display:block;left:${minX}px;top:${qy}px;width:${maxX-minX}px`;
+   st.dot.style.cssText=`display:block;left:${qx}px;top:${qy}px`;
+  }else{st.h.style.display='none';st.dot.style.display='none'}
+  st.tip.replaceChildren();
+  const title=el('div','ss-hover-title',st.tip);title.textContent=d.plane?'Complex-plane probe / 복소평면 좌표':'Graph probe / 그래프 값 읽기';
+  const coord=el('div','ss-hover-coord',st.tip);coord.textContent=`${d.xlabel||'x'} = ${fmt(x)}   |   ${d.ylabel||'y'} (cursor) = ${fmt(y)}`;
+  for(const it of items){const line=el('div','ss-hover-line'+(it.primary?' primary':''),st.tip);const sw=el('i','ss-hover-swatch',line);sw.style.setProperty('--ss-line',it.color);const text=el('span','',line);const name=el('b','',text);name.textContent=it.label;const val=el('span','',text);val.textContent=(it.value?' = '+it.value:'')}
+  const note=el('div','ss-hover-note',st.tip);note.textContent=d.plane?'복소평면 좌표는 위치값이며, pole/zero는 가까운 경우에만 표시합니다.':items.some(x=>x.method&&x.method!=='f(x) 직접 계산')?'fn(x): 수식 직접 계산 · sample: 실제 계산 표본 (보간하지 않음)':'수식 함수가 제공된 경우 커서 x에서 직접 계산한 값입니다.';
+  st.tip.style.display='block';
+  // Measure after writing and keep the tooltip inside the card.
+  const tw=st.tip.offsetWidth||230,th=st.tip.offsetHeight||90;
+  const hostW=st.host.clientWidth||hostRect.width,hostH=st.host.clientHeight||hostRect.height;
+  const tx=clamp(xlocal+15,5,Math.max(5,hostW-tw-5));
+  const ty=clamp(ylocal+13,5,Math.max(5,hostH-th-5));
+  st.tip.style.left=tx+'px';st.tip.style.top=ty+'px';
+  st.lastX=cx;st.lastType=pointerType;
+ }
+ window.ssHoverBind=bind;
+ window.ssHoverQueue=d=>{queued.push(d)};
+ window.ssHoverResetQueue=()=>{queued=[]};
+ window.ssHoverAttachQueued=()=>{const cards=[...document.querySelectorAll('#plots .plot-card')];const all=queued.splice(0);for(let i=0;i<Math.min(cards.length,all.length);i++){const svg=cards[i].querySelector('svg');if(svg)bind(svg,all[i])}};
+ window.__ssHoverDebug=()=>({count:document.querySelectorAll('.ss-hover-target').length,visible:document.querySelectorAll('.ss-hover-tip').length});
+})();
+</script>
+<script>
+function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
+ const el=document.getElementById(id);if(!el)return;
+ const host=el.closest('.plotbox,.figure,.compare-card');if(!host)return;
+ let key=host.querySelector('.axis-key');if(!key){key=document.createElement('div');key.className='axis-key';key.setAttribute('aria-label','Graph axis information');const legend=host.querySelector('.legend');if(legend)host.insertBefore(key,legend);else host.appendChild(key)}
+ const fmtAxis=v=>{if(!Number.isFinite(v))return String(v);const a=Math.abs(v);return (a>=100?Number(v.toFixed(0)):a>=10?Number(v.toFixed(1)):Number(v.toFixed(2))).toString()};
+ key.textContent=`X-axis: ${xlabel} [${fmtAxis(x0)} … ${fmtAxis(x1)}]   |   Y-axis: ${ylabel} [${fmtAxis(y0)} … ${fmtAxis(y1)}]`;
+}
+</script><meta name="ss-studio-version" content="Integrated Rev1">
+<link rel="stylesheet" href="./assets/design-system.css?v=1"><link rel="stylesheet" href="./assets/ss-lab-theme.css?v=5"><link rel="stylesheet" href="./assets/els-theme-v2.css?v=6"><link rel="stylesheet" href="./assets/ss-trace-palette.css?v=4"><link rel="stylesheet" href="./assets/els-typography-standard.css?v=1"><link rel="stylesheet" href="./assets/ss-common-header.css?v=2"><link rel="stylesheet" href="./assets/ss-readable-themes.css?v=1"><link rel="stylesheet" href="./assets/ss-formula-standard.css?v=3"><link rel="stylesheet" href="./assets/ss-foundations-standard.css?v=1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.js"></script><script defer src="./assets/els-theme-v2.js?v=20261121b"></script><script defer src="./assets/ss-common-header.js?v=4"></script><script defer src="./assets/ss-math-core.js?v=1"></script><script defer src="./assets/ss-foundations-standard.js?v=1"></script></head>
+<body><header class="ss-common-header ss-foundations-header" aria-label="Engineering Learning Studio navigation"><a class="ss-common-home" href="./index.html#overview">← Studio</a><details class="ss-common-menu"><summary class="ss-common-title">Signals &amp; Systems · Chapter 3 · Fourier Series <span aria-hidden="true">⌄</span></summary><nav class="ss-common-links" aria-label="Choose Chapter"></nav></details><div class="ss-common-actions"><label>Theme <select id="ss-foundations-theme" data-els-theme-picker aria-label="Theme"></select></label></div></header><a id="studio-back" href="../index.html#chapter=3" aria-label="Return to integrated Visual Lab">← Learning Studio</a><script>try{if(window.self!==window.top){document.getElementById("studio-back").hidden=true;}}catch(e){}</script><div class="app" id="app"></div><script>'use strict';
+// Standalone visual learning lab. No external libraries, network calls, or data access.
+const PI=Math.PI, TAU=2*Math.PI;
+const C={teal:'#0e8491',coral:'#ef7055',ink:'#193e51',gold:'#d9a138',gray:'#a4b5c2',muted:'#70889a',grid:'#e5edf1',light:'#b0dfe0',purple:'#7c67c4'};
+const $=id=>document.getElementById(id);
+const sinc=v=>Math.abs(v)<1e-10?1:Math.sin(v)/v;
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+const sample=(a,b,n,f)=>Array.from({length:n+1},(_,i)=>{const x=a+(b-a)*i/n;return [x,f(x)]});
+const clean=(n,d=3)=>Number.isFinite(n)?Number(n.toFixed(d)).toString():'-';
+const fmt=v=>{if(Math.abs(v)<1e-10)return'0';const a=Math.abs(v);return Number(v.toFixed(a>=10?1:a>=1?2: a>=.1?3:4)).toString()};
+function niceStep(span,target=5){const raw=Math.max(1e-12,span/Math.max(2,target)),p=Math.pow(10,Math.floor(Math.log10(raw))),s=raw/p;return (s<=1?1:s<=2?2:s<=2.5?2.5:s<=5?5:10)*p}
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+const lab={active:0,state:{},timer:null,guideSteps:{}};
+function ssGraphPalette(){const s=getComputedStyle(document.documentElement);const t=document.documentElement.dataset.elsTheme||'neutral-dark';const dark=['neutral-dark','warm-dark','navy-dark'].includes(t);const val=(key,f)=>s.getPropertyValue(key).trim()||f;return{bg:val('--els-surface',dark?'#1c1c1c':'#ffffff'),text:val('--els-ink',dark?'#f0f0ed':'#1b2730'),muted:val('--els-muted',dark?'#c1c5c1':'#455663'),grid:dark?'#485650':'#c9d3db',axis:dark?'#d7e3dc':'#344f62'};}
+const ssPlot=ssGraphPalette();function paintGraph(id,opt){const ssPlot=ssGraphPalette();const canvas=$(id);if(!canvas)return;const r=canvas.getBoundingClientRect(),w=Math.max(250,r.width),h=Math.max(210,r.height),d=Math.min(2,window.devicePixelRatio||1);canvas.width=Math.round(w*d);canvas.height=Math.round(h*d);const g=canvas.getContext('2d');g.setTransform(d,0,0,d,0,0);g.clearRect(0,0,w,h);
+ const xr=opt.x||[-4,4],yr=opt.y||[-2,2];const [x0,x1]=xr,[y0,y1]=yr;const m={l:58,r:17,t:18,b:47},W=w-m.l-m.r,H=h-m.t-m.b;const X=v=>m.l+(v-x0)*W/(x1-x0),Y=v=>m.t+(y1-v)*H/(y1-y0);g.fillStyle=ssPlot.bg;g.fillRect(0,0,w,h);
+ // Highlight reference intervals without changing data or axis scale.
+ for(const band of opt.bands||[]){const a=Math.max(x0,Math.min(x1,band.x0)),b=Math.max(x0,Math.min(x1,band.x1));if(b>a){g.fillStyle=band.color||'rgba(14,132,145,.085)';g.fillRect(X(a),m.t,X(b)-X(a),H)}}
+ const yt=opt.ystep||niceStep(y1-y0,5),xt=opt.xstep||niceStep(x1-x0,6);g.textBaseline='middle';g.font='11px system-ui';
+ for(let i=Math.ceil((y0-1e-10)/yt);i<=Math.floor((y1+1e-10)/yt);i++){const z=i*yt,y=Y(z);g.strokeStyle=ssPlot.grid;g.lineWidth=1;g.beginPath();g.moveTo(m.l,y);g.lineTo(w-m.r,y);g.stroke();g.fillStyle=ssPlot.muted;g.textAlign='right';g.fillText(fmt(z),m.l-9,y)}
+ for(let i=Math.ceil((x0-1e-10)/xt);i<=Math.floor((x1+1e-10)/xt);i++){const z=i*xt,x=X(z);g.strokeStyle=ssPlot.grid;g.lineWidth=1;g.beginPath();g.moveTo(x,m.t);g.lineTo(x,h-m.b);g.stroke();g.fillStyle=ssPlot.muted;g.textAlign='center';g.textBaseline='top';g.fillText(fmt(z),x,h-m.b+8)}
+ g.textBaseline='middle';g.strokeStyle=ssPlot.grid;g.lineWidth=1;g.strokeRect(m.l,m.t,W,H);if(x0<=0&&x1>=0){g.strokeStyle=ssPlot.axis;g.lineWidth=1.6;g.beginPath();g.moveTo(X(0),m.t);g.lineTo(X(0),h-m.b);g.stroke()}if(y0<=0&&y1>=0){g.strokeStyle=ssPlot.axis;g.lineWidth=1.6;g.beginPath();g.moveTo(m.l,Y(0));g.lineTo(w-m.r,Y(0));g.stroke()}if(x0<=0&&x1>=0&&y0<=0&&y1>=0){g.fillStyle=ssPlot.text;g.beginPath();g.arc(X(0),Y(0),3.6,0,TAU);g.fill()}
+ g.font='11px system-ui';g.fillStyle=ssPlot.text;g.textAlign='center';g.fillText(opt.xlabel||'t',m.l+W/2,h-10);g.save();g.translate(15,m.t+H/2);g.rotate(-PI/2);g.fillText(opt.ylabel||'x(t)',0,0);g.restore();
+ g.save();g.beginPath();g.rect(m.l+1,m.t+1,W-2,H-2);g.clip();
+ for(const s of opt.series||[]){const col=ssTraceColor(s.color||C.teal);g.strokeStyle=col;g.fillStyle=col;g.lineWidth=s.width||2.3;g.setLineDash(s.dash?[6,4]:[]);const data=s.data||[];
+ if(s.type==='stem'){for(const [xx,yy]of data){if(!Number.isFinite(yy))continue;g.beginPath();g.moveTo(X(xx),Y(clamp(0,y0,y1)));g.lineTo(X(xx),Y(yy));g.stroke();g.beginPath();g.arc(X(xx),Y(yy),s.radius||2.6,0,TAU);g.fill()}}
+ else {g.beginPath();let started=false;for(const [xx,yy]of data){if(!Number.isFinite(yy)||!Number.isFinite(xx)){started=false;continue}if(!started){g.moveTo(X(xx),Y(yy));started=true}else g.lineTo(X(xx),Y(yy))}g.stroke()}
+ g.setLineDash([])}
+ for(const p of opt.points||[]){g.beginPath();g.fillStyle=ssTraceColor(p.color||C.coral);g.arc(X(p.x),Y(p.y),p.r||4,0,TAU);g.fill()}
+ for(const v of opt.vlines||[]){g.strokeStyle=ssTraceColor(v.color||C.coral);g.lineWidth=1.8;g.setLineDash([5,4]);g.beginPath();g.moveTo(X(v.x),Y(y0));g.lineTo(X(v.x),Y(y1));g.stroke();g.setLineDash([])}
+ g.restore();
+ const el=$('legend'+id.replace('plot',''));if(el){const items=(opt.series||[]).filter(s=>s.label).map(s=>`<span class="legend-item"><span class="legend-chip ${s.type==='stem'?'stem':s.dash?'dashed':'line'}" style="--lc:${ssTraceColor(s.color||C.teal)}"></span>${esc(s.label)}</span>`);for(const v of opt.vlines||[])if(v.label)items.push(`<span class="legend-item"><span class="legend-chip vline" style="--lc:${ssTraceColor(v.color||C.coral)}"></span>${esc(v.label)}</span>`);el.innerHTML=items.join('');el.style.display=items.length?'flex':'none'}
+ const note=$('axisnote'+id.replace('plot',''));if(note){note.textContent=opt.axisnote||'';note.style.display=opt.axisnote?'block':'none'}ssAxisKey(id,opt.xlabel||'t (s)',opt.ylabel||'amplitude',x0,x1,y0,y1);ssHoverBind(canvas,{kind:'cart',w,h,pad:m,xmin:x0,xmax:x1,ymin:y0,ymax:y1,xlabel:opt.xlabel||'t (s)',ylabel:opt.ylabel||'amplitude',series:(opt.series||[]).map(s=>({label:s.label,color:ssTraceColor(s.color||C.teal),discrete:s.type==='stem',points:s.data||[]}))});
+}
+function setMetrics(items){for(let i=0;i<3;i++){const v=items[i]||['-',''];const x=$('met'+i),d=$('metd'+i);if(x)x.textContent=v[0];if(d)d.textContent=v[1]}}
+function setInsight(text){if($('insight'))$('insight').innerHTML=text}
+function setFormula(text){if($('formula'))$('formula').innerHTML=text}
+function renderShell(){const ln=MODULES.map((mod,i)=>`<button class="${i===lab.active?'active':''}" data-nav="${i}" aria-current="${i===lab.active?'page':'false'}"><span class="num">${String(i+1).padStart(2,'0')}</span><span class="nav-name">${mod.short}</span></button>`).join('');$('app').innerHTML=`<aside class="sidebar"><div class="brand"><div class="over">SIGNALS &amp; SYSTEMS / CHAPTER ${CHAPTER}</div><h1>${TOPIC} Visual Lab</h1><p>Explore signals and systems / 신호와 시스템을 직접 탐구하세요</p></div><div class="mobile-bar">Choose a topic / 실습 주제를 선택하세요</div><div class="side-label">LEARNING EXPERIMENTS / 학습 주제</div><nav class="nav" aria-label="Experiments">${ln}</nav><div class="side-foot"><strong>Learning sequence / 학습 순서</strong>1. Make a prediction · 결과 예측<br>2. Change one variable · 변수 변경<br>3. Observe and compare · 관찰·비교<br>4. Explain what you learned · 배운 내용 설명</div></aside><main class="main"><div class="topline"><span class="breadcrumb">CHAPTER ${CHAPTER} / INTERACTIVE CONCEPTS</span><span class="tag">No install / Offline ready</span></div><div id="content"></div><footer class="footer"><span>Core concepts and interactive models for Signals &amp; Systems</span><span>All computations run locally in this browser / 오프라인 실행</span></footer></main>`;document.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>{lab.active=Number(b.dataset.nav);if(lab.timer){clearInterval(lab.timer);lab.timer=null}renderShell();renderModule()}))}
+function ctl(c,s){const v=s[c.key];if(c.type==='select'){return `<div class="ctrl"><label for="ctl_${c.key}">${c.label}</label><select id="ctl_${c.key}" data-key="${c.key}">${c.options.map(o=>`<option value="${esc(o[0])}" ${String(v)===String(o[0])?'selected':''}>${esc(o[1])}</option>`).join('')}</select></div>`}return `<div class="ctrl"><label for="ctl_${c.key}">${c.label}<output id="out_${c.key}">${fmt(v)} ${c.unit||''}</output></label><input id="ctl_${c.key}" data-key="${c.key}" type="range" min="${c.min}" max="${c.max}" step="${c.step}" value="${v}"><div class="ends"><span>${c.min}${c.unit||''}</span><span>${c.max}${c.unit||''}</span></div></div>`}
+function renderModule(){stopGuidePlay();const m=MODULES[lab.active];const s=lab.state[m.id];$('content').innerHTML=`<header class="heading"><div class="overlabel">EXPERIMENT ${String(lab.active+1).padStart(2,'0')} / ${m.section}</div><h2>${m.title}</h2><p>${m.desc}</p></header><div class="hero-callout"><div class="formula" id="formula">${m.formula}</div><div class="hint">Fixed axes → Change one variable → Compare the graphs</div></div><div class="experiment"><aside class="controls"><div class="overlabel">EXPLORE / 실험 변수</div><h3>Change one thing</h3><div class="control-grid">${m.controls.map(c=>ctl(c,s)).join('')}</div><div class="btnrow"><button id="reset" class="btn" type="button">Reset / 초기화</button><button id="play" class="btn primary" type="button">Auto explore / 자동 탐색</button></div><p class="notice">Predict first, then change one control and explain the result. / 먼저 예측한 뒤 하나의 변수를 바꾸고 결과를 설명해 보세요.</p></aside><div class="body-col"><div class="charts ${m.plots.length===3?'three':''}">${m.plots.map((x,i)=>`<section class="figure"><h3>${x[0]}</h3><p>${x[1]}</p><canvas id="plot${i}" role="img" aria-label="${esc(x[0])}" width="600" height="270"></canvas><div class="legend" id="legend${i}"></div><div class="axis-note" id="axisnote${i}"></div></section>`).join('')}</div><div class="metrics">${[0,1,2].map(i=>`<div class="metric"><div class="k">${m.metrics[i]}</div><div class="v" id="met${i}">-</div><div class="detail" id="metd${i}"></div></div>`).join('')}</div><section id="derivationPanel" class="derivation-panel" aria-label="Guided derivation"></section><section id="readingPanel" class="reading-panel" aria-label="Graph interpretation"></section><section class="learning"><h3>Key insight / 핵심 이해</h3><p id="insight"></p></section><section class="question"><div class="overlabel">CHECK YOURSELF / 스스로 확인</div><h3>${m.question}</h3><p>${m.questionKo}</p><details><summary>Reveal explanation / 해설 보기</summary><div class="answer">${m.answer}</div></details></section></div></div>`;
+ document.querySelectorAll('[data-key]').forEach(el=>el.addEventListener('input',()=>{const v=el.value;const c=m.controls.find(c=>c.key===el.dataset.key);s[c.key]=c.type==='select'?v:Number(v);const out=$('out_'+c.key);if(out)out.textContent=fmt(s[c.key])+' '+(c.unit||'');updateModule()}));
+ $('reset').onclick=()=>{if(lab.timer){clearInterval(lab.timer);lab.timer=null}$('play').textContent='Auto explore / 자동 탐색';lab.state[m.id]=structuredClone(m.defaults);renderModule()};
+ $('play').onclick=()=>{if(lab.timer){clearInterval(lab.timer);lab.timer=null;$('play').textContent='Auto explore / 자동 탐색';return}const c=m.controls.find(c=>c.type==='range');if(!c)return;$('play').textContent='Pause / 일시 정지';lab.timer=setInterval(()=>{let n=Number(s[c.key])+Number(c.step);if(n>Number(c.max)+1e-8)n=Number(c.min);s[c.key]=Number(n.toFixed(6));const e=$('ctl_'+c.key);if(e)e.value=s[c.key];const o=$('out_'+c.key);if(o)o.textContent=fmt(s[c.key])+' '+(c.unit||'');updateModule()},240)};
+ updateModule()}
+function updateModule(){const m=MODULES[lab.active];m.draw(lab.state[m.id]);if(typeof renderGuidedLearning==="function")renderGuidedLearning(m,lab.state[m.id]);window.__visualLab={chapter:CHAPTER,active:m.id,state:structuredClone(lab.state),healthy:true}}
+function startLab(){for(const m of MODULES)lab.state[m.id]=structuredClone(m.defaults);renderShell();renderModule();window.addEventListener('resize',()=>updateModule())}
+
+const CHAPTER='03', TOPIC='Fourier Series', SOURCE_NOTE='301_Ch3_Fourier_Series_Rev1f_Sol';
+const harmonic=(t,T)=>TAU*t/T;
+const rectTrain=(t,T,tau,offset=0)=>Math.abs((((t-offset+T/2)%T)+T)%T-T/2)<=tau/2?1:0;
+const fsRect=(k,T,tau)=>tau/T*sinc(PI*k*tau/T);
+const squarePartial=(t,M)=>{let y=0;for(let j=0;j<M;j++){const k=2*j+1;y+=Math.sin(k*PI*t)/k}return 4*y/PI};
+const squareRef=t=>Math.abs(Math.sin(PI*t))<1e-9?0:Math.sign(Math.sin(PI*t));
+const MODULES=[
+{id:'harm',short:'Harmonics / 조화 성분',section:'§3.3',title:'Harmonically Related Sinusoids / 조화 정현파',desc:'One fundamental angular frequency generates integer-multiple harmonics. / 기본 각주파수의 정수배로 신호를 구성합니다.',formula:'x(t)=cos(ω<sub>0</sub>t)+A cos(2ω<sub>0</sub>t+φ), &nbsp; ω<sub>0</sub>=2π/T',defaults:{T:4,A:.65,phi:0},controls:[{key:'T',label:'Fundamental period T / 기본 주기',type:'range',min:2,max:8,step:.5,unit:' s'},{key:'A',label:'2nd harmonic amplitude A / 2차 진폭',type:'range',min:0,max:1.5,step:.05},{key:'phi',label:'Phase φ / 위상',type:'range',min:-180,max:180,step:15,unit:'°'}],plots:[['Time waveform / 시간 파형','Sum of the 1st and 2nd harmonics'],['Line spectrum |aₖ| / 선 스펙트럼','Complex Fourier coefficients, k = ±1, ±2']],metrics:['Fundamental f₀ / 기본 주파수','Second harmonic |a₂|','Period of the sum'],question:'Why is a₂ half the real cosine amplitude A?',questionKo:'실수 cosine의 진폭이 A인데 복소 푸리에 계수 크기는 왜 A/2인가요?',answer:'Euler relation: A cos(2ω₀t+φ) = (A/2)e^{jφ}e^{j2ω₀t}+(A/2)e^{-jφ}e^{-j2ω₀t}. The +2 and −2 coefficients form a conjugate pair. / 실수 cosine 하나는 복소 지수 두 항으로 구성됩니다.',draw(s){const T=s.T,w=TAU/T,ph=s.phi*PI/180;const a=sample(-12,12,1200,t=>Math.cos(w*t)),b=sample(-12,12,1200,t=>s.A*Math.cos(2*w*t+ph)),y=sample(-12,12,1200,t=>Math.cos(w*t)+s.A*Math.cos(2*w*t+ph));paintGraph('plot0',{x:[-12,12],y:[-2.8,2.8],xstep:4,axisnote:'Fixed time view: −12 to +12 s. Change T to see the number of cycles change. / 주기 변경에도 시간축은 고정됩니다.',vlines:[{x:T,color:C.gold,label:'next period t=T'}],xlabel:'time t (s)',ylabel:'amplitude',series:[{data:a,color:C.gray,dash:true,width:1.3,label:'1st harmonic'},{data:b,color:C.gold,dash:true,width:1.5,label:'2nd harmonic'},{data:y,color:C.teal,width:2.6,label:'sum x(t)'}]});const sk=[[-2,s.A/2],[-1,.5],[0,0],[1,.5],[2,s.A/2]];paintGraph('plot1',{x:[-3,3],y:[0,1],xstep:1,xlabel:'harmonic index k',ylabel:'|aₖ|',series:[{data:sk,color:C.coral,type:'stem',label:'complex |aₖ|'}]});setMetrics([[`${fmt(1/T)} Hz`,'f₀ = 1/T'],[fmt(s.A/2),'a₂ = (A/2)e^{jφ}'],[`${fmt(T)} s`,'The first harmonic fixes the fundamental period']]);setInsight('Each harmonic frequency is kω₀; negative and positive coefficients form conjugate pairs for real signals. / 실수 신호에서 ±k 계수는 복소켤레 쌍입니다.')}} ,
+{id:'rectfs',short:'Rectangular Pulse Train / 주기 펄스',section:'§§3.3–3.4',title:'CTFS of a Periodic Pulse / 주기 펄스의 CTFS',desc:'Adjust duty cycle and inspect the signed Fourier-series coefficients aₖ. / Duty cycle에 따른 계수의 부호와 영점을 관찰하세요.',formula:'a<sub>k</sub>=(τ/T) sinc(kπτ/T), &nbsp; sinc(x)=sin(x)/x',defaults:{T:6,tau:2,K:12},controls:[{key:'T',label:'Period T / 반복 주기',type:'range',min:4,max:10,step:1,unit:' s'},{key:'tau',label:'Pulse width τ / 펄스 폭',type:'range',min:.5,max:3.5,step:.5,unit:' s'},{key:'K',label:'Displayed harmonic range K',type:'range',min:5,max:20,step:1}],plots:[['Periodic pulse train / 주기 펄스열','Unit-height, origin-centered pulses'],['Signed coefficients aₖ / 부호 있는 계수','Signed real-even spectrum; negative stems matter']],metrics:['DC coefficient a₀','Duty cycle τ/T','First zero (when integer k exists)'],question:'What happens to a₀ as the pulse width increases?',questionKo:'펄스의 높이를 일정하게 유지하고 폭 τ를 늘리면 DC 계수는 어떻게 변할까요?',answer:'a₀ equals the average signal value over one period: a₀ = τ/T. It grows with duty cycle. At integer k where kτ/T is a nonzero integer, aₖ=0. / 평균값이 증가하고 특정 고조파가 상쇄됩니다.',draw(s){const tau=Math.min(s.tau,s.T-.1),T=s.T,K=s.K;paintGraph('plot0',{x:[-14,14],y:[-.15,1.3],xstep:4,axisnote:'Fixed time view: −14 to +14 s; dashed marks show one period. / 동일 축에서 반복 주기를 비교하세요.',vlines:[{x:0,color:C.gray,label:'pulse center t=0'},{x:T,color:C.gold,label:'t=T'}],xlabel:'time t (s)',ylabel:'x(t)',series:[{data:sample(-14,14,1400,t=>rectTrain(t,T,tau)),color:C.teal,label:'periodic rectangle'}]});let pts=[];for(let k=-K;k<=K;k++)pts.push([k,fsRect(k,T,tau)]);const d=tau/T;paintGraph('plot1',{x:[-21,21],y:[-.45,.95],xstep:5,ystep:.2,axisnote:'Fixed harmonic-index view: −21 to +21. K changes the number of displayed coefficients, not zoom. / K를 늘리면 선이 추가됩니다.',xlabel:'harmonic index k',ylabel:'aₖ (signed)',series:[{data:pts,color:C.coral,type:'stem',label:'signed aₖ'}]});let first=Number.isInteger(T/tau)?`${fmt(T/tau)}`:'not at an integer k';setMetrics([[fmt(d),'average over T'],[`${fmt(100*d)}%`,'τ/T'],[first,'k = T/τ, if an integer']]);setInsight('Unlike a magnitude spectrum, the signed coefficient diagram retains negative signs. The envelope narrows in harmonic index as τ/T increases. / 부호 있는 계수와 크기 스펙트럼을 혼동하지 마세요.')}} ,
+{id:'gibbs',short:'Partial Sums & Gibbs / 부분합',section:'§3.4',title:'Fourier Partial Sums and Gibbs / 부분합과 깁스 현상',desc:'Increase odd harmonics to sharpen edges and inspect persistent overshoot. / 조화 항을 늘려 불연속점 주변을 관찰하세요.',formula:'S<sub>M</sub>(t)=(4/π) Σ<sub>n=0</sub><sup>M−1</sup> sin[(2n+1)πt]/(2n+1)',defaults:{M:8},controls:[{key:'M',label:'Number of odd harmonics M / 홀수 조화 수',type:'range',min:1,max:40,step:1}],plots:[['Square-wave approximation / 구형파 근사','Reference ±1 versus Fourier partial sum'],['Zoom at a jump / 불연속점 확대','Gibbs overshoot near t = 0']],metrics:['Maximum around the positive step','Overshoot / jump height','Value at jump t=0'],question:'Does the Gibbs overshoot vanish as M increases?',questionKo:'조화 항을 계속 늘리면 Gibbs overshoot의 높이가 0으로 줄어들까요?',answer:'No. The overshoot approaches about 8.949% of the jump height (jump=2, peak≈1.17898); its width shrinks. Exactly at the jump, the partial sum converges to the midpoint 0. / overshoot의 폭은 좁아져도 상대적인 높이는 남습니다.',draw(s){const M=s.M,ref=sample(-1.05,1.05,1300,squareRef),sum=sample(-1.05,1.05,1300,t=>squarePartial(t,M));paintGraph('plot0',{x:[-1.05,1.05],y:[-1.6,1.6],axisnote:'Fixed overview: −1.05 to +1.05. The jump location does not move as M changes. / 불연속점 위치를 비교하세요.',xlabel:'time t / period = 2',ylabel:'amplitude',series:[{data:ref,color:C.gray,dash:true,width:1.5,label:'ideal square wave'},{data:sum,color:C.teal,width:2.4,label:'partial sum Sₘ(t)'}]});const small=sample(-.4,.4,1200,t=>squarePartial(t,M));const ideal=sample(-.4,.4,1200,squareRef);paintGraph('plot1',{x:[-.4,.4],y:[-1.55,1.55],axisnote:'Fixed zoom: −0.4 to +0.4. Notice overshoot becomes narrower, not necessarily lower. / overshoot 폭을 관찰하세요.',xlabel:'time near the jump',ylabel:'amplitude',series:[{data:ideal,color:C.gray,dash:true,width:1.4,label:'reference'},{data:small,color:C.coral,width:2.5,label:'Sₘ(t)'}]});let peak=-Infinity;for(let i=0;i<=2000;i++){const t=i*.35/2000;peak=Math.max(peak,squarePartial(t,M))}setMetrics([[fmt(peak),'measured in 0≤t≤0.35'],[`${fmt(Math.max(0,peak-1)*50)}%`,'(peak − 1) / 2 × 100; jump = 2'],['0','midpoint of −1 and +1']]);setInsight('Partial sums minimize mean-square error over a period, but a jump produces Gibbs overshoot. The peak tends toward 1.17898 for this ±1 square wave. / 부분합은 평균제곱 오차를 줄이지만 불연속점 주변 overshoot는 남습니다.')}} ,
+{id:'shift',short:'Time Shift & Phase / 시간 이동',section:'§3.5',title:'Time Shift Changes Phase / 시간 이동과 위상',desc:'Move the pulse train without altering the coefficient magnitudes. / 시간 이동은 계수 크기가 아니라 위상을 바꿉니다.',formula:'x(t−t<sub>0</sub>) ↔ b<sub>k</sub> = a<sub>k</sub> e<sup>−jkω<sub>0</sub>t<sub>0</sub></sup>',defaults:{T:6,t0:1.5},controls:[{key:'T',label:'Period T / 주기',type:'range',min:4,max:10,step:1,unit:' s'},{key:'t0',label:'Time shift t₀ / 이동',type:'range',min:-3,max:3,step:.25,unit:' s'}],plots:[['Shifted pulse train / 이동한 파형','Gray reference; teal shifted pulse'],['Phase contribution / 이동에 따른 위상','−kω₀t₀: unwrapped additional phase']],metrics:['Shifted DC coefficient','Magnitude change','Slope of phase versus k'],question:'Can the magnitude spectrum alone tell whether the signal was delayed?',questionKo:'크기 스펙트럼만 보고 시간 이동이 있었는지 판단할 수 있나요?',answer:'No. |bₖ|=|aₖ|, while the shift contributes −kω₀t₀ to the phase. If an aₖ is negative, its own phase adds ±π; the graph shows only the additional phase caused by delay. / 이동으로 추가된 위상만 표시합니다.',draw(s){const T=s.T,tau=T/3,kk=Array.from({length:13},(_,i)=>i-6);paintGraph('plot0',{x:[-14,14],y:[-.15,1.3],xstep:4,axisnote:'Fixed time view: −14 to +14 s. The shifted waveform moves along this axis. / 이동량을 동일 시간축에서 비교하세요.',vlines:[{x:0,color:C.gray,label:'original center'},{x:s.t0,color:C.gold,label:'shift t₀'}],xlabel:'time t (s)',ylabel:'x(t)',series:[{data:sample(-14,14,1000,t=>rectTrain(t,T,tau)),color:C.gray,dash:true,label:'original'},{data:sample(-14,14,1000,t=>rectTrain(t,T,tau,s.t0)),color:C.teal,label:'shifted'}]});paintGraph('plot1',{x:[-6.5,6.5],y:[-32,32],xstep:2,ystep:8,axisnote:'Fixed phase scale: −32 to +32 rad. Slope depends on t₀/T. / 위상 기울기 변화를 비교하세요.',xlabel:'harmonic index k',ylabel:'Δphase (rad)',series:[{data:kk.map(k=>[k,-k*TAU*s.t0/T]),color:C.coral,type:'stem',label:'delay contribution'}]});setMetrics([[fmt(tau/T),'a₀ unchanged'],['0','|bₖ|−|aₖ|'],[`${fmt(-TAU*s.t0/T)} rad/k`,'−ω₀t₀']]);setInsight('Time shift multiplies each coefficient by a unit-magnitude phasor. / 지연은 복소 계수의 회전이며 크기 스펙트럼을 바꾸지 않습니다.')}} ,
+{id:'dtfs',short:'DTFS & Periodicity / 이산 급수',section:'§§3.6–3.7',title:'Discrete-Time Fourier Series / 이산시간 푸리에 급수',desc:'Compare a periodic N-point sequence with the N unique DTFS coefficients. / 주기적 수열과 N개 고유 계수를 비교합니다.',formula:'a<sub>k</sub>=(1/N) Σ<sub>n=0</sub><sup>N−1</sup> x[n]e<sup>−j2πkn/N</sup>, &nbsp; a<sub>k+N</sub>=a<sub>k</sub>',defaults:{N:'8',L:3},controls:[{key:'N',label:'Fundamental period N / 주기',type:'select',options:[['8','8'],['10','10'],['12','12'],['16','16']]},{key:'L',label:'Nonzero samples per period L / 펄스 길이',type:'range',min:1,max:6,step:1}],plots:[['Periodic DT sequence / 이산 주기 신호','x[n] = 1 for n mod N < L'],['DTFS line spectrum |aₖ| / 계수 크기','Periodic in harmonic index k with period N']],metrics:['DC coefficient a₀','Unique DTFS coefficients','Coefficient periodicity'],question:'Why are there only N distinct DTFS coefficients?',questionKo:'이산시간에서는 왜 DTFS 계수 종류가 N개뿐인가요?',answer:'e^{-j2π(k+N)n/N}=e^{-j2πkn/N} for integer n. Thus a_{k+N}=aₖ; k=0,...,N−1 is a complete unique set. / DTFS 계수는 조화 인덱스에서 N 주기입니다.',draw(s){const N=Number(s.N),L=Math.min(s.L,N),seq=[];for(let n=-18;n<=34;n++)seq.push([n,((n%N)+N)%N<L?1:0]);paintGraph('plot0',{x:[-18,34],y:[-.15,1.35],xstep:8,ystep:.25,bands:[{x0:0,x1:N,color:'rgba(14,132,145,.08)'}],vlines:[{x:0,color:C.gold,label:'n=0'},{x:N,color:C.gold,label:'n=N; next period'}],axisnote:`Fixed n-axis: −18 to +34. Shaded 0 ≤ n < ${N} is one complete period; the next starts at n=${N}. / 한 주기의 경계를 확인하세요.`,xlabel:'sample index n',ylabel:'x[n]',series:[{data:seq,color:C.teal,type:'stem',label:'periodic sequence'}]});const coeff=[];for(let k=-18;k<=34;k++){let re=0,im=0;for(let n=0;n<L;n++){re+=Math.cos(-TAU*k*n/N);im+=Math.sin(-TAU*k*n/N)}coeff.push([k,Math.hypot(re,im)/N])}paintGraph('plot1',{x:[-18,34],y:[0,.9],xstep:8,ystep:.2,bands:[{x0:0,x1:N,color:'rgba(14,132,145,.10)'}],vlines:[{x:0,color:C.gold,label:'k=0'},{x:N,color:C.purple,label:'k=N; repeat'}],axisnote:`N=${N}: highlighted indices k=0,…,${N-1} are one complete set of N DTFS coefficients. At k=${N}, the pattern repeats (aₖ₊ᴺ=aₖ). / N개 계수와 반복 경계를 확인하세요.`,xlabel:'harmonic index k',ylabel:'|aₖ|',series:[{data:coeff,color:C.coral,type:'stem',label:'periodic coefficients'}]});setMetrics([[fmt(L/N),'mean x[n]'],[`${N}`,'k=0,...,N−1'],[`${N}`,'aₖ₊ᴺ=aₖ']]);setInsight(`The shaded k=0,…,${N-1} band shows one full set of N coefficient indices; k=${N} repeats k=0. The signals repeat every N samples in n and the DTFS coefficients repeat every N indices in k. / 강조된 영역은 N개 계수 인덱스이며, k=N에서 다시 반복합니다.`)}} ,
+{id:'filter',short:'Harmonic Filtering / 고조파 필터링',section:'§§3.8–3.10',title:'LTI Eigenfunctions and RC Filtering / 시스템 응답',desc:'A first-order RC lowpass attenuates and phase-shifts each harmonic independently. / 각 고조파가 독립적으로 감쇠하고 위상이 바뀝니다.',formula:'H(jω)=1/(1+jωτ), &nbsp; b<sub>k</sub>=H(jkω<sub>0</sub>)a<sub>k</sub>',defaults:{T:4,tau:.6},controls:[{key:'T',label:'Input period T / 주기',type:'range',min:2,max:8,step:.5,unit:' s'},{key:'tau',label:'Time constant τ / 시정수',type:'range',min:.1,max:2,step:.1,unit:' s'}],plots:[['Input vs output / 입력·출력 파형','x(t)=cos(ω₀t)+0.5cos(3ω₀t)'],['Magnitude spectrum / 고조파 크기','|aₖ| before and |bₖ| after lowpass']],metrics:['Fundamental gain |H(jω₀)|','Third-harmonic gain |H(j3ω₀)|','Cutoff angular frequency'],question:'Why does the output look smoother when τ increases?',questionKo:'RC 시정수 τ가 커지면 출력 파형이 부드러워지는 이유는 무엇인가요?',answer:'Higher-frequency harmonics (e.g., 3ω₀) are attenuated more strongly by |H(jω)|=1/√(1+(ωτ)²). Their phases also change. / 높은 조화 성분이 크게 감소하여 파형의 급격한 변동이 완화됩니다.',draw(s){const w=TAU/s.T,H=k=>{const a=k*w*s.tau;return [1/Math.hypot(1,a),-Math.atan(a)]};const y=t=>H(1)[0]*Math.cos(w*t+H(1)[1])+.5*H(3)[0]*Math.cos(3*w*t+H(3)[1]);paintGraph('plot0',{x:[-12,12],y:[-1.8,1.8],xstep:4,axisnote:'Fixed time view: −12 to +12 s; compare the number of oscillations and smoothing. / 주기를 바꾸어도 시간축은 일정합니다.',xlabel:'time t (s)',ylabel:'amplitude',series:[{data:sample(-12,12,1200,t=>Math.cos(w*t)+.5*Math.cos(3*w*t)),color:C.gray,dash:true,label:'input x(t)'},{data:sample(-12,12,1200,y),color:C.teal,label:'output y(t)'}]});const orig=[[-3,.25],[-1,.5],[0,0],[1,.5],[3,.25]],out=orig.map(([k,a])=>[k,a*H(k)[0]]);paintGraph('plot1',{x:[-4,4],y:[0,.65],xstep:1,xlabel:'harmonic index k',ylabel:'coefficient magnitude',series:[{data:orig,color:C.gray,type:'stem',label:'|aₖ| input'},{data:out,color:C.coral,type:'stem',label:'|bₖ| output'}]});setMetrics([[fmt(H(1)[0]),'k=1'],[fmt(H(3)[0]),'k=3'],[`${fmt(1/s.tau)} rad/s`,'ωc=1/τ']]);setInsight('For a stable LTI system, complex exponentials are eigenfunctions. Each spectral line is multiplied by H(jkω₀). / 컨벌루션을 직접 하지 않고도 주기 신호의 출력 성분을 예측할 수 있습니다.')}} ,
+{id:'midpoint',short:'Pointwise Convergence / 불연속점',section:'§3.4',title:'Value at a Jump / 불연속점의 수렴값',desc:'Changing one isolated sample in a CT function does not change its Fourier-series coefficients. / 한 점의 함수값 변경이 계수에 미치는 영향을 확인합니다.',formula:'S(0)=[x(0<sup>−</sup>)+x(0<sup>+</sup>)]/2 = 0, regardless of x(0)',defaults:{M:12,special:8},controls:[{key:'M',label:'Odd harmonic terms M / 항 수',type:'range',min:1,max:30,step:1},{key:'special',label:'Assigned x(0) / 원점의 지정값',type:'range',min:0,max:10,step:1}],plots:[['Point value versus side limits / 한 점의 값','Square wave near t=0, x(0) selected separately'],['Partial sum at a jump / 불연속점의 부분합','Fourier sum converges to the midpoint 0']],metrics:['Assigned x(0)','Midpoint of side limits','Fourier partial sum Sₘ(0)'],question:'Will changing x(0) from 0 to 10 change the Fourier coefficients?',questionKo:'불연속점 한 곳의 값 x(0)을 10으로 바꾸어도 Fourier 계수는 변하지 않나요?',answer:'No. Changing a function at a single time instant does not change the integral used in CTFS analysis. The partial sum at the jump converges to the midpoint 0 under the stated conditions. / 원래 함수값 x(0)과 Fourier 급수의 수렴값 S(0)은 다를 수 있습니다.',draw(s){const ref=sample(-.6,.6,500,t=>t===0?NaN:(t<0?-1:1)),partial=sample(-.5,.5,650,t=>squarePartial(t,s.M));paintGraph('plot0',{x:[-.6,.6],y:[-2,12],xstep:.2,ystep:2,axisnote:'Fixed axes: t=−0.6…+0.6 and y=−2…12. The assigned value changes only at t=0. / 한 점의 지정값만 바뀝니다.',xlabel:'time t',ylabel:'x(t)',series:[{data:ref,color:C.gray,dash:true,label:'left/right limits'}],points:[{x:0,y:s.special,color:C.coral,r:5}]});paintGraph('plot1',{x:[-.5,.5],y:[-1.55,1.55],xstep:.2,axisnote:'Fixed close-up: −0.5…+0.5. The Fourier sum stays Sₘ(0)=0 despite changing x(0). / 부분합은 원점에서 0입니다.',xlabel:'time near t=0',ylabel:'Sₘ(t)',series:[{data:partial,color:C.teal,label:'partial sum'}],points:[{x:0,y:0,color:C.coral,r:5}]});setMetrics([[fmt(s.special),'specified value at one point'],['0','(−1+1)/2'],['0','sin(kπ·0)=0 for every k']]);setInsight('A Fourier-series sum at a jump need not equal the specifically assigned x(0). Coefficients are unchanged by a single-point modification. / 측정한 한 점의 값보다 좌우극한과 중간값 규칙이 중요합니다.')}}
+];
+// Bilingual, control-linked derivations: English terminology first, Korean explanation second.
+const item=(head,math,ko)=>({head,math,ko});
+const plotNote=(title,en,ko)=>({title,en,ko});
+// Shared bilingual learning UI, invoked from each lab's numeric update loop.
+const guideItem=(head,math,ko)=>({head,math,ko});
+const guidePlot=(title,en,ko)=>({title,en,ko});
+const guideView={count:{},previous:{},timer:null,playing:false,duration:2600,lastModule:null};
+function stopGuidePlay(){if(guideView.timer!==null){clearInterval(guideView.timer);guideView.timer=null}guideView.playing=false}
+function revealGuide(moduleId,state,guideFactory){
+ const pane=document.getElementById('derivationPanel'),rp=document.getElementById('readingPanel');if(!pane||!rp)return;
+ const d=guideFactory(state),total=d.steps.length;
+ const n=Math.max(1,Math.min(total,guideView.count[moduleId]||1));
+ const animate=guideView.previous[moduleId]!==undefined&&n>guideView.previous[moduleId]&&n===guideView.previous[moduleId]+1;
+ const displayStep=(v,i)=>`<article class="deriv-step ${animate&&i===n-1?'guide-enter':''}" aria-label="Step ${i+1} of ${total}"><div class="deriv-top"><span class="step-index">${i+1}</span><strong>${v.head}</strong></div><div class="deriv-math">${v.math}</div><p>${v.ko}</p></article>`;
+ pane.innerHTML=`<div class="guide-head"><div><div class="overlabel">GUIDED DERIVATION / 단계별 수식 유도</div><h3>Equation → Derivation → Meaning / 수식 유도와 의미</h3><p>Adjust a variable to update the equations. / 변수를 변경하면 아래 수식도 갱신됩니다.</p></div><span class="progress-badge" role="status">Step ${n} / ${total}</span></div><div class="guide-track" role="progressbar" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${n}" aria-label="Derivation progress"><div style="width:${100*n/total}%"></div></div><div class="guide-steps">${d.steps.slice(0,n).map(displayStep).join('')}</div><div class="guide-actions"><button id="previousStep" type="button" ${n<=1?'disabled':''}>◀ Previous / 이전</button><button id="nextStep" type="button" ${n>=total?'disabled':''}>Next step / 다음 ▶</button><button id="guidePlay" type="button" class="primary" aria-pressed="${guideView.playing}">${guideView.playing?'Pause animation / 일시정지':'▶ Play animation / 자동 전개'}</button><button id="allSteps" type="button">${n===total?'Restart / 처음부터':'Show all / 전체 보기'}</button></div>`;
+ const change=next=>{guideView.count[moduleId]=Math.max(1,Math.min(total,next));revealGuide(moduleId,state,guideFactory)};
+ pane.querySelector('#previousStep').onclick=()=>{stopGuidePlay();change(n-1)};
+ pane.querySelector('#nextStep').onclick=()=>{stopGuidePlay();change(n+1)};
+ pane.querySelector('#allSteps').onclick=()=>{stopGuidePlay();change(n===total?1:total)};
+ pane.querySelector('#guidePlay').onclick=()=>{
+  if(guideView.playing){stopGuidePlay();revealGuide(moduleId,state,guideFactory);return}
+  if(n===total)guideView.count[moduleId]=1;
+  guideView.playing=true;
+  revealGuide(moduleId,state,guideFactory);
+  guideView.timer=setInterval(()=>{
+   if(currentGuidedId()!==moduleId){stopGuidePlay();return}
+   const now=guideView.count[moduleId]||1;
+   if(now>=total){stopGuidePlay();revealGuide(moduleId,currentGuidedState(moduleId),guideFactory);return}
+   guideView.count[moduleId]=now+1;
+   revealGuide(moduleId,currentGuidedState(moduleId),guideFactory);
+   if(now+1>=total){stopGuidePlay();const b=pane.querySelector('#guidePlay');if(b){b.textContent='▶ Play animation / 자동 전개';b.setAttribute('aria-pressed','false')}}
+  },guideView.duration)
+ };
+ guideView.previous[moduleId]=n;
+ rp.innerHTML=`<div class="overlabel">READ THE GRAPHS / 그래프 해석</div><h3>What changed, and why? / 무엇이 왜 바뀌었을까요?</h3><div class="reading-grid">${d.graphs.map((v,i)=>`<div class="reading-note"><span class="plot-number">GRAPH ${String(i+1).padStart(2,'0')}</span><strong>${v.title}</strong><p>${v.en}</p><p class="ko-explain">${v.ko}</p></div>`).join('')}</div><p class="guide-check"><strong>Interpretation checkpoint / 해석 점검:</strong> ${d.check}</p>`;
+}
+
+function currentGuidedId(){return MODULES[lab.active].id}
+function currentGuidedState(id){return lab.state[id]}
+function renderGuidedLearning(mod,s){const guide=GUIDES[mod.id];if(guide)revealGuide(mod.id,s,guide)}
+
+const GUIDES={
+ harm:s=>{const w=TAU/s.T,phi=s.phi*PI/180;return{
+  steps:[
+   item('Set the fundamental angular frequency / 기본 각주파수','ω<sub>0</sub> = 2π/T = 2π/'+fmt(s.T)+' = '+fmt(w)+' rad/s','주기 T를 조절하면 기본 주파수와 모든 조화 성분의 주파수가 함께 이동합니다.'),
+   item('Write the harmonic sum / 조화 성분 합','x(t) = cos(ω<sub>0</sub>t) + '+fmt(s.A)+' cos(2ω<sub>0</sub>t '+(s.phi<0?'−':' + ')+fmt(Math.abs(s.phi))+'°)','첫 번째 항은 ω₀, 두 번째 항은 2ω₀입니다. 위상은 두 번째 성분의 시작 위치를 바꿉니다.'),
+   item('Expand using Euler’s formula / 오일러 식','A cos(2ω<sub>0</sub>t+φ) = (A/2)e<sup>jφ</sup>e<sup>j2ω₀t</sup> + (A/2)e<sup>−jφ</sup>e<sup>−j2ω₀t</sup>','하나의 실수 cosine은 +2, −2번 복소 지수 성분으로 나뉘며 복소켤레 관계를 갖습니다.'),
+   item('Read the complex coefficients / 계수 읽기','a<sub>±1</sub> = 1/2, &nbsp; a<sub>2</sub> = '+fmt(s.A/2)+'e<sup>j'+fmt(phi)+'</sup>, &nbsp; |a<sub>±2</sub>| = '+fmt(s.A/2),'진폭 A와 선 스펙트럼 계수 |a₂|를 혼동하지 마세요. 실수 cosine의 진폭은 양·음 주파수 계수 크기의 두 배입니다.')],
+  graphs:[plotNote('Time waveform / 시간 파형','The teal line sums the 1st and 2nd harmonics. Changing T changes how many cycles fit in the same fixed ±12 s view; changing phase moves the 2nd harmonic relative to the 1st.','합성 파형은 기본 성분과 2차 성분의 합입니다. 위상을 조절하면 모양이 바뀌지만 조화 주파수 간격은 유지됩니다.'),plotNote('Line spectrum / 선 스펙트럼','Lines appear only at k=±1 and ±2. The line heights stay unchanged when only phase changes.','선의 높이는 복소 계수의 크기입니다. 위상만 바뀌면 선 스펙트럼의 높이는 변하지 않습니다.')],
+  check:'A=0으로 설정하면 k=±2의 선과 시간 파형에서 무엇이 사라질까요?'
+ }},
+ rectfs:s=>{const r=s.tau/s.T,w=TAU/s.T;return{
+  steps:[item('Define one centered pulse per period / 한 주기 정의','x(t)=1 (−τ/2 ≤ t ≤ τ/2), &nbsp; T='+fmt(s.T)+', τ='+fmt(s.tau),'진폭이 1이고 폭이 τ인 펄스를 T 간격으로 반복합니다.'),
+   item('Apply CTFS analysis / 계수 분석식','a<sub>k</sub> = (1/T) ∫<sub>−τ/2</sub><sup>τ/2</sup> e<sup>−jkω₀t</sup> dt, &nbsp; ω₀='+fmt(w),'한 주기의 적분에서 신호가 0이 아닌 구간만 남겨 계산합니다.'),
+   item('Integrate and simplify / 적분과 정리','a<sub>k</sub> = (τ/T) sinc(kπτ/T), &nbsp; sinc(z)=sin(z)/z','복소 지수 적분의 상·하한을 적용하면 sinc 형태가 나옵니다. 중심 대칭 펄스이므로 계수는 실수이고 짝대칭입니다.'),
+   item('Check DC and zeros / DC 및 영점 확인','a<sub>0</sub> = τ/T = '+fmt(r)+', &nbsp; a<sub>k</sub>=0 if kτ/T is a nonzero integer','DC 계수는 펄스 높이가 아니라 평균값입니다. sinc가 0이 되는 k가 정수일 때 실제 계수 영점이 나타납니다.')],
+  graphs:[plotNote('Pulse train / 주기 펄스열','Increasing τ increases the fraction of each period at value 1.','τ가 커질수록 한 주기 동안 신호가 1인 비율인 duty cycle이 증가합니다.'),plotNote('Signed coefficients / 부호 있는 계수','Stems below zero represent negative real coefficients, not negative magnitudes.','0 아래 선은 음의 실수 계수입니다. 이것을 |aₖ|와 혼동하면 위상 정보를 놓치게 됩니다.')],
+  check:'T='+fmt(s.T)+', τ='+fmt(s.tau)+'에서 a₀를 예측한 값과 화면의 DC 값을 비교해 보세요.'
+ }},
+ gibbs:s=>({
+ steps:[item('Start from an ideal square wave / 이상적인 구형파','x(t)=sgn(sin πt), &nbsp; period T=2','신호는 불연속점의 좌우에서 −1과 +1 사이를 점프하며 점프 높이는 2입니다.'),
+ item('Keep odd sine harmonics / 홀수 sine만 사용','S<sub>M</sub>(t) = (4/π) Σ<sub>m=0</sub><sup>M−1</sup> sin[(2m+1)πt]/(2m+1)','구형파는 홀수 sine 고조파로만 합성할 수 있습니다. 현재 사용하는 항 수는 M='+fmt(s.M)+'개입니다.'),
+ item('Evaluate the discontinuity / 불연속점 계산','S<sub>M</sub>(0) = 0 for every M, &nbsp; (x(0−)+x(0+))/2 = 0','모든 sine 항이 t=0에서 0이므로 부분합도 0입니다. 이것은 좌우극한의 중간값과 같습니다.'),
+ item('Interpret Gibbs overshoot / 깁스 현상','lim<sub>M→∞</sub> (peak−1)/(1−(−1)) ≈ 0.08949 = 8.949%','조화 항 수가 증가하면 불연속점 주변의 진동 폭은 좁아지지만, 충분히 큰 M에서 상대적 overshoot는 사라지지 않습니다.')],
+ graphs:[plotNote('Approximation / 부분합','Increasing M sharpens the transition and reduces error away from the jumps.','항 수가 증가하면 점프에서 떨어진 부분의 근사가 좋아지지만 불연속점 부근에서는 진동이 남습니다.'),plotNote('Zoom at the jump / 불연속점 확대','Track the first peak above +1 and the narrower oscillatory region as M grows.','+1을 넘는 첫 peak를 보세요. 점프 높이 대비 비율을 계산하며 M을 바꾸어 비교합니다.')],
+ check:'M을 4, 10, 30으로 늘리면 overshoot의 높이와 폭이 각각 어떻게 변하나요?'
+ }),
+ shift:s=>{const slope=-TAU*s.t0/s.T;return{
+ steps:[item('Begin with the centered pulse / 기준 신호','a<sub>k</sub> = (τ/T)sinc(kπτ/T), &nbsp; τ=T/3','중심 직사각형 펄스의 계수는 실수이며 음수가 될 수 있습니다.'),
+ item('Delay the signal / 시간 이동','y(t)=x(t−t₀), &nbsp; t₀='+fmt(s.t0)+' s','t₀가 양수이면 오른쪽으로 이동하고, 음수이면 왼쪽으로 이동합니다.'),
+ item('Substitute in the integral / 적분 변수 치환','b<sub>k</sub>=(1/T)∫x(t−t₀)e<sup>−jkω₀t</sup>dt = e<sup>−jkω₀t₀</sup>a<sub>k</sub>','u=t−t₀로 치환하면 지수의 이동 인자만 계수 앞에 곱해집니다.'),
+ item('Separate magnitude and phase / 크기와 위상','|b<sub>k</sub>|=|a<sub>k</sub>|; &nbsp; Δ∠b<sub>k</sub> = −kω₀t₀ = k('+fmt(slope)+') rad','이동으로 추가되는 위상은 k에 선형이고 계수 크기에는 영향을 주지 않습니다. aₖ 자체가 음수인 구간의 ±π 위상은 별개입니다.')],
+ graphs:[plotNote('Shifted waveform / 이동된 파형','Gray is the original pulse; teal shows the translated waveform.','시간축에서 두 펄스열의 위치 차이를 살펴보세요.'),plotNote('Phase contribution / 추가 위상','The phase-line slope is '+fmt(slope)+' rad per harmonic index k.','위상 기울기가 이동량 t₀와 어떤 관계인지 확인하세요.')],
+ check:'t₀=0일 때 두 파형 및 추가 위상 그래프는 어떻게 표시되나요?'
+ }},
+ dtfs:s=>{const N=+s.N,L=Math.min(s.L,N);return{
+ steps:[item('Select one complete discrete period / 이산시간 한 주기','x[n]=1 (n=0,…,'+(L-1)+'); &nbsp; 0 otherwise within N='+N,'한 주기에 1이 연속 '+L+'개이고 나머지는 0인 주기 수열입니다.'),
+ item('Write DTFS analysis / DTFS 분석식','a<sub>k</sub>=(1/'+N+')Σ<sub>n=0</sub><sup>'+(N-1)+'</sup>x[n]e<sup>−j2πkn/'+N+'</sup>','CTFS에서는 적분이지만 DTFS에서는 N개의 샘플을 더합니다.'),
+ item('Use the nonzero indices / 0이 아닌 구간만 합산','a<sub>k</sub>=(1/'+N+')Σ<sub>n=0</sub><sup>'+(L-1)+'</sup>e<sup>−j2πkn/'+N+'</sup>; &nbsp; a<sub>0</sub>='+L+'/'+N+'='+fmt(L/N),'DC 계수는 한 주기 샘플의 평균값입니다. 계산하는 항의 개수가 줄어듭니다.'),
+ item('Prove periodicity in k / 조화 인덱스의 주기성','e<sup>−j2π(k+N)n/N</sup>=e<sup>−j2πkn/N</sup> ⇒ a<sub>k+N</sub>=a<sub>k</sub>','n이 정수이므로 exp(−j2πn)=1이며, DTFS 계수에는 서로 다른 N개 값만 존재합니다.')],
+ graphs:[plotNote('Periodic x[n] / 주기 수열','The pattern repeats after N sample indices.','시간 인덱스 n에서 신호가 N마다 반복됩니다.'),plotNote('Periodic |aₖ| / 계수 크기','The spectral stems repeat after N harmonic indices.','계수는 k에서 N 주기입니다. CTFS와 달리 서로 다른 계수는 유한한 N개입니다.')],
+ check:'N='+N+'이고 L='+L+'일 때 a₀의 값과 aₖ의 주기를 그래프에서 확인하세요.'
+ }},
+ filter:s=>{const w=TAU/s.T,g1=1/Math.hypot(1,w*s.tau),g3=1/Math.hypot(1,3*w*s.tau);return{
+ steps:[item('Decompose the periodic input / 입력 분해','x(t)=cos(ω₀t)+0.5cos(3ω₀t); &nbsp; ω₀='+fmt(w)+' rad/s','실수 코사인 2개는 k=±1과 k=±3의 복소 푸리에 계수 쌍에 대응합니다.'),
+ item('Read the input line coefficients / 입력 계수','a<sub>±1</sub>=0.5, &nbsp; a<sub>±3</sub>=0.25','이 실습에서의 3차 고조파 진폭은 0.5지만, 복소 계수의 크기는 0.25입니다.'),
+ item('Evaluate the RC response / RC 주파수 응답','H(jω)=1/(1+jωτ), &nbsp; |H(jω)|=1/√(1+(ωτ)²)','시정수 τ='+fmt(s.tau)+' s, 차단 각주파수 ω<sub>c</sub>='+fmt(1/s.tau)+' rad/s입니다.'),
+ item('Multiply coefficients / 출력 계수','b<sub>k</sub>=H(jkω₀)a<sub>k</sub>; &nbsp; |H(jω₀)|='+fmt(g1)+', &nbsp; |H(j3ω₀)|='+fmt(g3),'각 조화 성분의 진폭과 위상이 독립적으로 변합니다. 높은 3차 성분이 상대적으로 많이 감쇠합니다.')],
+ graphs:[plotNote('Input and output / 입력과 출력','Compare gray input and teal output: higher-frequency variation is suppressed and phase shifted.','출력은 위상 지연과 함께 더 완만한 모양을 보입니다.'),plotNote('Spectral lines / 선 스펙트럼','The 3rd harmonic output stems shrink more strongly than the 1st harmonic stems.','각 k에서의 계수비 |bₖ|/|aₖ|가 |H(jkω₀)|임을 확인하세요.')],
+ check:'τ를 크게 바꾸면 |H(j3ω₀)|와 출력 파형의 굴곡은 어떻게 달라지나요?'
+ }},
+ midpoint:s=>({
+ steps:[item('Distinguish the value and the limits / 함수값과 극한 구분','x(0−)=−1, &nbsp; x(0+) = +1, &nbsp; x(0)='+fmt(s.special),'원점 한 점에 임의로 값을 지정해도 양쪽에서 접근하는 값은 바뀌지 않습니다.'),
+ item('Recall coefficient analysis / 계수 분석','a<sub>k</sub>=(1/T)∫<sub>one period</sub>x(t)e<sup>−jkω₀t</sup>dt','한 점에서만 값을 바꾼 함수들은 적분값이 같습니다. 따라서 모든 CTFS 계수도 동일합니다.'),
+ item('Compute the partial sum at t=0 / 부분합 계산','S<sub>M</sub>(0) = (4/π)Σ sin[(2m+1)π·0]/(2m+1) = 0','현재 M='+fmt(s.M)+'개인 모든 sine 항은 원점에서 0입니다.'),
+ item('Apply midpoint convergence / 중간값 수렴','lim<sub>M→∞</sub>S<sub>M</sub>(0) = [x(0−)+x(0+)]/2 = 0','Fourier 급수의 수렴값 0은 사용자가 지정한 x(0)과 다를 수 있습니다.')],
+ graphs:[plotNote('Specified point / 지정한 점','The coral dot shows x(0), separate from the one-sided limits at ±1.','원점의 색 점과 점프 전후 파형을 구분해서 읽습니다.'),plotNote('Fourier sum / 부분합','Every partial sum passes through Sₘ(0)=0 regardless of x(0).','특정 한 점의 함수값을 바꿔도 Fourier 부분합 그래프는 변하지 않습니다.')],
+ check:'x(0)을 0에서 10으로 바꾸어도 바뀌지 않는 두 가지는 무엇인가요?'
+ })
+};
+
+startLab();
+</script>
+<script>window.addEventListener('message',function(e){if(e.source!==parent||!e.data||e.data.type!=='ss-set-theme')return;try{if(typeof updateModule==='function')updateModule();}catch(err){console.warn('Plot recolor failed',err)}});</script>
+</body></html>
