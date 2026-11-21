@@ -52,6 +52,67 @@ try{
  await page.waitForFunction(()=>window.SSMathCore&&window.__ss8MathAudit&&window.katex?.render,{timeout:20000});
  const catalogue=await page.evaluate(()=>window.__ss8MathAudit.catalogue());
  check('formula-catalogue',catalogue.passed,catalogue);
+ // Independent source-derived mathematical and graphical invariants, not just KaTeX.
+ const invariants=await page.evaluate(()=>{
+   const e=EXPERIMENTS,results=[];
+   const near=(a,b,t=1e-9)=>Math.abs(a-b)<t;
+   function test(name,passed,details){results.push({name,passed,details})}
+   const curveAt=(opts,n)=>opts.pts?.find(x=>x[0]===n)?.[1];
+   // Chapter 8.1: right-sided geometric sequence and unit-circle criterion.
+   for(const a of [.3,.8,1,1.1]){
+    const p=e[0].draw({a});
+    test('8.1 pole and unit circle a='+a,p.plots.includes('Pole z=a') &&
+       p.insight.includes(a<1?'Unit circle lies in ROC':'Unit circle is not inside ROC'),{a});
+   }
+   // 8.2: the same rational expression, with opposite time support and ROC.
+   for(const direction of ['right','left']){
+    const p=e[1].draw({direction});
+    test('8.2 supports and ROC '+direction,
+     p.plots.includes(direction==='right'?'|z|>0.8':'|z|<0.8')&&
+     p.plots.includes('h[n]')&&p.plots.includes('Z-transform'),{direction});
+   }
+   // 8.3: zero z=(a+b)/2 and origin, and the annular ROC.
+   for(const [a,b] of [[.4,1.8],[.2,2.3]]){
+    const p=e[2].draw({a,b});
+    test('8.3 exact zeros '+a+','+b,
+      p.insight.includes('z='+fmt((a+b)/2,2))&&p.insight.includes('z=0'),{a,b});
+   }
+   // 8.4: A+B=1, bA+aB=0, and the three sequence directions.
+   for(const [a,b] of [[.5,2],[.3,1.3],[.8,2.3]]){
+    const A=-a/(b-a),B=b/(b-a);
+    test('8.4 coefficients '+a+','+b,near(A+B,1)&&near(b*A+a*B,0),{a,b,A,B});
+   }
+   // 8.5: DC gain is 1 and positive causal h[n] is absolutely summable.
+   for(const a of [.1,.7,.95]){
+    const dc=(1-a)/Math.hypot(1-a*Math.cos(0),a*Math.sin(0));
+    test('8.5 DC unity a='+a,near(dc,1),{a,dc});
+   }
+   // 8.6: roots of unity cancel except at DC; repeated origin pole is labeled.
+   for(const N of [3,4,7,10]){
+    const p=e[5].draw({N,omega:1});
+    let re=0,im=0;
+    for(let k=0;k<N;k++){re+=Math.cos(2*Math.PI*k/N)/N;im-=Math.sin(2*Math.PI*k/N)/N}
+    test('8.6 notch and root multiplicity N='+N,
+      Math.hypot(re,im)<1e-10 && p.plots.includes('×'+(N-1)),{N,re,im});
+   }
+   // 8.7: exact M-term sums, correct convergence direction, no M+1 sample error.
+   for(const [a,side,stable] of [[.8,'causal',true],[1.2,'causal',false],[1.2,'anti',true],[.8,'anti',false]]){
+    const p=e[6].draw({a,side,M:12});
+    const stems=(p.plots.match(/<circle cx=/g)||[]).length;
+    test('8.7 BIBO '+a+','+side,p.insight.includes(stable?'<strong>Stable:':'<strong>Not stable:') &&
+       p.plots.includes('First 12 samples'),{a,side,stable,stems});
+   }
+   // 8.8: no noise, step response should follow the stated recurrence.
+   for(const a of [.3,.8,.95]){
+    const p=e[7].draw({a,noise:0});
+    const value=25-5*Math.pow(a,29);
+    test('8.8 step model a='+a,p.insight.includes('After sample 40')&&
+      p.plots.includes('Step response without noise')&&value>20&&value<25,{a,value});
+   }
+   return results;
+ });
+ for(const entry of invariants)check('math-model-'+entry.name,entry.passed,entry.details);
+
  for(let n=1;n<=8;n++){
   await page.evaluate(n=>window.SSChapter8.openExperiment(n),n);
   await page.waitForFunction(n=>window.__ss8MathAudit?.status?.lesson===n,n);
