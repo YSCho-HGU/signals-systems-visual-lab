@@ -8,15 +8,15 @@ const CH82=[String.raw`H(z)=\sum_{n=0}^{\infty}(0.8z^{-1})^n=\frac{1}{1-0.8z^{-1
 const CH82_STEPS={
  right:[
  String.raw`h_R[n]=(0.8)^n u[n]`,
- String.raw`H_R(z)=\\sum_{n=0}^{\\infty}(0.8z^{-1})^n`,
- String.raw`H_R(z)=\\frac1{1-0.8z^{-1}},\\quad |0.8z^{-1}|<1`,
- String.raw`\\mathrm{ROC}_R:\\quad |z|>0.8`
+ String.raw`H_R(z)=\sum_{n=0}^{\infty}(0.8z^{-1})^n`,
+ String.raw`H_R(z)=\frac1{1-0.8z^{-1}},\quad |0.8z^{-1}|<1`,
+ String.raw`\mathrm{ROC}_R:\quad |z|>0.8`
  ],
  left:[
  String.raw`h_L[n]=-(0.8)^n u[-n-1]`,
- String.raw`H_L(z)=-\\sum_{n=-\\infty}^{-1}(0.8z^{-1})^n`,
- String.raw`H_L(z)=-\\sum_{k=1}^{\\infty}(z/0.8)^k=\\frac1{1-0.8z^{-1}}`,
- String.raw`\\mathrm{ROC}_L:\\quad |z|<0.8`
+ String.raw`H_L(z)=-\sum_{n=-\infty}^{-1}(0.8z^{-1})^n`,
+ String.raw`H_L(z)=-\sum_{k=1}^{\infty}(z/0.8)^k=\frac1{1-0.8z^{-1}}`,
+ String.raw`\mathrm{ROC}_L:\quad |z|<0.8`
  ]
 };
 let pending=false;
