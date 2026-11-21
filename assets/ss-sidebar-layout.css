@@ -346,3 +346,10 @@ html[data-els-theme][data-ss-sidebar="collapsed"] .app{
  grid-template-columns:52px minmax(0,1fr)!important;
  gap:0!important;
 }
+
+/* Match the dynamically generated #app grid itself; legacy theme selectors
+ * otherwise win at equal importance in Chapters 2–4 and 6. */
+html[data-els-theme][data-ss-sidebar="collapsed"] body #app.app{
+ grid-template-columns:52px minmax(0,1fr)!important;
+ column-gap:0!important;
+}
