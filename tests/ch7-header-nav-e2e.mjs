@@ -18,7 +18,7 @@ try{
   await page.goto(base+'#chapter=7',{waitUntil:'commit',timeout:45000});
   await page.waitForFunction(()=>document.querySelector('#lab-frame')?.contentWindow?.SSChapter7?.experimentCount===7,null,{timeout:30000});
   const f=page.frameLocator('#lab-frame');
-  check(await page.locator('.els-ss-unified-header').count()===1,size+'-ch5-style-header');
+  check(await page.locator('.ss-common-header .ss-common-menu').count()===1,size+'-shared-header');
   check(await page.locator('#els-ss-chapter-title').innerText().then(s=>s.includes('Chapter 7')&&s.includes('Sampling')),size+'-chapter-title');
   check(await page.locator('#ss-language-select').count()===1&&await page.locator('#theme-select').count()===1,size+'-single-language-theme');
   check(await page.locator('.els-ss-chapter-links a').count()===8,size+'-chapter-titles');
@@ -74,6 +74,11 @@ try{
   p.on('pageerror',e=>errors.push('chapter '+chapter+': '+String(e)));
   await p.goto(new URL(path,base).href,{waitUntil:'domcontentloaded',timeout:45000});
   check(await p.locator(selector).count()===1,'chapter-'+chapter+'-single-header');
+  check(await p.locator('.ss-common-header .ss-common-menu').count()===1,'chapter-'+chapter+'-shared-menu');
+  check(await p.locator('.ss-common-header .ss-common-actions').count()===1,'chapter-'+chapter+'-shared-actions');
+  await p.locator('.ss-common-title').click();
+  check(await p.locator('.ss-common-menu').evaluate(el=>el.open),'chapter-'+chapter+'-dropdown-opens');
+  check(await p.locator('.ss-common-links a[aria-current="page"]').count()===1,'chapter-'+chapter+'-current-link');
   check(await p.locator('header details summary').count()>=1,'chapter-'+chapter+'-chapter-dropdown');
   check(await p.locator('header select').count()>=2,'chapter-'+chapter+'-language-theme');
   await p.close();
