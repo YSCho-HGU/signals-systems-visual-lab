@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "total": 118,
+  "total": 143,
   "failures": [],
   "findings": [
     {
@@ -10,6 +10,218 @@
         "passed": true,
         "checked": 50,
         "failures": []
+      }
+    },
+    {
+      "id": "math-model-8.1 pole and unit circle a=0.3",
+      "passed": true,
+      "detail": {
+        "a": 0.3
+      }
+    },
+    {
+      "id": "math-model-8.1 pole and unit circle a=0.8",
+      "passed": true,
+      "detail": {
+        "a": 0.8
+      }
+    },
+    {
+      "id": "math-model-8.1 pole and unit circle a=1",
+      "passed": true,
+      "detail": {
+        "a": 1
+      }
+    },
+    {
+      "id": "math-model-8.1 pole and unit circle a=1.1",
+      "passed": true,
+      "detail": {
+        "a": 1.1
+      }
+    },
+    {
+      "id": "math-model-8.2 supports and ROC right",
+      "passed": true,
+      "detail": {
+        "direction": "right"
+      }
+    },
+    {
+      "id": "math-model-8.2 supports and ROC left",
+      "passed": true,
+      "detail": {
+        "direction": "left"
+      }
+    },
+    {
+      "id": "math-model-8.3 exact zeros 0.4,1.8",
+      "passed": true,
+      "detail": {
+        "a": 0.4,
+        "b": 1.8
+      }
+    },
+    {
+      "id": "math-model-8.3 exact zeros 0.2,2.3",
+      "passed": true,
+      "detail": {
+        "a": 0.2,
+        "b": 2.3
+      }
+    },
+    {
+      "id": "math-model-8.4 coefficients 0.5,2",
+      "passed": true,
+      "detail": {
+        "a": 0.5,
+        "b": 2,
+        "A": -0.3333333333333333,
+        "B": 1.3333333333333333
+      }
+    },
+    {
+      "id": "math-model-8.4 coefficients 0.3,1.3",
+      "passed": true,
+      "detail": {
+        "a": 0.3,
+        "b": 1.3,
+        "A": -0.3,
+        "B": 1.3
+      }
+    },
+    {
+      "id": "math-model-8.4 coefficients 0.8,2.3",
+      "passed": true,
+      "detail": {
+        "a": 0.8,
+        "b": 2.3,
+        "A": -0.5333333333333334,
+        "B": 1.5333333333333334
+      }
+    },
+    {
+      "id": "math-model-8.5 DC unity a=0.1",
+      "passed": true,
+      "detail": {
+        "a": 0.1,
+        "dc": 1
+      }
+    },
+    {
+      "id": "math-model-8.5 DC unity a=0.7",
+      "passed": true,
+      "detail": {
+        "a": 0.7,
+        "dc": 1
+      }
+    },
+    {
+      "id": "math-model-8.5 DC unity a=0.95",
+      "passed": true,
+      "detail": {
+        "a": 0.95,
+        "dc": 1
+      }
+    },
+    {
+      "id": "math-model-8.6 notch and root multiplicity N=3",
+      "passed": true,
+      "detail": {
+        "N": 3,
+        "re": -1.1102230246251565e-16,
+        "im": -1.1102230246251565e-16
+      }
+    },
+    {
+      "id": "math-model-8.6 notch and root multiplicity N=4",
+      "passed": true,
+      "detail": {
+        "N": 4,
+        "re": -4.592425496802574e-17,
+        "im": -5.551115123125783e-17
+      }
+    },
+    {
+      "id": "math-model-8.6 notch and root multiplicity N=7",
+      "passed": true,
+      "detail": {
+        "N": 7,
+        "re": -1.3877787807814457e-17,
+        "im": 2.7755575615628914e-17
+      }
+    },
+    {
+      "id": "math-model-8.6 notch and root multiplicity N=10",
+      "passed": true,
+      "detail": {
+        "N": 10,
+        "re": -5.551115123125783e-17,
+        "im": -6.938893903907228e-18
+      }
+    },
+    {
+      "id": "math-model-8.7 BIBO 0.8,causal",
+      "passed": true,
+      "detail": {
+        "a": 0.8,
+        "side": "causal",
+        "stable": true,
+        "stems": 15
+      }
+    },
+    {
+      "id": "math-model-8.7 BIBO 1.2,causal",
+      "passed": true,
+      "detail": {
+        "a": 1.2,
+        "side": "causal",
+        "stable": false,
+        "stems": 15
+      }
+    },
+    {
+      "id": "math-model-8.7 BIBO 1.2,anti",
+      "passed": true,
+      "detail": {
+        "a": 1.2,
+        "side": "anti",
+        "stable": true,
+        "stems": 15
+      }
+    },
+    {
+      "id": "math-model-8.7 BIBO 0.8,anti",
+      "passed": true,
+      "detail": {
+        "a": 0.8,
+        "side": "anti",
+        "stable": false,
+        "stems": 15
+      }
+    },
+    {
+      "id": "math-model-8.8 step model a=0.3",
+      "passed": true,
+      "detail": {
+        "a": 0.3,
+        "value": 24.999999999999996
+      }
+    },
+    {
+      "id": "math-model-8.8 step model a=0.8",
+      "passed": true,
+      "detail": {
+        "a": 0.8,
+        "value": 24.992262874754466
+      }
+    },
+    {
+      "id": "math-model-8.8 step model a=0.95",
+      "passed": true,
+      "detail": {
+        "a": 0.95,
+        "value": 23.870322295037173
       }
     },
     {
@@ -1908,7 +2120,7 @@
     }
   ],
   "pageErrors": [],
-  "sourceSha": "2b33750c553634d6a5d55fe6386296b040bb95e9",
-  "runId": 44910835615,
-  "generatedAt": "2026-11-21T13:50:47.411Z"
+  "sourceSha": "dc728d725f674616179d87672fafb9940ee8434e",
+  "runId": 44910884470,
+  "generatedAt": "2026-11-21T13:51:27.031Z"
 }
