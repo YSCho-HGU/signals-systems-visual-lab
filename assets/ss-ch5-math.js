@@ -3,9 +3,13 @@
  */
 (function(global){
  "use strict";
- const f=(v,d=2)=>Number(v).toFixed(d);
+ const f=(v,d=2)=>{const rounded=Number(v).toFixed(d);return Number(rounded)===0?(0).toFixed(d):rounded;};
  // Present pole and zero locations as natural factors (p=-1.10 -> s+1.10).
  const factor=(value)=>{const n=Number(f(value));return n<0?'s+'+f(-n):n>0?'s-'+f(n):'s';};
+ // Factor of s-root, with parentheses only when an addition/subtraction requires them.
+ const groupedFactor=(value)=>Math.abs(Number(f(value)))<1e-10?'s':'('+factor(value)+')';
+ const stabilityDenominator=(p)=>Math.abs(p+4)<1e-10?'(s+4)^2':groupedFactor(p)+'(s+4)';
+ const exponential=(v,variable='t')=>Math.abs(Number(f(v)))<1e-10?'1':'e^{'+f(v)+variable+'}';
  const L=String.raw;
  const E=global.ELSLabUI;
  function guides(id,s){
@@ -14,7 +18,7 @@
    return [
     'X(s)=\\int_{-\\infty}^{\\infty}x(t)e^{-st}\\,dt,\\quad s=\\sigma+j\\omega',
     'u(t)=1\\ (t\\ge0)\\ \\Longrightarrow\\ X(s)=\\int_0^\\infty e^{-st}\\,dt',
-    'e^{-\\sigma t}=e^{-('+f(v)+')t},\\quad F(5)='+f(finite,3)+',\\quad\\sigma'+(v>0?'>0':v<0?'<0':'=0'),
+    'e^{-\\sigma t}='+exponential(-v)+',\\quad F(5)='+f(finite,3)+',\\quad\\sigma'+(v>0?'>0':v<0?'<0':'=0'),
     'X(s)=\\left[-\\frac{e^{-st}}{s}\\right]_0^\\infty=\\frac1s,\\quad\\mathrm{ROC}:\\operatorname{Re}(s)>0'
    ];
   }
@@ -60,15 +64,15 @@
    const a=f(s.a),t=f(s.shift),b=f(s.b),d=s.mode==="delay",pole=f(d?-s.a:s.b-s.a);
    return [
     'x(t)=e^{-'+a+'t}u(t),\\quad X(s)=\\frac1{s+'+a+'}',
-    d?'y(t)=x(t-'+t+')':'y(t)=e^{'+b+'t}x(t)',
-    d?'Y(s)=\\frac{e^{-'+t+'s}}{s+'+a+'}':'Y(s)=X(s-'+b+')=\\frac1{s+'+f(s.a-s.b)+'}',
+    d?'y(t)=x(t-'+t+')':'y(t)='+(Math.abs(s.b)<1e-10?'x(t)':exponential(s.b)+'x(t)'),
+    d?(Math.abs(s.shift)<1e-10?'Y(s)=\\frac1{s+'+a+'}':'Y(s)=\\frac{'+exponential(-s.shift,'s')+'}{s+'+a+'}'):'Y(s)=X('+factor(s.b)+')=\\frac1{'+factor(s.b-s.a)+'}',
     '\\mathrm{pole}:s='+pole+',\\quad\\mathrm{ROC}:\\operatorname{Re}(s)>'+pole
    ];
   }
   if(id==="inverse"){
    const r=s.roc==="right",l=s.roc==="left";
    return [
-    'X(s)=\\frac1{(s+1)(s+4)}=\\frac{1/3}{s+1}-\\frac{1/3}{s+4}',
+    'X(s)=\\frac1{(s+1)(s+4)}=\\frac13\\left(\\frac1{s+1}-\\frac1{s+4}\\right)',
     '\\mathrm{ROC}:\\ '+(r?'\\operatorname{Re}(s)>-1':l?'\\operatorname{Re}(s)<-4':'-4<\\operatorname{Re}(s)<-1'),
     r?'x(t)=\\frac13(e^{-t}-e^{-4t})u(t)':l?'x(t)=-\\frac13e^{-t}u(-t)+\\frac13e^{-4t}u(-t)':'x(t)=-\\frac13e^{-t}u(-t)-\\frac13e^{-4t}u(t)',
     r?'x(0^+)=\\frac13(1-1)=0,\\quad x(t)=0\\ (t<0)':l?'x(0^-)=\\frac13(-1+1)=0,\\quad x(t)=0\\ (t>0)':'x(0^-)=-\\frac13,\\quad x(0^+)=-\\frac13'
@@ -78,7 +82,7 @@
    const p=Number(s.p),z=Number(s.z),cancelP=Math.abs(p-z)<1e-8,cancel4=Math.abs(z+4)<1e-8,
     active=cancelP?-4:cancel4?p:Math.max(p,-4);
    return [
-    'H(s)=\\frac{'+factor(z)+'}{('+factor(p)+')(s+4)}',
+    'H(s)=\\frac{'+factor(z)+'}{'+stabilityDenominator(p)+'}',
     cancelP?'z=p='+f(p)+'\\Longrightarrow H_{\\mathrm{red}}(s)=\\frac1{s+4}':cancel4?'z=-4\\Longrightarrow H_{\\mathrm{red}}(s)=\\frac1{'+factor(p)+'}':
      'z\\neq p,\\quad z\\neq-4\\Longrightarrow\\text{two active poles}',
     '\\mathrm{ROC}:\\operatorname{Re}(s)>'+f(active)+'\\quad(\\text{causal})',
@@ -91,7 +95,9 @@
     '\\tau\\frac{dy(t)}{dt}+y(t)=x(t),\\quad\\tau=RC',
     'H(s)=\\frac{Y(s)}{X(s)}=\\frac1{\\tau s+1}',
     'p=-\\frac1\\tau='+f(-cut,3)+',\\quad |H(j\\omega)|=\\frac1{\\sqrt{1+(\\omega\\tau)^2}}',
-    'y_{\\mathrm{step}}(t)=1-e^{-t/'+f(tau)+'},\\quad y(\\tau)=1-e^{-1}\\approx0.632,\\quad\\omega_c='+f(cut,3)+'\\,\\mathrm{rad/s}'
+    s.input==='pulse'?
+      'x(t)=u(t)-u(t-2),\\quad y(t)=r(t)-r(t-2),\\quad r(t)=(1-e^{-t/'+f(tau)+'})u(t)':
+      'y_{\\mathrm{step}}(t)=(1-e^{-t/'+f(tau)+'})u(t),\\quad y(\\tau)=1-e^{-1}\\approx0.632'
    ];
   }
   if(id==="second"){
@@ -99,7 +105,8 @@
     wd=z<1?w*Math.sqrt(1-z*z):0,over=z<1?Math.exp(-Math.PI*z/Math.sqrt(1-z*z))*100:0;
    return [
     'H(s)=\\frac{\\omega_n^2}{s^2+2\\zeta\\omega_ns+\\omega_n^2},\\quad\\zeta='+f(z)+',\\quad\\omega_n='+f(w),
-    's^2+2\\zeta\\omega_ns+\\omega_n^2=0,\\quad p_{1,2}=-\\zeta\\omega_n\\pm\\omega_n\\sqrt{\\zeta^2-1}',
+    z<1?'s^2+2\\zeta\\omega_ns+\\omega_n^2=0,\\quad p_{1,2}=-\\zeta\\omega_n\\pm j\\omega_n\\sqrt{1-\\zeta^2}':
+       's^2+2\\zeta\\omega_ns+\\omega_n^2=0,\\quad p_{1,2}=-\\zeta\\omega_n\\pm\\omega_n\\sqrt{\\zeta^2-1}',
     z<1?'0<\\zeta<1,\\quad p_{1,2}='+f(r)+'\\pm j'+f(wd)+',\\quad\\omega_d='+f(wd):
        Math.abs(z-1)<1e-8?'\\zeta=1,\\quad p_{1,2}='+f(r)+'\\ (\\text{repeated})':
        '\\zeta>1,\\quad p_1='+f(-z*w+w*Math.sqrt(z*z-1))+',\\quad p_2='+f(-z*w-w*Math.sqrt(z*z-1)),
