@@ -3,14 +3,14 @@
 (function(){
 'use strict';
 const formulas={
- 1:String.raw`y(t)=x(at+b),\\quad x[n]=x(nT_s)`,
+ 1:String.raw`y(t)=x(at+b),\quad x[n]=x(nT_s)`,
  2:String.raw`y(t)=x(t)*h(t)`,
- 3:String.raw`x(t)=\\sum_{k=-\\infty}^{\\infty}a_k e^{jk\\omega_0t}`,
- 4:String.raw`X(j\\omega)=\\int_{-\\infty}^{\\infty}x(t)e^{-j\\omega t}dt`,
- 5:String.raw`X(s)=\\int_{-\\infty}^{\\infty}x(t)e^{-st}dt`,
- 6:String.raw`X(e^{j\\Omega})=\\sum_{n=-\\infty}^{\\infty}x[n]e^{-j\\Omega n}`,
+ 3:String.raw`x(t)=\sum_{k=-\infty}^{\infty}a_k e^{jk\omega_0t}`,
+ 4:String.raw`X(j\omega)=\int_{-\infty}^{\infty}x(t)e^{-j\omega t}dt`,
+ 5:String.raw`X(s)=\int_{-\infty}^{\infty}x(t)e^{-st}dt`,
+ 6:String.raw`X(e^{j\Omega})=\sum_{n=-\infty}^{\infty}x[n]e^{-j\Omega n}`,
  7:String.raw`x[n]=x_c(nT_s)`,
- 8:String.raw`X(z)=\\sum_{n=-\\infty}^{\\infty}x[n]z^{-n}`
+ 8:String.raw`X(z)=\sum_{n=-\infty}^{\infty}x[n]z^{-n}`
 };
 function math(){
  if(!window.katex?.render)return;
