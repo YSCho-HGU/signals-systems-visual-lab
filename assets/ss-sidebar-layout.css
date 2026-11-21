@@ -128,3 +128,53 @@ html[data-ss-sidebar="collapsed"] :is(.ss7-workspace,.ss8-workspace,.shell>.main
   grid-template-columns:var(--ss-sidebar-closed) minmax(0,1fr)!important
  }
 }
+
+/* Chapters 2–4: match Chapter 5's light/dark sidebar surface, typography,
+ * selection indicator and navigation-number badges. */
+html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar){
+ background:var(--els-surface)!important;color:var(--els-ink)!important;
+ border-right:1px solid var(--els-border)!important
+}
+html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .brand{
+ border-bottom:1px solid var(--els-border)!important;background:transparent!important;
+ padding:4px 10px 17px!important
+}
+html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .brand :is(h1,p,.over){
+ color:var(--els-ink)!important
+}
+html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .side-label{
+ color:var(--els-muted)!important;font-size:11px!important
+}
+html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .nav{
+ display:flex!important;flex-direction:column!important;gap:5px!important
+}
+html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .nav button{
+ display:flex!important;align-items:center!important;gap:8px!important;
+ width:100%!important;min-height:47px!important;padding:8px 10px!important;
+ color:var(--els-ink)!important;background:transparent!important;
+ border:1px solid transparent!important;border-radius:9px!important;
+ font-size:12px!important;line-height:1.35!important;text-align:left!important;box-shadow:none!important
+}
+html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .nav button:hover{
+ background:var(--els-surface-alt)!important;border-color:var(--els-border)!important
+}
+html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .nav button.active{
+ background:var(--els-surface-alt)!important;border-color:var(--els-link,var(--els-primary))!important;
+ box-shadow:inset 3px 0 var(--els-link,var(--els-primary))!important
+}
+html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .nav .num{
+ display:inline-grid!important;place-items:center!important;flex:none!important;
+ min-width:29px!important;min-height:29px!important;border:1px solid var(--els-border)!important;
+ border-radius:7px!important;background:var(--els-surface-alt)!important;
+ color:var(--els-link,var(--els-ink))!important;font-size:11px!important
+}
+html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .nav .nav-name{
+ color:var(--els-ink)!important;font-size:12px!important;font-weight:700!important
+}
+html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .side-foot{
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
+ border:1px solid var(--els-border)!important
+}
+html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .side-foot strong{
+ color:var(--els-ink)!important
+}
