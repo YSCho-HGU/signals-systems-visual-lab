@@ -41,6 +41,15 @@ check("G0-shared-math-stylesheet-all-three",
  sharedFormula.includes(".ss5-prose-math") &&
  sharedFormula.includes(".ss6-inline-math") &&
  sharedFormula.includes(".ss7-prose-math"));
+const uiStandard=read("assets/ss-ui-standard.css");
+check("G0-ui-standard-ch5-6-7",
+ [laplaceNative,native,ch7].every(x=>x.includes('ss-ui-standard.css?v=2')) &&
+ uiStandard.includes(".ss5-native .tabs button") &&
+ uiStandard.includes(".ss6-compact-workspace .sidebar .nav button") &&
+ uiStandard.includes(".ss7-native #ss7-lesson-nav button"));
+check("G0-ui-standard-shared-focus-and-step",
+ uiStandard.includes(":focus-visible")&&uiStandard.includes(".ss7-stage-index") &&
+ uiStandard.includes("neutral-dark")&&uiStandard.includes("white-clean"));
 check("G0-no-duplicate-prose-math-css",
  !existsSync("assets/ss-ch5-prose-math.css")&&!existsSync("assets/ss-ch7-prose-math.css")&&
  ![laplaceNative,native,ch7].some(x=>x.includes("ss-ch5-prose-math.css")||x.includes("ss-ch7-prose-math.css")));
