@@ -77,6 +77,7 @@ function init(){
    graph+='<circle class="ss7-alias-dot" cx="'+x+'" cy="'+y+'" r="4" fill="var(--els-ink,#222)" stroke="var(--els-surface,#fff)" stroke-width="1.3"/>';
    if(n%2===0)graph+='<text x="'+x+'" y="'+(h-9)+'" font-size="10" text-anchor="middle" fill="currentColor">'+n+'</text>';
   }
+  graph+='<line class="ss7-alias-cursor" x1="'+l+'" x2="'+l+'" y1="'+top+'" y2="'+(h-bottom)+'" stroke="var(--els-ink,#222)" stroke-width="1.3" stroke-dasharray="4 4"/>';
   periodic.querySelector('.ss7-ct-plot').innerHTML='<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Three different continuous-time cosines with coincident samples at t equals n divided by sampling frequency">'+graph+'<text x="'+(w-r)+'" y="'+(h-9)+'" font-size="11" text-anchor="end" fill="currentColor">nTₛ</text></svg>';
   sampleF=f;sampleFs=fs;paintFrame();
   periodic.querySelector('.ss7-ct-title').textContent='Continuous time: '+f+' Hz, '+(f+fs)+' Hz, '+(f-fs)+' Hz (t = 0 … '+(1000*duration).toFixed(1)+' ms)';
