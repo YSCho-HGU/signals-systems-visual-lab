@@ -100,3 +100,17 @@ html.ss7-standard .ss7-sampling-active .plot-card .plot-title{font-size:13px}
 html.ss7-standard .ss7-sampling-active .plot-card .axis-key{font-size:12px}
 @media(max-width:1150px){html.ss7-standard .ss7-sampling-active .ss7-stage-pair{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:780px){html.ss7-standard .ss7-sampling-active #plots{grid-template-columns:minmax(0,1fr)}}
+
+/* 7.1 integer frequency-shift experiment. */
+html.ss7-standard .ss7-periodicity{display:none;margin-top:12px;padding:13px;border:1px solid var(--els-border);border-radius:10px;background:var(--els-page);color:var(--els-ink)}
+html.ss7-standard .ss7-sampling-active .ss7-periodicity{display:block}
+html.ss7-standard .ss7-periodicity-title{font-size:15px;font-weight:750;margin-bottom:8px}
+html.ss7-standard .ss7-periodicity label{font-size:13px;margin-right:8px}
+html.ss7-standard .ss7-periodicity select{padding:5px 9px;color:var(--els-ink);background:var(--els-surface);border:1px solid var(--els-border);border-radius:6px}
+html.ss7-standard .ss7-period-equation{margin:9px 0;font-size:13px;font-weight:650;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+html.ss7-standard .ss7-period-plot svg{display:block;width:100%;height:auto;max-height:195px;color:var(--els-ink)}
+html.ss7-standard .ss7-period-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px}
+html.ss7-standard .ss7-period-legend span{display:inline-flex;align-items:center;gap:5px}
+html.ss7-standard .ss7-period-dot{width:10px;height:10px;border-radius:50%;background:#cc8841}
+html.ss7-standard .ss7-period-cross{font-size:18px;font-weight:800;line-height:12px;color:#168c91}
+html.ss7-standard .ss7-periodicity .ss7-period-note{font-size:13px;line-height:1.6;margin:8px 0 0}
