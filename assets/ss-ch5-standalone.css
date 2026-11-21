@@ -402,3 +402,19 @@ html.ss5-native[data-els-theme] #page :is(.guide-actions button:not(.primary),.p
 html.ss5-native[data-els-theme] #page :is(.guide-actions button,.preset,.btn):focus-visible{
  outline:3px solid var(--els-focus)!important;outline-offset:2px
 }
+
+/* Chapter 5 header alignment + accessible chapter title menu, 2026-11-21 */
+html.ss5-native .ss5-site-header{display:flex;align-items:center;gap:12px;overflow:visible}
+html.ss5-native .ss5-chapter-menu{position:relative;flex:0 1 auto;min-width:0;max-width:min(65vw,620px)}
+html.ss5-native .ss5-chapter-menu>.ss5-site-title{display:flex;flex:none;max-width:100%;align-items:center;gap:6px;overflow:visible;text-overflow:clip;white-space:normal;line-height:1.3}
+html.ss5-native .ss5-header-actions{margin-left:auto;flex:0 0 auto;justify-content:flex-end;gap:10px}
+html.ss5-native .ss5-chapter-menu>.ss5-chapter-links{position:absolute;z-index:999;top:calc(100% + 12px);left:0;display:grid;gap:2px;min-width:min(350px,calc(100vw - 20px));max-width:calc(100vw - 20px);max-height:min(65vh,500px);overflow-y:auto;padding:8px;background:var(--els-surface,#fff);color:var(--els-ink,#222);border:1px solid var(--els-border,#999);border-radius:8px;box-shadow:0 12px 32px #0005}
+html.ss5-native .ss5-chapter-menu>.ss5-chapter-links a{color:var(--els-ink,#222);white-space:normal;line-height:1.4}
+html.ss5-native .ss5-chapter-menu>.ss5-chapter-links a:hover,
+html.ss5-native .ss5-chapter-menu>.ss5-chapter-links a:focus-visible{background:var(--els-accent,#0e8491);color:var(--els-surface,#fff)}
+@media(max-width:610px){
+ html.ss5-native .ss5-site-header{flex-wrap:wrap}
+ html.ss5-native .ss5-chapter-menu{flex:1 1 calc(100% - 95px);max-width:calc(100% - 95px)}
+ html.ss5-native .ss5-chapter-menu>.ss5-site-title{font-size:12px;line-height:1.35}
+ html.ss5-native .ss5-header-actions{margin-left:auto;width:100%;justify-content:flex-end}
+}
