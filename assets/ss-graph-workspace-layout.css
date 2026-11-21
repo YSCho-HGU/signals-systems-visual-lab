@@ -1,0 +1,117 @@
+/* Engineering Learning Studio — SS graph/workspace layout, 2026-11-21.
+   Preserve Step 2 (Change) beside Step 3 (Observe) on desktop.
+   The individual charts must not shrink into illegible tiles.
+   Scope to Chapters 5–8, leaving simulations and teaching steps unchanged. */
+
+/* Chapter 5: keep the main comparison adjacent to controls; allow plots to
+   wrap only when each plot would otherwise be too narrow. */
+@media (min-width: 901px) {
+ html.ss5-native #page>.lab{
+  grid-template-columns:minmax(215px,250px) minmax(0,1fr)!important;
+  gap:12px!important;
+ }
+}
+html.ss5-native #page .plots{
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr))!important;
+ gap:12px!important;
+}
+html.ss5-native #page .plots .figure{
+ min-width:0!important;
+}
+html.ss5-native #page .figure canvas{
+ height:clamp(255px,31dvh,360px)!important;
+}
+html.ss5-native #page .compare-grid{
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,305px),1fr))!important;
+ gap:12px!important;
+}
+html.ss5-native #page .compare-card:last-child{grid-column:auto!important}
+html.ss5-native #page .compare-card canvas{height:235px!important}
+@media (max-width:900px){
+ html.ss5-native #page>.lab{grid-template-columns:minmax(0,1fr)!important}
+ html.ss5-native #page .figure canvas{height:270px!important}
+}
+
+/* Chapter 6: maintain the one-row Step 2/3 learning workspace at widths
+   where both panels can be read. Charts themselves wrap at 480px. */
+@media (min-width:961px){
+ html.ss6-compact-workspace .ss6-control-plot-workspace,
+ html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module]{
+  grid-template-columns:minmax(215px,260px) minmax(0,1fr)!important;
+  gap:12px!important;
+ }
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace :is(.charts,.ss6-step-graphs),
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .ss6-step-graphs{
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr))!important;
+ gap:11px!important;
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace :is(.charts,.ss6-step-graphs) .figure.wide{
+ grid-column:1/-1!important;
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace .figure canvas,
+html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module] .figure canvas{
+ height:clamp(255px,31dvh,350px)!important;
+}
+@media (max-width:960px){
+ html.ss6-compact-workspace .ss6-control-plot-workspace,
+ html.ss6-compact-workspace .ss6-control-plot-workspace[data-ss6-module]{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+}
+@media (max-width:620px){
+ html.ss6-compact-workspace .ss6-control-plot-workspace .figure canvas{height:260px!important}
+}
+
+/* Chapters 7 and 8: 2 and 3 are siblings in a single row. Limit the
+   control column, giving Observe the remaining width. Only place SVGs
+   side-by-side when each can be at least 520px wide. */
+@media (min-width:901px){
+ html.ss7-native .ss7-stage-pair,
+ html.ss8-native .ss8-stage-pair{
+  grid-template-columns:minmax(205px,245px) minmax(0,1fr)!important;
+  align-items:start!important;
+  gap:12px!important;
+ }
+}
+html.ss7-native .ss7-stage-observe #plots,
+html.ss8-native .ss8-stage-observe #plots{
+ display:grid!important;
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr))!important;
+ gap:12px!important;
+ align-items:start!important;
+ min-width:0!important;
+}
+html.ss7-native .ss7-stage-observe #plots .plot-card,
+html.ss8-native .ss8-stage-observe #plots .plot-card{
+ min-width:0!important;
+ width:100%;
+}
+html.ss7-native .ss7-stage-observe #plots .plot-card svg,
+html.ss8-native .ss8-stage-observe #plots .plot-card svg{
+ display:block;
+ width:100%;
+ height:auto!important;
+ max-width:100%;
+ aspect-ratio:auto!important;
+}
+@media (max-width:900px){
+ html.ss7-native .ss7-stage-pair,
+ html.ss8-native .ss8-stage-pair{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+ html.ss7-native .ss7-stage-observe #plots,
+ html.ss8-native .ss8-stage-observe #plots{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+}
+
+/* Readable titles, captions and legends remain outside any SVG scaling.
+   Keep graph cards from inducing horizontal page overflow. */
+html:is(.ss5-native,.ss6-compact-workspace,.ss7-native,.ss8-native) :is(.figure,.plot-card,.compare-card){
+ min-width:0;
+ max-width:100%;
+}
+html:is(.ss5-native,.ss6-compact-workspace,.ss7-native,.ss8-native) :is(.legend,.axis-key){
+ overflow-wrap:anywhere;
+}
