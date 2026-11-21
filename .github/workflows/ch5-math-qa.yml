@@ -9,6 +9,7 @@ on:
       - 'assets/ss-ch5-*.js'
       - 'assets/ss-ch5-*.css'
       - 'tests/ch5-prose-math-qa.mjs'
+      - 'tests/ch5-math-contract.mjs'
       - 'tests/ch5-viewport-e2e.mjs'
       - '.github/workflows/ch5-math-qa.yml'
 
@@ -25,6 +26,8 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --no-audit --no-fund
+      - name: Verify algebraic notation and mathematical identities
+        run: node tests/ch5-math-contract.mjs
       - run: npx playwright install --with-deps chromium
       - name: Verify all eight experiments and full derivations
         run: node tests/ch5-prose-math-qa.mjs
