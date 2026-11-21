@@ -11,10 +11,6 @@ html.ss7-native .ss7-sidebar .brand h2{font-size:18px;margin:5px 0 6px;color:var
 html.ss7-native .ss7-sidebar .brand p{font-size:12px;line-height:1.55;margin:0;color:var(--els-muted,#667)}
 html.ss7-native .ss7-sidebar-title{font-size:11px;letter-spacing:.06em;font-weight:750;color:var(--els-muted,#667);margin:17px 9px 9px}
 html.ss7-native #ss7-lesson-nav{display:grid!important;gap:4px;overflow:visible;padding:0!important}
-html.ss7-native #ss7-lesson-nav button{display:flex;align-items:center;gap:9px;width:100%;max-width:none;text-align:left;min-height:47px;padding:8px 10px;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--els-ink,#222);font-size:12px;line-height:1.35;font-weight:650}
-html.ss7-native #ss7-lesson-nav button:hover{background:var(--els-surface-alt,#eaf1f1);border-color:var(--els-border,#ccc)}
-html.ss7-native #ss7-lesson-nav button[aria-current="true"]{background:var(--els-surface-alt,#e6f4f3);border-color:var(--els-accent,#0d8290);font-weight:800}
-html.ss7-native .ss7-lab-number{display:inline-grid;place-items:center;min-width:29px;min-height:29px;border-radius:7px;background:var(--els-surface-alt,#eee);color:var(--els-ink,#222);font-weight:750}
 html.ss7-native .ss7-workspace{min-width:0;max-width:none;padding:0}
 html.ss7-native .ss7-progress{margin:17px 8px;padding:12px;border:1px solid var(--els-border,#ccc);border-radius:10px;background:var(--els-page,#f7f7f7);font-size:12px;line-height:1.6}
 html.ss7-native .ss7-progress strong{display:block;font-size:13px;margin-bottom:8px}
