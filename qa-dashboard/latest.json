@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-21T10:06:41.821Z",
-  "sourceSha": "94bc59a7b81b5b373fa34efd7b02ab6530312237",
-  "runId": "44892712516",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44892712516",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/94bc59a7b81b5b373fa34efd7b02ab6530312237",
+  "generatedAt": "2026-11-21T10:10:45.203Z",
+  "sourceSha": "0264fc4b12c5bdeb42c884fc766d4f62914883a2",
+  "runId": "44892731449",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44892731449",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/0264fc4b12c5bdeb42c884fc766d4f62914883a2",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -13,9 +13,9 @@
   "labsCount": 62,
   "visual": {
     "expected": 248,
-    "observed": 0,
-    "issues": null,
-    "qualityStatus": "NOT_RUN"
+    "observed": 248,
+    "issues": 102,
+    "qualityStatus": "FAIL"
   },
   "gates": [
     {
@@ -27,49 +27,49 @@
     {
       "id": "G1",
       "label": "Sampling and transform mathematics",
-      "status": "NOT_RUN",
+      "status": "PASS",
       "required": true
     },
     {
       "id": "G2",
       "label": "Native Chapter 6 browser journey",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G2b",
       "label": "Native Chapter 5 and 6 five-palette Chromium/Edge regression",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G3",
       "label": "Theme and language persistence",
-      "status": "NOT_RUN",
+      "status": "PASS",
       "required": true
     },
     {
       "id": "G4",
       "label": "Learning aids and sonification",
-      "status": "NOT_RUN",
+      "status": "PASS",
       "required": true
     },
     {
       "id": "G5",
       "label": "Storage and 62-lab regression",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G6",
       "label": "248-screenshot visual and accessibility smoke audit",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G7",
       "label": "Evidence postprocessing",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     }
   ],
@@ -79,23 +79,51 @@
       "title": "Signals & Systems",
       "labCount": 9,
       "visual": {
-        "status": "NOT_RUN",
+        "status": "FAIL",
         "expected": 36,
-        "observed": 0,
-        "issues": 0,
-        "missing": 36
+        "observed": 36,
+        "issues": 6,
+        "missing": 0
       },
-      "issueExamples": [],
-      "missingExamples": [
-        "1:1:390:warm-neutral",
-        "1:1:390:neutral-dark",
-        "1:1:1280:warm-neutral",
-        "1:1:1280:neutral-dark",
-        "1:2:390:warm-neutral",
-        "1:2:390:neutral-dark",
-        "1:2:1280:warm-neutral",
-        "1:2:1280:neutral-dark"
+      "issueExamples": [
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Parent horizontal overflow {\"theme\":\"light\",\"documentWidth\":452,\"windowWidth\":390,\"guide\":true,\"navCurrent\":false}"
+        },
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Missing learning route/current page"
+        },
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "Parent horizontal overflow {\"theme\":\"dark\",\"documentWidth\":452,\"windowWidth\":390,\"guide\":true,\"navCurrent\":false}"
+        },
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "Missing learning route/current page"
+        },
+        {
+          "lab": null,
+          "width": 1280,
+          "theme": "warm-neutral",
+          "message": "Missing learning route/current page"
+        },
+        {
+          "lab": null,
+          "width": 1280,
+          "theme": "neutral-dark",
+          "message": "Missing learning route/current page"
+        }
       ],
+      "missingExamples": [],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
@@ -111,23 +139,51 @@
       "title": "Convolution and LTI",
       "labCount": 9,
       "visual": {
-        "status": "NOT_RUN",
+        "status": "FAIL",
         "expected": 36,
-        "observed": 0,
-        "issues": 0,
-        "missing": 36
+        "observed": 36,
+        "issues": 6,
+        "missing": 0
       },
-      "issueExamples": [],
-      "missingExamples": [
-        "2:1:390:warm-neutral",
-        "2:1:390:neutral-dark",
-        "2:1:1280:warm-neutral",
-        "2:1:1280:neutral-dark",
-        "2:2:390:warm-neutral",
-        "2:2:390:neutral-dark",
-        "2:2:1280:warm-neutral",
-        "2:2:1280:neutral-dark"
+      "issueExamples": [
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Parent horizontal overflow {\"theme\":\"light\",\"documentWidth\":452,\"windowWidth\":390,\"guide\":true,\"navCurrent\":false}"
+        },
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Missing learning route/current page"
+        },
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "Parent horizontal overflow {\"theme\":\"dark\",\"documentWidth\":452,\"windowWidth\":390,\"guide\":true,\"navCurrent\":false}"
+        },
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "Missing learning route/current page"
+        },
+        {
+          "lab": null,
+          "width": 1280,
+          "theme": "warm-neutral",
+          "message": "Missing learning route/current page"
+        },
+        {
+          "lab": null,
+          "width": 1280,
+          "theme": "neutral-dark",
+          "message": "Missing learning route/current page"
+        }
       ],
+      "missingExamples": [],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
@@ -143,23 +199,51 @@
       "title": "Fourier Series",
       "labCount": 7,
       "visual": {
-        "status": "NOT_RUN",
+        "status": "FAIL",
         "expected": 28,
-        "observed": 0,
-        "issues": 0,
-        "missing": 28
+        "observed": 28,
+        "issues": 6,
+        "missing": 0
       },
-      "issueExamples": [],
-      "missingExamples": [
-        "3:1:390:warm-neutral",
-        "3:1:390:neutral-dark",
-        "3:1:1280:warm-neutral",
-        "3:1:1280:neutral-dark",
-        "3:2:390:warm-neutral",
-        "3:2:390:neutral-dark",
-        "3:2:1280:warm-neutral",
-        "3:2:1280:neutral-dark"
+      "issueExamples": [
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Parent horizontal overflow {\"theme\":\"light\",\"documentWidth\":452,\"windowWidth\":390,\"guide\":true,\"navCurrent\":false}"
+        },
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Missing learning route/current page"
+        },
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "Parent horizontal overflow {\"theme\":\"dark\",\"documentWidth\":452,\"windowWidth\":390,\"guide\":true,\"navCurrent\":false}"
+        },
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "Missing learning route/current page"
+        },
+        {
+          "lab": null,
+          "width": 1280,
+          "theme": "warm-neutral",
+          "message": "Missing learning route/current page"
+        },
+        {
+          "lab": null,
+          "width": 1280,
+          "theme": "neutral-dark",
+          "message": "Missing learning route/current page"
+        }
       ],
+      "missingExamples": [],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
@@ -175,23 +259,51 @@
       "title": "Continuous-Time Fourier Transform",
       "labCount": 8,
       "visual": {
-        "status": "NOT_RUN",
+        "status": "FAIL",
         "expected": 32,
-        "observed": 0,
-        "issues": 0,
-        "missing": 32
+        "observed": 32,
+        "issues": 6,
+        "missing": 0
       },
-      "issueExamples": [],
-      "missingExamples": [
-        "4:1:390:warm-neutral",
-        "4:1:390:neutral-dark",
-        "4:1:1280:warm-neutral",
-        "4:1:1280:neutral-dark",
-        "4:2:390:warm-neutral",
-        "4:2:390:neutral-dark",
-        "4:2:1280:warm-neutral",
-        "4:2:1280:neutral-dark"
+      "issueExamples": [
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Parent horizontal overflow {\"theme\":\"light\",\"documentWidth\":452,\"windowWidth\":390,\"guide\":true,\"navCurrent\":false}"
+        },
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Missing learning route/current page"
+        },
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "Parent horizontal overflow {\"theme\":\"dark\",\"documentWidth\":452,\"windowWidth\":390,\"guide\":true,\"navCurrent\":false}"
+        },
+        {
+          "lab": null,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "Missing learning route/current page"
+        },
+        {
+          "lab": null,
+          "width": 1280,
+          "theme": "warm-neutral",
+          "message": "Missing learning route/current page"
+        },
+        {
+          "lab": null,
+          "width": 1280,
+          "theme": "neutral-dark",
+          "message": "Missing learning route/current page"
+        }
       ],
+      "missingExamples": [],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
@@ -207,23 +319,14 @@
       "title": "Laplace Transform",
       "labCount": 8,
       "visual": {
-        "status": "NOT_RUN",
+        "status": "PASS",
         "expected": 32,
-        "observed": 0,
+        "observed": 32,
         "issues": 0,
-        "missing": 32
+        "missing": 0
       },
       "issueExamples": [],
-      "missingExamples": [
-        "5:1:390:warm-neutral",
-        "5:1:390:neutral-dark",
-        "5:1:1280:warm-neutral",
-        "5:1:1280:neutral-dark",
-        "5:2:390:warm-neutral",
-        "5:2:390:neutral-dark",
-        "5:2:1280:warm-neutral",
-        "5:2:1280:neutral-dark"
-      ],
+      "missingExamples": [],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
@@ -239,23 +342,14 @@
       "title": "Discrete-Time Fourier Transform",
       "labCount": 6,
       "visual": {
-        "status": "NOT_RUN",
+        "status": "PASS",
         "expected": 24,
-        "observed": 0,
+        "observed": 24,
         "issues": 0,
-        "missing": 24
+        "missing": 0
       },
       "issueExamples": [],
-      "missingExamples": [
-        "6:1:390:warm-neutral",
-        "6:1:390:neutral-dark",
-        "6:1:1280:warm-neutral",
-        "6:1:1280:neutral-dark",
-        "6:2:390:warm-neutral",
-        "6:2:390:neutral-dark",
-        "6:2:1280:warm-neutral",
-        "6:2:1280:neutral-dark"
-      ],
+      "missingExamples": [],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "6.1 sampling identity only"
@@ -271,23 +365,87 @@
       "title": "Sampling",
       "labCount": 7,
       "visual": {
-        "status": "NOT_RUN",
+        "status": "FAIL",
         "expected": 28,
-        "observed": 0,
-        "issues": 0,
-        "missing": 28
+        "observed": 28,
+        "issues": 28,
+        "missing": 0
       },
-      "issueExamples": [],
-      "missingExamples": [
-        "7:1:390:warm-neutral",
-        "7:1:390:neutral-dark",
-        "7:1:1280:warm-neutral",
-        "7:1:1280:neutral-dark",
-        "7:2:390:warm-neutral",
-        "7:2:390:neutral-dark",
-        "7:2:1280:warm-neutral",
-        "7:2:1280:neutral-dark"
+      "issueExamples": [
+        {
+          "lab": 1,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Native Chapter 7 missing plot"
+        },
+        {
+          "lab": 2,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Native Chapter 7 missing plot"
+        },
+        {
+          "lab": 3,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Native Chapter 7 missing plot"
+        },
+        {
+          "lab": 4,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Native Chapter 7 missing plot"
+        },
+        {
+          "lab": 5,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Native Chapter 7 missing plot"
+        },
+        {
+          "lab": 6,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Native Chapter 7 missing plot"
+        },
+        {
+          "lab": 7,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "Native Chapter 7 missing plot"
+        },
+        {
+          "lab": 1,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "Native Chapter 7 missing plot"
+        },
+        {
+          "lab": 2,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "Native Chapter 7 missing plot"
+        },
+        {
+          "lab": 3,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "Native Chapter 7 missing plot"
+        },
+        {
+          "lab": 4,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "Native Chapter 7 missing plot"
+        },
+        {
+          "lab": 5,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "Native Chapter 7 missing plot"
+        }
       ],
+      "missingExamples": [],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
@@ -303,23 +461,87 @@
       "title": "Z-Transform",
       "labCount": 8,
       "visual": {
-        "status": "NOT_RUN",
+        "status": "FAIL",
         "expected": 32,
-        "observed": 0,
-        "issues": 0,
-        "missing": 32
+        "observed": 32,
+        "issues": 38,
+        "missing": 0
       },
-      "issueExamples": [],
-      "missingExamples": [
-        "8:1:390:warm-neutral",
-        "8:1:390:neutral-dark",
-        "8:1:1280:warm-neutral",
-        "8:1:1280:neutral-dark",
-        "8:2:390:warm-neutral",
-        "8:2:390:neutral-dark",
-        "8:2:1280:warm-neutral",
-        "8:2:1280:neutral-dark"
+      "issueExamples": [
+        {
+          "lab": 1,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "가로 스크롤 초과"
+        },
+        {
+          "lab": 1,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "가로 스크롤 초과"
+        },
+        {
+          "lab": 2,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "가로 스크롤 초과"
+        },
+        {
+          "lab": 2,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "가로 스크롤 초과"
+        },
+        {
+          "lab": 3,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "가로 스크롤 초과"
+        },
+        {
+          "lab": 3,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "가로 스크롤 초과"
+        },
+        {
+          "lab": 4,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "가로 스크롤 초과"
+        },
+        {
+          "lab": 4,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "가로 스크롤 초과"
+        },
+        {
+          "lab": 5,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "가로 스크롤 초과"
+        },
+        {
+          "lab": 5,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "가로 스크롤 초과"
+        },
+        {
+          "lab": 6,
+          "width": 390,
+          "theme": "warm-neutral",
+          "message": "가로 스크롤 초과"
+        },
+        {
+          "lab": 6,
+          "width": 390,
+          "theme": "neutral-dark",
+          "message": "가로 스크롤 초과"
+        }
       ],
+      "missingExamples": [],
       "coverage": {
         "dimensions": "2 viewport widths × 2 themes",
         "numericalReference": "PENDING_INDEPENDENT_ORACLE"
