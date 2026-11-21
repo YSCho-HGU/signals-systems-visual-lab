@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-21T03:00:15.336Z",
-  "sourceSha": "76f2dd6d94e3c2ddc77aeff05dd2d18f77125812",
-  "runId": "44858777829",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44858777829",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/76f2dd6d94e3c2ddc77aeff05dd2d18f77125812",
+  "generatedAt": "2026-11-21T03:01:24.988Z",
+  "sourceSha": "df4c1a2eaf77719bbff2c1f113f254cedac6ba5d",
+  "runId": "44858843736",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44858843736",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/df4c1a2eaf77719bbff2c1f113f254cedac6ba5d",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -33,13 +33,19 @@
     {
       "id": "G2",
       "label": "Native Chapter 6 browser journey",
+      "status": "FAIL",
+      "required": true
+    },
+    {
+      "id": "G2b",
+      "label": "Native Chapter 5 and 6 five-palette Chromium/Edge regression",
       "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G3",
       "label": "Theme and language persistence",
-      "status": "NOT_RUN",
+      "status": "PASS",
       "required": true
     },
     {
