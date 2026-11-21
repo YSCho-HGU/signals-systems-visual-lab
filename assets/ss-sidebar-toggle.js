@@ -7,10 +7,10 @@ function persist(value){try{localStorage.setItem(KEY,value?'1':'0')}catch{}}
 function update(){
  const collapsed=root.dataset.ssSidebar==='collapsed';
  document.querySelectorAll('.ss-side-toggle').forEach(b=>{
-  b.setAttribute('aria-expanded',String(!collapsed));
-  b.setAttribute('aria-label',collapsed?'Expand chapter navigation':'Collapse chapter navigation');
+  if(b.getAttribute('aria-expanded')!==String(!collapsed))b.setAttribute('aria-expanded',String(!collapsed));
+  const label=collapsed?'Expand chapter navigation':'Collapse chapter navigation';if(b.getAttribute('aria-label')!==label)b.setAttribute('aria-label',label);
   const icon=b.querySelector('.ss-toggle-icon');
-  if(icon)icon.textContent=collapsed?'»':'«';
+  if(icon&&icon.textContent!==(collapsed?'»':'«'))icon.textContent=collapsed?'»':'«';
  });
 }
 function setup(){
@@ -32,5 +32,5 @@ function setup(){
 root.dataset.ssSidebar=saved()?'collapsed':'expanded';
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);
 else setup();
-new MutationObserver(setup).observe(document.documentElement,{childList:true,subtree:true});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{const app=document.getElementById('app');if(app)new MutationObserver(setup).observe(app,{childList:true});});else{const app=document.getElementById('app');if(app)new MutationObserver(setup).observe(app,{childList:true});}
 })();
