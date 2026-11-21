@@ -131,20 +131,22 @@ try{
    const root=getComputedStyle(document.documentElement);
    const surface=root.getPropertyValue('--els-surface').trim();
    const ink=root.getPropertyValue('--els-ink').trim();
+   const muted=root.getPropertyValue('--els-muted').trim();
    const rgb=(value)=>{
     const elem=document.createElement('span');elem.style.color=value;document.body.appendChild(elem);
     const color=getComputedStyle(elem).color;elem.remove();return color;
    };
    return {chart:!!svg,labels:svg?.querySelectorAll('text').length||0,
     fill:rect?getComputedStyle(rect).fill:null,desiredSurface:rgb(surface),
-    axisColor:text?getComputedStyle(text).fill:null,desiredInk:rgb(ink),
+    axisColor:text?getComputedStyle(text).fill:null,desiredInk:rgb(ink),desiredMuted:rgb(muted),
     detailMath:!!document.querySelector('#tm-detail .tm-formula'),
     labelCount:document.querySelectorAll('.tm-node').length};
   });
   record(visual.chart&&visual.labels>3&&visual.labelCount===8,
     'map-'+theme+'-eight-nodes-and-labeled-graph',JSON.stringify(visual));
-  record(visual.fill===visual.desiredSurface&&visual.axisColor===visual.desiredInk,
-    'map-'+theme+'-chart-surface-and-axis-color',JSON.stringify(visual));
+  record(visual.fill===visual.desiredSurface&&[visual.desiredInk,visual.desiredMuted].includes(visual.axisColor)
+    &&contrast(visual.axisColor,visual.fill)>=4.5,
+    'map-'+theme+'-chart-surface-and-accessible-axis-color',JSON.stringify(visual));
   record(visual.detailMath,'map-'+theme+'-math-detail-present');
   await overview.screenshot({path:folder+'/learning-map-'+theme+'.png',fullPage:true});
  }
