@@ -59,7 +59,8 @@
         var span=document.createElement("span");
         span.className="els-inline-math";
         span.setAttribute("data-els-inline-source",match[0]);
-        renderMath(span,match[1],{display:false,fallbackText:match[0]});
+        span.textContent=match[0];
+        span.setAttribute("data-els-math-inline",match[1]);
         frag.appendChild(span);count++;cursor+=match[0].length;
       }else{
         var next=cursor+1;
@@ -68,6 +69,7 @@
       }
     }
     target.replaceChildren(frag);
+    renderAuthoredMath(target);
     return count;
   }
   // Explicit math inside authored HTML: <span data-els-math-inline="...">fallback</span>
