@@ -73,7 +73,7 @@ html.ss5-native .formula{
  border-left:4px solid var(--els-link,#216a80)!important;
  border-radius:11px!important;gap:6px!important
 }
-html.ss5-native .formula .math{font-size:clamp(18px,1.6vw,22px)!important;overflow-x:auto;line-height:1.55;color:var(--els-info-ink,#245270)!important}
+html.ss5-native .formula .math{color:var(--els-info-ink,#245270)!important}
 html.ss5-native .formula .formhint{font-size:12px!important;color:var(--els-muted,#667)!important}
 html.ss5-native .lab{
  display:grid!important;grid-template-columns:minmax(220px,265px) minmax(0,1fr)!important;
@@ -114,7 +114,6 @@ html.ss5-native .insight,html.ss5-native .quiz,html.ss5-native .compare-wrap{
 html.ss5-native .compare-head,html.ss5-native .compare-sub,html.ss5-native .compare-footer{color:var(--els-muted,#667)!important}
 html.ss5-native .compare-card{background:var(--els-surface,#fff)!important;color:var(--els-ink,#222)!important;border-color:var(--els-border,#ccd)!important;min-width:0}
 html.ss5-native .compare-card.selected{outline:2px solid var(--els-link,#216a80)!important;outline-offset:-2px}
-html.ss5-native .deriv-math{font-size:clamp(17px,1.45vw,21px)!important;overflow-x:auto!important}
 html.ss5-native .footer{font-size:11px!important;color:var(--els-muted,#667)!important;margin-top:22px!important;line-height:1.5!important}
 html.ss5-native #studio-back{display:none!important}
 html.ss5-native :is(a,button,input,select):focus-visible{outline:3px solid var(--els-focus,#b56b18)!important;outline-offset:2px!important}
@@ -382,7 +381,6 @@ html.ss5-native #page .reading-grid{gap:12px!important}
 html.ss5-native #page .reading-note{padding:13px 15px!important}
 html.ss5-native #page .guide-steps{gap:12px!important}
 html.ss5-native #page .deriv-step{padding:14px 16px!important}
-html.ss5-native #page .deriv-math{font-size:clamp(18px,1.55vw,22px)!important;line-height:1.7!important}
 html.ss5-native #page .ss5-predict{gap:9px 16px!important}
 html.ss5-native #page>.lab{gap:14px!important}
 @media(max-width:780px){
@@ -418,3 +416,6 @@ html.ss5-native .ss5-chapter-menu>.ss5-chapter-links a:focus-visible{background:
  html.ss5-native .ss5-chapter-menu>.ss5-site-title{font-size:12px;line-height:1.35}
  html.ss5-native .ss5-header-actions{margin-left:auto;width:100%;justify-content:flex-end}
 }
+
+/* Chapter-specific reading rhythm; formula typography lives in ss-formula-standard.css. */
+html.ss5-native :is(.reading-note p,.figure .sub,.quiz p){line-height:1.85!important}
