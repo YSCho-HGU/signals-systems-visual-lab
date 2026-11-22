@@ -6,7 +6,7 @@
       "id": "no-browser-pageerrors",
       "passed": false,
       "detail": [
-        "SyntaxError: Invalid regular expression flags"
+        "SyntaxError: Failed to set a named property 'ssLanguageOriginalaria-label' on 'DOMStringMap': 'ssLanguageOriginalaria-label' is not a valid property name."
       ]
     }
   ],
@@ -2125,14 +2125,14 @@
       "id": "no-browser-pageerrors",
       "passed": false,
       "detail": [
-        "SyntaxError: Invalid regular expression flags"
+        "SyntaxError: Failed to set a named property 'ssLanguageOriginalaria-label' on 'DOMStringMap': 'ssLanguageOriginalaria-label' is not a valid property name."
       ]
     }
   ],
   "pageErrors": [
-    "SyntaxError: Invalid regular expression flags"
+    "SyntaxError: Failed to set a named property 'ssLanguageOriginalaria-label' on 'DOMStringMap': 'ssLanguageOriginalaria-label' is not a valid property name."
   ],
-  "sourceSha": "8d9ede15d764ce7c56b9876a6ba113eefe4ab48a",
-  "runId": 44985172104,
-  "generatedAt": "2026-11-22T04:28:41.474Z"
+  "sourceSha": "01e81d17b16e42c8abaff662d280d8c3fae4e599",
+  "runId": 44985701529,
+  "generatedAt": "2026-11-22T04:35:59.194Z"
 }
