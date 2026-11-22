@@ -55,6 +55,34 @@ try{
      };
     },{side,buttons,badge});
     record(before.width>=160&&before.width<=270,'ch'+ch+'-'+width+'-expanded-width',JSON.stringify(before.width));
+    const layout=await page.evaluate(({side})=>{
+      const aside=document.querySelector(side);
+      const root=aside?.parentElement;
+      const content=ch===1?document.querySelector('#ch1-app>.ss-ch1-workspace'):
+        ch===7?document.querySelector('.ss7-workspace>main'):
+        ch===8?document.querySelector('.ss8-workspace>main'):
+        root?.querySelector(':scope>.main');
+      const ar=aside?.getBoundingClientRect(),mr=content?.getBoundingClientRect();
+      const style=content?getComputedStyle(content):null;
+      const nav=aside?.querySelector('nav');
+      return {
+        rail:ar?.width||0,
+        bodyStart:mr?.left||0,
+        bodyRight:mr?.right||0,
+        padTop:parseFloat(style?.paddingTop||'0'),
+        padLeft:parseFloat(style?.paddingLeft||'0'),
+        padRight:parseFloat(style?.paddingRight||'0'),
+        gap:nav?getComputedStyle(nav).rowGap:'',
+        first:content?.firstElementChild?.tagName||'',
+        available:!!content
+      };
+    },{side,ch});
+    record(layout.available&&layout.bodyStart>=layout.rail-2&&layout.bodyRight<=width+2,
+      'ch'+ch+'-'+width+'-chapter5-content-alignment',JSON.stringify(layout));
+    record(Math.abs(layout.padTop-(width<=780?12:15))<1&&Math.abs(layout.padLeft-layout.padRight)<1,
+      'ch'+ch+'-'+width+'-chapter5-content-padding',JSON.stringify(layout));
+    record(layout.gap==='5px','ch'+ch+'-'+width+'-chapter5-nav-gap',layout.gap);
+
     record(before.number==='01','ch'+ch+'-'+width+'-two-digit-first-number',before.number);
     if(ch===1){
      const names=await page.locator('#ch1-app>.sidebar .nav-name').allTextContents();
