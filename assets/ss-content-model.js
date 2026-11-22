@@ -35,7 +35,9 @@
  }
  function html(value,m=mode()){
   const source=String(value??'');
-  // Keep tags, quoted attribute values, math and embedded SVG paths unchanged.
+  // Full authored translation can contain markup (e.g. e<sup>−bt</sup>).
+  // Resolve that pair first, before splitting into tags and text fragments.
+  if(Object.prototype.hasOwnProperty.call(translations,source))return plain(source,m);
   return source.split(/(<[^>]+>)/g).map(part=>
    part.startsWith('<')&&part.endsWith('>')?part:plain(part,m)
   ).join('');
