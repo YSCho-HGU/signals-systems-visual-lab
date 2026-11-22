@@ -449,3 +449,23 @@ html[data-els-theme="navy-dark"] #map-view .tm-edge-path[data-type="algorithm"]{
 @media (prefers-reduced-motion:reduce){
  #map-view .tm-edge-path{transition:none!important}
 }
+
+/* SVG arrowheads use the same high-contrast relationship palette as their paths. */
+html[data-els-theme="neutral-dark"] #map-view marker#tm-arr-limit path,
+html[data-els-theme="warm-dark"] #map-view marker#tm-arr-limit path,
+html[data-els-theme="navy-dark"] #map-view marker#tm-arr-limit path{fill:#62d5df!important}
+html[data-els-theme="neutral-dark"] #map-view marker#tm-arr-roc path,
+html[data-els-theme="warm-dark"] #map-view marker#tm-arr-roc path,
+html[data-els-theme="navy-dark"] #map-view marker#tm-arr-roc path{fill:#c2a0f4!important}
+html[data-els-theme="neutral-dark"] #map-view marker#tm-arr-sampling path,
+html[data-els-theme="warm-dark"] #map-view marker#tm-arr-sampling path,
+html[data-els-theme="navy-dark"] #map-view marker#tm-arr-sampling path{fill:#f6be63!important}
+html[data-els-theme="neutral-dark"] #map-view marker#tm-arr-record path,
+html[data-els-theme="warm-dark"] #map-view marker#tm-arr-record path,
+html[data-els-theme="navy-dark"] #map-view marker#tm-arr-record path{fill:#8ec9ff!important}
+html[data-els-theme="neutral-dark"] #map-view marker#tm-arr-normalization path,
+html[data-els-theme="warm-dark"] #map-view marker#tm-arr-normalization path,
+html[data-els-theme="navy-dark"] #map-view marker#tm-arr-normalization path{fill:#ffa9c5!important}
+html[data-els-theme="neutral-dark"] #map-view marker#tm-arr-algorithm path,
+html[data-els-theme="warm-dark"] #map-view marker#tm-arr-algorithm path,
+html[data-els-theme="navy-dark"] #map-view marker#tm-arr-algorithm path{fill:#bdd5dd!important}
