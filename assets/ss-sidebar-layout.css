@@ -20,6 +20,15 @@ html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.n
 html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) .brand :is(h1,h2){
  margin:6px 0 5px!important;font-size:18px!important;line-height:1.4!important;font-weight:800!important;color:var(--els-ink)!important
 }
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) .brand :is(.over,.eyebrow){
+ font-family:Arial,'Malgun Gothic',sans-serif!important;font-size:11px!important;font-weight:750!important;
+ letter-spacing:.075em!important;text-transform:uppercase!important;line-height:1.55!important;
+ color:var(--els-muted)!important
+}
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) .brand p{
+ margin:0!important;font-family:Arial,'Malgun Gothic',sans-serif!important;font-size:12px!important;
+ line-height:1.6!important;font-weight:400!important;letter-spacing:normal!important;color:var(--els-muted)!important
+}
 html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) .brand :is(p,.over,.eyebrow){
  color:var(--els-muted)!important;line-height:1.55!important
 }
