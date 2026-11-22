@@ -251,7 +251,7 @@ html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hov
    if(getComputedStyle(host).position==='static')host.style.position='relative';
    const tip=el('div','ss-hover-tip',host),v=el('div','ss-hover-v',host),h=el('div','ss-hover-h',host),dot=el('div','ss-hover-dot',host);
    tip.setAttribute('role','status');tip.setAttribute('aria-live','off');
-   let hint=host.querySelector('.ss-hover-hint');if(!hint){hint=el('div','ss-hover-hint',host);hint.textContent='ⓘ Hover / Tap / Focus: coordinates + signal values · 마우스·터치·키보드로 값 확인'}
+   let hint=host.querySelector('.ss-hover-hint');if(!hint){hint=el('div','ss-hover-hint',host);hint.textContent=window.SSContentModel.text('ⓘ Hover / Tap / Focus: coordinates + signal values · 마우스·터치·키보드로 값 확인')}
    target.classList.add('ss-hover-target');target.setAttribute('tabindex','0');
    target.setAttribute('aria-description','Move pointer, tap, or use arrow keys to inspect signal values and coordinates.');
    st={target,host,tip,v,h,dot,d:null,lastX:null,lastType:null};states.set(target,st);
@@ -347,10 +347,10 @@ html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hov
    st.dot.style.cssText=`display:block;left:${qx}px;top:${qy}px`;
   }else{st.h.style.display='none';st.dot.style.display='none'}
   st.tip.replaceChildren();
-  const title=el('div','ss-hover-title',st.tip);title.textContent=d.plane?'Complex-plane probe / 복소평면 좌표':'Graph probe / 그래프 값 읽기';
+  const title=el('div','ss-hover-title',st.tip);title.textContent=window.SSContentModel.text(d.plane?'Complex-plane probe / 복소평면 좌표':'Graph probe / 그래프 값 읽기');
   const coord=el('div','ss-hover-coord',st.tip);coord.textContent=`${d.xlabel||'x'} = ${fmt(x)}   |   ${d.ylabel||'y'} (cursor) = ${fmt(y)}`;
   for(const it of items){const line=el('div','ss-hover-line'+(it.primary?' primary':''),st.tip);const sw=el('i','ss-hover-swatch',line);sw.style.setProperty('--ss-line',it.color);const text=el('span','',line);const name=el('b','',text);name.textContent=it.label;const val=el('span','',text);val.textContent=(it.value?' = '+it.value:'')}
-  const note=el('div','ss-hover-note',st.tip);note.textContent=d.plane?'복소평면 좌표는 위치값이며, pole/zero는 가까운 경우에만 표시합니다.':items.some(x=>x.method&&x.method!=='f(x) 직접 계산')?'fn(x): 수식 직접 계산 · sample: 실제 계산 표본 (보간하지 않음)':'수식 함수가 제공된 경우 커서 x에서 직접 계산한 값입니다.';
+  const note=el('div','ss-hover-note',st.tip);note.textContent=window.SSContentModel.text(d.plane?'복소평면 좌표는 위치값이며, pole/zero는 가까운 경우에만 표시합니다.':items.some(x=>x.method&&x.method!=='f(x) 직접 계산')?'fn(x): 수식 직접 계산 · sample: 실제 계산 표본 (보간하지 않음)':'수식 함수가 제공된 경우 커서 x에서 직접 계산한 값입니다.');
   st.tip.style.display='block';
   // Measure after writing and keep the tooltip inside the card.
   const tw=st.tip.offsetWidth||230,th=st.tip.offsetHeight||90;
