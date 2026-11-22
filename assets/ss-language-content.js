@@ -831,6 +831,170 @@ const embeddedEnglishFragments=[
  [
   "표준 근사, 실제 신호·잡음에 따라 다름",
   "standard approximation; depends on the actual signal and noise"
+ ],
+ [
+  "Tₛ를 크게 하면 DT sample의 간격과 개수는 어떻게 달라질까요?",
+  "How do sample spacing and sample count change as Tₛ increases?"
+ ],
+ [
+  "Sampling interval Tₛ를 움직이고 CT curve와 DT stems를 비교합니다.",
+  "Adjust sampling interval Tₛ and compare the CT curve with the DT stems."
+ ],
+ [
+  "DT의 실제 시간은 t=nTₛ입니다. Sample value는 x(nTₛ)로 계산됩니다.",
+  "Physical time for the DT sequence is t=nTₛ, and samples are evaluated as x(nTₛ)."
+ ],
+ [
+  "Pulse 폭 또는 ε를 줄이면 그래프는 어떻게 바뀔까요?",
+  "How does the graph change as pulse width or ε decreases?"
+ ],
+ [
+  "Signal type과 CT/DT를 전환하고 width를 조절합니다.",
+  "Switch signal types and CT/DT domains, then adjust width."
+ ],
+ [
+  "CT impulse approximation은 폭 ε, 높이 A/ε이므로 area A가 유지됩니다. DT impulse는 한 sample에만 A가 있습니다.",
+  "A CT impulse approximation has width ε and height A/ε, preserving area A; a DT impulse has value A at one index."
+ ],
+ [
+  "x(at+b)의 위치를 식의 부호만으로 추측하지 말고 support endpoints를 먼저 표시합니다.",
+  "Identify the transformed support endpoints rather than guessing from signs in x(at+b)."
+ ],
+ [
+  "CT cosine과 DT complex exponential의 주기성 조건은 같을까요?",
+  "Do continuous-time cosines and discrete-time complex exponentials satisfy the same periodicity condition?"
+ ],
+ [
+  "CT ω₀와 DT normalized frequency Ω/(2π)를 각각 변경합니다.",
+  "Adjust continuous-time ω₀ and discrete-time normalized frequency Ω/(2π) separately."
+ ],
+ [
+  "CT는 T₀=2π/|ω₀|; DT는 ΩN=2πm을 만족하는 정수 N이 필요합니다.",
+  "For CT, T₀=2π/|ω₀|; for DT, an integer N satisfying ΩN=2πm is required."
+ ],
+ [
+  "관찰 시간 T를 늘리면 누적 Energy와 Average Power는 각각 어떻게 될까요?",
+  "What happens to accumulated energy and average power as observation time T increases?"
+ ],
+ [
+  "단계별 이해",
+  "Guided explanation"
+ ],
+ [
+  "스스로 확인",
+  "Check yourself"
+ ],
+ [
+  "해설 보기",
+  "Reveal explanation"
+ ],
+ [
+  "학습 주제",
+  "Learning experiments"
+ ],
+ [
+  "오프라인 실행",
+  "Runs offline"
+ ],
+ [
+  "실험 변수",
+  "Experiment controls"
+ ],
+ [
+  "자동 탐색",
+  "Auto explore"
+ ],
+ [
+  "먼저 예측한 뒤 하나의 변수를 바꾸고 결과를 설명해 보세요.",
+  "Predict first, change one variable, then explain the result."
+ ],
+ [
+  "핵심 이해",
+  "Key insight"
+ ],
+ [
+  "단계별 수식 유도",
+  "Guided derivation"
+ ],
+ [
+  "수식 유도와 의미",
+  "Derivation and meaning"
+ ],
+ [
+  "변수를 변경하면 아래 수식도 갱신됩니다.",
+  "Changing a variable also updates the equations below."
+ ],
+ [
+  "이전",
+  "Previous"
+ ],
+ [
+  "다음",
+  "Next"
+ ],
+ [
+  "자동 전개",
+  "Play animation"
+ ],
+ [
+  "예측 → 관찰 → 이유 → 확인",
+  "Predict → Observe → Explain → Check"
+ ],
+ [
+  "나의 예측",
+  "My prediction"
+ ],
+ [
+  "변수 조절",
+  "Adjust controls"
+ ],
+ [
+  "전체 초기화",
+  "Reset all"
+ ],
+ [
+  "다음 실험",
+  "Next experiment"
+ ],
+ [
+  "먼저 결과를 예측한 다음 값을 조절하고, time-domain(시간영역)과 s-plane(복소평면)을 함께 읽어 보세요.",
+  "Predict the outcome, then adjust values and compare the time-domain signal with the s-plane."
+ ],
+ [
+  "그래프 관찰",
+  "Observe graphs"
+ ],
+ [
+  "변수 하나를 바꾸고 시간 신호와 s-plane을 비교하세요.",
+  "Change one variable and compare the time-domain signal with the s-plane."
+ ],
+ [
+  "한 개의 정현파가 왜 여러 FFT bin에 퍼져 보일까요?",
+  "Why does a single sinusoid appear across multiple FFT bins?"
+ ],
+ [
+  "1 → 2 → 3 → 4 순서로 눌러 관측 주기 수, 양 끝단 모양, 스펙트럼을 비교하세요.",
+  "Select 1 → 2 → 3 → 4 in order to compare cycle count, boundary shape, and spectrum."
+ ],
+ [
+  "학습 확인",
+  "Mark lab reviewed"
+ ],
+ [
+  "채점 결과 아님",
+  "Not a graded result"
+ ],
+ [
+  "핵심 관계식",
+  "Key relation"
+ ],
+ [
+  "목차 접기",
+  "Collapse contents"
+ ],
+ [
+  "목차 펼치기",
+  "Expand contents"
  ]
 ];
 const nodeFilter='script,style,textarea,option,svg,canvas,math,.katex,.katex-display,code,pre,[contenteditable],[data-no-translate]';
@@ -934,7 +1098,7 @@ function audit(){
    if(/[가-힣]/.test(value))entries.push({text:value.slice(0,180),tag:el.tagName});
   }
  }
- return {chapter:(location.pathname.match(/chapter([1-8])\\.html/)||[])[1]||null,mode:window.ELSLanguage.get(),untranslatedCount:entries.length,samples:entries.slice(0,40)};
+ return {chapter:(location.pathname.match(/chapter([1-8])\.html/)||[])[1]||null,mode:window.ELSLanguage.get(),untranslatedCount:entries.length,samples:entries.slice(0,40)};
 }
 window.ELSSharedLanguage={refresh:run,audit:audit};
 })();
