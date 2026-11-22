@@ -20,7 +20,7 @@ html.ss8-native .ss8-progress button{width:100%;padding:7px 10px}
 html.ss8-native .ss8-progress small{font-size:11px;line-height:1.55}
 html.ss8-native[data-ss-sidebar="collapsed"] .ss8-shell{grid-template-columns:52px minmax(0,1fr)}
 html.ss8-native[data-ss-sidebar="collapsed"] .ss8-sidebar{overflow:hidden}
-html.ss8-native[data-ss-sidebar="collapsed"] .ss8-sidebar>*:not(.ss-side-toggle){display:none!important}
+
 html.ss8-native[data-ss-sidebar="collapsed"] .ss8-sidebar .ss-side-toggle{width:34px;justify-content:center;padding:4px}
 html.ss8-native[data-ss-sidebar="collapsed"] .ss8-sidebar .ss-toggle-text{display:none}
 html.ss8-native .ss8-workspace{min-width:0}
