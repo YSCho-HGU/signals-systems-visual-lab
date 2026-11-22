@@ -20,7 +20,7 @@ try{
   });
   await page.goto(base+'chapter'+ch+'.html',{waitUntil:'domcontentloaded',timeout:45000});
   await page.locator('.ss-layout-sidebar nav button').first().waitFor({state:'visible',timeout:20000});
-  await page.waitForFunction(()=>!!window.ELSSharedLanguage?.audit,null,{timeout:15000});
+  await page.waitForFunction(()=>!!window.SSContentModel?.model,null,{timeout:15000});
   if(ch===1){
    const first=await page.locator('#desc').textContent();
    const prompt=await page.locator('.ss-found-intro').textContent();
@@ -44,7 +44,20 @@ try{
     });
     await page.waitForTimeout(80);
    }
-   const result=await page.evaluate(()=>window.ELSSharedLanguage.audit());
+   const result=await page.evaluate(()=>{
+    const root=document.querySelector('.ss-layout-root')||document.querySelector('main')||document.body;
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+    const remaining=[];
+    while(walker.nextNode()){
+     const node=walker.currentNode,el=node.parentElement;
+     if(!el||el.closest('script,style,option,textarea,svg,canvas,.katex,.katex-display,[hidden],[aria-hidden="true"]'))continue;
+     const rect=el.getBoundingClientRect();
+     if(!rect.width||!rect.height)continue;
+     const value=node.nodeValue.trim();
+     if(/[가-힣]/.test(value))remaining.push({tag:el.tagName,text:value.slice(0,180)});
+    }
+    return {untranslatedCount:remaining.length,samples:remaining.slice(0,40)};
+   });
    if(result.untranslatedCount) findings.push({chapter:ch,section:section+1,...result});
   }
   if(errors.length)findings.push({chapter:ch,pageErrors:errors});
