@@ -125,9 +125,32 @@ try{
 
     record(before.number==='01','ch'+ch+'-'+width+'-two-digit-first-number',before.number);
     if(ch===1){
-     const names=await page.locator('#ch1-app>.sidebar .nav-name').allTextContents();
-     record(names.length===9&&names[1]==='Step, Impulse & Ramp Signals'&&names[8]==='Sensor-to-Digital Signal Chain','ch1-'+width+'-revised-lesson-titles',JSON.stringify(names));
+     const names=await page.locator('#ch1-app>.sidebar .tabname').allTextContents();
+     record(names.length===9&&names[1]==='Step, Impulse & Ramp'&&names[8]==='Sensor-to-Digital Chain','ch1-'+width+'-revised-lesson-titles',JSON.stringify(names));
      record(!names.some(name=>/^Elementary$/.test(name)),'ch1-'+width+'-no-ambiguous-elementary');
+     const navReadability=await page.evaluate(()=>{
+       const rail=document.querySelector('#ch1-app>.sidebar');
+       const brand=rail.querySelector('.brand');
+       const heading=rail.querySelector('.navlabel');
+       const title=brand.querySelector('h1');
+       const nav=rail.querySelector('#nav');
+       const buttons=[...nav.querySelectorAll('button')];
+       const rect=e=>e.getBoundingClientRect();
+       const hr=rect(heading),br=rect(brand),nr=rect(nav);
+       return {
+         headingText:heading.textContent.trim(),headingHeight:hr.height,
+         headingFits:heading.scrollWidth<=heading.clientWidth+1,
+         brandHeight:br.height,brandTitle:title.textContent.trim(),
+         headingBeforeNav:hr.bottom<=nr.top+2,
+         labelFonts:buttons.map(b=>parseFloat(getComputedStyle(b.querySelector('.tabname')).fontSize)),
+         menuWrap:buttons.filter(b=>b.scrollWidth>b.clientWidth+2).length
+       };
+     });
+     record(navReadability.headingText==='LEARNING EXPERIMENTS'&&navReadability.headingFits&&navReadability.headingBeforeNav,
+       'ch1-'+width+'-chapter5-sidebar-section-heading',JSON.stringify(navReadability));
+     record(navReadability.labelFonts.every(x=>x>=12)&&navReadability.menuWrap===0,
+       'ch1-'+width+'-chapter5-typography-no-overflow',JSON.stringify(navReadability));
+
      const shape=await page.evaluate(()=>{
        const app=document.querySelector('#ch1-app');
        const sidebar=app?.querySelector(':scope > aside.sidebar');
