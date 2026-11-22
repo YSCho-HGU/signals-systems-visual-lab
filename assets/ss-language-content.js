@@ -656,10 +656,18 @@ function run(){
   for(const node of nodes){
    const p=node.parentElement;
    if(!p||p.closest(nodeFilter)||p.closest('[data-i18n-en],[data-i18n-ko],[data-i18n-mixed]'))continue;
-   if(!saved.has(node))saved.set(node,node.nodeValue);
-   const original=saved.get(node);
-   const next=bilingual(original,mode);
+   // A lab may update the same text node when a slider changes. Detect external
+   // updates instead of replaying the first text captured for that node.
+   let record=saved.get(node);
+   if(!record||typeof record!=='object'||!Object.prototype.hasOwnProperty.call(record,'source')){
+    record={source:node.nodeValue,rendered:node.nodeValue};
+    saved.set(node,record);
+   }else if(node.nodeValue!==record.rendered){
+    record.source=node.nodeValue;
+   }
+   const next=bilingual(record.source,mode);
    if(p.childNodes.length===1){p.classList.toggle('ss-i18n-mixed-paragraph',mode==='mixed'&&next.includes('\n'));}
+   record.rendered=next;
    if(node.nodeValue!==next)node.nodeValue=next;
   }
  }
