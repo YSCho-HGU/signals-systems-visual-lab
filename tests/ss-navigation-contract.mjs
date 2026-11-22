@@ -27,6 +27,13 @@ for(let ch=1;ch<=8;ch++){
  assert.match(page,/ss-sidebar-toggle\.js/, 'Chapter '+ch+' is missing sidebar controller');
  assert.match(page,/ss-common-header\.js/, 'Chapter '+ch+' is missing common header');
  assert.match(page,/ss-common-header/, 'Chapter '+ch+' is missing header style');
- if(ch===1)assert.match(page,/data-ss-foundation-chapter="1"/);
+ if(ch===1){
+  assert.match(page,/data-ss-foundation-chapter="1"/);
+  assert.match(page,/id="ch1-app" class="app ss-ch1-app"/);
+  assert.match(page,/<aside class="sidebar ss-ch1-sidebar"/);
+  assert.match(page,/ss-ch1-native-navigation\.css/);
+  assert.match(page,/class="num"/);
+  assert.doesNotMatch(page,/class="ss-ch1-nav-title"/);
+}
 }
 console.log('PASS: shared header + Learning Map + Overview + Chapters 1–8 sidebar contracts');
