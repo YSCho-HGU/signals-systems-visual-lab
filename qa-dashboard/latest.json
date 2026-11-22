@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-22T01:16:57.119Z",
-  "sourceSha": "3863b75ee8a4c1c02dba0190b9a7c56847fe5e30",
-  "runId": "44970656055",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44970656055",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/3863b75ee8a4c1c02dba0190b9a7c56847fe5e30",
+  "generatedAt": "2026-11-22T01:17:27.094Z",
+  "sourceSha": "51d791f360c5e81c1948e2e1611f2cbd50636dea",
+  "runId": "44970693347",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44970693347",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/51d791f360c5e81c1948e2e1611f2cbd50636dea",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -27,7 +27,7 @@
     {
       "id": "G1",
       "label": "Sampling and transform mathematics",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
