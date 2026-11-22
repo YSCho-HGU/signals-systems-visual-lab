@@ -9,6 +9,7 @@ const entries=[
  ['x(t)','x(t)'],['x[n]','x[n]'],['y(t)','y(t)'],['y[n]','y[n]'],
  ['h(t)','h(t)'],['h[n]','h[n]'],['h[k]','h[k]'],
  ['h_eq[k]','h_{\\mathrm{eq}}[k]'],
+ ['Accumulated energy E(R)','E(R)'],
  ['h(t) (1/s)','h(t)\\;(\\mathrm{s}^{-1})'],
  ['xₜ(t)','x_T(t)'],['x(nΔt)','x(n\\Delta t)'],
  ['xw[n]','x_w[n]'],['Sₘ(t)','S_m(t)'],
@@ -64,11 +65,40 @@ function typeset(el,tex){
  catch(e){return false}
 }
 const canvasSpans=new Set(),svgSpans=new Set(),pendingCanvas=new Map();
+/* Use actual transformed label geometry, not a guessed string-length width.
+ * A long vertical formula on a 220px chart must shrink/reposition inside
+ * the canvas, while remaining KaTeX (and preserving complete semantic text).
+ */
+function fitInside(node,chartBox,minFont=11){
+ if(!node.isConnected||chartBox.width<50||chartBox.height<50)return;
+ const side=node.dataset.ssAxis;
+ const maxExtent=side==='y'?chartBox.height-16:chartBox.width-16;
+ const base=side==='y'?16:16;
+ node.style.fontSize=base+'px';
+ let b=node.getBoundingClientRect();
+ let loops=0;
+ while((side==='y'?b.height:b.width)>maxExtent&&loops++<8){
+  const factor=Math.max(.72,maxExtent/(side==='y'?b.height:b.width));
+  const next=Math.max(minFont,parseFloat(node.style.fontSize)*factor*.97);
+  node.style.fontSize=next+'px';
+  b=node.getBoundingClientRect();
+  if(next<=minFont+.01)break;
+ }
+ const inset=4;
+ let dx=0,dy=0;
+ if(b.left<chartBox.left+inset)dx=chartBox.left+inset-b.left;
+ else if(b.right>chartBox.right-inset)dx=chartBox.right-inset-b.right;
+ if(b.top<chartBox.top+inset)dy=chartBox.top+inset-b.top;
+ else if(b.bottom>chartBox.bottom-inset)dy=chartBox.bottom-inset-b.bottom;
+ node.style.left=(parseFloat(node.style.left||'0')+dx)+'px';
+ node.style.top=(parseFloat(node.style.top||'0')+dy)+'px';
+}
 function alignCanvas(node){
  const canvas=node._canvas;if(!canvas?.isConnected||!node.isConnected)return;
  const pos=node._position,c=canvas.getBoundingClientRect(),p=node.parentElement.getBoundingClientRect();
  node.style.left=(c.left-p.left+pos.x*c.width/pos.w)+'px';
  node.style.top=(c.top-p.top+pos.y*c.height/pos.h)+'px';
+ fitInside(node,c);
 }
 function renderCanvas(ref,side,value,position){
  const canvas=typeof ref==='string'?document.getElementById(ref):ref;
@@ -82,8 +112,6 @@ function renderCanvas(ref,side,value,position){
   node.dataset.ssCanvas=canvas.id;node.dataset.ssAxis=side;node.setAttribute('aria-hidden','true');host.appendChild(node)}
  if(node.dataset.ssTex!==tex){if(!typeset(node,tex)){node.remove();return false}node.dataset.ssTex=tex}
  node.dataset.ssFormula=String(value);node._canvas=canvas;node._position=position;
- node.style.minWidth=(side==='y'?Math.min(260,Math.max(52,String(value).length*10)):Math.min(280,Math.max(40,String(value).length*8)))+'px';
- node.style.minHeight='24px';
  alignCanvas(node);canvasSpans.add(node);return true;
 }
 function alignSvg(node){
@@ -94,6 +122,7 @@ function alignSvg(node){
  const y=match?+match[2]:+(source.getAttribute('y')||v.height-6);
  node.style.left=(s.left-p.left+x/v.width*s.width)+'px';
  node.style.top=(s.top-p.top+y/v.height*s.height)+'px';
+ fitInside(node,s);
 }
 function enhanceSvg(){
  if(!ready())return;
