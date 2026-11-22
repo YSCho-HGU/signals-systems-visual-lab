@@ -18,13 +18,7 @@
  --ss-layout-nav-font:13px;
 }
 /* Independent implementation roots all use a single, two-track grid. */
-html :is(
-  #ch1-app.ss-ch1-app,
-  #app.app,
-  .shell,
-  .ss7-shell,
-  .ss8-shell
-){
+html .ss-layout-root{
  display:grid!important;
  grid-template-columns:var(--ss-layout-sidebar-open) minmax(0,1fr)!important;
  column-gap:0!important;
