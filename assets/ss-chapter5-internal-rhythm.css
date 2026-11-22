@@ -157,3 +157,15 @@ html[data-els-theme] :is(.ss-found-predict,.ss5-predict,.ss7-stage-predict,.ss8-
   padding-left:max(53px,3.25rem)!important;
  }
 }
+
+
+/* Chapter 6's late inline page styles are more specific than the stylesheet
+ * link. Scope these rhythm declarations to its live root (#app) so the
+ * final 14px card and 13/12/10px graph insets win without altering charts. */
+html.ss6-compact-workspace[data-els-theme] #app .ss6-step-card{
+ padding-top:14px!important;
+ padding-bottom:14px!important;
+}
+html.ss6-compact-workspace[data-els-theme] #app .figure{
+ padding:var(--ss-inner-graph-padding)!important;
+}
