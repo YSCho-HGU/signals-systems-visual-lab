@@ -357,7 +357,7 @@ function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
 <script src="./assets/els-language.js?v=1"></script>
 <script src="./assets/els-theme-v2.js?v=6"></script>
 <link rel="stylesheet" href="./assets/ss-trace-palette.css?v=4"><script src="./assets/ss-trace-palette.js?v=2"></script><script src="./assets/ss-sidebar-toggle.js?v=20261121c" defer></script><link rel="stylesheet" href="./assets/els-typography-standard.css?v=1"><link rel="stylesheet" href="./assets/ss-common-header.css?v=20261121d0261121d"><link rel="stylesheet" href="./assets/ss-readable-themes.css?v=1"><script src="./assets/ss-common-header.js?v=3" defer></script><link rel="stylesheet" href="./assets/ss-graph-workspace-layout.css?v=1">
-<link rel="stylesheet" href="./assets/ss-learning-bridges.css?v=1"><script defer src="./assets/ss-learning-bridges.js?v=1"></script><link rel="stylesheet" href="./assets/ss-chapter5-layout-standard.css?v=20261122a"><link rel="stylesheet" href="./assets/ss-chapter5-internal-rhythm.css?v=20261122a"></head>
+<link rel="stylesheet" href="./assets/ss-learning-bridges.css?v=1"><script defer src="./assets/ss-learning-bridges.js?v=1"></script><link rel="stylesheet" href="./assets/ss-chapter5-layout-standard.css?v=20261122a"><link rel="stylesheet" href="./assets/ss-chapter5-internal-rhythm.css?v=20261122a"><link rel="stylesheet" href="./assets/ss-graph-math.css?v=20261122b"><script src="./assets/ss-graph-math.js?v=20261122b"></script></head>
 <body><header class="ss6-site-header ss-common-header" aria-label="Engineering Learning Studio navigation">
 <a class="ss6-home ss-common-home" href="./index.html#overview">← Studio</a>
 <details class="els-ss-chapter-menu ss-common-menu"><summary class="ss6-site-title ss-common-title">Signals &amp; Systems · Chapter 6 · DTFT <span aria-hidden="true">⌄</span></summary><nav class="els-ss-chapter-links ss-common-links" aria-label="Choose Chapter"></nav></details>
@@ -467,8 +467,8 @@ function drawChart(id,opt){
  for(let k=Math.ceil(ymin/yStep-1e-9),count=0;k<=Math.floor(ymax/yStep+1e-9)&&count<40;k++,count++){const v=k*yStep;g.font=(Math.abs(v)<1e-9?'bold ':'')+'15px system-ui';g.textAlign='right';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.fillText(tickLabel(v,yStep),m.l-9,Y(v))}
  for(let k=Math.ceil(xmin/xStep-1e-9),count=0;k<=Math.floor(xmax/xStep+1e-9)&&count<40;k++,count++){const v=k*xStep;g.font=(Math.abs(v)<1e-9?'bold ':'')+'15px system-ui';g.textAlign='center';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.fillText(tickLabel(v,xStep),X(v),h-m.b+16)}
  g.fillStyle=plotTheme.ink;g.font='bold 17px system-ui';
- if(opt.xlabel){g.textAlign='center';g.fillText(opt.xlabel,m.l+W/2,h-16)}
- if(opt.ylabel){g.save();g.translate(19,m.t+H/2);g.rotate(-PI/2);g.textAlign='center';g.fillText(opt.ylabel,0,0);g.restore()}
+ if(opt.xlabel){g.textAlign='center';if(!window.SSGraphMath?.renderCanvas(id,'x',opt.xlabel,{x:m.l+W/2,y:h-16,w,h}))g.fillText(opt.xlabel,m.l+W/2,h-16)}
+ if(opt.ylabel&&!window.SSGraphMath?.renderCanvas(id,'y',opt.ylabel,{x:19,y:m.t+H/2,w,h})){g.save();g.translate(19,m.t+H/2);g.rotate(-PI/2);g.textAlign='center';g.fillText(opt.ylabel,0,0);g.restore()}
  ssAxisKey(id,opt.xlabel||'sample index n',opt.ylabel||'amplitude',xmin,xmax,ymin,ymax);
  ssHoverBind(id,{kind:'cart',w,h,pad:m,xmin,xmax,ymin,ymax,xlabel:opt.xlabel||'sample index n',ylabel:opt.ylabel||'amplitude',series:(opt.series||[]).map(s=>({label:s.label,color:ssTraceColor(s.color||C.teal),points:s.xy||[],discrete:s.type==='stem'}))});
 }
