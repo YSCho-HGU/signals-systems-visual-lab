@@ -30,26 +30,87 @@ function init(){
  const links=header.querySelector('.ss-common-links');
  if(!menu||!title||!links)return;
  buildLinks(links);
- // Canonical previous/next chapter controls; one controller for all chapters.
- const chapterMatch=location.pathname.match(/chapter([1-8])\.html$/);
+ // Four controls: previous chapter, previous section, next section, next chapter.
+ const chapterMatch=location.pathname.match(/chapter([1-8])\\.html$/);
  const chapterNumber=chapterMatch?Number(chapterMatch[1]):0;
- if(chapterNumber && !header.querySelector('.ss-chapter-arrows')){
+ if(chapterNumber){
+  const existing=header.querySelector('.ss-chapter-arrows');
+  if(existing)existing.remove();
   const arrows=document.createElement('nav');
-  arrows.className='ss-chapter-arrows';
-  arrows.setAttribute('aria-label','Previous and next chapters');
-  for(const [offset,label] of [[-1,'←'],[1,'→']]){
-   const target=chapterNumber+offset;
-   const button=document.createElement('a');
-   button.textContent=label;
-   button.className='ss-chapter-arrow';
-   button.setAttribute('aria-label',offset<0?'Previous chapter':'Next chapter');
-   button.title=(offset<0?'Previous':'Next')+' Chapter '+target;
-   if(target<1||target>8){button.setAttribute('aria-disabled','true');button.removeAttribute('href');}
-   else button.href='./chapter'+target+'.html';
-   arrows.append(button);
-  }
+  arrows.className='ss-chapter-arrows ss-four-navigation';
+  arrows.setAttribute('aria-label','Chapter and section navigation');
+  const make=(kind,direction,glyph,label)=>{
+   const el=document.createElement(kind==='chapter'?'a':'button');
+   el.className='ss-chapter-arrow ss-nav-'+kind;
+   el.textContent=glyph;el.title=label;el.setAttribute('aria-label',label);
+   if(kind==='section'){el.type='button';el.dataset.ssSectionDirection=String(direction);}
+   else{
+    const target=chapterNumber+direction;
+    if(target<1||target>8){el.setAttribute('aria-disabled','true');el.removeAttribute('href');}
+    else el.href='./chapter'+target+'.html';
+   }
+   arrows.append(el);return el;
+  };
+  make('chapter',-1,'⇤','Previous chapter');
+  const prevSection=make('section',-1,'←','Previous section');
+  const nextSection=make('section',1,'→','Next section');
+  make('chapter',1,'⇥','Next chapter');
   const actions=header.querySelector('.ss-common-actions');
   if(actions)header.insertBefore(arrows,actions);else header.append(arrows);
+
+  const findNav=()=>{
+   const side=document.querySelector('.ss-layout-sidebar');
+   if(!side)return null;
+   return side.querySelector('#ss7-lesson-nav,#tabs,nav.ss8-lab-nav,nav.tabs,nav.nav,nav#nav');
+  };
+  const sections=()=>Array.from(findNav()?.querySelectorAll(':scope > button')||[])
+   .filter(button=>!button.hidden && !button.disabled);
+  const currentIndex=items=>{
+   let i=items.findIndex(button=>button.matches('.active,.on,[aria-current="page"],[aria-current="true"],[aria-pressed="true"]'));
+   if(i<0)i=items.findIndex(button=>button.classList.contains('selected'));
+   return i<0?0:i;
+  };
+  const refresh=()=>{
+   const items=sections(),i=currentIndex(items);
+   prevSection.disabled=!items.length||i<=0;
+   nextSection.disabled=!items.length||i>=items.length-1;
+   prevSection.setAttribute('aria-disabled',String(prevSection.disabled));
+   nextSection.setAttribute('aria-disabled',String(nextSection.disabled));
+  };
+  arrows.addEventListener('click',event=>{
+   const button=event.target.closest('[data-ss-section-direction]');
+   if(!button||button.disabled)return;
+   const items=sections(),index=currentIndex(items);
+   const target=items[index+Number(button.dataset.ssSectionDirection)];
+   if(target){target.click();requestAnimationFrame(refresh);}
+  });
+  let observed=null;
+  const observe=()=>{
+   const nav=findNav();
+   if(!nav||observed===nav)return;
+   observed=nav;
+   new MutationObserver(()=>requestAnimationFrame(refresh)).observe(nav,{childList:true,subtree:true,attributes:true,attributeFilter:['class','aria-current','aria-pressed','disabled']});
+   nav.addEventListener('click',()=>requestAnimationFrame(refresh));
+   refresh();
+  };
+  observe();
+  const container=document.querySelector('.ss-layout-root');
+  if(container)new MutationObserver(observe).observe(container,{childList:true});
+  window.addEventListener('ss:sidebar-resized',refresh);
+  refresh();
+ }
+ // Synchronize all chapter language pickers using the shared language preference.
+ const languagePicker=header.querySelector('.ss-common-language-select');
+ if(languagePicker){
+  if(window.ELSLanguage?.bindSelect)window.ELSLanguage.bindSelect(languagePicker);
+  else{
+   const KEY='els-language';
+   try{languagePicker.value=localStorage.getItem(KEY)||'mixed';}catch(e){}
+   languagePicker.addEventListener('change',()=>{
+    try{localStorage.setItem(KEY,languagePicker.value)}catch(e){}
+    document.documentElement.dataset.language=languagePicker.value;
+   });
+  }
  }
  const path=location.pathname;
  function sync(){
