@@ -168,3 +168,14 @@ html .ss-common-header .ss-common-title{
  html .ss-common-header .ss-four-navigation{order:2!important;margin-left:auto!important}
  html .ss-common-header .ss-common-actions{order:3!important;width:100%!important;justify-content:flex-end!important}
 }
+
+/* 2026-11-22: focus ring clearance at the top of every chapter header. */
+html .ss-common-header{
+ height:auto!important;min-height:58px!important;
+ padding-top:10px!important;padding-bottom:10px!important;
+ overflow:visible!important;
+}
+html .ss-common-header :is(select,button,a,summary):focus-visible{
+ outline-offset:2px!important;
+}
+@media(max-width:950px){html .ss-common-header{min-height:58px!important;padding-top:10px!important;padding-bottom:10px!important}}
