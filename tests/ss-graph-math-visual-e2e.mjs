@@ -13,7 +13,7 @@ if(own)await new Promise(r=>setTimeout(r,1200));
 const browser=await chromium.launch({headless:true});
 const results=[];
 function record(ok,label,extra=''){results.push({ok:!!ok,label,extra});console.log((ok?'PASS ':'FAIL ')+label+(extra?' '+extra:''))}
-const themes=['neutral-dark','white-clean'];
+const themes=['neutral-dark','warm-dark','navy-dark','warm-neutral','white-clean'];
 try{
  for(const theme of themes){
   for(let chapter=1;chapter<=8;chapter++){
