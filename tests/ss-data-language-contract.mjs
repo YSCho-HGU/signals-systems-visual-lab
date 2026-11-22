@@ -27,7 +27,7 @@ for(const mode of ['en','mixed','ko']){
 }
 for(let ch=1;ch<=8;ch++){
  const page=read('chapter'+ch+'.html');
- assert.match(page,/ss-content-model\.js\?v=20261122-model-only-v4/);
+ assert.match(page,/ss-content-model\.js\?v=20261122-content-v5/);
  if(ch>1)assert.match(page,/SSContentModel\.model/);
  assert.match(page,/els-language-change/);
  assert.ok(page.indexOf('ss-content-model.js')<page.indexOf('<body>'),'Model must load before the lesson controller');
