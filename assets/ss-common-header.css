@@ -106,3 +106,65 @@ html .ss-common-header .ss-common-menu > summary.ss-common-title:focus-visible{
 .ss-common-header .ss-common-menu[open] > summary.ss-common-title::after{
  transform:translateY(2px) rotate(225deg)!important;
 }
+
+/* 2026-11-22: One compact language/theme and four-arrow header on all chapters. */
+html .ss-common-header .ss-common-actions{
+ display:flex!important;align-items:center!important;gap:9px!important;
+ margin-left:0!important;min-width:0!important;flex:0 0 auto!important
+}
+html .ss-common-header .ss-common-actions :is(.ss-common-language,.ss-common-theme){
+ display:inline-flex!important;align-items:center!important;gap:5px!important;
+ min-width:0!important;margin:0!important;padding:0!important;
+ font-size:12px!important;font-weight:650!important;color:var(--els-ink)!important;
+ background:transparent!important;border:0!important
+}
+html .ss-common-header .ss-common-actions .ss-common-language select{
+ min-width:82px!important;max-width:112px!important
+}
+html .ss-common-header .ss-common-actions .ss-common-theme select{
+ min-width:110px!important;max-width:145px!important
+}
+html .ss-common-header .ss-four-navigation{
+ display:flex!important;align-items:center!important;justify-content:flex-end!important;
+ gap:5px!important;margin:0 7px 0 auto!important;
+ min-width:0!important;flex:0 0 auto!important;padding:0!important;
+ background:none!important;border:0!important;
+}
+html .ss-common-header .ss-four-navigation .ss-chapter-arrow{
+ display:grid!important;place-items:center!important;box-sizing:border-box!important;
+ width:32px!important;min-width:32px!important;height:32px!important;
+ padding:0!important;margin:0!important;border:1px solid var(--els-border)!important;
+ border-radius:8px!important;text-decoration:none!important;
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
+ font:750 20px/1 Arial,sans-serif!important;cursor:pointer!important
+}
+html .ss-common-header .ss-four-navigation .ss-nav-chapter{
+ font-size:22px!important;background:var(--els-surface)!important;
+ border-color:var(--els-link)!important
+}
+html .ss-common-header .ss-four-navigation .ss-nav-section{
+ font-size:19px!important
+}
+html .ss-common-header .ss-four-navigation .ss-chapter-arrow:is(:hover,:focus-visible){
+ border-color:var(--els-link)!important;outline-offset:2px!important;
+ background:var(--els-info-bg)!important
+}
+html .ss-common-header .ss-four-navigation .ss-chapter-arrow:is(:disabled,[aria-disabled="true"]){
+ opacity:.38!important;cursor:default!important;pointer-events:none!important
+}
+html .ss-common-header .ss-common-menu{
+ min-width:0!important;max-width:min(46vw,520px)!important;flex:0 1 auto!important
+}
+html .ss-common-header .ss-common-title{
+ max-width:100%!important
+}
+@media(max-width:950px){
+ html .ss-common-header{height:auto!important;min-height:46px!important;flex-wrap:wrap!important}
+ html .ss-common-header .ss-common-menu{max-width:calc(100% - 110px)!important}
+ html .ss-common-header .ss-four-navigation{margin-left:auto!important}
+ html .ss-common-header .ss-common-actions{width:auto!important;margin-left:0!important}
+}
+@media(max-width:620px){
+ html .ss-common-header .ss-four-navigation{order:2!important;margin-left:auto!important}
+ html .ss-common-header .ss-common-actions{order:3!important;width:100%!important;justify-content:flex-end!important}
+}
