@@ -73,3 +73,36 @@ html[data-els-theme] .ss-common-header .ss-common-actions :is(select,option){
  .ss-common-header .ss-chapter-arrows{margin-left:auto!important;margin-right:5px!important}
  .ss-common-header .ss-chapter-arrow{width:30px!important}
 }
+
+/* The chapter title is a complete dropdown trigger, not a tiny chevron target. */
+.ss-common-header .ss-common-menu{
+ flex:0 1 auto!important;min-width:0!important;
+}
+html[data-els-theme] .ss-common-header .ss-common-menu > summary.ss-common-title{
+ box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:14px!important;min-height:34px!important;width:100%!important;
+ margin:0!important;padding:5px 12px!important;
+ border:1px solid var(--els-border)!important;border-radius:8px!important;
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
+ cursor:pointer!important;white-space:normal!important;
+ transition:border-color .15s ease,background-color .15s ease!important;
+}
+html[data-els-theme] .ss-common-header .ss-common-menu > summary.ss-common-title:hover,
+html[data-els-theme] .ss-common-header .ss-common-menu[open] > summary.ss-common-title{
+ border-color:var(--els-link)!important;background:var(--els-info-bg)!important;
+}
+html[data-els-theme] .ss-common-header .ss-common-menu > summary.ss-common-title:focus-visible{
+ outline:2px solid var(--els-focus)!important;outline-offset:2px!important;
+}
+.ss-common-header .ss-common-menu > summary.ss-common-title > span[aria-hidden="true"]{
+ display:none!important;
+}
+.ss-common-header .ss-common-menu > summary.ss-common-title::after{
+ content:""!important;display:block!important;flex:0 0 8px!important;
+ width:8px!important;height:8px!important;border-right:2px solid currentColor!important;
+ border-bottom:2px solid currentColor!important;transform:translateY(-2px) rotate(45deg)!important;
+ opacity:.95!important;transition:transform .15s ease!important;
+}
+.ss-common-header .ss-common-menu[open] > summary.ss-common-title::after{
+ transform:translateY(2px) rotate(225deg)!important;
+}
