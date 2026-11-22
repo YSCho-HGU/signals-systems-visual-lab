@@ -18,7 +18,7 @@
  --ss-layout-nav-font:13px;
 }
 /* Independent implementation roots all use a single, two-track grid. */
-html[data-els-theme] :is(
+html :is(
   #ch1-app.ss-ch1-app,
   #app.app,
   .shell,
@@ -37,7 +37,7 @@ html[data-els-theme] :is(
 }
 /* Shared content rectangle: all chapters start 15px below header, with
  * Chapter 5's exact horizontal padding clamp. Inner learning steps are intact. */
-html[data-els-theme] :is(
+html :is(
   #ch1-app>.ss-ch1-workspace,
   #app>.main,
   .shell>.main,
@@ -57,14 +57,14 @@ html[data-els-theme] :is(
  color:var(--els-ink)!important;
 }
 /* Ch 7/8 carry a wrapper between the grid root and the actual main. */
-html[data-els-theme] :is(.ss7-shell>.ss7-workspace,.ss8-shell>.ss8-workspace){
+html :is(.ss7-shell>.ss7-workspace,.ss8-shell>.ss8-workspace){
  display:block!important;
  grid-column:2!important;grid-row:1!important;
  width:100%!important;max-width:none!important;
  min-width:0!important;margin:0!important;padding:0!important;
  background:var(--els-bg)!important;
 }
-html[data-els-theme] :is(
+html :is(
   #ch1-app>.ss-ch1-workspace,
   #app>.main,
   .shell>.main,
@@ -73,7 +73,7 @@ html[data-els-theme] :is(
 )>:first-child{
  margin-top:0!important;
 }
-html[data-els-theme] :is(
+html :is(
   #ch1-app>.ss-ch1-workspace,
   #app>.main,
   .shell>.main,
@@ -98,18 +98,18 @@ html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.ss-ch1-wo
 }
 /* Preserve the essential Change+Observe side-by-side learning design; keep
  * chapter-specific ratios and collapse only when the workspace is narrow. */
-html[data-els-theme] :is(
+html :is(
   .ss-found-four-step,.ss7-standard-layout,.ss8-standard-layout
 ){
  row-gap:var(--ss-layout-panel-gap)!important;
 }
-html[data-els-theme] :is(
+html :is(
   .ss-found-23,.ss7-stage-pair,.ss8-stage-pair
 ){
  column-gap:var(--ss-layout-panel-gap)!important;
  min-width:0!important;
 }
-html[data-els-theme] :is(
+html :is(
   .ss-found-23>.ss-found-controls,.ss-found-23>.ss-found-observe,
   .ss7-stage-pair>.ss7-stage-change,.ss7-stage-pair>.ss7-stage-observe,
   .ss8-stage-pair>.ss8-stage-change,.ss8-stage-pair>.ss8-stage-observe
