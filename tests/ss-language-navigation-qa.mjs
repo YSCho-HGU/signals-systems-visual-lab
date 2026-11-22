@@ -18,6 +18,9 @@ assert.match(header,/한\/영/);
 assert.match(language,/ELSLanguage\.subscribe/);
 assert.match(language,/data-i18n-/);
 assert.match(language,/MutationObserver/);
+assert.match(language,/embeddedEnglishFragments/);
+assert.match(language,/record\.source=node\.nodeValue/);
+assert.match(language,/function audit\(/);
 assert.match(language,/authoredTranslations/);
 assert.match(language,/ss-i18n-mixed-paragraph/);
 for(let chapter=1;chapter<=8;chapter++){
