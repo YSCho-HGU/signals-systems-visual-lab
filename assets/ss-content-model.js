@@ -9,6 +9,12 @@
  function mode(){try{return window.ELSLanguage?.get?.()||localStorage.getItem('els-language')||'mixed'}catch{return 'mixed'}}
  function text(value,m=mode()){
   const source=String(value??'');
+  const pair=source.trim().match(inlinePattern);
+  if(pair&&korean.test(pair[1])!==korean.test(pair[2])){
+   const englishPart=korean.test(pair[1])?pair[2]:pair[1];
+   const koreanPart=korean.test(pair[1])?pair[1]:pair[2];
+   return m==='en'?englishPart:m==='ko'?koreanPart:englishPart+' / '+koreanPart;
+  }
   if(m==='ko')return source;
   let english=translations[source];
   if(english===undefined){
@@ -36,7 +42,7 @@
   if(Object.getPrototypeOf(value)!==Object.prototype)return value;
   const out={};
   for(const [key,part] of Object.entries(value)){
-   if(key==='id'||key==='key'||key==='type'||key==='unit'||key==='defaults'||key==='set'||key==='state'||key==='value'||key==='kind'||key==='color'||key==='class'||key==='formula'||key==='math'||key==='svg'||key==='params'||key==='options'){
+   if(key==='id'||key==='key'||key==='type'||key==='unit'||key==='defaults'||key==='set'||key==='state'||key==='value'||key==='kind'||key==='color'||key==='class'||key==='formula'||key==='math'||key==='svg'||key==='params'||key==='questionKo'){
     out[key]=part;
    }else{
     out[key]=model(part,m,depth+1);
