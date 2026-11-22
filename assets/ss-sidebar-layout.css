@@ -15,171 +15,8 @@ html .ss-side-toggle{
 html .ss-side-toggle:focus-visible{outline:3px solid var(--els-focus,#be8331)!important;outline-offset:2px}
 html .ss-side-toggle .ss-toggle-icon{font-size:16px;line-height:1;flex:none}
 html .ss-side-toggle .ss-toggle-text{white-space:normal;text-align:left}
-@media(min-width:781px){
- html .shell,html .app,html .ss7-shell,html .ss8-shell{
-  grid-template-columns:var(--ss-sidebar-open) minmax(0,1fr)!important;
- }
-}
-/* Chapter 1 previously used a bare nav; wrap the existing nav in a proper
- * sticky aside while preserving its click handlers and original button nodes. */
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] main{
- max-width:none!important;width:100%!important;
- grid-template-columns:var(--ss-sidebar-open) minmax(0,1fr)!important;
- padding:12px clamp(10px,1.6vw,22px) 35px!important;
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] main>.ss-ch1-sidebar{
- grid-column:1;grid-row:1;position:sticky;top:57px;align-self:start;
- max-height:calc(100dvh - 66px);overflow-y:auto;min-width:0;
- padding:14px 10px;border:1px solid var(--els-border);
- border-radius:12px;background:var(--els-surface);color:var(--els-ink);
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] .ss-ch1-brand{
- margin:0 3px;padding:4px 6px 16px;border-bottom:1px solid var(--els-border)
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] .ss-ch1-brand>span{
- font-size:10px;font-weight:850;letter-spacing:.08em;color:var(--els-muted)
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] .ss-ch1-brand h2{
- font-size:18px;margin:8px 0 5px;color:var(--els-ink)
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] .ss-ch1-brand p{
- margin:0;font-size:12px;color:var(--els-muted)
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] .ss-ch1-sidebar-title{
- font-size:11px;letter-spacing:.065em;font-weight:750;color:var(--els-muted);
- margin:15px 8px 8px
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] .ss-ch1-sidebar nav#nav{
- display:flex!important;flex-direction:column!important;gap:6px!important;
- overflow:visible!important;max-width:none!important;padding:0!important;
- margin:0!important;background:transparent!important
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] .ss-ch1-sidebar nav#nav button{
- display:block!important;width:100%!important;min-height:47px!important;
- text-align:left!important;white-space:normal!important;flex:0 0 auto!important;
- padding:10px 12px!important;border-radius:9px!important;
- color:var(--els-ink)!important;background:transparent!important;
- border:1px solid transparent!important;font-size:12px!important;
- line-height:1.4!important
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] .ss-ch1-sidebar nav#nav button small{
- display:block!important;font-size:11px!important;color:var(--els-muted)!important
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] .ss-ch1-sidebar nav#nav button:hover{
- background:var(--els-surface-alt)!important;border-color:var(--els-border)!important
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] .ss-ch1-sidebar nav#nav button.active{
- border-color:var(--els-link,var(--els-primary))!important;
- box-shadow:inset 3px 0 var(--els-link,var(--els-primary))!important;
- background:var(--els-surface-alt)!important;color:var(--els-ink)!important
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] main>.ss-found-four-step{
- grid-column:2;grid-row:1;min-width:0;width:100%
-}
-/* Shared collapsible rail: hide everything but the button, then allow the
- * adjacent learning workspace to fill all reclaimed space. */
-html[data-ss-sidebar="collapsed"] :is(.shell,.app,.ss7-shell,.ss8-shell){
- display:grid!important;grid-template-columns:var(--ss-sidebar-closed) minmax(0,1fr)!important;
- gap:0!important;min-width:0!important;width:100%!important;max-width:none!important
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"][data-ss-sidebar="collapsed"] main{
- display:grid!important;grid-template-columns:var(--ss-sidebar-closed) minmax(0,1fr)!important
-}
-html[data-ss-sidebar="collapsed"] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar){
- box-sizing:border-box!important;min-width:0!important;width:var(--ss-sidebar-closed)!important;
- max-width:var(--ss-sidebar-closed)!important;padding:9px 5px!important;
- overflow-x:hidden!important;
-}
-html[data-ss-sidebar="collapsed"] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)>:not(.ss-side-toggle){
- display:none!important
-}
-html[data-ss-sidebar="collapsed"] .ss-side-toggle{
- width:40px!important;max-width:40px!important;height:36px!important;
- min-height:36px!important;margin:0!important;padding:4px!important;
- justify-content:center!important;gap:0!important
-}
-html[data-ss-sidebar="collapsed"] .ss-side-toggle .ss-toggle-text{display:none!important}
-html[data-ss-sidebar="collapsed"] :is(.shell>.main,.app>.main,.ss7-workspace,.ss8-workspace,main>.ss-found-four-step){
- box-sizing:border-box!important;width:100%!important;max-width:none!important;
- min-width:0!important;margin-left:0!important;margin-right:0!important
-}
-html[data-ss-sidebar="collapsed"] :is(.ss7-workspace>main,.ss8-workspace>main){
- width:100%!important;max-width:none!important;margin:0!important;
-}
-html[data-ss-sidebar="collapsed"] :is(.ss7-workspace,.ss8-workspace,.shell>.main,.app>.main){
- min-width:0!important
-}
-@media(max-width:780px){
- html.ss-foundations-standard[data-ss-foundation-chapter="1"] main{
-  display:grid!important;grid-template-columns:170px minmax(0,1fr)!important;
-  padding:8px!important
- }
- html.ss-foundations-standard[data-ss-foundation-chapter="1"] main>.ss-ch1-sidebar{
-  position:sticky;top:52px;max-height:calc(100dvh - 58px);padding:8px 5px
- }
- html.ss-foundations-standard[data-ss-foundation-chapter="1"] .ss-ch1-brand{display:none}
- html.ss-foundations-standard[data-ss-foundation-chapter="1"] .ss-ch1-sidebar nav#nav button{
-  font-size:11px!important;padding:8px!important
- }
- html[data-ss-sidebar="collapsed"] :is(.shell,.app,.ss7-shell,.ss8-shell){
-  display:grid!important;grid-template-columns:var(--ss-sidebar-closed) minmax(0,1fr)!important
- }
- html.ss-foundations-standard[data-ss-foundation-chapter="1"][data-ss-sidebar="collapsed"] main{
-  grid-template-columns:var(--ss-sidebar-closed) minmax(0,1fr)!important
- }
-}
 
-/* Chapters 2–4: match Chapter 5's light/dark sidebar surface, typography,
- * selection indicator and navigation-number badges. */
-html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar){
- background:var(--els-surface)!important;color:var(--els-ink)!important;
- border-right:1px solid var(--els-border)!important
-}
-html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .brand{
- border-bottom:1px solid var(--els-border)!important;background:transparent!important;
- padding:4px 10px 17px!important
-}
-html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .brand :is(h1,p,.over){
- color:var(--els-ink)!important
-}
-html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .side-label{
- color:var(--els-muted)!important;font-size:11px!important
-}
-html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .nav{
- display:flex!important;flex-direction:column!important;gap:5px!important
-}
-html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .nav button{
- display:flex!important;align-items:center!important;gap:8px!important;
- width:100%!important;min-height:47px!important;padding:8px 10px!important;
- color:var(--els-ink)!important;background:transparent!important;
- border:1px solid transparent!important;border-radius:9px!important;
- font-size:12px!important;line-height:1.35!important;text-align:left!important;box-shadow:none!important
-}
-html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .nav button:hover{
- background:var(--els-surface-alt)!important;border-color:var(--els-border)!important
-}
-html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .nav button.active{
- background:var(--els-surface-alt)!important;border-color:var(--els-link,var(--els-primary))!important;
- box-shadow:inset 3px 0 var(--els-link,var(--els-primary))!important
-}
-html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .nav .num{
- display:inline-grid!important;place-items:center!important;flex:none!important;
- min-width:29px!important;min-height:29px!important;border:1px solid var(--els-border)!important;
- border-radius:7px!important;background:var(--els-surface-alt)!important;
- color:var(--els-link,var(--els-ink))!important;font-size:11px!important
-}
-html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .nav .nav-name{
- color:var(--els-ink)!important;font-size:12px!important;font-weight:700!important
-}
-html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .side-foot{
- background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
- border:1px solid var(--els-border)!important
-}
-html.ss-foundations-standard :is(.app>.sidebar,#app>.sidebar) .side-foot strong{
- color:var(--els-ink)!important
-}
-
-
+/* Shared sidebar visual tokens; structural dimensions are centralized in ss-chapter5-layout-standard.css. */
 /* 2026-11 unified chapter-navigation standard
  * Chapter 4's 01/02 numbering, Chapter 5's active-state and stage-number tokens.
  * All chapters share one sidebar width and typography at each viewport size. */
@@ -199,10 +36,10 @@ html[data-els-theme] :is(.shell,.app,.ss7-shell,.ss8-shell){
  grid-template-columns:var(--ss-sidebar-open) minmax(0,1fr)!important;
  width:100%!important;max-width:none!important;
 }
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] main{
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app{
  grid-template-columns:var(--ss-sidebar-open) minmax(0,1fr)!important;
 }
-html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar){
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar){
  box-sizing:border-box!important;min-width:0!important;
  background:var(--els-surface)!important;color:var(--els-ink)!important;
  border-color:var(--els-border)!important;
@@ -212,29 +49,29 @@ html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-s
  max-height:calc(100dvh - 46px)!important;overflow-y:auto!important;
  border-right:1px solid var(--els-border)!important;
 }
-html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar) :is(.brand,.ss-ch1-brand){
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar) :is(.brand,.ss-ch1-brand){
  background:transparent!important;border-color:var(--els-border)!important;
  padding:7px 8px 14px!important;margin:0!important;
 }
-html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar) :is(.brand h1,.brand h2,.ss-ch1-brand h2){
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar) :is(.brand h1,.brand h2,.ss-ch1-brand h2){
  font-size:18px!important;line-height:1.4!important;color:var(--els-ink)!important;
  margin:4px 0 5px!important;letter-spacing:normal!important;
 }
-html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar) :is(.brand p,.ss-ch1-brand p){
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar) :is(.brand p,.ss-ch1-brand p){
  font-size:12px!important;line-height:1.6!important;color:var(--els-muted)!important
 }
-html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar)
  :is(.navlabel,.side-label,.ss-ch1-sidebar-title,.ss7-sidebar-title,.ss8-sidebar-title){
  font-size:var(--ss-nav-heading-size)!important;line-height:1.5!important;
  font-weight:750!important;letter-spacing:.045em!important;
  color:var(--els-muted)!important;margin:13px 7px 9px!important
 }
-html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar)
  :is(.tabs,.nav,#ss7-lesson-nav,#nav){
  display:flex!important;flex-direction:column!important;gap:5px!important;
  padding:0!important;margin:0!important;overflow:visible!important
 }
-html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar)
  :is(.tabs button,.nav button,#ss7-lesson-nav button,#nav button){
  display:flex!important;align-items:center!important;justify-content:flex-start!important;
  flex:0 0 auto!important;gap:10px!important;min-width:0!important;width:100%!important;
@@ -247,28 +84,25 @@ html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-s
  white-space:normal!important;overflow-wrap:anywhere!important;
  text-shadow:none!important;opacity:1!important
 }
-html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
- :is(.tabs button,.nav button,#ss7-lesson-nav button,#nav button) :is(.tabname,.nav-name,.ss-ch1-nav-title){
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar)
+ :is(.tabs button,.nav button,#ss7-lesson-nav button,#nav button) :is(.tabname,.nav-name,.__ss-ch1-obsolete-nav-title){
  font:inherit!important;color:var(--els-ink)!important;
  white-space:normal!important;overflow-wrap:anywhere!important;min-width:0!important
 }
-html[data-els-theme] .ss-ch1-nav-title small{
- display:block!important;font-size:11px!important;line-height:1.45!important;
- color:var(--els-muted)!important;margin:3px 0 0!important;
-}
-html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar)
  :is(.tabs button,.nav button,#ss7-lesson-nav button,#nav button):hover{
  background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
  border-color:var(--els-border)!important
 }
-html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar)
  :is(.tabs button.on,.nav button.active,#ss7-lesson-nav button[aria-current="true"],#nav button.active,#nav button[aria-current="true"],#nav button[aria-current="page"],.nav button[aria-current="page"]){
  background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
  border-color:var(--els-link)!important;
  box-shadow:inset 3px 0 var(--els-link)!important
 }
-html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
- :is(.tabs .num,.nav .num,#ss7-lesson-nav .ss7-lab-number,#nav .ss8-lab-number,#nav .ss-ch1-lab-number){
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar)
+ :is(.tabs .num,.nav .num,#ss7-lesson-nav .ss7-lab-number,#nav .ss8-lab-number,#__ss-ch1-obsolete .num){
  display:inline-grid!important;place-items:center!important;
  box-sizing:border-box!important;flex:0 0 var(--ss-nav-number-size)!important;
  width:var(--ss-nav-number-size)!important;height:var(--ss-nav-number-size)!important;
@@ -279,7 +113,7 @@ html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-s
  font:800 12px/1 Arial,"Malgun Gothic",sans-serif!important;
  opacity:1!important;box-shadow:none!important;text-shadow:none!important;
 }
-html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar)
  :is(.tabs button.on,.nav button.active,#ss7-lesson-nav button[aria-current="true"],#nav button.active,#nav button[aria-current="true"],#nav button[aria-current="page"],.nav button[aria-current="page"])
  :is(.num,.ss7-lab-number,.ss8-lab-number,.ss-ch1-lab-number){
  color:var(--els-ink)!important;background:var(--els-info-bg)!important;
@@ -304,11 +138,11 @@ html[data-ss-sidebar="collapsed"] :is(.shell,.app,.ss7-shell,.ss8-shell){
 html.ss-foundations-standard[data-ss-foundation-chapter="1"][data-ss-sidebar="collapsed"] main{
  grid-template-columns:var(--ss-sidebar-closed) minmax(0,1fr)!important
 }
-html[data-els-theme][data-ss-sidebar="collapsed"] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar){
+html[data-els-theme][data-ss-sidebar="collapsed"] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar){
  width:var(--ss-sidebar-closed)!important;min-width:0!important;max-width:var(--ss-sidebar-closed)!important;
  padding:9px 5px!important;overflow-x:hidden!important;
 }
-html[data-els-theme][data-ss-sidebar="collapsed"] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)>:not(.ss-side-toggle){
+html[data-els-theme][data-ss-sidebar="collapsed"] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar)>:not(.ss-side-toggle){
  display:none!important
 }
 @media(max-width:900px){
@@ -319,10 +153,10 @@ html[data-els-theme][data-ss-sidebar="collapsed"] :is(.shell>aside.nav,.app>asid
  html[data-els-theme] :is(.shell,.app,.ss7-shell,.ss8-shell){
   display:grid!important;grid-template-columns:var(--ss-sidebar-open) minmax(0,1fr)!important
  }
- html.ss-foundations-standard[data-ss-foundation-chapter="1"] main{
+ html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app{
   display:grid!important;grid-template-columns:var(--ss-sidebar-open) minmax(0,1fr)!important
  }
- html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar){
+ html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar){
   position:sticky!important;top:46px!important;max-height:calc(100dvh - 46px)!important;height:calc(100dvh - 46px)!important
  }
  html[data-els-theme][data-ss-sidebar="collapsed"] :is(.shell,.app,.ss7-shell,.ss8-shell){
@@ -331,25 +165,8 @@ html[data-els-theme][data-ss-sidebar="collapsed"] :is(.shell>aside.nav,.app>asid
 }
 @media(max-width:560px){
  :root{--ss-sidebar-open:170px}
- html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main>.ss-ch1-sidebar)
+ html[data-els-theme] :is(.shell>aside.nav,.app>aside.sidebar,.ss7-sidebar,.ss8-sidebar,main#ch1-app>.ss-ch1-sidebar)
   :is(.tabs button,.nav button,#ss7-lesson-nav button,#nav button){
   gap:6px!important;padding:8px 5px!important;font-size:12px!important
  }
-}
-
-
-/* Browser QA: the legacy .app grid retained a 58px navigation track in
- * Chapters 2–4 and 6 despite the sidebar itself measuring 52px.
- * Pin the collapsed track to its actual rail width to reclaim all space. */
-html[data-els-theme][data-ss-sidebar="collapsed"] .app{
- display:grid!important;
- grid-template-columns:52px minmax(0,1fr)!important;
- gap:0!important;
-}
-
-/* Match the dynamically generated #app grid itself; legacy theme selectors
- * otherwise win at equal importance in Chapters 2–4 and 6. */
-html[data-els-theme][data-ss-sidebar="collapsed"] body #app.app{
- grid-template-columns:52px minmax(0,1fr)!important;
- column-gap:0!important;
 }
