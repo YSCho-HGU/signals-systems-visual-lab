@@ -277,7 +277,7 @@ function syncChapterOneLanguage(){
  if(bridge)bridge.textContent=translate(exp.bridge);
  const intro=document.querySelector('.ss-found-intro');
  if(intro&&step===0){
-  const prompt=exp.steps(states[active])[0].replace(/<[^>]+>/g,' ').replace(/^\\s*Predict\\s*[—:·-]?\\s*/i,'').trim();
+  const prompt=exp.steps(states[active])[0].replace(/<[^>]+>/g,' ').replace(/^\s*Predict\s*[—:·-]?\s*/i,'').trim();
   intro.textContent=translate(prompt);
  }
 }
