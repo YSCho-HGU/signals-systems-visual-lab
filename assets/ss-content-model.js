@@ -33,6 +33,15 @@
   if(m==='en')return english;
   return korean.test(source)&&english!==source?english+'\n'+source:source;
  }
+ // Translate an explicitly authored English/Korean pair without inspecting the DOM.
+ function pair(en,ko,m=mode(),long=false){
+  const english=String(en??''),koreanText=String(ko??'');
+  if(m==='en')return english||text(koreanText,'en');
+  if(m==='ko')return koreanText||text(english,'ko');
+  if(!english)return koreanText;
+  if(!koreanText)return english;
+  return english+(long?'\n':' · ')+koreanText;
+ }
  function html(value,m=mode()){
   const source=String(value??'');
   // Full authored translation can contain markup (e.g. e<sup>−bt</sup>).
@@ -83,5 +92,5 @@
   }
   return out;
  }
- window.SSContentModel=Object.freeze({text,html,model,graph,mode,translations,version:'20261122-data-v4'});
+ window.SSContentModel=Object.freeze({text,html,model,graph,pair,mode,translations,version:'20261122-data-v5'});
 })(window);
