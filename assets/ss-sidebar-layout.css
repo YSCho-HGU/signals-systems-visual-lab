@@ -73,10 +73,20 @@ html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.n
  box-sizing:border-box!important;margin:18px 0 0!important;padding:12px 13px!important;border:1px solid var(--els-border)!important;
  border-radius:10px!important;background:var(--els-surface-alt)!important;color:var(--els-ink)!important;font-size:12px!important;line-height:1.65!important
 }
-/* Icon-only toggle occupies no full row: Chapter navigation is immediately below it. */
+/* Canonical compact chapter row: icon and chapter label share one line. */
+html .ss-layout-sidebar > .ss-sidebar-topline{
+ display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;
+ gap:9px!important;min-width:0!important;width:100%!important;margin:0 0 12px!important;padding:0!important
+}
+html .ss-layout-sidebar > .ss-sidebar-topline > .ss-sidebar-chapter-label{
+ display:block!important;flex:1 1 auto!important;min-width:0!important;margin:0!important;padding:0!important;
+ white-space:nowrap!important;text-transform:none!important;letter-spacing:0!important;overflow:hidden!important;
+ text-overflow:ellipsis!important;font:750 11px/1.35 Arial,'Malgun Gothic',sans-serif!important;color:var(--els-muted)!important
+}
+/* Compact icon-only control beside chapter label. */
 html .ss-side-toggle{
  display:grid!important;place-items:center!important;width:40px!important;height:36px!important;min-height:36px!important;
- margin:0 0 12px!important;padding:0!important;border:1px solid var(--els-border)!important;border-radius:8px!important;
+ margin:0!important;padding:0!important;flex:0 0 40px!important;border:1px solid var(--els-border)!important;border-radius:8px!important;
  color:var(--els-ink)!important;background:var(--els-surface-alt)!important;cursor:pointer!important;
  font:900 23px/1 Arial,sans-serif!important
 }
@@ -95,7 +105,9 @@ html[data-ss-sidebar="collapsed"] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell
 html[data-ss-sidebar="collapsed"] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar){
  width:var(--ss-sidebar-closed)!important;padding:9px 5px!important;overflow-x:hidden!important
 }
-html[data-ss-sidebar="collapsed"] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) > :not(.ss-side-toggle){display:none!important}
+html[data-ss-sidebar="collapsed"] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) > :not(.ss-sidebar-topline){display:none!important}
+html[data-ss-sidebar="collapsed"] .ss-layout-sidebar > .ss-sidebar-topline{justify-content:center!important;gap:0!important;margin:0!important}
+html[data-ss-sidebar="collapsed"] .ss-layout-sidebar > .ss-sidebar-topline > .ss-sidebar-chapter-label{display:none!important}
 @media(max-width:900px){:root{--ss-sidebar-open:210px}}
 @media(max-width:780px){:root{--ss-sidebar-open:190px}}
 @media(max-width:560px){:root{--ss-sidebar-open:170px}}
