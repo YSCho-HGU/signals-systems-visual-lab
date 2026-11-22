@@ -10,32 +10,39 @@
  }
  const inlinePattern=/^(.+?)\s+\/\s+(.+)$/;
  function mode(){try{return window.ELSLanguage?.get?.()||localStorage.getItem('els-language')||'mixed'}catch{return 'mixed'}}
- function text(value,m=mode()){
+ // Translate authored strings before the application inserts them into the live page.
+ // An HTML fragment is handled as alternating tags and text, so formulas,
+ // attributes, callbacks and chart markup remain byte-for-byte intact.
+ function plain(value,m=mode()){
   const source=String(value??'');
+  if(!source||!korean.test(source)&&!reverse.has(source))return source;
   const pair=source.trim().match(inlinePattern);
   if(pair&&korean.test(pair[1])!==korean.test(pair[2])){
-   const englishPart=korean.test(pair[1])?pair[2]:pair[1];
-   const koreanPart=korean.test(pair[1])?pair[1]:pair[2];
-   return m==='en'?englishPart:m==='ko'?koreanPart:englishPart+' / '+koreanPart;
+   const en=korean.test(pair[1])?pair[2]:pair[1];
+   const ko=korean.test(pair[1])?pair[1]:pair[2];
+   return m==='en'?en:m==='ko'?ko:en+' / '+ko;
   }
   if(m==='ko')return reverse.get(source)||source;
-  if(m==='mixed'&&!korean.test(source)&&reverse.has(source))return source+'\n'+reverse.get(source);
   let english=translations[source];
   if(english===undefined){
-   const bilingual=source.trim().match(inlinePattern);
-   if(bilingual&&korean.test(bilingual[1])!==korean.test(bilingual[2])){
-    const en=korean.test(bilingual[1])?bilingual[2]:bilingual[1];
-    const ko=korean.test(bilingual[1])?bilingual[1]:bilingual[2];
-    return m==='en'?en:m==='mixed'?en+' / '+ko:ko;
-   }
    english=source;
    for(const [ko,en] of fragments){
     if(english.includes(ko))english=english.split(ko).join(en);
    }
-   if(english===source)return source;
   }
   if(m==='en')return english;
-  return korean.test(source)?english+'\n'+source:source;
+  return korean.test(source)&&english!==source?english+'\n'+source:source;
+ }
+ function html(value,m=mode()){
+  const source=String(value??'');
+  // Keep tags, quoted attribute values, math and embedded SVG paths unchanged.
+  return source.split(/(<[^>]+>)/g).map(part=>
+   part.startsWith('<')&&part.endsWith('>')?part:plain(part,m)
+  ).join('');
+ }
+ function text(value,m=mode()){
+  const source=String(value??'');
+  return /<\/?[A-Za-z][^>]*>/.test(source)?html(source,m):plain(source,m);
  }
  // Derived presentation data: numeric state, IDs and callbacks remain untouched.
  function model(value,m=mode(),depth=0){
@@ -54,5 +61,5 @@
   }
   return out;
  }
- window.SSContentModel=Object.freeze({text,model,mode,translations,version:'20261122-data-v1'});
+ window.SSContentModel=Object.freeze({text,html,model,mode,translations,version:'20261122-data-v3'});
 })(window);
