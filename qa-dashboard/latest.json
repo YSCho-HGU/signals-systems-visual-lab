@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-22T04:30:44.205Z",
-  "sourceSha": "c08a7b3a3c9bd221fcfc173afc808303373dca66",
-  "runId": "44985326436",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44985326436",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/c08a7b3a3c9bd221fcfc173afc808303373dca66",
+  "generatedAt": "2026-11-22T04:30:59.446Z",
+  "sourceSha": "e50ff48be8125c4773a90af6d448ad258179f1fa",
+  "runId": "44985368591",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44985368591",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/e50ff48be8125c4773a90af6d448ad258179f1fa",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -21,7 +21,7 @@
     {
       "id": "G0",
       "label": "Catalog and source integrity",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
