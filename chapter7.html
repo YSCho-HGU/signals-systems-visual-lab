@@ -374,7 +374,7 @@ document.addEventListener('els-language-change',()=>{
  render();
  if(wasOpen)$('check')?.classList.add('open');
 });
-window.SSChapter7=Object.freeze({openExperiment(index){const n=Number(index)-1;if(!Number.isInteger(n)||n<0||n>=EXPERIMENTS.length)return false;if(current!==n){current=n;step=0;all=false;render();document.dispatchEvent(new Event('ss-ch7-experiment-change'))}return true},get currentExperiment(){return current+1},get experimentCount(){return EXPERIMENTS.length}});window.addEventListener('DOMContentLoaded',init);
+window.SSChapter7=Object.freeze({openExperiment(index){const n=Number(index)-1;if(!Number.isInteger(n)||n<0||n>=EXPERIMENTS.length)return false;if(current!==n){current=n;step=0;all=false;render();document.dispatchEvent(new Event('ss-ch7-experiment-change'))}return true},get currentExperiment(){return current+1},get experimentCount(){return EXPERIMENTS.length},get currentCheckQuestion(){return window.SSContentModel.text(EXPERIMENTS[current].check[0])}});window.addEventListener('DOMContentLoaded',init);
 /* Repaint computed graph trace colors whenever the explicit ELS theme changes. */
 window.addEventListener('els:themechange',()=>{if(stepsState[current])draw()});
 
