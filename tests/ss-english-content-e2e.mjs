@@ -20,7 +20,7 @@ try{
   });
   await page.goto(base+'chapter'+ch+'.html',{waitUntil:'domcontentloaded',timeout:45000});
   await page.locator('.ss-layout-sidebar nav button').first().waitFor({state:'visible',timeout:20000});
-  await page.waitForFunction(()=>!!window.ELSSharedLanguage?.audit,{timeout:15000});
+  await page.waitForFunction(()=>!!window.ELSSharedLanguage?.audit,null,{timeout:15000});
   const buttons=page.locator('.ss-layout-sidebar nav button:visible');
   const count=await buttons.count();
   for(let section=0;section<count;section++){
