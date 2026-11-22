@@ -152,7 +152,7 @@ function content234(){
  const link=document.createElement('a');link.className='ss-bridge-link';link.href='./chapter'+(chapter+1)+'.html';link.textContent='Continue to Chapter '+(chapter+1)+' · '+(['','LTI Systems','Fourier Series','CTFT','Laplace Transform'][chapter]);explain.append(link);
 }
 function content1(){
- const grid=document.querySelector('main .grid');if(!grid||grid.closest('.ss-found-four-step'))return;
+ const grid=document.querySelector('#ch1-app .grid');if(!grid||grid.closest('.ss-found-four-step'))return;
  const left=grid.querySelector('section.card'),right=grid.querySelector('aside.card');if(!left||!right)return;
  const block=document.createElement('section');block.className='ss-found-four-step';
  const pre=document.createElement('section');pre.className='ss-found-predict';pre.append(left);pre.insertBefore(stageHeading(1,'Predict · Understand the signal and predict the result'),left);
@@ -173,7 +173,7 @@ let busy=false;
 function schedule(){if(busy)return;busy=true;queueMicrotask(()=>{busy=false;try{chapter===1?content1():content234();refreshPredict(document.querySelector('.ss-found-four-step'));typeset();enhanceGuidedMath();setNewTitle()}catch(e){console.warn('Foundation standard enhancement',e)}})}
 function init(){
  // The native experiment scripts still own every simulation and state change.
- const root=document.querySelector(chapter===1?'main':'#app');if(!root)return;
+ const root=document.querySelector(chapter===1?'#ch1-app':'#app');if(!root)return;
  new MutationObserver(mutations=>{if(mutations.some(m=>m.type==='childList'&&[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches?.('.experiment,.grid,.heading,.formula')||n.querySelector?.('.experiment,.grid')))))schedule()}).observe(root,{childList:true,subtree:true});
  const nav=document.querySelector(chapter===1?'#nav':'[data-nav]')?.closest('nav')||document.querySelector('nav');
  nav?.addEventListener('click',()=>setTimeout(schedule,60));
