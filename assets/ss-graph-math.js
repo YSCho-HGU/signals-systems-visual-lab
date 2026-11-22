@@ -82,6 +82,8 @@ function renderCanvas(ref,side,value,position){
   node.dataset.ssCanvas=canvas.id;node.dataset.ssAxis=side;node.setAttribute('aria-hidden','true');host.appendChild(node)}
  if(node.dataset.ssTex!==tex){if(!typeset(node,tex)){node.remove();return false}node.dataset.ssTex=tex}
  node.dataset.ssFormula=String(value);node._canvas=canvas;node._position=position;
+ node.style.minWidth=(side==='y'?Math.min(260,Math.max(52,String(value).length*10)):Math.min(280,Math.max(40,String(value).length*8)))+'px';
+ node.style.minHeight='24px';
  alignCanvas(node);canvasSpans.add(node);return true;
 }
 function alignSvg(node){
@@ -119,7 +121,8 @@ function resize(){
  for(const node of canvasSpans){if(node.isConnected)alignCanvas(node);else canvasSpans.delete(node)}
  for(const node of svgSpans){if(node.isConnected)alignSvg(node);else svgSpans.delete(node)}
 }
-function init(){new MutationObserver(enhanceAll).observe(document.body,{subtree:true,childList:true});enhanceAll();window.addEventListener('resize',resize,{passive:true})}
+function init(){new MutationObserver(enhanceAll).observe(document.body,{subtree:true,childList:true});enhanceAll();window.addEventListener('resize',resize,{passive:true});
+ requestAnimationFrame(()=>{if(ready())window.dispatchEvent(new Event('resize'))});}
 window.SSGraphMath=Object.freeze({latexFor,renderCanvas,enhanceAll});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
  window.addEventListener('load',enhanceAll,{once:true});
