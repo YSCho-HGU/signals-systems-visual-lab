@@ -18,11 +18,13 @@ assert.match(header,/한\/영/);
 assert.match(language,/ELSLanguage\.subscribe/);
 assert.match(language,/data-i18n-/);
 assert.match(language,/MutationObserver/);
+assert.match(language,/authoredTranslations/);
+assert.match(language,/ss-i18n-mixed-paragraph/);
 for(let chapter=1;chapter<=8;chapter++){
  const source=read('chapter'+chapter+'.html');
  assert.match(source,/ss-common-header\.js\?v=20261122-navigation-language-v2/);
  assert.match(source,/ss-common-header\.css\?v=20261122-compact-controls/);
- assert.match(source,/ss-language-content\.js\?v=20261122-bilingual-content/);
+ assert.match(source,/ss-language-content\.js\?v=20261122-bilingual-pass2/);
  assert.match(source,/ss-language-icon/);
  assert.match(source,/<option value="mixed">한\/영<\/option>/);
  assert.match(source,/<option value="en">English<\/option>/);
