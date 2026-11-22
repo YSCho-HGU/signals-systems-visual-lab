@@ -1,37 +1,44 @@
-/* Shared collapsible navigation across Chapters 1–8.
- * Retains the established localStorage key and never rebuilds experiment buttons.
+/* One sidebar header/toggle component for Signals & Systems Chapters 1–8.
+ * The chapter-specific experiment controls remain owned by their original scripts.
  */
 (function(){
 'use strict';
-const KEY='ss-sidebar-collapsed-v1',root=document.documentElement;
+const KEY='ss-sidebar-collapsed-v1';
+const root=document.documentElement;
 function saved(){try{return localStorage.getItem(KEY)==='1'}catch{return false}}
 function persist(v){try{localStorage.setItem(KEY,v?'1':'0')}catch{}}
 function findSidebar(){
- return document.querySelector('#ch1-app>.ss-ch1-sidebar,.ss-vertical-layout>.ss-vertical-sidebar,.ss7-shell>.ss7-sidebar,.ss8-shell>.ss8-sidebar,.shell>aside.nav,.app>aside.sidebar,#app>aside.sidebar');
+ return document.querySelector('.ss-layout-root > .ss-layout-sidebar');
 }
 function redraw(){
- // Layout first, then notify existing graph resize listeners after the new width is applied.
  requestAnimationFrame(()=>requestAnimationFrame(()=>{
   window.dispatchEvent(new Event('resize'));
-  document.dispatchEvent(new CustomEvent('ss:sidebar-resized',{
-   detail:{collapsed:root.dataset.ssSidebar==='collapsed'}
-  }));
+  document.dispatchEvent(new CustomEvent('ss:sidebar-resized',{detail:{collapsed:root.dataset.ssSidebar==='collapsed'}}));
  }));
 }
 function sync(){
  const collapsed=root.dataset.ssSidebar==='collapsed';
  document.querySelectorAll('.ss-side-toggle').forEach(button=>{
   button.setAttribute('aria-expanded',String(!collapsed));
-  button.setAttribute('aria-label',collapsed?'Expand chapter navigation':'Collapse chapter navigation');
-  button.title=collapsed?'Expand navigation / 목차 펼치기':'Collapse navigation / 목차 접기';
+  button.setAttribute('aria-label',collapsed?'목차 펼치기':'목차 접기');
+  button.title=collapsed?'Expand chapter navigation / 목차 펼치기':'Collapse chapter navigation / 목차 접기';
   const icon=button.querySelector('.ss-toggle-icon');
   if(icon)icon.textContent=collapsed?'≫':'≪';
  });
 }
 function setup(){
  const side=findSidebar();if(!side)return;
- if(!side.querySelector('.ss-side-toggle')){
-  const button=document.createElement('button');
+ const brand=side.querySelector(':scope > .brand');
+ if(!brand)return;
+ let row=side.querySelector(':scope > .ss-sidebar-topline');
+ if(!row){
+  row=document.createElement('div');
+  row.className='ss-sidebar-topline';
+  side.prepend(row);
+ }
+ let button=row.querySelector('.ss-side-toggle');
+ if(!button){
+  button=document.createElement('button');
   button.type='button';button.className='ss-side-toggle';
   button.innerHTML='<span class="ss-toggle-icon" aria-hidden="true">≪</span>';
   button.addEventListener('click',()=>{
@@ -39,8 +46,12 @@ function setup(){
    root.dataset.ssSidebar=collapsed?'collapsed':'expanded';
    persist(collapsed);sync();redraw();
   });
-  side.prepend(button);
-  redraw();
+  row.prepend(button);
+ }
+ const eyebrow=brand.querySelector(':scope > .over,:scope > .eyebrow');
+ if(eyebrow && eyebrow.parentElement!==row){
+  eyebrow.classList.add('ss-sidebar-chapter-label');
+  row.append(eyebrow);
  }
  sync();
 }
@@ -51,5 +62,7 @@ function init(){
  if(app)new MutationObserver(setup).observe(app,{childList:true});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
-window.addEventListener('storage',e=>{if(e.key===KEY){root.dataset.ssSidebar=saved()?'collapsed':'expanded';sync();redraw()}});
+window.addEventListener('storage',e=>{
+ if(e.key===KEY){root.dataset.ssSidebar=saved()?'collapsed':'expanded';sync();redraw()}
+});
 })();
