@@ -7,7 +7,7 @@ const KEY='ss-sidebar-collapsed-v1',root=document.documentElement;
 function saved(){try{return localStorage.getItem(KEY)==='1'}catch{return false}}
 function persist(v){try{localStorage.setItem(KEY,v?'1':'0')}catch{}}
 function findSidebar(){
- return document.querySelector('main>.ss-ch1-sidebar,.ss-vertical-layout>.ss-vertical-sidebar,.ss7-shell>.ss7-sidebar,.ss8-shell>.ss8-sidebar,.shell>aside.nav,.app>aside.sidebar,#app>aside.sidebar');
+ return document.querySelector('#ch1-app>.ss-ch1-sidebar,.ss-vertical-layout>.ss-vertical-sidebar,.ss7-shell>.ss7-sidebar,.ss8-shell>.ss8-sidebar,.shell>aside.nav,.app>aside.sidebar,#app>aside.sidebar');
 }
 function redraw(){
  // Layout first, then notify existing graph resize listeners after the new width is applied.
