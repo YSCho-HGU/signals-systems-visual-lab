@@ -124,9 +124,10 @@ function refreshPredict(container){
  const p=container.querySelector('.ss-found-intro');if(!p)return;
  // The experiment card already displays m.desc. Do not repeat the description
  // or the word Predict in the prediction prompt.
- const question=chapter===1?m.steps(states[active])[0]:(m.question||m.questionKo||'');
+ const language=window.SSContentModel?.mode?.()||'mixed';
+ const question=chapter===1?m.steps(states[active])[0]:language==='ko'?(m.questionKo||m.question):language==='mixed'&&m.questionKo?(m.question+' / '+m.questionKo):(m.question||m.questionKo||'');
  const clean=question.replace(/<[^>]+>/g,' ').replace(/^\s*Predict\s*[—:·-]?\s*/i,'').trim();
- p.textContent=window.ELSSharedLanguage?.translate?.(clean)||clean;
+ p.textContent=window.SSContentModel?.text(clean)||clean;
 }
 function setNewTitle(){
  const m=current();if(!m)return;
