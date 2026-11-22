@@ -20,7 +20,7 @@
   if(pair&&korean.test(pair[1])!==korean.test(pair[2])){
    const en=korean.test(pair[1])?pair[2]:pair[1];
    const ko=korean.test(pair[1])?pair[1]:pair[2];
-   return m==='en'?en:m==='ko'?ko:en+' / '+ko;
+   return m==='en'?en:m==='ko'?ko:(source.length>95?en+'\n'+ko:en+' / '+ko);
   }
   if(m==='ko')return reverse.get(source)||source;
   let english=translations[source];
