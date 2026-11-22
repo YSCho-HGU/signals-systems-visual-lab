@@ -18,7 +18,21 @@ const dictionary={
  '예측하기':'Predict','변경하기':'Change','관찰하기':'Observe','설명하기':'Explain',
  '초기화':'Reset','실습 초기화':'Reset Lab','스스로 확인하기':'Check Yourself',
  '학습 목표':'Learning Objectives','핵심 개념':'Key idea',
- '관찰 포인트':'What to notice'
+ '관찰 포인트':'What to notice',
+ '목차 접기':'Collapse contents','목차 펼치기':'Expand contents',
+ '오류 제보':'Report an issue','해설 보기':'Reveal explanation',
+ '시간 신호':'Time-domain signal','복소평면':'Complex plane',
+ '이산 표본':'Discrete samples','계산 표본 (보간 없음)':'Computed samples (no interpolation)',
+ 'f(x) 직접 계산':'Direct evaluation of f(x)',
+ 'ROC 내부 (boundary excluded)':'Inside ROC (boundary excluded)',
+ 'ROC 외부 또는 경계':'Outside ROC or on boundary',
+ '표시 범위 밖':'Outside display range',
+ '복소평면 좌표':'Complex-plane coordinates','그래프 값 읽기':'Read graph values',
+ '수식 함수가 제공된 경우 커서 x에서 직접 계산한 값입니다.':'When a formula is available, the value is evaluated directly at the cursor position x.',
+ '복소평면 좌표는 위치값이며, pole/zero는 가까운 경우에만 표시합니다.':'Complex-plane coordinates indicate position; poles and zeros appear only when nearby.',
+ '원래 신호':'Original signal','변환된 신호':'Transformed signal',
+ '수렴영역':'Region of convergence','극점':'Pole','영점':'Zero',
+ '신호와 시스템':'Signals and Systems','예측은 자기 점검용이며 채점되지 않습니다':'Predictions are for self-checking and are not graded.'
 };
 const nodeFilter='script,style,textarea,option,svg,canvas,math,.katex,.katex-display,code,pre,[contenteditable],[data-no-translate]';
 const roots=()=>[document.querySelector('.ss-layout-root'),document.querySelector('main'),document.querySelector('#page'),document.querySelector('.ss-layout-sidebar')].filter((x,i,a)=>x&&a.indexOf(x)===i).filter(x=>!rootsAncestor(x));
@@ -26,6 +40,7 @@ function rootsAncestor(el){return !!(el.parentElement&&el.parentElement.closest(
 function bilingual(raw,mode){
  if(mode==='mixed')return raw;
  const trimmed=raw.trim();
+ // Preserve surrounding whitespace and math syntax; translate only exact authored phrases.
  if(dictionary[trimmed]){
   const value=dictionary[trimmed];
   if(mode==='en'&&/[가-힣]/.test(trimmed))return raw.replace(trimmed,value);
@@ -48,6 +63,7 @@ function run(){
  if(running){pending=true;return;}
  running=true;
  for(const observer of observers)observer.disconnect();
+ observers=[];
  const mode=window.ELSLanguage.get();
  document.documentElement.dataset.language=mode;
  document.documentElement.dataset.elsLanguage=mode;
