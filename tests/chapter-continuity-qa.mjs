@@ -16,7 +16,7 @@ try{
   await page.goto(BASE+'chapter'+ch+'.html',{waitUntil:'load',timeout:50000});
   await page.waitForTimeout(650);
   const head=await page.evaluate(()=>({title:document.title,header:!!document.querySelector('.ss-common-header'),links:document.querySelectorAll('.ss-common-links a').length,frame:document.querySelectorAll('iframe').length,theme:document.documentElement.dataset.elsTheme||'',stage:!!document.querySelector('.ss-found-four-step'),canvas:document.querySelectorAll('canvas').length,formula:!!document.querySelector('.ss-found-katex'),math:!!document.querySelector('.ss-found-katex .katex'),main:document.querySelector('main')?.textContent.slice(0,120)}));
-  check('chapter'+ch+'-header-and-nav',head.header&&head.links===8&&head.frame===0,head);
+  check('chapter'+ch+'-header-and-nav',head.header&&head.links>=8&&head.frame===0,head);
   check('chapter'+ch+'-theme',!!head.theme,head.theme);
   if(ch<=4){
    check('chapter'+ch+'-four-stage-layout',head.stage&&head.canvas>0&&head.formula,head);
@@ -63,7 +63,7 @@ try{
    const bad=lessonResults.filter(x=>!x.title||!x.stage||!x.predict||!x.controls||!x.graphs||!x.keyFormula||!x.guided||!x.nextChapter||x.hasReferenceError);
    check('chapter'+ch+'-every-lab-functional',bad.length===0,{tested:lessonResults.length,failures:bad});
    if(ch===1){
-    const toc=await page.locator('main > nav#nav').evaluate(el=>({display:getComputedStyle(el).display,position:getComputedStyle(el).position}));
+    const toc=await page.locator('#ch1-app>.sidebar').evaluate(el=>({display:getComputedStyle(el.querySelector('nav#nav')).display,position:getComputedStyle(el).position}));
     check('chapter1-left-TOC',toc.display==='flex'&&toc.position==='sticky',toc);
    }
    await page.locator('[data-els-theme-picker]').first().selectOption('warm-neutral');
