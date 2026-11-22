@@ -13,7 +13,7 @@ var L={
  filter:{title:["05 · 센서에서의 디지털 필터","05 · Digital filtering of a sensor"],goal:["원하는 저주파와 간섭 성분이 이동평균필터를 지나며 어떻게 달라지는지 분석합니다.","Analyze how averaging changes a useful signal and interference."],do:["주파수·진폭을 고정한 채 Filter length M부터 바꿔 보세요.","Hold frequencies and amplitude fixed; vary filter length M first."],read:["입출력 파형을 비교한 다음, 유효 성분과 잡음 성분의 이득을 읽으세요.","Compare input/output waveforms, then useful/noise gains."]},
  fft:{title:["06 · 유한 데이터와 FFT 누설","06 · Finite records and FFT leakage"],goal:["On-bin과 Off-bin을 비교해 누설의 원인을 찾고 Hann window, zero padding의 역할을 구분합니다.","Compare on-bin and off-bin tones, then distinguish Hann windowing from zero padding."],do:["1 On-bin → 2 Off-bin → 3 Hann → 4 Zero padding 버튼을 순서대로 실행하세요.","Run 1 On-bin → 2 Off-bin → 3 Hann → 4 Zero padding in order."],read:["원래 데이터 길이는 유지하면서 스펙트럼의 sidelobe와 bin 간격을 비교하세요.","Compare sidelobes and bin spacing without confusing padding with new measurements."]}
 };
-function lang(ko,en){var v=window.ELSLanguage&&window.ELSLanguage.get();return v==="en"?en:v==="ko"?ko:en+" · "+ko}
+function lang(ko,en){return window.SSContentModel.pair(en,ko)}
 function lookup(id){return L[id]||L.periodic}
 function periodicDo(){
  var s=state.periodic;
