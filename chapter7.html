@@ -255,7 +255,7 @@ html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hov
 <link rel="stylesheet" href="./assets/els-theme-v2.css?v=20261121b">
 <link rel="stylesheet" href="./assets/els-typography-standard.css?v=1">
 <link rel="stylesheet" href="./assets/ss-ch7-learning-standard.css?v=14">
-<link rel="stylesheet" href="./assets/ss-common-header.css?v=20261122-model-bilingual">
+<link rel="stylesheet" href="./assets/ss-common-header.css?v=20261122-model-only">
 <link rel="stylesheet" href="./assets/ss-ch7-standalone.css?v=20261122-q3-canonical">
 <link rel="stylesheet" href="./assets/ss-trace-palette.css?v=4">
 <script src="./assets/ss-trace-palette.js?v=2"></script>
@@ -274,7 +274,7 @@ html[data-theme="dark"] .ss-hover-tip :is(.ss-hover-coord,.ss-hover-line,.ss-hov
 <script defer src="./assets/ss-ch7-standalone.js?v=1"></script>
 <script defer src="./assets/ss-sidebar-toggle.js?v=20261122-q3-canonical"></script>
 <link rel="stylesheet" href="./assets/ss-graph-workspace-layout.css?v=1">
-<link rel="stylesheet" href="./assets/ss-learning-bridges.css?v=1"><script defer src="./assets/ss-learning-bridges.js?v=1"></script><link rel="stylesheet" href="./assets/ss-chapter5-layout-standard.css?v=20261122-smooth-nav"><link rel="stylesheet" href="./assets/ss-chapter5-internal-rhythm.css?v=20261122a"><link rel="stylesheet" href="./assets/ss-graph-math.css?v=20261122b"><script src="./assets/ss-graph-math.js?v=20261122b"></script><script src="./assets/ss-content-model.js?v=20261122-data-v2"></script></head><body>
+<link rel="stylesheet" href="./assets/ss-learning-bridges.css?v=1"><script defer src="./assets/ss-learning-bridges.js?v=1"></script><link rel="stylesheet" href="./assets/ss-chapter5-layout-standard.css?v=20261122-smooth-nav"><link rel="stylesheet" href="./assets/ss-chapter5-internal-rhythm.css?v=20261122a"><link rel="stylesheet" href="./assets/ss-graph-math.css?v=20261122b"><script src="./assets/ss-graph-math.js?v=20261122b"></script><script src="./assets/ss-content-model.js?v=20261122-model-only-v4"></script></head><body>
 <header class="ss7-site-header ss-common-header" aria-label="Engineering Learning Studio navigation">
 <a class="ss7-home ss-common-home" href="./index.html#overview">← Studio</a>
 <details class="ss7-chapter-menu ss-common-menu">
@@ -388,5 +388,5 @@ const EXPERIMENTS=[
 {short:'DAC / ZOH',topic:'Reconstruction hardware',title:'7.7 · Zero-Order Hold vs Ideal Reconstruction',desc:'실제 DAC의 계단형 출력(ZOH)과 이상적 sinc 복원을 비교합니다. 시간축을 0–0.25 s로 고정합니다.',defaults:{fs:50,f:12},controls:[{key:'fs',label:'DAC sample rate (Hz)',min:35,max:110,step:5},{key:'f',label:'Tone f (Hz)',min:5,max:25,step:1}],draw:p=>{const zoh=t=>Math.cos(2*PI*p.f*Math.floor(t*p.fs)/p.fs),ideal=t=>Array.from({length:141},(_,i)=>i-70).reduce((s,n)=>s+Math.cos(2*PI*p.f*n/p.fs)*sinc(p.fs*t-n),0);let pts=[];for(let n=0;n<=Math.ceil(.25*p.fs);n++){let t=n/p.fs,v=Math.cos(2*PI*p.f*t),t2=Math.min(.25,(n+1)/p.fs);if(t>.25)break;pts.push([t,v],[t2,v]);if(t2<.25)pts.push([t2,Math.cos(2*PI*p.f*(n+1)/p.fs)])}return {plots:chart({xmin:0,xmax:.25,ymin:-1.35,ymax:1.35,xlab:'t (s)',title:'Fixed 0–0.25 s · original / ZOH / sinc approximation',curves:[{fn:t=>Math.cos(2*PI*p.f*t),color:'#0b8491',label:'Original'},{pts,color:'#c88939',label:'DAC ZOH staircase',width:2.5},{fn:ideal,color:'#4d6fa8',label:'Finite sinc approximation',dash:'5 4'}]}),insight:`<strong>f=${p.f} Hz, fₛ=${p.fs} Hz.</strong> ZOH holds each value for Tₛ=${fmt(1000/p.fs,1)} ms, producing a staircase. ${p.fs>2*p.f?'Sinc reconstruction is theoretically valid under ideal assumptions.':'Nyquist condition fails; ideal reconstruction cannot identify the original tone.'} 실제 DAC에는 reconstruction smoothing filter가 필요합니다.`}},steps:[['Digital samples are numbers','x[n]=x꜀(nTₛ)','DAC는 이산시간 표본을 전압·전류 출력으로 변환합니다.'],['Zero-order hold','y<sub>ZOH</sub>(t)=x[n], &nbsp; nTₛ≤t<(n+1)Tₛ','각 값을 다음 샘플이 올 때까지 유지하여 계단형 파형을 만듭니다.'],['Frequency-domain consequence','H<sub>ZOH</sub>(jω)=Tₛe<sup>−jωTₛ/2</sup>sinc(ωTₛ/2π)','ZOH는 주파수에 따른 magnitude droop과 지연을 갖습니다.'],['Distinguish filtering from exact interpolation','ZOH + LPF ≠ ideal sinc reconstruction','ZOH에 의한 passband의 sinc droop과 지연을 정확히 보상하려면 equalization이 추가로 필요합니다. 이상적 sinc 보간은 impulse-sampled 신호에 대한 별도 모델입니다.']],readings:[['Step waveform','계단형 출력은 원래 정현파와 다르며 고주파 image를 포함합니다.'],['Fixed time axis','샘플링률만 바꾸면 계단 폭이 달라집니다.'],['Physical reconstruction','실제 DAC 뒤의 analog reconstruction filter가 계단 성분을 완화합니다.']],check:['DAC의 ZOH 출력은 이상적인 sinc 복원과 동일한가요?','아닙니다. ZOH는 값을 일정 시간 유지하고, 이상적 sinc 복원은 전체 표본의 대역제한 보간을 사용합니다.']}
 ];
 
-</script><link rel="stylesheet" href="./assets/ss-sidebar-layout.css?v=20261122-readability"><script defer src="./assets/ss-language-content.js?v=20261122-ch1-live-fix-v5"></script>
+</script><link rel="stylesheet" href="./assets/ss-sidebar-layout.css?v=20261122-readability">
 </body></html>
