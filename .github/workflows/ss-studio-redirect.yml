@@ -1,0 +1,21 @@
+name: Signals migration redirect contract
+on:
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'chapter*.html'
+      - 'assets/ss-studio-redirect.js'
+      - 'tests/ss-studio-redirect-contract.mjs'
+      - '.github/workflows/ss-studio-redirect.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  redirect-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tests/ss-studio-redirect-contract.mjs
