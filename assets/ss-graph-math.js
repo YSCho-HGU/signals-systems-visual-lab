@@ -40,6 +40,20 @@ const entries=[
  ['Re','\\operatorname{Re}'],['Im','\\operatorname{Im}'],
  ['upper integration bound T','T\\;(\\text{integration bound})'],
  ['time t (s)','t\\;(\\mathrm{s})'],['t (s)','t\\;(\\mathrm{s})'],['R (s)','R\\;(\\mathrm{s})'],
+ ['sample index n','n\\;(\\text{sample index})'],
+ ['output index n','n\\;(\\text{output index})'],
+ ['dummy index k','k\\;(\\text{summation index})'],
+ ['tap index k','k\\;(\\text{tap index})'],
+ ['harmonic index k','k\\;(\\text{harmonic index})'],
+ ['integration variable τ (s)','\\tau\\;(\\mathrm{s})'],
+ ['output time t (s)','t\\;(\\mathrm{s})'],
+ ['time near t=0','t\\;(\\text{near }0)'],
+ ['time near the jump','t\\;(\\text{near jump})'],
+ ['time t','t'],
+ ['n (samples)','n'],['n (integer)','n'],
+ ['Sample index n','n'],['f (Hz)','f\\;(\\mathrm{Hz})'],
+ ['frequency (Hz)','f\\;(\\mathrm{Hz})'],
+ ['step response','\\text{Step response}'],
  ['n','n'],['k','k'],['M (terms)','M\\;(\\text{terms})']
 ];
 const mapping=new Map(entries);
