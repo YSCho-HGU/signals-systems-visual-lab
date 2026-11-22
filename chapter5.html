@@ -552,7 +552,7 @@ const guideView={count:{},previous:{},timer:null,playing:false,duration:2600,las
 function stopGuidePlay(){if(guideView.timer!==null){clearInterval(guideView.timer);guideView.timer=null}guideView.playing=false}
 function revealGuide(moduleId,state,guideFactory){
  const pane=document.getElementById('derivationPanel'),rp=document.getElementById('readingPanel');if(!pane||!rp)return;
- const d=window.SSContentModel.model(guideFactory(state)),total=d.steps.length;
+ const rawGuide=guideFactory(state),d=window.SSContentModel.model(rawGuide),total=d.steps.length;
  // One source of truth: the four KaTeX-ready equations are owned by ss-ch5-math.js.
  // The narrative factory supplies titles and explanations, not a competing formula.
  const canonical=window.ELSChapterFiveMath?.guides(moduleId,state);
