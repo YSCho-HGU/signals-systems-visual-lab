@@ -429,7 +429,7 @@ const guideView={count:{},previous:{},timer:null,playing:false,duration:2600,las
 function stopGuidePlay(){if(guideView.timer!==null){clearInterval(guideView.timer);guideView.timer=null}guideView.playing=false}
 function revealGuide(moduleId,state,guideFactory){
  const pane=document.getElementById('derivationPanel'),rp=document.getElementById('readingPanel');if(!pane||!rp)return;
- const d=window.SSContentModel.model(guideFactory(state)),total=d.steps.length;
+ const rawGuide=guideFactory(state),d=window.SSContentModel.model(rawGuide),total=d.steps.length;
  const n=Math.max(1,Math.min(total,guideView.count[moduleId]||1));
  const animate=guideView.previous[moduleId]!==undefined&&n>guideView.previous[moduleId]&&n===guideView.previous[moduleId]+1;
  const displayStep=(v,i)=>`<article class="deriv-step ${animate&&i===n-1?'guide-enter':''}" aria-label="Step ${i+1} of ${total}"><div class="deriv-top"><span class="step-index">${i+1}</span><strong>${v.head}</strong></div><div class="deriv-math">${v.math}</div><p>${v.ko}</p></article>`;
@@ -453,7 +453,7 @@ function revealGuide(moduleId,state,guideFactory){
   },guideView.duration)
  };
  guideView.previous[moduleId]=n;
- rp.innerHTML=window.SSContentModel.html(`<div class="overlabel">READ THE GRAPHS / 그래프 해석</div><h3>What changed, and why? / 무엇이 왜 바뀌었을까요?</h3><div class="reading-grid">${d.graphs.map((v,i)=>`<div class="reading-note"><span class="plot-number">GRAPH ${String(i+1).padStart(2,'0')}</span><strong>${v.title}</strong><p>${v.en}</p><p class="ko-explain">${v.ko}</p></div>`).join('')}</div><p class="guide-check"><strong>Interpretation checkpoint / 해석 점검:</strong> ${d.check}</p>`);
+ rp.innerHTML=window.SSContentModel.html(`<div class="overlabel">READ THE GRAPHS / 그래프 해석</div><h3>What changed, and why? / 무엇이 왜 바뀌었을까요?</h3><div class="reading-grid">${d.graphs.map((v,i)=>`<div class="reading-note"><span class="plot-number">GRAPH ${String(i+1).padStart(2,'0')}</span><strong>${v.title}</strong><p>${window.SSContentModel.mode()==='ko'?'':rawGuide.graphs[i].en}</p><p class="ko-explain">${window.SSContentModel.mode()==='en'?'':rawGuide.graphs[i].ko}</p></div>`).join('')}</div><p class="guide-check"><strong>Interpretation checkpoint / 해석 점검:</strong> ${d.check}</p>`);
 }
 
 function currentGuidedId(){return MODULES[lab.active].id}
