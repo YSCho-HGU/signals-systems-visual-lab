@@ -12,7 +12,7 @@ for(const name of ['function plain(','function html(','function text(','function
 assert.ok(!foundations.includes('ELSSharedLanguage'), 'Foundations must use native content model');
 for(let ch=1;ch<=8;ch++){
  const page=read('chapter'+ch+'.html');
- assert.match(page,/ss-content-model\.js\?v=20261122-content-v6/);
+ assert.match(page,/ss-content-model\.js\?v=20261122-unified-v7/);
  assert.doesNotMatch(page,/ss-language-content\.js/,'Do not load the legacy DOM translator');
  assert.match(page,/ss-common-header\.js\?v=20261122-navigation-language-v2/);
  assert.match(page,/ss-common-header\.css\?v=20261122-model-only/);
