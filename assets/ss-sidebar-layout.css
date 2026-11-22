@@ -125,6 +125,22 @@ html[data-ss-sidebar="collapsed"] .ss-layout-root > .ss-layout-sidebar > .ss-sid
  width:40px!important;height:36px!important;flex:0 0 40px!important;
  margin:0!important;padding:0!important;
 }
+/* Shared collapse recovery control is outside every chapter sidebar.
+   This prevents older lesson-navigation CSS from hiding the only expand action. */
+html body > #ss-sidebar-restore[hidden]{display:none!important}
+html[data-ss-sidebar="collapsed"] .ss-layout-root > .ss-layout-sidebar .ss-side-toggle{
+ visibility:hidden!important;pointer-events:none!important
+}
+html[data-ss-sidebar="collapsed"] body > #ss-sidebar-restore:not([hidden]){
+ display:grid!important;position:fixed!important;top:calc(var(--ss-layout-header,46px) + 9px)!important;
+ left:6px!important;z-index:1000!important;box-sizing:border-box!important;
+ width:40px!important;min-width:40px!important;height:36px!important;
+ margin:0!important;padding:0!important;visibility:visible!important;
+ opacity:1!important;pointer-events:auto!important;
+ background:var(--els-surface-alt,#ecefea)!important;
+ color:var(--els-ink,#273a32)!important;border:1px solid var(--els-border,#899b92)!important;
+ border-radius:8px!important;box-shadow:none!important
+}
 @media(max-width:900px){:root{--ss-sidebar-open:210px}}
 @media(max-width:780px){:root{--ss-sidebar-open:190px}}
 @media(max-width:560px){:root{--ss-sidebar-open:170px}}
