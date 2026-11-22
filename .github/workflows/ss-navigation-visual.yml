@@ -6,6 +6,9 @@ on:
     paths:
       - "assets/ss-common-header.css"
       - "assets/ss-sidebar-layout.css"
+      - "assets/ss-chapter5-layout-standard.css"
+      - "assets/ss-ch1-native-navigation.css"
+      - "assets/ss-foundations-standard.css"
       - "assets/ss-overview-standard.css"
       - "assets/ss-overview-standard.js"
       - "assets/ss-ch7-standalone.js"
