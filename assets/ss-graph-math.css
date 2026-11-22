@@ -43,3 +43,11 @@ html[data-els-theme] .ss-graph-axis-x .katex{font-size:1.0em}
  .ss-graph-axis-math{font-size:14px}
  .ss-graph-axis-y .katex{font-size:.9em}
 }
+
+/* Opaque, theme-matched label surface masks a raw canvas fallback label
+ * when KaTeX finishes loading after the first chart paint. */
+.ss-graph-axis-math{
+ background:var(--els-surface,#fff)!important;
+ padding:1px 3px!important;
+ box-sizing:border-box!important;
+}
