@@ -82,6 +82,46 @@ try{
     record(Math.abs(layout.padTop-(width<=780?12:15))<1&&Math.abs(layout.padLeft-layout.padRight)<1,
       'ch'+ch+'-'+width+'-chapter5-content-padding',JSON.stringify(layout));
     record(layout.gap==='5px','ch'+ch+'-'+width+'-chapter5-nav-gap',layout.gap);
+    const inner=await page.evaluate((ch)=>{
+      const cardSelector={
+        1:'.ss-found-four-step .ss-found-observe',
+        2:'.ss-found-four-step .ss-found-observe',
+        3:'.ss-found-four-step .ss-found-observe',
+        4:'.ss-found-four-step .ss-found-observe',
+        5:'#page .panel',
+        6:'.ss6-step-card',
+        7:'.ss7-card',
+        8:'.ss8-card'
+      }[ch];
+      const graphSelector={
+        1:'.ss-found-observe .plotbox',
+        2:'.ss-found-observe .figure',
+        3:'.ss-found-observe .figure',
+        4:'.ss-found-observe .figure',
+        5:'#page .figure',
+        6:'.ss6-control-plot-workspace .figure',
+        7:'.ss7-stage-observe #plots .plot-card',
+        8:'.ss8-stage-observe #plots .plot-card'
+      }[ch];
+      const measure=(el)=>{
+        if(!el)return null;
+        const c=getComputedStyle(el);
+        return {top:parseFloat(c.paddingTop),left:parseFloat(c.paddingLeft),
+          radius:parseFloat(c.borderTopLeftRadius),width:el.getBoundingClientRect().width};
+      };
+      const card=document.querySelector(cardSelector);
+      const graph=document.querySelector(graphSelector);
+      const title=ch>=7?graph?.querySelector('.plot-title'):null;
+      return {card:measure(card),graph:measure(graph),
+        title:measure(title),
+        chartCount:document.querySelectorAll(graphSelector).length};
+    },ch);
+    record(inner.card?.radius===12,'ch'+ch+'-'+width+'-chapter5-card-corners',JSON.stringify(inner));
+    record(inner.card?.top===14,'ch'+ch+'-'+width+'-chapter5-card-padding',JSON.stringify(inner));
+    record(inner.graph?.radius===12,'ch'+ch+'-'+width+'-chapter5-graph-corners',JSON.stringify(inner));
+    record(ch>=7?(inner.title?.left===12):(inner.graph?.left===(width<=780?11:12)),
+      'ch'+ch+'-'+width+'-chapter5-graph-padding',JSON.stringify(inner));
+
 
     record(before.number==='01','ch'+ch+'-'+width+'-two-digit-first-number',before.number);
     if(ch===1){
