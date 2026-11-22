@@ -47,3 +47,29 @@ html[data-els-theme] .ss-common-header .ss-common-title{
 html[data-els-theme] .ss-common-header .ss-common-actions :is(select,option){
  color:var(--els-ink)!important;background:var(--els-surface)!important;
 }
+
+/* Chapter-level navigation lives in the common header, after chapter title and to the right of center. */
+.ss-common-header .ss-chapter-arrows{
+ display:flex!important;flex:0 0 auto!important;align-items:center!important;
+ gap:7px!important;margin-left:auto!important;margin-right:12px!important;
+ background:transparent!important;border:0!important;padding:0!important;
+}
+.ss-common-header .ss-chapter-arrow{
+ box-sizing:border-box!important;display:grid!important;place-items:center!important;
+ width:34px!important;height:30px!important;border:1px solid var(--els-border)!important;
+ border-radius:7px!important;background:var(--els-surface-alt)!important;
+ color:var(--els-ink)!important;font:800 19px/1 Arial,sans-serif!important;text-decoration:none!important;
+}
+.ss-common-header .ss-chapter-arrow:is(:hover,:focus-visible){
+ border-color:var(--els-link)!important;outline-offset:2px!important;
+}
+.ss-common-header .ss-chapter-arrow[aria-disabled="true"]{
+ opacity:.35!important;pointer-events:none!important;
+}
+.ss-common-header:has(.ss-chapter-arrows) .ss-common-actions{
+ margin-left:0!important;
+}
+@media(max-width:700px){
+ .ss-common-header .ss-chapter-arrows{margin-left:auto!important;margin-right:5px!important}
+ .ss-common-header .ss-chapter-arrow{width:30px!important}
+}
