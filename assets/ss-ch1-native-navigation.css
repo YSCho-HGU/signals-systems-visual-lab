@@ -1,0 +1,143 @@
+/* Chapter 1 native sidebar and workspace, same DOM contract as Chapter 4.
+ * Override only Chapter 1 legacy top-strip and inner-card geometry.
+ * Shared ss-sidebar-layout.css continues to own all chapter navigation colors and sizes. */
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app.app{
+ display:grid!important;
+ grid-template-columns:var(--ss-sidebar-open,250px) minmax(0,1fr)!important;
+ gap:0!important;
+ align-items:start!important;
+ box-sizing:border-box!important;
+ max-width:none!important;width:100%!important;
+ margin:0!important;padding:0!important;
+ background:var(--els-page)!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar{
+ grid-column:1!important;grid-row:1!important;
+ margin:0!important;
+ border-radius:0!important;border-top:0!important;border-left:0!important;
+ box-shadow:none!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar .brand{
+ display:block!important;
+ border-bottom:1px solid var(--els-border)!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar .brand .over{
+ color:var(--els-muted)!important;
+ font-size:11px!important;letter-spacing:.055em!important;font-weight:800!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar .brand h1{
+ font-size:18px!important;line-height:1.4!important;margin:7px 0 5px!important;
+ color:var(--els-ink)!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar .brand p{
+ color:var(--els-muted)!important;font-size:12px!important;line-height:1.6!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar #nav{
+ display:flex!important;flex-direction:column!important;gap:5px!important;
+ overflow:visible!important;max-width:none!important;
+ padding:0!important;margin:0!important;background:transparent!important;
+ border:0!important;box-shadow:none!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar #nav button{
+ display:flex!important;align-items:center!important;gap:10px!important;
+ width:100%!important;min-width:0!important;min-height:49px!important;
+ margin:0!important;padding:9px 10px!important;
+ flex:0 0 auto!important;
+ text-align:left!important;white-space:normal!important;
+ background:transparent!important;color:var(--els-ink)!important;
+ border:1px solid transparent!important;border-radius:9px!important;
+ box-shadow:none!important;opacity:1!important;
+ font:650 var(--ss-nav-text-size,13px)/1.45 Arial,"Malgun Gothic",sans-serif!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar #nav button:is(:hover,:focus-visible){
+ background:var(--els-surface-alt)!important;
+ color:var(--els-ink)!important;border-color:var(--els-border)!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar #nav button.active{
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
+ border-color:var(--els-link)!important;
+ box-shadow:inset 3px 0 var(--els-link)!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar #nav .num{
+ box-sizing:border-box!important;display:inline-grid!important;place-items:center!important;
+ flex:0 0 var(--ss-nav-number-size,30px)!important;
+ min-width:var(--ss-nav-number-size,30px)!important;
+ width:var(--ss-nav-number-size,30px)!important;
+ height:var(--ss-nav-number-size,30px)!important;
+ border:1px solid var(--els-border)!important;border-radius:7px!important;
+ background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
+ font:800 12px/1 Arial,"Malgun Gothic",sans-serif!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar #nav button.active .num{
+ background:var(--els-info-bg)!important;border-color:var(--els-link)!important;color:var(--els-ink)!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar #nav .nav-name{
+ color:inherit!important;font:inherit!important;min-width:0!important;
+ white-space:normal!important;overflow-wrap:anywhere!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar .side-foot{
+ background:var(--els-surface-alt)!important;border:1px solid var(--els-border)!important;
+ color:var(--els-muted)!important;border-radius:10px!important;
+ margin:20px 0 8px!important;padding:13px!important;
+ font-size:12px!important;line-height:1.75!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.sidebar .side-foot strong{
+ display:block;color:var(--els-ink)!important;margin-bottom:6px;
+ font-size:12px!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.ss-ch1-workspace{
+ display:block!important;grid-column:2!important;grid-row:1!important;
+ min-width:0!important;width:100%!important;max-width:none!important;
+ box-sizing:border-box!important;
+ margin:0!important;padding:16px clamp(12px,2vw,30px) 30px!important;
+ background:var(--els-page)!important;
+ color:var(--els-ink)!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app .ss-ch1-workspace-top{
+ display:flex;justify-content:space-between;align-items:center;gap:14px;
+ margin-bottom:12px;color:var(--els-muted)!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app .ss-ch1-workspace-top .breadcrumb{
+ font-size:12px!important;font-weight:700!important;letter-spacing:.05em!important;
+ color:var(--els-muted)!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app .ss-ch1-workspace-top button{
+ border:1px solid var(--els-border)!important;
+ background:var(--els-surface)!important;
+ color:var(--els-ink)!important;
+ border-radius:8px!important;
+ padding:6px 10px!important;font-size:12px!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.ss-ch1-workspace>.ss-found-four-step{
+ min-width:0!important;width:100%!important;max-width:none!important;
+ grid-column:auto!important;grid-row:auto!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app .footer{
+ display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+ font-size:12px!important;color:var(--els-muted)!important;
+ border-top:1px solid var(--els-border)!important;
+ margin-top:24px!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"][data-ss-sidebar="collapsed"] #ch1-app.app{
+ grid-template-columns:var(--ss-sidebar-closed,52px) minmax(0,1fr)!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"][data-ss-sidebar="collapsed"] #ch1-app>.sidebar{
+ width:var(--ss-sidebar-closed,52px)!important;
+ max-width:var(--ss-sidebar-closed,52px)!important;
+ padding:9px 5px!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"][data-ss-sidebar="collapsed"] #ch1-app>.sidebar>:not(.ss-side-toggle){
+ display:none!important;
+}
+@media(max-width:780px){
+ html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app.app{
+  display:grid!important;
+  grid-template-columns:var(--ss-sidebar-open,190px) minmax(0,1fr)!important;
+ }
+ html.ss-foundations-standard[data-ss-foundation-chapter="1"] #ch1-app>.ss-ch1-workspace{
+  min-width:0!important;padding:12px!important;
+ }
+ html.ss-foundations-standard[data-ss-foundation-chapter="1"][data-ss-sidebar="collapsed"] #ch1-app.app{
+  grid-template-columns:var(--ss-sidebar-closed,52px) minmax(0,1fr)!important;
+ }
+}
