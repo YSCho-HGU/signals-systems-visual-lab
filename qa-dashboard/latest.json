@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-22T01:32:50.683Z",
-  "sourceSha": "90a7395eefabf01fe04da6c75b849a7b54f471c0",
-  "runId": "44971909824",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44971909824",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/90a7395eefabf01fe04da6c75b849a7b54f471c0",
+  "generatedAt": "2026-11-22T01:40:40.599Z",
+  "sourceSha": "0d3e0e6090d15484acbba60cce0abcfafdafb68e",
+  "runId": "44971961747",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44971961747",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/0d3e0e6090d15484acbba60cce0abcfafdafb68e",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -39,43 +39,43 @@
     {
       "id": "G2b",
       "label": "Native Chapter 5 and 6 five-palette Chromium/Edge regression",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G3",
       "label": "Theme and language persistence",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G4",
       "label": "Learning aids and sonification",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G5",
       "label": "Storage and 62-lab regression",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G6",
       "label": "248-screenshot visual and accessibility smoke audit",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G7",
       "label": "Evidence postprocessing",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "CH8_MATH",
       "label": "Chapter 8 key, guided, Predict and Observe math typesetting",
-      "status": "NOT_RUN",
+      "status": "PASS",
       "required": true
     }
   ],
