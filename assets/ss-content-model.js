@@ -55,6 +55,9 @@
   for(const [key,part] of Object.entries(value)){
    if(key==='id'||key==='key'||key==='type'||key==='unit'||key==='defaults'||key==='set'||key==='state'||key==='value'||key==='kind'||key==='color'||key==='class'||key==='formula'||key==='math'||key==='svg'||key==='params'||key==='questionKo'){
     out[key]=part;
+   }else if(key==='options'&&Array.isArray(part)){
+    // Option identifiers are values, not prose. Only localize their labels.
+    out[key]=part.map(item=>Array.isArray(item)?[item[0],typeof item[1]==='string'?text(item[1],m):item[1]]:model(item,m,depth+1));
    }else{
     out[key]=model(part,m,depth+1);
    }
