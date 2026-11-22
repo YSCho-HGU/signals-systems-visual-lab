@@ -51,6 +51,8 @@ function setup(){
  const eyebrow=brand.querySelector(':scope > .over,:scope > .eyebrow');
  if(eyebrow && eyebrow.parentElement!==row){
   eyebrow.classList.add('ss-sidebar-chapter-label');
+  const m=eyebrow.textContent.match(/CHAPTER\s*0?([1-8])/i);
+  if(m)eyebrow.textContent='Signals & Systems · Ch '+String(m[1]).padStart(2,'0');
   row.append(eyebrow);
  }
  sync();
