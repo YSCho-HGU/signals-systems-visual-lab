@@ -1,0 +1,45 @@
+/* Shared axis math overlays. The canvas/SVG retains the accessible plain
+ * axis data; visual math is positioned without changing graph coordinates. */
+.ss-graph-axis-math{
+ position:absolute;
+ z-index:3;
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ pointer-events:none;
+ white-space:nowrap;
+ color:var(--els-ink,#233940);
+ font:700 16px/1.25 Cambria,Georgia,"Times New Roman",serif;
+ text-shadow:none;
+ transform:translate(-50%,-50%);
+ max-width:none;
+}
+.ss-graph-axis-math .katex{
+ font-size:1.02em;
+ white-space:nowrap;
+ color:inherit!important;
+}
+.ss-graph-axis-y{
+ writing-mode:horizontal-tb;
+ transform:translate(-50%,-50%) rotate(-90deg);
+ transform-origin:center center;
+}
+.ss-graph-axis-x{transform:translate(-50%,-50%);}
+.ss-graph-caption-math{display:inline-block;margin-right:5px;color:var(--els-ink);font-size:1.08em;white-space:nowrap}
+.ss-graph-caption-math .katex{font-size:1em;color:inherit}
+html[data-els-theme] .ss-graph-axis-math{color:var(--els-ink)!important}
+html[data-els-theme] :is(.plot-card .plot-title,.figure h3,.plotbox h3){
+ color:var(--els-ink)!important;
+}
+html[data-els-theme] :is(.plot-card .legend,.figure .legend,.plotbox .legend,.axis-key){
+ color:var(--els-muted)!important;font-size:13px!important;line-height:1.55!important;
+}
+html[data-els-theme] .plot-card .plot-title{
+ font-size:15px!important;line-height:1.5!important;
+}
+html[data-els-theme] .ss-graph-axis-y .katex{font-size:.96em}
+html[data-els-theme] .ss-graph-axis-x .katex{font-size:1.0em}
+@media(max-width:780px){
+ .ss-graph-axis-math{font-size:14px}
+ .ss-graph-axis-y .katex{font-size:.9em}
+}
