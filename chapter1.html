@@ -263,6 +263,27 @@ $('report').addEventListener('click',()=>{const e=EXPS[active-1];const vals=stat
 window.addEventListener('resize',()=>{if(lastModel)lastModel.plots.forEach((p,i)=>{const canvas=$('plot-'+i);if(canvas)plot(canvas,p)})});
 
 render();
+// Chapter 1 native data is dynamically rendered. Keep the language-visible
+// description and question synced to the actual source data without resetting
+// controls, slider values, or the current guide step.
+function syncChapterOneLanguage(){
+ const translate=window.ELSSharedLanguage?.translate;
+ if(typeof translate!=='function')return;
+ const exp=EXPS[active-1];
+ if(!exp)return;
+ const desc=$('desc'),question=$('question'),bridge=$('bridge');
+ if(desc)desc.textContent=translate(exp.desc);
+ if(question)question.textContent=translate(exp.question);
+ if(bridge)bridge.textContent=translate(exp.bridge);
+ const intro=document.querySelector('.ss-found-intro');
+ if(intro&&step===0){
+  const prompt=exp.steps(states[active])[0].replace(/<[^>]+>/g,' ').replace(/^\\s*Predict\\s*[—:·-]?\\s*/i,'').trim();
+  intro.textContent=translate(prompt);
+ }
+}
+window.addEventListener('load',syncChapterOneLanguage);
+document.addEventListener('els-language-change',()=>requestAnimationFrame(syncChapterOneLanguage));
+$('nav').addEventListener('click',()=>requestAnimationFrame(syncChapterOneLanguage));
 </script>
 <script>window.addEventListener('message',function(e){if(e.source!==parent||!e.data||e.data.type!=='ss-set-theme')return;try{if(typeof draw==='function')draw();}catch(err){console.warn('Plot recolor failed',err)}});</script>
 <script defer src="./assets/ss-language-content.js?v=20261122-ch1-live-fix-v5"></script>
