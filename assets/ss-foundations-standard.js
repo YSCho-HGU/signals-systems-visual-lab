@@ -122,9 +122,11 @@ function stageHeading(num,label){
 function refreshPredict(container){
  const m=current();if(!m||!container)return;
  const p=container.querySelector('.ss-found-intro');if(!p)return;
- const background=m.desc||'Explore the relation between the expression and the observed signals.';
- const question=chapter===1?m.steps(states[active])[0]:((m.questionKo||m.question||'')+' '+(m.question||'')).trim();
- p.textContent=background+'  Predict: '+question.replace(/<[^>]+>/g,' ');
+ // The experiment card already displays m.desc. Do not repeat the description
+ // or the word Predict in the prediction prompt.
+ const question=chapter===1?m.steps(states[active])[0]:(m.question||m.questionKo||'');
+ const clean=question.replace(/<[^>]+>/g,' ').replace(/^\s*Predict\s*[—:·-]?\s*/i,'').trim();
+ p.textContent=window.ELSSharedLanguage?.translate?.(clean)||clean;
 }
 function setNewTitle(){
  const m=current();if(!m)return;
