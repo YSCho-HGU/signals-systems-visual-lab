@@ -30,6 +30,11 @@ html .ss-layout-root{
  margin:0!important;
  padding:0!important;
  box-sizing:border-box!important;
+ transition:grid-template-columns 240ms cubic-bezier(.22,.75,.25,1)!important;
+}
+/* Disable animation for users requesting reduced motion or while initial state is uninitialized. */
+@media(prefers-reduced-motion:reduce){
+ html .ss-layout-root{transition:none!important}
 }
 /* Shared content rectangle: all chapters start 15px below header, with
  * Chapter 5's exact horizontal padding clamp. Inner learning steps are intact. */
