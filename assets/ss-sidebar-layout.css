@@ -6,33 +6,33 @@
 :root[data-els-theme="navy-dark"]{--ss-step-foreground:#ddf2ff;--ss-step-background:#2d5270;--ss-step-stroke:#a9daff}
 :root[data-els-theme="warm-neutral"]{--ss-step-foreground:#214c39;--ss-step-background:#e2ede4;--ss-step-stroke:#46765d}
 :root[data-els-theme="white-clean"]{--ss-step-foreground:#194d65;--ss-step-background:#eaf4f9;--ss-step-stroke:#367793}
-html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar){
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar){
  box-sizing:border-box!important;display:block!important;grid-column:1!important;grid-row:1!important;
  position:sticky!important;top:46px!important;height:calc(100dvh - 46px)!important;max-height:calc(100dvh - 46px)!important;
  min-width:0!important;width:100%!important;overflow-x:hidden!important;overflow-y:auto!important;
  margin:0!important;padding:14px 10px!important;border:0!important;border-right:1px solid var(--els-border)!important;
  border-radius:0!important;box-shadow:none!important;background:var(--els-surface)!important;color:var(--els-ink)!important
 }
-html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) .brand{
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) .brand{
  display:block!important;padding:7px 8px 14px!important;margin:0!important;
  background:transparent!important;border:0!important;border-bottom:1px solid var(--els-border)!important;box-shadow:none!important
 }
-html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) .brand :is(h1,h2){
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) .brand :is(h1,h2){
  margin:6px 0 5px!important;font-size:18px!important;line-height:1.4!important;font-weight:800!important;color:var(--els-ink)!important
 }
-html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) .brand :is(p,.over,.eyebrow){
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) .brand :is(p,.over,.eyebrow){
  color:var(--els-muted)!important;line-height:1.55!important
 }
-html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(.navlabel,.side-label,.ss7-sidebar-title,.ss8-sidebar-title){
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(.navlabel,.side-label,.ss7-sidebar-title,.ss8-sidebar-title){
  display:block!important;margin:13px 7px 9px!important;font-size:11px!important;line-height:1.5!important;
  font-weight:750!important;letter-spacing:.045em!important;color:var(--els-muted)!important
 }
-html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav){
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav){
  display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;
  gap:5px!important;width:100%!important;min-width:0!important;max-width:none!important;
  margin:0!important;padding:0!important;overflow:visible!important;border:0!important;background:transparent!important
 }
-html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav) > button{
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav) > button{
  box-sizing:border-box!important;display:flex!important;flex-direction:row!important;flex:0 0 auto!important;
  align-items:center!important;justify-content:flex-start!important;gap:10px!important;
  min-height:49px!important;height:auto!important;width:100%!important;min-width:0!important;max-width:none!important;
@@ -41,39 +41,39 @@ html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside
  font-size:13px!important;line-height:1.45!important;font-weight:650!important;text-align:left!important;
  white-space:normal!important;overflow-wrap:anywhere!important;opacity:1!important;text-shadow:none!important
 }
-html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav) > button :is(.num,.ss7-lab-number,.ss8-lab-number){
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav) > button :is(.num,.ss7-lab-number,.ss8-lab-number){
  box-sizing:border-box!important;display:inline-grid!important;place-items:center!important;flex:0 0 30px!important;
  width:30px!important;min-width:30px!important;max-width:30px!important;height:30px!important;
  border:1px solid var(--els-border)!important;border-radius:7px!important;background:var(--els-surface-alt)!important;
  color:var(--els-ink)!important;font:800 12px/1 Arial,'Malgun Gothic',sans-serif!important;box-shadow:none!important
 }
-html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav) > button :is(.tabname,.nav-name,.ss8-lab-label){
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav) > button :is(.tabname,.nav-name,.ss8-lab-label){
  display:block!important;flex:1 1 auto!important;min-width:0!important;font:inherit!important;color:inherit!important;
  white-space:normal!important;overflow-wrap:break-word!important
 }
-html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav) > button:hover{
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav) > button:hover{
  background:var(--els-surface-alt)!important;border-color:var(--els-border)!important
 }
-html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav) > button:is(.active,.on,[aria-current="page"],[aria-current="true"]){
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav) > button:is(.active,.on,[aria-current="page"],[aria-current="true"]){
  background:var(--els-surface-alt)!important;border-color:var(--els-link)!important;box-shadow:inset 3px 0 var(--els-link)!important
 }
-html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav) > button:is(.active,.on,[aria-current="page"],[aria-current="true"]) :is(.num,.ss7-lab-number,.ss8-lab-number){
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(nav#nav,nav#tabs,nav.nav,nav.tabs,nav#ss7-lesson-nav,nav.ss8-lab-nav) > button:is(.active,.on,[aria-current="page"],[aria-current="true"]) :is(.num,.ss7-lab-number,.ss8-lab-number){
  background:var(--els-info-bg)!important;border-color:var(--els-link)!important
 }
-html[data-els-theme] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(.teach,.side-foot,.ss5-progress,.ss7-progress,.ss8-progress){
+html :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) :is(.teach,.side-foot,.ss5-progress,.ss7-progress,.ss8-progress){
  box-sizing:border-box!important;margin:18px 0 0!important;padding:12px 13px!important;border:1px solid var(--els-border)!important;
  border-radius:10px!important;background:var(--els-surface-alt)!important;color:var(--els-ink)!important;font-size:12px!important;line-height:1.65!important
 }
 /* Icon-only toggle occupies no full row: Chapter navigation is immediately below it. */
-html[data-els-theme] .ss-side-toggle{
+html .ss-side-toggle{
  display:grid!important;place-items:center!important;width:40px!important;height:36px!important;min-height:36px!important;
  margin:0 0 12px!important;padding:0!important;border:1px solid var(--els-border)!important;border-radius:8px!important;
  color:var(--els-ink)!important;background:var(--els-surface-alt)!important;cursor:pointer!important;
  font:900 23px/1 Arial,sans-serif!important
 }
-html[data-els-theme] .ss-side-toggle:hover{border-color:var(--els-link)!important}
-html[data-els-theme] .ss-side-toggle:focus-visible{outline:3px solid var(--els-focus)!important;outline-offset:2px}
-html[data-els-theme] :is(.ss-found-stage span,.ss5-flow-label>span,.ss6-step-card::before,.ss6-controls-number,.ss7-stage-index,.ss8-stage-index){
+html .ss-side-toggle:hover{border-color:var(--els-link)!important}
+html .ss-side-toggle:focus-visible{outline:3px solid var(--els-focus)!important;outline-offset:2px}
+html :is(.ss-found-stage span,.ss5-flow-label>span,.ss6-step-card::before,.ss6-controls-number,.ss7-stage-index,.ss8-stage-index){
  display:inline-grid!important;place-items:center!important;box-sizing:border-box!important;
  width:31px!important;height:31px!important;min-width:31px!important;flex:0 0 31px!important;
  border:1.5px solid var(--ss-step-stroke)!important;border-radius:8px!important;
