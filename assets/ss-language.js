@@ -162,7 +162,9 @@ function updateGuide(){
 function updateShell(){
  document.documentElement.lang=mode==="en"?"en":"ko";document.documentElement.dataset.language=mode;
  const langLabel=document.querySelector('label[for="ss-language-select"]');
- setText(langLabel,["Language","언어","Language · 언어"]);
+ // Never replace label.textContent: the select is a child of this label.
+ const labelText=langLabel?.querySelector('.ss-language-label-text');
+ if(labelText)setText(labelText,["Language","언어","Language · 언어"]);
  document.querySelectorAll(".chapter-card").forEach((card,index)=>{
   const id=Number(card.dataset.chapter||card.querySelector(".chapter-no")?.textContent);
   if(id>=1&&id<=8)setText(card.querySelector("p"),descriptions[id-1]);
