@@ -70,10 +70,10 @@ body{font-family:system-ui,-apple-system,'Malgun Gothic','Apple SD Gothic Neo',A
 .figure canvas{display:block;max-width:100%}
 .figure p,.reading-panel p,.guide-head p{line-height:1.65}
 button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #e2ae3e!important;outline-offset:2px!important}
-#studio-back{position:fixed;right:17px;top:14px;z-index:9999;display:flex;align-items:center;gap:8px;background:#112b41;color:#fff;text-decoration:none;border-radius:100px;padding:9px 15px;box-shadow:0 5px 20px #071c3066;font-size:12px;font-weight:750}
-#studio-back:hover{background:#0e8491}
-#studio-back[hidden]{display:none!important}
-@media(max-width:750px){.derivation-panel,.reading-panel{padding:15px!important}#studio-back{top:8px;right:9px;padding:7px 10px;font-size:11px}}
+
+
+
+@media(max-width:750px){.derivation-panel,.reading-panel{padding:15px!important}}
 @media(prefers-reduced-motion:reduce){.deriv-step{animation:none!important}}
 
 
@@ -366,7 +366,7 @@ function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
 <option value="mixed">Mixed</option><option value="en">English</option><option value="ko">한국어</option>
 </select></label>
 <label for="ss6-theme-picker">Theme <select id="ss6-theme-picker" data-els-theme-picker aria-label="Theme"></select></label>
-</div></header><a id="studio-back" href="./index.html#overview" aria-label="Return to integrated Visual Lab">← Learning Studio</a><script>try{if(window.self!==window.top){document.getElementById("studio-back").hidden=true;}}catch(e){}</script>
+</div></header>
 <div id="app" class="app"></div>
 <script>
 
