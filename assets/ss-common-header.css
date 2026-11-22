@@ -189,3 +189,6 @@ html .ss-common-header .ss-four-navigation .ss-nav-section{font-size:16px!import
 
 /* Readable English-first bilingual instructional copy. */
 html .ss-i18n-mixed-paragraph{white-space:pre-line!important;line-height:1.65!important}
+
+/* Data-model language views: English-first explanatory paragraphs remain legible. */
+html[data-els-language="mixed"] .ss-layout-main :is(p,.desc,.notice,.insight,.smallnote,.guide-check,.step p,.answer,.ss5-flow-label){white-space:pre-line}
