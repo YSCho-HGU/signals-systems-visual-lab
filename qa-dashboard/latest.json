@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-22T01:51:15.351Z",
-  "sourceSha": "7c37fc50fb04df089a8e310f866676d58d3ffda5",
-  "runId": "44973057940",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44973057940",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/7c37fc50fb04df089a8e310f866676d58d3ffda5",
+  "generatedAt": "2026-11-22T01:52:25.005Z",
+  "sourceSha": "f6955d94bcd21d7206cc48a77ccc0d0c2c880076",
+  "runId": "44973360579",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44973360579",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/f6955d94bcd21d7206cc48a77ccc0d0c2c880076",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -39,13 +39,13 @@
     {
       "id": "G2b",
       "label": "Native Chapter 5 and 6 five-palette Chromium/Edge regression",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G3",
       "label": "Theme and language persistence",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
@@ -75,7 +75,7 @@
     {
       "id": "CH8_MATH",
       "label": "Chapter 8 key, guided, Predict and Observe math typesetting",
-      "status": "PASS",
+      "status": "NOT_RUN",
       "required": true
     }
   ],
