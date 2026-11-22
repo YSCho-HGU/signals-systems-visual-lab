@@ -14,7 +14,7 @@ const browser=await chromium.launch({headless:true});
 const results=[];
 function record(ok,name,details=''){results.push({pass:!!ok,name,details});console.log((ok?'PASS ':'FAIL ')+name+(details?' '+details:''))}
 const selectors={
- 1:['.ss-ch1-sidebar','.ss-ch1-sidebar nav#nav button','.ss-ch1-lab-number'],
+ 1:['#ch1-app>.sidebar','#ch1-app>.sidebar nav#nav button','#ch1-app>.sidebar .num'],
  2:['.app>.sidebar','.app>.sidebar nav.nav button','.app>.sidebar .num'],
  3:['.app>.sidebar','.app>.sidebar nav.nav button','.app>.sidebar .num'],
  4:['.app>.sidebar','.app>.sidebar nav.nav button','.app>.sidebar .num'],
@@ -57,9 +57,21 @@ try{
     record(before.width>=160&&before.width<=270,'ch'+ch+'-'+width+'-expanded-width',JSON.stringify(before.width));
     record(before.number==='01','ch'+ch+'-'+width+'-two-digit-first-number',before.number);
     if(ch===1){
-     const names=await page.locator('.ss-ch1-nav-title').allTextContents();
+     const names=await page.locator('#ch1-app>.sidebar .nav-name').allTextContents();
      record(names.length===9&&names[1]==='Step, Impulse & Ramp Signals'&&names[8]==='Sensor-to-Digital Signal Chain','ch1-'+width+'-revised-lesson-titles',JSON.stringify(names));
      record(!names.some(name=>/^Elementary$/.test(name)),'ch1-'+width+'-no-ambiguous-elementary');
+     const shape=await page.evaluate(()=>{
+       const app=document.querySelector('#ch1-app');
+       const sidebar=app?.querySelector(':scope > aside.sidebar');
+       const main=app?.querySelector(':scope > .main');
+       const first=sidebar?.querySelector('#nav button');
+       const num=first?.querySelector('.num');
+       return {app:app?.tagName,sidebar:!!sidebar,main:!!main,firstNumber:num?.textContent,
+         class:sidebar?.className,navLayout:getComputedStyle(sidebar?.querySelector('#nav')).flexDirection,
+         positions:{sidebar:sidebar?.getBoundingClientRect().left,main:main?.getBoundingClientRect().left}};
+     });
+     record(shape.sidebar&&shape.main&&shape.navLayout==='column'&&shape.firstNumber==='01'
+        &&shape.positions.main>shape.positions.sidebar,'ch1-'+width+'-chapter4-native-sidebar-structure',JSON.stringify(shape));
     }
     record(before.font>=12&&before.font<=14,'ch'+ch+'-'+width+'-nav-font',String(before.font));
     record(before.overflow<15,'ch'+ch+'-'+width+'-no-horizontal-overflow',String(before.overflow));
