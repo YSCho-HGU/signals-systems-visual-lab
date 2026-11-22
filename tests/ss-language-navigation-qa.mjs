@@ -35,4 +35,10 @@ for(let chapter=1;chapter<=8;chapter++){
  assert.doesNotMatch(source,/<span>Language<\/span>/);
  assert.doesNotMatch(source,/ss5-language-content\.js\?v=1/);
 }
+const ch1=read('chapter1.html');
+const foundations=read('assets/ss-foundations-standard.js');
+assert.match(ch1,/function syncChapterOneLanguage\\(/,'Chapter 1 should sync native data language');
+assert.match(ch1,/ELSSharedLanguage\\?\\.translate/);
+assert.doesNotMatch(foundations,/background\\+'  Predict: '/,'Predict prompt must not repeat description');
+assert.match(foundations,/const clean=question/);
 console.log('PASS: Chapter 1–8 common navigation boundaries and language integration (static contracts)');
