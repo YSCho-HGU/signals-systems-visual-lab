@@ -186,3 +186,6 @@ html .ss-common-header .ss-common-actions select{box-sizing:border-box!important
 html .ss-common-header .ss-four-navigation .ss-chapter-arrow{width:30px!important;min-width:30px!important;height:30px!important;font-size:17px!important;line-height:1!important}
 html .ss-common-header .ss-four-navigation .ss-nav-chapter{font-size:18px!important}
 html .ss-common-header .ss-four-navigation .ss-nav-section{font-size:16px!important}
+
+/* Readable English-first bilingual instructional copy. */
+html .ss-i18n-mixed-paragraph{white-space:pre-line!important;line-height:1.65!important}
