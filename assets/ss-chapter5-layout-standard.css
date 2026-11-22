@@ -34,6 +34,8 @@ html :is(
  width:100%!important;
  max-width:none!important;
  margin:0!important;
+ padding:0!important;
+ box-sizing:border-box!important;
 }
 /* Shared content rectangle: all chapters start 15px below header, with
  * Chapter 5's exact horizontal padding clamp. Inner learning steps are intact. */
