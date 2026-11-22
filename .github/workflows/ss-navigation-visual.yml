@@ -8,6 +8,9 @@ on:
       - "assets/ss-sidebar-layout.css"
       - "assets/ss-chapter5-layout-standard.css"
       - "assets/ss-chapter5-internal-rhythm.css"
+      - "assets/ss-graph-math.js"
+      - "assets/ss-graph-math.css"
+      - "tests/ss-graph-math-visual-e2e.mjs"
       - "assets/ss-ch1-native-navigation.css"
       - "assets/ss-foundations-standard.css"
       - "assets/ss-overview-standard.css"
@@ -36,10 +39,14 @@ jobs:
         run: npm run qa:navigation
       - name: 8 chapters, dark theme, responsive layout, overview and map
         run: npm run qa:navigation:visual
+      - name: Canvas and SVG axis formula regression
+        run: npm run qa:graph-math
       - name: Upload visual audit evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ss-navigation-visual-evidence
-          path: qa-navigation/
+          path: |
+            qa-navigation/
+            qa-graph-math/
           if-no-files-found: ignore
