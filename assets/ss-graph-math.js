@@ -15,7 +15,7 @@ const entries=[
  ['|aₖ|','|a_k|'],['aₖ (signed)','a_k\\;(\\text{signed})'],
  ['|X_N|/N','\\frac{|X_N|}{N}'],['|X|','|X|'],['|X|, |Y|','|X|,\\ |Y|'],
  ['2|X| / Σw','\\frac{2|X|}{\\sum_n w[n]}'],
- ['S_K = Σ|h[k]|','S_K=\\sum_{k=-K}^{K}|h[k]|'],
+ ['S_K = Σ|h[k]|','S_K=\\sum_k|h[k]|'],
  ['X(jω)','X(j\\omega)'],
  ['signed X(jω)','X(j\\omega)\\;(\\text{signed})'],
  ['X(jω), signed','X(j\\omega)\\;(\\text{signed})'],
@@ -38,7 +38,8 @@ const entries=[
  ['Im(s) = ω','\\operatorname{Im}(s)=\\omega'],
  ['Re(z)','\\operatorname{Re}(z)'],['Im(z)','\\operatorname{Im}(z)'],
  ['Re','\\operatorname{Re}'],['Im','\\operatorname{Im}'],
- ['t (s)','t\\;(\\mathrm{s})'],['R (s)','R\\;(\\mathrm{s})'],
+ ['upper integration bound T','T\\;(\\text{integration bound})'],
+ ['time t (s)','t\\;(\\mathrm{s})'],['t (s)','t\\;(\\mathrm{s})'],['R (s)','R\\;(\\mathrm{s})'],
  ['n','n'],['k','k'],['M (terms)','M\\;(\\text{terms})']
 ];
 const mapping=new Map(entries);
@@ -119,4 +120,5 @@ function resize(){
 function init(){new MutationObserver(enhanceAll).observe(document.body,{subtree:true,childList:true});enhanceAll();window.addEventListener('resize',resize,{passive:true})}
 window.SSGraphMath=Object.freeze({latexFor,renderCanvas,enhanceAll});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+ window.addEventListener('load',enhanceAll,{once:true});
 })();
