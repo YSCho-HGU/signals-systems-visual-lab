@@ -16,7 +16,7 @@
         "canvas": 2,
         "formula": true,
         "math": true,
-        "main": "\n«목차 접기 / Collapse\n  Signals and Systems / Chapter 01Foundations Visual LabSignals · Systems · CT/DT신호와 시스템의 기초\n  LEARNI"
+        "main": "\n  CHAPTER 01 / INTERACTIVE CONCEPTS✎ 오류 제보\n  1Predict · Understand the signal and predict the result1.1 · SIGNAL DOMAIN"
       }
     },
     {
@@ -37,7 +37,7 @@
         "canvas": 2,
         "formula": true,
         "math": true,
-        "main": "\n«목차 접기 / Collapse\n  Signals and Systems / Chapter 01Foundations Visual LabSignals · Systems · CT/DT신호와 시스템의 기초\n  LEARNI"
+        "main": "\n  CHAPTER 01 / INTERACTIVE CONCEPTS✎ 오류 제보\n  1Predict · Understand the signal and predict the result1.1 · SIGNAL DOMAIN"
       }
     },
     {
@@ -53,7 +53,7 @@
         "canvas": 2,
         "formula": true,
         "math": true,
-        "main": "\n«목차 접기 / Collapse\n  Signals and Systems / Chapter 01Foundations Visual LabSignals · Systems · CT/DT신호와 시스템의 기초\n  LEARNI"
+        "main": "\n  CHAPTER 01 / INTERACTIVE CONCEPTS✎ 오류 제보\n  1Predict · Understand the signal and predict the result1.1 · SIGNAL DOMAIN"
       }
     },
     {
@@ -583,11 +583,11 @@
       "id": "index-ch2-standalone-route",
       "passed": true,
       "detail": {
-        "url": "http://127.0.0.1:8891/chapter2.html?v=20261121e"
+        "url": "http://127.0.0.1:8891/chapter2.html"
       }
     }
   ],
-  "sourceSha": "bf7282ee6f79234802df554e48ab8e6c9fdb5a49",
-  "runId": 44974447218,
-  "generatedAt": "2026-11-22T02:06:22.475Z"
+  "sourceSha": "768df8c7e7b00d3daffe5e1bbf44f2c1619ec6a0",
+  "runId": 44977643622,
+  "generatedAt": "2026-11-22T02:47:34.921Z"
 }
