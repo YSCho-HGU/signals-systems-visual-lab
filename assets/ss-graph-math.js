@@ -48,7 +48,7 @@ function typeset(el,tex){
  try{window.katex.render(tex,el,{throwOnError:true,strict:'ignore',trust:false,output:'htmlAndMathml'});return true}
  catch(e){return false}
 }
-const canvasSpans=new Set(),svgSpans=new Set();
+const canvasSpans=new Set(),svgSpans=new Set(),pendingCanvas=new Map();
 function alignCanvas(node){
  const canvas=node._canvas;if(!canvas?.isConnected||!node.isConnected)return;
  const pos=node._position,c=canvas.getBoundingClientRect(),p=node.parentElement.getBoundingClientRect();
@@ -59,6 +59,7 @@ function renderCanvas(ref,side,value,position){
  const canvas=typeof ref==='string'?document.getElementById(ref):ref;
  if(!canvas?.parentElement)return false;
  const tex=latexFor(value),host=canvas.parentElement;
+ if(tex)pendingCanvas.set(canvas.id+'|'+side,{ref:canvas,side,value,position});
  let node=Array.from(host.querySelectorAll('.ss-graph-axis-math')).find(el=>el.dataset.ssCanvas===canvas.id&&el.dataset.ssAxis===side);
  if(!tex||!ready()){if(node)node.remove();return false}
  if(getComputedStyle(host).position==='static')host.style.position='relative';
@@ -109,7 +110,7 @@ function enhanceCaptions(){
 let queued=false;
 function enhanceAll(){
  if(queued)return;queued=true;
- requestAnimationFrame(()=>{queued=false;enhanceSvg();enhanceCaptions()});
+ requestAnimationFrame(()=>{queued=false;enhanceSvg();enhanceCaptions();if(ready()){for(const row of pendingCanvas.values())renderCanvas(row.ref,row.side,row.value,row.position)}});
 }
 function resize(){
  for(const node of canvasSpans){if(node.isConnected)alignCanvas(node);else canvasSpans.delete(node)}
