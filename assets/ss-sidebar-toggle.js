@@ -20,8 +20,6 @@ function sync(){
  const collapsed=root.dataset.ssSidebar==='collapsed';
  const side=findSidebar();
  if(side){
-  // Stronger than legacy chapter nav CSS (including rules with !important).
-  // Restore all native component styles on expand.
   for(const child of side.children){
    if(child.classList.contains('ss-sidebar-topline'))continue;
    if(collapsed)child.style.setProperty('display','none','important');
@@ -29,13 +27,36 @@ function sync(){
   }
   if(collapsed)side.scrollTop=0;
  }
+ // An independent, body-level restore control cannot be hidden or clipped
+ // by any chapter's sidebar/lesson CSS while the rail is collapsed.
+ const restore=document.getElementById('ss-sidebar-restore');
+ if(restore){
+  restore.hidden=!collapsed;
+  restore.setAttribute('aria-expanded',String(!collapsed));
+ }
  document.querySelectorAll('.ss-side-toggle').forEach(button=>{
+  const inSide=!!button.closest('.ss-layout-sidebar');
   button.setAttribute('aria-expanded',String(!collapsed));
   button.setAttribute('aria-label',collapsed?'목차 펼치기':'목차 접기');
   button.title=collapsed?'Expand chapter navigation / 목차 펼치기':'Collapse chapter navigation / 목차 접기';
   const icon=button.querySelector('.ss-toggle-icon');
   if(icon)icon.textContent=collapsed?'≫':'≪';
+  // Only the body-level restore control is keyboard-accessible when collapsed.
+  if(inSide)button.tabIndex=collapsed?-1:0;
  });
+}
+function makeRestoreControl(){
+ let restore=document.getElementById('ss-sidebar-restore');
+ if(restore)return restore;
+ restore=document.createElement('button');
+ restore.id='ss-sidebar-restore';
+ restore.type='button';
+ restore.className='ss-side-toggle';
+ restore.setAttribute('aria-label','목차 펼치기');
+ restore.innerHTML='<span class="ss-toggle-icon" aria-hidden="true">≫</span>';
+ restore.hidden=true;
+ document.body.append(restore);
+ return restore;
 }
 function setup(){
  const side=findSidebar();if(!side)return;
@@ -65,7 +86,7 @@ function setup(){
 }
 document.addEventListener('click',event=>{
  const button=event.target.closest?.('.ss-side-toggle');
- if(!button||!button.closest('.ss-layout-sidebar'))return;
+ if(!button||(!button.closest('.ss-layout-sidebar') && button.id!=='ss-sidebar-restore'))return;
  const collapsed=root.dataset.ssSidebar!=='collapsed';
  root.dataset.ssSidebar=collapsed?'collapsed':'expanded';
  persist(collapsed);
@@ -74,6 +95,7 @@ document.addEventListener('click',event=>{
 });
 root.dataset.ssSidebar=saved()?'collapsed':'expanded';
 function init(){
+ makeRestoreControl();
  setup();
  const app=document.getElementById('app');
  if(app)new MutationObserver(setup).observe(app,{childList:true});
