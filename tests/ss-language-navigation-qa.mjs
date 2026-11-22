@@ -26,7 +26,7 @@ assert.match(language,/ss-i18n-mixed-paragraph/);
 for(let chapter=1;chapter<=8;chapter++){
  const source=read('chapter'+chapter+'.html');
  assert.match(source,/ss-common-header\.js\?v=20261122-navigation-language-v2/);
- assert.match(source,/ss-common-header\.css\?v=20261122-compact-controls/);
+ assert.match(source,/ss-common-header\.css\?v=20261122-model-bilingual/);
  assert.match(source,/ss-language-content\.js\?v=20261122-english-svg-v4/);
  assert.match(source,/ss-language-icon/);
  assert.match(source,/<option value="mixed">한\/영<\/option>/);
