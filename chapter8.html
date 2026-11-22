@@ -506,7 +506,11 @@ const EXPERIMENTS=[
 }
 ];
 /* Native Chapter 8 controller: do not modify simulation functions. */
-document.addEventListener('els-language-change',()=>render());
+document.addEventListener('els-language-change',()=>{
+ const wasOpen=$('check')?.classList.contains('open');
+ render();
+ if(wasOpen)$('check')?.classList.add('open');
+});
 window.SSChapter8=Object.freeze({
  get currentExperiment(){return current+1},
  get experimentCount(){return EXPERIMENTS.length},
