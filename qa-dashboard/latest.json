@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-22T04:39:42.224Z",
-  "sourceSha": "5cad2b1726c3b0d7437632510ec5f335c1f73181",
-  "runId": "44985752210",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44985752210",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/5cad2b1726c3b0d7437632510ec5f335c1f73181",
+  "generatedAt": "2026-11-22T04:44:15.703Z",
+  "sourceSha": "0f8937ab26b102256fa02debb500b97bd19a308d",
+  "runId": "44986011741",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44986011741",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/0f8937ab26b102256fa02debb500b97bd19a308d",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -39,7 +39,7 @@
     {
       "id": "G2b",
       "label": "Native Chapter 5 and 6 five-palette Chromium/Edge regression",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
