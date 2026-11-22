@@ -104,9 +104,10 @@ function init(){
  document.addEventListener('ss-ch7-experiment-change',syncSampling);
  syncSampling();
 
- function updatePrompt(){var q=document.getElementById('check-q');prompt.textContent=q?q.textContent.trim():'Predict how the output changes when a parameter moves.'}
+ function updatePrompt(){prompt.textContent=window.SSChapter7?.currentCheckQuestion||window.SSContentModel.text('Predict how the output changes when a parameter moves.')}
  updatePrompt();
  document.addEventListener('ss-ch7-experiment-change',updatePrompt);
+ document.addEventListener('els-language-change',()=>requestAnimationFrame(updatePrompt));
  window.__ss7Standard={ready:true,stages:4,chapter:7,experiments:window.SSChapter7?.experimentCount||0,sidebarColumns:1};
 }
 // The native core installs/render() in its own DOMContentLoaded handler. Initialize after it.
