@@ -1,6 +1,6 @@
 /* Shared theme: one localStorage key for Studio and both courses. */
 (()=>{"use strict";
-const KEY="els-theme-v2",VALID=["neutral-dark","warm-dark","navy-dark","warm-neutral","white-clean"],DEFAULT="neutral-dark";
+const KEY="els-theme-v2",VALID=["white-clean","warm-neutral","neutral-dark","warm-dark","navy-dark"],DEFAULT="neutral-dark";
 const root=document.documentElement;
 function safeGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function inferLegacy(){
@@ -51,7 +51,7 @@ function setup(){
  }
  document.querySelectorAll("[data-els-theme-picker]").forEach(select=>{
   select.replaceChildren();
-  for(const [value,label] of [["neutral-dark","Neutral Dark (기본)"],["warm-dark","Warm Dark"],["navy-dark","Navy Dark"],["warm-neutral","Warm Neutral"],["white-clean","White Clean"]]){
+  for(const [value,label] of [["white-clean","White Clean"],["warm-neutral","Warm Neutral"],["neutral-dark","Neutral Dark"],["warm-dark","Warm Dark"],["navy-dark","Navy Dark"]]){
    const o=document.createElement("option");o.value=value;o.textContent=label;select.append(o);
   }
   select.value=selected();
