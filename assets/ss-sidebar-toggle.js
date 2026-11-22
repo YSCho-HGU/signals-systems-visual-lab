@@ -41,12 +41,15 @@ function setup(){
   button=document.createElement('button');
   button.type='button';button.className='ss-side-toggle';
   button.innerHTML='<span class="ss-toggle-icon" aria-hidden="true">≪</span>';
+  row.prepend(button);
+ }
+ if(button.dataset.ssToggleBound!=='true'){
+  button.dataset.ssToggleBound='true';
   button.addEventListener('click',()=>{
    const collapsed=root.dataset.ssSidebar!=='collapsed';
    root.dataset.ssSidebar=collapsed?'collapsed':'expanded';
    persist(collapsed);sync();redraw();
   });
-  row.prepend(button);
  }
  const eyebrow=brand.querySelector(':scope > .over,:scope > .eyebrow');
  if(eyebrow && eyebrow.parentElement!==row){
