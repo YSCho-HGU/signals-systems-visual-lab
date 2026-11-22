@@ -30,6 +30,27 @@ function init(){
  const links=header.querySelector('.ss-common-links');
  if(!menu||!title||!links)return;
  buildLinks(links);
+ // Canonical previous/next chapter controls; one controller for all chapters.
+ const chapterMatch=location.pathname.match(/chapter([1-8])\.html$/);
+ const chapterNumber=chapterMatch?Number(chapterMatch[1]):0;
+ if(chapterNumber && !header.querySelector('.ss-chapter-arrows')){
+  const arrows=document.createElement('nav');
+  arrows.className='ss-chapter-arrows';
+  arrows.setAttribute('aria-label','Previous and next chapters');
+  for(const [offset,label] of [[-1,'←'],[1,'→']]){
+   const target=chapterNumber+offset;
+   const button=document.createElement('a');
+   button.textContent=label;
+   button.className='ss-chapter-arrow';
+   button.setAttribute('aria-label',offset<0?'Previous chapter':'Next chapter');
+   button.title=(offset<0?'Previous':'Next')+' Chapter '+target;
+   if(target<1||target>8){button.setAttribute('aria-disabled','true');button.removeAttribute('href');}
+   else button.href='./chapter'+target+'.html';
+   arrows.append(button);
+  }
+  const actions=header.querySelector('.ss-common-actions');
+  if(actions)header.insertBefore(arrows,actions);else header.append(arrows);
+ }
  const path=location.pathname;
  function sync(){
   const ch=Number((path.match(/chapter([1-8])\.html$/)||[])[1])||Number((location.hash.match(/^#chapter=(\d+)/)||[])[1])||0;
