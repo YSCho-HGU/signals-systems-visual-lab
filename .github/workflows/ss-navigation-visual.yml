@@ -11,6 +11,7 @@ on:
       - "assets/ss-graph-math.js"
       - "assets/ss-graph-math.css"
       - "tests/ss-graph-math-visual-e2e.mjs"
+      - "tests/ss-all-lab-graph-audit.mjs"
       - "assets/ss-ch1-native-navigation.css"
       - "assets/ss-foundations-standard.css"
       - "assets/ss-overview-standard.css"
@@ -41,6 +42,8 @@ jobs:
         run: npm run qa:navigation:visual
       - name: Canvas and SVG axis formula regression
         run: npm run qa:graph-math
+      - name: Full-curriculum graph and formula presentation audit
+        run: npm run qa:graph-all-labs
       - name: Upload visual audit evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -49,4 +52,5 @@ jobs:
           path: |
             qa-navigation/
             qa-graph-math/
+            qa-graph-content/
           if-no-files-found: ignore
