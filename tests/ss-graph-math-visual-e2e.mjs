@@ -44,7 +44,7 @@ try{
      const special=await page.evaluate(()=>[...document.querySelectorAll('.ss-graph-axis-math')].map(e=>e.dataset.ssFormula||''));
      record(special.includes('∫₀ᵀ e^(−σt)dt'),'ch5-'+theme+'-integral-axis-typeset',JSON.stringify(special));
      const caption=await page.locator('.figure .sub .katex').count();
-     record(caption>=1,'ch5-'+theme+'-integral-caption-typeset',String(caption));
+     record(caption>=1,'ch5-'+theme+'-integral-caption-typeset',JSON.stringify({caption,subs:await page.locator('.figure .sub').allTextContents()}));
     }
     await page.screenshot({path:folder+'/chapter'+chapter+'-'+theme+'.png',fullPage:false});
    }catch(err){record(false,'ch'+chapter+'-'+theme+'-setup',String(err))}
