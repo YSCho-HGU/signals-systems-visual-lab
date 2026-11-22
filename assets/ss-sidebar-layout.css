@@ -108,6 +108,23 @@ html[data-ss-sidebar="collapsed"] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell
 html[data-ss-sidebar="collapsed"] :is(#ch1-app,#app,.shell,.ss7-shell,.ss8-shell) > :is(aside.sidebar,aside.nav,aside.ss7-sidebar,aside.ss8-sidebar) > :not(.ss-sidebar-topline){display:none!important}
 html[data-ss-sidebar="collapsed"] .ss-layout-sidebar > .ss-sidebar-topline{justify-content:center!important;gap:0!important;margin:0!important}
 html[data-ss-sidebar="collapsed"] .ss-layout-sidebar > .ss-sidebar-topline > .ss-sidebar-chapter-label{display:none!important}
+/* Single authoritative collapsed-rail visibility contract.
+   Lesson navigation MUST NOT leak into the 52px collapsed rail. */
+html[data-ss-sidebar="collapsed"] .ss-layout-root > .ss-layout-sidebar > :not(.ss-sidebar-topline),
+html[data-ss-sidebar="collapsed"] .ss-layout-root > .ss-layout-sidebar > :is(nav,#nav,#tabs,#ss7-lesson-nav,.ss8-lab-nav),
+html[data-ss-sidebar="collapsed"] .ss-layout-sidebar #ss7-lesson-nav,
+html[data-ss-sidebar="collapsed"] .ss-layout-sidebar .ss8-lab-nav {
+ display:none!important;visibility:hidden!important;
+}
+html[data-ss-sidebar="collapsed"] .ss-layout-root > .ss-layout-sidebar > .ss-sidebar-topline{
+ display:flex!important;visibility:visible!important;position:relative!important;z-index:5!important;
+ width:100%!important;min-height:36px!important;overflow:visible!important;
+}
+html[data-ss-sidebar="collapsed"] .ss-layout-root > .ss-layout-sidebar > .ss-sidebar-topline > .ss-side-toggle {
+ display:grid!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+ width:40px!important;height:36px!important;flex:0 0 40px!important;
+ margin:0!important;padding:0!important;
+}
 @media(max-width:900px){:root{--ss-sidebar-open:210px}}
 @media(max-width:780px){:root{--ss-sidebar-open:190px}}
 @media(max-width:560px){:root{--ss-sidebar-open:170px}}
