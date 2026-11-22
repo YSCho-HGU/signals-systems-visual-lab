@@ -51,7 +51,7 @@ function setup(){
  }
  document.querySelectorAll("[data-els-theme-picker]").forEach(select=>{
   select.replaceChildren();
-  for(const [value,label] of [["white-clean","White Clean"],["warm-neutral","Warm Neutral"],["neutral-dark","Neutral Dark"],["warm-dark","Warm Dark"],["navy-dark","Navy Dark"]]){
+  for(const [value,label] of [["white-clean","White Clean"],["warm-neutral","Warm Neutral"],["warm-dark","Warm Dark"],["navy-dark","Navy Dark"],["neutral-dark","Neutral Dark"]]){
    const o=document.createElement("option");o.value=value;o.textContent=label;select.append(o);
   }
   select.value=selected();
