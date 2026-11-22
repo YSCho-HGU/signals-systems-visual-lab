@@ -278,7 +278,7 @@ function ssAxisKey(id,xlabel,ylabel,x0,x1,y0,y1){
 </style>
 
 <link rel="stylesheet" href="./assets/ss-trace-palette.css?v=4"><script src="./assets/ss-trace-palette.js?v=2"></script><script src="./assets/ss-sidebar-toggle.js?v=20261121c" defer></script><link rel="stylesheet" href="./assets/els-typography-standard.css?v=1"><link rel="stylesheet" href="./assets/ss-reading-rhythm.css?v=20261121b"><link rel="stylesheet" href="./assets/ss-four-step-standard.css?v=20261121b"><link rel="stylesheet" href="./assets/ss-ch5-standalone.css?v=11"><link rel="stylesheet" href="./assets/ss-common-header.css?v=20261121d0261121d"><link rel="stylesheet" href="./assets/ss-readable-themes.css?v=1"><link rel="stylesheet" href="./assets/ss-formula-standard.css?v=1"><link rel="stylesheet" href="./assets/ss-ui-standard.css?v=3"><script src="./assets/ss-common-header.js?v=3" defer></script><link rel="stylesheet" href="./assets/ss-graph-workspace-layout.css?v=1">
-<link rel="stylesheet" href="./assets/ss-learning-bridges.css?v=1"><script defer src="./assets/ss-learning-bridges.js?v=1"></script><link rel="stylesheet" href="./assets/ss-chapter5-layout-standard.css?v=20261122a"><link rel="stylesheet" href="./assets/ss-chapter5-internal-rhythm.css?v=20261122a"></head>
+<link rel="stylesheet" href="./assets/ss-learning-bridges.css?v=1"><script defer src="./assets/ss-learning-bridges.js?v=1"></script><link rel="stylesheet" href="./assets/ss-chapter5-layout-standard.css?v=20261122a"><link rel="stylesheet" href="./assets/ss-chapter5-internal-rhythm.css?v=20261122a"><link rel="stylesheet" href="./assets/ss-graph-math.css?v=20261122b"><script src="./assets/ss-graph-math.js?v=20261122b"></script></head>
 <body>
 <header class="ss5-site-header ss-common-header" aria-label="Engineering Learning Studio navigation">
 <a class="ss5-home ss-common-home" href="./index.html#overview">← Studio</a>
@@ -394,8 +394,8 @@ function chart(id,opt){
  for(let k=Math.ceil(xmin/xStep-1e-8),count=0;k<=Math.floor(xmax/xStep+1e-8)&&count<30;k++,count++){
    const v=k*xStep;g.textAlign='center';g.fillStyle=Math.abs(v)<1e-9?plotTheme.ink:plotTheme.muted;g.font=(Math.abs(v)<1e-9?'bold ':'')+(mini?'15px':'15px')+' system-ui';g.fillText(tickLabel(v,xStep),X(v),h-m.b+16);
  }
- g.font='bold '+(mini?'16px':'17px')+' system-ui';g.fillStyle=plotTheme.ink;g.textAlign='center';g.fillText(opt.xlabel||'time t (s)',m.l+W/2,h-16);
- g.save();g.translate(mini?20:19,m.t+H/2);g.rotate(-PI/2);g.fillText(opt.ylabel||'amplitude',0,0);g.restore();
+ g.font='bold '+(mini?'16px':'17px')+' system-ui';g.fillStyle=plotTheme.ink;g.textAlign='center';if(!window.SSGraphMath?.renderCanvas(id,'x',opt.xlabel||'time t (s)',{x:m.l+W/2,y:h-16,w,h}))g.fillText(opt.xlabel||'time t (s)',m.l+W/2,h-16);
+ if(!window.SSGraphMath?.renderCanvas(id,'y',opt.ylabel||'amplitude',{x:mini?20:19,y:m.t+H/2,w,h})){g.save();g.translate(mini?20:19,m.t+H/2);g.rotate(-PI/2);g.fillText(opt.ylabel||'amplitude',0,0);g.restore();}
  if(opt.originLabel&&xmin<=0&&xmax>=0&&ymin<=0&&ymax>=0&&!mini){g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle=plotTheme.ink;g.fillText('(0, 0)',Math.min(w-62,X(0)+9),Math.max(m.t+23,Y(0)-14))}
  if(opt.valueAtZeroLabel&&xmin<=0&&xmax>=0&&!mini){const yy=opt.valueAtZeroLabel.y;g.fillStyle=COLORS.orange;g.beginPath();g.arc(X(0),Y(yy),4.3,0,TAU);g.fill();g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle='#ba6036';g.fillText(opt.valueAtZeroLabel.text,Math.min(w-122,X(0)+10),Math.min(h-m.b-7,Y(yy)+17))}
  if(opt.startLabel&&xmin<=0&&xmax>=0&&!mini){g.fillStyle=COLORS.orange;g.beginPath();g.arc(X(0),Y(0),4,0,TAU);g.fill();g.font='bold 11px system-ui';g.textAlign='left';g.fillStyle='#ba6036';g.fillText('x(0) = 0',Math.min(w-92,X(0)+9),Math.max(m.t+35,Y(0)-18))}
