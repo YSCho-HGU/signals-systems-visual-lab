@@ -17,34 +17,34 @@
 
 /* Accessible shared chapter chooser, all themes including Neutral Dark.
  * No white-on-light-accent combinations; keyboard and pointer states identical. */
-html[data-els-theme] .ss-common-header .ss-common-links{
+html .ss-common-header .ss-common-links{
  isolation:isolate!important;
  background:var(--els-surface)!important;
  color:var(--els-ink)!important;
  border-color:var(--els-border)!important;
 }
-html[data-els-theme] .ss-common-header .ss-common-links a{
+html .ss-common-header .ss-common-links a{
  background:transparent!important;color:var(--els-ink)!important;
  font-size:13px!important;line-height:1.55!important;font-weight:600!important;
  text-decoration:none!important;
  min-height:39px!important;
 }
-html[data-els-theme] .ss-common-header .ss-common-links a:is(:hover,:focus-visible){
+html .ss-common-header .ss-common-links a:is(:hover,:focus-visible){
  background:var(--els-surface-alt)!important;color:var(--els-ink)!important;
  outline:2px solid var(--els-focus)!important;outline-offset:-2px!important;
 }
-html[data-els-theme] .ss-common-header .ss-common-links a[aria-current="page"]{
+html .ss-common-header .ss-common-links a[aria-current="page"]{
  background:var(--els-info-bg)!important;color:var(--els-info-ink)!important;
  border-left:3px solid var(--els-link)!important;
  padding-left:9px!important;text-decoration:none!important;font-weight:800!important;
 }
-html[data-els-theme] .ss-common-header .ss-common-links a[aria-current="page"]:is(:hover,:focus-visible){
+html .ss-common-header .ss-common-links a[aria-current="page"]:is(:hover,:focus-visible){
  background:var(--els-info-bg)!important;color:var(--els-info-ink)!important;
 }
-html[data-els-theme] .ss-common-header .ss-common-title{
+html .ss-common-header .ss-common-title{
  color:var(--els-ink)!important;font-size:13px!important
 }
-html[data-els-theme] .ss-common-header .ss-common-actions :is(select,option){
+html .ss-common-header .ss-common-actions :is(select,option){
  color:var(--els-ink)!important;background:var(--els-surface)!important;
 }
 
@@ -78,7 +78,7 @@ html[data-els-theme] .ss-common-header .ss-common-actions :is(select,option){
 .ss-common-header .ss-common-menu{
  flex:0 1 auto!important;min-width:0!important;
 }
-html[data-els-theme] .ss-common-header .ss-common-menu > summary.ss-common-title{
+html .ss-common-header .ss-common-menu > summary.ss-common-title{
  box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:space-between!important;
  gap:14px!important;min-height:34px!important;width:100%!important;
  margin:0!important;padding:5px 12px!important;
@@ -87,11 +87,11 @@ html[data-els-theme] .ss-common-header .ss-common-menu > summary.ss-common-title
  cursor:pointer!important;white-space:normal!important;
  transition:border-color .15s ease,background-color .15s ease!important;
 }
-html[data-els-theme] .ss-common-header .ss-common-menu > summary.ss-common-title:hover,
-html[data-els-theme] .ss-common-header .ss-common-menu[open] > summary.ss-common-title{
+html .ss-common-header .ss-common-menu > summary.ss-common-title:hover,
+html .ss-common-header .ss-common-menu[open] > summary.ss-common-title{
  border-color:var(--els-link)!important;background:var(--els-info-bg)!important;
 }
-html[data-els-theme] .ss-common-header .ss-common-menu > summary.ss-common-title:focus-visible{
+html .ss-common-header .ss-common-menu > summary.ss-common-title:focus-visible{
  outline:2px solid var(--els-focus)!important;outline-offset:2px!important;
 }
 .ss-common-header .ss-common-menu > summary.ss-common-title > span[aria-hidden="true"]{
