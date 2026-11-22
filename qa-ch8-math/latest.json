@@ -1,13 +1,2126 @@
 {
-  "status": "NOT_RUN",
-  "total": 0,
-  "failures": [
+  "status": "PASS",
+  "total": 143,
+  "failures": [],
+  "findings": [
     {
-      "id": "runner",
-      "detail": "No QA result file generated"
+      "id": "formula-catalogue",
+      "passed": true,
+      "detail": {
+        "passed": true,
+        "checked": 50,
+        "failures": []
+      }
+    },
+    {
+      "id": "math-model-8.1 pole and unit circle a=0.3",
+      "passed": true,
+      "detail": {
+        "a": 0.3
+      }
+    },
+    {
+      "id": "math-model-8.1 pole and unit circle a=0.8",
+      "passed": true,
+      "detail": {
+        "a": 0.8
+      }
+    },
+    {
+      "id": "math-model-8.1 pole and unit circle a=1",
+      "passed": true,
+      "detail": {
+        "a": 1
+      }
+    },
+    {
+      "id": "math-model-8.1 pole and unit circle a=1.1",
+      "passed": true,
+      "detail": {
+        "a": 1.1
+      }
+    },
+    {
+      "id": "math-model-8.2 supports and ROC right",
+      "passed": true,
+      "detail": {
+        "direction": "right"
+      }
+    },
+    {
+      "id": "math-model-8.2 supports and ROC left",
+      "passed": true,
+      "detail": {
+        "direction": "left"
+      }
+    },
+    {
+      "id": "math-model-8.3 exact zeros 0.4,1.8",
+      "passed": true,
+      "detail": {
+        "a": 0.4,
+        "b": 1.8
+      }
+    },
+    {
+      "id": "math-model-8.3 exact zeros 0.2,2.3",
+      "passed": true,
+      "detail": {
+        "a": 0.2,
+        "b": 2.3
+      }
+    },
+    {
+      "id": "math-model-8.4 coefficients 0.5,2",
+      "passed": true,
+      "detail": {
+        "a": 0.5,
+        "b": 2,
+        "A": -0.3333333333333333,
+        "B": 1.3333333333333333
+      }
+    },
+    {
+      "id": "math-model-8.4 coefficients 0.3,1.3",
+      "passed": true,
+      "detail": {
+        "a": 0.3,
+        "b": 1.3,
+        "A": -0.3,
+        "B": 1.3
+      }
+    },
+    {
+      "id": "math-model-8.4 coefficients 0.8,2.3",
+      "passed": true,
+      "detail": {
+        "a": 0.8,
+        "b": 2.3,
+        "A": -0.5333333333333334,
+        "B": 1.5333333333333334
+      }
+    },
+    {
+      "id": "math-model-8.5 DC unity a=0.1",
+      "passed": true,
+      "detail": {
+        "a": 0.1,
+        "dc": 1
+      }
+    },
+    {
+      "id": "math-model-8.5 DC unity a=0.7",
+      "passed": true,
+      "detail": {
+        "a": 0.7,
+        "dc": 1
+      }
+    },
+    {
+      "id": "math-model-8.5 DC unity a=0.95",
+      "passed": true,
+      "detail": {
+        "a": 0.95,
+        "dc": 1
+      }
+    },
+    {
+      "id": "math-model-8.6 notch and root multiplicity N=3",
+      "passed": true,
+      "detail": {
+        "N": 3,
+        "re": -1.1102230246251565e-16,
+        "im": -1.1102230246251565e-16
+      }
+    },
+    {
+      "id": "math-model-8.6 notch and root multiplicity N=4",
+      "passed": true,
+      "detail": {
+        "N": 4,
+        "re": -4.592425496802574e-17,
+        "im": -5.551115123125783e-17
+      }
+    },
+    {
+      "id": "math-model-8.6 notch and root multiplicity N=7",
+      "passed": true,
+      "detail": {
+        "N": 7,
+        "re": -1.3877787807814457e-17,
+        "im": 2.7755575615628914e-17
+      }
+    },
+    {
+      "id": "math-model-8.6 notch and root multiplicity N=10",
+      "passed": true,
+      "detail": {
+        "N": 10,
+        "re": -5.551115123125783e-17,
+        "im": -6.938893903907228e-18
+      }
+    },
+    {
+      "id": "math-model-8.7 BIBO 0.8,causal",
+      "passed": true,
+      "detail": {
+        "a": 0.8,
+        "side": "causal",
+        "stable": true,
+        "stems": 15
+      }
+    },
+    {
+      "id": "math-model-8.7 BIBO 1.2,causal",
+      "passed": true,
+      "detail": {
+        "a": 1.2,
+        "side": "causal",
+        "stable": false,
+        "stems": 15
+      }
+    },
+    {
+      "id": "math-model-8.7 BIBO 1.2,anti",
+      "passed": true,
+      "detail": {
+        "a": 1.2,
+        "side": "anti",
+        "stable": true,
+        "stems": 15
+      }
+    },
+    {
+      "id": "math-model-8.7 BIBO 0.8,anti",
+      "passed": true,
+      "detail": {
+        "a": 0.8,
+        "side": "anti",
+        "stable": false,
+        "stems": 15
+      }
+    },
+    {
+      "id": "math-model-8.8 step model a=0.3",
+      "passed": true,
+      "detail": {
+        "a": 0.3,
+        "value": 24.999999999999996
+      }
+    },
+    {
+      "id": "math-model-8.8 step model a=0.8",
+      "passed": true,
+      "detail": {
+        "a": 0.8,
+        "value": 24.992262874754466
+      }
+    },
+    {
+      "id": "math-model-8.8 step model a=0.95",
+      "passed": true,
+      "detail": {
+        "a": 0.95,
+        "value": 23.870322295037173
+      }
+    },
+    {
+      "id": "8.1-prose-inline-math",
+      "passed": true,
+      "detail": {
+        "converted": 37,
+        "visible": 17,
+        "rendered": 17,
+        "failures": [],
+        "conversionErrors": []
+      }
+    },
+    {
+      "id": "8.1-inline-math-baseline",
+      "passed": true,
+      "detail": {
+        "found": true,
+        "parentSize": 16,
+        "outerSize": 16,
+        "innerSize": 16,
+        "display": "inline",
+        "overflowX": "visible",
+        "fraction": "x[n]"
+      }
+    },
+    {
+      "id": "8.1-default",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 1,
+          "direction": "right",
+          "all": false,
+          "expectedSteps": 1,
+          "failures": [],
+          "math": {
+            "total": 19,
+            "rendered": 19,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "X(z)=\\sum_{n=-\\infty}^{\\infty}x[n]z^{-n}"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "X(z)=\\sum_{n=-\\infty}^{\\infty}x[n]z^{-n}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 19,
+        "katexCount": 19,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.1-four-guided-equations",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 1,
+          "direction": "right",
+          "all": true,
+          "expectedSteps": 4,
+          "failures": [],
+          "math": {
+            "total": 25,
+            "rendered": 25,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "X(z)=\\sum_{n=-\\infty}^{\\infty}x[n]z^{-n}"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "X(z)=\\sum_{n=-\\infty}^{\\infty}x[n]z^{-n}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "X(z)=\\sum_{n=0}^{\\infty}(az^{-1})^n",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "X(z)=\\frac{1}{1-az^{-1}},\\quad |z|>|a|",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "z=a,\\quad \\mathrm{ROC}:\\ |z|>|a|",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 25,
+        "katexCount": 25,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.2-prose-inline-math",
+      "passed": true,
+      "detail": {
+        "converted": 69,
+        "visible": 29,
+        "rendered": 29,
+        "failures": [],
+        "conversionErrors": []
+      }
+    },
+    {
+      "id": "8.2-inline-math-baseline",
+      "passed": true,
+      "detail": {
+        "found": true,
+        "parentSize": 16,
+        "outerSize": 16,
+        "innerSize": 16,
+        "display": "inline",
+        "overflowX": "visible",
+        "fraction": "H(z)=\\tfrac{1}{1-az^{-1}}"
+      }
+    },
+    {
+      "id": "8.2-default",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 2,
+          "direction": "right",
+          "all": false,
+          "expectedSteps": 1,
+          "failures": [],
+          "math": {
+            "total": 35,
+            "rendered": 35,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "H(z)=\\frac{1}{1-0.8z^{-1}},\\quad \\mathrm{ROC}:|z|>0.8"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "h_R[n]=(0.8)^nu[n]",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 35,
+        "katexCount": 35,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.2-four-guided-equations",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 2,
+          "direction": "right",
+          "all": true,
+          "expectedSteps": 4,
+          "failures": [],
+          "math": {
+            "total": 41,
+            "rendered": 41,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "H(z)=\\frac{1}{1-0.8z^{-1}},\\quad \\mathrm{ROC}:|z|>0.8"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "h_R[n]=(0.8)^nu[n]",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "H_R(z)=\\sum_{n=0}^{\\infty}(0.8z^{-1})^n",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "H_R(z)=\\frac{1}{1-0.8z^{-1}},\\quad|0.8z^{-1}|<1",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "\\mathrm{ROC}_R:\\quad|z|>0.8",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 41,
+        "katexCount": 41,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.2-graph-title-and-stage-inline-typesetting",
+      "passed": true,
+      "detail": {
+        "plotSource": "h[n]=(0.8)^nu[n]",
+        "plotRendered": true,
+        "stageSource": "h[n]",
+        "stageRendered": true
+      }
+    },
+    {
+      "id": "8.2-right-math-change",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 2,
+          "direction": "right",
+          "all": true,
+          "expectedSteps": 4,
+          "failures": [],
+          "math": {
+            "total": 41,
+            "rendered": 41,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "H(z)=\\frac{1}{1-0.8z^{-1}},\\quad \\mathrm{ROC}:|z|>0.8"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "h_R[n]=(0.8)^nu[n]",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "H_R(z)=\\sum_{n=0}^{\\infty}(0.8z^{-1})^n",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "H_R(z)=\\frac{1}{1-0.8z^{-1}},\\quad|0.8z^{-1}|<1",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "\\mathrm{ROC}_R:\\quad|z|>0.8",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 41,
+        "katexCount": 41,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.2-left-math-change",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 2,
+          "direction": "left",
+          "all": true,
+          "expectedSteps": 4,
+          "failures": [],
+          "math": {
+            "total": 41,
+            "rendered": 41,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "H(z)=\\frac{1}{1-0.8z^{-1}},\\quad \\mathrm{ROC}:|z|<0.8"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "h_L[n]=-(0.8)^nu[-n-1]",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "H_L(z)=-\\sum_{n=-\\infty}^{-1}(0.8z^{-1})^n",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "H_L(z)=-\\sum_{k=1}^{\\infty}(z/0.8)^k=\\frac{1}{1-0.8z^{-1}}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "\\mathrm{ROC}_L:\\quad|z|<0.8",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 41,
+        "katexCount": 41,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.3-prose-inline-math",
+      "passed": true,
+      "detail": {
+        "converted": 108,
+        "visible": 16,
+        "rendered": 16,
+        "failures": [],
+        "conversionErrors": []
+      }
+    },
+    {
+      "id": "8.3-default",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 3,
+          "direction": "right",
+          "all": false,
+          "expectedSteps": 1,
+          "failures": [],
+          "math": {
+            "total": 18,
+            "rendered": 18,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "X(z)=\\frac{z(2z-a-b)}{(z-a)(z-b)},\\quad a<|z|<b"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "X_R(z)=\\frac{1}{1-az^{-1}},\\quad|z|>a",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 18,
+        "katexCount": 18,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.3-four-guided-equations",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 3,
+          "direction": "right",
+          "all": true,
+          "expectedSteps": 4,
+          "failures": [],
+          "math": {
+            "total": 21,
+            "rendered": 21,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "X(z)=\\frac{z(2z-a-b)}{(z-a)(z-b)},\\quad a<|z|<b"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "X_R(z)=\\frac{1}{1-az^{-1}},\\quad|z|>a",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "X_L(z)=\\frac{1}{1-bz^{-1}},\\quad|z|<b",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "X(z)=\\frac{z(2z-a-b)}{(z-a)(z-b)},\\quad a<|z|<b",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "0<a<1<b\\ \\Longrightarrow\\ |z|=1\\text{ lies in ROC}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 21,
+        "katexCount": 21,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.4-prose-inline-math",
+      "passed": true,
+      "detail": {
+        "converted": 127,
+        "visible": 19,
+        "rendered": 19,
+        "failures": [],
+        "conversionErrors": []
+      }
+    },
+    {
+      "id": "8.4-default",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 4,
+          "direction": "right",
+          "all": false,
+          "expectedSteps": 1,
+          "failures": [],
+          "math": {
+            "total": 22,
+            "rendered": 22,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "\\begin{aligned}\nX(z)&=\\frac{1}{(1-az^{-1})(1-bz^{-1})}\\\\[5pt]\n&=\\frac{A}{1-az^{-1}}+\\frac{B}{1-bz^{-1}}\n\\end{aligned}"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "X(z)=\\frac{1}{(1-az^{-1})(1-bz^{-1})}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 22,
+        "katexCount": 22,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.4-four-guided-equations",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 4,
+          "direction": "right",
+          "all": true,
+          "expectedSteps": 4,
+          "failures": [],
+          "math": {
+            "total": 32,
+            "rendered": 32,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "\\begin{aligned}\nX(z)&=\\frac{1}{(1-az^{-1})(1-bz^{-1})}\\\\[5pt]\n&=\\frac{A}{1-az^{-1}}+\\frac{B}{1-bz^{-1}}\n\\end{aligned}"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "X(z)=\\frac{1}{(1-az^{-1})(1-bz^{-1})}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "\\begin{aligned}\n    1&=A(1-bz^{-1})+B(1-az^{-1})\\\\\n    A+B&=1,\\quad bA+aB=0\\\\\n    A&=-\\frac{a}{b-a},\\quad B=\\frac{b}{b-a}\n   \\end{aligned}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "\\begin{cases}|z|>b:\\ \\mathrm{RR}\\\\a<|z|<b:\\ \\mathrm{RL}\\\\|z|<a:\\ \\mathrm{LL}\\end{cases}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "x[n]=x_1[n]+x_2[n],\\quad\\mathcal{Z}\\{x[n]\\}=X(z)",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 32,
+        "katexCount": 32,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.4-background-typeset",
+      "passed": true,
+      "detail": {
+        "math": 3,
+        "factor": true
+      }
+    },
+    {
+      "id": "8.4-input-factored-equation",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 4,
+          "direction": "right",
+          "all": true,
+          "expectedSteps": 4,
+          "failures": [],
+          "math": {
+            "total": 32,
+            "rendered": 32,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "\\begin{aligned}\nX(z)&=\\frac{1}{(1-az^{-1})(1-bz^{-1})}\\\\[5pt]\n&=\\frac{A}{1-az^{-1}}+\\frac{B}{1-bz^{-1}}\n\\end{aligned}"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "X(z)=\\frac{1}{(1-az^{-1})(1-bz^{-1})}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "\\begin{aligned}\n    1&=A(1-bz^{-1})+B(1-az^{-1})\\\\\n    A+B&=1,\\quad bA+aB=0\\\\\n    A&=-\\frac{a}{b-a},\\quad B=\\frac{b}{b-a}\n   \\end{aligned}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "\\begin{cases}|z|>b:\\ \\mathrm{RR}\\\\a<|z|<b:\\ \\mathrm{RL}\\\\|z|<a:\\ \\mathrm{LL}\\end{cases}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "x[n]=x_1[n]+x_2[n],\\quad\\mathcal{Z}\\{x[n]\\}=X(z)",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 32,
+        "katexCount": 32,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.5-prose-inline-math",
+      "passed": true,
+      "detail": {
+        "converted": 151,
+        "visible": 13,
+        "rendered": 13,
+        "failures": [],
+        "conversionErrors": []
+      }
+    },
+    {
+      "id": "8.5-inline-math-baseline",
+      "passed": true,
+      "detail": {
+        "found": true,
+        "parentSize": 16,
+        "outerSize": 16,
+        "innerSize": 16,
+        "display": "inline",
+        "overflowX": "visible",
+        "fraction": "H(z)=\\tfrac{1-a}{1-az^{-1}}"
+      }
+    },
+    {
+      "id": "8.5-default",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 5,
+          "direction": "right",
+          "all": false,
+          "expectedSteps": 1,
+          "failures": [],
+          "math": {
+            "total": 15,
+            "rendered": 15,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "H(z)=\\frac{1-a}{1-az^{-1}}"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "y[n]=ay[n-1]+(1-a)x[n]",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 15,
+        "katexCount": 15,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.5-four-guided-equations",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 5,
+          "direction": "right",
+          "all": true,
+          "expectedSteps": 4,
+          "failures": [],
+          "math": {
+            "total": 19,
+            "rendered": 19,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "H(z)=\\frac{1-a}{1-az^{-1}}"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "y[n]=ay[n-1]+(1-a)x[n]",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "H(z)=\\frac{1-a}{1-az^{-1}}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "z_p=a,\\quad\\mathrm{ROC}:|z|>|a|",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "|H(e^{j\\Omega})|=\\frac{|1-a|}{\\sqrt{1+a^2-2a\\cos\\Omega}}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 19,
+        "katexCount": 19,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.6-prose-inline-math",
+      "passed": true,
+      "detail": {
+        "converted": 185,
+        "visible": 33,
+        "rendered": 33,
+        "failures": [],
+        "conversionErrors": []
+      }
+    },
+    {
+      "id": "8.6-inline-math-baseline",
+      "passed": true,
+      "detail": {
+        "found": true,
+        "parentSize": 16,
+        "outerSize": 16,
+        "innerSize": 16,
+        "display": "inline",
+        "overflowX": "visible",
+        "fraction": "y[n]"
+      }
+    },
+    {
+      "id": "8.6-default",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 6,
+          "direction": "right",
+          "all": false,
+          "expectedSteps": 1,
+          "failures": [],
+          "math": {
+            "total": 35,
+            "rendered": 35,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "H(z)=\\frac1N\\sum_{k=0}^{N-1}z^{-k}"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "y[n]=\\frac{1}{N}\\sum_{k=0}^{N-1}x[n-k]",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 35,
+        "katexCount": 35,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.6-four-guided-equations",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 6,
+          "direction": "right",
+          "all": true,
+          "expectedSteps": 4,
+          "failures": [],
+          "math": {
+            "total": 45,
+            "rendered": 45,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "H(z)=\\frac1N\\sum_{k=0}^{N-1}z^{-k}"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "y[n]=\\frac{1}{N}\\sum_{k=0}^{N-1}x[n-k]",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "H(e^{j\\Omega})=\\frac1N\\sum_{k=0}^{N-1}e^{-j\\Omega k}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "H(z)=\\frac1N\\sum_{k=0}^{N-1}z^{-k}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "z_m=e^{j2\\pi m/N}\\ (m=1,\\ldots,N-1),\\quad \\mathrm{ROC}:|z|>0",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 45,
+        "katexCount": 45,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.7-prose-inline-math",
+      "passed": true,
+      "detail": {
+        "converted": 217,
+        "visible": 25,
+        "rendered": 25,
+        "failures": [],
+        "conversionErrors": []
+      }
+    },
+    {
+      "id": "8.7-inline-math-baseline",
+      "passed": true,
+      "detail": {
+        "found": true,
+        "parentSize": 16,
+        "outerSize": 16,
+        "innerSize": 16,
+        "display": "inline",
+        "overflowX": "visible",
+        "fraction": "\\sum"
+      }
+    },
+    {
+      "id": "8.7-default",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 7,
+          "direction": "right",
+          "all": false,
+          "expectedSteps": 1,
+          "failures": [],
+          "math": {
+            "total": 27,
+            "rendered": 27,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "\\mathrm{BIBO\\ stable}\\iff\\sum_n|h[n]|<\\infty\\iff |z|=1\\text{ is in ROC}"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "h[n]=a^nu[n]\\quad\\mathrm{or}\\quad h[n]=-a^nu[-n-1]",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 27,
+        "katexCount": 27,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.7-four-guided-equations",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 7,
+          "direction": "right",
+          "all": true,
+          "expectedSteps": 4,
+          "failures": [],
+          "math": {
+            "total": 31,
+            "rendered": 31,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "\\mathrm{BIBO\\ stable}\\iff\\sum_n|h[n]|<\\infty\\iff |z|=1\\text{ is in ROC}"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "h[n]=a^nu[n]\\quad\\mathrm{or}\\quad h[n]=-a^nu[-n-1]",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "S(M)=\\sum_{k=1}^{M}|h[n_k]|,\\quad n_k=\\begin{cases}k-1&\\mathrm{causal}\\\\-k&\\mathrm{anti\\!-\\!causal}\\end{cases}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "\\mathrm{Right\\!-\\!sided}:a<1,\\quad\\mathrm{left\\!-\\!sided}:a>1",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "\\mathrm{BIBO\\ stable}\\iff\\sum_n|h[n]|<\\infty\\iff |z|=1\\text{ is in ROC}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 31,
+        "katexCount": 31,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.8-prose-inline-math",
+      "passed": true,
+      "detail": {
+        "converted": 233,
+        "visible": 15,
+        "rendered": 15,
+        "failures": [],
+        "conversionErrors": []
+      }
+    },
+    {
+      "id": "8.8-inline-math-baseline",
+      "passed": true,
+      "detail": {
+        "found": true,
+        "parentSize": 16,
+        "outerSize": 16,
+        "innerSize": 16,
+        "display": "inline",
+        "overflowX": "visible",
+        "fraction": "y[n]=ay[n-1]+(1-a)x[n]"
+      }
+    },
+    {
+      "id": "8.8-default",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 8,
+          "direction": "right",
+          "all": false,
+          "expectedSteps": 1,
+          "failures": [],
+          "math": {
+            "total": 17,
+            "rendered": 17,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "H(z)=\\frac{1-a}{1-az^{-1}},\\quad\\mathrm{ROC}:|z|>|a|"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "x[n]=s[n]+v[n],\\quad y[n]=ay[n-1]+(1-a)x[n]",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 17,
+        "katexCount": 17,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.8-four-guided-equations",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 8,
+          "direction": "right",
+          "all": true,
+          "expectedSteps": 4,
+          "failures": [],
+          "math": {
+            "total": 22,
+            "rendered": 22,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "H(z)=\\frac{1-a}{1-az^{-1}},\\quad\\mathrm{ROC}:|z|>|a|"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "x[n]=s[n]+v[n],\\quad y[n]=ay[n-1]+(1-a)x[n]",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "y\\leftarrow a\\,y_{\\mathrm{prev}}+(1-a)x,\\quad y_{\\mathrm{prev}}\\leftarrow y",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "H(z)=\\frac{1-a}{1-az^{-1}},\\quad\\mathrm{ROC}:|z|>|a|",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          },
+          {
+            "rendered": true,
+            "source": "h[n]=(1-a)a^nu[n],\\quad H(e^{j\\Omega})=H(z)|_{z=e^{j\\Omega}}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 22,
+        "katexCount": 22,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "8.1-neutral-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 17,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.2-neutral-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 29,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.3-neutral-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 16,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.4-neutral-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 19,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.5-neutral-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 13,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.6-neutral-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 33,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.7-neutral-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 25,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.8-neutral-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 15,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.1-warm-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 17,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.2-warm-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 29,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.3-warm-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 16,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.4-warm-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 19,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.5-warm-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 13,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.6-warm-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 33,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.7-warm-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 25,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.8-warm-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 15,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.1-navy-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 17,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.2-navy-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 29,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.3-navy-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 16,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.4-navy-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 19,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.5-navy-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 13,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.6-navy-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 33,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.7-navy-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 25,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.8-navy-dark-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 15,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.1-warm-neutral-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 17,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.2-warm-neutral-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 29,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.3-warm-neutral-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 16,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.4-warm-neutral-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 19,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.5-warm-neutral-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 13,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.6-warm-neutral-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 33,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.7-warm-neutral-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 25,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.8-warm-neutral-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 15,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.1-white-clean-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 17,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.2-white-clean-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 29,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.3-white-clean-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 16,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.4-white-clean-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 19,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.5-white-clean-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 13,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.6-white-clean-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 33,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.7-white-clean-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 25,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.8-white-clean-390px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 15,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.1-neutral-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 17,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.2-neutral-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 29,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.3-neutral-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 16,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.4-neutral-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 19,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.5-neutral-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 13,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.6-neutral-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 33,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.7-neutral-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 25,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.8-neutral-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 15,
+        "theme": "neutral-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.1-warm-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 17,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.2-warm-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 29,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.3-warm-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 16,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.4-warm-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 19,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.5-warm-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 13,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.6-warm-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 33,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.7-warm-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 25,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.8-warm-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 15,
+        "theme": "warm-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.1-navy-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 17,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.2-navy-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 29,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.3-navy-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 16,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.4-navy-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 19,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.5-navy-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 13,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.6-navy-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 33,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.7-navy-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 25,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.8-navy-dark-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 15,
+        "theme": "navy-dark",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.1-warm-neutral-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 17,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.2-warm-neutral-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 29,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.3-warm-neutral-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 16,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.4-warm-neutral-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 19,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.5-warm-neutral-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 13,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.6-warm-neutral-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 33,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.7-warm-neutral-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 25,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.8-warm-neutral-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 15,
+        "theme": "warm-neutral",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.1-white-clean-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 17,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.2-white-clean-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 29,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.3-white-clean-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 16,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.4-white-clean-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 19,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.5-white-clean-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 13,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.6-white-clean-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 33,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.7-white-clean-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 25,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "8.8-white-clean-1280px-inline-geometry",
+      "passed": true,
+      "detail": {
+        "total": 15,
+        "theme": "white-clean",
+        "failures": []
+      }
+    },
+    {
+      "id": "switch-8.2-to-8.4-no-stale-source",
+      "passed": true,
+      "detail": {
+        "ready": true,
+        "report": {
+          "passed": true,
+          "lesson": 4,
+          "direction": "right",
+          "all": false,
+          "expectedSteps": 1,
+          "failures": [],
+          "math": {
+            "total": 22,
+            "rendered": 22,
+            "waiting": 0,
+            "missing": 0,
+            "errors": 0,
+            "unrendered": 0,
+            "failures": [],
+            "passed": true
+          }
+        },
+        "key": {
+          "rendered": true,
+          "source": "\\begin{aligned}\nX(z)&=\\frac{1}{(1-az^{-1})(1-bz^{-1})}\\\\[5pt]\n&=\\frac{A}{1-az^{-1}}+\\frac{B}{1-bz^{-1}}\n\\end{aligned}"
+        },
+        "steps": [
+          {
+            "rendered": true,
+            "source": "X(z)=\\frac{1}{(1-az^{-1})(1-bz^{-1})}",
+            "html": "<span class=\"katex-display\"><span class=\"kate"
+          }
+        ],
+        "expected": 22,
+        "katexCount": 22,
+        "blanks": 0,
+        "errors": 0,
+        "untypeset": []
+      }
+    },
+    {
+      "id": "no-browser-pageerrors",
+      "passed": true,
+      "detail": []
     }
   ],
-  "sourceSha": "437f72651b0bd82cdc5ffa98c69420703c90a308",
-  "runId": 44979909797,
-  "generatedAt": "2026-11-22T03:18:01.904Z"
+  "pageErrors": [],
+  "sourceSha": "1d963f4e70f6d3f7266e514093c467f9466f2a19",
+  "runId": 44979980801,
+  "generatedAt": "2026-11-22T03:18:46.268Z"
 }
