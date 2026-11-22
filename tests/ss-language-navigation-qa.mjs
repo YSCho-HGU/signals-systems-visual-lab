@@ -27,7 +27,7 @@ for(let chapter=1;chapter<=8;chapter++){
  const source=read('chapter'+chapter+'.html');
  assert.match(source,/ss-common-header\.js\?v=20261122-navigation-language-v2/);
  assert.match(source,/ss-common-header\.css\?v=20261122-compact-controls/);
- assert.match(source,/ss-language-content\.js\?v=20261122-bilingual-pass2/);
+ assert.match(source,/ss-language-content\.js\?v=20261122-english-audit-v3/);
  assert.match(source,/ss-language-icon/);
  assert.match(source,/<option value="mixed">한\/영<\/option>/);
  assert.match(source,/<option value="en">English<\/option>/);
