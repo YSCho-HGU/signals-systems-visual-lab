@@ -110,22 +110,10 @@ function enhanceSvg(){
   });
  });
 }
-function enhanceCaptions(){
- if(!ready())return;
- document.querySelectorAll('.figure .sub').forEach(el=>{
-  if(el.dataset.ssMathCaption==='1')return;
-  const source=el.textContent||'',match=source.match(/^\s*F\(T\)\s*=\s*∫₀ᵀ\s*e\^\(−σt\)\s*dt/);
-  if(!match)return;
-  const node=document.createElement('span');
-  if(!typeset(node,'F(T)=\\int_0^T e^{-\\sigma t}\\,dt'))return;
-  node.className='ss-graph-caption-math';el.replaceChildren(node,document.createTextNode(source.slice(match[0].length)));
-  el.dataset.ssMathCaption='1';
- });
-}
 let queued=false;
 function enhanceAll(){
  if(queued)return;queued=true;
- requestAnimationFrame(()=>{queued=false;enhanceSvg();enhanceCaptions();if(ready()){for(const row of pendingCanvas.values())renderCanvas(row.ref,row.side,row.value,row.position)}});
+ requestAnimationFrame(()=>{queued=false;enhanceSvg();if(ready()){for(const row of pendingCanvas.values())renderCanvas(row.ref,row.side,row.value,row.position)}});
 }
 function resize(){
  for(const node of canvasSpans){if(node.isConnected)alignCanvas(node);else canvasSpans.delete(node)}
