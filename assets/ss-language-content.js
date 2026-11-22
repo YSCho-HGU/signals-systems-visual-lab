@@ -115,7 +115,7 @@ function bilingual(raw,mode){
  if(!trimmed)return raw;
  const direct=authoredTranslations[trimmed];
  if(direct){
-  const content=mode==='en'?direct:mode==='mixed'?direct+' / '+trimmed:trimmed;
+  const content=mode==='en'?direct:mode==='mixed'?(trimmed.length>70?direct+'\n'+trimmed:direct+' · '+trimmed):trimmed;
   return raw.replace(trimmed,content);
  }
  // Explicitly bilingual passages are normalized to English-first in mixed mode.
@@ -123,7 +123,7 @@ function bilingual(raw,mode){
  if(split&&/[가-힣]/.test(split[1])!==/[가-힣]/.test(split[2])){
   const ko=/[가-힣]/.test(split[1])?split[1].trim():split[2].trim();
   const en=/[가-힣]/.test(split[1])?split[2].trim():split[1].trim();
-  const value=mode==='en'?en:mode==='ko'?ko:en+' / '+ko;
+  const value=mode==='en'?en:mode==='ko'?ko:(trimmed.length>70?en+'\n'+ko:en+' · '+ko);
   return raw.replace(trimmed,value);
  }
  if(mode==='mixed')return raw;
@@ -167,6 +167,7 @@ function run(){
    if(!saved.has(node))saved.set(node,node.nodeValue);
    const original=saved.get(node);
    const next=bilingual(original,mode);
+   if(p.childNodes.length===1){p.classList.toggle('ss-i18n-mixed-paragraph',mode==='mixed'&&next.includes('\n'));}
    if(node.nodeValue!==next)node.nodeValue=next;
   }
  }
