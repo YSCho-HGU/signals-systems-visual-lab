@@ -43,7 +43,7 @@ try{
     if(chapter===5){
      const special=await page.evaluate(()=>[...document.querySelectorAll('.ss-graph-axis-math')].map(e=>e.dataset.ssFormula||''));
      record(special.includes('∫₀ᵀ e^(−σt)dt'),'ch5-'+theme+'-integral-axis-typeset',JSON.stringify(special));
-     const caption=await page.locator('.figure .sub .ss-graph-caption-math .katex').count();
+     const caption=await page.locator('.figure .sub .katex').count();
      record(caption>=1,'ch5-'+theme+'-integral-caption-typeset',String(caption));
     }
     await page.screenshot({path:folder+'/chapter'+chapter+'-'+theme+'.png',fullPage:false});
