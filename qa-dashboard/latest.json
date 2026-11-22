@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-22T03:01:41.682Z",
-  "sourceSha": "297b84339f90b48d9daa53477ebbfcd9a987a469",
-  "runId": "44978579468",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44978579468",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/297b84339f90b48d9daa53477ebbfcd9a987a469",
+  "generatedAt": "2026-11-22T03:04:53.868Z",
+  "sourceSha": "48e0c241d52f74a9b913455b4ccbeaa4298edd5e",
+  "runId": "44978931943",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44978931943",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/48e0c241d52f74a9b913455b4ccbeaa4298edd5e",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -21,13 +21,13 @@
     {
       "id": "G0",
       "label": "Catalog and source integrity",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
       "id": "G1",
       "label": "Sampling and transform mathematics",
-      "status": "FAIL",
+      "status": "NOT_RUN",
       "required": true
     },
     {
