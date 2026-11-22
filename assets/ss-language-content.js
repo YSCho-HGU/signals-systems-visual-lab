@@ -997,7 +997,7 @@ const embeddedEnglishFragments=[
   "Expand contents"
  ]
 ];
-const nodeFilter='script,style,textarea,option,svg,canvas,math,.katex,.katex-display,code,pre,[contenteditable],[data-no-translate]';
+const nodeFilter='script,style,textarea,option,canvas,math,.katex,.katex-display,code,pre,[contenteditable],[data-no-translate]';
 const roots=()=>[document.querySelector('.ss-layout-root'),document.querySelector('main'),document.querySelector('#page'),document.querySelector('.ss-layout-sidebar')].filter((x,i,a)=>x&&a.indexOf(x)===i).filter(x=>!rootsAncestor(x));
 function rootsAncestor(el){return !!(el.parentElement&&el.parentElement.closest('.ss-layout-root,main,#page'));}
 function bilingual(raw,mode){
@@ -1053,6 +1053,21 @@ function run(){
    const translated=el.getAttribute('data-i18n-'+mode);
    if(translated!=null&&el.textContent!==translated)el.textContent=translated;
    else if(translated==null&&el.textContent!==saved.get(el))el.textContent=saved.get(el);
+  }
+  // Localize visible and accessible labels without modifying controls or input values.
+  for(const el of root.querySelectorAll('[title],[aria-label],[placeholder]')){
+   if(el.closest('script,style,.katex,[data-no-translate]'))continue;
+   for(const attr of ['title','aria-label','placeholder']){
+    if(!el.hasAttribute(attr))continue;
+    const key='ssLanguageOriginal'+attr;
+    const previous=el.dataset[key];
+    const renderedKey='ssLanguageRendered'+attr;
+    const now=el.getAttribute(attr);
+    if(previous===undefined||now!==el.dataset[renderedKey])el.dataset[key]=now;
+    const translated=bilingual(el.dataset[key],mode);
+    el.dataset[renderedKey]=translated;
+    if(now!==translated)el.setAttribute(attr,translated);
+   }
   }
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
   const nodes=[];
