@@ -1,0 +1,159 @@
+/* Chapter 5 internal card and graph rhythm — Ch 1–8, 2026-11-22.
+ * Layout only. Does NOT change chart height, pixel density, interpolation,
+ * mathematical logic, controls, tab ordering, or stored learning state.
+ * Loaded AFTER chapter-native CSS and ss-chapter5-layout-standard.css.
+ */
+:root{
+ --ss-inner-card-padding:14px;
+ --ss-inner-predict-padding:11px 15px;
+ --ss-inner-graph-padding:13px 12px 10px;
+ --ss-inner-graph-head-padding:10px 12px;
+ --ss-inner-card-radius:12px;
+ --ss-inner-card-gap:12px;
+ --ss-inner-section-gap:14px;
+ --ss-inner-label-gap:10px;
+}
+/* Top-level teaching sections share a consistent rectangular inset.
+ * Their plot/body children retain natural sizes and responsive columns. */
+html.ss-foundations-standard[data-ss-foundation-chapter] :is(
+ .ss-found-predict,.ss-found-four-step .ss-found-controls,
+ .ss-found-four-step .ss-found-observe,.ss-found-four-step .ss-found-explain
+),
+html.ss5-native #page :is(.panel,.ss5-predict,.ss5-observe,.ss5-check),
+html.ss7-native :is(.ss7-card,.ss7-key-formula),
+html.ss8-native :is(.ss8-card,.ss8-key-formula){
+ box-sizing:border-box!important;
+ min-width:0!important;
+ border-radius:var(--ss-inner-card-radius)!important;
+ box-shadow:none!important;
+ border-color:var(--els-border)!important;
+ background-color:var(--els-surface)!important;
+ color:var(--els-ink)!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter] :is(
+ .ss-found-predict,.ss-found-four-step .ss-found-controls,
+ .ss-found-four-step .ss-found-observe,.ss-found-four-step .ss-found-explain
+),
+html.ss7-native :is(.ss7-card,.ss7-key-formula),
+html.ss8-native :is(.ss8-card,.ss8-key-formula){
+ padding:var(--ss-inner-card-padding)!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter] .ss-found-predict,
+html.ss5-native #page>.ss5-predict{
+ padding:var(--ss-inner-predict-padding)!important;
+}
+html.ss5-native #page .panel{padding:var(--ss-inner-card-padding)!important}
+/* Ch6 is intentionally indented to make space for its 1–4 number boxes.
+ * Keep the existing left inset; match Chapter 5 only vertically. */
+html.ss6-compact-workspace .ss6-step-card{
+ box-sizing:border-box!important;
+ padding-top:14px!important;
+ padding-bottom:14px!important;
+ margin-bottom:var(--ss-inner-section-gap)!important;
+ border-radius:var(--ss-inner-card-radius)!important;
+ box-shadow:none!important;
+ border-color:var(--els-border)!important;
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace .ss6-step-controls{
+ padding-top:16px!important;
+ padding-bottom:14px!important;
+}
+html.ss6-compact-workspace .ss6-control-plot-workspace .ss6-observation-header{
+ padding-top:0!important;
+ margin-bottom:var(--ss-inner-label-gap)!important;
+}
+/* Shared 2 ↔ 3 and repeated chart spacing; preserve the chapter's
+ * responsive decision about when a single column is necessary. */
+html.ss-foundations-standard[data-ss-foundation-chapter] .ss-found-four-step,
+html.ss7-native .ss7-standard-layout,
+html.ss8-native .ss8-standard-layout{
+ row-gap:var(--ss-inner-section-gap)!important;
+}
+html.ss5-native #page>.lab,
+html.ss6-compact-workspace .ss6-control-plot-workspace,
+html.ss7-native .ss7-stage-pair,
+html.ss8-native .ss8-stage-pair,
+html.ss-foundations-standard[data-ss-foundation-chapter] .ss-found-23{
+ gap:var(--ss-inner-card-gap)!important;
+}
+html.ss5-native #page .plots,
+html.ss6-compact-workspace .ss6-control-plot-workspace :is(.charts,.ss6-step-graphs),
+html.ss7-native .ss7-stage-observe #plots,
+html.ss8-native .ss8-stage-observe #plots,
+html.ss-foundations-standard[data-ss-foundation-chapter] :is(.plot-grid,.charts,.ss-found-observe #plots){
+ gap:var(--ss-inner-card-gap)!important;
+}
+/* Time/frequency graph containers — same interior rhythm as Chapter 5,
+ * while retaining all graph-specific canvas and SVG dimensions. */
+html.ss5-native #page .figure,
+html.ss6-compact-workspace .figure,
+html.ss-foundations-standard[data-ss-foundation-chapter="2"] .figure,
+html.ss-foundations-standard[data-ss-foundation-chapter="3"] .figure,
+html.ss-foundations-standard[data-ss-foundation-chapter="4"] .figure{
+ box-sizing:border-box!important;
+ padding:var(--ss-inner-graph-padding)!important;
+ border:1px solid var(--els-border)!important;
+ border-radius:var(--ss-inner-card-radius)!important;
+ background:var(--els-surface)!important;
+ box-shadow:none!important;
+ min-width:0!important;
+ max-width:100%!important;
+ margin:0!important;
+}
+html.ss-foundations-standard[data-ss-foundation-chapter="1"] .plotbox{
+ box-sizing:border-box!important;
+ padding:var(--ss-inner-graph-padding)!important;
+ border:1px solid var(--els-border)!important;
+ border-radius:var(--ss-inner-card-radius)!important;
+ background:var(--els-surface)!important;
+ box-shadow:none!important;
+ min-width:0!important;
+ max-width:100%!important;
+ margin:0!important;
+}
+/* SVG plots use a bordered header instead of Chapter 5's padded canvas.
+ * Apply matching 12px horizontal inner gutter to title and caption,
+ * but NEVER add padding to SVG viewports or their coordinate systems. */
+html.ss7-native .ss7-stage-observe #plots .plot-card,
+html.ss8-native .ss8-stage-observe #plots .plot-card{
+ box-sizing:border-box!important;
+ min-width:0!important;
+ width:100%!important;
+ max-width:100%!important;
+ padding:0!important;
+ margin:0!important;
+ border:1px solid var(--els-border)!important;
+ border-radius:var(--ss-inner-card-radius)!important;
+ box-shadow:none!important;
+ background:var(--els-surface)!important;
+ overflow:hidden!important;
+}
+html:is(.ss7-native,.ss8-native) .plot-card .plot-title{
+ padding:var(--ss-inner-graph-head-padding)!important;
+ margin:0!important;
+ font-size:15px!important;
+ line-height:1.45!important;
+ color:var(--els-ink)!important;
+ background:var(--els-surface-alt)!important;
+ border-bottom:1px solid var(--els-border)!important;
+}
+html:is(.ss7-native,.ss8-native) .plot-card :is(.legend,.axis-key,.plot-caption){
+ padding-left:12px!important;
+ padding-right:12px!important;
+}
+/* Normalize learning-stage labels without changing equations or narrative. */
+html.ss-foundations-standard[data-ss-foundation-chapter] .ss-found-stage,
+html.ss5-native .ss5-flow-label,
+html.ss7-native .ss7-stage-head,
+html.ss8-native .ss8-stage-head{
+ margin-bottom:var(--ss-inner-label-gap)!important;
+}
+html[data-els-theme] :is(.ss-found-predict,.ss5-predict,.ss7-stage-predict,.ss8-stage-predict) p{
+ line-height:1.7!important;
+}
+@media(max-width:780px){
+ :root{--ss-inner-card-padding:12px;--ss-inner-graph-padding:12px 11px 10px;}
+ html.ss6-compact-workspace .ss6-step-card{
+  padding-left:max(53px,3.25rem)!important;
+ }
+}
