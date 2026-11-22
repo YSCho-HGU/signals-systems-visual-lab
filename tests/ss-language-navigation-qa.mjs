@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
+const header=read('assets/ss-common-header.js');
+const language=read('assets/ss-language-content.js');
+assert.match(header,/Previous chapter/);
+assert.match(header,/Next chapter/);
+assert.match(header,/Previous section/);
+assert.match(header,/Next section/);
+assert.match(header,/target<1\|\|target>8/);
+assert.match(header,/prevSection\.disabled=i<=0/);
+assert.match(header,/nextSection\.disabled=i<0\|\|i>=items\.length-1/);
+assert.match(header,/target\.click\(\)/);
+assert.match(header,/ss-layout-sidebar/);
+assert.match(header,/aria-disabled/);
+assert.match(header,/ss-language-icon/);
+assert.match(header,/한\/영/);
+assert.match(language,/ELSLanguage\.subscribe/);
+assert.match(language,/data-i18n-/);
+assert.match(language,/MutationObserver/);
+for(let chapter=1;chapter<=8;chapter++){
+ const source=read('chapter'+chapter+'.html');
+ assert.match(source,/ss-common-header\.js\?v=20261122-navigation-language-v2/);
+ assert.match(source,/ss-language-content\.js\?v=20261122-unified/);
+ assert.match(source,/ss-language-icon/);
+ assert.match(source,/<option value="mixed">한\/영<\/option>/);
+ assert.match(source,/<option value="en">English<\/option>/);
+ assert.match(source,/<option value="ko">한국어<\/option>/);
+ assert.doesNotMatch(source,/<span>Language<\/span>/);
+ assert.doesNotMatch(source,/ss5-language-content\.js\?v=1/);
+}
+console.log('PASS: Chapter 1–8 common navigation boundaries and language integration (static contracts)');
