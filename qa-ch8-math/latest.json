@@ -1,7 +1,15 @@
 {
-  "status": "PASS",
+  "status": "FAIL",
   "total": 143,
-  "failures": [],
+  "failures": [
+    {
+      "id": "no-browser-pageerrors",
+      "passed": false,
+      "detail": [
+        "SyntaxError: Invalid regular expression flags"
+      ]
+    }
+  ],
   "findings": [
     {
       "id": "formula-catalogue",
@@ -2115,12 +2123,16 @@
     },
     {
       "id": "no-browser-pageerrors",
-      "passed": true,
-      "detail": []
+      "passed": false,
+      "detail": [
+        "SyntaxError: Invalid regular expression flags"
+      ]
     }
   ],
-  "pageErrors": [],
-  "sourceSha": "bf207628b7adcc1524cf6b57aa23da9ac897b915",
-  "runId": 44983767704,
-  "generatedAt": "2026-11-22T04:09:48.293Z"
+  "pageErrors": [
+    "SyntaxError: Invalid regular expression flags"
+  ],
+  "sourceSha": "5eb056db6b29fbd05517a3eb50eae506b7f1ab74",
+  "runId": 44984565152,
+  "generatedAt": "2026-11-22T04:20:32.441Z"
 }
