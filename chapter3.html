@@ -522,10 +522,12 @@ const GUIDES={
 
 startLab();
 document.addEventListener('els-language-change',()=>{
-  const selected=lab.active;
-  const before={...lab.state[MODULES[selected].id]};
-  renderShell();renderModule();
-  Object.assign(lab.state[MODULES[selected].id],before);
+  // Keep the existing sidebar, active section and parameter values intact.
+  document.querySelectorAll('.ss-layout-sidebar nav [data-nav]').forEach((button,i)=>{
+   const name=button.querySelector('.nav-name');
+   if(name&&MODULES[i])name.textContent=window.SSContentModel.text(MODULES[i].short);
+  });
+  renderModule();
 });
 </script>
 <script>window.addEventListener('message',function(e){if(e.source!==parent||!e.data||e.data.type!=='ss-set-theme')return;try{if(typeof updateModule==='function')updateModule();}catch(err){console.warn('Plot recolor failed',err)}});</script>
