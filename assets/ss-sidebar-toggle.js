@@ -6,23 +6,6 @@
 const KEY='ss-sidebar-collapsed-v1',root=document.documentElement;
 function saved(){try{return localStorage.getItem(KEY)==='1'}catch{return false}}
 function persist(v){try{localStorage.setItem(KEY,v?'1':'0')}catch{}}
-function chapterOneSidebar(){
- if(root.dataset.ssFoundationChapter!=='1')return;
- const nav=document.querySelector('main > nav#nav');
- if(!nav)return;
- const side=document.createElement('aside');
- side.className='ss-ch1-sidebar';
- side.setAttribute('aria-label','Chapter 1 learning navigation');
- const brand=document.createElement('div');brand.className='ss-ch1-brand';
- const over=document.createElement('span');over.textContent='SIGNALS & SYSTEMS / CHAPTER 01';
- const title=document.createElement('h2');title.textContent='Signals & Systems';
- const desc=document.createElement('p');desc.textContent='Foundations · Visual Lab';
- brand.append(over,title,desc);
- const label=document.createElement('div');label.className='ss-ch1-sidebar-title';
- label.textContent='LEARNING EXPERIMENTS / 학습 주제';
- nav.parentNode.insertBefore(side,nav);
- side.append(brand,label,nav);
-}
 function findSidebar(){
  return document.querySelector('main>.ss-ch1-sidebar,.ss-vertical-layout>.ss-vertical-sidebar,.ss7-shell>.ss7-sidebar,.ss8-shell>.ss8-sidebar,.shell>aside.nav,.app>aside.sidebar,#app>aside.sidebar');
 }
@@ -48,7 +31,6 @@ function sync(){
  });
 }
 function setup(){
- chapterOneSidebar();
  const side=findSidebar();if(!side)return;
  if(!side.querySelector('.ss-side-toggle')){
   const button=document.createElement('button');
