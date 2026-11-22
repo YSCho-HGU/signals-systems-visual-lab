@@ -31,7 +31,7 @@ function init(){
  if(!menu||!title||!links)return;
  buildLinks(links);
  // Four controls: previous chapter, previous section, next section, next chapter.
- const chapterMatch=location.pathname.match(/chapter([1-8])\\.html$/);
+ const chapterMatch=location.pathname.match(/chapter([1-8])\.html$/);
  const chapterNumber=chapterMatch?Number(chapterMatch[1]):0;
  if(chapterNumber){
   const existing=header.querySelector('.ss-chapter-arrows');
