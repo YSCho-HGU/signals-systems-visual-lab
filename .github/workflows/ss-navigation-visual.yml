@@ -13,6 +13,7 @@ on:
       - "tests/ss-graph-math-visual-e2e.mjs"
       - "tests/ss-all-lab-graph-audit.mjs"
       - "tests/ss-graph-geometry-e2e.mjs"
+      - "tests/ss-independent-math-e2e.mjs"
       - "assets/ss-ch1-native-navigation.css"
       - "assets/ss-foundations-standard.css"
       - "assets/ss-overview-standard.css"
@@ -47,6 +48,8 @@ jobs:
         run: npm run qa:graph-all-labs
       - name: Axis label geometry and clipping audit
         run: npm run qa:graph-geometry
+      - name: Independent mathematical reference verification
+        run: npm run qa:math-independent
       - name: Upload visual audit evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -57,4 +60,5 @@ jobs:
             qa-graph-math/
             qa-graph-content/
             qa-graph-geometry/
+            qa-math-reference/
           if-no-files-found: ignore
