@@ -599,6 +599,240 @@ const authoredTranslations={
  "fn(x): 수식 직접 계산 · sample: 실제 계산 표본 (보간하지 않음)": "fn(x): direct formula evaluation · sample: computed samples (no interpolation)",
  "수식 함수가 제공된 경우 커서 x에서 직접 계산한 값입니다.": "Where a formula is available, the value is evaluated directly at cursor x."
 };
+const embeddedEnglishFragments=[
+ [
+  " · 표시 범위 밖",
+  " · Outside visible range"
+ ],
+ [
+  "Original τ∈{0,1.5,3}을 선택합니다.",
+  "Select Original τ∈{0,1.5,3}."
+ ],
+ [
+  "세 점의 새 위치는 ",
+  "The three new positions are "
+ ],
+ [
+  "폭은 ",
+  "The width is "
+ ],
+ [
+  "이면 reversal; ",
+  " gives reversal; "
+ ],
+ [
+  "이면 compression입니다.",
+  " gives compression."
+ ],
+ [
+  "Ω와 Ω+2π는 같은 DT sequence를 만듭니다.",
+  "Ω and Ω+2π generate the same DT sequence."
+ ],
+ [
+  "오류 제보",
+  "Report an issue"
+ ],
+ [
+  "문제점",
+  "Issue"
+ ],
+ [
+  "기대 결과",
+  "Expected result"
+ ],
+ [
+  "재현 방법",
+  "Steps to reproduce"
+ ],
+ [
+  "금색 점이 다음 계산 위치입니다.",
+  "The gold dot marks the next calculation index."
+ ],
+ [
+  "합산은 정수 n에서만 합니다.",
+  "Summation is performed only at integer n."
+ ],
+ [
+  "x[k]는 고정입니다.",
+  "x[k] remains fixed."
+ ],
+ [
+  "금색 항은 아직 합산 전입니다.",
+  "The gold term has not yet been added."
+ ],
+ [
+  "겹친 항을 더합니다.",
+  "Add the overlapping terms."
+ ],
+ [
+  "누적합과 최종 출력을 구분하세요.",
+  "Distinguish the partial sum from the final output."
+ ],
+ [
+  "k를 한 단계씩 이동하며 계산합니다.",
+  "Calculate by advancing k one step at a time."
+ ],
+ [
+  "Flip은 k에 대한 반전, Shift는 n만큼 이동하는 동작입니다.",
+  "Flip reverses with respect to k; Shift translates by n."
+ ],
+ [
+  "시작과 끝 인덱스는 각각 더합니다.",
+  "Add the respective starting and ending indices."
+ ],
+ [
+  "사각 펄스는 반전 시 양 끝점이 뒤바뀝니다.",
+  "Reversing the rectangular pulse swaps its endpoints."
+ ],
+ [
+  "채워진 면적이 누적 적분값입니다.",
+  "The shaded area is the accumulated integral."
+ ],
+ [
+  "겹침 길이가 출력입니다.",
+  "The overlap length is the output."
+ ],
+ [
+  "금색 점은 진행 중인 적분값입니다.",
+  "The gold point is the running integral."
+ ],
+ [
+  "적분 상한을 이동하며 면적이 누적되는 모습을 관찰하세요.",
+  "Observe the area accumulating as the integration limit moves."
+ ],
+ [
+  "그 밖의 곱은 0입니다.",
+  "The product is zero elsewhere."
+ ],
+ [
+  "그래프 해석",
+  "Read the graphs"
+ ],
+ [
+  "무엇이 왜 바뀌었을까요?",
+  "What changed, and why?"
+ ],
+ [
+  "해석 점검",
+  "Interpretation checkpoint"
+ ],
+ [
+  "한 주기의 경계를 확인하세요.",
+  "Locate the boundary of one period."
+ ],
+ [
+  "N개 계수와 반복 경계를 확인하세요.",
+  "Identify the N coefficients and the repetition boundary."
+ ],
+ [
+  "강조된 영역은 N개 계수 인덱스이며, k=N에서 다시 반복합니다.",
+  "The highlighted region has N coefficient indices; the pattern repeats at k=N."
+ ],
+ [
+  "동시에 비교하기",
+  "Compare simultaneously"
+ ],
+ [
+  "같은 X(s), 서로 다른 ROC · 공통 시간 범위, 독립적인 y축 눈금",
+  "Same X(s), different ROCs · Common time range, independent vertical scales"
+ ],
+ [
+  "세 그림은 x축 범위를 똑같이 t∈[−1.4, 2.6] s로 설정했습니다. RS는 작은 진폭, LS는 음의 시간에서 매우 큰 진폭이므로 각 y축의 단위 간격은 다릅니다. 각 그림을 클릭하면 메인 그래프의 ROC도 변경됩니다.",
+  "All three plots share t∈[−1.4, 2.6] s. RS has small amplitude, whereas LS grows large at negative time, so the vertical scales differ. Clicking a plot updates the main ROC."
+ ],
+ [
+  "s-plane의 보라색 ",
+  "Drag the purple "
+ ],
+ [
+  "σ 탐침선",
+  "σ probe line"
+ ],
+ [
+  "을 좌우로 드래그하거나 원하는 ROC 영역을 클릭해 보세요. Pole을 통과할 때마다 시간 신호가 바뀝니다.",
+  " left or right, or click the desired ROC region. The time-domain signal changes as the probe crosses each pole."
+ ],
+ [
+  "s-plane의 주황색 ",
+  "Drag the orange "
+ ],
+ [
+  "× pole",
+  "× pole"
+ ],
+ [
+  " 또는 보라색 ",
+  " or purple "
+ ],
+ [
+  "○ zero",
+  "○ zero"
+ ],
+ [
+  "를 마우스나 터치로 드래그하세요. 청록색 ROC 경계와 h(t)가 즉시 갱신됩니다. 겹친 위치는 Shift+드래그로 pole을 선택하거나 슬라이더를 이용할 수 있습니다.",
+  " with mouse or touch. The teal ROC boundary and h(t) update immediately. At an overlapping position, Shift-drag the pole or use the slider."
+ ],
+ [
+  "s-plane의 × pole을 좌우로 드래그하여 a 값과 시간 신호를 함께 관찰할 수 있습니다.",
+  "Drag the × pole horizontally in the s-plane to observe changes to a and the time-domain signal."
+ ],
+ [
+  "이면 가중신호가 감쇠하고 적분은 ",
+  " causes the weighted signal to decay and the integral converges to "
+ ],
+ [
+  "로 수렴합니다. 이 적분은 ω=0의 한 단면이며 ROC는 Re(s)>0입니다.",
+  " . This integral is the ω=0 slice, and the ROC is Re(s)>0."
+ ],
+ [
+  "인 경우 ω=0에서 적분이 수렴하지 않습니다. 유한 관측시간의 적분값이 계산된다는 사실은 T→∞의 수렴을 의미하지 않습니다.",
+  " causes divergence at ω=0. Evaluating a finite-time integral does not imply convergence as T→∞."
+ ],
+ [
+  "동일한 대수식이라도 ROC가 필요합니다.",
+  "An ROC is required even for the same algebraic expression."
+ ],
+ [
+  "계수와 신호의 부호를 두 그래프에서 확인하세요. 원점 영점은 2중입니다.",
+  "Check coefficient and signal signs in both plots. The zero at the origin has multiplicity two."
+ ],
+ [
+  "이산 정현파는 양방향으로 무한히 존재한다고 가정하므로 과도응답 없이 평균의 정상상태를 관찰합니다. 원점 pole은 N−1차, ROC는 |z|>0입니다.",
+  "Assume the discrete sinusoid exists for all integer n, so the average is observed in steady state without a transient. The origin has a pole of order N−1 and the ROC is |z|>0."
+ ],
+ [
+  "초기 필터 상태 y[−1]=20으로 설정하며, 입력은 12번째 샘플부터 증가합니다.",
+  "The initial filter state is y[−1]=20, and the input steps up at sample 12."
+ ],
+ [
+  "실제 DAC에는 reconstruction smoothing filter가 필요합니다.",
+  "A real DAC requires a reconstruction smoothing filter."
+ ],
+ [
+  "이미 aliasing된 20 Hz 성분을 후처리 FFT만으로 원래 140 Hz로 판별할 수 없습니다.",
+  "An FFT applied after sampling cannot identify the aliased 20 Hz component as the original 140 Hz interferer."
+ ],
+ [
+  "무한합의 이상적 조건과 유한 계산 근사를 구별합니다.",
+  "Distinguish ideal infinite-sum conditions from finite numerical approximation."
+ ],
+ [
+  "수직 크기는 비교를 위한 상대값이며 실제 임펄스열 모델에는 1/Tₛ 배율이 있습니다.",
+  "The plotted vertical scale is relative; the ideal impulse-train model includes a factor of 1/Tₛ."
+ ],
+ [
+  "복소 지수에서는 부호 있는 alias ",
+  "For complex exponentials, the signed alias "
+ ],
+ [
+  " Hz가 중요하지만, 실수 코사인은 ±주파수에서 동일합니다. 원래 f를 FFT만으로 되찾을 수 없습니다.",
+  " Hz matters; real cosines are identical at positive and negative frequencies. The original f cannot be recovered from the FFT alone."
+ ],
+ [
+  "표준 근사, 실제 신호·잡음에 따라 다름",
+  "standard approximation; depends on the actual signal and noise"
+ ]
+];
 const nodeFilter='script,style,textarea,option,svg,canvas,math,.katex,.katex-display,code,pre,[contenteditable],[data-no-translate]';
 const roots=()=>[document.querySelector('.ss-layout-root'),document.querySelector('main'),document.querySelector('#page'),document.querySelector('.ss-layout-sidebar')].filter((x,i,a)=>x&&a.indexOf(x)===i).filter(x=>!rootsAncestor(x));
 function rootsAncestor(el){return !!(el.parentElement&&el.parentElement.closest('.ss-layout-root,main,#page'));}
@@ -629,6 +863,15 @@ function bilingual(raw,mode){
   if(trailing)return raw.replace(trimmed,trailing[1].trim());
   const leading=trimmed.match(/^([가-힣][^()]*)\\s*\\(([A-Za-z][^()]*)\\)$/);
   if(leading)return raw.replace(trimmed,leading[2].trim());
+ }
+ // Translate authored Korean fragments embedded in dynamically generated text.
+ // Preserve the original for Mixed / Korean; never drop unknown source content.
+ if(mode==='en'&&/[가-힣]/.test(raw)){
+  let translated=raw;
+  for(const [ko,en] of embeddedEnglishFragments){
+   if(translated.includes(ko))translated=translated.split(ko).join(en);
+  }
+  return translated;
  }
  return raw;
 }
