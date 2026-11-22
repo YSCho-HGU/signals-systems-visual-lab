@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-22T03:07:37.637Z",
-  "sourceSha": "f0eef8929ec50283ed93e048181f5f3c28ac4423",
-  "runId": "44979016155",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44979016155",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/f0eef8929ec50283ed93e048181f5f3c28ac4423",
+  "generatedAt": "2026-11-22T03:11:35.539Z",
+  "sourceSha": "5e843e3cca9b53a6774de73895b71ab3fbff9992",
+  "runId": "44979196673",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/44979196673",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/5e843e3cca9b53a6774de73895b71ab3fbff9992",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -45,7 +45,7 @@
     {
       "id": "G3",
       "label": "Theme and language persistence",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
