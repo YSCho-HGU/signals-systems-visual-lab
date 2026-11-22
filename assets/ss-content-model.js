@@ -46,6 +46,23 @@
   const source=String(value??'');
   return /<\/?[A-Za-z][^>]*>/.test(source)?html(source,m):plain(source,m);
  }
+ // Localize graph captions/legend strings without copying numeric sample arrays.
+ function graph(opt,m=mode()){
+  if(!opt||typeof opt!=='object')return opt;
+  const copy={...opt};
+  for(const field of ['title','subtitle','xlabel','ylabel','xlab','ylab','xLabel','yLabel','note']){
+   if(typeof copy[field]==='string')copy[field]=text(copy[field],m);
+  }
+  for(const field of ['series','curves','stems','vlines','legends']){
+   if(Array.isArray(copy[field]))copy[field]=copy[field].map(item=>{
+    if(!item||typeof item!=='object')return item;
+    const row={...item};
+    for(const label of ['name','label','title','description'])if(typeof row[label]==='string')row[label]=text(row[label],m);
+    return row;
+   });
+  }
+  return copy;
+ }
  // Derived presentation data: numeric state, IDs and callbacks remain untouched.
  function model(value,m=mode(),depth=0){
   if(depth>12)return value;
@@ -66,5 +83,5 @@
   }
   return out;
  }
- window.SSContentModel=Object.freeze({text,html,model,mode,translations,version:'20261122-data-v3'});
+ window.SSContentModel=Object.freeze({text,html,model,graph,mode,translations,version:'20261122-data-v4'});
 })(window);
