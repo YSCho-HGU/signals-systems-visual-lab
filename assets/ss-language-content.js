@@ -844,8 +844,8 @@ function bilingual(raw,mode){
   const content=mode==='en'?direct:mode==='mixed'?(trimmed.length>70?direct+'\n'+trimmed:direct+' · '+trimmed):trimmed;
   return raw.replace(trimmed,content);
  }
- // Explicitly bilingual passages are normalized to English-first in mixed mode.
- const split=trimmed.match(/^(.+?)\\s+\\/\\s+(.+)$/);
+ // Normalize explicitly bilingual English/Korean fragments.
+ const split=trimmed.match(/^(.+?)\s+\/\s+(.+)$/);
  if(split&&/[가-힣]/.test(split[1])!==/[가-힣]/.test(split[2])){
   const ko=/[가-힣]/.test(split[1])?split[1].trim():split[2].trim();
   const en=/[가-힣]/.test(split[1])?split[2].trim():split[1].trim();
@@ -859,14 +859,11 @@ function bilingual(raw,mode){
   if(mode==='ko'&&!/[가-힣]/.test(trimmed))return raw.replace(trimmed,candidate);
  }
  if(mode==='en'){
-  const trailing=trimmed.match(/^(.+?)\\s*\\(([가-힣][^()]*)\\)$/);
+  const trailing=trimmed.match(/^(.+?)\s*\(([가-힣][^()]*)\)$/);
   if(trailing)return raw.replace(trimmed,trailing[1].trim());
-  const leading=trimmed.match(/^([가-힣][^()]*)\\s*\\(([A-Za-z][^()]*)\\)$/);
+  const leading=trimmed.match(/^([가-힣][^()]*)\s*\(([A-Za-z][^()]*)\)$/);
   if(leading)return raw.replace(trimmed,leading[2].trim());
- }
- // Translate authored Korean fragments embedded in dynamically generated text.
- // Preserve the original for Mixed / Korean; never drop unknown source content.
- if(mode==='en'&&/[가-힣]/.test(raw)){
+  // Translate authored fragments inside live, interpolated messages.
   let translated=raw;
   for(const [ko,en] of embeddedEnglishFragments){
    if(translated.includes(ko))translated=translated.split(ko).join(en);
