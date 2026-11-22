@@ -469,3 +469,31 @@ html[data-els-theme="navy-dark"] #map-view marker#tm-arr-normalization path{fill
 html[data-els-theme="neutral-dark"] #map-view marker#tm-arr-algorithm path,
 html[data-els-theme="warm-dark"] #map-view marker#tm-arr-algorithm path,
 html[data-els-theme="navy-dark"] #map-view marker#tm-arr-algorithm path{fill:#bdd5dd!important}
+
+/* Readable transform relation hierarchy: prevent card text/badges overlap. */
+#map-view .tm-node{height:126px!important;padding:13px 13px 29px!important;overflow:hidden!important}
+#map-view .tm-node .tm-node-top{font-size:11px!important;line-height:1.25!important;letter-spacing:.015em!important;white-space:normal!important}
+#map-view .tm-node strong{font-size:21px!important;line-height:1.22!important;margin-top:5px!important}
+#map-view .tm-node small{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow:hidden!important;font-size:12px!important;line-height:1.35!important;max-height:34px!important;padding-right:0!important}
+#map-view .tm-node .tm-available{bottom:7px!important;right:10px!important;font-size:10px!important;padding:2px 5px!important}
+#map-view .tm-edge-path{stroke-width:5.5!important}
+#map-view .tm-edge-path.active{stroke-width:8!important}
+#map-view .tm-edge-btn{font-size:13px!important;min-height:37px!important;z-index:5!important}
+#map-view .tm-lane span{font-size:13px!important;font-weight:850!important}
+html[data-els-theme] .ss-common-header.topbar{
+ height:46px!important;min-height:46px!important;max-height:46px!important;
+ background:var(--els-surface)!important;border-bottom:1px solid var(--els-border)!important;
+ color:var(--els-ink)!important;display:flex!important;align-items:center!important;
+ padding:5px 15px!important;gap:12px!important;border-radius:0!important
+}
+html[data-els-theme] .ss-common-header.topbar .ss-common-menu > summary.ss-common-title{
+ border:1px solid var(--els-border)!important;border-radius:8px!important;
+ padding:5px 12px!important;min-height:34px!important;max-width:min(65vw,620px)!important;
+ color:var(--els-ink)!important;background:var(--els-surface-alt)!important
+}
+html[data-els-theme] .ss-common-header.topbar .ss-common-actions{
+ margin-left:auto!important;flex:0 0 auto!important
+}
+@media(max-width:700px){
+ html[data-els-theme] .ss-common-header.topbar{height:auto!important;max-height:none!important;min-height:46px!important;flex-wrap:wrap!important}
+}
