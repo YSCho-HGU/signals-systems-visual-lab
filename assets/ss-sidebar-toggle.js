@@ -18,6 +18,17 @@ function redraw(){
 }
 function sync(){
  const collapsed=root.dataset.ssSidebar==='collapsed';
+ const side=findSidebar();
+ if(side){
+  // Stronger than legacy chapter nav CSS (including rules with !important).
+  // Restore all native component styles on expand.
+  for(const child of side.children){
+   if(child.classList.contains('ss-sidebar-topline'))continue;
+   if(collapsed)child.style.setProperty('display','none','important');
+   else child.style.removeProperty('display');
+  }
+  if(collapsed)side.scrollTop=0;
+ }
  document.querySelectorAll('.ss-side-toggle').forEach(button=>{
   button.setAttribute('aria-expanded',String(!collapsed));
   button.setAttribute('aria-label',collapsed?'목차 펼치기':'목차 접기');
