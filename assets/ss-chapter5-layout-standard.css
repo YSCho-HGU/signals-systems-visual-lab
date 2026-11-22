@@ -353,3 +353,10 @@ html[data-ss-sidebar="collapsed"] :is(
   grid-template-columns:var(--ss-layout-sidebar-closed) minmax(0,1fr)!important;
  }
 }
+
+
+/* Chapter 1's original native navigation file has a more specific workspace
+ * selector; make its content rectangle obey the exact Chapter 5 tokens. */
+html.ss-foundations-standard[data-ss-foundation-chapter="1"][data-els-theme] #ch1-app.app>.ss-ch1-workspace{
+ padding:var(--ss-layout-body-top) var(--ss-layout-body-x) var(--ss-layout-body-bottom)!important;
+}
