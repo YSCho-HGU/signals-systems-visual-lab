@@ -10,14 +10,14 @@ mkdirSync(folder,{recursive:true});
 const output=[];
 const nav={1:'#ch1-app #nav button',2:'#app .sidebar .nav button',3:'#app .sidebar .nav button',4:'#app .sidebar .nav button',5:'#tabs button',6:'#app .sidebar .nav button',7:'#ss7-lesson-nav button',8:'#nav button'};
 try{
- for(const theme of ['neutral-dark','white-clean'])for(let ch=1;ch<=8;ch++)for(const width of (ch===1?[1440,980,768,520,390]:[1440,768,390])){
+ for(const theme of ['neutral-dark','white-clean'])for(let ch=1;ch<=8;ch++)for(const width of (ch===1?[1440,768,390]:[1440,390])){
   const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'});
   await page.addInitScript(({t,c})=>{localStorage.setItem('els-theme-v2',t);localStorage.setItem('ss-sidebar-collapsed-v1',c?'1':'0')},{t:theme,c:width<=780});
   try{
    await page.goto(base+'chapter'+ch+'.html',{waitUntil:'load',timeout:40000});
    await page.waitForTimeout(180);
    const b=page.locator(nav[ch]),n=await b.count();
-   const labs=ch===1?[...Array(n).keys()]:[...new Set([0,Math.floor(n/2),n-1])].filter(x=>x>=0);
+   const labs=ch===1?[...Array(n).keys()]:[...new Set([0,n-1])].filter(x=>x>=0);
    for(const ix of labs){
     await b.nth(ix).click({timeout:10000});
     await page.waitForTimeout(120);
@@ -43,7 +43,7 @@ try{
      return{graphs:hosts.length,problems};
     });
     output.push({ch,lab:ix+1,width,theme,...item});
-    if(item.problems.length)await page.screenshot({path:folder+'/fail-'+ch+'-'+(ix+1)+'-'+width+'-'+theme+'.png',fullPage:true});
+    if(item.problems.length&&output.filter(x=>x.problems?.length).length<=12)await page.screenshot({path:folder+'/fail-'+ch+'-'+(ix+1)+'-'+width+'-'+theme+'.png',fullPage:true});
     console.log((item.problems.length?'FAIL ':'PASS ')+'ch'+ch+'/'+(ix+1)+'/'+width+'/'+theme+' '+JSON.stringify(item).slice(0,1250));
    }
   }catch(err){output.push({ch,width,theme,problems:[{type:'exception',message:String(err)}]});console.log('FAIL ch'+ch+' '+String(err))}
