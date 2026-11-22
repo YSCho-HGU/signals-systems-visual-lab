@@ -54,14 +54,6 @@ function setup(){
   button.innerHTML='<span class="ss-toggle-icon" aria-hidden="true">≪</span>';
   row.prepend(button);
  }
- if(button.dataset.ssToggleBound!=='true'){
-  button.dataset.ssToggleBound='true';
-  button.addEventListener('click',()=>{
-   const collapsed=root.dataset.ssSidebar!=='collapsed';
-   root.dataset.ssSidebar=collapsed?'collapsed':'expanded';
-   persist(collapsed);sync();redraw();
-  });
- }
  const eyebrow=brand.querySelector(':scope > .over,:scope > .eyebrow');
  if(eyebrow && eyebrow.parentElement!==row){
   eyebrow.classList.add('ss-sidebar-chapter-label');
@@ -71,6 +63,15 @@ function setup(){
  }
  sync();
 }
+document.addEventListener('click',event=>{
+ const button=event.target.closest?.('.ss-side-toggle');
+ if(!button||!button.closest('.ss-layout-sidebar'))return;
+ const collapsed=root.dataset.ssSidebar!=='collapsed';
+ root.dataset.ssSidebar=collapsed?'collapsed':'expanded';
+ persist(collapsed);
+ sync();
+ redraw();
+});
 root.dataset.ssSidebar=saved()?'collapsed':'expanded';
 function init(){
  setup();
