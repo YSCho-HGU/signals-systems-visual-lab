@@ -382,3 +382,70 @@ html[data-els-theme] #map-view .ss-map-foundation-note{
  html[data-els-theme] #map-view .ss-application-preview{display:block}
  html[data-els-theme] #map-view .ss-application-preview>span{display:block;margin-top:8px}
 }
+
+
+/* Transform relationship map: connection hierarchy and theme-aware contrast. */
+#map-view .tm-map-instruction{
+ margin:10px 0 14px!important;padding:11px 14px!important;
+ border:1px solid var(--els-border)!important;border-left:4px solid var(--els-link)!important;
+ border-radius:9px!important;background:var(--els-surface-alt)!important;
+ color:var(--els-ink)!important;font-size:14px!important;line-height:1.6!important
+}
+#map-view .tm-map-instruction strong{color:var(--els-ink)!important}
+#map-view .tm-map-instruction span{color:var(--els-muted)!important}
+#map-view .tm-edge-path{
+ stroke-width:5!important;opacity:1!important;filter:drop-shadow(0 1px 1px rgba(0,0,0,.22))!important;
+ transition:opacity .2s,stroke-width .2s,filter .2s!important
+}
+#map-view .tm-edge-path.active{
+ stroke-width:7!important;opacity:1!important;filter:drop-shadow(0 0 4px currentColor)!important
+}
+#map-view .tm-edge-path.dim{opacity:.22!important;stroke-width:4!important}
+#map-view .tm-edge-btn{
+ min-height:36px!important;padding:7px 11px!important;
+ border:2px solid var(--els-border)!important;border-radius:9px!important;
+ background:var(--els-surface)!important;color:var(--els-ink)!important;
+ box-shadow:0 2px 7px rgba(0,0,0,.12)!important;
+ font-size:13px!important;font-weight:800!important;line-height:1.25!important;
+}
+#map-view .tm-edge-btn i{width:15px!important;height:5px!important;flex:0 0 15px!important}
+#map-view .tm-edge-btn.dim{opacity:.55!important}
+#map-view .tm-edge-btn:is(:hover,.active){
+ border-color:var(--els-link)!important;background:var(--els-info-bg)!important;
+ box-shadow:0 0 0 2px var(--els-border),0 3px 9px rgba(0,0,0,.16)!important
+}
+#map-view .tm-node{border-width:2px!important;box-shadow:0 3px 10px rgba(0,0,0,.10)!important}
+#map-view .tm-node.active{
+ border-width:3px!important;border-color:var(--els-link)!important;
+ background:var(--els-info-bg)!important;
+ box-shadow:0 0 0 3px var(--els-border),0 4px 14px rgba(0,0,0,.14)!important
+}
+#map-view .tm-legend{font-size:14px!important;line-height:1.6!important}
+#map-view .tm-line{width:28px!important;border-top-width:4px!important}
+/* Fixed palette matches the edge legend and maintains contrast on light and dark backgrounds. */
+html[data-els-theme="neutral-dark"] #map-view .tm-edge-path,
+html[data-els-theme="warm-dark"] #map-view .tm-edge-path,
+html[data-els-theme="navy-dark"] #map-view .tm-edge-path{
+ filter:drop-shadow(0 0 2px rgba(255,255,255,.24))!important
+}
+html[data-els-theme="neutral-dark"] #map-view .tm-edge-path[data-type="limit"],
+html[data-els-theme="warm-dark"] #map-view .tm-edge-path[data-type="limit"],
+html[data-els-theme="navy-dark"] #map-view .tm-edge-path[data-type="limit"]{stroke:#62d5df!important}
+html[data-els-theme="neutral-dark"] #map-view .tm-edge-path[data-type="roc"],
+html[data-els-theme="warm-dark"] #map-view .tm-edge-path[data-type="roc"],
+html[data-els-theme="navy-dark"] #map-view .tm-edge-path[data-type="roc"]{stroke:#c2a0f4!important}
+html[data-els-theme="neutral-dark"] #map-view .tm-edge-path[data-type="sampling"],
+html[data-els-theme="warm-dark"] #map-view .tm-edge-path[data-type="sampling"],
+html[data-els-theme="navy-dark"] #map-view .tm-edge-path[data-type="sampling"]{stroke:#f6be63!important}
+html[data-els-theme="neutral-dark"] #map-view .tm-edge-path[data-type="record"],
+html[data-els-theme="warm-dark"] #map-view .tm-edge-path[data-type="record"],
+html[data-els-theme="navy-dark"] #map-view .tm-edge-path[data-type="record"]{stroke:#8ec9ff!important}
+html[data-els-theme="neutral-dark"] #map-view .tm-edge-path[data-type="normalization"],
+html[data-els-theme="warm-dark"] #map-view .tm-edge-path[data-type="normalization"],
+html[data-els-theme="navy-dark"] #map-view .tm-edge-path[data-type="normalization"]{stroke:#ffa9c5!important}
+html[data-els-theme="neutral-dark"] #map-view .tm-edge-path[data-type="algorithm"],
+html[data-els-theme="warm-dark"] #map-view .tm-edge-path[data-type="algorithm"],
+html[data-els-theme="navy-dark"] #map-view .tm-edge-path[data-type="algorithm"]{stroke:#bdd5dd!important}
+@media (prefers-reduced-motion:reduce){
+ #map-view .tm-edge-path{transition:none!important}
+}
