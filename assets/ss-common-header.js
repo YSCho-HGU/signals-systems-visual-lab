@@ -58,50 +58,76 @@ function init(){
   const actions=header.querySelector('.ss-common-actions');
   if(actions)header.insertBefore(arrows,actions);else header.append(arrows);
 
+  // Each chapter owns its section buttons, but the public sidebar contract is shared.
+  // Never count hidden or disabled navigation buttons as sections.
   const findNav=()=>{
    const side=document.querySelector('.ss-layout-sidebar');
    if(!side)return null;
-   return side.querySelector('#ss7-lesson-nav,#tabs,nav.ss8-lab-nav,nav.tabs,nav.nav,nav#nav');
+   return side.querySelector('#ss7-lesson-nav,#tabs,nav.ss8-lab-nav,nav.tabs,nav.nav,nav#nav,nav[aria-label*="xperiment"]');
   };
-  const sections=()=>Array.from(findNav()?.querySelectorAll(':scope > button')||[])
-   .filter(button=>!button.hidden && !button.disabled);
+  const sections=()=>{
+   const nav=findNav();
+   if(!nav)return [];
+   return Array.from(nav.querySelectorAll('button')).filter(b=>
+    !b.disabled && !b.hidden && b.getAttribute('aria-hidden')!=='true' &&
+    !!b.getClientRects().length && !b.closest('[hidden],[aria-hidden="true"]'));
+  };
   const currentIndex=items=>{
-   let i=items.findIndex(button=>button.matches('.active,.on,[aria-current="page"],[aria-current="true"],[aria-pressed="true"]'));
-   if(i<0)i=items.findIndex(button=>button.classList.contains('selected'));
-   return i<0?0:i;
+   let i=items.findIndex(b=>b.matches('.active,.on,.selected,[aria-current="page"],[aria-current="true"],[aria-pressed="true"]'));
+   return i>=0?i:(items.length?0:-1);
   };
   const refresh=()=>{
    const items=sections(),i=currentIndex(items);
-   prevSection.disabled=!items.length||i<=0;
-   nextSection.disabled=!items.length||i>=items.length-1;
+   prevSection.disabled=i<=0;
+   nextSection.disabled=i<0||i>=items.length-1;
    prevSection.setAttribute('aria-disabled',String(prevSection.disabled));
    nextSection.setAttribute('aria-disabled',String(nextSection.disabled));
+   prevSection.title=prevSection.disabled?'First section — no previous section':'Previous section';
+   nextSection.title=nextSection.disabled?'Last section — no next section':'Next section';
   };
   arrows.addEventListener('click',event=>{
    const button=event.target.closest('[data-ss-section-direction]');
    if(!button||button.disabled)return;
    const items=sections(),index=currentIndex(items);
    const target=items[index+Number(button.dataset.ssSectionDirection)];
-   if(target){target.click();requestAnimationFrame(refresh);}
+   if(!target)return;
+   target.click();
+   requestAnimationFrame(refresh);
+   setTimeout(refresh,0);
   });
-  let observed=null;
+  let observed=null,observer=null;
   const observe=()=>{
    const nav=findNav();
-   if(!nav||observed===nav)return;
+   if(!nav){refresh();return;}
+   if(observed===nav)return;
+   if(observer)observer.disconnect();
    observed=nav;
-   new MutationObserver(()=>requestAnimationFrame(refresh)).observe(nav,{childList:true,subtree:true,attributes:true,attributeFilter:['class','aria-current','aria-pressed','disabled']});
+   observer=new MutationObserver(()=>requestAnimationFrame(refresh));
+   observer.observe(nav,{childList:true,subtree:true,attributes:true,attributeFilter:['class','aria-current','aria-pressed','disabled','hidden','style']});
    nav.addEventListener('click',()=>requestAnimationFrame(refresh));
    refresh();
   };
   observe();
-  const container=document.querySelector('.ss-layout-root');
-  if(container)new MutationObserver(observe).observe(container,{childList:true});
+  const container=document.querySelector('.ss-layout-root')||document.body;
+  new MutationObserver(observe).observe(container,{childList:true,subtree:false});
   window.addEventListener('ss:sidebar-resized',refresh);
+  window.addEventListener('pageshow',()=>{observe();refresh();});
   refresh();
  }
  // Synchronize all chapter language pickers using the shared language preference.
+ const languageLabel=header.querySelector('.ss-common-language');
+ if(languageLabel){
+  const text=languageLabel.querySelector('span');
+  if(text){text.textContent='🌐';text.setAttribute('aria-hidden','true');text.className='ss-language-icon';}
+ }
  const languagePicker=header.querySelector('.ss-common-language-select');
  if(languagePicker){
+  for(const option of languagePicker.options){
+   if(option.value==='mixed')option.textContent='한/영';
+   if(option.value==='en')option.textContent='English';
+   if(option.value==='ko')option.textContent='한국어';
+  }
+  languagePicker.setAttribute('aria-label','언어 선택 / Select language');
   if(window.ELSLanguage?.bindSelect)window.ELSLanguage.bindSelect(languagePicker);
   else{
    const KEY='els-language';
