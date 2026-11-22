@@ -21,6 +21,13 @@ try{
   await page.goto(base+'chapter'+ch+'.html',{waitUntil:'domcontentloaded',timeout:45000});
   await page.locator('.ss-layout-sidebar nav button').first().waitFor({state:'visible',timeout:20000});
   await page.waitForFunction(()=>!!window.ELSSharedLanguage?.audit,null,{timeout:15000});
+  if(ch===1){
+   const first=await page.locator('#desc').textContent();
+   const prompt=await page.locator('.ss-found-intro').textContent();
+   assert.ok(first.includes('A continuous-time (CT) signal'), 'Chapter 1 description must render in English');
+   assert.ok(prompt.includes('How do sample spacing'), 'Chapter 1 Predict prompt must render in English');
+   assert.doesNotMatch(first+prompt,/[가-힣]/, 'Chapter 1 first lab must be English-only');
+  }
   const buttons=page.locator('.ss-layout-sidebar nav button:visible');
   const count=await buttons.count();
   for(let section=0;section<count;section++){
