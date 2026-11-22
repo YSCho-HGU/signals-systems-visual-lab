@@ -25,11 +25,15 @@ for(const mode of ['en','mixed','ko']){
   assert.ok(model.title.indexOf('Harmonically')<model.title.indexOf('조화'));
  }
 }
-for(let ch=2;ch<=8;ch++){
+for(let ch=1;ch<=8;ch++){
  const page=read('chapter'+ch+'.html');
- assert.match(page,/ss-content-model\.js\?v=20261122-data-v2/);
- assert.match(page,/SSContentModel\.model/);
+ assert.match(page,/ss-content-model\.js\?v=20261122-model-only-v4/);
+ if(ch>1)assert.match(page,/SSContentModel\.model/);
  assert.match(page,/els-language-change/);
  assert.ok(page.indexOf('ss-content-model.js')<page.indexOf('<body>'),'Model must load before the lesson controller');
 }
-console.log('PASS: Chapter 2-8 use immutable English/Korean display data without changing numeric model state');
+const markup='<strong>Explain</strong> — CT/DT 구분은 그래프의 모양이 아니라 independent-variable domain입니다.';
+const window={ELSLanguage:{get:()=> 'en'}};
+new Function('window','localStorage',source)(window,{getItem:()=> 'en'});
+assert.doesNotMatch(window.SSContentModel.html(markup),/[가-힣]/,'Dynamic HTML is translated before insertion');
+console.log('PASS: Chapter 1-8 immutable English/Korean model, HTML generation and numeric state');
