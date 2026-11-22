@@ -55,7 +55,7 @@ try{
      };
     },{side,buttons,badge});
     record(before.width>=160&&before.width<=270,'ch'+ch+'-'+width+'-expanded-width',JSON.stringify(before.width));
-    const layout=await page.evaluate(({side})=>{
+    const layout=await page.evaluate(({side,ch})=>{
       const aside=document.querySelector(side);
       const root=aside?.parentElement;
       const content=ch===1?document.querySelector('#ch1-app>.ss-ch1-workspace'):
