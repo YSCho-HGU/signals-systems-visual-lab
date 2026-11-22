@@ -998,7 +998,7 @@ const embeddedEnglishFragments=[
  ]
 ];
 const nodeFilter='script,style,textarea,option,canvas,math,.katex,.katex-display,code,pre,[contenteditable],[data-no-translate]';
-const roots=()=>[document.querySelector('.ss-layout-root'),document.querySelector('main'),document.querySelector('#page'),document.querySelector('.ss-layout-sidebar')].filter((x,i,a)=>x&&a.indexOf(x)===i).filter(x=>!rootsAncestor(x));
+const roots=()=>[document.body].filter(Boolean);
 function rootsAncestor(el){return !!(el.parentElement&&el.parentElement.closest('.ss-layout-root,main,#page'));}
 function bilingual(raw,mode){
  const trimmed=raw.trim();
@@ -1101,6 +1101,9 @@ function run(){
 window.ELSLanguage.subscribe(run);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});
 else run();
+window.addEventListener('load',run,{once:true});
+window.addEventListener('pageshow',run);
+document.addEventListener('els-language-change',()=>requestAnimationFrame(run));
 // Audit visible Korean in English mode without deleting scientific explanations.
 function audit(){
  const entries=[];
@@ -1115,5 +1118,5 @@ function audit(){
  }
  return {chapter:(location.pathname.match(/chapter([1-8])\.html/)||[])[1]||null,mode:window.ELSLanguage.get(),untranslatedCount:entries.length,samples:entries.slice(0,40)};
 }
-window.ELSSharedLanguage={refresh:run,audit:audit};
+window.ELSSharedLanguage={refresh:run,audit:audit,translate:(source,mode)=>bilingual(String(source??''),mode||window.ELSLanguage.get())};
 })();
