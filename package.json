@@ -11,7 +11,8 @@
     "qa:graph-math": "node tests/ss-graph-math-visual-e2e.mjs",
     "qa:graph-all-labs": "node tests/ss-all-lab-graph-audit.mjs",
     "qa:graph-geometry": "node tests/ss-graph-geometry-e2e.mjs",
-    "qa:math-independent": "node tests/ss-independent-math-e2e.mjs"
+    "qa:math-independent": "node tests/ss-independent-math-e2e.mjs",
+    "qa:english": "node tests/ss-english-content-e2e.mjs"
   },
   "devDependencies": {
     "playwright": "^1.56.0"
