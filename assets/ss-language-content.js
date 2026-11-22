@@ -156,7 +156,29 @@ const authoredTranslations={
  "n≥0과 n≤−1 양쪽에 성분이 있습니다.": "The signal has components for both n≥0 and n≤−1.",
  "인과성은 우측 지지, 안정성은 절대합/단위원 ROC와 관련됩니다.": "Causality concerns right-sided support; BIBO stability concerns absolute summability and whether the ROC contains the unit circle.",
  "a=0.4, b=1.8이면 ROC가 단위원을 포함하나요?": "When a=0.4 and b=1.8, does the ROC contain the unit circle?",
- "네. 0.4<1<1.8이므로 포함합니다.": "Yes. The inequality 0.4<1<1.8 places the unit circle in the ROC."
+ "네. 0.4<1<1.8이므로 포함합니다.": "Yes. The inequality 0.4<1<1.8 places the unit circle in the ROC.",
+ "중간 출력값이 우연히 0이 되면 출력 길이도 짧아지나요?": "Does the output length shrink if an intermediate output sample happens to be zero?",
+ "두 사각 펄스의 폭이 다르면 왜 삼각형이 아니라 사다리꼴이 되나요?": "Why does convolving rectangular pulses of unequal widths produce a trapezoid rather than a triangle?",
+ "두 신호가 t=0에서 1이어도 컨벌루션 출력 y(0)은 왜 0인가요?": "Why is the convolution output y(0)=0 even if both signals equal 1 at t=0?",
+ "시정수 τ를 크게 하면 출력이 더 빨리 상승하나요, 느리게 상승하나요?": "Does increasing time constant τ make the output rise faster or slower?",
+ "이동평균 필터가 일정한 입력값을 그대로 유지하는 이유는 무엇인가요?": "Why does a moving-average filter preserve a constant input?",
+ "두 LTI 시스템을 직렬 연결할 때 순서를 바꿔도 출력이 같은 이유는 무엇인가요?": "Why does reversing the order of two cascaded LTI systems preserve the output?",
+ "인과적이지 않지만 BIBO 안정적인 LTI 시스템이 존재할까요?": "Can an LTI system be noncausal yet BIBO stable?",
+ "실수 cosine의 진폭이 A인데 복소 푸리에 계수 크기는 왜 A/2인가요?": "Why does a real cosine with amplitude A yield complex Fourier coefficients of magnitude A/2?",
+ "펄스의 높이를 일정하게 유지하고 폭 τ를 늘리면 DC 계수는 어떻게 변할까요?": "How does the DC coefficient change as pulse width τ increases at fixed amplitude?",
+ "조화 항을 계속 늘리면 Gibbs overshoot의 높이가 0으로 줄어들까요?": "Does the Gibbs overshoot height approach zero as more harmonics are added?",
+ "크기 스펙트럼만 보고 시간 이동이 있었는지 판단할 수 있나요?": "Can a time shift be detected from the magnitude spectrum alone?",
+ "이산시간에서는 왜 DTFS 계수 종류가 N개뿐인가요?": "Why are there only N distinct DTFS coefficients for an N-periodic sequence?",
+ "RC 시정수 τ가 커지면 출력 파형이 부드러워지는 이유는 무엇인가요?": "Why does increasing the RC time constant τ smooth the output waveform?",
+ "불연속점 한 곳의 값 x(0)을 10으로 바꾸어도 Fourier 계수는 변하지 않나요?": "Do the Fourier coefficients remain unchanged if x(0) at one discontinuity is set to 10?",
+ "주기 T를 늘릴 때 Fourier Series 계수 aₖ를 그대로 그래프로 그리면 왜 잘못된 비교가 되나요?": "Why is plotting unscaled Fourier-series coefficients aₖ misleading when the period T increases?",
+ "높이를 유지한 채 펄스 폭을 2배로 늘리면 spectrum의 main lobe는 어떻게 되나요?": "What happens to the spectral main lobe when pulse width doubles at constant amplitude?",
+ "α가 증가하면 시간 신호는 더 빨리 감쇠하는데 왜 주파수 스펙트럼의 폭은 커질까요?": "Why does the spectrum broaden as α increases and the time-domain signal decays faster?",
+ "펄스의 폭과 위치를 조절할 때 스펙트럼 크기·위상이 각각 어떻게 변하나요?": "How do pulse width and pulse position separately affect spectral magnitude and phase?",
+ "부호가 음수인 sidelobe에서 magnitude도 음수가 되나요?": "Is the magnitude negative in a sidelobe where the signed spectrum is negative?",
+ "입력 펄스가 0이 된 후에도 출력이 즉시 0이 되지 않는 이유는 무엇인가요?": "Why does the output not immediately return to zero when the input pulse ends?",
+ "cos(ωct)를 곱하면 주파수영역에 왜 두 복사본이 생기나요?": "Why does multiplication by cos(ωct) create two copies in the frequency domain?",
+ "샘플 간격 Δt를 줄이거나 zero padding만 하면 유한 관측 구간 밖의 정보를 복원할 수 있나요?": "Can decreasing sample spacing Δt or adding zero padding recover information outside a finite observation window?"
 };
 const nodeFilter='script,style,textarea,option,svg,canvas,math,.katex,.katex-display,code,pre,[contenteditable],[data-no-translate]';
 const roots=()=>[document.querySelector('.ss-layout-root'),document.querySelector('main'),document.querySelector('#page'),document.querySelector('.ss-layout-sidebar')].filter((x,i,a)=>x&&a.indexOf(x)===i).filter(x=>!rootsAncestor(x));
