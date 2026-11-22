@@ -25,9 +25,7 @@ function sync(){
   button.setAttribute('aria-label',collapsed?'Expand chapter navigation':'Collapse chapter navigation');
   button.title=collapsed?'Expand navigation / 목차 펼치기':'Collapse navigation / 목차 접기';
   const icon=button.querySelector('.ss-toggle-icon');
-  if(icon)icon.textContent=collapsed?'»':'«';
-  const text=button.querySelector('.ss-toggle-text');
-  if(text)text.textContent=collapsed?'목차 펼치기 / Expand':'목차 접기 / Collapse';
+  if(icon)icon.textContent=collapsed?'≫':'≪';
  });
 }
 function setup(){
@@ -35,7 +33,7 @@ function setup(){
  if(!side.querySelector('.ss-side-toggle')){
   const button=document.createElement('button');
   button.type='button';button.className='ss-side-toggle';
-  button.innerHTML='<span class="ss-toggle-icon" aria-hidden="true">«</span><span class="ss-toggle-text">목차 접기 / Collapse</span>';
+  button.innerHTML='<span class="ss-toggle-icon" aria-hidden="true">≪</span>';
   button.addEventListener('click',()=>{
    const collapsed=root.dataset.ssSidebar!=='collapsed';
    root.dataset.ssSidebar=collapsed?'collapsed':'expanded';
