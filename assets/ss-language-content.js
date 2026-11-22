@@ -99,5 +99,19 @@ function run(){
 window.ELSLanguage.subscribe(run);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});
 else run();
-window.ELSSharedLanguage={refresh:run};
+// Audit visible Korean in English mode without deleting scientific explanations.
+function audit(){
+ const entries=[];
+ for(const root of roots()){
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  while(walker.nextNode()){
+   const node=walker.currentNode,el=node.parentElement;
+   if(!el||el.closest(nodeFilter)||!el.getClientRects().length)continue;
+   const value=(node.nodeValue||'').trim();
+   if(/[가-힣]/.test(value))entries.push({text:value.slice(0,180),tag:el.tagName});
+  }
+ }
+ return {chapter:(location.pathname.match(/chapter([1-8])\\.html/)||[])[1]||null,mode:window.ELSLanguage.get(),untranslatedCount:entries.length,samples:entries.slice(0,40)};
+}
+window.ELSSharedLanguage={refresh:run,audit:audit};
 })();
