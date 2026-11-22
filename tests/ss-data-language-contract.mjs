@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import vm from 'node:vm';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const source=read('assets/ss-content-model.js');
 const example={id:'example',title:'Harmonically Related Sinusoids / 조화 정현파',
@@ -8,7 +7,7 @@ const example={id:'example',title:'Harmonically Related Sinusoids / 조화 정�
  defaults:{frequency:30},controls:[{key:'frequency',label:'Sampling rate / 표본화율'}]};
 for(const mode of ['en','mixed','ko']){
  const window={ELSLanguage:{get:()=>mode}};
- vm.runInNewContext(source,{window,localStorage:{getItem:()=>mode}});
+ new Function('window','localStorage',source)(window,{getItem:()=>mode});
  const model=window.SSContentModel.model(example);
  assert.equal(model.id,example.id);
  assert.equal(model.defaults.frequency,30);
