@@ -48,39 +48,3 @@ html.ss-foundations-standard .ss-found-katex .katex-display{margin:.3em 0}
 html.ss-foundations-standard .ss-found-bridge{margin:16px 0}
 @media(max-width:1000px){html.ss-foundations-standard :is(.experiment){grid-template-columns:1fr!important}html.ss-foundations-standard .ss-found-four-step .ss-found-23{grid-template-columns:1fr}}
 @media(max-width:650px){html.ss-foundations-standard .ss-common-header{gap:6px;padding:5px 8px!important}html.ss-foundations-standard .ss-common-menu{max-width:45vw}html.ss-foundations-standard .ss-found-four-step :is(.ss-found-controls,.ss-found-observe,.ss-found-explain){padding:11px}}
-
-/* Chapter 1 uses the same stable left TOC as later chapters rather than a
-   horizontal strip of experiment buttons. */
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] main{
- max-width:min(1660px,100%);display:grid;grid-template-columns:230px minmax(0,1fr);
- column-gap:14px;align-items:start
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] main>nav#nav{
- grid-column:1;grid-row:1;position:sticky;top:57px;max-height:calc(100vh - 65px);
- overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;gap:5px;
- border:1px solid var(--els-border);border-radius:12px;padding:10px;
- background:var(--els-surface)
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] main>nav#nav button{
- width:100%;flex:0 0 auto;padding:11px;text-align:left;white-space:normal;
- font-size:14px;background:var(--els-surface-alt,var(--els-surface));
- border-color:var(--els-border);color:var(--els-ink)
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] main>nav#nav button.active{
- background:var(--els-primary,#227d77);color:#fff;border-color:var(--els-primary,#227d77)
-}
-html.ss-foundations-standard[data-ss-foundation-chapter="1"] main>.ss-found-four-step{
- grid-column:2;grid-row:1;min-width:0
-}
-@media(max-width:860px){
- html.ss-foundations-standard[data-ss-foundation-chapter="1"] main{
-  display:block
- }
- html.ss-foundations-standard[data-ss-foundation-chapter="1"] main>nav#nav{
-  position:static;max-height:none;display:flex;flex-direction:row;overflow-x:auto;
-  overflow-y:hidden;margin-bottom:12px
- }
- html.ss-foundations-standard[data-ss-foundation-chapter="1"] main>nav#nav button{
-  flex:0 0 160px
- }
-}
