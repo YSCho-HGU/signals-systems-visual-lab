@@ -1,15 +1,7 @@
 {
-  "status": "FAIL",
+  "status": "PASS",
   "total": 143,
-  "failures": [
-    {
-      "id": "no-browser-pageerrors",
-      "passed": false,
-      "detail": [
-        "SyntaxError: Failed to set a named property 'ssLanguageOriginalaria-label' on 'DOMStringMap': 'ssLanguageOriginalaria-label' is not a valid property name."
-      ]
-    }
-  ],
+  "failures": [],
   "findings": [
     {
       "id": "formula-catalogue",
@@ -708,9 +700,9 @@
       "id": "8.4-prose-inline-math",
       "passed": true,
       "detail": {
-        "converted": 173,
-        "visible": 27,
-        "rendered": 27,
+        "converted": 170,
+        "visible": 24,
+        "rendered": 24,
         "failures": [],
         "conversionErrors": []
       }
@@ -728,8 +720,8 @@
           "expectedSteps": 1,
           "failures": [],
           "math": {
-            "total": 30,
-            "rendered": 30,
+            "total": 27,
+            "rendered": 27,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -749,8 +741,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 30,
-        "katexCount": 30,
+        "expected": 27,
+        "katexCount": 27,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -769,8 +761,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 47,
-            "rendered": 47,
+            "total": 44,
+            "rendered": 44,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -805,8 +797,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 47,
-        "katexCount": 47,
+        "expected": 44,
+        "katexCount": 44,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -833,8 +825,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 47,
-            "rendered": 47,
+            "total": 44,
+            "rendered": 44,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -869,8 +861,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 47,
-        "katexCount": 47,
+        "expected": 44,
+        "katexCount": 44,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -880,7 +872,7 @@
       "id": "8.5-prose-inline-math",
       "passed": true,
       "detail": {
-        "converted": 208,
+        "converted": 205,
         "visible": 17,
         "rendered": 17,
         "failures": [],
@@ -1001,9 +993,9 @@
       "id": "8.6-prose-inline-math",
       "passed": true,
       "detail": {
-        "converted": 257,
-        "visible": 47,
-        "rendered": 47,
+        "converted": 251,
+        "visible": 44,
+        "rendered": 44,
         "failures": [],
         "conversionErrors": []
       }
@@ -1034,8 +1026,8 @@
           "expectedSteps": 1,
           "failures": [],
           "math": {
-            "total": 49,
-            "rendered": 49,
+            "total": 46,
+            "rendered": 46,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -1055,8 +1047,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 49,
-        "katexCount": 49,
+        "expected": 46,
+        "katexCount": 46,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -1075,8 +1067,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 65,
-            "rendered": 65,
+            "total": 62,
+            "rendered": 62,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -1111,8 +1103,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 65,
-        "katexCount": 65,
+        "expected": 62,
+        "katexCount": 62,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -1122,7 +1114,7 @@
       "id": "8.7-prose-inline-math",
       "passed": true,
       "detail": {
-        "converted": 302,
+        "converted": 296,
         "visible": 32,
         "rendered": 32,
         "failures": [],
@@ -1243,7 +1235,7 @@
       "id": "8.8-prose-inline-math",
       "passed": true,
       "detail": {
-        "converted": 324,
+        "converted": 318,
         "visible": 20,
         "rendered": 20,
         "failures": [],
@@ -1391,7 +1383,7 @@
       "id": "8.4-neutral-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 27,
+        "total": 24,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1409,7 +1401,7 @@
       "id": "8.6-neutral-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 47,
+        "total": 44,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1463,7 +1455,7 @@
       "id": "8.4-warm-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 27,
+        "total": 24,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1481,7 +1473,7 @@
       "id": "8.6-warm-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 47,
+        "total": 44,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1535,7 +1527,7 @@
       "id": "8.4-navy-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 27,
+        "total": 24,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1553,7 +1545,7 @@
       "id": "8.6-navy-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 47,
+        "total": 44,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1607,7 +1599,7 @@
       "id": "8.4-warm-neutral-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 27,
+        "total": 24,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1625,7 +1617,7 @@
       "id": "8.6-warm-neutral-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 47,
+        "total": 44,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1679,7 +1671,7 @@
       "id": "8.4-white-clean-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 27,
+        "total": 24,
         "theme": "white-clean",
         "failures": []
       }
@@ -1697,7 +1689,7 @@
       "id": "8.6-white-clean-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 47,
+        "total": 44,
         "theme": "white-clean",
         "failures": []
       }
@@ -1751,7 +1743,7 @@
       "id": "8.4-neutral-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 27,
+        "total": 24,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1769,7 +1761,7 @@
       "id": "8.6-neutral-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 47,
+        "total": 44,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1823,7 +1815,7 @@
       "id": "8.4-warm-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 27,
+        "total": 24,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1841,7 +1833,7 @@
       "id": "8.6-warm-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 47,
+        "total": 44,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1895,7 +1887,7 @@
       "id": "8.4-navy-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 27,
+        "total": 24,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1913,7 +1905,7 @@
       "id": "8.6-navy-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 47,
+        "total": 44,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1967,7 +1959,7 @@
       "id": "8.4-warm-neutral-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 27,
+        "total": 24,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1985,7 +1977,7 @@
       "id": "8.6-warm-neutral-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 47,
+        "total": 44,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -2039,7 +2031,7 @@
       "id": "8.4-white-clean-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 27,
+        "total": 24,
         "theme": "white-clean",
         "failures": []
       }
@@ -2057,7 +2049,7 @@
       "id": "8.6-white-clean-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 47,
+        "total": 44,
         "theme": "white-clean",
         "failures": []
       }
@@ -2093,8 +2085,8 @@
           "expectedSteps": 1,
           "failures": [],
           "math": {
-            "total": 30,
-            "rendered": 30,
+            "total": 27,
+            "rendered": 27,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -2114,8 +2106,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 30,
-        "katexCount": 30,
+        "expected": 27,
+        "katexCount": 27,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -2123,16 +2115,12 @@
     },
     {
       "id": "no-browser-pageerrors",
-      "passed": false,
-      "detail": [
-        "SyntaxError: Failed to set a named property 'ssLanguageOriginalaria-label' on 'DOMStringMap': 'ssLanguageOriginalaria-label' is not a valid property name."
-      ]
+      "passed": true,
+      "detail": []
     }
   ],
-  "pageErrors": [
-    "SyntaxError: Failed to set a named property 'ssLanguageOriginalaria-label' on 'DOMStringMap': 'ssLanguageOriginalaria-label' is not a valid property name."
-  ],
-  "sourceSha": "cbc0fbbd8a89b2a42756da71ac39ab30cf29f337",
-  "runId": 44986596404,
-  "generatedAt": "2026-11-22T04:48:32.425Z"
+  "pageErrors": [],
+  "sourceSha": "8d4e0ca4ba20c5ad3f21fe845a7f82eff3949b40",
+  "runId": 44987381232,
+  "generatedAt": "2026-11-22T04:59:53.577Z"
 }
