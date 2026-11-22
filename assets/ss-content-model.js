@@ -15,6 +15,12 @@
  // attributes, callbacks and chart markup remain byte-for-byte intact.
  function plain(value,m=mode()){
   const source=String(value??'');
+  // A presentation model may already contain an English-first multiline pair.
+  // The HTML renderer must not translate and append its Korean half again.
+  if(m==='mixed'&&source.includes('\n')){
+   const split=source.indexOf('\n'),english=source.slice(0,split),koreanText=source.slice(split+1);
+   if(korean.test(koreanText) && plain(koreanText,'en')===english)return source;
+  }
   if(!source||!korean.test(source)&&!reverse.has(source))return source;
   const pair=source.trim().match(inlinePattern);
   if(pair&&korean.test(pair[1])!==korean.test(pair[2])){
