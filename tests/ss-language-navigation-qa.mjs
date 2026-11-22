@@ -23,4 +23,10 @@ for(let ch=1;ch<=8;ch++){
  if(ch>1)assert.match(page,/SSContentModel\.model/);
 }
 assert.ok(read('chapter1.html').includes('const ch1Localize=value=>window.SSContentModel.text(value)'));
+const supplemental6=read('assets/ss-ch6-learning-flow.js');
+assert.ok(supplemental6.includes('window.SSContentModel.pair(en,ko)'),'Chapter 6 supplemental language must use the shared model');
+const supplemental7=read('assets/ss-ch7-learning-standard.js');
+assert.ok(supplemental7.includes('SSChapter7?.currentCheckQuestion'),'Chapter 7 prompt must come from the authored model, not DOM text');
+assert.ok(!supplemental7.includes("q?q.textContent.trim()"),'Chapter 7 prompt should not scrape a rendered question');
+assert.ok(!read('chapter7.html').includes('ss-language-content.js'),'Legacy DOM translator should remain disconnected');
 console.log('PASS: Chapter 1–8 use the shared data model and common header without DOM text rewriting');
