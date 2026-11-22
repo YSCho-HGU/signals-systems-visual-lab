@@ -30,7 +30,7 @@ for(let ch=1;ch<=8;ch++){
  if(ch===1){
   assert.match(page,/data-ss-foundation-chapter="1"/);
   assert.match(page,/id="ch1-app" class="app ss-ch1-app"/);
-  assert.match(page,/<aside class="sidebar ss-ch1-sidebar"/);
+  assert.match(page,/<aside class="sidebar nav ss-ch1-sidebar"/);
   assert.match(page,/ss-ch1-native-navigation\.css/);
   assert.match(page,/class="num"/);
   assert.doesNotMatch(page,/class="ss-ch1-nav-title"/);
