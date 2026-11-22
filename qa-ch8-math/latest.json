@@ -236,9 +236,9 @@
       "id": "8.1-prose-inline-math",
       "passed": true,
       "detail": {
-        "converted": 37,
-        "visible": 17,
-        "rendered": 17,
+        "converted": 47,
+        "visible": 22,
+        "rendered": 22,
         "failures": [],
         "conversionErrors": []
       }
@@ -269,8 +269,8 @@
           "expectedSteps": 1,
           "failures": [],
           "math": {
-            "total": 19,
-            "rendered": 19,
+            "total": 24,
+            "rendered": 24,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -290,8 +290,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 19,
-        "katexCount": 19,
+        "expected": 24,
+        "katexCount": 24,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -310,8 +310,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 25,
-            "rendered": 25,
+            "total": 33,
+            "rendered": 33,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -346,8 +346,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 25,
-        "katexCount": 25,
+        "expected": 33,
+        "katexCount": 33,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -357,9 +357,9 @@
       "id": "8.2-prose-inline-math",
       "passed": true,
       "detail": {
-        "converted": 69,
-        "visible": 29,
-        "rendered": 29,
+        "converted": 93,
+        "visible": 40,
+        "rendered": 40,
         "failures": [],
         "conversionErrors": []
       }
@@ -390,8 +390,8 @@
           "expectedSteps": 1,
           "failures": [],
           "math": {
-            "total": 35,
-            "rendered": 35,
+            "total": 46,
+            "rendered": 46,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -411,8 +411,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 35,
-        "katexCount": 35,
+        "expected": 46,
+        "katexCount": 46,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -431,8 +431,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 41,
-            "rendered": 41,
+            "total": 55,
+            "rendered": 55,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -467,8 +467,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 41,
-        "katexCount": 41,
+        "expected": 55,
+        "katexCount": 55,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -497,8 +497,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 41,
-            "rendered": 41,
+            "total": 55,
+            "rendered": 55,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -533,8 +533,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 41,
-        "katexCount": 41,
+        "expected": 55,
+        "katexCount": 55,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -553,8 +553,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 41,
-            "rendered": 41,
+            "total": 55,
+            "rendered": 55,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -589,8 +589,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 41,
-        "katexCount": 41,
+        "expected": 55,
+        "katexCount": 55,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -600,9 +600,9 @@
       "id": "8.3-prose-inline-math",
       "passed": true,
       "detail": {
-        "converted": 108,
-        "visible": 16,
-        "rendered": 16,
+        "converted": 146,
+        "visible": 23,
+        "rendered": 23,
         "failures": [],
         "conversionErrors": []
       }
@@ -620,8 +620,8 @@
           "expectedSteps": 1,
           "failures": [],
           "math": {
-            "total": 18,
-            "rendered": 18,
+            "total": 25,
+            "rendered": 25,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -641,8 +641,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 18,
-        "katexCount": 18,
+        "expected": 25,
+        "katexCount": 25,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -661,8 +661,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 21,
-            "rendered": 21,
+            "total": 28,
+            "rendered": 28,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -697,8 +697,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 21,
-        "katexCount": 21,
+        "expected": 28,
+        "katexCount": 28,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -708,9 +708,9 @@
       "id": "8.4-prose-inline-math",
       "passed": true,
       "detail": {
-        "converted": 127,
-        "visible": 19,
-        "rendered": 19,
+        "converted": 173,
+        "visible": 27,
+        "rendered": 27,
         "failures": [],
         "conversionErrors": []
       }
@@ -728,8 +728,8 @@
           "expectedSteps": 1,
           "failures": [],
           "math": {
-            "total": 22,
-            "rendered": 22,
+            "total": 30,
+            "rendered": 30,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -749,8 +749,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 22,
-        "katexCount": 22,
+        "expected": 30,
+        "katexCount": 30,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -769,8 +769,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 32,
-            "rendered": 32,
+            "total": 47,
+            "rendered": 47,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -805,8 +805,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 32,
-        "katexCount": 32,
+        "expected": 47,
+        "katexCount": 47,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -833,8 +833,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 32,
-            "rendered": 32,
+            "total": 47,
+            "rendered": 47,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -869,8 +869,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 32,
-        "katexCount": 32,
+        "expected": 47,
+        "katexCount": 47,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -880,9 +880,9 @@
       "id": "8.5-prose-inline-math",
       "passed": true,
       "detail": {
-        "converted": 151,
-        "visible": 13,
-        "rendered": 13,
+        "converted": 208,
+        "visible": 17,
+        "rendered": 17,
         "failures": [],
         "conversionErrors": []
       }
@@ -913,8 +913,8 @@
           "expectedSteps": 1,
           "failures": [],
           "math": {
-            "total": 15,
-            "rendered": 15,
+            "total": 19,
+            "rendered": 19,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -934,8 +934,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 15,
-        "katexCount": 15,
+        "expected": 19,
+        "katexCount": 19,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -954,8 +954,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 19,
-            "rendered": 19,
+            "total": 24,
+            "rendered": 24,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -990,8 +990,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 19,
-        "katexCount": 19,
+        "expected": 24,
+        "katexCount": 24,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -1001,9 +1001,9 @@
       "id": "8.6-prose-inline-math",
       "passed": true,
       "detail": {
-        "converted": 185,
-        "visible": 33,
-        "rendered": 33,
+        "converted": 257,
+        "visible": 47,
+        "rendered": 47,
         "failures": [],
         "conversionErrors": []
       }
@@ -1034,8 +1034,8 @@
           "expectedSteps": 1,
           "failures": [],
           "math": {
-            "total": 35,
-            "rendered": 35,
+            "total": 49,
+            "rendered": 49,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -1055,8 +1055,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 35,
-        "katexCount": 35,
+        "expected": 49,
+        "katexCount": 49,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -1075,8 +1075,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 45,
-            "rendered": 45,
+            "total": 65,
+            "rendered": 65,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -1111,8 +1111,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 45,
-        "katexCount": 45,
+        "expected": 65,
+        "katexCount": 65,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -1122,9 +1122,9 @@
       "id": "8.7-prose-inline-math",
       "passed": true,
       "detail": {
-        "converted": 217,
-        "visible": 25,
-        "rendered": 25,
+        "converted": 302,
+        "visible": 32,
+        "rendered": 32,
         "failures": [],
         "conversionErrors": []
       }
@@ -1155,8 +1155,8 @@
           "expectedSteps": 1,
           "failures": [],
           "math": {
-            "total": 27,
-            "rendered": 27,
+            "total": 34,
+            "rendered": 34,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -1176,8 +1176,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 27,
-        "katexCount": 27,
+        "expected": 34,
+        "katexCount": 34,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -1196,8 +1196,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 31,
-            "rendered": 31,
+            "total": 39,
+            "rendered": 39,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -1232,8 +1232,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 31,
-        "katexCount": 31,
+        "expected": 39,
+        "katexCount": 39,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -1243,9 +1243,9 @@
       "id": "8.8-prose-inline-math",
       "passed": true,
       "detail": {
-        "converted": 233,
-        "visible": 15,
-        "rendered": 15,
+        "converted": 324,
+        "visible": 20,
+        "rendered": 20,
         "failures": [],
         "conversionErrors": []
       }
@@ -1276,8 +1276,8 @@
           "expectedSteps": 1,
           "failures": [],
           "math": {
-            "total": 17,
-            "rendered": 17,
+            "total": 22,
+            "rendered": 22,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -1297,8 +1297,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 17,
-        "katexCount": 17,
+        "expected": 22,
+        "katexCount": 22,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -1317,8 +1317,8 @@
           "expectedSteps": 4,
           "failures": [],
           "math": {
-            "total": 22,
-            "rendered": 22,
+            "total": 29,
+            "rendered": 29,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -1353,8 +1353,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 22,
-        "katexCount": 22,
+        "expected": 29,
+        "katexCount": 29,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -1364,7 +1364,7 @@
       "id": "8.1-neutral-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 17,
+        "total": 22,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1373,7 +1373,7 @@
       "id": "8.2-neutral-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 29,
+        "total": 40,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1382,7 +1382,7 @@
       "id": "8.3-neutral-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 16,
+        "total": 23,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1391,7 +1391,7 @@
       "id": "8.4-neutral-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 19,
+        "total": 27,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1400,7 +1400,7 @@
       "id": "8.5-neutral-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 13,
+        "total": 17,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1409,7 +1409,7 @@
       "id": "8.6-neutral-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 33,
+        "total": 47,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1418,7 +1418,7 @@
       "id": "8.7-neutral-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 25,
+        "total": 32,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1427,7 +1427,7 @@
       "id": "8.8-neutral-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 15,
+        "total": 20,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1436,7 +1436,7 @@
       "id": "8.1-warm-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 17,
+        "total": 22,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1445,7 +1445,7 @@
       "id": "8.2-warm-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 29,
+        "total": 40,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1454,7 +1454,7 @@
       "id": "8.3-warm-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 16,
+        "total": 23,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1463,7 +1463,7 @@
       "id": "8.4-warm-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 19,
+        "total": 27,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1472,7 +1472,7 @@
       "id": "8.5-warm-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 13,
+        "total": 17,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1481,7 +1481,7 @@
       "id": "8.6-warm-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 33,
+        "total": 47,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1490,7 +1490,7 @@
       "id": "8.7-warm-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 25,
+        "total": 32,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1499,7 +1499,7 @@
       "id": "8.8-warm-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 15,
+        "total": 20,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1508,7 +1508,7 @@
       "id": "8.1-navy-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 17,
+        "total": 22,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1517,7 +1517,7 @@
       "id": "8.2-navy-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 29,
+        "total": 40,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1526,7 +1526,7 @@
       "id": "8.3-navy-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 16,
+        "total": 23,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1535,7 +1535,7 @@
       "id": "8.4-navy-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 19,
+        "total": 27,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1544,7 +1544,7 @@
       "id": "8.5-navy-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 13,
+        "total": 17,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1553,7 +1553,7 @@
       "id": "8.6-navy-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 33,
+        "total": 47,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1562,7 +1562,7 @@
       "id": "8.7-navy-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 25,
+        "total": 32,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1571,7 +1571,7 @@
       "id": "8.8-navy-dark-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 15,
+        "total": 20,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1580,7 +1580,7 @@
       "id": "8.1-warm-neutral-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 17,
+        "total": 22,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1589,7 +1589,7 @@
       "id": "8.2-warm-neutral-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 29,
+        "total": 40,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1598,7 +1598,7 @@
       "id": "8.3-warm-neutral-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 16,
+        "total": 23,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1607,7 +1607,7 @@
       "id": "8.4-warm-neutral-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 19,
+        "total": 27,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1616,7 +1616,7 @@
       "id": "8.5-warm-neutral-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 13,
+        "total": 17,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1625,7 +1625,7 @@
       "id": "8.6-warm-neutral-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 33,
+        "total": 47,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1634,7 +1634,7 @@
       "id": "8.7-warm-neutral-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 25,
+        "total": 32,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1643,7 +1643,7 @@
       "id": "8.8-warm-neutral-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 15,
+        "total": 20,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1652,7 +1652,7 @@
       "id": "8.1-white-clean-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 17,
+        "total": 22,
         "theme": "white-clean",
         "failures": []
       }
@@ -1661,7 +1661,7 @@
       "id": "8.2-white-clean-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 29,
+        "total": 40,
         "theme": "white-clean",
         "failures": []
       }
@@ -1670,7 +1670,7 @@
       "id": "8.3-white-clean-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 16,
+        "total": 23,
         "theme": "white-clean",
         "failures": []
       }
@@ -1679,7 +1679,7 @@
       "id": "8.4-white-clean-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 19,
+        "total": 27,
         "theme": "white-clean",
         "failures": []
       }
@@ -1688,7 +1688,7 @@
       "id": "8.5-white-clean-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 13,
+        "total": 17,
         "theme": "white-clean",
         "failures": []
       }
@@ -1697,7 +1697,7 @@
       "id": "8.6-white-clean-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 33,
+        "total": 47,
         "theme": "white-clean",
         "failures": []
       }
@@ -1706,7 +1706,7 @@
       "id": "8.7-white-clean-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 25,
+        "total": 32,
         "theme": "white-clean",
         "failures": []
       }
@@ -1715,7 +1715,7 @@
       "id": "8.8-white-clean-390px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 15,
+        "total": 20,
         "theme": "white-clean",
         "failures": []
       }
@@ -1724,7 +1724,7 @@
       "id": "8.1-neutral-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 17,
+        "total": 22,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1733,7 +1733,7 @@
       "id": "8.2-neutral-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 29,
+        "total": 40,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1742,7 +1742,7 @@
       "id": "8.3-neutral-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 16,
+        "total": 23,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1751,7 +1751,7 @@
       "id": "8.4-neutral-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 19,
+        "total": 27,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1760,7 +1760,7 @@
       "id": "8.5-neutral-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 13,
+        "total": 17,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1769,7 +1769,7 @@
       "id": "8.6-neutral-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 33,
+        "total": 47,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1778,7 +1778,7 @@
       "id": "8.7-neutral-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 25,
+        "total": 32,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1787,7 +1787,7 @@
       "id": "8.8-neutral-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 15,
+        "total": 20,
         "theme": "neutral-dark",
         "failures": []
       }
@@ -1796,7 +1796,7 @@
       "id": "8.1-warm-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 17,
+        "total": 22,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1805,7 +1805,7 @@
       "id": "8.2-warm-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 29,
+        "total": 40,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1814,7 +1814,7 @@
       "id": "8.3-warm-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 16,
+        "total": 23,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1823,7 +1823,7 @@
       "id": "8.4-warm-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 19,
+        "total": 27,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1832,7 +1832,7 @@
       "id": "8.5-warm-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 13,
+        "total": 17,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1841,7 +1841,7 @@
       "id": "8.6-warm-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 33,
+        "total": 47,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1850,7 +1850,7 @@
       "id": "8.7-warm-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 25,
+        "total": 32,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1859,7 +1859,7 @@
       "id": "8.8-warm-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 15,
+        "total": 20,
         "theme": "warm-dark",
         "failures": []
       }
@@ -1868,7 +1868,7 @@
       "id": "8.1-navy-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 17,
+        "total": 22,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1877,7 +1877,7 @@
       "id": "8.2-navy-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 29,
+        "total": 40,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1886,7 +1886,7 @@
       "id": "8.3-navy-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 16,
+        "total": 23,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1895,7 +1895,7 @@
       "id": "8.4-navy-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 19,
+        "total": 27,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1904,7 +1904,7 @@
       "id": "8.5-navy-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 13,
+        "total": 17,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1913,7 +1913,7 @@
       "id": "8.6-navy-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 33,
+        "total": 47,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1922,7 +1922,7 @@
       "id": "8.7-navy-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 25,
+        "total": 32,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1931,7 +1931,7 @@
       "id": "8.8-navy-dark-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 15,
+        "total": 20,
         "theme": "navy-dark",
         "failures": []
       }
@@ -1940,7 +1940,7 @@
       "id": "8.1-warm-neutral-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 17,
+        "total": 22,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1949,7 +1949,7 @@
       "id": "8.2-warm-neutral-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 29,
+        "total": 40,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1958,7 +1958,7 @@
       "id": "8.3-warm-neutral-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 16,
+        "total": 23,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1967,7 +1967,7 @@
       "id": "8.4-warm-neutral-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 19,
+        "total": 27,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1976,7 +1976,7 @@
       "id": "8.5-warm-neutral-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 13,
+        "total": 17,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1985,7 +1985,7 @@
       "id": "8.6-warm-neutral-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 33,
+        "total": 47,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -1994,7 +1994,7 @@
       "id": "8.7-warm-neutral-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 25,
+        "total": 32,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -2003,7 +2003,7 @@
       "id": "8.8-warm-neutral-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 15,
+        "total": 20,
         "theme": "warm-neutral",
         "failures": []
       }
@@ -2012,7 +2012,7 @@
       "id": "8.1-white-clean-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 17,
+        "total": 22,
         "theme": "white-clean",
         "failures": []
       }
@@ -2021,7 +2021,7 @@
       "id": "8.2-white-clean-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 29,
+        "total": 40,
         "theme": "white-clean",
         "failures": []
       }
@@ -2030,7 +2030,7 @@
       "id": "8.3-white-clean-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 16,
+        "total": 23,
         "theme": "white-clean",
         "failures": []
       }
@@ -2039,7 +2039,7 @@
       "id": "8.4-white-clean-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 19,
+        "total": 27,
         "theme": "white-clean",
         "failures": []
       }
@@ -2048,7 +2048,7 @@
       "id": "8.5-white-clean-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 13,
+        "total": 17,
         "theme": "white-clean",
         "failures": []
       }
@@ -2057,7 +2057,7 @@
       "id": "8.6-white-clean-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 33,
+        "total": 47,
         "theme": "white-clean",
         "failures": []
       }
@@ -2066,7 +2066,7 @@
       "id": "8.7-white-clean-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 25,
+        "total": 32,
         "theme": "white-clean",
         "failures": []
       }
@@ -2075,7 +2075,7 @@
       "id": "8.8-white-clean-1280px-inline-geometry",
       "passed": true,
       "detail": {
-        "total": 15,
+        "total": 20,
         "theme": "white-clean",
         "failures": []
       }
@@ -2093,8 +2093,8 @@
           "expectedSteps": 1,
           "failures": [],
           "math": {
-            "total": 22,
-            "rendered": 22,
+            "total": 30,
+            "rendered": 30,
             "waiting": 0,
             "missing": 0,
             "errors": 0,
@@ -2114,8 +2114,8 @@
             "html": "<span class=\"katex-display\"><span class=\"kate"
           }
         ],
-        "expected": 22,
-        "katexCount": 22,
+        "expected": 30,
+        "katexCount": 30,
         "blanks": 0,
         "errors": 0,
         "untypeset": []
@@ -2132,7 +2132,7 @@
   "pageErrors": [
     "SyntaxError: Failed to set a named property 'ssLanguageOriginalaria-label' on 'DOMStringMap': 'ssLanguageOriginalaria-label' is not a valid property name."
   ],
-  "sourceSha": "01e81d17b16e42c8abaff662d280d8c3fae4e599",
-  "runId": 44985701529,
-  "generatedAt": "2026-11-22T04:35:59.194Z"
+  "sourceSha": "c9845449e350bb2bcf5f15a1d8cdc3f9de358c2d",
+  "runId": 44986394232,
+  "generatedAt": "2026-11-22T04:45:21.211Z"
 }
