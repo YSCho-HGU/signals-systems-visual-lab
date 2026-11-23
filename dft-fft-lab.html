@@ -1,22 +1,22 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DFT vs FFT · Interactive Engineering Lab</title>
-<link rel="stylesheet" href="./assets/els-theme-v2.css"><link rel="stylesheet" href="./assets/els-typography-standard.css">
+<link rel="stylesheet" href="./assets/els-theme-v2.css"><link rel="stylesheet" href="./assets/els-typography-standard.css"><link rel="stylesheet" href="./assets/ss-common-header.css"><link rel="stylesheet" href="./assets/ss-readable-themes.css">
 <style>
 :root{color-scheme:dark;--bg:#171c20;--panel:#232b31;--ink:#e7edf2;--sub:#b8c6d2;--edge:#475661;--accent:#78c6c5}
 *{box-sizing:border-box}body{font:16px/1.6 system-ui,"Malgun Gothic",sans-serif;margin:0;background:var(--bg);color:var(--ink)}
-body[data-skin="white-clean"]{--bg:#fff;--panel:#f4f7fa;--ink:#193247;--sub:#425e72;--edge:#c7d5de;--accent:#086b77;color-scheme:light}
-body[data-skin="warm-neutral"]{--bg:#f3eee7;--panel:#fffaf1;--ink:#312f2b;--sub:#57534e;--edge:#cfc4b3;--accent:#087b79;color-scheme:light}
-body[data-skin="navy-dark"]{--bg:#112333;--panel:#1c3545;--ink:#eef7fc;--sub:#c2d2dd;--edge:#466377;--accent:#81d6d6}
-body[data-skin="warm-dark"]{--bg:#26231f;--panel:#342f29;--ink:#f2e9da;--sub:#d6c8b5;--edge:#61564a;--accent:#b2dfba}
-header{padding:12px max(20px,calc((100vw - 1280px)/2));border-bottom:1px solid var(--edge);display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-header a{color:var(--accent);font-weight:700}main{max-width:1280px;margin:auto;padding:22px 18px 60px}h1{font-size:clamp(1.6rem,3vw,2.1rem);margin:3px 0}h2{font-size:1.22rem;margin:0 0 9px}h3{font-size:1.04rem;margin:0 0 9px}p{margin:8px 0;color:var(--sub)}.eyebrow{font-weight:750;letter-spacing:.08em;color:var(--accent);font-size:.8rem}
+html[data-els-theme="white-clean"]{--bg:#fff;--panel:#f4f7fa;--ink:#193247;--sub:#425e72;--edge:#c7d5de;--accent:#086b77;color-scheme:light}
+html[data-els-theme="warm-neutral"]{--bg:#f3eee7;--panel:#fffaf1;--ink:#312f2b;--sub:#57534e;--edge:#cfc4b3;--accent:#087b79;color-scheme:light}
+html[data-els-theme="navy-dark"]{--bg:#112333;--panel:#1c3545;--ink:#eef7fc;--sub:#c2d2dd;--edge:#466377;--accent:#81d6d6}
+html[data-els-theme="warm-dark"]{--bg:#26231f;--panel:#342f29;--ink:#f2e9da;--sub:#d6c8b5;--edge:#61564a;--accent:#b2dfba}
+header{border-bottom:1px solid var(--edge)}
+header a{color:var(--accent);font-weight:700}main{max-width:1440px;margin:auto;padding:18px 22px 60px}h1{font-size:clamp(1.6rem,3vw,2.1rem);margin:3px 0}h2{font-size:1.22rem;margin:0 0 9px}h3{font-size:1.04rem;margin:0 0 9px}p{margin:8px 0;color:var(--sub)}.eyebrow{font-weight:750;letter-spacing:.08em;color:var(--accent);font-size:.8rem}
 .steps{display:flex;gap:9px;flex-wrap:wrap;margin:21px 0}.steps button{flex:1;min-width:155px;text-align:left}
 button,select,input{font:inherit}button,select,input[type=file],input[type=number]{background:var(--panel);border:1px solid var(--edge);border-radius:9px;color:var(--ink);padding:9px 12px}
 button{cursor:pointer}button[aria-current=step]{border:2px solid var(--accent);color:var(--ink);font-weight:800}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 section.card,.box{border:1px solid var(--edge);border-radius:14px;background:var(--panel);padding:17px;margin:11px 0}.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.controls{display:flex;gap:14px;align-items:end;flex-wrap:wrap;margin:13px 0}.controls label{display:flex;flex-direction:column;gap:4px;min-width:105px;font-weight:650}.controls label input[type=range]{width:175px;accent-color:var(--accent)}
 canvas{display:block;width:100%;height:205px;border-radius:10px;background:var(--bg);border:1px solid var(--edge)}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.metric{background:var(--bg);padding:11px;border-radius:9px;border:1px solid var(--edge)}.metric strong{display:block;font-size:1.35rem;overflow-wrap:anywhere}.metric span{font-size:.83rem;color:var(--sub)}.note{font-size:.9rem}output{font-weight:750;color:var(--accent)}.formula{font-family:"Cambria Math",Georgia,serif;font-size:1.18rem;color:var(--ink)}[hidden]{display:none!important}.question{border-left:3px solid var(--accent);padding:8px 12px;margin-top:15px}.small{font-size:.82rem}#status{min-height:26px}table{border-collapse:collapse;width:100%;font-size:.91rem}th,td{border-bottom:1px solid var(--edge);padding:7px;text-align:right}th:first-child,td:first-child{text-align:left}
-@media(max-width:750px){.two,.metrics{grid-template-columns:1fr}canvas{height:180px}header{padding:12px 18px}}
-</style></head><body><header><a href="./index.html#map">← Signals &amp; Systems · Learning Map</a><div><label for="theme">Theme </label><select id="theme"><option value="neutral-dark">Neutral Dark</option><option value="warm-dark">Warm Dark</option><option value="navy-dark">Navy Dark</option><option value="warm-neutral">Warm Neutral</option><option value="white-clean">White Clean</option></select></div></header>
+@media(max-width:750px){.two,.metrics{grid-template-columns:1fr}canvas{height:180px}}
+</style><script src="./assets/els-language.js" defer></script><script src="./assets/ss-common-header.js" defer></script><script src="./assets/els-theme-v2.js" defer></script></head><body><header class="ss-common-header" aria-label="Engineering Learning Studio navigation"><a class="ss-common-home" href="./index.html#overview">← Studio</a><details class="ss-common-menu"><summary class="ss-common-title">Signals &amp; Systems · Applications · DFT vs FFT <span aria-hidden="true">⌄</span></summary><nav class="ss-common-links" aria-label="Choose chapter"></nav></details><div class="ss-common-actions"><label class="ss-common-language" for="dft-language"><span class="ss-language-icon" aria-hidden="true">🌐</span><select class="ss-common-language-select" id="dft-language" aria-label="Language"><option value="mixed">한/영</option><option value="en">English</option><option value="ko">한국어</option></select></label><label class="ss-common-theme" for="dft-theme"><select id="dft-theme" data-els-theme-picker aria-label="Theme"></select></label></div></header>
 <main><div class="eyebrow">APPLICATIONS / INTERACTIVE LAB</div><h1>DFT vs FFT · Same spectrum, smarter computation</h1><p>Explore a finite record, confirm identical transform results, measure calculation cost, and inspect uploaded audio or sensor readings. · DFT와 FFT의 동일한 결과 및 계산 속도를 비교하고 실제 데이터를 분석합니다.</p>
 <nav class="steps" aria-label="Learning steps"><button data-step="0" aria-current="step">01 · Understand</button><button data-step="1">02 · Observe</button><button data-step="2">03 · Experiment</button><button data-step="3">04 · Discover / Upload</button></nav>
 <section class="card" id="intro"><h2 id="step-title">01 · Understand the DFT</h2><p id="step-desc"></p><div class="box formula" aria-label="Discrete Fourier transform equation">X[k] = Σ<sub>n=0</sub><sup>N−1</sup> x[n] e<sup>−j2πkn/N</sup>, &nbsp; k = 0, …, N−1</div><p class="note">FFT is an algorithm for evaluating this same DFT. It is not a different transform. FFT and DFT use the same N-point input, sign convention, and scaling below.</p></section>
@@ -35,7 +35,7 @@ canvas{display:block;width:100%;height:205px;border-radius:10px;background:var(-
 <label>CSV column<select id="column"><option value="auto">Auto / last numeric column</option><option value="0">Column 1</option><option value="1">Column 2</option><option value="2">Column 3</option><option value="3">Column 4</option></select></label>
 <label>Start sample<input id="offset" type="number" min="0" value="0"></label></div>
 <p id="file-info" aria-live="polite">No file selected. For CSV: one numeric sample per row, or time,value rows with numeric time in seconds. A header is allowed.</p>
-<div class="question"><strong>Investigate</strong><p>What frequencies dominate the record? How does window length affect Δf = fₛ/N? If the sampling rate is unknown, report cycles/sample rather than inventing Hz. Can you distinguish closely spaced tones?</p></div></section>
+<div class="box" id="peak-analysis" aria-live="polite"><h3 id="peak-heading">Detected frequency components · 주요 주파수 자동 분석</h3><p id="peak-explanation">Choose or upload a signal to inspect its prominent spectral peaks.</p><div id="peak-results"></div><p class="note" id="peak-caution"></p></div><div class="question"><strong>Investigate</strong><p>What frequencies dominate the record? How does window length affect Δf = fₛ/N? If the sampling rate is unknown, report cycles/sample rather than inventing Hz. Can you distinguish closely spaced tones?</p></div></section>
 <p id="status" role="status" aria-live="polite"></p>
 </main><script>
 (()=>{
@@ -47,17 +47,78 @@ const steps=[
 ["02 · Observe","Direct DFT and FFT compute the same complex coefficients. Inspect their maximum numerical discrepancy. · 같은 데이터를 두 계산법으로 분석합니다."],
 ["03 · Experiment","Increase N and compare measured runtime with N² versus N log₂N growth. · 데이터 길이가 길어질 때 계산시간 변화를 비교합니다."],
 ["04 · Discover","Upload real audio or sensor data, specify fₛ when known, and find the prominent frequency components. · 실측 파일의 숨겨진 주파수를 찾아보세요."]];
-function setStep(v){step=v;$all("[data-step]").forEach(b=>b.setAttribute("aria-current",Number(b.dataset.step)===v?"step":"false"));$("step-title").textContent=steps[v][0];$("step-desc").textContent=steps[v][1];$("compare").hidden=v===0;$("growth").hidden=v!==2;$("upload").hidden=v!==3; }
+function setStep(v){step=v;$all("[data-step]").forEach(b=>b.setAttribute("aria-current",Number(b.dataset.step)===v?"step":"false"));$("step-title").textContent=L(...stepsLocalized[v][0]);$("step-desc").textContent=L(...stepsLocalized[v][1]);$("compare").hidden=v===0;$("growth").hidden=v!==2;$("upload").hidden=v!==3; }
 $all("[data-step]").forEach(b=>b.onclick=()=>{setStep(+b.dataset.step);if(step===3)$("upload").scrollIntoView({behavior:"smooth",block:"nearest"});});
-const theme=$("theme"),skin=()=>{const v=theme.value;document.body.dataset.skin=v;document.documentElement.dataset.elsTheme=v;document.documentElement.dataset.theme=["white-clean","warm-neutral"].includes(v)?"light":"dark";document.documentElement.style.colorScheme=["white-clean","warm-neutral"].includes(v)?"only light":"dark";try{localStorage.setItem("els-theme-v2",v)}catch(e){};run(false)};
-try{theme.value=localStorage.getItem("els-theme-v2")||"neutral-dark"}catch(e){};if(!Array.from(theme.options).some(o=>o.value===theme.value))theme.value="neutral-dark";theme.onchange=skin;
+const language=()=>window.ELSLanguage?.get()||"mixed";
+const L=(en,ko)=>language()==="en"?en:language()==="ko"?ko:en+" · "+ko;
+const stepsLocalized=[
+ [["01 · Understand","01 · 이해"],["Understand how N time samples become N complex DFT coefficients.","N개 시간 샘플이 N개 복소 DFT 계수가 되는 원리를 이해합니다."]],
+ [["02 · Observe","02 · 관찰"],["Direct DFT and FFT compute the same X[k] values within numerical precision.","직접 DFT와 FFT가 수치 오차 범위에서 같은 X[k]를 계산함을 확인합니다."]],
+ [["03 · Experiment","03 · 실험"],["Increase N and compare measured runtime and asymptotic growth.","N을 늘리며 실행 시간과 계산 복잡도를 비교합니다."]],
+ [["04 · Discover","04 · 발견"],["Analyze real audio or sensor data and interpret dominant frequency components.","실제 음성 또는 센서 데이터의 주파수 피크와 물리적 의미를 분석합니다."]]
+];
+const translations={
+"DFT vs FFT · Same spectrum, smarter computation":"DFT와 FFT · 동일한 스펙트럼, 효율적인 계산",
+"Explore a finite record, confirm identical transform results, measure calculation cost, and inspect uploaded audio or sensor readings. · DFT와 FFT의 동일한 결과 및 계산 속도를 비교하고 실제 데이터를 분석합니다.":"유한 신호의 DFT·FFT 결과, 계산 시간 및 실제 음성·센서 데이터를 분석합니다.",
+"FFT is an algorithm for evaluating this same DFT. It is not a different transform. FFT and DFT use the same N-point input, sign convention, and scaling below.":"FFT는 동일한 DFT를 효율적으로 계산하는 알고리즘입니다. 같은 입력 길이, 부호 및 정규화 조건을 적용합니다.",
+"Input record / 입력 신호":"입력 신호","Time-domain samples":"시간 영역 샘플","One-sided amplitude spectrum":"단측 진폭 스펙트럼",
+"Same N-point result / 동일한 결과 비교":"동일한 N점 결과 비교","Calculation growth / 계산량 증가":"계산량 증가",
+"Real data / 음성·센서 데이터 분석":"실제 음성·센서 데이터 분석","Detected frequency components · 주요 주파수 자동 분석":"검출된 주요 주파수 성분",
+"Why does this matter?":"왜 중요한가요?","Investigate":"탐구 과제","Load file":"파일 선택",
+"CSV sample-rate (Hz)":"CSV 샘플링 주파수 (Hz)","CSV column":"CSV 열","Start sample":"시작 샘플",
+"Analyze / 분석":"분석","Signal":"신호","Tone f (Hz)":"정현파 주파수 (Hz)",
+"Direct DFT · measured":"직접 DFT · 실측 시간","Radix-2 FFT · measured":"Radix-2 FFT · 실측 시간",
+"Choose WAV/MP3 audio (browser decoding) or CSV/TXT sensor measurements. All processing runs locally in your browser; no file is uploaded to a server.":"WAV/MP3 등의 오디오 파일 또는 CSV/TXT 센서 데이터를 선택합니다. 파일 분석은 브라우저에서 로컬로 수행됩니다.",
+"Compare identical complex X[k] values, not just matching magnitude plots. Browser timing depends on CPU, warm-up, JIT and load; it is not a hardware benchmark.":"크기 그래프뿐 아니라 복소 X[k]의 일치 여부를 확인합니다. 실행 시간은 CPU, JIT, 시스템 부하에 영향을 받습니다.",
+"Illustrative growth terms, not literal operation counts. FFT implementation constants and actual timing may differ.":"이론적인 증가율 비교이며 정확한 연산 횟수 또는 실제 속도 향상 배수는 아닙니다.",
+"No file selected. For CSV: one numeric sample per row, or time,value rows with numeric time in seconds. A header is allowed.":"파일을 선택하지 않았습니다. CSV는 행마다 값 하나 또는 시간(초),값을 입력합니다. 헤더가 있어도 됩니다.",
+"Choose or upload a signal to inspect its prominent spectral peaks.":"신호를 선택하거나 업로드하면 주요 주파수 피크를 분석합니다.",
+"What frequencies dominate the record? How does window length affect Δf = fₛ/N? If the sampling rate is unknown, report cycles/sample rather than inventing Hz. Can you distinguish closely spaced tones?":"어떤 주파수가 우세한가요? N과 Δf=fₛ/N은 어떤 관계인가요? fₛ가 없으면 Hz 대신 cycles/sample로 보고해야 합니다."
+};
+function localize(){
+const mode=language();document.documentElement.lang=mode==="en"?"en":"ko";
+document.querySelectorAll("[data-english]").forEach(el=>{el.textContent=L(el.dataset.english,el.dataset.korean)});
+document.querySelectorAll("[data-base-text]").forEach(el=>{const en=el.dataset.baseText,ko=translations[en];if(ko)el.textContent=L(en,ko)});
+setStep(step);if(window.__dftReady)run(false);
+}
+document.querySelectorAll("h1,h2,h3,p,strong,button,label,span").forEach(el=>{if(el.children.length===0){const value=el.textContent.trim();if(translations[value])el.dataset.baseText=value;}});
+window.ELSLanguage?.subscribe(localize);
+window.addEventListener("els:themechange",()=>{if(window.__dftReady)run(false)});
+
 function radix2(x){const N=x.length,re=new Float64Array(N),im=new Float64Array(N);for(let i=0;i<N;i++)re[i]=x[i];for(let i=1,j=0;i<N;i++){let b=N>>1;for(;j&b;b>>=1)j^=b;j^=b;if(i<j){[re[i],re[j]]=[re[j],re[i]];[im[i],im[j]]=[im[j],im[i]];}}for(let len=2;len<=N;len*=2){const ar=-2*Math.PI/len;for(let p=0;p<N;p+=len)for(let j=0;j<len/2;j++){const a=ar*j,c=Math.cos(a),s=Math.sin(a),u=p+j,v=u+len/2,tr=c*re[v]-s*im[v],ti=s*re[v]+c*im[v];re[v]=re[u]-tr;im[v]=im[u]-ti;re[u]+=tr;im[u]+=ti;}}return {re,im}}
 function direct(x){const N=x.length,re=new Float64Array(N),im=new Float64Array(N);for(let k=0;k<N;k++){const ang=-2*Math.PI*k/N,c=Math.cos(ang),s=Math.sin(ang);let cr=1,ci=0,sr=0,si=0;for(let n=0;n<N;n++){sr+=x[n]*cr;si+=x[n]*ci;const nr=cr*c-ci*s;ci=cr*s+ci*c;cr=nr;}re[k]=sr;im[k]=si;}return {re,im}}
 function benchmark(fn,x,reps){let y;for(let j=0;j<2;j++)y=fn(x);const t=[];for(let j=0;j<reps;j++){const start=performance.now();y=fn(x);t.push(performance.now()-start)}return {result:y,ms:t.sort((a,b)=>a-b)[Math.floor(t.length/2)]}}
 function synthetic(N,fs){const x=new Float64Array(N),f=Number($("tone").value)||128,kind=$("signal").value;for(let i=0;i<N;i++){const t=i/fs;let v=Math.sin(2*Math.PI*f*t);if(kind==="two")v+=.5*Math.sin(2*Math.PI*2.5*f*t);if(kind==="noise")v+=.25*(Math.sin(i*12.9898)*43758.5453%1);x[i]=v;}return x}
 function draw(id,values,xMax,yLabel,peakLabels){const canvas=$(id),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height,pad=48,ink=getComputedStyle(document.body).getPropertyValue("--ink").trim(),edge=getComputedStyle(document.body).getPropertyValue("--edge").trim(),accent=getComputedStyle(document.body).getPropertyValue("--accent").trim();ctx.clearRect(0,0,W,H);ctx.strokeStyle=edge;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad,12);ctx.lineTo(pad,H-31);ctx.lineTo(W-8,H-31);ctx.stroke();let hi=0;for(const v of values)hi=Math.max(hi,Math.abs(v));hi=hi||1;ctx.fillStyle=ink;ctx.font="13px system-ui";ctx.fillText(yLabel,9,17);ctx.fillText("0",pad-13,H-13);ctx.fillText(Number(xMax).toLocaleString("en-US",{maximumFractionDigits:2}),W-100,H-13);ctx.strokeStyle=accent;ctx.lineWidth=1.8;ctx.beginPath();const visible=values.length;for(let i=0;i<visible;i++){const xp=pad+i/Math.max(1,visible-1)*(W-pad-10),yp=12+(1-(values[i]/hi+1)/2)*(H-44);if(i===0)ctx.moveTo(xp,yp);else ctx.lineTo(xp,yp);}ctx.stroke();if(peakLabels){ctx.fillStyle=ink;ctx.fillText(peakLabels,W-190,17)}}
 function chartCosts(){const rows=$("cost-rows");rows.innerHTML="";[32,128,512,2048,8192].forEach(n=>{const tr=document.createElement("tr");[n,n*n,Math.round(n*Math.log2(n))].forEach(q=>{let td=document.createElement("td");td.textContent=q.toLocaleString();tr.append(td)});rows.append(tr)});const n=Number($("size").value);draw("complexity",Array.from({length:80},(_,i)=>{const v=Math.pow(2,5+i/79*9);return Math.log2(v*v)/28}),"N = 16384","log scale");}
-function run(show=true){const N=Number($("size").value);let fs=Number($("fs").value);if(!Number.isFinite(fs)||fs<=0)fs=1024;let x;if($("signal").value==="upload"&&upload){const start=Math.max(0,Math.floor(Number($("offset").value)||0));x=new Float64Array(N);x.set(upload.samples.subarray(start,Math.min(upload.samples.length,start+N)));fs=upload.fs||0;if(start>=upload.samples.length){$("status").textContent="Start sample exceeds the record length.";return}}else{x=synthetic(N,fs);}
+function describePeaks(amp,fs,N,uploaded){
+ const root=$("peak-results"),summary=$("peak-explanation"),note=$("peak-caution");root.replaceChildren();
+ let mx=0;for(let i=1;i<amp.length-1;i++)mx=Math.max(mx,amp[i]);
+ if(mx<1e-10){summary.textContent=L("No significant non-DC spectral component was found.","직류를 제외한 의미 있는 주파수 성분을 찾지 못했습니다.");note.textContent="";return;}
+ const df=fs>0?fs/N:1/N,unit=fs>0?"Hz":"cycles/sample";
+ const candidates=[];for(let k=1;k<amp.length-1;k++){if(amp[k]>=amp[k-1]&&amp[k]>amp[k+1]&&amp[k]>=mx*0.08)candidates.push({k,a:amp[k]});}
+ candidates.sort((a,b)=>b.a-a.a);
+ const peaks=[];for(const p of candidates){if(peaks.every(q=>Math.abs(q.k-p.k)>2)){peaks.push(p);if(peaks.length===5)break;}}
+ if(!peaks.length){summary.textContent=L("No distinct peaks detected.","뚜렷한 피크가 검출되지 않았습니다.");return;}
+ const d=peaks[0],f=d.k*df;
+ summary.textContent=L("Strongest detected spectral bin: ","가장 큰 주파수 피크: ")+f.toFixed(fs?2:5)+" "+unit+" (k="+d.k+", amplitude ≈ "+d.a.toPrecision(3)+").";
+ const table=document.createElement("table"),thead=document.createElement("thead"),hr=document.createElement("tr");
+ for(const label of [L("Rank","순위"),L("Frequency","주파수"),L("Amplitude","진폭"),L("Relative level","상대 크기")]){const th=document.createElement("th");th.textContent=label;hr.append(th);}thead.append(hr);table.append(thead);
+ const tbody=document.createElement("tbody");
+ peaks.forEach((p,i)=>{const tr=document.createElement("tr");[i+1,(p.k*df).toFixed(fs?2:5)+" "+unit,p.a.toPrecision(4),(100*p.a/d.a).toFixed(1)+"%"].forEach(value=>{const td=document.createElement("td");td.textContent=value;tr.append(td)});tbody.append(tr)});
+ table.append(tbody);root.append(table);
+ const harmonics=peaks.slice(1).filter(p=>{const ratio=p.k/d.k;return ratio>=1.75&&Math.abs(ratio-Math.round(ratio))<=Math.max(.1,1.5/d.k)});
+ const kind=uploaded?(upload?.kind==="audio"?"audio":"sensor"):"synthetic";
+ let interpretation=kind==="audio"
+ ?L("For audio, peaks may represent a pitch component, harmonics, or background hum. The strongest peak is not necessarily the fundamental frequency.","음성·음악에서는 피크가 음높이 성분, 고조파 또는 배경 잡음일 수 있습니다. 가장 큰 피크가 반드시 기본주파수는 아닙니다.")
+ :kind==="sensor"
+ ?L("For sensors, peaks indicate recurring oscillations; interpretation depends on the measured quantity and equipment (rotation, vibration, electrical hum, motion).","센서 데이터의 피크는 반복적인 변동을 나타냅니다. 회전·진동·전원 간섭·동작 등 실제 의미는 측정 대상과 장비에 따라 달라집니다.")
+ :L("Synthetic example: compare peak frequencies with the input tone settings.","합성 예제에서는 입력 정현파 설정과 검출된 피크를 비교하세요.");
+ if(harmonics.length)interpretation+=" "+L("Other peaks near integer multiples may be harmonics, but this is not proof.","정수배 부근의 피크는 고조파일 가능성이 있지만 이것만으로 확정할 수는 없습니다.");
+ const p=document.createElement("p");p.textContent=interpretation;root.append(p);
+ note.textContent=(fs>0?L("Frequency spacing Δf = ","주파수 간격 Δf = ")+df.toPrecision(4)+" Hz; "+L("Nyquist frequency = ","나이퀴스트 주파수 = ")+(fs/2).toFixed(2)+" Hz.":L("Sample rate unknown: physical Hz and periods in seconds cannot be inferred.","샘플링 주파수 미상: 실제 Hz와 시간(초) 단위의 주기를 추정할 수 없습니다."))+" "+L("Finite window, leakage, aliasing and noise can shift or spread peaks. This is a spectral clue, not an automated diagnosis.","유한 관측 구간, 누설, 앨리어싱 및 잡음이 피크를 이동·확산시킬 수 있습니다. 결과는 분석 단서이지 자동 진단이 아닙니다.");
+}
+function run(show=true){const N=Number($("size").value);let fs=Number($("fs").value);if(!Number.isFinite(fs)||fs<=0)fs=1024;let x;if($("signal").value==="upload"&&upload){const start=Math.max(0,Math.floor(Number($("offset").value)||0));x=new Float64Array(N);x.set(upload.samples.subarray(start,Math.min(upload.samples.length,start+N)));fs=upload.fs||0;if(start+N>upload.samples.length){$("status").textContent=L("Not enough remaining samples for the chosen N.","선택한 N만큼의 샘플이 남아 있지 않습니다.");return;}if(start>=upload.samples.length){$("status").textContent="Start sample exceeds the record length.";return}}else{x=synthetic(N,fs);}
 const mean=x.reduce((a,b)=>a+b,0)/N;const x0=Float64Array.from(x,v=>v-mean);const fast=benchmark(radix2,x0,5);let slow=null;if(N<=2048)slow=benchmark(direct,x0,N<=512?3:1);
 let error=0;if(slow){for(let i=0;i<N;i++)error=Math.max(error,Math.hypot(slow.result.re[i]-fast.result.re[i],slow.result.im[i]-fast.result.im[i]));}
 $("error").textContent=slow?error.toExponential(2):"Skipped";$("dtime").textContent=slow?slow.ms.toFixed(3)+" ms":"N > 2048";$("ftime").textContent=fast.ms.toFixed(3)+" ms";
@@ -65,12 +126,12 @@ $("timing-note").textContent="Direct DFT benchmark capped at N=2048 to keep the 
 const amp=Array.from({length:N/2+1},(_,k)=>{const factor=(k===0||k===N/2)?1:2;return factor*Math.hypot(fast.result.re[k],fast.result.im[k])/N;});
 const peaks=amp.map((a,i)=>({a,i})).slice(1).sort((a,b)=>b.a-a.a).slice(0,3);const freqUnit=fs>0?"Hz":"cycles/sample",df=fs>0?fs/N:1/N;
 $("axis-note").textContent="Δf = "+df.toPrecision(5)+" "+freqUnit+"; peak bins: "+peaks.map(p=>(p.i*df).toFixed(fs?2:5)+" "+freqUnit).join(", ")+". Rectangular window; amplitude uses 2|X[k]|/N except DC/Nyquist. Mean removed. No zero padding.";
-draw("time",Array.from(x0).slice(0,Math.min(N,600)),fs>0?(Math.min(N,600)-1)/fs:Math.min(N,600)-1,fs>0?"time (s)":"sample index");draw("spectrum",amp,fs>0?fs/2:.5,freqUnit);chartCosts();if(show)$("status").textContent="Analysis complete · "+N+" samples.";}
+describePeaks(amp,fs,N,$("signal").value==="upload"&&!!upload);draw("time",Array.from(x0).slice(0,Math.min(N,600)),fs>0?(Math.min(N,600)-1)/fs:Math.min(N,600)-1,fs>0?"time (s)":"sample index");draw("spectrum",amp,fs>0?fs/2:.5,freqUnit);chartCosts();if(show)$("status").textContent="Analysis complete · "+N+" samples.";}
 $("run").onclick=()=>run();["size","signal","fs","tone","offset"].forEach(id=>$(id).addEventListener("change",()=>run(false)));
 function parseCSV(content){const rows=content.split(/\r?\n/).map(line=>line.trim()).filter(line=>line&&!line.startsWith("#")).map(line=>line.split(/[,;\t]+/).map(v=>Number(v.trim()))).filter(row=>row.length&&row.every(Number.isFinite));if(rows.length<16)throw Error("CSV requires at least 16 numeric rows.");const col=$("column").value==="auto"?rows[0].length-1:+$("column").value;if(rows.some(r=>r.length<=col))throw Error("Selected column is unavailable.");
 let fs=Number($("csvfs").value)||0;if(!fs&&rows[0].length>=2&&col!==0){const dt=[];for(let i=1;i<Math.min(rows.length,1000);i++){const d=rows[i][0]-rows[i-1][0];if(d>0)dt.push(d);}if(dt.length>=12){dt.sort((a,b)=>a-b);const m=dt[Math.floor(dt.length/2)];if(dt.every(v=>Math.abs(v-m)<m*.02))fs=1/m;}}
-return {samples:Float64Array.from(rows,r=>r[col]),fs};}
-$("file").addEventListener("change",async()=>{const file=$("file").files?.[0];if(!file)return;try{let data;if(/\.(csv|txt)$/i.test(file.name)||file.type.startsWith("text/"))data=parseCSV(await file.text());else{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw Error("Browser audio decoding unavailable.");const ac=new AC();try{const decoded=await ac.decodeAudioData(await file.arrayBuffer());const arr=new Float64Array(decoded.length);for(let c=0;c<decoded.numberOfChannels;c++){const ch=decoded.getChannelData(c);for(let i=0;i<arr.length;i++)arr[i]+=ch[i]/decoded.numberOfChannels;}data={samples:arr,fs:decoded.sampleRate}}finally{await ac.close()}}if(data.samples.length<16)throw Error("At least 16 samples are needed.");upload=data;$("signal").value="upload";$("fs").value=data.fs||"";$("offset").value=0;$("file-info").textContent=file.name+" · "+data.samples.length.toLocaleString()+" samples · "+(data.fs?data.fs.toFixed(2)+" Hz":"sample rate unknown; spectrum in cycles/sample")+". Only the chosen N-sample frame is analyzed.";run();}catch(err){$("file-info").textContent="Unable to read file: "+err.message;}});
-setStep(0);skin();
+return {samples:Float64Array.from(rows,r=>r[col]),fs,kind:"sensor"};}
+$("file").addEventListener("change",async()=>{const file=$("file").files?.[0];if(!file)return;try{let data;if(/\.(csv|txt)$/i.test(file.name)||file.type.startsWith("text/"))data=parseCSV(await file.text());else{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)throw Error("Browser audio decoding unavailable.");const ac=new AC();try{const decoded=await ac.decodeAudioData(await file.arrayBuffer());const arr=new Float64Array(decoded.length);for(let c=0;c<decoded.numberOfChannels;c++){const ch=decoded.getChannelData(c);for(let i=0;i<arr.length;i++)arr[i]+=ch[i]/decoded.numberOfChannels;}data={samples:arr,fs:decoded.sampleRate,kind:"audio"}}finally{await ac.close()}}if(data.samples.length<16)throw Error("At least 16 samples are needed.");upload=data;$("signal").value="upload";$("fs").value=data.fs||"";$("offset").value=0;$("file-info").textContent=file.name+" · "+data.samples.length.toLocaleString()+" samples · "+(data.fs?data.fs.toFixed(2)+" Hz":"sample rate unknown; spectrum in cycles/sample")+". Only the chosen N-sample frame is analyzed.";run();}catch(err){$("file-info").textContent="Unable to read file: "+err.message;}});
+window.__dftReady=true;setStep(0);localize();run(false);
 })();
 </script></body></html>
