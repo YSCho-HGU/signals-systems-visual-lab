@@ -31,6 +31,13 @@ try{
  await page.goto(pathToFileURL(path.join(root,"dft-fft-lab.html")).href);
  await page.locator("#peak-analysis").count();
  assert.ok(await page.locator("#guide-title").isVisible(),"Guided mission hidden");
+ const lessonOrder=await page.evaluate(()=>{
+   const graph=document.querySelector("#signal-graphs"),theory=document.querySelector("#intro");
+   return Boolean(graph.compareDocumentPosition(theory)&Node.DOCUMENT_POSITION_FOLLOWING);
+ });
+ assert.ok(lessonOrder,"Time/spectrum graphs should precede DFT theory in Step 1");
+ assert.ok(await page.locator("#intro").isVisible(),"DFT theory is missing after the initial graphs");
+
  expectContains(await page.locator("#guide-question").innerText(),"bin 64","Stage 1 prediction");
  await page.locator("#guide-reveal").click();
  expectContains(await page.locator("#guide-feedback").innerText(),"k=fN/fₛ","Stage 1 explanation");
@@ -234,6 +241,9 @@ try{
  await page.locator('[data-intro-part="3"]').click();
  assert.ok(await page.locator("#padding-paired-plots").isHidden(),"Checkpoint 4 should focus on overlay");
  assert.ok(await page.locator("#padding-overlay-section").isVisible(),"Checkpoint 4 overlay missing");
+ assert.ok(await page.locator("#intro-wrap-up").isVisible(),"Eureka checkpoint should summarize learning");
+ expectContains(await page.locator("#intro-takeaway-3").innerText(),"Zero-padding","Summary must distinguish padding from new observations");
+
  const overlayText=await page.locator("#padding-overlay-result").innerText();
  const errorMatch=overlayText.match(/\d+(?:\.\d+)?e[+-]\d+/i);
  assert.ok(errorMatch,"Overlay did not report its original-bin numerical error");
