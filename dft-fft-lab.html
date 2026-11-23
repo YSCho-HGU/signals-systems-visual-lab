@@ -36,7 +36,12 @@ canvas{display:block;width:100%;height:205px;border-radius:10px;background:var(-
 <label>CSV column<select id="column"><option value="auto">Auto / last numeric column</option><option value="0">Column 1</option><option value="1">Column 2</option><option value="2">Column 3</option><option value="3">Column 4</option></select></label>
 <label>Start sample<input id="offset" type="number" min="0" value="0"></label></div>
 <p id="file-info" aria-live="polite">No file selected. For CSV: one numeric sample per row, or time,value rows with numeric time in seconds. A header is allowed.</p>
-<div class="box" id="peak-analysis" aria-live="polite"><h3 id="peak-heading">Detected frequency components · 주요 주파수 자동 분석</h3><p id="peak-explanation">Choose or upload a signal to inspect its prominent spectral peaks.</p><div id="peak-results"></div><p class="note" id="peak-caution"></p></div><div class="question"><strong>Investigate</strong><p>What frequencies dominate the record? How does window length affect Δf = fₛ/N? If the sampling rate is unknown, report cycles/sample rather than inventing Hz. Can you distinguish closely spaced tones?</p></div></section>
+<div class="box" id="peak-analysis" aria-live="polite"><h3 id="peak-heading">Detected frequency components · 주요 주파수 자동 분석</h3><p id="peak-explanation">Choose or upload a signal to inspect its prominent spectral peaks.</p><div id="peak-results"></div><p class="note" id="peak-caution"></p></div><div class="box" id="sensor-physics"><h3 data-base-text="Sensor physics · frequency to RPM and period">Sensor physics · frequency to RPM and period</h3><p data-base-text="Interpret a selected spectral peak as a periodic event. RPM requires a verified events-per-revolution assumption.">Interpret a selected spectral peak as a periodic event. RPM requires a verified events-per-revolution assumption.</p>
+<div class="controls"><label><span data-base-text="Observed peak">Observed peak</span><select id="physics-peak"></select></label>
+<label><span data-base-text="Events per revolution">Events per revolution</span><input id="events-per-rev" type="number" min="0.001" step="any" value="1"></label></div>
+<div class="metrics"><div class="metric"><span data-base-text="Peak frequency">Peak frequency</span><strong id="physics-hz">—</strong></div><div class="metric"><span data-base-text="Oscillation period">Oscillation period</span><strong id="physics-period">—</strong></div><div class="metric"><span data-base-text="Conditional shaft speed">Conditional shaft speed</span><strong id="physics-rpm">—</strong></div></div>
+<p id="physics-harmonics" class="note"></p><p id="physics-note" class="note" aria-live="polite"></p></div>
+<div class="question"><strong>Investigate</strong><p>What frequencies dominate the record? How does window length affect Δf = fₛ/N? If the sampling rate is unknown, report cycles/sample rather than inventing Hz. Can you distinguish closely spaced tones?</p></div></section>
 <p id="status" role="status" aria-live="polite"></p>
 </main><script>
 (()=>{
@@ -63,7 +68,7 @@ const translations={
 "DFT vs FFT · Same spectrum, smarter computation":"DFT와 FFT · 동일한 스펙트럼, 효율적인 계산",
 "Explore a finite record, confirm identical transform results, measure calculation cost, and inspect uploaded audio or sensor readings. · DFT와 FFT의 동일한 결과 및 계산 속도를 비교하고 실제 데이터를 분석합니다.":"유한 신호의 DFT·FFT 결과, 계산 시간 및 실제 음성·센서 데이터를 분석합니다.",
 "FFT is an algorithm for evaluating this same DFT. It is not a different transform. FFT and DFT use the same N-point input, sign convention, and scaling below.":"FFT는 동일한 DFT를 효율적으로 계산하는 알고리즘입니다. 같은 입력 길이, 부호 및 정규화 조건을 적용합니다.",
-"Input record / 입력 신호":"입력 신호","Time-domain samples":"시간 영역 샘플","One-sided amplitude spectrum":"단측 진폭 스펙트럼",
+"Input record / 입력 신호":"입력 신호","Sensor physics · frequency to RPM and period":"센서 물리 해석 · 주파수를 RPM과 주기로 변환","Interpret a selected spectral peak as a periodic event. RPM requires a verified events-per-revolution assumption.":"선택한 피크를 반복 이벤트로 해석합니다. RPM 계산에는 회전당 이벤트 수에 대한 검증된 가정이 필요합니다.","Observed peak":"관측 피크","Events per revolution":"회전당 이벤트 수","Peak frequency":"피크 주파수","Oscillation period":"진동 주기","Conditional shaft speed":"가정에 따른 축 회전수","Time-domain samples":"시간 영역 샘플","One-sided amplitude spectrum":"단측 진폭 스펙트럼",
 "Same N-point result / 동일한 결과 비교":"동일한 N점 결과 비교","Calculation growth / 계산량 증가":"계산량 증가",
 "Real data / 음성·센서 데이터 분석":"실제 음성·센서 데이터 분석","Detected frequency components · 주요 주파수 자동 분석":"검출된 주요 주파수 성분",
 "Why does this matter?":"왜 중요한가요?","Investigate":"탐구 과제","Load file":"파일 선택",
@@ -95,15 +100,41 @@ function benchmark(fn,x,reps){let y;for(let j=0;j<2;j++)y=fn(x);const t=[];for(l
 function synthetic(N,fs){const x=new Float64Array(N),f=Number($("tone").value)||128,kind=$("signal").value;for(let i=0;i<N;i++){const t=i/fs;let v=Math.sin(2*Math.PI*f*t);if(kind==="two")v+=.5*Math.sin(2*Math.PI*2.5*f*t);if(kind==="noise")v+=.25*(Math.sin(i*12.9898)*43758.5453%1);x[i]=v;}return x}
 function draw(id,values,xMax,yLabel,peakLabels){const canvas=$(id),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height,pad=48,ink=getComputedStyle(document.body).getPropertyValue("--ink").trim(),edge=getComputedStyle(document.body).getPropertyValue("--edge").trim(),accent=getComputedStyle(document.body).getPropertyValue("--accent").trim();ctx.clearRect(0,0,W,H);ctx.strokeStyle=edge;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad,12);ctx.lineTo(pad,H-31);ctx.lineTo(W-8,H-31);ctx.stroke();let hi=0;for(const v of values)hi=Math.max(hi,Math.abs(v));hi=hi||1;ctx.fillStyle=ink;ctx.font="13px system-ui";ctx.fillText(yLabel,9,17);ctx.fillText("0",pad-13,H-13);ctx.fillText(Number(xMax).toLocaleString("en-US",{maximumFractionDigits:2}),W-100,H-13);ctx.strokeStyle=accent;ctx.lineWidth=1.8;ctx.beginPath();const visible=values.length;for(let i=0;i<visible;i++){const xp=pad+i/Math.max(1,visible-1)*(W-pad-10),yp=12+(1-(values[i]/hi+1)/2)*(H-44);if(i===0)ctx.moveTo(xp,yp);else ctx.lineTo(xp,yp);}ctx.stroke();if(peakLabels){ctx.fillStyle=ink;ctx.fillText(peakLabels,W-190,17)}}
 function chartCosts(){const rows=$("cost-rows");rows.innerHTML="";[32,128,512,2048,8192].forEach(n=>{const tr=document.createElement("tr");[n,n*n,Math.round(n*Math.log2(n))].forEach(q=>{let td=document.createElement("td");td.textContent=q.toLocaleString();tr.append(td)});rows.append(tr)});const n=Number($("size").value);draw("complexity",Array.from({length:80},(_,i)=>{const v=Math.pow(2,5+i/79*9);return Math.log2(v*v)/28}),"N = 16384","log scale");}
+let physicsPeaks=[],physicsFs=0,physicsN=0;
+function renderPhysics(){
+ const select=$("physics-peak"),hz=$("physics-hz"),period=$("physics-period"),rpm=$("physics-rpm"),harm=$("physics-harmonics"),note=$("physics-note");
+ const peak=physicsPeaks.find(p=>String(p.k)===select.value);
+ const events=Number($("events-per-rev").value);
+ const valid=peak&&physicsFs>0&&Number.isFinite(events)&&events>0;
+ if(!valid){
+ hz.textContent=peak&&physicsFs<=0?(peak.k/physicsN).toFixed(5)+" cycles/sample":"—";
+ period.textContent="—";rpm.textContent="—";harm.textContent="";
+ note.textContent=physicsFs<=0?L("Sampling rate is unknown. Period in seconds and RPM cannot be determined.","샘플링 주파수를 알 수 없어 초 단위 주기 및 RPM을 결정할 수 없습니다."):L("Choose a detected peak and enter events per revolution greater than zero.","피크를 선택하고 0보다 큰 회전당 이벤트 수를 입력하세요.");
+ return;
+ }
+ const f=peak.k*physicsFs/physicsN;
+ hz.textContent=f.toFixed(2)+" Hz";period.textContent=(1000/f).toFixed(3)+" ms";rpm.textContent=(60*f/events).toFixed(2)+" RPM";
+ const near=physicsPeaks.filter(p=>p.k!==peak.k).map(p=>({p,ratio:p.k/peak.k})).filter(v=>v.ratio>=1.8&&Math.abs(v.ratio-Math.round(v.ratio))<=Math.max(.12,1.5/peak.k));
+ harm.textContent=near.length?L("Possible integer-multiple harmonics: ","정수배 고조파 후보: ")+near.map(v=>Math.round(v.ratio)+"× ("+(v.p.k*physicsFs/physicsN).toFixed(2)+" Hz)").join(", "):L("No clear integer-multiple harmonics among the detected peaks.","검출된 피크 중 뚜렷한 정수배 고조파 후보는 없습니다.");
+ note.textContent=L("T = 1/f; RPM = 60f / events per revolution. This is a conditional speed estimate, not a measured shaft speed. Sensor peaks can originate from gear teeth, blade pass, bearing faults, structural modes, or electrical interference. Confirm the machine geometry and acquisition rate.","T = 1/f, RPM = 60f / 회전당 이벤트 수. 계산한 RPM은 조건부 추정치이며 축 속도 실측값이 아닙니다. 피크는 기어 이, 블레이드 통과, 베어링 결함, 구조물 고유진동 또는 전원 간섭에서 발생할 수 있습니다. 기계 구조와 샘플링 조건을 확인해야 합니다.");
+}
+function updatePhysics(peaks,fs,N){
+ const select=$("physics-peak"),previous=select.value;physicsPeaks=peaks;physicsFs=fs;physicsN=N;select.replaceChildren();
+ for(const p of peaks){const option=document.createElement("option");option.value=String(p.k);option.textContent=(fs>0?(p.k*fs/N).toFixed(2)+" Hz":(p.k/N).toFixed(5)+" cycles/sample")+" (k="+p.k+")";select.add(option)}
+ if(peaks.some(p=>String(p.k)===previous))select.value=previous;renderPhysics();
+}
+$("physics-peak").addEventListener("change",renderPhysics);
+$("events-per-rev").addEventListener("input",renderPhysics);
 function describePeaks(amp,fs,N,uploaded){
  const root=$("peak-results"),summary=$("peak-explanation"),note=$("peak-caution");root.replaceChildren();
  let mx=0;for(let i=1;i<amp.length-1;i++)mx=Math.max(mx,amp[i]);
- if(mx<1e-10){summary.textContent=L("No significant non-DC spectral component was found.","직류를 제외한 의미 있는 주파수 성분을 찾지 못했습니다.");note.textContent="";return;}
+ if(mx<1e-10){updatePhysics([],fs,N);summary.textContent=L("No significant non-DC spectral component was found.","직류를 제외한 의미 있는 주파수 성분을 찾지 못했습니다.");note.textContent="";return;}
  const df=fs>0?fs/N:1/N,unit=fs>0?"Hz":"cycles/sample";
  const candidates=[];for(let k=1;k<amp.length-1;k++){if(amp[k]>=amp[k-1]&&amp[k]>amp[k+1]&&amp[k]>=mx*0.08)candidates.push({k,a:amp[k]});}
  candidates.sort((a,b)=>b.a-a.a);
  const peaks=[];for(const p of candidates){if(peaks.every(q=>Math.abs(q.k-p.k)>2)){peaks.push(p);if(peaks.length===5)break;}}
- if(!peaks.length){summary.textContent=L("No distinct peaks detected.","뚜렷한 피크가 검출되지 않았습니다.");return;}
+ if(!peaks.length){updatePhysics([],fs,N);summary.textContent=L("No distinct peaks detected.","뚜렷한 피크가 검출되지 않았습니다.");return;}
+ updatePhysics(peaks,fs,N);
  const d=peaks[0],f=d.k*df;
  summary.textContent=L("Strongest detected spectral bin: ","가장 큰 주파수 피크: ")+f.toFixed(fs?2:5)+" "+unit+" (k="+d.k+", amplitude ≈ "+d.a.toPrecision(3)+").";
  const table=document.createElement("table"),thead=document.createElement("thead"),hr=document.createElement("tr");
