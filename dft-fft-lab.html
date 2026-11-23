@@ -98,62 +98,19 @@ function radix2(x){const N=x.length,re=new Float64Array(N),im=new Float64Array(N
 function direct(x){const N=x.length,re=new Float64Array(N),im=new Float64Array(N);for(let k=0;k<N;k++){const ang=-2*Math.PI*k/N,c=Math.cos(ang),s=Math.sin(ang);let cr=1,ci=0,sr=0,si=0;for(let n=0;n<N;n++){sr+=x[n]*cr;si+=x[n]*ci;const nr=cr*c-ci*s;ci=cr*s+ci*c;cr=nr;}re[k]=sr;im[k]=si;}return {re,im}}
 function benchmark(fn,x,reps){let y;for(let j=0;j<2;j++)y=fn(x);const t=[];for(let j=0;j<reps;j++){const start=performance.now();y=fn(x);t.push(performance.now()-start)}return {result:y,ms:t.sort((a,b)=>a-b)[Math.floor(t.length/2)]}}
 function synthetic(N,fs){const x=new Float64Array(N),f=Number($("tone").value)||128,kind=$("signal").value;for(let i=0;i<N;i++){const t=i/fs;let v=Math.sin(2*Math.PI*f*t);if(kind==="two")v+=.5*Math.sin(2*Math.PI*2.5*f*t);if(kind==="noise")v+=.25*(Math.sin(i*12.9898)*43758.5453%1);x[i]=v;}return x}
-function draw(id,values,xMax,yLabel,peakLabels){const canvas=$(id),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height,pad=48,ink=getComputedStyle(document.body).getPropertyValue("--ink").trim(),edge=getComputedStyle(document.body).getPropertyValue("--edge").trim(),accent=getComputedStyle(document.body).getPropertyValue("--accent").trim();ctx.clearRect(0,0,W,H);ctx.strokeStyle=edge;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad,12);ctx.lineTo(pad,H-31);ctx.lineTo(W-8,H-31);ctx.stroke();let hi=0;for(const v of values)hi=Math.max(hi,Math.abs(v));hi=hi||1;ctx.fillStyle=ink;ctx.font="13px system-ui";ctx.fillText(yLabel,9,17);ctx.fillText("0",pad-13,H-13);ctx.fillText(Number(xMax).toLocaleString("en-US",{maximumFractionDigits:2}),W-100,H-13);ctx.strokeStyle=accent;ctx.lineWidth=1.8;ctx.beginPath();const visible=values.length;for(let i=0;i<visible;i++){const xp=pad+i/Math.max(1,visible-1)*(W-pad-10),yp=12+(1-(values[i]/hi+1)/2)*(H-44);if(i===0)ctx.moveTo(xp,yp);else ctx.lineTo(xp,yp);}ctx.stroke();if(peakLabels){ctx.fillStyle=ink;ctx.fillText(peakLabels,W-190,17)}}
-function chartCosts(){const rows=$("cost-rows");rows.innerHTML="";[32,128,512,2048,8192].forEach(n=>{const tr=document.createElement("tr");[n,n*n,Math.round(n*Math.log2(n))].forEach(q=>{let td=document.createElement("td");td.textContent=q.toLocaleString();tr.append(td)});rows.append(tr)});const n=Number($("size").value);draw("complexity",Array.from({length:80},(_,i)=>{const v=Math.pow(2,5+i/79*9);return Math.log2(v*v)/28}),"N = 16384","log scale");}
-let physicsPeaks=[],physicsFs=0,physicsN=0;
-function renderPhysics(){
- const select=$("physics-peak"),hz=$("physics-hz"),period=$("physics-period"),rpm=$("physics-rpm"),harm=$("physics-harmonics"),note=$("physics-note");
- const peak=physicsPeaks.find(p=>String(p.k)===select.value);
- const events=Number($("events-per-rev").value);
- const valid=peak&&physicsFs>0&&Number.isFinite(events)&&events>0;
- if(!valid){
- hz.textContent=peak&&physicsFs<=0?(peak.k/physicsN).toFixed(5)+" cycles/sample":"—";
- period.textContent="—";rpm.textContent="—";harm.textContent="";
- note.textContent=physicsFs<=0?L("Sampling rate is unknown. Period in seconds and RPM cannot be determined.","샘플링 주파수를 알 수 없어 초 단위 주기 및 RPM을 결정할 수 없습니다."):L("Choose a detected peak and enter events per revolution greater than zero.","피크를 선택하고 0보다 큰 회전당 이벤트 수를 입력하세요.");
- return;
- }
- const f=peak.k*physicsFs/physicsN;
- hz.textContent=f.toFixed(2)+" Hz";period.textContent=(1000/f).toFixed(3)+" ms";rpm.textContent=(60*f/events).toFixed(2)+" RPM";
- const near=physicsPeaks.filter(p=>p.k!==peak.k).map(p=>({p,ratio:p.k/peak.k})).filter(v=>v.ratio>=1.8&&Math.abs(v.ratio-Math.round(v.ratio))<=Math.max(.12,1.5/peak.k));
- harm.textContent=near.length?L("Possible integer-multiple harmonics: ","정수배 고조파 후보: ")+near.map(v=>Math.round(v.ratio)+"× ("+(v.p.k*physicsFs/physicsN).toFixed(2)+" Hz)").join(", "):L("No clear integer-multiple harmonics among the detected peaks.","검출된 피크 중 뚜렷한 정수배 고조파 후보는 없습니다.");
- note.textContent=L("T = 1/f; RPM = 60f / events per revolution. This is a conditional speed estimate, not a measured shaft speed. Sensor peaks can originate from gear teeth, blade pass, bearing faults, structural modes, or electrical interference. Confirm the machine geometry and acquisition rate.","T = 1/f, RPM = 60f / 회전당 이벤트 수. 계산한 RPM은 조건부 추정치이며 축 속도 실측값이 아닙니다. 피크는 기어 이, 블레이드 통과, 베어링 결함, 구조물 고유진동 또는 전원 간섭에서 발생할 수 있습니다. 기계 구조와 샘플링 조건을 확인해야 합니다.");
+function draw(id,values,xMax,yLabel,peakLabels){const canvas=$(id),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height,pad=48,ink=getComputedStyle(document.body).getPropertyValue("--ink").trim(),edge=getComputedStyle(document.body).getPropertyValue("--edge").trim(),accent=getComputedStyle(document.body).getPropertyValue("--accent").trim();ctx.clearRect(0,0,W,H);ctx.strokeStyle=edge;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad,12);ctx.lineTo(pad,H-31);ctx.lineTo(W-8,H-31);ctx.stroke();let hi=0;for(const v of values)hi=Math.max(hi,Math.abs(v));hi=hi||1;ctx.fillStyle=ink;ctx.font="13px system-ui";ctx.fillText(yLabel,9,17);ctx.fillText("0",pad-13,H-13);ctx.fillText(Number(xMax).toLocaleString("en-US",{maximumFractionDigits:2}),W-100,H-13);ctx.strokeStyle=accent;ctx.lineWidth=1.8;ctx.beginPath();const visible=values.length,isSpectrum=id==="spectrum";for(let i=0;i<visible;i++){const xp=pad+i/Math.max(1,visible-1)*(W-pad-10),yp=isSpectrum?(H-31)-(Math.max(0,values[i])/hi)*(H-45):12+(1-(values[i]/hi+1)/2)*(H-44);if(i===0)ctx.moveTo(xp,yp);else ctx.lineTo(xp,yp);}ctx.stroke();if(peakLabels){ctx.fillStyle=ink;ctx.fillText(peakLabels,W-190,17)}}
+function chartCosts(){
+ const rows=$("cost-rows");rows.replaceChildren();
+ [32,128,512,2048,8192].forEach(n=>{const tr=document.createElement("tr");[n,n*n,Math.round(n*Math.log2(n))].forEach(q=>{const td=document.createElement("td");td.textContent=q.toLocaleString();tr.append(td)});rows.append(tr)});
+ const canvas=$("complexity"),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height,ink=getComputedStyle(document.documentElement).getPropertyValue("--ink").trim()||"#ddd",edge=getComputedStyle(document.documentElement).getPropertyValue("--edge").trim()||"#777";
+ const x0=65,x1=W-24,y0=H-43,y1=20;
+ ctx.clearRect(0,0,W,H);ctx.strokeStyle=edge;ctx.beginPath();ctx.moveTo(x0,y1);ctx.lineTo(x0,y0);ctx.lineTo(x1,y0);ctx.stroke();
+ ctx.fillStyle=ink;ctx.font="13px system-ui";ctx.fillText("log10(work)",5,17);ctx.fillText("log2(N)",W-87,H-11);
+ for(const exp of [5,8,11,14]){const x=x0+(exp-5)/9*(x1-x0);ctx.fillText(String(2**exp),x-14,y0+18)}
+ [{color:"#db9655",fn:n=>n*n},{color:"#40b1b6",fn:n=>n*Math.log2(n)}].forEach(({color,fn})=>{ctx.strokeStyle=color;ctx.lineWidth=2.8;ctx.beginPath();for(let i=0;i<=90;i++){const e=5+9*i/90,n=2**e,x=x0+i/90*(x1-x0),y=y0-Math.log10(fn(n))/9*(y0-y1);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)}ctx.stroke()});
+ ctx.fillStyle="#db9655";ctx.fillText("DFT  N²",x0+12,40);ctx.fillStyle="#40b1b6";ctx.fillText("FFT  N log₂N",x0+140,40);
 }
-function updatePhysics(peaks,fs,N){
- const select=$("physics-peak"),previous=select.value;physicsPeaks=peaks;physicsFs=fs;physicsN=N;select.replaceChildren();
- for(const p of peaks){const option=document.createElement("option");option.value=String(p.k);option.textContent=(fs>0?(p.k*fs/N).toFixed(2)+" Hz":(p.k/N).toFixed(5)+" cycles/sample")+" (k="+p.k+")";select.add(option)}
- if(peaks.some(p=>String(p.k)===previous))select.value=previous;renderPhysics();
-}
-$("physics-peak").addEventListener("change",renderPhysics);
-$("events-per-rev").addEventListener("input",renderPhysics);
-function describePeaks(amp,fs,N,uploaded){
- const root=$("peak-results"),summary=$("peak-explanation"),note=$("peak-caution");root.replaceChildren();
- let mx=0;for(let i=1;i<amp.length-1;i++)mx=Math.max(mx,amp[i]);
- if(mx<1e-10){updatePhysics([],fs,N);summary.textContent=L("No significant non-DC spectral component was found.","직류를 제외한 의미 있는 주파수 성분을 찾지 못했습니다.");note.textContent="";return;}
- const df=fs>0?fs/N:1/N,unit=fs>0?"Hz":"cycles/sample";
- const candidates=[];for(let k=1;k<amp.length-1;k++){if(amp[k]>=amp[k-1]&&amp[k]>amp[k+1]&&amp[k]>=mx*0.08)candidates.push({k,a:amp[k]});}
- candidates.sort((a,b)=>b.a-a.a);
- const peaks=[];for(const p of candidates){if(peaks.every(q=>Math.abs(q.k-p.k)>2)){peaks.push(p);if(peaks.length===5)break;}}
- if(!peaks.length){updatePhysics([],fs,N);summary.textContent=L("No distinct peaks detected.","뚜렷한 피크가 검출되지 않았습니다.");return;}
- updatePhysics(peaks,fs,N);
- const d=peaks[0],f=d.k*df;
- summary.textContent=L("Strongest detected spectral bin: ","가장 큰 주파수 피크: ")+f.toFixed(fs?2:5)+" "+unit+" (k="+d.k+", amplitude ≈ "+d.a.toPrecision(3)+").";
- const table=document.createElement("table"),thead=document.createElement("thead"),hr=document.createElement("tr");
- for(const label of [L("Rank","순위"),L("Frequency","주파수"),L("Amplitude","진폭"),L("Relative level","상대 크기")]){const th=document.createElement("th");th.textContent=label;hr.append(th);}thead.append(hr);table.append(thead);
- const tbody=document.createElement("tbody");
- peaks.forEach((p,i)=>{const tr=document.createElement("tr");[i+1,(p.k*df).toFixed(fs?2:5)+" "+unit,p.a.toPrecision(4),(100*p.a/d.a).toFixed(1)+"%"].forEach(value=>{const td=document.createElement("td");td.textContent=value;tr.append(td)});tbody.append(tr)});
- table.append(tbody);root.append(table);
- const harmonics=peaks.slice(1).filter(p=>{const ratio=p.k/d.k;return ratio>=1.75&&Math.abs(ratio-Math.round(ratio))<=Math.max(.1,1.5/d.k)});
- const kind=uploaded?(upload?.kind==="audio"?"audio":"sensor"):"synthetic";
- let interpretation=kind==="audio"
- ?L("For audio, peaks may represent a pitch component, harmonics, or background hum. The strongest peak is not necessarily the fundamental frequency.","음성·음악에서는 피크가 음높이 성분, 고조파 또는 배경 잡음일 수 있습니다. 가장 큰 피크가 반드시 기본주파수는 아닙니다.")
- :kind==="sensor"
- ?L("For sensors, peaks indicate recurring oscillations; interpretation depends on the measured quantity and equipment (rotation, vibration, electrical hum, motion).","센서 데이터의 피크는 반복적인 변동을 나타냅니다. 회전·진동·전원 간섭·동작 등 실제 의미는 측정 대상과 장비에 따라 달라집니다.")
- :L("Synthetic example: compare peak frequencies with the input tone settings.","합성 예제에서는 입력 정현파 설정과 검출된 피크를 비교하세요.");
- if(harmonics.length)interpretation+=" "+L("Other peaks near integer multiples may be harmonics, but this is not proof.","정수배 부근의 피크는 고조파일 가능성이 있지만 이것만으로 확정할 수는 없습니다.");
- const p=document.createElement("p");p.textContent=interpretation;root.append(p);
- note.textContent=(fs>0?L("Frequency spacing Δf = ","주파수 간격 Δf = ")+df.toPrecision(4)+" Hz; "+L("Nyquist frequency = ","나이퀴스트 주파수 = ")+(fs/2).toFixed(2)+" Hz.":L("Sample rate unknown: physical Hz and periods in seconds cannot be inferred.","샘플링 주파수 미상: 실제 Hz와 시간(초) 단위의 주기를 추정할 수 없습니다."))+" "+L("Finite window, leakage, aliasing and noise can shift or spread peaks. This is a spectral clue, not an automated diagnosis.","유한 관측 구간, 누설, 앨리어싱 및 잡음이 피크를 이동·확산시킬 수 있습니다. 결과는 분석 단서이지 자동 진단이 아닙니다.");
-}
-function run(show=true){const N=Number($("size").value);let fs=Number($("fs").value);if(!Number.isFinite(fs)||fs<=0)fs=1024;let x;if($("signal").value==="upload"&&upload){const start=Math.max(0,Math.floor(Number($("offset").value)||0));x=new Float64Array(N);x.set(upload.samples.subarray(start,Math.min(upload.samples.length,start+N)));fs=upload.fs||0;if(start+N>upload.samples.length){$("status").textContent=L("Not enough remaining samples for the chosen N.","선택한 N만큼의 샘플이 남아 있지 않습니다.");return;}if(start>=upload.samples.length){$("status").textContent="Start sample exceeds the record length.";return}}else{x=synthetic(N,fs);}
+function run(show=true){const N=Number($("size").value);let fs=Number($("fs").value);if(!Number.isFinite(fs)||fs<=0)fs=1024;let x;if($("signal").value==="upload"&&upload){const start=Math.max(0,Math.floor(Number($("offset").value)||0));x=new Float64Array(N);x.set(upload.samples.subarray(start,Math.min(upload.samples.length,start+N)));fs=Number($("fs").value)>0?Number($("fs").value):upload.fs||0;if(start+N>upload.samples.length){$("status").textContent=L("Not enough remaining samples for the chosen N.","선택한 N만큼의 샘플이 남아 있지 않습니다.");return;}if(start>=upload.samples.length){$("status").textContent="Start sample exceeds the record length.";return}}else{x=synthetic(N,fs);}
 const mean=x.reduce((a,b)=>a+b,0)/N;const x0=Float64Array.from(x,v=>v-mean);const fast=benchmark(radix2,x0,5);let slow=null;if(N<=2048)slow=benchmark(direct,x0,N<=512?3:1);
 let error=0;if(slow){for(let i=0;i<N;i++)error=Math.max(error,Math.hypot(slow.result.re[i]-fast.result.re[i],slow.result.im[i]-fast.result.im[i]));}
 $("error").textContent=slow?error.toExponential(2):"Skipped";$("dtime").textContent=slow?slow.ms.toFixed(3)+" ms":"N > 2048";$("ftime").textContent=fast.ms.toFixed(3)+" ms";
@@ -161,8 +118,8 @@ $("timing-note").textContent="Direct DFT benchmark capped at N=2048 to keep the 
 const amp=Array.from({length:N/2+1},(_,k)=>{const factor=(k===0||k===N/2)?1:2;return factor*Math.hypot(fast.result.re[k],fast.result.im[k])/N;});
 const peaks=amp.map((a,i)=>({a,i})).slice(1).sort((a,b)=>b.a-a.a).slice(0,3);const freqUnit=fs>0?"Hz":"cycles/sample",df=fs>0?fs/N:1/N;
 $("axis-note").textContent="Δf = "+df.toPrecision(5)+" "+freqUnit+"; peak bins: "+peaks.map(p=>(p.i*df).toFixed(fs?2:5)+" "+freqUnit).join(", ")+". Rectangular window; amplitude uses 2|X[k]|/N except DC/Nyquist. Mean removed. No zero padding.";
-describePeaks(amp,fs,N,$("signal").value==="upload"&&!!upload);draw("time",Array.from(x0).slice(0,Math.min(N,600)),fs>0?(Math.min(N,600)-1)/fs:Math.min(N,600)-1,fs>0?"time (s)":"sample index");draw("spectrum",amp,fs>0?fs/2:.5,freqUnit);chartCosts();if(show)$("status").textContent="Analysis complete · "+N+" samples.";}
-$("run").onclick=()=>run();["size","signal","fs","tone","offset"].forEach(id=>$(id).addEventListener("change",()=>run(false)));
+describePeaks(amp,fs,N,$("signal").value==="upload"&&!!upload);draw("time",Array.from(x0).slice(0,Math.min(N,600)),fs>0?(Math.min(N,600)-1)/fs:Math.min(N,600)-1,fs>0?"time (s)":"sample index");draw("spectrum",amp,fs>0?fs/2:.5,freqUnit);chartCosts();if(show)$("status").textContent=L("Analysis complete","분석 완료")+" · "+N+" samples.";}
+$("run").onclick=()=>run();["size","signal","fs","tone","offset"].forEach(id=>$(id).addEventListener("change",()=>run(false)));["column","csvfs"].forEach(id=>$(id).addEventListener("change",()=>{if($("file").files?.length&&/\.(csv|txt)$/i.test($("file").files[0].name))$("file").dispatchEvent(new Event("change"));}));
 function parseCSV(content){const rows=content.split(/\r?\n/).map(line=>line.trim()).filter(line=>line&&!line.startsWith("#")).map(line=>line.split(/[,;\t]+/).map(v=>Number(v.trim()))).filter(row=>row.length&&row.every(Number.isFinite));if(rows.length<16)throw Error("CSV requires at least 16 numeric rows.");const col=$("column").value==="auto"?rows[0].length-1:+$("column").value;if(rows.some(r=>r.length<=col))throw Error("Selected column is unavailable.");
 let fs=Number($("csvfs").value)||0;if(!fs&&rows[0].length>=2&&col!==0){const dt=[];for(let i=1;i<Math.min(rows.length,1000);i++){const d=rows[i][0]-rows[i-1][0];if(d>0)dt.push(d);}if(dt.length>=12){dt.sort((a,b)=>a-b);const m=dt[Math.floor(dt.length/2)];if(dt.every(v=>Math.abs(v-m)<m*.02))fs=1/m;}}
 return {samples:Float64Array.from(rows,r=>r[col]),fs,kind:"sensor"};}
