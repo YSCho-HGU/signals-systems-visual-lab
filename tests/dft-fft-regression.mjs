@@ -51,12 +51,25 @@ try{
  expectContains(result,"160.00 Hz","Sensor peak 160 Hz");
  expectContains(await page.locator("#file-info").innerText(),"1024","CSV timestamp sampling rate");
  console.log("PASS CSV sensor peaks 64 Hz + 160 Hz and auto sample rate");
+ await page.locator("#physics-peak").selectOption("32"); // 64 Hz at N=512, fs=1024
+ await page.locator("#events-per-rev").fill("1");
+ expectContains(await page.locator("#physics-hz").innerText(),"64.00 Hz","Physical frequency");
+ expectContains(await page.locator("#physics-period").innerText(),"15.625 ms","Period T=1/f");
+ expectContains(await page.locator("#physics-rpm").innerText(),"3840.00 RPM","1 event/revolution");
+ await page.locator("#events-per-rev").fill("2");
+ expectContains(await page.locator("#physics-rpm").innerText(),"1920.00 RPM","2 events/revolution");
+ expectContains(await page.locator("#physics-note").innerText(),"conditional speed estimate","Conditional speed caveat");
+ console.log("PASS sensor physical units, period and event-count-aware RPM");
+
 
  const single=Array.from({length:512},(_,i)=>Math.sin(2*Math.PI*32*i/512).toFixed(8)).join("\n");
  await page.locator("#file").setInputFiles({name:"unknown-rate.txt",mimeType:"text/plain",buffer:Buffer.from(single)});
  await page.locator("#run").click();
  expectContains(await page.locator("#peak-results").innerText(),"cycles/sample","Unknown sample rate unit");
  expectContains(await page.locator("#peak-caution").innerText(),"Sample rate unknown","Unknown sampling rate caveat");
+ expectContains(await page.locator("#physics-hz").innerText(),"cycles/sample","Unknown fs normalized frequency");
+ assert.equal(await page.locator("#physics-rpm").innerText(),"—","Unknown fs must not create RPM");
+
  console.log("PASS unknown sampling rate never invents Hz");
 
  await page.locator("#file").setInputFiles({name:"two-notes.wav",mimeType:"audio/wav",buffer:makeWav()});
