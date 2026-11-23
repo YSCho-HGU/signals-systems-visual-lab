@@ -30,6 +30,14 @@ try{
  page.on("pageerror",error=>errors.push(error.message));
  await page.goto(pathToFileURL(path.join(root,"dft-fft-lab.html")).href);
  await page.locator("#peak-analysis").count();
+ assert.ok(await page.locator("#guide-title").isVisible(),"Guided mission hidden");
+ expectContains(await page.locator("#guide-question").innerText(),"bin 64","Stage 1 prediction");
+ await page.locator("#guide-reveal").click();
+ expectContains(await page.locator("#guide-feedback").innerText(),"k=fN/fₛ","Stage 1 explanation");
+ assert.equal(await page.locator("#guide-reveal").getAttribute("aria-expanded"),"true");
+ await page.locator("#guide-next").click();
+ expectContains(await page.locator("#guide-title").innerText(),"Same spectrum","Stage 2 navigation");
+ assert.equal(await page.locator("#guide-reveal").getAttribute("aria-expanded"),"false");
  await page.locator('[data-step="1"]').click();
  await page.locator("#size").selectOption("512");
  await page.locator("#signal").selectOption("one");
@@ -100,6 +108,8 @@ try{
  assert.ok(!(await page.locator("#step-desc").innerText()).includes("DFT는"),"English mode leaked Korean into step description");
  await page.locator("#dft-language").selectOption("ko");
  expectContains(await page.locator("#step-desc").innerText(),"샘플","Korean step explanation");
+ await page.locator("#guide-reveal").click();
+ expectContains(await page.locator("#guide-feedback").innerText(),"bin","Korean feedback technical term");
  console.log("PASS EN/KR content switching");
  await page.locator("#dft-theme").selectOption("white-clean");
  assert.equal(await page.locator("html").getAttribute("data-els-theme"),"white-clean");
