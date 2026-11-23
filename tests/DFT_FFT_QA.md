@@ -67,3 +67,14 @@ The regression checks stage-1 prediction, answer reveal accessibility state, sta
 - Step 4 (Discover): upload controls, sample-rate correction, waveform/spectrum, peak table, and conditional physical units; no DFT/FFT timing cards.
 
 The Playwright regression now asserts step-specific visibility. Inline JavaScript syntax compilation succeeded. Actual Chromium end-to-end execution was not available because the execution environment could not resolve github.com; browser pass status remains unverified.
+
+## Stage 1 synchronized frequency-axis explorer
+The beginner screen defaults to one pure tone. It presents dual frequency scales (DFT bin index k and physical Hz), plus four linked quantities:
+- Δf = fs/N,
+- fNyquist = fs/2,
+- observation duration T = N/fs,
+- predicted tone bin k = fN/fs.
+
+Comparison controls double N or fs independently, or reset to N=512, fs=1024 Hz, f=128 Hz. At baseline: Δf=2 Hz, Nyquist=512 Hz, T=0.5 s, and k=64. Doubling N gives Δf=1 Hz, T=1 s, k=128. Doubling fs instead gives Δf=4 Hz, Nyquist=1024 Hz, T=0.25 s, k=32. A noninteger-bin tone triggers a rectangular-window spectral leakage explanation; a tone above Nyquist triggers an aliasing warning.
+
+The new regression assertions check these values and step-specific visibility. Static inline-JavaScript syntax compilation passed after the change. Full headless Chromium tests have been authored but their success has not been verified in this session.
