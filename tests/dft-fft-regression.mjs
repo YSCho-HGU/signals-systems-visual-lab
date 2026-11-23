@@ -199,6 +199,26 @@ try{
  await page.locator('[data-step="1"]').click();
  assert.ok(await page.locator("#frequency-axis-lab").isHidden(),"Stage 1 frequency axis must not clutter Stage 2");
  console.log("PASS Stage 1 bin index / Hz mapping, N, fs, leakage and aliasing");
+ await page.locator("#axis-reset").click();
+ assert.ok(await page.locator("#padding-comparison").isVisible(),"Zero-padding comparison not visible in stage 1");
+ expectContains(await page.locator("#padding-long-stats").innerText(),"1.0000 s","2N observation duration");
+ expectContains(await page.locator("#padding-zero-stats").innerText(),"0.5000 s","Zero-padded duration remains N/fs");
+ expectContains(await page.locator("#padding-long-stats").innerText(),"1.000 Hz","2N observation grid");
+ expectContains(await page.locator("#padding-zero-stats").innerText(),"1.000 Hz","Zero padding grid matches 2N FFT");
+ expectContains(await page.locator("#padding-conclusion").innerText(),"without lengthening","Zero padding must not claim better resolution");
+ await page.locator("#padding-offbin").click();
+ assert.equal(await page.locator("#tone").inputValue(),"129","Off-bin comparison preset");
+ const coverage=await page.locator("#padding-zero-plot").evaluate(canvas=>{
+  const data=canvas.getContext("2d").getImageData(0,0,canvas.width,canvas.height).data;
+  let nonempty=0;for(let i=3;i<data.length;i+=4)if(data[i]!==0)nonempty++;return nonempty;
+ });
+ assert.ok(coverage>500,"Zero-padded spectrum was not rendered");
+ await page.locator("#padding-coherent").click();
+ assert.equal(await page.locator("#tone").inputValue(),"128","Coherent-tone comparison preset");
+ await page.locator('[data-step="1"]').click();
+ assert.ok(await page.locator("#padding-comparison").isHidden(),"Padding comparison must not clutter step 2");
+ console.log("PASS longer observation vs zero-padding comparison and spectral plots");
+
 
  console.log("PASS desktop/mobile learning layout and contextual upload controls");
  console.log("PASS no uncaught page errors");
