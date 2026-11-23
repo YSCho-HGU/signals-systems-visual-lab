@@ -32,3 +32,12 @@ The test needs a Playwright-compatible Chromium browser. If the CI workflow does
 The Discover / Upload panel supports selecting a detected peak, interpreting its frequency as a measured periodic-event rate, computing oscillation period `T=1/f`, and conditionally estimating shaft RPM as `60 f / events_per_revolution`. For the provided 64 Hz fixture, the expected period is 15.625 ms, and the conditional speeds are 3840 RPM for 1 event/revolution or 1920 RPM for 2 events/revolution. Neither value is a direct shaft speed measurement: a bearing, gear mesh, blade-pass, or structural mode may produce a different frequency. Candidate harmonics are labeled as possibilities only.
 
 Additional Playwright assertions cover those calculations, the count-dependent RPM change, and suppression of RPM when the sample rate is unknown.
+
+## Comprehensive QA review (2026-11-23)
+- Independently executed the direct DFT and radix-2 FFT numerical kernels in Node on N=32,64,128,512,1024 synthetic two-tone records. Largest observed maximum complex coefficient discrepancy: 5.883e-11, below 1e-7.
+- Improved the complexity canvas to display distinct N² and N log₂N curves, rather than a single ambiguous curve. These are growth terms, not measured instruction counts.
+- Adjusted the one-sided magnitude plot to use a true zero baseline. Distinguished x-axis units from vertical signal amplitude labels.
+- Allowed the uploaded sample rate to be corrected through the fₛ control, and reprocessed CSV files when time-column or CSV rate controls change.
+- Added QA assertions for sample-rate override and nonempty comparison plot.
+
+**Verification scope:** Node numerical-kernel checks were executed. Browser Playwright e2e and GitHub Actions results have not been confirmed in this review; do not treat the existence of the tests as a passing CI run.
