@@ -27,3 +27,8 @@ Automated GitHub Actions workflow: `.github/workflows/dft-fft-regression.yml`.
 The regression covers known-bin sinusoids, not all real recordings. The top spectral peak is not necessarily the fundamental frequency; harmonic relationships are only hypotheses. Results may change with finite record length, leakage, aliasing, compression or noisy sensors. Runtime timings are not hardware-independent benchmarks.
 
 The test needs a Playwright-compatible Chromium browser. If the CI workflow does not complete, check the Actions run logs rather than treating the existence of test files as evidence of a passing run.
+
+## Sensor physics extension
+The Discover / Upload panel supports selecting a detected peak, interpreting its frequency as a measured periodic-event rate, computing oscillation period `T=1/f`, and conditionally estimating shaft RPM as `60 f / events_per_revolution`. For the provided 64 Hz fixture, the expected period is 15.625 ms, and the conditional speeds are 3840 RPM for 1 event/revolution or 1920 RPM for 2 events/revolution. Neither value is a direct shaft speed measurement: a bearing, gear mesh, blade-pass, or structural mode may produce a different frequency. Candidate harmonics are labeled as possibilities only.
+
+Additional Playwright assertions cover those calculations, the count-dependent RPM change, and suppression of RPM when the sample rate is unknown.
