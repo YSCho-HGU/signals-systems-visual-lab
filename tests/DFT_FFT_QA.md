@@ -78,3 +78,14 @@ The beginner screen defaults to one pure tone. It presents dual frequency scales
 Comparison controls double N or fs independently, or reset to N=512, fs=1024 Hz, f=128 Hz. At baseline: Δf=2 Hz, Nyquist=512 Hz, T=0.5 s, and k=64. Doubling N gives Δf=1 Hz, T=1 s, k=128. Doubling fs instead gives Δf=4 Hz, Nyquist=1024 Hz, T=0.25 s, k=32. A noninteger-bin tone triggers a rectangular-window spectral leakage explanation; a tone above Nyquist triggers an aliasing warning.
 
 The new regression assertions check these values and step-specific visibility. Static inline-JavaScript syntax compilation passed after the change. Full headless Chromium tests have been authored but their success has not been verified in this session.
+
+## N-observation versus FFT zero-padding — Stage 1 (2026-11-23)
+A two-panel matched-grid comparison was added under the main time-domain and spectrum graphs.
+
+- **Actual longer record:** generate 2N real samples at fixed fs, compute a 2N-point FFT and normalize one-sided amplitude by 2N.
+- **Zero-padding:** keep the same original N real samples, append N zeros, compute a 2N-point FFT and normalize by N.
+- Both FFT grids have displayed spacing fs/(2N), but only the 2N-observation case has 2N/fs observation time and improved nominal physical frequency resolution (1/T). Padding interpolates the finite-record spectrum and does not resolve closer frequencies.
+- 128 Hz is a coherent-bin demonstration at baseline fs=1024 and N=512; 129 Hz is an off-bin example that helps students see leakage and differing spectral widths.
+- Safety: comparison restricts N to 8192; if N exceeds the cap, the two additional plots are cleared rather than showing stale results.
+- Playwright assertions were added for both observation durations, identical displayed FFT spacing, off-bin/coherent presets, the absence of comparison panels in stage 2, and spectrum rendering.
+- Inline JS syntax was checked successfully. A full Playwright/Chromium end-to-end passing run has not been confirmed.
