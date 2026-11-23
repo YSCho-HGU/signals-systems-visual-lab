@@ -476,7 +476,7 @@
         "canvas": 0,
         "formula": false,
         "math": false,
-        "main": "\n\n\nINTERACTIVE EXPERIMENT\n7.1 · Sampling Theorem / 표본화 정리\n같은 아날로그 정현파를 서로 다른 sampling rate로 관찰합니다. 시간축은 항상 0–0.20 s로 고정합"
+        "main": "\n\n\nINTERACTIVE EXPERIMENT\n7.1 · Sampling Theorem / 표본화 정리\nObserve the same analog sinusoid at different sampling rates. "
       }
     },
     {
@@ -502,7 +502,7 @@
         "canvas": 0,
         "formula": false,
         "math": false,
-        "main": "\n\nINTERACTIVE EXPERIMENT8.1 · Why the Z-Transform? / 복소 z-평면감쇠·증가하는 이산 지수수열의 pole과 ROC를 연결합니다. 시간축 n=0,…,15n=0,\\ldots,15"
+        "main": "\n\nINTERACTIVE EXPERIMENT8.1 · Why the Z-Transform? / 복소 z-평면Relate poles and ROC to decaying and growing discrete-time e"
       }
     },
     {
@@ -587,7 +587,7 @@
       }
     }
   ],
-  "sourceSha": "768df8c7e7b00d3daffe5e1bbf44f2c1619ec6a0",
-  "runId": 44977643622,
-  "generatedAt": "2026-11-22T02:47:34.921Z"
+  "sourceSha": "4e5dfdd9dfd9124f4aab0136fd23711809d8bbf1",
+  "runId": 45155484181,
+  "generatedAt": "2026-11-23T10:23:15.324Z"
 }
