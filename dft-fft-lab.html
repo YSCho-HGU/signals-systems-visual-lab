@@ -242,8 +242,9 @@ function drawComparisonSpectrum(canvasId,fft,scale,fs){
  ctx.stroke();
 }
 function renderPaddingComparison(N,fs){
- if($("signal").value==="upload"){ $("padding-conclusion").textContent=L("Choose a synthetic signal for this controlled comparison.","이 비교에서는 합성 신호를 선택하세요.");return;}
- if(N>8192){$("padding-long-stats").textContent="";$("padding-zero-stats").textContent="";$("padding-conclusion").textContent=L("Select N ≤ 8192 for the two additional FFT calculations.","비교 계산을 위해 N을 8192 이하로 선택하세요.");return;}
+ const clearPlots=()=>{for(const id of ["padding-long-plot","padding-zero-plot"]){const c=$(id);c.getContext("2d").clearRect(0,0,c.width,c.height)}};
+ if($("signal").value==="upload"){clearPlots(); $("padding-conclusion").textContent=L("Choose a synthetic signal for this controlled comparison.","이 비교에서는 합성 신호를 선택하세요.");return;}
+ if(N>8192){clearPlots();$("padding-long-stats").textContent="";$("padding-zero-stats").textContent="";$("padding-conclusion").textContent=L("Select N ≤ 8192 for the two additional FFT calculations.","비교 계산을 위해 N을 8192 이하로 선택하세요.");return;}
  const M=2*N,base=synthetic(N,fs),long=synthetic(M,fs),padded=new Float64Array(M);
  padded.set(base);
  const full=radix2(long),zero=radix2(padded),dfOriginal=fs/N,dfGrid=fs/M;
