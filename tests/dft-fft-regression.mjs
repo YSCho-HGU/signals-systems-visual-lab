@@ -217,6 +217,24 @@ try{
  assert.equal(await page.locator("#tone").inputValue(),"128","Coherent-tone comparison preset");
  await page.locator('[data-step="1"]').click();
  assert.ok(await page.locator("#padding-comparison").isHidden(),"Padding comparison must not clutter step 2");
+ const overlayTable=await page.locator("#padding-teaching").innerText();
+ expectContains(overlayTable,"1024","Measured-sample scenario");
+ expectContains(overlayTable,"512","Padded-sample scenario");
+ expectContains(overlayTable,"0.5000 s","Zero-padding preserves physical observation time");
+ expectContains(overlayTable,"1.0000 s","2N true observation duration");
+ expectContains(overlayTable,"2.000 Hz","Original observation resolution remains 1/T");
+ const overlayText=await page.locator("#padding-overlay-result").innerText();
+ const errorMatch=overlayText.match(/\d+(?:\.\d+)?e[+-]\d+/i);
+ assert.ok(errorMatch,"Overlay did not report its original-bin numerical error");
+ assert.ok(Number(errorMatch[0])<1e-8,"Original-bin FFT mismatch after padding: "+errorMatch[0]);
+ const overlayPixels=await page.locator("#padding-overlay-plot").evaluate(canvas=>{
+  const rgba=canvas.getContext("2d").getImageData(0,0,canvas.width,canvas.height).data;
+  let visible=0;for(let i=3;i<rgba.length;i+=4)if(rgba[i]>0)visible++;return visible;
+ });
+ assert.ok(overlayPixels>300,"Zero-padding overlay graph is blank");
+ await page.locator("#padding-offbin").click();
+ const offbinText=await page.locator("#padding-overlay-result").innerText();
+ assert.ok(/\d+(?:\.\d+)?e[+-]\d+/i.test(offbinText),"Off-bin overlay did not recalculate");
  console.log("PASS longer observation vs zero-padding comparison and spectral plots");
 
 
