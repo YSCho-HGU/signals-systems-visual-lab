@@ -89,3 +89,12 @@ A two-panel matched-grid comparison was added under the main time-domain and spe
 - Safety: comparison restricts N to 8192; if N exceeds the cap, the two additional plots are cleared rather than showing stale results.
 - Playwright assertions were added for both observation durations, identical displayed FFT spacing, off-bin/coherent presets, the absence of comparison panels in stage 2, and spectrum rendering.
 - Inline JS syntax was checked successfully. A full Playwright/Chromium end-to-end passing run has not been confirmed.
+
+## Original versus zero-padded spectrum overlay (Stage 1)
+The page now includes an observation-vs-padding comparison table and an overlaid spectrum beneath the two comparison panels. Gold dots show the N-point FFT of the original N samples. The cyan curve shows the 2N-point FFT of the same samples followed by N zeros. Both spectra use amplitude normalization N and share the same physical Hz axis. The overlay zooms around the selected tone.
+
+Every original coefficient X_N[k] matches the padded FFT coefficient X_2N[2k] within floating-point error. The UI reports maximum amplitude difference at those common bins. This is evidence that zero-padding fills in intermediate frequency samples but does not create new measurements or improve frequency resolving power.
+
+The two displayed 2N-point grids have equal interval fs/(2N), but the real-2N observation has duration 2N/fs while the padded-N observation retains N/fs. Thus nominal resolution scales differ: fs/(2N) versus fs/N. 128 Hz and 129 Hz presets illustrate on-bin and off-bin cases.
+
+Playwright regression assertions now check the table values, overlaid-plot visibility, nonempty canvas and original-bin agreement. Inline JavaScript syntax check passed; a complete browser QA run has not been confirmed.
