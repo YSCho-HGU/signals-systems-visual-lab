@@ -41,3 +41,13 @@ Additional Playwright assertions cover those calculations, the count-dependent R
 - Added QA assertions for sample-rate override and nonempty comparison plot.
 
 **Verification scope:** Node numerical-kernel checks were executed. Browser Playwright e2e and GitHub Actions results have not been confirmed in this review; do not treat the existence of the tests as a passing CI run.
+
+## Guided four-step learning experience
+The page now exposes a compact mission at each step: learning objective, a reproducible manipulation, a prediction/explanation question, and an opt-in answer reveal. A Next step control advances without resetting the experiment inputs.
+
+1. **Understand:** predict the bin index (64) of a 128 Hz sinusoid with fs=1024 Hz and N=512.
+2. **Observe:** compare direct DFT and FFT complex values rather than only visual magnitudes; interpret floating-point discrepancy.
+3. **Experiment:** vary N to compare measured runtime against two asymptotic growth curves; direct DFT is capped at 2048 samples.
+4. **Discover:** upload the provided sensor CSV, identify peaks, and distinguish conditional RPM estimates from measured shaft speed.
+
+The regression checks stage-1 prediction, answer reveal accessibility state, stage navigation, and localized feedback. These checks are authored but browser execution success remains to be verified.
