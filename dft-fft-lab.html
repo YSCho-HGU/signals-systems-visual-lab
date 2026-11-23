@@ -190,8 +190,8 @@ function setStep(v){
  $("workspace-heading").textContent=v===2?L("Choose the record length N","데이터 길이 N 선택"):v===3?L("Upload and inspect a signal","데이터 업로드와 신호 관찰"):L("Input signal and spectrum","입력 신호와 스펙트럼");
  $("stage-focus").textContent=L(...stageFocus[v]);
  $("comparison-title").textContent=v===2?L("Execution time comparison","계산 시간 비교"):L("Numerical equivalence: DFT vs FFT","수치 결과 일치성: DFT vs FFT");
- if(v===0)renderIntroPart();
  renderMission();
+ if(v===0)renderIntroPart();
 }
 $("guide-reveal").onclick=()=>{const e=$("guide-feedback");e.hidden=!e.hidden;$("guide-reveal").setAttribute("aria-expanded",String(!e.hidden));$("guide-reveal").textContent=e.hidden?L("Reveal explanation","해설 보기"):L("Hide explanation","해설 접기")};
 $("guide-next").onclick=()=>{
