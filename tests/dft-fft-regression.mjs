@@ -36,6 +36,9 @@ try{
  expectContains(await page.locator("#guide-feedback").innerText(),"k=fN/fₛ","Stage 1 explanation");
  assert.equal(await page.locator("#guide-reveal").getAttribute("aria-expanded"),"true");
  await page.locator("#guide-next").click();
+ assert.equal(await page.locator('[data-intro-part="1"]').getAttribute("aria-current"),"step","Next discovery should go to bin/Hz");
+ assert.ok(await page.locator("#frequency-axis-lab").isVisible(),"Bin/Hz checkpoint is missing");
+ await page.locator('[data-step="1"]').click();
  expectContains(await page.locator("#guide-title").innerText(),"Same spectrum","Stage 2 navigation");
  assert.equal(await page.locator("#guide-reveal").getAttribute("aria-expanded"),"false");
  await page.locator('[data-step="1"]').click();
