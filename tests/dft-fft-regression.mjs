@@ -174,6 +174,10 @@ try{
  console.log("PASS focused content visibility across all four stages");
  // Stage 1: N, fs and bin-index/Hz mapping must stay mathematically consistent.
  await page.locator('[data-step="0"]').click();
+ assert.ok(await page.locator("#signal-graphs").isVisible(),"Checkpoint 1 signal plots missing");
+ assert.ok(await page.locator("#frequency-axis-lab").isHidden(),"Checkpoint 1 should not show advanced bin map");
+ assert.ok(await page.locator("#padding-comparison").isHidden(),"Checkpoint 1 should not show padding comparison");
+ await page.locator('[data-intro-part="1"]').click();
  await page.locator("#axis-reset").click();
  assert.ok(await page.locator("#frequency-axis-lab").isVisible(),"Stage 1 frequency axis explorer missing");
  expectContains(await page.locator("#axis-df").innerText(),"2.000 Hz","Baseline df=1024/512");
@@ -199,6 +203,8 @@ try{
  await page.locator('[data-step="1"]').click();
  assert.ok(await page.locator("#frequency-axis-lab").isHidden(),"Stage 1 frequency axis must not clutter Stage 2");
  console.log("PASS Stage 1 bin index / Hz mapping, N, fs, leakage and aliasing");
+ await page.locator('[data-step="0"]').click();
+ await page.locator('[data-intro-part="2"]').click();
  await page.locator("#axis-reset").click();
  assert.ok(await page.locator("#padding-comparison").isVisible(),"Zero-padding comparison not visible in stage 1");
  expectContains(await page.locator("#padding-long-stats").innerText(),"1.0000 s","2N observation duration");
@@ -215,14 +221,16 @@ try{
  assert.ok(coverage>500,"Zero-padded spectrum was not rendered");
  await page.locator("#padding-coherent").click();
  assert.equal(await page.locator("#tone").inputValue(),"128","Coherent-tone comparison preset");
- await page.locator('[data-step="1"]').click();
- assert.ok(await page.locator("#padding-comparison").isHidden(),"Padding comparison must not clutter step 2");
+ assert.ok(await page.locator("#padding-overlay-section").isHidden(),"Overlay belongs to checkpoint 4");
  const overlayTable=await page.locator("#padding-teaching").innerText();
  expectContains(overlayTable,"1024","Measured-sample scenario");
  expectContains(overlayTable,"512","Padded-sample scenario");
  expectContains(overlayTable,"0.5000 s","Zero-padding preserves physical observation time");
  expectContains(overlayTable,"1.0000 s","2N true observation duration");
  expectContains(overlayTable,"2.000 Hz","Original observation resolution remains 1/T");
+ await page.locator('[data-intro-part="3"]').click();
+ assert.ok(await page.locator("#padding-paired-plots").isHidden(),"Checkpoint 4 should focus on overlay");
+ assert.ok(await page.locator("#padding-overlay-section").isVisible(),"Checkpoint 4 overlay missing");
  const overlayText=await page.locator("#padding-overlay-result").innerText();
  const errorMatch=overlayText.match(/\d+(?:\.\d+)?e[+-]\d+/i);
  assert.ok(errorMatch,"Overlay did not report its original-bin numerical error");
@@ -235,7 +243,10 @@ try{
  await page.locator("#padding-offbin").click();
  const offbinText=await page.locator("#padding-overlay-result").innerText();
  assert.ok(/\d+(?:\.\d+)?e[+-]\d+/i.test(offbinText),"Off-bin overlay did not recalculate");
- console.log("PASS longer observation vs zero-padding comparison and spectral plots");
+ await page.locator("#intro-finish").click();
+ assert.ok(await page.locator("#padding-comparison").isHidden(),"Exit introduction must hide comparison");
+ assert.ok(await page.locator("#accuracy-metric").isVisible(),"Follow-on Observe step missing");
+ console.log("PASS four sequenced introduction checkpoints and zero-padding plots");
 
 
  console.log("PASS desktop/mobile learning layout and contextual upload controls");
