@@ -60,6 +60,14 @@ try{
  expectContains(await page.locator("#physics-rpm").innerText(),"1920.00 RPM","2 events/revolution");
  expectContains(await page.locator("#physics-note").innerText(),"conditional speed estimate","Conditional speed caveat");
  console.log("PASS sensor physical units, period and event-count-aware RPM");
+ await page.locator("#fs").fill("2048");
+ await page.locator("#run").click();
+ expectContains(await page.locator("#physics-hz").innerText(),"128.00 Hz","Sampling-rate override frequency");
+ expectContains(await page.locator("#physics-rpm").innerText(),"3840.00 RPM","Sampling-rate override conditional RPM");
+ await page.locator("#fs").fill("1024");
+ await page.locator("#run").click();
+ console.log("PASS uploaded sample-rate override recalculates physical units");
+
 
 
  const single=Array.from({length:512},(_,i)=>Math.sin(2*Math.PI*32*i/512).toFixed(8)).join("\n");
@@ -98,6 +106,15 @@ try{
  await page.locator("#dft-theme").selectOption("neutral-dark");
  assert.equal(await page.locator("html").getAttribute("data-els-theme"),"neutral-dark");
  console.log("PASS shared theme contract");
+ await page.locator('[data-step="2"]').click();
+ assert.ok(await page.locator("#complexity").isVisible(),"Complexity chart unavailable");
+ const chartPixels=await page.locator("#complexity").evaluate(el=>{
+  const ctx=el.getContext("2d"),data=ctx.getImageData(0,0,el.width,el.height).data;
+  let changed=0;for(let i=3;i<data.length;i+=4)if(data[i])changed++;return changed;
+ });
+ assert.ok(chartPixels>500,"Complexity chart is empty");
+ console.log("PASS DFT and FFT comparison chart renders");
+
 
  assert.deepEqual(errors,[],"Browser uncaught errors");
  console.log("PASS no uncaught page errors");
