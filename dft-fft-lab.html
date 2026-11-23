@@ -159,6 +159,7 @@ function renderIntroPart(){
  $("intro-takeaway-title").textContent=L("Three discoveries to remember","기억해야 할 세 가지 핵심");
  values.forEach((pair,i)=>$("intro-takeaway-"+(i+1)).textContent=(i+1)+". "+L(...pair));
  $("intro-finish").textContent=L("Continue to 02 · Observe →","02 · Observe로 이동 →");
+ if(step===0)$("guide-next").textContent=introPart<3?L("Next discovery →","다음 발견 →"):L("Continue to 02 · Observe →","02 · Observe로 이동 →");
 }
 $("intro-path").querySelectorAll("[data-intro-part]").forEach(b=>b.addEventListener("click",()=>{
  introPart=Number(b.dataset.introPart);renderIntroPart();$("signal-workspace").scrollIntoView({behavior:"smooth",block:"start"});
@@ -193,7 +194,10 @@ function setStep(v){
  renderMission();
 }
 $("guide-reveal").onclick=()=>{const e=$("guide-feedback");e.hidden=!e.hidden;$("guide-reveal").setAttribute("aria-expanded",String(!e.hidden));$("guide-reveal").textContent=e.hidden?L("Reveal explanation","해설 보기"):L("Hide explanation","해설 접기")};
-$("guide-next").onclick=()=>{setStep((step+1)%4);document.querySelector(".steps").scrollIntoView({block:"start",behavior:"smooth"})};
+$("guide-next").onclick=()=>{
+ if(step===0&&introPart<3){introPart++;renderIntroPart();$("signal-workspace").scrollIntoView({block:"start",behavior:"smooth"});return;}
+ setStep((step+1)%4);document.querySelector(".steps").scrollIntoView({block:"start",behavior:"smooth"});
+};
 $all("[data-step]").forEach(b=>b.onclick=()=>{setStep(+b.dataset.step);if(step===3)$("signal-workspace").scrollIntoView({behavior:"smooth",block:"nearest"});});
 const language=()=>window.ELSLanguage?.get()||"mixed";
 const L=(en,ko)=>language()==="en"?en:language()==="ko"?ko:en+" · "+ko;
