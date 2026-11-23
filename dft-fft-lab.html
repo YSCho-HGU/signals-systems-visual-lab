@@ -40,7 +40,7 @@ main{padding-top:12px}main>h1{font-size:clamp(1.45rem,2.3vw,1.85rem);margin:2px 
 <label id="control-tone">Tone f (Hz)<input id="tone" type="number" min="0" value="128"></label>
 <button id="run">Analyze / 분석</button></div>
 <div id="upload-setup" hidden></div><div class="two" id="signal-graphs"><div id="time-graph-panel"><h3>Time-domain samples</h3><canvas id="time" width="650" height="240" role="img" aria-label="Time domain signal graph"></canvas></div><div id="spectrum-graph-panel"><h3>One-sided amplitude spectrum</h3><canvas id="spectrum" width="650" height="240" role="img" aria-label="FFT amplitude spectrum"></canvas></div></div><p id="axis-note" class="small"></p></section>
-<section class="card" id="compare"><h3>Same N-point result / 동일한 결과 비교</h3><div class="metrics"><div class="metric" id="accuracy-metric"><span>Max |DFT − FFT|</span><strong id="error">—</strong></div><div class="metric" id="dft-speed-metric"><span>Direct DFT · measured</span><strong id="dtime">—</strong></div><div class="metric" id="fft-speed-metric"><span>Radix-2 FFT · measured</span><strong id="ftime">—</strong></div></div><p class="note" id="timing-note"></p><div class="question" id="comparison-explanation"><strong>Why does this matter?</strong><p>Compare identical complex X[k] values, not just matching magnitude plots. Browser timing depends on CPU, warm-up, JIT and load; it is not a hardware benchmark.</p></div></section>
+<section class="card" id="compare"><h3 id="comparison-title">Same N-point result / 동일한 결과 비교</h3><div class="metrics"><div class="metric" id="accuracy-metric"><span>Max |DFT − FFT|</span><strong id="error">—</strong></div><div class="metric" id="dft-speed-metric"><span>Direct DFT · measured</span><strong id="dtime">—</strong></div><div class="metric" id="fft-speed-metric"><span>Radix-2 FFT · measured</span><strong id="ftime">—</strong></div></div><p class="note" id="timing-note"></p><div class="question" id="comparison-explanation"><strong>Why does this matter?</strong><p>Compare identical complex X[k] values, not just matching magnitude plots. Browser timing depends on CPU, warm-up, JIT and load; it is not a hardware benchmark.</p></div></section>
 <section class="card" id="growth"><h3>Calculation growth / 계산량 증가</h3><div class="two"><div><canvas id="complexity" width="650" height="240" role="img" aria-label="Asymptotic work comparison"></canvas></div><div><table><thead><tr><th>N</th><th>DFT N²</th><th>FFT N log₂N</th></tr></thead><tbody id="cost-rows"></tbody></table><p class="note">Illustrative growth terms, not literal operation counts. FFT implementation constants and actual timing may differ.</p></div></div></section>
 <section class="card" id="upload"><h3 id="upload-heading">Real data / 음성·센서 데이터 분석</h3><p id="upload-description">Choose WAV/MP3 audio (browser decoding) or CSV/TXT sensor measurements. All processing runs locally in your browser; no file is uploaded to a server.</p>
 <p class="note" id="fixtures-note">Reference datasets · 기준 데이터: <a href="./tests/fixtures/dft-fft-vibration-64-160hz.csv" download>Sensor CSV (64 + 160 Hz)</a> · <button type="button" id="download-wav">Download synthetic audio WAV (250 + 750 Hz)</button>. These are controlled test signals, not human voice recordings or physical sensor measurements.</p>
@@ -95,10 +95,11 @@ function setStep(v){
  $("timing-note").hidden=v!==2;$("comparison-explanation").hidden=v!==1;
  $("compare").querySelector(".metrics").className="metrics "+(v===1?"metrics-one":"metrics-two");
  $("control-tone").hidden=v===2||v===3;
- $("control-fs").hidden=v===2||v===3;
+ $("control-fs").hidden=v===2;
  $("control-signal").hidden=v===2||v===3;
  $("workspace-heading").textContent=v===2?L("Choose the record length N","데이터 길이 N 선택"):v===3?L("Upload and inspect a signal","데이터 업로드와 신호 관찰"):L("Input signal and spectrum","입력 신호와 스펙트럼");
  $("stage-focus").textContent=L(...stageFocus[v]);
+ $("comparison-title").textContent=v===2?L("Execution time comparison","계산 시간 비교"):L("Numerical equivalence: DFT vs FFT","수치 결과 일치성: DFT vs FFT");
  renderMission();
 }
 $("guide-reveal").onclick=()=>{const e=$("guide-feedback");e.hidden=!e.hidden;$("guide-reveal").setAttribute("aria-expanded",String(!e.hidden));$("guide-reveal").textContent=e.hidden?L("Reveal explanation","해설 보기"):L("Hide explanation","해설 접기")};
