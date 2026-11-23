@@ -1,0 +1,35 @@
+name: DFT FFT browser regression
+on:
+  push:
+    paths:
+      - 'dft-fft-lab.html'
+      - 'tests/dft-fft-regression.mjs'
+      - 'tests/fixtures/dft-fft-vibration-64-160hz.csv'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/dft-fft-regression.yml'
+  pull_request:
+    paths:
+      - 'dft-fft-lab.html'
+      - 'tests/dft-fft-regression.mjs'
+      - 'tests/fixtures/dft-fft-vibration-64-160hz.csv'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/dft-fft-regression.yml'
+  workflow_dispatch:
+jobs:
+  playwright-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Test DFT vs FFT interactive lab
+        run: npm run qa:dft-fft
