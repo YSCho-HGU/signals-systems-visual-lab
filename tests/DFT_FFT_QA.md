@@ -51,3 +51,11 @@ The page now exposes a compact mission at each step: learning objective, a repro
 4. **Discover:** upload the provided sensor CSV, identify peaks, and distinguish conditional RPM estimates from measured shaft speed.
 
 The regression checks stage-1 prediction, answer reveal accessibility state, stage navigation, and localized feedback. These checks are authored but browser execution success remains to be verified.
+
+## Student-centered layout refinement
+- Shortened title/introduction area and tightened step navigation and mission cards to place experimentation earlier on screen.
+- Stage 1 retains the DFT formula explanation; later stages hide it, without removing the learning-mission question and optional answer reveal.
+- Waveform and spectrum remain side by side on desktop and stack on narrow screens.
+- Discover's file controls and reference-dataset controls are moved into the signal workspace immediately above the paired graphs, while peak interpretation and RPM remain underneath.
+- Added responsive Playwright checks for presence of file controls, a short control-to-chart gap, appropriate hiding on other stages, and no mobile horizontal overflow.
+- HTML inline script parse check was performed successfully; actual Chromium visual regression remains unverified in this environment.
