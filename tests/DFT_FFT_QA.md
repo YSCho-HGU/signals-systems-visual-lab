@@ -59,3 +59,11 @@ The regression checks stage-1 prediction, answer reveal accessibility state, sta
 - Discover's file controls and reference-dataset controls are moved into the signal workspace immediately above the paired graphs, while peak interpretation and RPM remain underneath.
 - Added responsive Playwright checks for presence of file controls, a short control-to-chart gap, appropriate hiding on other stages, and no mobile horizontal overflow.
 - HTML inline script parse check was performed successfully; actual Chromium visual regression remains unverified in this environment.
+
+## Step-specific information hierarchy
+- Step 1 (Understand): input controls, waveform, spectrum and DFT definition; no runtime or complexity panels.
+- Step 2 (Observe): spectrum and complex direct-DFT-vs-FFT error; no time plot, elapsed-time metrics or complexity chart.
+- Step 3 (Experiment): record length, measured runtimes, and N² vs N log₂N growth curves; no time/spectrum plots. Direct DFT is capped at 2048 points.
+- Step 4 (Discover): upload controls, sample-rate correction, waveform/spectrum, peak table, and conditional physical units; no DFT/FFT timing cards.
+
+The Playwright regression now asserts step-specific visibility. Inline JavaScript syntax compilation succeeded. Actual Chromium end-to-end execution was not available because the execution environment could not resolve github.com; browser pass status remains unverified.
