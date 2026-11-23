@@ -26,7 +26,7 @@ main{padding-top:12px}main>h1{font-size:clamp(1.45rem,2.3vw,1.85rem);margin:2px 
 #signal-workspace .two{gap:10px}.axis-lab{border:1px solid var(--edge);border-radius:11px;padding:11px 13px;margin:7px 0 11px;background:var(--bg)}.axis-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:8px}.axis-summary>div{border:1px solid var(--edge);border-radius:8px;padding:7px 9px;min-width:0}.axis-summary span{display:block;font-size:.77rem;color:var(--sub)}.axis-summary strong{display:block;font-size:1.07rem;font-variant-numeric:tabular-nums}#frequency-axis{height:174px;width:100%}.axis-presets{display:flex;gap:7px;flex-wrap:wrap}.axis-presets button{padding:5px 9px;min-height:34px;font-size:.83rem}.axis-lab #axis-insight{margin:7px 0;line-height:1.5}@media(max-width:750px){.axis-summary{grid-template-columns:repeat(2,minmax(0,1fr))}#frequency-axis{height:165px}}#signal-workspace h3{font-size:.98rem;margin:0 0 5px}#signal-workspace canvas{height:190px;aspect-ratio:auto}#axis-note{font-size:.82rem;margin:6px 0 0}
 #upload-setup:not([hidden]){border-top:1px solid var(--edge);padding:10px 0 9px;margin-top:6px}#upload-setup>.controls{margin:8px 0}#upload-setup>p{font-size:.85rem}#upload-setup #fixtures-note{margin-bottom:4px}#upload-setup #download-wav{font-size:.85rem;min-height:32px;padding:4px 9px}#upload-setup #file-info{font-size:.84rem}
 #upload{margin:10px 0}#upload .box{margin:8px 0}#upload .metrics{gap:8px}
-#status{min-height:0;margin:4px 0}section.card{scroll-margin-top:65px}#padding-comparison{margin-top:10px}.padding-cards{margin-top:10px}.padding-cards>div{min-width:0}.padding-cards h3{font-size:.94rem;margin:0 0 5px}.padding-stats{font-size:.83rem;color:var(--sub);margin:4px 0 7px}#padding-comparison canvas{height:170px;max-width:100%}#padding-conclusion{font-weight:600;line-height:1.5}@media(max-width:750px){#padding-comparison .padding-cards{grid-template-columns:1fr}}
+#status{min-height:0;margin:4px 0}section.card{scroll-margin-top:65px}#padding-comparison{margin-top:10px}.padding-cards{margin-top:10px}.padding-cards>div{min-width:0}.padding-cards h3{font-size:.94rem;margin:0 0 5px}.padding-stats{font-size:.83rem;color:var(--sub);margin:4px 0 7px}#padding-comparison canvas{height:170px;max-width:100%}#padding-conclusion{font-weight:600;line-height:1.5}.padding-teaching{margin-top:13px;padding-top:12px;border-top:1px solid var(--edge)}.padding-teaching h3{margin:0 0 5px;font-size:1rem}.padding-teaching p{line-height:1.55}.padding-table th,.padding-table td{text-align:left;font-size:.85rem}.padding-table th:first-child{width:34%}.padding-table{overflow-wrap:anywhere}.padding-legend{display:flex;gap:18px;flex-wrap:wrap;margin:8px 0;font-size:.83rem}.padding-legend>span{display:inline-flex;align-items:center;gap:6px}.padding-key{display:inline-block;width:19px;height:5px;border-radius:3px}.padding-key-original{background:#e6a44d}.padding-key-zero{background:#4ab9cc}#padding-overlay-plot{height:245px;max-width:100%;aspect-ratio:auto}@media(max-width:750px){#padding-overlay-plot{height:215px}.padding-table th,.padding-table td{font-size:.76rem;padding:5px}}@media(max-width:750px){#padding-comparison .padding-cards{grid-template-columns:1fr}}
 @media(min-width:1100px){.learning-guide .guide-columns{grid-template-columns:1fr 1fr}#signal-workspace .controls label{max-width:210px}}
 @media(max-width:750px){main{padding:11px 12px 35px}.steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.steps button{min-width:0;font-size:.83rem}.learning-guide{padding:11px}.guide-columns{grid-template-columns:1fr}#signal-workspace .two{grid-template-columns:1fr}#signal-workspace canvas{height:175px}#signal-workspace>.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}#signal-workspace>.controls label{min-width:0}#signal-workspace>.controls #run{grid-column:1/-1}#upload-setup .controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}#upload-setup .controls label{min-width:0}#upload-setup input[type=file]{max-width:100%}}
 </style><script src="./assets/els-language.js"></script><script src="./assets/ss-common-header.js"></script><script src="./assets/els-theme-v2.js"></script></head><body><header class="ss-common-header" aria-label="Engineering Learning Studio navigation"><a class="ss-common-home" href="./index.html#overview">← Studio</a><details class="ss-common-menu"><summary class="ss-common-title">Signals &amp; Systems · Applications · DFT vs FFT <span aria-hidden="true">⌄</span></summary><nav class="ss-common-links" aria-label="Choose chapter"></nav></details><div class="ss-common-actions"><label class="ss-common-language" for="dft-language"><span class="ss-language-icon" aria-hidden="true">🌐</span><select class="ss-common-language-select" id="dft-language" aria-label="Language"><option value="mixed">한/영</option><option value="en">English</option><option value="ko">한국어</option></select></label><label class="ss-common-theme" for="dft-theme"><select id="dft-theme" data-els-theme-picker aria-label="Theme"></select></label></div></header>
@@ -60,6 +60,28 @@ main{padding-top:12px}main>h1{font-size:clamp(1.45rem,2.3vw,1.85rem);margin:2px 
   <div><h3 id="padding-zero-title">Zero-padding (N samples + N zeros)</h3><div class="padding-stats" id="padding-zero-stats"></div><canvas id="padding-zero-plot" width="650" height="240" aria-label="Spectrum using N original samples and N zeros"></canvas></div>
  </div>
  <p id="padding-conclusion" class="note" aria-live="polite"></p>
+ <div class="padding-teaching" id="padding-teaching">
+  <h3 id="padding-teaching-title">What actually changes?</h3>
+  <p id="padding-teaching-intro"></p>
+  <table aria-label="Observation length versus zero padding" class="padding-table">
+   <thead><tr><th id="pad-h-property">Property</th><th id="pad-h-real">2N measured</th><th id="pad-h-zero">N + N zeros</th></tr></thead>
+   <tbody>
+    <tr><th id="pad-row-samples">Observed samples</th><td id="pad-real-samples"></td><td id="pad-zero-samples"></td></tr>
+    <tr><th id="pad-row-time">Observation time</th><td id="pad-real-time"></td><td id="pad-zero-time"></td></tr>
+    <tr><th id="pad-row-grid">Displayed FFT interval</th><td id="pad-real-grid"></td><td id="pad-zero-grid"></td></tr>
+    <tr><th id="pad-row-resolution">Nominal resolution (1/T)</th><td id="pad-real-resolution"></td><td id="pad-zero-resolution"></td></tr>
+   </tbody>
+  </table>
+  <p id="padding-teaching-key" class="note"></p>
+ </div>
+ <div id="padding-overlay-section" class="padding-teaching">
+  <h3 id="padding-overlay-title">Overlay: original FFT bins and zero-padded samples</h3>
+  <p id="padding-overlay-intro" class="note"></p>
+  <div class="padding-legend"><span><i class="padding-key padding-key-original"></i><span id="padding-original-legend">Original N-point FFT · sampled dots</span></span><span><i class="padding-key padding-key-zero"></i><span id="padding-zero-legend">Zero-padded 2N-point FFT · line</span></span></div>
+  <canvas id="padding-overlay-plot" width="1024" height="320" role="img" aria-label="Original frequency bins as dots overlaid with zero-padded FFT curve"></canvas>
+  <p id="padding-overlay-result" class="note" aria-live="polite"></p>
+  <p id="padding-overlay-question" class="note"></p>
+ </div>
 </section>
 </section>
 <section class="card" id="compare"><h3 id="comparison-title">Same N-point result / 동일한 결과 비교</h3><div class="metrics"><div class="metric" id="accuracy-metric"><span>Max |DFT − FFT|</span><strong id="error">—</strong></div><div class="metric" id="dft-speed-metric"><span>Direct DFT · measured</span><strong id="dtime">—</strong></div><div class="metric" id="fft-speed-metric"><span>Radix-2 FFT · measured</span><strong id="ftime">—</strong></div></div><p class="note" id="timing-note"></p><div class="question" id="comparison-explanation"><strong>Why does this matter?</strong><p>Compare identical complex X[k] values, not just matching magnitude plots. Browser timing depends on CPU, warm-up, JIT and load; it is not a hardware benchmark.</p></div></section>
@@ -241,13 +263,41 @@ function drawComparisonSpectrum(canvasId,fft,scale,fs){
  for(let k=0;k<bins.length;k++){const x=x0+(x1-x0)*k/(bins.length-1),y=y0-(bins[k]/max)*(y0-y1);if(k===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}
  ctx.stroke();
 }
+function drawPaddingOverlay(original,padded,N,fs,tone){
+ const canvas=$("padding-overlay-plot"),ctx=canvas.getContext("2d"),W=canvas.width,H=canvas.height;
+ const palette=getComputedStyle(document.documentElement),ink=palette.getPropertyValue("--ink").trim()||"#ddd",grid=palette.getPropertyValue("--edge").trim()||"#888";
+ const originalColor="#e6a44d",paddedColor="#4ab9cc",left=67,right=W-23,top=24,bottom=H-45;
+ // Zoom around the signal tone; use identical Hz coordinates for original and padded bins.
+ const halfWidth=Math.max(8*fs/N,16),nyquist=fs/2;
+ const center=Math.min(Math.max(tone,0),nyquist);
+ const low=Math.max(0,center-halfWidth),high=Math.min(nyquist,center+halfWidth);
+ const span=Math.max(1e-12,high-low);
+ const base=new Float64Array(N/2+1),fine=new Float64Array(N+1);
+ for(let k=0;k<base.length;k++)base[k]=(k===0||k===N/2?1:2)*Math.hypot(original.re[k],original.im[k])/N;
+ for(let k=0;k<fine.length;k++)fine[k]=(k===0||k===N?1:2)*Math.hypot(padded.re[k],padded.im[k])/N;
+ let max=1e-12;
+ for(let k=0;k<fine.length;k++){const freq=k*fs/(2*N);if(freq>=low&&freq<=high)max=Math.max(max,fine[k]);}
+ ctx.clearRect(0,0,W,H);ctx.strokeStyle=grid;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(left,top);ctx.lineTo(left,bottom);ctx.lineTo(right,bottom);ctx.stroke();
+ ctx.font="14px system-ui";ctx.fillStyle=ink;ctx.textAlign="left";ctx.fillText("|X| / N",8,18);
+ for(let i=0;i<=4;i++){const freq=low+span*i/4,x=left+(right-left)*i/4;ctx.fillStyle=ink;ctx.textAlign="center";ctx.fillText(freq.toFixed(2),x,H-19);}
+ ctx.fillText("Hz",right-9,H-5);
+ const xf=freq=>left+(freq-low)/span*(right-left),yf=value=>bottom-(value/max)*(bottom-top-8);
+ ctx.strokeStyle=paddedColor;ctx.lineWidth=2.6;ctx.beginPath();let first=true;
+ for(let k=0;k<fine.length;k++){const freq=k*fs/(2*N);if(freq<low||freq>high)continue;const x=xf(freq),y=yf(fine[k]);if(first){ctx.moveTo(x,y);first=false}else ctx.lineTo(x,y);}
+ ctx.stroke();
+ ctx.fillStyle=originalColor;ctx.strokeStyle="#25292c";ctx.lineWidth=.8;
+ for(let k=0;k<base.length;k++){const freq=k*fs/N;if(freq<low||freq>high)continue;ctx.beginPath();ctx.arc(xf(freq),yf(base[k]),4.5,0,2*Math.PI);ctx.fill();ctx.stroke();}
+ let maximumDifference=0;for(let k=0;k<base.length;k++)maximumDifference=Math.max(maximumDifference,Math.abs(base[k]-fine[2*k]));
+ return maximumDifference;
+}
 function renderPaddingComparison(N,fs){
- const clearPlots=()=>{for(const id of ["padding-long-plot","padding-zero-plot"]){const c=$(id);c.getContext("2d").clearRect(0,0,c.width,c.height)}};
- if($("signal").value==="upload"){clearPlots(); $("padding-conclusion").textContent=L("Choose a synthetic signal for this controlled comparison.","이 비교에서는 합성 신호를 선택하세요.");return;}
- if(N>8192){clearPlots();$("padding-long-stats").textContent="";$("padding-zero-stats").textContent="";$("padding-conclusion").textContent=L("Select N ≤ 8192 for the two additional FFT calculations.","비교 계산을 위해 N을 8192 이하로 선택하세요.");return;}
+ const clearPlots=()=>{for(const id of ["padding-long-plot","padding-zero-plot","padding-overlay-plot"]){const c=$(id);c.getContext("2d").clearRect(0,0,c.width,c.height)}};
+ if($("signal").value==="upload"){clearPlots();$("padding-overlay-section").hidden=true;$("padding-teaching").hidden=true; $("padding-conclusion").textContent=L("Choose a synthetic signal for this controlled comparison.","이 비교에서는 합성 신호를 선택하세요.");return;}
+ if(N>8192){clearPlots();$("padding-overlay-section").hidden=true;$("padding-teaching").hidden=true;$("padding-long-stats").textContent="";$("padding-zero-stats").textContent="";$("padding-conclusion").textContent=L("Select N ≤ 8192 for the two additional FFT calculations.","비교 계산을 위해 N을 8192 이하로 선택하세요.");return;}
+ $("padding-overlay-section").hidden=false;$("padding-teaching").hidden=false;
  const M=2*N,base=synthetic(N,fs),long=synthetic(M,fs),padded=new Float64Array(M);
  padded.set(base);
- const full=radix2(long),zero=radix2(padded),dfOriginal=fs/N,dfGrid=fs/M;
+ const full=radix2(long),zero=radix2(padded),original=radix2(base),dfOriginal=fs/N,dfGrid=fs/M;
  $("padding-title").textContent=L("Longer observation vs zero-padding","관측 시간 증가와 Zero-padding 비교");
  $("padding-purpose").textContent=L("Both spectra use M=2N FFT bins. Only the left case has 2N actual observations.","두 그래프 모두 M=2N FFT를 사용하지만 왼쪽만 실제 관측 샘플이 2N개입니다.");
  $("padding-long-title").textContent=L("Actual longer observation · 2N measured samples","실제 관측 시간 증가 · 2N개 샘플");
@@ -260,6 +310,26 @@ function renderPaddingComparison(N,fs){
  L("Grid spacing","표시 간격")+" = "+dfGrid.toPrecision(4)+" Hz";
  drawComparisonSpectrum("padding-long-plot",full,M,fs);
  drawComparisonSpectrum("padding-zero-plot",zero,N,fs);
+ const tone=Number($("tone").value)||0;
+ const difference=drawPaddingOverlay(original,zero,N,fs,tone);
+ const ids={
+ "padding-teaching-title":["What actually changes?","무엇이 실제로 달라질까요?"],
+ "padding-teaching-intro":["A zero-padded FFT has more plotted frequency samples, not more recorded measurements. Both comparison FFTs have M=2N, but only one extends the observation.","Zero-padding으로 FFT 주파수 표시점은 늘어나지만 측정값이 추가되지는 않습니다. 두 FFT 모두 M=2N이지만 실제 관측 시간은 한 경우에만 늘어납니다."],
+ "pad-h-property":["Property","비교 항목"],"pad-h-real":["2N measured samples","실제 2N개 관측"],"pad-h-zero":["N samples + N zeros","N개 관측 + N개 0"],
+ "pad-row-samples":["Real observed samples","실제 관측 샘플"],"pad-row-time":["Observation time","실제 관측 시간"],
+ "pad-row-grid":["FFT display spacing","FFT 표시 간격"],"pad-row-resolution":["Nominal resolution scale 1/T","분해능 척도 1/T"],
+ "padding-overlay-title":["Overlay: original vs zero-padded FFT","중첩 비교: 원본 FFT와 Zero-padding"],
+ "padding-overlay-intro":["The orange dots are existing N-point FFT values. The cyan curve uses the same N samples plus zeros, giving intermediate FFT bins.","주황색 점은 기존 N점 FFT 결과이고 청록색 선은 같은 N개 샘플 뒤에 0을 추가하여 중간 주파수 bin을 계산한 결과입니다."],
+ "padding-original-legend":["Original N-point FFT · dots","원본 N점 FFT · 점"],
+ "padding-zero-legend":["Zero-padded 2N-point FFT · line","Zero-padding 2N점 FFT · 선"],
+ "padding-overlay-question":["Try 129 Hz: are the old sample dots still on the new curve? What information would require more real observations?","129 Hz를 시도하세요. 기존 FFT 점들이 새 곡선 위에 그대로 있나요? 가까운 두 성분을 분리하려면 무엇을 더 관측해야 할까요?"]
+ };
+ for(const [id,pair] of Object.entries(ids))$(id).textContent=L(...pair);
+ $("pad-real-samples").textContent=String(M);$("pad-zero-samples").textContent=String(N);
+ $("pad-real-time").textContent=(M/fs).toFixed(4)+" s";$("pad-zero-time").textContent=(N/fs).toFixed(4)+" s";
+ $("pad-real-grid").textContent=dfGrid.toPrecision(4)+" Hz";$("pad-zero-grid").textContent=dfGrid.toPrecision(4)+" Hz";
+ $("pad-real-resolution").textContent=dfGrid.toPrecision(4)+" Hz";$("pad-zero-resolution").textContent=dfOriginal.toPrecision(4)+" Hz";
+ $("padding-overlay-result").textContent=L("At every original bin, the two amplitude values agree (max difference: ","원래 FFT bin 위치에서 두 진폭 값이 일치합니다 (최대 차이: ")+difference.toExponential(2)+"). "+L("Zero-padding samples the same finite-record spectrum more densely; it does not improve physical resolving power.","Zero-padding은 같은 유한 관측 신호의 스펙트럼을 더 촘촘하게 평가할 뿐 실제 주파수 분리 능력을 개선하지 않습니다.");
  $("padding-conclusion").textContent=L("Original record: T=N/fₛ="+(N/fs).toFixed(4)+" s and native spacing fₛ/N="+dfOriginal.toPrecision(4)+" Hz. Padding halves the displayed bin interval to "+dfGrid.toPrecision(4)+" Hz without lengthening T or improving the ability to resolve nearby tones. The 2N-observation case actually doubles T and improves nominal resolution.","원본 관측 시간은 "+(N/fs).toFixed(4)+" s, 원래 bin 간격은 "+dfOriginal.toPrecision(4)+" Hz입니다. Zero-padding으로 표시 간격은 "+dfGrid.toPrecision(4)+" Hz로 줄지만 실제 관측 시간이나 가까운 주파수의 분리 능력은 개선되지 않습니다. 실제로 2N개를 관측하면 T가 두 배로 길어져 주파수 분리 능력이 향상됩니다.");
 }
 for(const [id,tone] of [["padding-offbin",129],["padding-coherent",128]]){
