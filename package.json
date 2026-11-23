@@ -13,7 +13,8 @@
     "qa:graph-geometry": "node tests/ss-graph-geometry-e2e.mjs",
     "qa:math-independent": "node tests/ss-independent-math-e2e.mjs",
     "qa:english": "node tests/ss-english-content-e2e.mjs",
-    "qa:language-model": "node tests/ss-data-language-contract.mjs"
+    "qa:language-model": "node tests/ss-data-language-contract.mjs",
+    "qa:dft-fft": "node tests/dft-fft-regression.mjs"
   },
   "devDependencies": {
     "playwright": "^1.56.0"
