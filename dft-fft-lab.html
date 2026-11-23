@@ -10,7 +10,7 @@ html[data-els-theme="navy-dark"]{--bg:#112333;--panel:#1c3545;--ink:#eef7fc;--su
 html[data-els-theme="warm-dark"]{--bg:#26231f;--panel:#342f29;--ink:#f2e9da;--sub:#d6c8b5;--edge:#61564a;--accent:#b2dfba}
 header{border-bottom:1px solid var(--edge)}
 header a{color:var(--accent);font-weight:700}main{max-width:1440px;margin:auto;padding:18px 22px 60px}h1{font-size:clamp(1.6rem,3vw,2.1rem);margin:3px 0}h2{font-size:1.22rem;margin:0 0 9px}h3{font-size:1.04rem;margin:0 0 9px}p{margin:8px 0;color:var(--sub)}.eyebrow{font-weight:750;letter-spacing:.08em;color:var(--accent);font-size:.8rem}
-.steps{display:flex;gap:9px;flex-wrap:wrap;margin:21px 0}.learning-guide{border-left:4px solid var(--accent);background:var(--panel);border-radius:12px;padding:15px;margin:14px 0}.learning-guide p{margin:6px 0}.guide-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px}.guide-kicker{color:var(--accent);font-size:.84rem;font-weight:750}.guide-buttons{display:flex;justify-content:space-between;gap:12px;margin-top:12px}#guide-feedback{padding:10px;border-radius:8px;background:var(--bg)}@media(max-width:750px){.guide-columns{grid-template-columns:1fr}}.steps button{flex:1;min-width:155px;text-align:left}.stage-focus{font-size:.88rem;margin:2px 0 7px;color:var(--sub)}#signal-graphs.spectrum-only{grid-template-columns:minmax(0,1fr)}#compare .metrics.metrics-one{grid-template-columns:minmax(0,1fr)}#compare .metrics.metrics-two{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:750px){#compare .metrics.metrics-two{grid-template-columns:1fr}}
+.steps{display:flex;gap:9px;flex-wrap:wrap;margin:21px 0}.learning-guide{border-left:4px solid var(--accent);background:var(--panel);border-radius:12px;padding:15px;margin:14px 0}.learning-guide p{margin:6px 0}.guide-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px}.guide-kicker{color:var(--accent);font-size:.84rem;font-weight:750}.guide-buttons{display:flex;justify-content:space-between;gap:12px;margin-top:12px}#guide-feedback{padding:10px;border-radius:8px;background:var(--bg)}@media(max-width:750px){.guide-columns{grid-template-columns:1fr}}.steps button{flex:1;min-width:155px;text-align:left}.intro-path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:0 0 9px}.intro-path button{min-width:0;min-height:38px;padding:6px 8px;text-align:center;font-size:.87rem}.intro-path button[aria-current="step"]{border:2px solid var(--accent);font-weight:800}.intro-path-lead{margin:3px 0 8px;font-size:.91rem;color:var(--sub)}.intro-wrap-up{border:1px solid var(--edge);border-radius:10px;padding:12px 14px;margin-top:10px;background:var(--panel)}.intro-wrap-up h3{margin-bottom:7px}.intro-wrap-up p{margin:7px 0}.intro-wrap-up #intro-finish{margin-top:8px;font-weight:750}@media(max-width:750px){.intro-path{grid-template-columns:repeat(2,minmax(0,1fr))}.intro-path button{font-size:.82rem}}.stage-focus{font-size:.88rem;margin:2px 0 7px;color:var(--sub)}#signal-graphs.spectrum-only{grid-template-columns:minmax(0,1fr)}#compare .metrics.metrics-one{grid-template-columns:minmax(0,1fr)}#compare .metrics.metrics-two{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:750px){#compare .metrics.metrics-two{grid-template-columns:1fr}}
 button,select,input{font:inherit}button,select,input[type=file],input[type=number]{background:var(--panel);border:1px solid var(--edge);border-radius:9px;color:var(--ink);padding:9px 12px}
 button{cursor:pointer}button[aria-current=step]{border:2px solid var(--accent);color:var(--ink);font-weight:800}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 section.card,.box{border:1px solid var(--edge);border-radius:14px;background:var(--panel);padding:17px;margin:11px 0}.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.controls{display:flex;gap:14px;align-items:end;flex-wrap:wrap;margin:13px 0}.controls label{display:flex;flex-direction:column;gap:4px;min-width:105px;font-weight:650}.controls label input[type=range]{width:175px;accent-color:var(--accent)}
@@ -33,7 +33,15 @@ main{padding-top:12px}main>h1{font-size:clamp(1.45rem,2.3vw,1.85rem);margin:2px 
 <main><div class="eyebrow">APPLICATIONS / INTERACTIVE LAB</div><h1>DFT vs FFT · Same spectrum, smarter computation</h1><p>Explore a finite record, confirm identical transform results, measure calculation cost, and inspect uploaded audio or sensor readings. · DFT와 FFT의 동일한 결과 및 계산 속도를 비교하고 실제 데이터를 분석합니다.</p>
 <nav class="steps" aria-label="Learning steps"><button data-step="0" aria-current="step">01 · Understand</button><button data-step="1">02 · Observe</button><button data-step="2">03 · Experiment</button><button data-step="3">04 · Discover / Upload</button></nav>
 <section class="learning-guide" aria-labelledby="guide-title"><div class="eyebrow" id="guide-number"></div><h3 id="guide-title"></h3><p id="guide-goal"></p><div class="guide-columns"><div><div class="guide-kicker" id="guide-try-label"></div><p id="guide-task"></p></div><div><div class="guide-kicker" id="guide-question-label"></div><p id="guide-question"></p></div></div><div class="guide-buttons"><button id="guide-reveal" type="button" aria-expanded="false"></button><button id="guide-next" type="button"></button></div><p id="guide-feedback" hidden aria-live="polite"></p></section><section class="card" id="intro"><h2 id="step-title">01 · Understand the DFT</h2><p id="step-desc"></p><div class="box formula" aria-label="Discrete Fourier transform equation">X[k] = Σ<sub>n=0</sub><sup>N−1</sup> x[n] e<sup>−j2πkn/N</sup>, &nbsp; k = 0, …, N−1</div><p class="note">FFT is an algorithm for evaluating this same DFT. It is not a different transform. FFT and DFT use the same N-point input, sign convention, and scaling below.</p></section>
-<section class="card" id="signal-workspace"><h3 id="workspace-heading">Input record / 입력 신호</h3><p id="stage-focus" class="stage-focus" aria-live="polite"></p><div class="controls">
+<section class="card" id="signal-workspace">
+<nav id="intro-path" class="intro-path" aria-label="Understand learning sequence">
+<button type="button" data-intro-part="0" aria-current="step">1 · Signal → Spectrum</button>
+<button type="button" data-intro-part="1">2 · Bin ↔ Hz</button>
+<button type="button" data-intro-part="2">3 · Observe vs Pad</button>
+<button type="button" data-intro-part="3">4 · Eureka</button>
+</nav>
+<p class="intro-path-lead" id="intro-part-lead" aria-live="polite"></p>
+<h3 id="workspace-heading">Input record / 입력 신호</h3><p id="stage-focus" class="stage-focus" aria-live="polite"></p><div class="controls">
 <label id="control-signal">Signal<select id="signal"><option value="two">Two tones</option><option value="one" selected>Single tone</option><option value="noise">Tone + deterministic noise</option><option value="upload">Uploaded data</option></select></label>
 <label id="control-size">N (samples)<select id="size"><option>32</option><option>64</option><option>128</option><option>256</option><option selected>512</option><option>1024</option><option>2048</option><option>4096</option><option>8192</option><option>16384</option></select></label>
 <label id="control-fs">fₛ (Hz)<input type="number" id="fs" value="1024" min="0.001" step="any"></label>
@@ -55,7 +63,7 @@ main{padding-top:12px}main>h1{font-size:clamp(1.45rem,2.3vw,1.85rem);margin:2px 
  <h3 id="padding-title">Longer observation vs zero-padding</h3>
  <p id="padding-purpose" class="note">Compare two equal-size FFT grids. One uses twice as many measured samples; the other adds zeros to the original record.</p>
  <div class="axis-presets"><button type="button" id="padding-offbin">Try 129 Hz · Off-bin tone</button><button type="button" id="padding-coherent">Try 128 Hz · Bin-centered</button></div>
- <div class="two padding-cards">
+ <div class="two padding-cards" id="padding-paired-plots">
   <div><h3 id="padding-long-title">Actual longer observation (2N samples)</h3><div class="padding-stats" id="padding-long-stats"></div><canvas id="padding-long-plot" width="650" height="240" aria-label="Spectrum using 2N actual samples"></canvas></div>
   <div><h3 id="padding-zero-title">Zero-padding (N samples + N zeros)</h3><div class="padding-stats" id="padding-zero-stats"></div><canvas id="padding-zero-plot" width="650" height="240" aria-label="Spectrum using N original samples and N zeros"></canvas></div>
  </div>
@@ -81,6 +89,11 @@ main{padding-top:12px}main>h1{font-size:clamp(1.45rem,2.3vw,1.85rem);margin:2px 
   <canvas id="padding-overlay-plot" width="1024" height="320" role="img" aria-label="Original frequency bins as dots overlaid with zero-padded FFT curve"></canvas>
   <p id="padding-overlay-result" class="note" aria-live="polite"></p>
   <p id="padding-overlay-question" class="note"></p>
+ </div>
+ <div id="intro-wrap-up" class="intro-wrap-up">
+  <h3 id="intro-takeaway-title">Three discoveries to remember</h3>
+  <p id="intro-takeaway-1"></p><p id="intro-takeaway-2"></p><p id="intro-takeaway-3"></p>
+  <button type="button" id="intro-finish">Continue to 02 · Observe →</button>
  </div>
 </section>
 </section>
@@ -119,6 +132,38 @@ $("guide-try-label").textContent=L("TRY THIS","직접 해보기");$("guide-quest
 $("guide-feedback").hidden=true;$("guide-reveal").setAttribute("aria-expanded","false");$("guide-reveal").textContent=L("Reveal explanation","해설 보기");
 $("guide-next").textContent=step===3?L("Return to step 1 ↺","첫 단계로 ↺"):L("Next step →","다음 단계 →");
 }
+let introPart=0;
+const introParts=[
+ {label:["1 · Signal → Spectrum","1 · 신호 → 스펙트럼"],lead:["First, create one tone. Predict and locate its frequency peak in the time and frequency plots.","먼저 정현파 하나를 만들고 시간·주파수 그래프에서 피크를 찾으세요."]},
+ {label:["2 · Bin ↔ Hz","2 · Bin ↔ Hz"],lead:["Keep the tone fixed; change N and fₛ separately to see how bin index and the Hz axis change.","정현파는 그대로 두고 N과 fₛ를 각각 바꾸어 bin 번호와 Hz 축의 변화를 확인하세요."]},
+ {label:["3 · Observe vs Pad","3 · 관측 vs Padding"],lead:["Compare two 2N-point spectra: one from 2N real samples, the other from N samples followed by N zeros.","2N개의 실제 관측과 N개의 관측 뒤에 N개의 0을 추가한 경우를 비교하세요."]},
+ {label:["4 · Eureka","4 · 핵심 발견"],lead:["Overlay the old FFT dots and the new padded curve. Check that the original points stay unchanged.","원래 FFT 점과 Zero-padding한 곡선을 겹쳐 원래 결과가 그대로 보존되는지 확인하세요."]}
+];
+function renderIntroPart(){
+ $("intro-path").querySelectorAll("[data-intro-part]").forEach(b=>{const i=Number(b.dataset.introPart);b.setAttribute("aria-current",i===introPart?"step":"false");b.textContent=L(...introParts[i].label)});
+ $("intro-part-lead").textContent=L(...introParts[introPart].lead);
+ $("signal-graphs").hidden=introPart>=2;
+ $("axis-note").hidden=introPart>=2;
+ $("frequency-axis-lab").hidden=introPart!==1;
+ $("padding-comparison").hidden=introPart<2;
+ $("padding-paired-plots").hidden=introPart!==2;
+ $("padding-conclusion").hidden=introPart!==2;
+ $("padding-teaching").hidden=introPart!==2;
+ $("padding-overlay-section").hidden=introPart!==3;
+ $("intro-wrap-up").hidden=introPart!==3;
+ const values=[
+  ["You can locate a tone using the waveform and the corresponding spectral peak.","시간 파형과 스펙트럼 피크를 비교하면 정현파의 주파수를 찾을 수 있습니다."],
+  ["N and fₛ determine the mapping from bin number to Hz: Δf=fₛ/N.","N과 fₛ가 bin 번호와 Hz의 대응 관계를 결정합니다: Δf=fₛ/N."],
+  ["Zero-padding adds frequency samples, not measured time. More actual observations improve the nominal resolution scale 1/T.","Zero-padding은 측정 시간이 아닌 주파수 표시점을 늘립니다. 실제 관측 시간이 늘어나야 분해능 척도 1/T가 작아집니다."]
+ ];
+ $("intro-takeaway-title").textContent=L("Three discoveries to remember","기억해야 할 세 가지 핵심");
+ values.forEach((pair,i)=>$("intro-takeaway-"+(i+1)).textContent=(i+1)+". "+L(...pair));
+ $("intro-finish").textContent=L("Continue to 02 · Observe →","02 · Observe로 이동 →");
+}
+$("intro-path").querySelectorAll("[data-intro-part]").forEach(b=>b.addEventListener("click",()=>{
+ introPart=Number(b.dataset.introPart);renderIntroPart();$("signal-workspace").scrollIntoView({behavior:"smooth",block:"start"});
+}));
+$("intro-finish").addEventListener("click",()=>{setStep(1);document.querySelector(".steps").scrollIntoView({behavior:"smooth",block:"start"})});
 const stageFocus=[
 ["Observe the time signal and locate its frequency peak.","시간 신호와 주파수 피크를 함께 관찰하세요."],
 ["Compare complex DFT and FFT results; runtime belongs to the next step.","DFT와 FFT의 복소 결과 오차에 집중하세요. 실행 시간은 다음 단계에서 비교합니다."],
@@ -130,7 +175,7 @@ function setStep(v){
  $("step-title").textContent=L(...stepsLocalized[v][0]);$("step-desc").textContent=L(...stepsLocalized[v][1]);
  $("intro").hidden=v!==0;$("compare").hidden=!(v===1||v===2);$("growth").hidden=v!==2;
  $("upload").hidden=v!==3;$("upload-setup").hidden=v!==3;
- $("signal-graphs").hidden=v===2;$("frequency-axis-lab").hidden=v!==0;$("padding-comparison").hidden=v!==0;
+ $("signal-graphs").hidden=v===2;$("frequency-axis-lab").hidden=v!==0;$("padding-comparison").hidden=v!==0;$("intro-path").hidden=v!==0;$("intro-part-lead").hidden=v!==0;
  $("signal-graphs").classList.toggle("spectrum-only",v===1);
  $("time-graph-panel").hidden=v===1;
  $("axis-note").hidden=v===2;
@@ -144,6 +189,7 @@ function setStep(v){
  $("workspace-heading").textContent=v===2?L("Choose the record length N","데이터 길이 N 선택"):v===3?L("Upload and inspect a signal","데이터 업로드와 신호 관찰"):L("Input signal and spectrum","입력 신호와 스펙트럼");
  $("stage-focus").textContent=L(...stageFocus[v]);
  $("comparison-title").textContent=v===2?L("Execution time comparison","계산 시간 비교"):L("Numerical equivalence: DFT vs FFT","수치 결과 일치성: DFT vs FFT");
+ if(v===0)renderIntroPart();
  renderMission();
 }
 $("guide-reveal").onclick=()=>{const e=$("guide-feedback");e.hidden=!e.hidden;$("guide-reveal").setAttribute("aria-expanded",String(!e.hidden));$("guide-reveal").textContent=e.hidden?L("Reveal explanation","해설 보기"):L("Hide explanation","해설 접기")};
