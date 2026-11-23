@@ -143,6 +143,35 @@ try{
  assert.ok(await page.locator("#file").isVisible(),"Mobile upload missing");
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+3);
  assert.equal(overflow,false,"Mobile page has horizontal overflow");
+ 
+ // Stage-specific display contract: suppress irrelevant graphs and data in every mission.
+ await page.setViewportSize({width:1366,height:900});
+ await page.locator('[data-step="0"]').click();
+ assert.ok(await page.locator("#intro").isVisible(),"Stage 1 DFT concept absent");
+ assert.ok(await page.locator("#time-graph-panel").isVisible(),"Stage 1 time-domain plot absent");
+ assert.ok(await page.locator("#spectrum-graph-panel").isVisible(),"Stage 1 spectrum absent");
+ assert.ok(await page.locator("#compare").isHidden(),"Stage 1 should not display numerical benchmark");
+ await page.locator('[data-step="1"]').click();
+ assert.ok(await page.locator("#time-graph-panel").isHidden(),"Stage 2 should focus on spectrum");
+ assert.ok(await page.locator("#spectrum-graph-panel").isVisible(),"Stage 2 spectrum absent");
+ assert.ok(await page.locator("#accuracy-metric").isVisible(),"Stage 2 complex error absent");
+ assert.ok(await page.locator("#dft-speed-metric").isHidden(),"Stage 2 runtime metric must be hidden");
+ assert.ok(await page.locator("#growth").isHidden(),"Stage 2 work graph must be hidden");
+ await page.locator('[data-step="2"]').click();
+ assert.ok(await page.locator("#signal-graphs").isHidden(),"Stage 3 signal plots distract from runtime analysis");
+ assert.ok(await page.locator("#accuracy-metric").isHidden(),"Stage 3 error metric should be hidden");
+ assert.ok(await page.locator("#dft-speed-metric").isVisible(),"Stage 3 direct time absent");
+ assert.ok(await page.locator("#fft-speed-metric").isVisible(),"Stage 3 FFT time absent");
+ assert.ok(await page.locator("#growth").isVisible(),"Stage 3 cost comparison absent");
+ assert.ok(await page.locator("#control-fs").isHidden(),"Stage 3 irrelevant sampling-rate input visible");
+ await page.locator('[data-step="3"]').click();
+ assert.ok(await page.locator("#time-graph-panel").isVisible(),"Stage 4 time-domain plot absent");
+ assert.ok(await page.locator("#spectrum-graph-panel").isVisible(),"Stage 4 spectrum plot absent");
+ assert.ok(await page.locator("#control-fs").isVisible(),"Stage 4 needs sampling-rate correction");
+ assert.ok(await page.locator("#peak-analysis").isVisible(),"Stage 4 peak analysis absent");
+ assert.ok(await page.locator("#sensor-physics").isVisible(),"Stage 4 physical interpretation absent");
+ assert.ok(await page.locator("#compare").isHidden(),"Stage 4 numerical comparison should be hidden");
+ console.log("PASS focused content visibility across all four stages");
  console.log("PASS desktop/mobile learning layout and contextual upload controls");
  console.log("PASS no uncaught page errors");
  console.log("ALL DFT/FFT REGRESSION CHECKS PASSED");
