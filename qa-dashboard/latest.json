@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "source": "GitHub Actions / Visual Lab Accessibility and Regression Audit",
-  "generatedAt": "2026-11-23T10:40:39.208Z",
-  "sourceSha": "6cf43bef0d96d3a166a46489e8e42c0e52746e46",
-  "runId": "45158173937",
-  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/45158173937",
-  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/6cf43bef0d96d3a166a46489e8e42c0e52746e46",
+  "generatedAt": "2026-11-23T10:46:32.985Z",
+  "sourceSha": "6bd1705d22f4ce43551324d93c338b37a7d159a4",
+  "runId": "45158242529",
+  "runUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/actions/runs/45158242529",
+  "latestCommitUrl": "https://github.com/YSCho-HGU/signals-systems-visual-lab/commit/6bd1705d22f4ce43551324d93c338b37a7d159a4",
   "automatedStatus": "BLOCKED_AUTOMATED",
   "manualStatus": "PENDING",
   "releaseStatus": "BLOCKED_AUTOMATED",
@@ -27,25 +27,25 @@
     {
       "id": "G1",
       "label": "Sampling and transform mathematics",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G2",
       "label": "Native Chapter 6 browser journey",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G2b",
       "label": "Native Chapter 5 and 6 five-palette Chromium/Edge regression",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
       "id": "G3",
       "label": "Theme and language persistence",
-      "status": "NOT_RUN",
+      "status": "FAIL",
       "required": true
     },
     {
@@ -75,7 +75,7 @@
     {
       "id": "CH8_MATH",
       "label": "Chapter 8 key, guided, Predict and Observe math typesetting",
-      "status": "NOT_RUN",
+      "status": "PASS",
       "required": true
     }
   ],
