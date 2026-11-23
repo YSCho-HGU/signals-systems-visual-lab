@@ -127,6 +127,23 @@ try{
 
 
  assert.deepEqual(errors,[],"Browser uncaught errors");
+ // UX contracts: controls stay directly above paired charts, and upload controls appear in the same workspace.
+ await page.setViewportSize({width:1366,height:900});
+ await page.locator('[data-step="3"]').click();
+ assert.ok(await page.locator("#upload-setup").isVisible(),"Upload controls not shown for Discover");
+ assert.ok(await page.locator("#file").isVisible(),"Upload input hidden");
+ assert.ok(await page.locator("#signal-graphs").isVisible(),"Signal graphs hidden");
+ const positions=await page.evaluate(()=>{const a=document.querySelector("#upload-setup").getBoundingClientRect(),b=document.querySelector("#signal-graphs").getBoundingClientRect();return {setupTop:a.top,setupBottom:a.bottom,graphTop:b.top}});
+ assert.ok(positions.graphTop>=positions.setupBottom&&positions.graphTop-positions.setupBottom<85,"Graph is detached from upload controls");
+ await page.locator('[data-step="1"]').click();
+ assert.ok(await page.locator("#intro").isHidden(),"Full formula introduction consumes space in stage 2");
+ assert.ok(await page.locator("#upload-setup").isHidden(),"Stage 2 contains unrelated upload controls");
+ await page.setViewportSize({width:390,height:844});
+ await page.locator('[data-step="3"]').click();
+ assert.ok(await page.locator("#file").isVisible(),"Mobile upload missing");
+ const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+3);
+ assert.equal(overflow,false,"Mobile page has horizontal overflow");
+ console.log("PASS desktop/mobile learning layout and contextual upload controls");
  console.log("PASS no uncaught page errors");
  console.log("ALL DFT/FFT REGRESSION CHECKS PASSED");
 }finally{
