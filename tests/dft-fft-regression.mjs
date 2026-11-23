@@ -172,6 +172,34 @@ try{
  assert.ok(await page.locator("#sensor-physics").isVisible(),"Stage 4 physical interpretation absent");
  assert.ok(await page.locator("#compare").isHidden(),"Stage 4 numerical comparison should be hidden");
  console.log("PASS focused content visibility across all four stages");
+ // Stage 1: N, fs and bin-index/Hz mapping must stay mathematically consistent.
+ await page.locator('[data-step="0"]').click();
+ await page.locator("#axis-reset").click();
+ assert.ok(await page.locator("#frequency-axis-lab").isVisible(),"Stage 1 frequency axis explorer missing");
+ expectContains(await page.locator("#axis-df").innerText(),"2.000 Hz","Baseline df=1024/512");
+ expectContains(await page.locator("#axis-nyquist").innerText(),"512.00 Hz","Baseline Nyquist");
+ expectContains(await page.locator("#axis-duration").innerText(),"0.5000 s","Baseline observation time");
+ expectContains(await page.locator("#axis-bin").innerText(),"64.00 bins","Baseline bin index");
+ await page.locator("#axis-double-n").click();
+ expectContains(await page.locator("#axis-df").innerText(),"1.000 Hz","Double N halves spacing");
+ expectContains(await page.locator("#axis-bin").innerText(),"128.00 bins","Double N doubles bin index");
+ expectContains(await page.locator("#axis-duration").innerText(),"1.000 s","Double N doubles observation");
+ await page.locator("#axis-reset").click();
+ await page.locator("#axis-double-fs").click();
+ expectContains(await page.locator("#axis-df").innerText(),"4.000 Hz","Double fs doubles spacing");
+ expectContains(await page.locator("#axis-nyquist").innerText(),"1024.0 Hz","Double fs increases Nyquist");
+ expectContains(await page.locator("#axis-bin").innerText(),"32.00 bins","Double fs halves bin index");
+ await page.locator("#axis-reset").click();
+ await page.locator("#tone").fill("129");
+ await page.locator("#run").click();
+ expectContains(await page.locator("#axis-insight").innerText(),"between DFT bins","Off-bin leakage explanation");
+ await page.locator("#tone").fill("700");
+ await page.locator("#run").click();
+ expectContains(await page.locator("#axis-insight").innerText(),"above Nyquist","Aliasing warning");
+ await page.locator('[data-step="1"]').click();
+ assert.ok(await page.locator("#frequency-axis-lab").isHidden(),"Stage 1 frequency axis must not clutter Stage 2");
+ console.log("PASS Stage 1 bin index / Hz mapping, N, fs, leakage and aliasing");
+
  console.log("PASS desktop/mobile learning layout and contextual upload controls");
  console.log("PASS no uncaught page errors");
  console.log("ALL DFT/FFT REGRESSION CHECKS PASSED");
