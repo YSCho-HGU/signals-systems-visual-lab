@@ -72,10 +72,6 @@ html.ss-foundations-standard .ss-found-live-link{
 html.ss-foundations-standard .ss-found-live-title{
   margin:0 0 5px;font-size:16px;line-height:1.45;
 }
-html.ss-foundations-standard .ss-found-live-caption{
-  white-space:pre-line;margin:0 0 12px;font-size:13px;line-height:1.58;
-  color:var(--els-muted,var(--els-ink));
-}
 html.ss-foundations-standard .ss-found-live-columns{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;align-items:start;
