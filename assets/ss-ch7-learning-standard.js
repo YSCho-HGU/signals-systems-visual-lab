@@ -31,6 +31,26 @@ function init(){
  layout.insertBefore(periodic,layout.querySelector('.ss7-stage-explain'));
 
 
+ function translated(en,ko,long){return window.SSContentModel.pair(en,ko,undefined,!!long)}
+ function updateLanguageCards(){
+  var fields=[
+   [concept,'strong','From x(t) to x[n]','x(t)에서 x[n]으로'],
+   [concept,'p','Sample at t = nTₛ, where Tₛ = 1/fₛ. Then x[n] = cos(Ωn), Ω = 2πf/fₛ rad/sample.','t = nTₛ에서 표본화합니다. 여기서 Tₛ = 1/fₛ입니다. 그러면 x[n] = cos(Ωn), Ω = 2πf/fₛ rad/sample이 됩니다.'],
+   [concept,'.ss7-sampling-guidance','Change f with fₛ fixed: the discrete-time frequency changes although the index spacing stays at one sample. Change fₛ with f fixed: the sampling instants and x[n] change together. Compare frequencies that differ by an integer multiple of fₛ to investigate aliasing.','fₛ를 고정하고 f를 바꾸면 표본 인덱스 간격은 1이지만 이산시간 주파수는 달라집니다. f를 고정하고 fₛ를 바꾸면 표본화 시각과 x[n]이 함께 달라집니다. fₛ의 정수배만큼 차이 나는 주파수를 비교하여 에일리어싱을 확인하세요.'],
+   [periodic,'.ss7-periodicity-title','Discrete-time frequency periodicity','이산시간 주파수의 주기성'],
+   [periodic,'label[for="ss7-period-k"]','Integer frequency shift k','정수 주파수 이동 k'],
+   [periodic,'.ss7-ct-legend span:last-child','◆ sampled values','◆ 표본값'],
+   [periodic,'.ss7-period-note','The orange circles (Ω) and teal crosses (Ω + 2πk) coincide at every integer n. This is discrete-time frequency periodicity, not an assertion that the underlying continuous-time frequencies are identical.','주황색 원(Ω)과 청록색 십자(Ω + 2πk)는 모든 정수 n에서 일치합니다. 이는 이산시간 주파수의 주기성이며, 원래 연속시간 주파수가 같다는 뜻은 아닙니다.'],
+   [flow,'strong','One experiment, three connected observations','하나의 실험에서 연결되는 세 가지 관찰'],
+   [flow,'li:nth-child(1)','Compare the continuous-time signals f, f + fₛ, and f − fₛ.','연속시간 신호 f, f + fₛ, f − fₛ를 비교하세요.'],
+   [flow,'li:nth-child(2)','Play or scrub sampling instants t = nTₛ. Their sampled values coincide.','재생하거나 t = nTₛ의 표본화 시각을 이동해 보세요. 세 신호의 표본값이 일치합니다.'],
+   [flow,'li:nth-child(3)','Change k below: Ω and Ω + 2πk give the same sequence at integer n.','아래에서 k를 변경하세요. 정수 n에서 Ω와 Ω + 2πk는 동일한 수열을 만듭니다.'],
+   [animate,'.ss7-alias-reset','Reset','초기화']
+  ];
+  for(var entry of fields){var element=entry[0].querySelector(entry[1]);if(element)element.textContent=translated(entry[2],entry[3],entry[2].length>90)}
+  var play=animate.querySelector('.ss7-alias-play');
+  if(play)play.textContent=translated(running?'Pause':'Play',running?'일시정지':'재생');
+ }
  var frame=0,running=false,raf=0,last=0,sampleF=0,sampleFs=1;
  function paintFrame(){
   var svg=periodic.querySelector('.ss7-ct-plot svg');if(!svg)return;
@@ -39,9 +59,9 @@ function init(){
   animate.querySelector('.ss7-alias-frame').value=frame;
   animate.querySelector('.ss7-alias-status').textContent='n = '+frame+' · t = '+(1000*frame/sampleFs).toFixed(2)+' ms · x[n] = '+Math.cos(2*Math.PI*sampleF*frame/sampleFs).toFixed(3);
  }
- function pauseFrame(){running=false;if(raf)cancelAnimationFrame(raf);raf=0;last=0;animate.querySelector('.ss7-alias-play').textContent='Play'}
+ function pauseFrame(){running=false;if(raf)cancelAnimationFrame(raf);raf=0;last=0;animate.querySelector('.ss7-alias-play').textContent=translated('Play','재생')}
  function tickFrame(time){if(!running)return;if(!last)last=time;if(time-last>=600){frame=(frame+1)%9;last=time;paintFrame()}raf=requestAnimationFrame(tickFrame)}
- animate.querySelector('.ss7-alias-play').addEventListener('click',function(){if(running){pauseFrame();return}running=true;this.textContent='Pause';raf=requestAnimationFrame(tickFrame)});
+ animate.querySelector('.ss7-alias-play').addEventListener('click',function(){if(running){pauseFrame();return}running=true;this.textContent=translated('Pause','일시정지');raf=requestAnimationFrame(tickFrame)});
  animate.querySelector('.ss7-alias-reset').addEventListener('click',function(){pauseFrame();frame=0;paintFrame()});
  animate.querySelector('.ss7-alias-frame').addEventListener('input',function(){pauseFrame();frame=Number(this.value);paintFrame()});
  document.addEventListener('visibilitychange',function(){if(document.hidden)pauseFrame()});
@@ -68,7 +88,7 @@ function init(){
   graph+='<line class="ss7-alias-cursor" x1="'+l+'" x2="'+l+'" y1="'+top+'" y2="'+(h-bottom)+'" stroke="var(--els-ink,#222)" stroke-width="1.3" stroke-dasharray="4 4"/>';
   periodic.querySelector('.ss7-ct-plot').innerHTML='<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Three different continuous-time cosines with coincident samples at t equals n divided by sampling frequency">'+graph+'<text x="'+(w-r)+'" y="'+(h-9)+'" font-size="11" text-anchor="end" fill="currentColor">nTₛ</text></svg>';
   sampleF=f;sampleFs=fs;paintFrame();
-  periodic.querySelector('.ss7-ct-title').textContent='Continuous time: '+f+' Hz, '+(f+fs)+' Hz, '+(f-fs)+' Hz (t = 0 … '+(1000*duration).toFixed(1)+' ms)';
+  periodic.querySelector('.ss7-ct-title').textContent=translated('Continuous time','연속시간')+': '+f+' Hz, '+(f+fs)+' Hz, '+(f-fs)+' Hz (t = 0 … '+(1000*duration).toFixed(1)+' ms)';
  }
  function drawPeriodicity(omega){
   var k=Number(shiftSelect.value),shifted=omega+2*Math.PI*k;
@@ -94,7 +114,7 @@ function init(){
   var sliders=Array.from(controls.querySelectorAll('input[type="range"]'));
   var f=Number(sliders[0]&&sliders[0].value),fs=Number(sliders[1]&&sliders[1].value);
   var metrics=concept.querySelector('.ss7-sampling-metrics');
-  if(!Number.isFinite(f)||!Number.isFinite(fs)||fs<=0){metrics.textContent='Adjust the frequency and sampling-rate controls.';return}
+  if(!Number.isFinite(f)||!Number.isFinite(fs)||fs<=0){metrics.textContent=translated('Adjust the frequency and sampling-rate controls.','주파수와 표본화율 조절값을 확인하세요.');return}
   var omega=2*Math.PI*f/fs,cycles=f/fs;
   drawPeriodicity(omega);
   pauseFrame();frame=0;drawCTAliases(f,fs);
@@ -103,11 +123,12 @@ function init(){
  controls.addEventListener('input',syncSampling);
  document.addEventListener('ss-ch7-experiment-change',syncSampling);
  syncSampling();
+ updateLanguageCards();
 
  function updatePrompt(){prompt.textContent=window.SSChapter7?.currentCheckQuestion||window.SSContentModel.text('Predict how the output changes when a parameter moves.')}
  updatePrompt();
  document.addEventListener('ss-ch7-experiment-change',updatePrompt);
- document.addEventListener('els-language-change',()=>requestAnimationFrame(updatePrompt));
+ document.addEventListener('els-language-change',()=>requestAnimationFrame(function(){updateLanguageCards();syncSampling();updatePrompt()}));
  window.__ss7Standard={ready:true,stages:4,chapter:7,experiments:window.SSChapter7?.experimentCount||0,sidebarColumns:1};
 }
 // The native core installs/render() in its own DOMContentLoaded handler. Initialize after it.
