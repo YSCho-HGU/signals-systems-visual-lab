@@ -1,0 +1,53 @@
+
+/* Chapter 5–8 live evidence: isolated presentation layer inside the native ④ stage. */
+.ss-adv-live-panel{
+ box-sizing:border-box;display:block;width:100%;min-width:0;max-width:100%;
+ margin:12px 0 18px;padding:15px 16px;
+ border:1px solid var(--els-border,var(--line,#bfd1d8));
+ border-radius:12px;background:var(--els-surface,var(--card,#fff));
+ color:var(--els-ink,var(--ink,#17354a));
+ font:inherit;
+}
+.ss-adv-live-panel *{box-sizing:border-box}
+.ss-adv-live-panel .ss-adv-live-title{margin:0 0 5px;font-size:17px;line-height:1.4;font-weight:750;color:inherit}
+.ss-adv-live-panel .ss-adv-live-caption{margin:0 0 13px;font-size:14px;line-height:1.58;white-space:pre-line;color:var(--els-muted,var(--muted,#5b7380))}
+.ss-adv-live-panel .ss-adv-live-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:12px}
+.ss-adv-live-panel .ss-adv-live-column{min-width:0;border:1px solid var(--els-border,var(--line,#bfd1d8));border-radius:9px;padding:10px 12px;background:var(--els-surface-alt,var(--els-surface,var(--card,#fff)))}
+.ss-adv-live-panel .ss-adv-live-column-title{margin:0 0 9px;font-size:14px;line-height:1.45;font-weight:700;color:inherit;white-space:pre-line}
+.ss-adv-live-panel .ss-adv-live-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,145px),1fr));gap:8px 12px;margin:0}
+.ss-adv-live-panel .ss-adv-live-item{min-width:0;overflow-wrap:anywhere}
+.ss-adv-live-panel .ss-adv-live-item dt{margin:0 0 3px;font-size:12px;line-height:1.5;color:var(--els-muted,var(--muted,#5b7380))}
+.ss-adv-live-panel .ss-adv-live-item dd{margin:0;font-size:15px;line-height:1.52;font-weight:650;font-variant-numeric:tabular-nums;color:inherit;overflow-wrap:anywhere}
+.ss-adv-live-panel .ss-adv-live-detail{display:block;font-size:12px;line-height:1.5;color:var(--els-muted,var(--muted,#5b7380));overflow-wrap:anywhere}
+.ss-adv-live-panel .ss-adv-live-math{min-width:0;margin:12px 0 0;padding:12px;border:1px solid var(--els-border,var(--line,#bfd1d8));border-radius:9px;background:var(--els-surface-alt,var(--els-surface,var(--card,#fff)))}
+.ss-adv-live-panel .ss-adv-live-math-title{margin:0 0 8px;font-size:15px;line-height:1.45;color:inherit}
+.ss-adv-live-panel .ss-adv-live-math-row{min-width:0;margin:0 0 10px}
+.ss-adv-live-panel .ss-adv-live-math-row:last-child{margin:0}
+.ss-adv-live-panel .ss-adv-live-math-label{margin:0 0 4px;color:var(--els-muted,var(--muted,#5b7380));font-size:12px;line-height:1.5}
+.ss-adv-live-panel .ss-adv-live-equation{
+ display:block;min-width:0;width:100%;overflow-x:auto;overflow-y:hidden;
+ padding:8px 10px;border-radius:7px;
+ background:var(--els-surface,var(--card,#fff));color:inherit;
+ font-size:17px;line-height:1.7;white-space:normal;
+ scrollbar-width:thin;
+}
+.ss-adv-live-panel .ss-adv-live-equation .katex-display{margin:0.25em 0;text-align:left}
+.ss-adv-live-panel .ss-adv-live-equation .katex-display>.katex{text-align:left;white-space:nowrap}
+.ss-adv-live-panel .ss-adv-live-equation[data-ss-math-state="waiting"],
+.ss-adv-live-panel .ss-adv-live-equation[data-ss-math-state="error"]{
+ white-space:pre-wrap;overflow-wrap:anywhere;font-family:ui-monospace,monospace;font-size:12px;
+}
+.ss-adv-live-panel .ss-adv-live-note{
+ margin:12px 0 0;padding:10px 12px;border-left:3px solid var(--els-primary,var(--teal,#0b8491));
+ border-radius:6px;background:var(--els-surface-alt,var(--els-surface,var(--card,#fff)));
+ font-size:14px;line-height:1.65;white-space:pre-line;color:inherit;
+}
+@media(max-width:820px){
+ .ss-adv-live-panel .ss-adv-live-columns{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:650px){
+ .ss-adv-live-panel{padding:11px 12px;margin:10px 0 14px}
+ .ss-adv-live-panel .ss-adv-live-math{padding:9px}
+ .ss-adv-live-panel .ss-adv-live-equation{font-size:14px;padding:7px 8px}
+ .ss-adv-live-panel .ss-adv-live-items{grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr))}
+}
