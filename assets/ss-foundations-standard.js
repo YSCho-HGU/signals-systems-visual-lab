@@ -224,6 +224,59 @@ function populateLiveColumn(host,heading,entries,fallback){
  }
  host.append(list);
 }
+
+/* Math is keyed to the same native control state and metric rows used in ②/③.
+ * Both equations are presentation only; native numerical calculations stay intact.
+ * Render KaTeX when available and retain readable TeX when offline.
+ */
+function liveMathPanel(group,metrics){
+ const raw=Object.fromEntries([...group.querySelectorAll(
+  '.ss-found-controls input[data-key],.ss-found-controls select[data-key]'
+ )].map(el=>[el.dataset.key,el.value]));
+ const equation=window.SSFoundationEquations?.get?.(chapter,selectedIndex(),raw,metrics);
+ if(!equation)return null;
+ const section=liveNode('section','ss-found-live-math');
+ const h=liveNode('h4','ss-found-live-math-title',local('④ Formula to evidence','④ 수식으로 결과 설명하기'));
+ section.append(h);
+ for(const [caption,source] of [
+  [local('Core relationship','핵심 관계식'),equation.general],
+  [local('Current values','현재 값 대입'),equation.now]
+ ]){
+  const line=liveNode('div','ss-found-live-math-row');
+  line.append(liveNode('div','ss-found-live-math-caption',caption));
+  const el=liveNode('div','ss-found-live-equation',source);
+  el.dataset.ssMath=source;
+  el.dataset.ssMathDisplay='block';
+  el.dataset.ssMathFallback=source;
+  el.setAttribute('aria-label',source);
+  line.append(el);section.append(line);
+ }
+ return section;
+}
+function renderLiveMath(panel){
+ for(const el of panel.querySelectorAll('.ss-found-live-equation')){
+  const source=el.dataset.ssMath||'';
+  if(!source)continue;
+  if(typeof window.katex?.render==='function'){
+   try{
+    window.katex.render(source,el,{
+     displayMode:true,throwOnError:true,strict:'ignore',trust:false,
+     output:'htmlAndMathml'
+    });
+    el.dataset.ssMathSourceDone=source;
+    el.dataset.ssMathState='rendered';
+    el.removeAttribute('data-ss-math-error');
+   }catch(err){
+    el.dataset.ssMathState='error';
+    el.dataset.ssMathError=String(err).slice(0,140);
+    el.textContent=source;
+   }
+  }else{
+   el.dataset.ssMathState='waiting';
+   el.textContent=source;
+  }
+ }
+}
 const liveSignatures=new WeakMap();
 function updateLiveLink(group){
  const explain=group?.querySelector('.ss-found-explain');
@@ -256,8 +309,10 @@ function updateLiveLink(group){
  populateLiveColumn(measurementPanel,local('③ Computed observations','③ 계산된 관찰 결과'),metrics,
    local('Change a control to view the result.','조절값을 바꾸면 결과가 표시됩니다.'));
  columns.append(settingPanel,measurementPanel);
+ const equation=liveMathPanel(group,metrics);
  const insight=liveNode('p','ss-found-live-conclusion',liveText(tip[0],tip[1]));
- panel.replaceChildren(title,copy,columns,insight);
+ panel.replaceChildren(title,copy,columns,...(equation?[equation]:[]),insight);
+ if(equation)renderLiveMath(panel);
  panel.dataset.chapter=String(chapter);
  panel.dataset.lesson=String(selectedIndex()+1);
 }
