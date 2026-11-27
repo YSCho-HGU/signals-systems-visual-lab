@@ -55,17 +55,12 @@ html.ss-foundations-standard .ss-found-action-cue{
  border-radius:6px;background:var(--els-surface-alt,var(--els-surface));
  color:var(--els-ink);font-size:14px;line-height:1.55;white-space:pre-line;
 }
-html.ss-foundations-standard .ss-found-link-cue{
- margin:0 0 12px;padding:11px 13px;border:1px solid var(--els-border);
- border-radius:9px;background:var(--els-surface-alt,var(--els-surface));
- color:var(--els-ink);font-size:14px;line-height:1.6;white-space:pre-line;
-}
 html.ss-foundations-standard .ss-found-stage{line-height:1.45;flex-wrap:wrap}
 html.ss-foundations-standard .ss-found-stage span{flex-shrink:0}
 html.ss-foundations-standard .ss-found-23 > section{min-width:0}
 html.ss-foundations-standard .ss-found-explain :is(.reading-panel,.derivation-panel,.learning,.question){max-width:100%;min-width:0}
 @media(max-width:650px){
- html.ss-foundations-standard :is(.ss-found-action-cue,.ss-found-link-cue){font-size:13px;padding:9px 10px}
+ html.ss-foundations-standard .ss-found-action-cue{font-size:13px;padding:9px 10px}
 }
 
 /* Chapter 1-4: live evidence from the same ② controls and ③ plotted metrics. */
