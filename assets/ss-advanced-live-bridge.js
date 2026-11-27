@@ -41,13 +41,23 @@
    detail:tr(el.querySelector('.d,.detail')?.textContent?.trim()||'')
   })).filter(x=>x.value&&x.value!=='-'&&x.value!=='—').slice(0,3);
  }
- function observation(){
-  const metrics=readMetrics();
-  if(metrics.length)return metrics;
+ function observation(formula){
   const hint=document.querySelector('#insight');
-  const text=tr(hint?.textContent?.replace(/\s+/g,' ').trim()||'');
-  const lead=hint?.querySelector('strong')?.textContent?.replace(/\s+/g,' ').trim()||'';
-  const sample=(lead.length>=8?lead:text).slice(0,240);
+  const original=hint?.textContent?.replace(/\s+/g,' ').trim()||'';
+  const localized=tr(original),mode=window.SSContentModel?.mode?.()||'mixed';
+  const primary=hint?.querySelector('strong')?.textContent?.replace(/\s+/g,' ').trim()||'';
+  let sample=localized;
+  // Native Chapter 7/8 insights may contain untranslated prose. Show a grounded,
+  // mode-correct explanation rather than leaking Korean into English-only cards.
+  if(mode==='en'&&/[가-힣]/.test(sample)){
+   sample=(primary&&!/[가-힣]/.test(primary)&&/\d|ROC|Hz/.test(primary))
+     ?primary+' — '+(formula?.en||''):(formula?.en||primary);
+  }else if(mode==='ko'&&!/[가-힣]/.test(sample)){
+   sample=formula?.ko||sample;
+  }else if(mode==='mixed'&&!/[가-힣]/.test(sample)){
+   sample=L(sample,formula?.ko||'');
+  }
+  if(sample.length>240)sample=sample.slice(0,237).trimEnd()+'…';
   return sample?[{key:L('Current graph finding','현재 그래프의 관찰 결과'),value:sample}]:[];
  }
  function mount(){
@@ -98,8 +108,8 @@
   const lesson=info?.lesson??nativeState.lesson;
   if(lesson===undefined||lesson===null)return;
   const metrics=readMetrics();
-  const observationNow=metrics.length?metrics:observation();
   const formula=eq().get(chapter,lesson,params,metrics);
+  const observationNow=metrics.length?metrics:observation(formula);
   if(!formula)return;
   let panel=loc.host.querySelector(':scope > .'+panelClass);
   if(!panel){panel=el('section',panelClass);panel.setAttribute('aria-live','off');loc.host.insertBefore(panel,loc.before||null)}
