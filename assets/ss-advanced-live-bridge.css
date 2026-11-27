@@ -10,7 +10,6 @@
 }
 .ss-adv-live-panel *{box-sizing:border-box}
 .ss-adv-live-panel .ss-adv-live-title{margin:0 0 5px;font-size:17px;line-height:1.4;font-weight:750;color:inherit}
-.ss-adv-live-panel .ss-adv-live-caption{margin:0 0 13px;font-size:14px;line-height:1.58;white-space:pre-line;color:var(--els-muted,var(--muted,#5b7380))}
 .ss-adv-live-panel .ss-adv-live-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:12px}
 .ss-adv-live-panel .ss-adv-live-column{min-width:0;border:1px solid var(--els-border,var(--line,#bfd1d8));border-radius:9px;padding:10px 12px;background:var(--els-surface-alt,var(--els-surface,var(--card,#fff)))}
 .ss-adv-live-panel .ss-adv-live-column-title{margin:0 0 9px;font-size:14px;line-height:1.45;font-weight:700;color:inherit;white-space:pre-line}
