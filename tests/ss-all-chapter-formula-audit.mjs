@@ -99,7 +99,7 @@ includes(1,2,{kind:'impulse',domain:'CT',A:2,width:0.5},'\\frac{A}{\\varepsilon}
 includes(1,3,{a:'2',b:-2},'[1,2.5]');
 includes(1,4,{freq:'2/5'},'N_0=5');
 includes(2,3,{nx:-2,nh:1,Lx:4,Lh:3},'L_y=6');
-includes(2,5,{a:.8,b:.8},'t e^{-at}');
+assert.ok(formula(2,4,{...native[2][4].defaults,a:.8,b:.8}).general.includes('t e^{-at}'));
 includes(2,7,{M:8},'\\frac1M=0.125');
 includes(3,1,{A:.8},'|a_2|=0.4');
 includes(3,2,{tau:2,T:6},'0.3333');
