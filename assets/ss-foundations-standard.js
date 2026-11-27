@@ -138,7 +138,7 @@ function lessonFocus(m){
  const plots=chapter===1?[]:(m?.plots||[]);
  const first=Array.isArray(plots[0])?plots[0][0]:'';
  const second=Array.isArray(plots[1])?plots[1][0]:'';
- return {control:stripLabel(control),first:stripLabel(first),second:stripLabel(second)};
+ return {control:window.SSContentModel?.text?.(control)||stripLabel(control),first:window.SSContentModel?.text?.(first)||stripLabel(first),second:window.SSContentModel?.text?.(second)||stripLabel(second)};
 }
 function noteLine(section,cls){let e=section.querySelector('.'+cls);if(!e){e=document.createElement('p');e.className=cls;section.querySelector('.ss-found-stage')?.after(e)}return e}
 function updateLessonDirections(group){
@@ -164,7 +164,13 @@ function updateLessonDirections(group){
  if(explain){
   noteLine(explain,'ss-found-link-cue').textContent=local('Use the current setting in ② and the resulting graph in ③ to explain your answer in ④. This is one connected experiment—not a separate example.','④는 별도의 실습이 아닙니다. ②에서 설정한 현재 값과 ③의 그래프를 근거로, 같은 실험의 결과를 설명하세요.');
   const bridge=explain.querySelector('.ss-found-bridge');
-  if(bridge)bridge.textContent=window.SSContentModel?.text?.(bridgeNotes[chapter])||bridgeNotes[chapter];
+  const bridgeKo={
+   1:'1장에서는 CT/DT 신호와 시스템의 기본 성질을 익혔습니다. 2장에서는 이를 컨벌루션과 LTI 시스템 응답에 적용합니다.',
+   2:'2장의 컨벌루션과 임펄스 응답을 3장의 조화 신호에 적용하고, 4장에서는 주파수영역 곱셈으로 해석합니다.',
+   3:'3장은 주기 신호를 푸리에 급수 계수로 나타냈습니다. 4장은 이를 비주기 신호의 연속 주파수 스펙트럼으로 확장합니다.',
+   4:'4장의 CTFT는 수렴할 때 jω축의 주파수 성분을 나타냅니다. 5장은 복소 주파수 s와 수렴영역(ROC)으로 확장합니다.'
+  };
+  if(bridge)bridge.textContent=local(bridgeNotes[chapter],bridgeKo[chapter]);
   const next=explain.querySelector('.ss-bridge-link');if(next)next.textContent=local('Continue to Chapter '+(chapter+1),'다음 장으로 이동 · Chapter '+(chapter+1));
  }
 }
