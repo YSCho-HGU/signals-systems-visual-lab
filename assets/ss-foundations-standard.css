@@ -48,3 +48,22 @@ html.ss-foundations-standard .ss-found-katex .katex-display{margin:.3em 0}
 html.ss-foundations-standard .ss-found-bridge{margin:16px 0}
 @media(max-width:1000px){html.ss-foundations-standard :is(.experiment){grid-template-columns:1fr!important}html.ss-foundations-standard .ss-found-four-step .ss-found-23{grid-template-columns:1fr}}
 @media(max-width:650px){html.ss-foundations-standard .ss-common-header{gap:6px;padding:5px 8px!important}html.ss-foundations-standard .ss-common-menu{max-width:45vw}html.ss-foundations-standard .ss-found-four-step :is(.ss-found-controls,.ss-found-observe,.ss-found-explain){padding:11px}}
+
+/* Student directions: keep ②/③ in one visual investigation and ④ visibly connected. */
+html.ss-foundations-standard .ss-found-action-cue{
+ margin:0 0 12px;padding:9px 12px;border-left:3px solid var(--els-primary,#299c8f);
+ border-radius:6px;background:var(--els-surface-alt,var(--els-surface));
+ color:var(--els-ink);font-size:14px;line-height:1.55;white-space:pre-line;
+}
+html.ss-foundations-standard .ss-found-link-cue{
+ margin:0 0 12px;padding:11px 13px;border:1px solid var(--els-border);
+ border-radius:9px;background:var(--els-surface-alt,var(--els-surface));
+ color:var(--els-ink);font-size:14px;line-height:1.6;white-space:pre-line;
+}
+html.ss-foundations-standard .ss-found-stage{line-height:1.45;flex-wrap:wrap}
+html.ss-foundations-standard .ss-found-stage span{flex-shrink:0}
+html.ss-foundations-standard .ss-found-23 > section{min-width:0}
+html.ss-foundations-standard .ss-found-explain :is(.reading-panel,.derivation-panel,.learning,.question){max-width:100%;min-width:0}
+@media(max-width:650px){
+ html.ss-foundations-standard :is(.ss-found-action-cue,.ss-found-link-cue){font-size:13px;padding:9px 10px}
+}
