@@ -225,6 +225,7 @@ function populateLiveColumn(host,heading,entries,fallback){
  }
  host.append(list);
 }
+const liveSignatures=new WeakMap();
 function updateLiveLink(group){
  const explain=group?.querySelector('.ss-found-explain');
  if(!explain||!group.querySelector('.ss-found-observe'))return;
@@ -236,6 +237,9 @@ function updateLiveLink(group){
   if(marker)marker.after(panel);else explain.prepend(panel);
  }
  const {settings,metrics}=liveData(group);
+ const signature=JSON.stringify([chapter,selectedIndex(),liveMode(),settings,metrics]);
+ if(liveSignatures.get(panel)===signature)return;
+ liveSignatures.set(panel,signature);
  const tip=liveIdea[chapter]?.[selectedIndex()]||[
   'Relate the current settings to the computed measurements.',
   '현재 설정값과 계산된 관찰 결과를 서로 연결하세요.'
