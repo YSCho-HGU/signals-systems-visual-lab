@@ -51,3 +51,8 @@
  .ss-adv-live-panel .ss-adv-live-equation{font-size:14px;padding:7px 8px}
  .ss-adv-live-panel .ss-adv-live-items{grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr))}
 }
+
+/* Chapter 5 follow-up may be a grid; the evidence card occupies the full ④ row. */
+#page .ss5-followup > .ss-adv-live-panel{grid-column:1/-1;min-width:0}
+#content .ss6-interpretation > .ss-adv-live-panel{grid-column:1/-1;min-width:0}
+.ss7-stage-explain > .ss-adv-live-panel,.ss8-stage-explain > .ss-adv-live-panel{grid-column:1/-1;min-width:0}
