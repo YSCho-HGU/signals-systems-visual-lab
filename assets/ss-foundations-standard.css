@@ -121,3 +121,42 @@ html.ss-foundations-standard .ss-found-live-conclusion{
  html.ss-foundations-standard .ss-found-live-items{grid-template-columns:repeat(auto-fit,minmax(min(100%,135px),1fr))}
  html.ss-foundations-standard .ss-found-live-conclusion{font-size:13px}
 }
+
+/* Formula-to-evidence cards: keep long KaTeX equations out of graph/control areas. */
+html.ss-foundations-standard .ss-found-live-math{
+ min-width:0;margin-top:12px;padding:12px 14px;
+ background:var(--els-surface);border:1px solid var(--els-border);
+ border-radius:10px;color:var(--els-ink);
+}
+html.ss-foundations-standard .ss-found-live-math-title{
+ margin:0 0 10px;font-size:15px;line-height:1.4;color:var(--els-ink);
+}
+html.ss-foundations-standard .ss-found-live-math-row{
+ min-width:0;margin:0 0 9px;
+}
+html.ss-foundations-standard .ss-found-live-math-row:last-child{margin-bottom:0}
+html.ss-foundations-standard .ss-found-live-math-caption{
+ font-size:12px;line-height:1.4;font-weight:650;
+ color:var(--els-muted,var(--els-ink));margin:0 0 4px;
+}
+html.ss-foundations-standard .ss-found-live-equation{
+ display:block;box-sizing:border-box;min-width:0;width:100%;
+ padding:7px 9px;overflow-x:auto;overflow-y:hidden;
+ border-radius:7px;background:var(--els-surface-alt,var(--els-surface));
+ color:var(--els-ink);font-size:16px;line-height:1.65;
+ white-space:normal;scrollbar-width:thin;
+}
+html.ss-foundations-standard .ss-found-live-equation .katex-display{
+ margin:.2em 0;text-align:left;overflow:visible;
+}
+html.ss-foundations-standard .ss-found-live-equation .katex-display>.katex{
+ text-align:left;white-space:nowrap;
+}
+html.ss-foundations-standard .ss-found-live-equation[data-ss-math-state="error"],
+html.ss-foundations-standard .ss-found-live-equation[data-ss-math-state="waiting"]{
+ white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;
+}
+@media(max-width:650px){
+ html.ss-foundations-standard .ss-found-live-math{padding:10px}
+ html.ss-foundations-standard .ss-found-live-equation{font-size:14px;padding:7px}
+}
