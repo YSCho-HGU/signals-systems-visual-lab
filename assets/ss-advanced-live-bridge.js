@@ -57,7 +57,7 @@
   }else if(mode==='mixed'&&!/[가-힣]/.test(sample)){
    sample=L(sample,formula?.ko||'');
   }
-  if(sample.length>240)sample=sample.slice(0,237).trimEnd()+'…';
+  if(sample.length>170)sample=sample.slice(0,167).trimEnd()+'…';
   return sample?[{key:L('Current graph finding','현재 그래프의 관찰 결과'),value:sample}]:[];
  }
  function mount(){
@@ -119,29 +119,26 @@
   signatures.set(panel,signature);
   panel.dataset.ssAdvancedChapter=String(chapter);
   panel.dataset.ssAdvancedLesson=String(lesson);
-  const title=el('h3','ss-adv-live-title',L('One experiment · ② → ③ → ④','하나의 실험 · ② → ③ → ④'));
-  const subtitle=el('p','ss-adv-live-caption',L(
-   'The values in ② generated the observations in ③. Explain this same result using the equation below.',
-   '②의 현재 값으로 ③의 결과가 생성되었습니다. 아래 수식으로 같은 결과를 설명하세요.'
-  ));
+  const title=el('h3','ss-adv-live-title',L('Current result · ② → ③','현재 결과 · ② → ③'));
+
   const cols=el('div','ss-adv-live-columns');
   for(const [label,items,empty] of [
-   [L('② Current settings','② 현재 설정값'),controlsNow,L('Adjust a variable in ②','②에서 변수를 조절하세요')],
-   [L('③ Observed results','③ 관찰 결과'),observationNow,L('Review the current graph','현재 그래프를 확인하세요')]
+   [L('② Settings','② 설정값'),controlsNow,L('Adjust a variable in ②','②에서 변수를 조절하세요')],
+   [L('③ Observed','③ 관찰값'),observationNow,L('Review the current graph','현재 그래프를 확인하세요')]
   ]){
    const col=el('div','ss-adv-live-column');
    col.append(el('h4','ss-adv-live-column-title',label));
    addDataList(col,items,empty);cols.append(col);
   }
   const math=el('section','ss-adv-live-math');
-  math.append(el('h4','ss-adv-live-math-title',L('④ Equation and values','④ 수식과 값 대입')));
+  math.append(el('h4','ss-adv-live-math-title',L('Equation check','수식으로 확인')));
   for(const [head,tex] of [[L('Core relationship','핵심 관계식'),formula.general],[L('At current settings','현재 설정값 대입'),formula.now]]){
    const row=el('div','ss-adv-live-math-row');
    row.append(el('p','ss-adv-live-math-label',head));
    renderMath(row,tex);math.append(row);
   }
   const note=el('p','ss-adv-live-note',L(formula.en,formula.ko));
-  panel.replaceChildren(title,subtitle,cols,math,note);
+  panel.replaceChildren(title,cols,math,note);
  }
  function queue(event){
   if(event?.detail?.chapter===chapter)lastEvent=event.detail;
