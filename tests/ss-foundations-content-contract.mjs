@@ -28,7 +28,7 @@ for(let chapter=1;chapter<=4;chapter++){
  const lessonPattern=chapter===1?/\{id:(\d+),short:'/g:/\{id:'([^']+)',short:'/g;
  const matches=[...html.matchAll(lessonPattern)];
  assert.equal(matches.length,counts[chapter-1],'Chapter '+chapter+' lesson count');
- assert.match(html,/ss-foundations-standard\.js\?v=20261127-learning-flow-v2/);
+ assert.match(html,/ss-foundations-standard\.js\?v=20261127-live-evidence-v3/);
  assert.match(html,/ss-content-model\.js\?v=20261127-bilingual-content-v8/);
  for(let i=0;i<matches.length;i++){
   const id=matches[i][1],block=html.slice(matches[i].index,matches[i+1]?.index??html.length);
