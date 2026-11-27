@@ -1,0 +1,47 @@
+name: Chapter 5-8 live equation evidence QA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/chapter-5-8-live-evidence-qa.yml'
+      - 'assets/ss-advanced-live-equations.js'
+      - 'assets/ss-advanced-live-bridge.js'
+      - 'assets/ss-advanced-live-bridge.css'
+      - 'chapter5.html'
+      - 'chapter6.html'
+      - 'chapter7.html'
+      - 'chapter8.html'
+      - 'tests/ss-advanced-live-formulas-contract.mjs'
+      - 'tests/ss-advanced-live-bridge-e2e.mjs'
+      - 'package.json'
+
+permissions:
+  contents: read
+
+jobs:
+  equation-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install npm dependencies
+        run: npm install --no-audit --no-fund
+      - name: Validate all 29 equations and numeric branches
+        run: npm run qa:advanced-live-formulas
+      - name: Install Chromium for visual regression
+        run: npx playwright install --with-deps chromium
+      - name: Audit 174 chapter/language/viewport browser cases
+        run: npm run qa:advanced-live-browser
+      - name: Attach QA report and failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chapter-5-8-live-equation-evidence
+          path: qa-advanced-live/
+          if-no-files-found: warn
+          retention-days: 14
