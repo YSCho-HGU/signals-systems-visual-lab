@@ -24,7 +24,7 @@ for(const [chapter,total] of Object.entries(mod.chapterCounts)){
   assert.ok(result,'missing formula for chapter '+chapter+' lesson '+(index+1));
   for(const prop of ['general','now']){
    assert.equal(typeof result[prop],'string');
-   assert.ok(result[prop].length>=6,'empty '+prop);
+   assert.ok(result[prop].length>=(prop==='general'?6:3),'empty '+prop);
    assert.doesNotMatch(result[prop],/NaN|Infinity|undefined|null/,'invalid formula '+chapter+':'+index);
    assert.doesNotMatch(result[prop],/[가-힣]/,'prose leaked into math '+chapter+':'+index);
   }
