@@ -129,6 +129,45 @@ function refreshPredict(container){
  const clean=question.replace(/<[^>]+>/g,' ').replace(/^\s*Predict\s*[—:·-]?\s*/i,'').trim();
  p.textContent=window.SSContentModel?.text(clean)||clean;
 }
+/* Short, section-specific learning directions. The numerical modules remain authoritative. */
+function local(en,ko){return window.SSContentModel?.pair?.(en,ko)||en+' / '+ko}
+function stripLabel(value){return String(value??'').replace(/<[^>]*>/g,' ').replace(/\s*\/\s*[가-힣][^,;]*/g,'').replace(/\s+/g,' ').trim()}
+function lessonFocus(m){
+ const item=chapter===1?(m?.controls||[])[0]:(m?.controls||[])[0];
+ const control=chapter===1?(Array.isArray(item)?item[1]:''):(item?.label||'');
+ const plots=chapter===1?[]:(m?.plots||[]);
+ const first=Array.isArray(plots[0])?plots[0][0]:'';
+ const second=Array.isArray(plots[1])?plots[1][0]:'';
+ return {control:stripLabel(control),first:stripLabel(first),second:stripLabel(second)};
+}
+function noteLine(section,cls){let e=section.querySelector('.'+cls);if(!e){e=document.createElement('p');e.className=cls;section.querySelector('.ss-found-stage')?.after(e)}return e}
+function updateLessonDirections(group){
+ const m=current();if(!m||!group)return;
+ const focus=lessonFocus(m);
+ const pre=group.querySelector('.ss-found-predict'),change=group.querySelector('.ss-found-controls');
+ const observe=group.querySelector('.ss-found-observe'),explain=group.querySelector('.ss-found-explain');
+ const stageLabels=[
+  local('Predict · Form one expectation','예측 · 한 가지 결과 예상하기'),
+  local('Change · Test one variable','변경 · 변수 하나 조절하기'),
+  local('Observe · Compare the graphs','관찰 · 그래프 비교하기'),
+  local('Explain · Connect the result to the concept','설명 · 결과와 개념 연결하기')
+ ];
+ [pre,change,observe,explain].forEach((section,i)=>{if(!section)return;const heading=section.querySelector('.ss-found-stage');if(heading){const n=heading.querySelector('span');heading.textContent=stageLabels[i];if(n)heading.prepend(n)}});
+ const controlHint=focus.control
+  ?local('Start with '+focus.control+'. Change only one setting, then inspect the graph beside it.','먼저 '+focus.control+' 값을 조절하세요. 한 번에 하나의 값만 바꾸고 옆 그래프를 확인하세요.')
+  :local('Change one setting, then inspect the graph beside it.','한 번에 한 변수만 바꾸고 옆 그래프를 확인하세요.');
+ if(change)noteLine(change,'ss-found-action-cue').textContent=controlHint;
+ const graphHint=focus.first
+  ?local('Read '+focus.first+(focus.second?' and '+focus.second:'')+'. Compare the same features before and after your change.',''+focus.first+(focus.second?' 및 '+focus.second:'')+' 그래프에서 변경 전후의 동일한 특징을 비교하세요.')
+  :local('Compare the signal and graph values before and after your change.','조절 전후의 신호와 그래프 값을 비교하세요.');
+ if(observe)noteLine(observe,'ss-found-action-cue').textContent=graphHint;
+ if(explain){
+  noteLine(explain,'ss-found-link-cue').textContent=local('Use the current setting in ② and the resulting graph in ③ to explain your answer in ④. This is one connected experiment—not a separate example.','④는 별도의 실습이 아닙니다. ②에서 설정한 현재 값과 ③의 그래프를 근거로, 같은 실험의 결과를 설명하세요.');
+  const bridge=explain.querySelector('.ss-found-bridge');
+  if(bridge)bridge.textContent=window.SSContentModel?.text?.(bridgeNotes[chapter])||bridgeNotes[chapter];
+  const next=explain.querySelector('.ss-bridge-link');if(next)next.textContent=local('Continue to Chapter '+(chapter+1),'다음 장으로 이동 · Chapter '+(chapter+1));
+ }
+}
 function setNewTitle(){
  const m=current();if(!m)return;
  const tag=document.querySelector('.ss-common-title');
@@ -152,7 +191,7 @@ function content234(){
  requestAnimationFrame(()=>{try{if(typeof updateModule==='function')updateModule()}catch(e){console.warn('Foundations reflow update',e)}});
  refreshPredict(group);typeset();
  const note=document.createElement('p');note.className='ss-found-bridge';note.textContent=bridgeNotes[chapter];explain.append(note);
- const link=document.createElement('a');link.className='ss-bridge-link';link.href='./chapter'+(chapter+1)+'.html';link.textContent='Continue to Chapter '+(chapter+1)+' · '+(['','LTI Systems','Fourier Series','CTFT','Laplace Transform'][chapter]);explain.append(link);
+ const link=document.createElement('a');link.className='ss-bridge-link';link.href='./chapter'+(chapter+1)+'.html';link.textContent='Continue to Chapter '+(chapter+1)+' · '+(['','LTI Systems','Fourier Series','CTFT','Laplace Transform'][chapter]);explain.append(link);updateLessonDirections(group);
 }
 function content1(){
  const grid=document.querySelector('#ch1-app .grid');if(!grid||grid.closest('.ss-found-four-step'))return;
@@ -169,11 +208,11 @@ function content1(){
  const explain=document.createElement('section');explain.className='ss-found-explain';explain.append(stageHeading(4,'Explain · Guided learning and check'),right);
  const note=document.createElement('p');note.className='ss-found-bridge';note.textContent=bridgeNotes[chapter];explain.append(note);
  const link=document.createElement('a');link.className='ss-bridge-link';link.href='./chapter'+(chapter+1)+'.html';link.textContent='Continue to Chapter '+(chapter+1)+' · '+(['','LTI Systems','Fourier Series','CTFT','Laplace Transform'][chapter]);explain.append(link);
- block.append(pre,pair,explain);grid.replaceWith(block);refreshPredict(block);typeset();
+ block.append(pre,pair,explain);grid.replaceWith(block);refreshPredict(block);updateLessonDirections(block);typeset();
  requestAnimationFrame(()=>{try{if(typeof draw==='function')draw()}catch(e){console.warn('Ch1 reflow graph update',e)}});
 }
 let busy=false;
-function schedule(){if(busy)return;busy=true;queueMicrotask(()=>{busy=false;try{chapter===1?content1():content234();refreshPredict(document.querySelector('.ss-found-four-step'));typeset();enhanceGuidedMath();setNewTitle()}catch(e){console.warn('Foundation standard enhancement',e)}})}
+function schedule(){if(busy)return;busy=true;queueMicrotask(()=>{busy=false;try{chapter===1?content1():content234();refreshPredict(document.querySelector('.ss-found-four-step'));updateLessonDirections(document.querySelector('.ss-found-four-step'));typeset();enhanceGuidedMath();setNewTitle()}catch(e){console.warn('Foundation standard enhancement',e)}})}
 function init(){
  // The native experiment scripts still own every simulation and state change.
  const root=document.querySelector(chapter===1?'#ch1-app':'#app');if(!root)return;
@@ -184,6 +223,7 @@ function init(){
  root.addEventListener('click',e=>{if(e.target.closest('#previousStep,#nextStep,#allSteps,#guidePlay'))setTimeout(enhanceGuidedMath,80)});
  new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches?.('.deriv-step')||n.querySelector?.('.deriv-step')))))queueMicrotask(enhanceGuidedMath)}).observe(root,{childList:true,subtree:true});
  document.addEventListener('els:themechange',()=>{if(typeof updateModule==='function')updateModule();else if(typeof draw==='function')draw()});
+ document.addEventListener('els-language-change',()=>requestAnimationFrame(schedule));
  if(window.katex?.render)typeset();window.addEventListener('load',schedule);schedule();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
