@@ -19,7 +19,8 @@
     "qa:foundations-live": "node tests/ss-foundations-live-link-e2e.mjs",
     "qa:foundations-formulas": "node tests/ss-foundations-formula-contract.mjs",
     "qa:advanced-live-formulas": "node tests/ss-advanced-live-formulas-contract.mjs",
-    "qa:advanced-live-browser": "node tests/ss-advanced-live-bridge-e2e.mjs"
+    "qa:advanced-live-browser": "node tests/ss-advanced-live-bridge-e2e.mjs",
+    "qa:all-formulas": "node tests/ss-all-chapter-formula-audit.mjs"
   },
   "devDependencies": {
     "playwright": "^1.56.0"
