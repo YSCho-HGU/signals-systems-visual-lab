@@ -29,7 +29,9 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
-      - name: Audit chapter 5-8 cards and languages against built files
+      - name: Audit deployed Chapter 5-8 in Chromium
+        env:
+          SS_BASE_URL: https://yscho-hgu.github.io/signals-systems-visual-lab/
         run: node tests/ss-guide-card-layout-language-e2e.mjs
       - name: Upload report and failure screenshots
         if: always()
