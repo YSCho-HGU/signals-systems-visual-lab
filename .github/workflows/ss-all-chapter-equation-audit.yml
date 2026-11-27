@@ -1,0 +1,43 @@
+name: Signals and Systems Chapter 1-8 math and Explain audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ss-all-chapter-equation-audit.yml'
+      - 'assets/ss-foundations-live-equations.js'
+      - 'assets/ss-foundations-standard.js'
+      - 'assets/ss-advanced-live-equations.js'
+      - 'assets/ss-advanced-live-bridge.js'
+      - 'chapter1.html'
+      - 'chapter2.html'
+      - 'chapter3.html'
+      - 'chapter4.html'
+      - 'chapter5.html'
+      - 'chapter6.html'
+      - 'chapter7.html'
+      - 'chapter8.html'
+      - 'tests/ss-all-chapter-formula-audit.mjs'
+      - 'tests/ss-foundations-formula-contract.mjs'
+      - 'tests/ss-advanced-live-formulas-contract.mjs'
+      - 'package.json'
+
+permissions:
+  contents: read
+
+jobs:
+  mathematical-parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Audit all 62 lessons at native control values
+        run: npm run qa:all-formulas
+      - name: Check Chapter 1-4 numerical branches
+        run: npm run qa:foundations-formulas
+      - name: Check Chapter 5-8 numerical branches
+        run: npm run qa:advanced-live-formulas
