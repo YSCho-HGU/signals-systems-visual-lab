@@ -1,0 +1,43 @@
+name: Chapter 5-8 guide-card QA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tests/ss-guide-card-layout-language-e2e.mjs'
+      - '.github/workflows/chapter-guide-card-qa.yml'
+      - 'chapter5.html'
+      - 'chapter6.html'
+      - 'chapter7.html'
+      - 'chapter8.html'
+      - 'assets/**'
+
+permissions:
+  contents: read
+
+jobs:
+  guide-card-browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Audit chapter 5-8 cards and languages against built files
+        run: node tests/ss-guide-card-layout-language-e2e.mjs
+      - name: Upload report and failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ch5-8-guide-card-language-qa
+          path: qa-guide-card-language/
+          retention-days: 14
+          if-no-files-found: warn
