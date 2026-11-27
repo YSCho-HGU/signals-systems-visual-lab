@@ -1,0 +1,49 @@
+name: Chapter 1-4 live evidence QA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/chapter-1-4-live-evidence-qa.yml'
+      - 'assets/ss-foundations-standard.js'
+      - 'assets/ss-foundations-standard.css'
+      - 'assets/ss-content-model.js'
+      - 'chapter1.html'
+      - 'chapter2.html'
+      - 'chapter3.html'
+      - 'chapter4.html'
+      - 'tests/ss-foundations-content-contract.mjs'
+      - 'tests/ss-foundations-live-link-e2e.mjs'
+      - 'package.json'
+
+permissions:
+  contents: read
+
+jobs:
+  live-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Check Chapter 1-4 bilingual lesson content
+        run: npm run qa:foundations-content
+      - name: Run desktop/mobile three-language browser regression
+        run: npm run qa:foundations-live
+      - name: Upload report and failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ch1-4-live-evidence-qa
+          path: qa-foundations-live/
+          retention-days: 14
+          if-no-files-found: warn
