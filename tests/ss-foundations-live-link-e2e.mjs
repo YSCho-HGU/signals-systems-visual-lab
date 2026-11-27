@@ -91,7 +91,7 @@ try{
        const linked=[...panel.querySelectorAll('.ss-found-live-column:nth-child(2) dd')].map(x=>x.textContent.trim());
        const ctl=root.querySelector('.ss-found-controls input[type="range"][data-key],.ss-found-controls select[data-key]');
        const displayed=panel.querySelector('.ss-found-live-column:first-child dd')?.textContent||'';
-       const state=ctl?.tagName==='SELECT'?ctl.selectedOptions?.[0]?.textContent?.trim()||ctl.value:ctl?.value;
+       const state=ctl?.tagName==='SELECT'?window.SSContentModel?.text(ctl.selectedOptions?.[0]?.textContent?.trim()||ctl.value):ctl?.value;
        return src.length>0&&JSON.stringify(src)===JSON.stringify(linked)&&!!state&&displayed.includes(String(state));
       },null,{timeout:12000});
       const updated=await snapshot(page);
