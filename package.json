@@ -17,7 +17,9 @@
     "qa:dft-fft": "node tests/dft-fft-regression.mjs",
     "qa:foundations-content": "node tests/ss-foundations-content-contract.mjs",
     "qa:foundations-live": "node tests/ss-foundations-live-link-e2e.mjs",
-    "qa:foundations-formulas": "node tests/ss-foundations-formula-contract.mjs"
+    "qa:foundations-formulas": "node tests/ss-foundations-formula-contract.mjs",
+    "qa:advanced-live-formulas": "node tests/ss-advanced-live-formulas-contract.mjs",
+    "qa:advanced-live-browser": "node tests/ss-advanced-live-bridge-e2e.mjs"
   },
   "devDependencies": {
     "playwright": "^1.56.0"
