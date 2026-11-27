@@ -163,7 +163,6 @@ function updateLessonDirections(group){
   :local('Compare the signal and graph values before and after your change.','조절 전후의 신호와 그래프 값을 비교하세요.');
  if(observe)noteLine(observe,'ss-found-action-cue').textContent=graphHint;
  if(explain){
-  const oldCue=explain.querySelector('.ss-found-link-cue');if(oldCue)oldCue.remove();
   const bridge=explain.querySelector('.ss-found-bridge');
   const bridgeKo={
    1:'1장에서는 CT/DT 신호와 시스템의 기본 성질을 익혔습니다. 2장에서는 이를 컨벌루션과 LTI 시스템 응답에 적용합니다.',
