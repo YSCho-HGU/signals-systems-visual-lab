@@ -126,4 +126,39 @@ includes(8,6,{N:4,omega:1},'|H|=0');
 includes(8,7,{a:.8,M:3,side:'causal'},'S(M)=2.44');
 includes(8,7,{a:1.2,M:3,side:'anti'},'S(M)=2.106');
 includes(8,8,{a:.7},'1-a=0.3');
-console.log('PASS '+lessonCount+' lessons, '+stateCount+' native control states, 32 math identities');
+
+/* Pedagogical regression: concise, distinct bilingual interpretation sentences. */
+const foundationUI=read('assets/ss-foundations-standard.js');
+const livePrefix='const liveIdea=';
+const hStart=foundationUI.indexOf(livePrefix),hEnd=foundationUI.indexOf(';\nfunction liveText',hStart);
+assert.ok(hStart>=0&&hEnd>hStart,'Missing foundation insights');
+const hints=JSON.parse(foundationUI.slice(hStart+livePrefix.length,hEnd));
+const seenEnglish=new Set();
+let hintCount=0;
+for(let ch=1;ch<=4;ch++){
+ assert.equal(hints[ch].length,limits[ch],'Lesson-specific insight count Ch'+ch);
+ for(const pair of hints[ch]){
+  const [en,ko]=pair;
+  assert.ok(en.length>=25&&en.length<=120,'Foundation insight too vague/long');
+  assert.ok(ko.length>=18&&ko.length<=100,'Korean insight too vague/long');
+  assert.match(ko,/[가-힣]/);
+  assert.doesNotMatch(en,/[가-힣]/);
+  assert.ok(!seenEnglish.has(en),'Repeated English insight');
+  seenEnglish.add(en);hintCount++;
+ }
+}
+const advancedUI=read('assets/ss-advanced-live-bridge.js');
+assert.ok(!foundationUI.includes('The settings below produced the displayed results.'));
+assert.ok(!advancedUI.includes('The values in ② generated the observations in ③.'));
+assert.ok(advancedUI.includes('Current result · ② → ③'));
+assert.ok(foundationUI.includes('Current result · ② → ③'));
+let noteCount=0;
+for(let ch=5;ch<=8;ch++)for(let i=0;i<native[ch].length;i++){
+ const eq=formula(ch,i,native[ch][i].defaults);
+ assert.ok(eq.en.length>=25&&eq.en.length<=120,'Advanced English insight too long/vague Ch'+ch+'.'+i);
+ assert.ok(eq.ko.length>=15&&eq.ko.length<=110,'Advanced Korean insight too long/vague Ch'+ch+'.'+i);
+ noteCount++;
+}
+assert.equal(hintCount+noteCount,62);
+
+console.log('PASS '+lessonCount+' lessons, '+stateCount+' native control states, 32 math identities, 62 concise bilingual explanations');
