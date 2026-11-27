@@ -63,7 +63,7 @@
    (s)=>{const a=num(s,'a'),b=num(s,'b');return entry(T`X(z)=\frac{A}{1-az^{-1}}+\frac{B}{1-bz^{-1}}`,T`A=${fmt(-a/(b-a))},\ B=${fmt(b/(b-a))},\quad A+B=1`,'The ROC changes time direction, not partial-fraction coefficients.','ROC는 시간 방향을 바꾸지만 부분분수 계수는 바꾸지 않습니다.')},
    (s)=>{const a=num(s,'a');return entry(T`H(z)=\frac{1-a}{1-az^{-1}},\quad H(e^{j0})=1`,T`a=${fmt(a)},\quad|H(e^{j\pi})|=${fmt((1-a)/(1+a))}`,'Poles closer to +1 create longer memory and stronger high-frequency attenuation.','극점이 +1에 가까울수록 기억이 길어지고 고주파 감쇠가 커집니다.')},
    (s)=>{const N=num(s,'N',4),omega=2*PI*num(s,'omega')/N,den=Math.sin(omega/2),mag=Math.abs(den)<1e-9?1:Math.abs(Math.sin(N*omega/2)/(N*den));return entry(T`H(e^{j\Omega})=\frac1N\sum_{k=0}^{N-1}e^{-j\Omega k}`,T`N=${fmt(N)},\quad\Omega=${fmt(omega)},\quad|H|=${fmt(mag)}`,'Frequency notches arise when delayed phasors cancel.','주파수 노치는 지연된 페이저들이 상쇄될 때 생깁니다.')},
-   (s)=>{const a=num(s,'a'),M=num(s,'M',12),causal=s.side!=='left';let sum=0;for(let i=0;i<M;i++)sum+=Math.abs(causal?a**i:a**(-i-1));return entry(T`\mathrm{BIBO}\iff\sum_n|h[n]|<\infty`,T`M=${fmt(M)},\quad S(M)=${fmt(sum,3)}`,'The absolute partial sums must approach a finite limit.','절댓값 부분합이 유한한 값으로 수렴하는지 확인하세요.')},
+   (s)=>{const a=num(s,'a'),M=num(s,'M',12),causal=s.side!=='anti';let sum=0;for(let i=0;i<M;i++)sum+=Math.abs(causal?a**i:a**(-i-1));return entry(T`\mathrm{BIBO}\iff\sum_n|h[n]|<\infty`,T`M=${fmt(M)},\quad S(M)=${fmt(sum,3)}`,'The absolute partial sums must approach a finite limit.','절댓값 부분합이 유한한 값으로 수렴하는지 확인하세요.')},
    (s)=>{const a=num(s,'a');return entry(T`y[n]=ay[n-1]+(1-a)x[n]`,T`a=${fmt(a)},\quad 1-a=${fmt(1-a)}`,'The previous output forms the IIR filter state.','이전 출력이 IIR 필터의 상태가 됩니다.')}
   ]
  };
