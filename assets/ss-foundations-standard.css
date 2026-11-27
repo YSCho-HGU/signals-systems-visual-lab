@@ -67,3 +67,62 @@ html.ss-foundations-standard .ss-found-explain :is(.reading-panel,.derivation-pa
 @media(max-width:650px){
  html.ss-foundations-standard :is(.ss-found-action-cue,.ss-found-link-cue){font-size:13px;padding:9px 10px}
 }
+
+/* Chapter 1-4: live evidence from the same ② controls and ③ plotted metrics. */
+html.ss-foundations-standard .ss-found-live-link{
+  min-width:0;margin:6px 0 14px;padding:15px 16px;border:1px solid var(--els-border);
+  border-radius:12px;background:var(--els-surface-alt,var(--els-surface));
+  color:var(--els-ink);
+}
+html.ss-foundations-standard .ss-found-live-title{
+  margin:0 0 5px;font-size:16px;line-height:1.45;
+}
+html.ss-foundations-standard .ss-found-live-caption{
+  white-space:pre-line;margin:0 0 12px;font-size:13px;line-height:1.58;
+  color:var(--els-muted,var(--els-ink));
+}
+html.ss-foundations-standard .ss-found-live-columns{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;align-items:start;
+}
+html.ss-foundations-standard .ss-found-live-column{
+  min-width:0;border:1px solid var(--els-border);border-radius:10px;
+  padding:11px 12px;background:var(--els-surface);
+}
+html.ss-foundations-standard .ss-found-live-column-title{
+  margin:0 0 8px;font-size:14px;line-height:1.5;font-weight:750;color:var(--els-ink);
+}
+html.ss-foundations-standard .ss-found-live-items{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));
+  gap:8px;margin:0;
+}
+html.ss-foundations-standard .ss-found-live-item{min-width:0}
+html.ss-foundations-standard .ss-found-live-item dt{
+  margin:0 0 2px;font-size:12px;line-height:1.4;
+  color:var(--els-muted);overflow-wrap:anywhere;
+}
+html.ss-foundations-standard .ss-found-live-item dd{
+  margin:0;font-weight:750;font-size:15px;line-height:1.5;
+  color:var(--els-ink);overflow-wrap:anywhere;font-variant-numeric:tabular-nums;
+}
+html.ss-foundations-standard .ss-found-live-detail{
+  display:block;margin-top:2px;font-size:11px;line-height:1.5;
+  color:var(--els-muted);overflow-wrap:anywhere;
+}
+html.ss-foundations-standard .ss-found-live-empty{
+  margin:0;color:var(--els-muted);font-size:13px;
+}
+html.ss-foundations-standard .ss-found-live-conclusion{
+  white-space:pre-line;margin:12px 0 0;padding:10px 12px;
+  border-left:3px solid var(--els-primary,#299c8f);
+  border-radius:6px;background:var(--els-surface);
+  font-size:14px;line-height:1.6;color:var(--els-ink);
+}
+@media(max-width:760px){
+ html.ss-foundations-standard .ss-found-live-columns{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:650px){
+ html.ss-foundations-standard .ss-found-live-link{padding:11px 12px}
+ html.ss-foundations-standard .ss-found-live-items{grid-template-columns:repeat(auto-fit,minmax(min(100%,135px),1fr))}
+ html.ss-foundations-standard .ss-found-live-conclusion{font-size:13px}
+}
