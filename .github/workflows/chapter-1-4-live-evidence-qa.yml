@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/chapter-1-4-live-evidence-qa.yml'
       - 'assets/ss-foundations-standard.js'
+      - 'assets/ss-foundations-live-equations.js'
       - 'assets/ss-foundations-standard.css'
       - 'assets/ss-content-model.js'
       - 'chapter1.html'
@@ -14,6 +15,7 @@ on:
       - 'chapter3.html'
       - 'chapter4.html'
       - 'tests/ss-foundations-content-contract.mjs'
+      - 'tests/ss-foundations-formula-contract.mjs'
       - 'tests/ss-foundations-live-link-e2e.mjs'
       - 'package.json'
 
@@ -37,6 +39,8 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Check Chapter 1-4 bilingual lesson content
         run: npm run qa:foundations-content
+      - name: Validate 33 formulas and current values
+        run: npm run qa:foundations-formulas
       - name: Run desktop/mobile three-language browser regression
         run: npm run qa:foundations-live
       - name: Upload report and failure screenshots
