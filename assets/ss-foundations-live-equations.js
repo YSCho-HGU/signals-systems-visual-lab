@@ -95,7 +95,7 @@ const funcs={
  3:[
   (v,m)=>label('x(t)=\\cos(\\omega_0 t)+A\\cos(2\\omega_0t+\\phi),\\quad |a_2|=\\frac A2',
      'f_0='+round(1/n(v,'T',1))+'\\ \\mathrm{Hz},\\quad |a_2|='+round(n(v,'A',0)/2)),
-  (v,m)=>label('a_k=\\frac\\tau T\\operatorname{sinc}(k\\pi\\tau/T)',
+  (v,m)=>label('a_0=\\frac{\\tau}{T},\\quad a_k=\\frac{\\sin(k\\pi\\tau/T)}{k\\pi}\\ (k\\ne0)',
      'a_0=\\frac{'+round(n(v,'tau',1))+'}{'+round(n(v,'T',1))+'}='+round(n(v,'tau',1)/n(v,'T',1))),
   (v,m)=>label('S_M(t)=\\frac4\\pi\\sum_{j=0}^{M-1}\\frac{\\sin((2j+1)\\pi t)}{2j+1}',
      'M='+round(n(v,'M',1))+',\\quad S_M(0)='+printed(metric(m,2))),
@@ -111,11 +111,11 @@ const funcs={
  4:[
   (v,m)=>label('\\Delta\\omega=\\frac{2\\pi}T,\\quad X(j\\omega_k)=T a_k',
      '\\Delta\\omega='+round(2*pi/n(v,'T',1))+',\\quad T a_0='+printed(metric(m,2))),
-  (v,m)=>label('X(j\\omega)=A\\tau\\operatorname{sinc}(\\omega\\tau/2)',
+  (v,m)=>label('X(j\\omega)=A\\tau\\frac{\\sin(\\omega\\tau/2)}{\\omega\\tau/2}',
      'X(j0)='+printed(metric(m,0))+',\\quad\\omega_{\\mathrm{zero}}='+printed(metric(m,1))),
   (v,m)=>label('X(j\\omega)=\\frac{2\\alpha}{\\alpha^2+\\omega^2}',
      '\\alpha='+round(n(v,'a',1))+',\\quad X(j0)='+printed(metric(m,0))),
-  (v,m)=>label('X(j\\omega)=e^{-j\\omega t_0}\\tau\\operatorname{sinc}(\\omega\\tau/2)',
+  (v,m)=>label('X(j\\omega)=e^{-j\\omega t_0}\\tau\\frac{\\sin(\\omega\\tau/2)}{\\omega\\tau/2}',
      't_0='+round(n(v,'t0',0))+',\\quad\\frac{d\\phi_{\\mathrm{shift}}}{d\\omega}='+round(-n(v,'t0',0))),
   (v,m)=>label('|X(j\\omega)|\\ge0,\\quad X(j\\omega)\\in\\mathbb R',
      'X(j0)='+printed(metric(m,0))+',\\quad\\omega_{\\mathrm{zero}}='+printed(metric(m,1))),
