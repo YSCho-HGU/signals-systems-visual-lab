@@ -138,7 +138,8 @@ function lessonFocus(m){
  const plots=chapter===1?[]:(m?.plots||[]);
  const first=Array.isArray(plots[0])?plots[0][0]:'';
  const second=Array.isArray(plots[1])?plots[1][0]:'';
- return {control:window.SSContentModel?.text?.(control)||stripLabel(control),first:window.SSContentModel?.text?.(first)||stripLabel(first),second:window.SSContentModel?.text?.(second)||stripLabel(second)};
+ const translate=(value,mode)=>window.SSContentModel?.text?.(value,mode)||stripLabel(value);
+ return {controlEn:translate(control,'en'),controlKo:translate(control,'ko'),firstEn:translate(first,'en'),firstKo:translate(first,'ko'),secondEn:translate(second,'en'),secondKo:translate(second,'ko')};
 }
 function noteLine(section,cls){let e=section.querySelector('.'+cls);if(!e){e=document.createElement('p');e.className=cls;section.querySelector('.ss-found-stage')?.after(e)}return e}
 function updateLessonDirections(group){
@@ -153,12 +154,12 @@ function updateLessonDirections(group){
   local('Explain · Connect the result to the concept','설명 · 결과와 개념 연결하기')
  ];
  [pre,change,observe,explain].forEach((section,i)=>{if(!section)return;const heading=section.querySelector('.ss-found-stage');if(heading){const n=heading.querySelector('span');heading.textContent=stageLabels[i];if(n)heading.prepend(n)}});
- const controlHint=focus.control
-  ?local('Start with '+focus.control+'. Change only one setting, then inspect the graph beside it.','먼저 '+focus.control+' 값을 조절하세요. 한 번에 하나의 값만 바꾸고 옆 그래프를 확인하세요.')
+ const controlHint=focus.controlEn
+  ?local('Start with '+focus.controlEn+'. Change one setting, then inspect the graph beside it.','먼저 '+focus.controlKo+' 값을 조절하세요. 한 번에 한 변수만 바꾸고 옆 그래프를 확인하세요.')
   :local('Change one setting, then inspect the graph beside it.','한 번에 한 변수만 바꾸고 옆 그래프를 확인하세요.');
  if(change)noteLine(change,'ss-found-action-cue').textContent=controlHint;
- const graphHint=focus.first
-  ?local('Read '+focus.first+(focus.second?' and '+focus.second:'')+'. Compare the same features before and after your change.',''+focus.first+(focus.second?' 및 '+focus.second:'')+' 그래프에서 변경 전후의 동일한 특징을 비교하세요.')
+ const graphHint=focus.firstEn
+  ?local('Read '+focus.firstEn+(focus.secondEn?' and '+focus.secondEn:'')+'. Compare before and after your change.',focus.firstKo+(focus.secondKo?' 및 '+focus.secondKo:'')+' 그래프에서 변경 전후를 비교하세요.')
   :local('Compare the signal and graph values before and after your change.','조절 전후의 신호와 그래프 값을 비교하세요.');
  if(observe)noteLine(observe,'ss-found-action-cue').textContent=graphHint;
  if(explain){
