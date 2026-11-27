@@ -53,7 +53,7 @@ const funcs={
   (v,m)=>label('E(T)=\\int_{-T}^{T}|x(t)|^2dt,\\quad P(T)=\\frac{E(T)}{2T}',
      'E(T)='+printed(metric(m,0))+',\\quad P(T)='+printed(metric(m,1))),
   (v,m)=>label('\\Delta_L=T\\{ax_1+bx_2\\}-aT\\{x_1\\}-bT\\{x_2\\}',
-     '\\max|\\Delta_L|\\approx'+printed(metric(m,0))+',\\quad\\max|\\Delta_{TI}|\\approx'+printed(metric(m,1))),
+     '\\max_{\\mathrm{sampled}}|\\Delta_L|\\approx'+printed(metric(m,0))+',\\quad\\max_{\\mathrm{sampled}}|\\Delta_{TI}|\\approx'+printed(metric(m,1))),
   (v,m)=>label('x_e(t)=\\frac{x(t)+x(-t)}2,\\quad x_o(t)=\\frac{x(t)-x(-t)}2',
      '\\Delta_e='+printed(metric(m,0))+',\\quad\\Delta_o='+printed(metric(m,1))),
   (v,m)=>{
@@ -115,7 +115,7 @@ const funcs={
      'X(j0)='+printed(metric(m,0))+',\\quad\\omega_{\\mathrm{zero}}='+printed(metric(m,1))),
   (v,m)=>label('X(j\\omega)=\\frac{2\\alpha}{\\alpha^2+\\omega^2}',
      '\\alpha='+round(n(v,'a',1))+',\\quad X(j0)='+printed(metric(m,0))),
-  (v,m)=>label('Y(j\\omega)=e^{-j\\omega t_0}\\tau\\operatorname{sinc}(\\omega\\tau/2)',
+  (v,m)=>label('X(j\\omega)=e^{-j\\omega t_0}\\tau\\operatorname{sinc}(\\omega\\tau/2)',
      't_0='+round(n(v,'t0',0))+',\\quad\\frac{d\\phi_{\\mathrm{shift}}}{d\\omega}='+round(-n(v,'t0',0))),
   (v,m)=>label('|X(j\\omega)|\\ge0,\\quad X(j\\omega)\\in\\mathbb R',
      'X(j0)='+printed(metric(m,0))+',\\quad\\omega_{\\mathrm{zero}}='+printed(metric(m,1))),
