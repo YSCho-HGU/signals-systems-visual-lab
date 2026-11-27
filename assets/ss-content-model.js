@@ -19,7 +19,7 @@
   // The HTML renderer must not translate and append its Korean half again.
   if(m==='mixed'&&source.includes('\n')){
    const split=source.indexOf('\n'),english=source.slice(0,split),koreanText=source.slice(split+1);
-   if(korean.test(koreanText) && plain(koreanText,'en')===english)return source;
+   if(english.trim()&&!korean.test(english)&&korean.test(koreanText))return source;
   }
   if(!source||!korean.test(source)&&!reverse.has(source))return source;
   const pair=source.trim().match(inlinePattern);
