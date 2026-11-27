@@ -30,10 +30,27 @@ async function snapshot(page){
   const title=panel.querySelector('.ss-found-live-title')?.textContent?.trim()||'';
   const caption=panel.querySelector('.ss-found-live-caption')?.textContent?.trim()||'';
   const conclusion=panel.querySelector('.ss-found-live-conclusion')?.textContent?.trim()||'';
+  const mathNodes=[...panel.querySelectorAll('.ss-found-live-equation')];
+  const params=Object.fromEntries(controls.map(el=>[el.dataset.key,el.value]));
+  const metricRows=[...group.querySelectorAll('.ss-found-observe .metric')].map(el=>({
+   key:el.querySelector('.k,b')?.textContent?.trim()||'',
+   value:el.querySelector('.v,strong')?.textContent?.trim()||'',
+   detail:el.querySelector('.detail')?.textContent?.trim()||''
+  })).filter(row=>row.value&&row.value!=='-').slice(0,3);
+  const expected=window.SSFoundationEquations?.get(
+   Number(document.documentElement.dataset.ssFoundationChapter),Number(panel.dataset.lesson)-1,params,metricRows
+  );
+  const math={
+   sources:mathNodes.map(el=>el.dataset.ssMath||''),
+   expected:expected?[expected.general,expected.now]:null,
+   katexReady:!!window.katex?.render,
+   rendered:mathNodes.filter(el=>el.querySelector('.katex')&&el.dataset.ssMathState==='rendered').length,
+   failed:mathNodes.filter(el=>el.dataset.ssMathState==='error').length
+  };
   const box=panel.getBoundingClientRect();
   return {
    lesson:Number(panel.dataset.lesson),controlCount:controls.length,settingCount:summary.length,
-   source,linked,settings:summary,title,caption,conclusion,
+   source,linked,settings:summary,title,caption,conclusion,math,
    horizontalOverflow:panel.scrollWidth>panel.clientWidth+8||box.right>innerWidth+8||box.left< -8
   };
  });
@@ -46,6 +63,12 @@ function verify(item,{chapter,index,mode,width}){
  assert.ok(item.source.length>=1,'No computed observations in ③');
  assert.deepEqual(item.linked,item.source,'④ observations differ from native ③ metrics');
  assert.ok(!item.horizontalOverflow,'④ card overflows viewport');
+ assert.ok(item.math.expected,'Missing lesson-specific mathematical model');
+ assert.deepEqual(item.math.sources,item.math.expected,'④ formula does not match current ② settings / ③ metrics');
+ assert.equal(item.math.sources.length,2,'④ must show symbolic and numerical equations');
+ assert.equal(item.math.failed,0,'KaTeX equation rendering failed');
+ assert.ok(item.math.katexReady,'KaTeX unavailable; formulas cannot be rendered');
+ assert.equal(item.math.rendered,2,'Both formulas must render as KaTeX');
  const authored=item.title+item.caption+item.conclusion;
  if(mode==='en')assert.doesNotMatch(authored,/[가-힣]/,'English explanation contains Korean');
  if(mode==='ko')assert.match(authored,/[가-힣]/,'Korean explanation missing');
